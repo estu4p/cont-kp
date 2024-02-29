@@ -139,12 +139,13 @@
                                     Lupa Kata Sandi? <a class="btn btn-link" href="#" style="color: #660708;" >Hubungi admin</a>
                                 </div>
                             </div>
-                            <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">
-                                    Login as Contributor
-                                </button>
-                            </div>
+                            
                         </form>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">
+                            Login as Contributor
+                        </button>
                     </div>
                 </div>
             </div>
