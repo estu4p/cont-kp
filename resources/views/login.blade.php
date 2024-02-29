@@ -37,8 +37,8 @@
             font-weight: bold;
             text-align: center;
             color: #333;
-            background-color: #f7f7f7;
-            border-bottom: 1px solid #ccc;
+            /* background-color: #f7f7f7; */
+            /* border-bottom: 1px solid #ccc; */
             padding: 10px;
             width: 100%;
             font-size: 30px;
@@ -65,9 +65,9 @@
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 5px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-top: 10px;
         }
 
         input[type="text"]:focus,
@@ -82,12 +82,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
-            background-color: #6C757D;
+            background-color:#286090 ;
             color: #fff;
         }
 
         button:hover {
-            background-color: #286090;
+            background-color:#6C757D ;
         }
 
         a {
@@ -115,8 +115,9 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-8">
+
                 <div class="card">
-                    <div class="card-header" style="color: #660708" >Log In</div>
+                    <div class="card-header" style="color: #660708" ><ul><img src="/assets/icon-login.png" alt=></ul>Log In</div>
                     <div class="card-body">
                         <form action="" method="POST">
                             @csrf
@@ -130,16 +131,12 @@
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
-                                    <label class="form-check-label" for="remember_me">
-                                        Ingat Saya
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">Ingatkan Saya
                                 </div>
                                 <div>
                                     Lupa Kata Sandi? <a class="btn btn-link" href="#" style="color: #660708;" >Hubungi admin</a>
                                 </div>
                             </div>
-                            
                         </form>
                     </div>
                     <div class="form-group text-center">
