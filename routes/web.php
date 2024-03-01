@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +21,5 @@ Route::get('/welcome', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::post('/login', [AuthLoginController::class, 'ValidateLogin']);
