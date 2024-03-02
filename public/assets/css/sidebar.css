@@ -1,6 +1,7 @@
 body{
     background-color: #EEEEEE;
-
+    padding-left:250px;
+    padding-top:50px;
 }
 .sidebar {
     position: fixed; /* Tetap pada posisi */
