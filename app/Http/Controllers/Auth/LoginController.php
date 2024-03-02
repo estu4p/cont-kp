@@ -19,18 +19,48 @@ class LoginController extends Controller
 
     public function ValidateLogin(Request $request)
     {
-        $login = $request->validate([
+        $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($login)){
-            $request->session()->regenerate();
+        $login = $request->only('email', 'password');
+        $remember = $request->filled('remember');
 
-            return redirect()->intended('dashboard');
+        if(Auth::attempt($login, $remember)){
+            $user = Auth::user();
+
+            if($user->role == 1){
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Super Admin',
+                    'redirect' => '/SuperAdmin/dashboard'
+                ], 200);
+            } else if($user->role == 2){
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Admin',
+                    'redirect' => '/Admin/dashboard'
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai User',
+                    'redirect' => '/dashboard'
+                ], 200);
+            }
+
+        } else {
+            return response()->json([
+                'error' => 'Email atau password salah'
+            ], 422);
         }
+    }
 
-        return back()
-            ->with('login eror', ' Login failed!');
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

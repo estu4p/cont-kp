@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +23,12 @@ Route::get('/login', function () {
     return view('login');
 });
 
-<<<<<<< HEAD
+
 Route::post('/login', [AuthLoginController::class, 'ValidateLogin']);
-=======
+Route::post('/register', [RegisterController::class, 'register']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
->>>>>>> 845cfeeb232690281aabae3885e00d0b3b865dce
+
