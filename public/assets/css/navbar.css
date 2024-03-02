@@ -1,0 +1,67 @@
+.navbar {
+  padding: 20px;
+  background-color: transparent;
+  display: flex;
+  /* justify-content: flex-end; */
+  align-items: center;
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  width:100%;/* Navbar tetap di posisi */
+  z-index: 0; /* Menetapkan z-index untuk memastikan navbar tetap di depan konten */
+}
+
+.navbar-brand {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-link {
+  margin-right: 15px;
+}
+
+.dropdown-menu {
+  min-width: 100px;
+}
+
+.form-control {
+  width: 200px;
+}
+
+.btn-outline-success {
+  margin-left: 10px;
+}
+
+.navbar {
+  display: flex;
+  /* justify-content: flex-end; */
+  align-items: center;
+}
+
+
+
+.navbar-profile {
+  margin-right: 20px;
+}
+
+.profile-name,
+.profile-status {
+  display: block;
+}
+.navbar-logo {
+  width: 40px; /* Ubah ukuran lebar gambar profil */
+  height: 40px; /* Ubah ukuran tinggi gambar profil */
+}
+.navbar-logo img{
+    width:100%;
+}
+
+/* navbar.css */
+.nav.flex-column,
+.nav.flex-column li {
+    list-style-type: none; /* Menghilangkan bullets pada daftar menu */
+}
+.kanan{
+    justify-content: space-between !important;
+}
