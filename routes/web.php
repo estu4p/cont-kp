@@ -22,4 +22,11 @@ Route::get('/login', function () {
     return view('login');
 });
 
+<<<<<<< HEAD
 Route::post('/login', [AuthLoginController::class, 'ValidateLogin']);
+=======
+
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
+});
+>>>>>>> 845cfeeb232690281aabae3885e00d0b3b865dce
