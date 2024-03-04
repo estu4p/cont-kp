@@ -12,8 +12,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
-            <div class="col-md-8 row justify-content-center">
-                <div class="card   col-7 p-0" data-aos="zoom-in-up">
+            <div class="col-md-8 row justify-content-center"> 
+                <div class="card   col-7 p-0" data-aos="zoom-in" data-aos-duration="2000">
                     <div class="card-header d-flex flex-column justify-content-center  py-2 gap-2" style="color: #660708"  >
                         <i class="fa-solid fa-lock text-center"></i>
                         <p class=" text-center">Log In</p>

@@ -1,3 +1,57 @@
 .wadah{
+margin:auto 20% auto 3%;
+}
 
+h1, h2  {
+    color: #26577C;
+    font-weight: bold;
+    font-size: 40px;
+    
+}
+.card-title{
+    color: #26577C;
+    font-weight: bold;
+}
+.pantau{
+    opacity: 0.7;
+    font-size: 24px;
+}
+
+
+
+.lengkung{
+    border-radius: 30px !important;
+    height:180px;
+    box-shadow: 0 0 15px rgb(161, 161, 161) !important;
+    box-sizing: border-box !important;
+}
+
+
+.atas{
+    height:70%;
+}
+.bawah{
+    height:20%;
+}
+
+
+.jumlah-mahasiswa{
+    color: #26577C;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.masuk{
+    color: #0F9F03;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.izin{
+    color: #FF1E1E;
+    font-weight: bold;
+    font-size: 24px;
+}
+.gambargroup img{
+    width:100%;
 }
