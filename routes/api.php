@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/login', [LoginController::class, 'validateLogin']);
+Route::post('/login', [LoginController::class, 'validateLogin'])->name('login');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/register/withbarcode', [RegisterController::class, 'sigupQRcode']);
-Route::post('/password/forget', [ForgetPasswordController::class, 'ForgetPassword']);
-Route::post('/password/reset', [ResetPasswordController::class, 'ResetPassword']);
+// Route::post('/register/withbarcode', [RegisterController::class, 'sigupQRcode']);
+// Route::post('/password/forget', [ForgetPasswordController::class, 'ForgetPassword']);
+// Route::post('/password/reset', [ResetPasswordController::class, 'ResetPassword']);

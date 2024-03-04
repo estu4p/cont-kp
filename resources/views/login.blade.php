@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
     <style>
-         * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -82,12 +83,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
-            background-color:#286090 ;
+            background-color: #286090;
             color: #fff;
         }
 
         button:hover {
-            background-color:#6C757D ;
+            background-color: #6C757D;
         }
 
         a {
@@ -111,42 +112,52 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header" style="color: #660708" ><ul><img src="/assets/icon-login.png" alt=></ul>Log In</div>
+                    <div class="card-header" style="color: #660708">
+                        <ul><img src="/assets/icon-login.png" alt=></ul>Log In
+                    </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="username_email">Username/Email</label>
-                                <input id="username_email" type="text" class="form-control @error('username_email') is-invalid @enderror" name="username_email" value="{{ old('username_email') }}" required autofocus>
+                                <label for="email">Username/Email</label>
+                                <input id="email" type="text"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="password">Kata Sandi</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password">
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">Ingatkan Saya
+                                    <input class="form-check-input" type="checkbox" name="remember_me"
+                                        id="remember_me">Ingatkan Saya
                                 </div>
                                 <div>
-                                    Lupa Kata Sandi? <a class="btn btn-link" href="#" style="color: #660708;" >Hubungi admin</a>
+                                    Lupa Kata Sandi? <a class="btn btn-link" href="#"
+                                        style="color: #660708;">Hubungi admin</a>
                                 </div>
                             </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    Login as Contributor
+                                </button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary">
-                            Login as Contributor
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

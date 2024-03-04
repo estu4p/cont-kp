@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +22,16 @@ Route::get('/login', function () {
     return view('login');
 });
 
-
-Route::post('/login', [AuthLoginController::class, 'ValidateLogin']);
+Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::post('/register', [RegisterController::class, 'register']);
+
+Route::middleware('SuperAdmin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.dashboard');
+    });
+});
 
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
-
