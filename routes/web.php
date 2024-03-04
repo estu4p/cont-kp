@@ -25,7 +25,7 @@ Route::get('/login', function () {
 Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::middleware('SuperAdmin')->group(function () {
+Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
     });
