@@ -25,6 +25,9 @@ h1, h2  {
     box-shadow: 0 0 15px rgb(161, 161, 161) !important;
     box-sizing: border-box !important;
 }
+.icon{
+    color: #26577C;
+}
 
 
 .atas{
