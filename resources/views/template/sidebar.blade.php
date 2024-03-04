@@ -3,13 +3,13 @@
     <img src="assets/images/logo.png" alt="Logo" class="logo">
   <ul class="nav flex-column">
       <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+          <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" href="#">Mahasiswa</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Presensi</a>
+          <a class="nav-link" aria-current="page" href="/presensi">Presensi</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" href="#">Penilaian</a>
@@ -19,4 +19,3 @@
       </li>
   </ul>
 </div>
-  
