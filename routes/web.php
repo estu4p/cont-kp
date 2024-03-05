@@ -26,4 +26,15 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
+
 Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
+Route::get('/presensi', function () {
+    return view('presensi.presensiharian');
+});
+
+Route::get('/adminbeforepayment', function () {
+    return view('adminbeforepayment');
+});
+
+
