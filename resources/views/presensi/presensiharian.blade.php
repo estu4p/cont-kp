@@ -24,17 +24,30 @@
                                     <div style="position: relative;">
                                         <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
                                         <input type="date" name="date" id="date-input" style="padding-left: 30px;">
+                                        <p id="date-text"></p>
                                     </div>
                                 </div>
-                                <div style="float:left;">
-                                    <select>
-                                        <option value="">&#x25BC; Filter</option>
-                                        <option value="Hadir">Hadir</option>
-                                        <option value="Izin">Izin</option>
-                                        <option value="Tidak Hadir">Tidak Hadir</option>
-                                    </select>
-                                </div>
-                            </div>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Filter &#9660;</button>
+                                    <div class="dropdown-content">
+                                      <label>Status</label><br>
+                                      <input type="checkbox" id="checkbox2">
+                                      <label for="checkbox2">Hadir</label><br>
+                                      <input type="checkbox" id="checkbox3">
+                                      <label for="checkbox3">Izin</label><br>
+                                      <input type="checkbox" id="checkbox3">
+                                      <label for="checkbox3">Izin</label><br>
+                                      <label for="checkbox1">Shift</label><br>
+                                      <input type="checkbox" id="checkbox2">
+                                      <label for="checkbox2">Shift pagi</label><br>
+                                      <input type="checkbox" id="checkbox3">
+                                      <label for="checkbox3">Shift Middle</label><br>
+                                      <input type="checkbox" id="checkbox3">
+                                      <label for="checkbox3">Shift Siang</label><br>
+
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
                               </div>
                             </div>
@@ -47,10 +60,10 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="15%">Nama</th>
-                                    <th width="8%">Jam Kerja <br>masuk &nbsp pulang</th>
-                                    <th width="8%">Jam Istirahat <br> mulai &nbsp selesai</th>
-                                    <th width="8%">Total Jam Kerja <br>total jam &nbsp (+)(-)</th>
-                                    <th width="15%">Log Aktivitas <br> Log Aktivitas &nbsp aksi </th>
+                                    <th width="8%">Jam Kerja <br>masuk &nbsp; pulang</th>
+                                    <th width="8%">Jam Istirahat <br> mulai &nbsp; selesai</th>
+                                    <th width="8%">Total Jam Kerja <br>total jam &nbsp; (+)(-)</th>
+                                    <th width="15%">Log Aktivitas <br> Log Aktivitas &nbsp; aksi </th>
                                     <th width="5%">Status <br>kehadiran</th>
                                     <th width="10%">kebaikan</th>
                                 </tr>
@@ -58,7 +71,7 @@
                             <tbody>
                                 @for ($i = 1; $i <= 10; $i++)
                                 <tr>
-                                    <td><input type="checkbox" id="checkbox_{{ $i }}"> &nbsp; {{ $i }}</td>
+                                    <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
@@ -73,6 +86,7 @@
                     </div>
                 </div>
             </div>
+            <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
         </div>
     </div>
 </div>
@@ -92,5 +106,32 @@
       console.log("Date:", date);
     }
   </script>
+
+  <script>
+    const dateInput = document.getElementById('date-input');
+    const dateText = document.getElementById('date-text');
+
+    dateInput.addEventListener('input', function() {
+        const dateValue = new Date(this.value);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = dateValue.toLocaleDateString('en-US', options);
+        dateText.textContent = dateString;
+    });
+</script>
+
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdown');
+        dropdown.classList.toggle('active');
+    }
+
+    function closeDropdown() {
+        var dropdown = document.getElementById('dropdown');
+        if (!dropdown.contains(event.relatedTarget)) {
+            dropdown.classList.remove('active');
+        }
+    }
+</script>
+
 
 @endpush
