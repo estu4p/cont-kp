@@ -24,3 +24,12 @@ Route::get('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
+
+Route::get('/presensi', function () {
+    return view('presensi.presensiharian');
+});
+
+Route::get('/adminbeforepayment', function () {
+    return view('adminbeforepayment');
+});
+
