@@ -29,3 +29,7 @@ Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
 
+Route::get('/adminbeforepayment', function () {
+    return view('adminbeforepayment');
+});
+
