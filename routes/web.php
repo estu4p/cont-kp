@@ -56,7 +56,7 @@ Route::get('/invoice', function () {
 });
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
-})
+});
 
 Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
 
