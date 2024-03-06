@@ -1,0 +1,98 @@
+h1 {
+    color: #26577C;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+}
+input{
+    width: 400px;
+    background: #e8e8e8;
+    border: 1px solid black;
+    border-radius: 7px;
+    margin-top: 50px;
+    padding-left: 10px;
+}
+form{
+    position: relative;
+    float: right;
+}
+form i{
+    position: absolute;
+    top: 75%;
+    left: 10px;
+}
+form input{
+    padding-left: 30px;
+}
+
+.page, .item{
+
+    margin-top: 20px;
+    background: #c6c6c6;
+}
+
+.wadah {
+    margin-top: 50px;
+    margin-left: 125px;
+}
+
+table{  
+
+    border-collapse: collapse;
+    width: 100%;
+
+
+}
+.wadah-tabel{
+    height:max-content;
+        margin-top: 20px;
+    box-sizing: border-box;
+       border-radius: 20px !important; 
+       overflow: hidden;
+          box-shadow: 0 0 15px rgb(161, 161, 161) !important; 
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    /* background-color: #f2f2f2; */
+}
+
+
+.active{
+    width: 75px;
+    background: #2B97C5;
+    color: #F5F3F4;
+    border-radius: 5px;
+    text-align: center;
+}
+.inactive{
+    width: 75px;
+    background: #E5383B;
+    color: #F5F3F4;
+    border-radius: 5px;
+    text-align: center;
+}
+.done{
+    width: 75px;
+    background: #1AA158;
+    color: #F5F3F4;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+.icon{
+    color: #2B97C5;
+}
+
+.abu{
+    background: #D8DADF;
+}
+.putih {
+    background:  #F2F4F8;
+}
+
