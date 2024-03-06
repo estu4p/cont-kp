@@ -115,6 +115,7 @@
     <link href="/assets/css/login.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -124,16 +125,46 @@
 
                 <div class="card">
                     <div class="card-header" style="color: #660708">
-                        <ul><img src="/assets/icon-login.png" alt=></ul>Log In
+                        <ul><img src="/assets/icon-login.png" alt=></ul>Register
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="{{ route('register') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="email">Username/Email</label>
+                                <label for="nama_lengkap">Nama Lengkap</label>
+                                <input id="nama_lengkap" type="text"
+                                    class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap"
+                                    value="{{ old('nama_lengkap') }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="nomor_induk_mahasiswa">NIM</label>
+                                <input id="nomor_induk_mahasiswa" type="text"
+                                    class="form-control @error('nomor_induk_mahasiswa') is-invalid @enderror" name="nomor_induk_mahasiswa"
+                                    value="{{ old('nomor_induk_mahasiswa') }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="jurusan">Jurusan</label>
+                                <input id="jurusan" type="text"
+                                    class="form-control @error('jurusan') is-invalid @enderror" name="jurusan"
+                                    value="{{ old('jurusan') }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
                                 <input id="email" type="text"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input id="username" type="text"
+                                    class="form-control @error('username') is-invalid @enderror" name="username"
+                                    value="{{ old('username') }}" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_hp">No hp</label>
+                                <input id="no_hp" type="text"
+                                    class="form-control @error('no_hp') is-invalid @enderror" name="no_hp"
+                                    value="{{ old('no_hp') }}" required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="password">Kata Sandi</label>
@@ -141,51 +172,18 @@
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="current-password">
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember_me"
-                                        id="remember_me">Ingatkan Saya
-                                </div>
-                                <div>
-                                    Lupa Kata Sandi? <a class="btn btn-link" href="#"
-                                        style="color: #660708;">Hubungi admin</a>
-                                </div>
+                            <div class="form-group">
+                                <label for="password-confirm">Konfirmasi Password</label>
+                                <input id="password-confirm" type="password"
+                                    class="form-control @error('password-confirm') is-invalid @enderror" name="password-confirm"
+                                    required autocomplete="current-password">
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">
-                                    Login as Contributor
+                                    Register
                                 </button>
                             </div>
                         </form>
-
-            <div class="col-md-8 row justify-content-center"> 
-                <div class="card   col-7 p-0" data-aos="zoom-in" data-aos-duration="2000">
-                    <div class="card-header d-flex flex-column justify-content-center  py-2 gap-2" style="color: #660708"  >
-                        <i class="fa-solid fa-lock text-center"></i>
-                        <p class=" text-center">Log In</p>
-                    </div>
-                    <div class="card-body row w-100 p-5 justify-content-center ">
-                        <div class="container">
-                            <form>
-                                <div class="form-group">
-                                    <label for="username">Username/Email</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Masukan Username / Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Masukan Password">
-                                </div>
-                                <div class="d-flex gap-0 justify-content-between row flex-row">
-                                    <div class="form-check d-flex align-items-start col-5 gap-2  ">
-                                        <input type="checkbox" class="form-check-input m-0" id="remember">
-                                        <label class="form-check-label fz7 " for="remember">Ingatkan saya</label>
-                                    </div>
-                                    <div class="kanan d-flex align-items-start justify-content-end gap-2 flex-row col-7 ">
-                                        <p class="fz7 ">   Lupa password? <a href="#" class="btn btn-link fz9 ">Hubungi admin</a> </p>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -198,9 +196,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
-
-
 </html>
-
 </html>
-
