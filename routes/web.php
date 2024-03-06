@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,7 @@ Route::get('/welcome', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/daftar', function () {
-    return view('daftar');
-});
+Route::get('/daftar', [LandingPageController::class, 'lpdaftar'])->name('daftar');
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');

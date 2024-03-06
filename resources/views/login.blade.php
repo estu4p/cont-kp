@@ -149,37 +149,5 @@
         </div>
     </div>
 </body>
-<body>
-    <div class="container">
-    <div class= "input">
-        <h1>Daftarkan Kampus/Sekolah Anda </h1>
-        <form action="Daftar" method="POST">
-            <div class= "box-input">
-                <i class="fas fa-user"></i>
-                <input type= "text" name="fullname" placeholder="Full Name">
-            </div>
-            <div class= "box-input">
-                <i class="fas fa-graduation-cap"></i>
-                <input type= "text" name="sekolah" placeholder="Nama Sekolah/Perguruan Tinggi">
-            </div>
-            <div class= "box-input">
-                <i class="fas fa-envelope-open-text"></i>
-                <input type= "text" name="email" placeholder="Email">
-            </div>
-            <div class= "box-input">
-                <i class="fas fa-phone"></i>
-                <input type= "text" name="fullname" placeholder="Telephone">
-
-            <div class= "box-input">
-                <i class="fas fa-lock"></i>
-                <input type= "text" name="password" placeholder="Password">
-            </div>
-            <button type="submit" class="btn-input">
-                Daftar
-            </button>
-        </form>
-    </div>
-    </div>
-</body>
 
 </html>
