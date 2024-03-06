@@ -20,7 +20,7 @@ use  App\Http\Controllers\MahasiswaController;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
+
 Route::view('/login', 'login');
 Route::view('/register', 'register');
 Route::view('/resetpw', 'resetpw');
@@ -39,26 +39,21 @@ Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
     });
-=======
-
-Route::get('/login', function () {
-    return view('login');
->>>>>>> ebbc049035918be06271af20e9c8259be697b3e5
+    Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+    Route::get('/presensi', function () {
+        return view('presensi.presensiharian');
+    });
+    Route::get('/adminbeforepayment', function () {
+        return view('adminbeforepayment');
+    });
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
+Route::get('/login', function () {
+    return view('login');
 
-Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
-
-Route::get('/presensi', function () {
-    return view('presensi.presensiharian');
 });
-
-Route::get('/adminbeforepayment', function () {
-    return view('adminbeforepayment');
-});
-
 
