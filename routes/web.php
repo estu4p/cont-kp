@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
 });
 
 
+
 Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
 
 Route::get('/presensi', function () {
@@ -36,5 +37,4 @@ Route::get('/presensi', function () {
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
-
 
