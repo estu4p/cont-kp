@@ -28,7 +28,7 @@ body{
   background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
 }
 
-.nav-link.active {
+a.nav-link.activee {
   font-weight: bold; /* Menebalkan tautan aktif */
   background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
   color: #fff; /* Warna teks untuk tautan aktif */
