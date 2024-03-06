@@ -18,7 +18,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbar')
+        @include('template.navbarprofileadmin')
 
         <div class="content-wrapper">
             <section class="content">
@@ -27,7 +27,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar')
+            @include('template.sidebaradmin')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">
