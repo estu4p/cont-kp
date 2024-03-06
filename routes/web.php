@@ -52,10 +52,10 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
-<<<<<<< HEAD
+
 Route::get('/login', function () {
     return view('login');
-=======
+
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
@@ -87,13 +87,11 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
->>>>>>> e50cac7f98467a963ecccf4c0dae337ee417bdb4
 
 });
 
-<<<<<<< HEAD
-=======
+
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
->>>>>>> e50cac7f98467a963ecccf4c0dae337ee417bdb4
+
