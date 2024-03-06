@@ -35,7 +35,7 @@
                 <td>
                     <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
                 </td>
-                <td><i class="fa-solid fa-circle-info icon"></i></td>
+                <td><a href="#"><i class="fa-solid fa-circle-info icon"></i></a></td>
             </tr>
             @endforeach
         </tbody>
