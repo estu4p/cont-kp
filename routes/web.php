@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
+use  App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 Route::view('/login', 'login');
 Route::view('/register', 'register');
 Route::view('/resetpw', 'resetpw');
@@ -37,9 +39,26 @@ Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
     });
-});
+=======
 
+Route::get('/login', function () {
+    return view('login');
+>>>>>>> ebbc049035918be06271af20e9c8259be697b3e5
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
+
+
+Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
+Route::get('/presensi', function () {
+    return view('presensi.presensiharian');
+});
+
+Route::get('/adminbeforepayment', function () {
+    return view('adminbeforepayment');
+});
+
+
