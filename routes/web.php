@@ -98,3 +98,8 @@ Route::get('/login', function () {
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
+
+Route::get('/profil-siswa', function () {
+    return view('jumlah-mahasiswa.profil-siswa');
+});
+

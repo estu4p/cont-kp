@@ -50,7 +50,7 @@
         $(document).ready( function () {
             var table = $('#example').DataTable( {
                 pageLength : 5,
-                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+                lengthMenu: [[5, 7, 10, 50, -1], [5, 7, 10, 50, 'semua']],
                 language: {
                     searchPlaceholder: 'cari nama mahasiswa'
                 }

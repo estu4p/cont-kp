@@ -13,7 +13,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswa = [
-        ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
+        ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
         ['nama' => 'Fairuza Attar Aviciena', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Danni Hernando', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Febrian Adipurnowo', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
