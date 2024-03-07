@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/jumlah-mahasiswa.css') }}">
 <form action="" method="GET">
-<i class="fa-solid fa-magnifying-glass"></i>
+<!-- <i class="fa-solid fa-magnifying-glass"></i> -->
     <!-- <input type="text" placeholder="cari nama mahasiswa"/> -->
 </form>
 <div class="wadah p-5">
@@ -36,7 +36,7 @@
                 <td>
                     <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
                 </td>
-                <td><a href="#"> <i class="fa-solid fa-circle-info icon"></i></a></td>
+                <td><a href="/profil-siswa"> <i class="fa-solid fa-circle-info icon"></i></a></td>
             </tr>
             @endforeach
         </tbody>
