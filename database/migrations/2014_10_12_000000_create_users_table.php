@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jurusan');
             $table->string('email')->unique();
             $table->string('username')->unique();;
-            $table->integer('no_hp');
+            $table->string('no_hp');
             $table->string('role', 1)->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
