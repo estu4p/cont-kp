@@ -4,8 +4,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\MahasiswaController;
+
+use function Laravel\Prompts\alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +64,10 @@ Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
+Route::get('/dashboard-admin', function () {
+    return view('dashboard.dashboard-admin', ['title' => 'Admin']);
+});
+Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 Route::get('/login', function () {
     return view('login');

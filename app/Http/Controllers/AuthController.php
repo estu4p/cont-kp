@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $validation = ['email' => $request->email, 'password' => $request->password];
         if (Auth::attempt($validation)) {
-            return redirect('/')->with('success', 'login success');
+            return redirect('/dashboard-admin')->with('success', 'login success');
         }
 
         return redirect()->route('login')->with('error', 'Email or password is incorrect.');
