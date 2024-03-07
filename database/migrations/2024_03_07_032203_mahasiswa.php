@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer("nomor_induk_mahasiswa");
             $table->string("jurusan");
             $table->string("no_hp");
+            $table->string("address");
+            $table->string("about");
         });
     }
 

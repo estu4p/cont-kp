@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Http\Controllers\Controller;
-use App\Models\Mitra;
 use App\Models\User;
+use App\Models\Mitra;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
 {
@@ -22,5 +23,9 @@ class DashboardAdminController extends Controller
             "jumlah siswa" => $jumlah_siswa,
 
         ]);
+    }
+    public function update()
+    {
+        $user = User::find(Auth::user()->id);
     }
 }
