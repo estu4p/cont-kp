@@ -11,6 +11,8 @@ class Mahasiswa extends Model
 
     protected $table = 'mahasiswa';
     protected $fillable = ['nama_mahasiswa', 'email', 'nomor_induk_mahasiswa', 'jurusan', 'no_hp', 'address', 'about'];
+    public $timestamps = false;
+
 
     // private static $dataMahasiswa = [
     //     ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],

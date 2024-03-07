@@ -28,3 +28,6 @@ Route::post('register', [RegisterController::class, 'register'])->name('register
 Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 
 Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
+Route::get('dashboard/{id}', [DashboardAdminController::class, 'detailProfile']);
+Route::get('edit-profile-admin', [DashboardAdminController::class, 'profile']);
+Route::post('edit-profile-admin/{id}', [DashboardAdminController::class, 'update']);
