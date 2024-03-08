@@ -30,8 +30,8 @@
                             style="color: #A61C1CE5;">
                         <label for="remember" class="mb-0">Ingat saya</label>
                     </div>
-                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="" class="text-decoration-none"
-                            style="color:#A61C1CE5;">Reset</a></p>
+                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="{{ route('reset', ['id' => auth()->user()->id]) }}}"
+                            class="text-decoration-none" style="color:#A61C1CE5;">Reset</a></p>
                 </div>
 
                 <div class="button-container fw-semibold">

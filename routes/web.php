@@ -61,6 +61,7 @@ Route::get('/register', function () {
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+Route::get('/reset-password/{id}', [AuthController::class, 'reset'])->name('reset');
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
