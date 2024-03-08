@@ -12,7 +12,7 @@
 
                     <input type="email" name="email"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        placeholder="Masukkan Email" value="{{ $user->email }}" readonly>
+                        placeholder="Masukkan Email" readonly>
                 </div>
 
                 <div class="button-container fw-semibold">

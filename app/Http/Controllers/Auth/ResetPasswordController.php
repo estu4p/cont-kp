@@ -18,8 +18,7 @@ class ResetPasswordController extends Controller
 {
     public function index()
     {
-        $user = User::findOrFail(Auth::user()->id);
-        return view("landing-page.resetPassword")->with(["user" => $user])->with("title", "reset password");
+        return view("landing-page.resetPassword")->with("title", "reset password");
     }
 
     public function resetPassword(Request $request)
