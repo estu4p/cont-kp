@@ -4,11 +4,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ asset('assets/css/laporandatapresensi.css') }}">
 <div id="laporan-hasil-presensi">
-    <div class="container">
+    <div class="container-fluid p-5 ml-2">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 parent-relatife">
+                <a href="/presensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                 <div class="card">
-
                     <div class="card-header" style="display: grid; grid-template-columns: 1fr auto;">
                         <div>
                             <h3 style="font-size: 50px; margin: 0;">Laporan Data Presensi</h3>
@@ -55,7 +55,7 @@
 
                 </div>
                 <br>
-                    <table class="table table-sm table-bordered table-striped" style="font-size: 15px;">
+                    <table class="table table-sm table-bordered" style="font-size: 15px;">
                             <thead>
                               <tr>
                                 <th><input type="checkbox" id="#" name=""></th>
@@ -71,16 +71,16 @@
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>
                                 <td>1</td>
-                                <td>syalita widyadini</td>
+                                <td><a href="/datapresensisiswa">simpay</a></td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
-                                <td>100</td>
-                                <td>80</td>
-                                <td>70</td>
+                                <td>100 &nbsp; <a href="/presensihadir" class="fa-solid fa-circle-info"></td>
+                                <td>80  &nbsp; <a href="/presensiizin" class="fa-solid fa-circle-info"></td>
+                                <td>70  &nbsp; <a href="/presensitidakhadir" class="fa-solid fa-circle-info"></td>
                               </tr>
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>
                                 <td>2</td>
-                                <td>diah ayu narianti</td>
+                                <td>bono</td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
                                 <td>100</td>
                                 <td>80</td>
@@ -90,7 +90,7 @@
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>
                                 <td>3</td>
-                                <td>indah puji astuti</td>
+                                <td>udin nganga</td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
                                 <td>100</td>
                                 <td>80</td>
@@ -100,12 +100,11 @@
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>
                                 <td>4</td>
-                                <td>achmad mucibin</td>
+                                <td>aufff</td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
                                 <td>100</td>
                                 <td>80</td>
                                 <td>70</td>
-
                               </tr>
                             </tbody>
                             </table>

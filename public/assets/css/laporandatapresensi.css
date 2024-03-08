@@ -7,6 +7,18 @@
     color: white;
     background-color: #404040;
     border-bottom: 1px solid #ddd;
+    position: relative;
+}
+.parent-relatife{
+    position: relative;
+}
+.kekiri{
+    position: absolute;
+    left:-2%;
+    z-index: 10;
+    top:10px;
+    color: black;
+
 }
 
 #date-input {
@@ -44,16 +56,16 @@ table {
     border-collapse: collapse;
 }
 
-th {
+.table th {
     text-align: center;
-    padding: 8px;
-    background-color: #f2f2f2;
+    background-color: #DCDCDC;
 }
 
-td {
-    text-align: center;
-    padding: 8px;
-    border: 1px solid #ddd;
+.table tr td {
+    background-color: white !important;
+}
+.table tr{
+    background-color: white !important;
 }
 .search{
     padding-right: 10px;

@@ -6,7 +6,7 @@
           <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Mahasiswa</a>
+          <a class="nav-link" href="/jumlah-mahasiswa">Mahasiswa</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/presensi">Presensi</a>

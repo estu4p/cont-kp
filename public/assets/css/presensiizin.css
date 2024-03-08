@@ -1,0 +1,105 @@
+.card-header{
+    left: 456px;
+    top: 187px;
+    background: #404040;
+    color: white;
+    }
+
+    .parent-relatife{
+        position: relative;
+    }
+    .kekiri{
+        position: absolute;
+        left:-2%;
+        z-index: 10;
+        top:10px;
+        color: black;
+
+    }
+
+    .user{
+    width: 95px;
+    height: 99px;
+    left: 487px;
+    top: 214px;
+    background: #BA181B;
+    border-radius: 50px;
+    }
+    .masa {
+        width: auto;
+        height: auto;
+
+        background: #E9E9E9;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .masa table th,
+    .masa table td {
+        text-align: left;
+    }
+
+    .masa table td:nth-child(2) {
+        text-align: right;
+    }
+
+    .container-card {
+        display: flex;
+        gap: 20px;
+    }
+
+    .masuk, .target{
+        background-color: #20DB1C;
+        border-radius: 15px;
+        color: white;
+    }
+    .total, .sisa{
+        background-color: black;
+        border-radius: 15px;
+        color: white;
+    }
+    .container-card2 {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .butongeser{
+    width: 60px;
+    height: 30px;
+    left: 456px;
+    top: 499px;
+    background: #404040;
+    color: white;
+    }
+
+    table {
+        margin: auto;
+        text-align: center;
+      }
+
+      th, td {
+        text-align: center;
+      }
+
+      tr th[rowspan], tr th[colspan] {
+        vertical-align: middle;
+      }
+      .btnpdf{
+        background-color: red;
+        color: white;
+        border-radius: 6px;
+        border-color: #ddd;
+
+    }
+    .table th {
+        text-align: center;
+        background-color: #DCDCDC;
+    }
+
+    .table tr td {
+        background-color: white !important;
+    }
+    .table tr{
+        background-color: white !important;
+    }
+

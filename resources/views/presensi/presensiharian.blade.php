@@ -58,29 +58,29 @@
                             </div>
                         </div>
                         <br>
-                        <table class="table table-sm table-bordered table-striped" style="font-size: 10px;">
-                            <thead>
+                        <table class="table table-sm table-bordered " style="font-size: 10px;">
+                            <thead style="text-align: center;">
                                 <tr>
-                                <th rowspan="2"><input type="checkbox" id="#" name="">&nbsp;No</th>
-                                  <th rowspan="2">Nama</th>
-                                  <th colspan="2">Jam Kerja</th>
-                                  <th colspan="2">Jam istirahat </th>
-                                  <th colspan="2">total jam kerja</th>
-                                  <th colspan="2">Log Aktivitas</th>
-                                  <th rowspan="2">Status <br>Kehadiran</th>
-                                  <th rowspan="2">Kebaikan</th>
+                                    <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" id="#" name="">&nbsp;No</th>
+                                    <th rowspan="2" style="vertical-align: middle;">Nama</th>
+                                    <th colspan="2">Jam Kerja</th>
+                                    <th colspan="2">Jam Istirahat</th>
+                                    <th colspan="2">Total Jam Kerja</th>
+                                    <th colspan="2">Log Aktivitas</th>
+                                    <th rowspan="2">Status <br>Kehadiran</th>
+                                    <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
                                 </tr>
                                 <tr>
-                                  <th>masuk</th>
-                                  <th>pulang</th>
-                                  <th>mulai</th>
-                                  <th>selesai</th>
-                                  <th>total jam</th>
-                                  <th>(-)(+)</th>
-                                  <th class="bates">Log Aktivitas</th>
-                                  <th>aksi</th>
+                                    <th>Masuk</th>
+                                    <th>Pulang</th>
+                                    <th>Mulai</th>
+                                    <th>Selesai</th>
+                                    <th>Total Jam</th>
+                                    <th>(-)(+)</th>
+                                    <th class="bates">Log Aktivitas</th>
+                                    <th>Aksi</th>
                                 </tr>
-                              </thead>
+                            </thead>
                               <tbody>
                                 <tr>
                                   <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
@@ -126,7 +126,7 @@
                                   </tr>
                                   <tr>
                                     <td><input type="checkbox" id="#" name=""> &nbsp; 4</td>
-                                    <td>syalita widyandini</td>
+                                    <td>aufff</td>
                                     <td>06:25:00</td>
                                     <td>13:05:14</td>
                                     <td>06:25:00 </td>

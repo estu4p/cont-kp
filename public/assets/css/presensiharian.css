@@ -33,7 +33,7 @@ border-radius: 20px;
 }
 
 .card-body {
-    padding: 20px; 
+    padding: 20px;
     background-color: #EEEEEE;
     border: none;
 }
@@ -43,16 +43,18 @@ border-radius: 20px;
     border-color: #ddd;
 }
 
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
+
 
 .table th {
     text-align: center;
+    background-color: #DCDCDC;
 }
 
-.table td {
-    vertical-align: middle;
+.table tr td {
+    background-color: white !important;
+}
+.table tr{
+    background-color: white !important;
 }
 
 .btn-primary {
