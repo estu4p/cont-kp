@@ -28,4 +28,9 @@ Route::get('/dashboard', function () {
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
-
+Route::get('/laporandatapresensi', function () {
+    return view('presensi.laporandatapresensi');
+});
+Route::get('/datapresensisiswa', function () {
+    return view('presensi.datapresensisiswa');
+});

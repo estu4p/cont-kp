@@ -9,19 +9,33 @@
 
 .card-header {
     color: white;
-    background-color: black;
+    background-image: url(/assets/images/backroundheaderpresensi.png);
     border-bottom: 1px solid #ddd;
 }
 .btn {
-    background-color: white;
-    color: blue;
-    border-radius: 20px;
-    padding: 5px 5px;
+width: 228px;
+height: 36px;
+left: 404px;
+top: 494px;
+color: #007bff;
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 20px;
+
 }
 
+.search{
+    padding-left: 30px;
+    box-sizing: border-box;
+    background: #E9E9E9;
+    border: 0.5px solid #000000;
+
+}
 
 .card-body {
-    padding: 20px;
+    padding: 20px; 
+    background-color: #EEEEEE;
+    border: none;
 }
 
 
@@ -46,25 +60,26 @@
     border-color: #007bff;
 }
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
+
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    padding-right: 30px;
 }
 .dropbtn {
-    width: 70px;
+    width: 90px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 130px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
+    padding: 12px 12px;
     z-index: 1;
 }
 
@@ -85,3 +100,30 @@
 
 }
 
+.checkbox-container {
+    margin-right: 10px;
+}
+
+.round-button-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: green;
+    color: white;
+    border: none;
+    margin-right: 10px;
+}
+.round-button-cross {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    border: none;
+    margin-right: 10px;
+}
+.bates{
+    max-width:200px !important;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}

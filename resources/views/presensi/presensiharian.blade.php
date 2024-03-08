@@ -12,31 +12,35 @@
                         <h3 style="font-size: 50px;">Presensi Harian</h3>
                         <p>Data per tanggal 2023-09-04</p>
                     </div>
-                    <div class="card-body">
+                </div>
+            </div>
+                    <div class="card-body"  >
                         <div class="row">
                             <div style=" display: flex; justify-content: space-between;">
-                                <button class="btn">
+                                <a class="btn" href="/laporandatapresensi">
                                   <i class="fa-regular fa-eye"></i>
                                   Lihat Laporan Presensi
-                                </button>
+                                </a>
                                 <div>
                                 <div style="float:left;">
                                     <div style="position: relative;">
                                         <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
-                                        <input type="date" name="date" id="date-input" style="padding-left: 30px;">
+                                        <input type="date" name="date" id="date-input" class="search">
                                         <p id="date-text"></p>
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Filter &#9660;</button>
+                                    <button class="dropbtn"><i class="fa-solid fa-filter"></i>Filter<i class="fa-solid fa-chevron-down"></i></button>
                                     <div class="dropdown-content">
-                                      <label>Status</label><br>
-                                      <input type="checkbox" id="checkbox2">
-                                      <label for="checkbox2">Hadir</label><br>
-                                      <input type="checkbox" id="checkbox3">
-                                      <label for="checkbox3">Izin</label><br>
-                                      <input type="checkbox" id="checkbox3">
-                                      <label for="checkbox3">Izin</label><br>
+                                        <div style="border-bottom: 1px solid #000;">
+                                            <label>Status</label><br>
+                                            <input type="checkbox" id="checkbox1">
+                                            <label for="checkbox1">Hadir</label><br>
+                                            <input type="checkbox" id="checkbox2">
+                                            <label for="checkbox2">Izin</label><br>
+                                            <input type="checkbox" id="checkbox3">
+                                            <label for="checkbox3">Izin</label><br>
+                                        </div>
                                       <label for="checkbox1">Shift</label><br>
                                       <input type="checkbox" id="checkbox2">
                                       <label for="checkbox2">Shift pagi</label><br>
@@ -44,7 +48,6 @@
                                       <label for="checkbox3">Shift Middle</label><br>
                                       <input type="checkbox" id="checkbox3">
                                       <label for="checkbox3">Shift Siang</label><br>
-
                                     </div>
                                   </div>
                               </div>
@@ -58,80 +61,94 @@
                         <table class="table table-sm table-bordered table-striped" style="font-size: 10px;">
                             <thead>
                                 <tr>
-                                    <th width="5%">No</th>
-                                    <th width="15%">Nama</th>
-                                    <th width="8%">Jam Kerja <br>masuk &nbsp; pulang</th>
-                                    <th width="8%">Jam Istirahat <br> mulai &nbsp; selesai</th>
-                                    <th width="8%">Total Jam Kerja <br>total jam &nbsp; (+)(-)</th>
-                                    <th width="15%">Log Aktivitas <br> Log Aktivitas &nbsp; aksi </th>
-                                    <th width="5%">Status <br>kehadiran</th>
-                                    <th width="10%">kebaikan</th>
+                                <th rowspan="2"><input type="checkbox" id="#" name="">&nbsp;No</th>
+                                  <th rowspan="2">Nama</th>
+                                  <th colspan="2">Jam Kerja</th>
+                                  <th colspan="2">Jam istirahat </th>
+                                  <th colspan="2">total jam kerja</th>
+                                  <th colspan="2">Log Aktivitas</th>
+                                  <th rowspan="2">Status <br>Kehadiran</th>
+                                  <th rowspan="2">Kebaikan</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @for ($i = 1; $i <= 10; $i++)
                                 <tr>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                  <th>masuk</th>
+                                  <th>pulang</th>
+                                  <th>mulai</th>
+                                  <th>selesai</th>
+                                  <th>total jam</th>
+                                  <th>(-)(+)</th>
+                                  <th class="bates">Log Aktivitas</th>
+                                  <th>aksi</th>
                                 </tr>
-                                @endfor
-                            </tbody>
-                        </table>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
+                                  <td class="bates" href><a href="/datapresensisiswa">simpay</a></td>
+                                  <td>06:25:00</td>
+                                  <td>13:05:14</td>
+                                  <td>06:25:00 </td>
+                                  <td>13:05:14</td>
+                                  <td>06:25:00 </td>
+                                  <td>13:05:14</td>
+                                  <td  class="bates">Membuat ributt anak gang sebelah</td>
+                                  <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                  <td>hadir</td>
+                                  <td>merapikan parkiran motor</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" id="#" name=""> &nbsp; 2</td>
+                                    <td  class="bates" >bono</td>
+                                    <td>06:25:00</td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td  class="bates">Membuat onar di kantor</td>
+                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                    <td>hadir</td>
+                                    <td>merapikan parkiran motor</td>
+                                  </tr>
+                                  <tr>
+                                    <td><input type="checkbox" id="#" name=""> &nbsp; 3</td>
+                                    <td>udin nganga</td>
+                                    <td>06:25:00</td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td  class="bates">Membuat rusush</td>
+                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                    <td>hadir</td>
+                                    <td>merapikan parkiran motor</td>
+                                  </tr>
+                                  <tr>
+                                    <td><input type="checkbox" id="#" name=""> &nbsp; 4</td>
+                                    <td>syalita widyandini</td>
+                                    <td>06:25:00</td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td>06:25:00 </td>
+                                    <td>13:05:14</td>
+                                    <td  class="bates">Membuat ributt anak gang sebelahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</td>
+                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                    <td>hadir</td>
+                                    <td>merapikan parkiran motor</td>
+                                  </tr>
+                              </tbody>
+                         </table>
+                         <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
                     </div>
+
                 </div>
+
             </div>
-            <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+
         </div>
     </div>
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        // Datatable
-        $('#table-presentasi').DataTable();
-    });
-</script>
-<script>
-    function search() {
-      var date = document.getElementById("dateInput").value;
-      // Lakukan sesuatu dengan tanggal yang dipilih
-      console.log("Date:", date);
-    }
-  </script>
-
-  <script>
-    const dateInput = document.getElementById('date-input');
-    const dateText = document.getElementById('date-text');
-
-    dateInput.addEventListener('input', function() {
-        const dateValue = new Date(this.value);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const dateString = dateValue.toLocaleDateString('en-US', options);
-        dateText.textContent = dateString;
-    });
-</script>
-
-<script>
-    function toggleDropdown() {
-        var dropdown = document.getElementById('dropdown');
-        dropdown.classList.toggle('active');
-    }
-
-    function closeDropdown() {
-        var dropdown = document.getElementById('dropdown');
-        if (!dropdown.contains(event.relatedTarget)) {
-            dropdown.classList.remove('active');
-        }
-    }
-</script>
-
-
-@endpush
