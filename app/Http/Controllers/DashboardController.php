@@ -20,7 +20,7 @@ class DashboardController extends Controller
 
         $jumlah_mitra = Mitra::count();
         // $jumlah_siswa = User::count();
-        $jumlah_siswa = User::where('role', 1)->count();
+        $jumlah_siswa = User::where('role_id', 1)->count();
 
         return view("dashboard.dashboard-admin")->with(["jumlah_mitra" => $jumlah_mitra, "jumlah_siswa" => $jumlah_siswa]);
 
