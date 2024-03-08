@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,5 +23,10 @@ class AuthController extends Controller
         }
 
         return redirect()->route('login')->with('error', 'Email or password is incorrect.');
+    }
+    public function reset($id)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        return view("landing-page.resetPassword")->with(["user" => $user])->with("title", "reset password");
     }
 }
