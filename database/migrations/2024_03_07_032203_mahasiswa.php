@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("mahasiswa", function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("nama_mahasiswa");
-            $table->string("email");
-            $table->integer("nomor_induk_mahasiswa");
-            $table->string("jurusan");
-            $table->string("no_hp");
-            $table->string("address");
-            $table->string("about");
+        Schema::create('mahasiswa', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nama_mahasiswa');
+            $table->string('email');
+            $table->integer('nomor_induk_mahasiswa');
+            $table->string('jurusan');
+            $table->string('no_hp');
+            $table->string('address');
+            $table->string('about');
+            $table->unsignedBigInteger('mitra_id')->nullable(); // Kolom untuk kunci asing
+
+            // Menambahkan kunci asing ke tabel 'mitra'
+            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('cascade');
         });
     }
 
