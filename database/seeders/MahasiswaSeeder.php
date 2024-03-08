@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Mahasiswa;
+use App\Models\Mitra;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,8 @@ class MahasiswaSeeder extends Seeder
                 'jurusan' => 'Ilmu Komputer',
                 'no_hp' => $faker->phoneNumber,
                 'address' => $faker->address,
-                'about' => $faker->randomLetter
+                'about' => $faker->randomLetter,
+                'mitra_id' => Mitra::inRandomOrder()->first()->id // Mengambil ID mitra secara acak
             ]);
         }
     }
