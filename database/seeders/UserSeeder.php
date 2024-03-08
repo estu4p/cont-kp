@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk_mahasiswa' => $faker->randomNumber,
-                'jurusan' => "Ilmu Komputer",
+                'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
                 'email' => $faker->email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
