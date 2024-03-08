@@ -20,7 +20,6 @@ Route::get('/welcome', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/daftar', [LandingPageController::class, 'lpdaftar'])->name('daftar');
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');

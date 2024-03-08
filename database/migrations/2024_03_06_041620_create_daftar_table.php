@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('daftar', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+         $table->id();
+         $table->string('name');
+         $table->string('sekolah');
+         $table->string('telephone');
+         $table->string('email')->unique();
+         $table->string('password');
+         $table->timestamps();
+
         });
     }
 

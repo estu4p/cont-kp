@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran</title>
     <link rel="stylesheet" href="{{ asset('css/daftar.css') }}">
-<!--
-    {{-- <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -51,13 +50,13 @@
             background-color: #45a049;
         }
 
-    </style> --}} -->
+    </style>
 </head>
 <body>
     <div class="container">
     <div class= "input">
         <h1>Daftarkan Kampus/Sekolah Anda </h1>
-        <form action="{{ route('daftar') }}">
+        <form action="/api/daftar" method="POST">
             <div class= "box-input">
                 <label for="username">Nama</label>
                 <i class="fas fa-user"></i>
@@ -103,6 +102,7 @@ function signup() {
             console.log("Password:", password);
             console.log("Sekolah:", sekolah);
             console.log("Telephone:", telephone);
+}
 
 </script>
 

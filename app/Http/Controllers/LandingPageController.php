@@ -16,20 +16,22 @@ class LandingPageController extends Controller
 
     public function lpdaftar(Request $request)
     {
-            $name= $request->input('fullname');
-            $sekolah= $request->input('sekolah');
-            $email= $request->input('email');
-            $telephone=$request->input('telephoen');
-            $password=$request->input('password');
+        $request->validate([
+            'fullname' => 'required|string|max:100',
+            'sekolah' => 'required|string',
+            'email' => 'email|required|unique:daftar,email',
+            'telephone' => 'required|regex:/^\d+$/',
+            'password' => 'min:8|required'
+        ]);
 
-            $daftar = new Daftar;
-            $daftar->name = $name;
-            $daftar->sekolah = $sekolah;
-            $daftar->email = $email;
-            $daftar->telephone = $telephone;
-            $daftar->password = $password;
-            $daftar->save();
+            $data = Daftar::create([
+                'name' => $request->fullname,
+                'sekolah' => $request->sekolah,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'password' => $request->password,
+            ]);
 
-            return Redirect::route('daftar')->with('success', 'Pendaftaran berhasil');
+            return response()->json(['data' => $data]);
     }
 }
