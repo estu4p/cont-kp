@@ -42,3 +42,7 @@ body{
   .logo {
     margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
   }
+  .logout{
+    position:absolute;
+   bottom:10%;
+  }
