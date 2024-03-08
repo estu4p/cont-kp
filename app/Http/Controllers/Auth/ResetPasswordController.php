@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
-use Illuminate\Support\Facades\Password;
-use App\Http\Controllers\Auth\to;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\to;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 
 
 class ResetPasswordController extends Controller
 {
-    public function index(){
-        return view('resetpw');
+    public function index()
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        return view("landing-page.resetPassword")->with(["user" => $user])->with("title", "reset password");
     }
 
     public function resetPassword(Request $request)
@@ -42,7 +45,8 @@ class ResetPasswordController extends Controller
         }
     }
 
-    public function verifyOTP(Request $request){
+    public function verifyOTP(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'otp' => 'required|string',
@@ -53,7 +57,7 @@ class ResetPasswordController extends Controller
             return back()->withErrors(['email' => 'User not found.']);
         }
         //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
-        if($user->otp !== $request->otp){
+        if ($user->otp !== $request->otp) {
             return response()->json([
                 'error' => ' Invalid OTP'
             ], 400);
@@ -77,5 +81,4 @@ class ResetPasswordController extends Controller
         $user->save();
         return redirect()->route('login')->with('success', 'Password has been reset successfully. Please login with your new password.');
     }
-
 }
