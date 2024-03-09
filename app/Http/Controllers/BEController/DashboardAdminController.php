@@ -15,12 +15,12 @@ class DashboardAdminController extends Controller
     public function index()
     { // menampilkan seluruh data yang diperlukan
         $jumlah_mitra = Mitra::all();
-        $jumlah_siswa = User::where("role", 1)->get();
+        $jumlah_siswa = User::where("role_id", 1)->get();
 
         // Mengambil nama siswa dari koleksi data
 
         return response()->json([
-            "message" => "Succes get data",
+            "message" => "Success get data",
             "jumlah mitra" => $jumlah_mitra,
             "jumlah siswa" => $jumlah_siswa,
 
