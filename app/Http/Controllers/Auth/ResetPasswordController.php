@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Auth\to;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 
 
@@ -17,7 +22,7 @@ class ResetPasswordController extends Controller
 {
     public function index()
     {
-        return view('resetpw');
+        return view("landing-page.resetPassword")->with("title", "reset password");
     }
 
     public function resetPassword(Request $request)
@@ -49,12 +54,25 @@ class ResetPasswordController extends Controller
             'digit3' => 'required|string',
             'digit4' => 'required|string',
         ]);
+
         $inputOtp = $request->digit1 . $request->digit2 . $request->digit3 . $request->digit4;
         // Ambil OTP dari session
         $otpFromSession = Session::get('otp_');
         // Cek apakah OTP sesuai
         if ($otpFromSession !== $inputOtp) {
             return redirect()->back()->with('error', 'Invalid OTP');
+
+        $user = User::where('email', $request->email)->first();
+        // Cek apakah pengguna ditemukan
+        if (!$user) {
+            return back()->withErrors(['email' => 'User not found.']);
+        }
+        //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
+        if ($user->otp !== $request->otp) {
+            return response()->json([
+                'error' => ' Invalid OTP'
+            ], 400);
+
         }
 
         // Hapus OTP dari session setelah diverifikasi
