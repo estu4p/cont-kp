@@ -20,7 +20,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbar')
+        @include('template.navbarprofileadmin')
         <!-- bueeek master baru piqri bangke -->
 
         <div class="content-wrapper">
@@ -30,7 +30,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebarMitra') <!-- bueeek master baru piqri bangke -->
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">
