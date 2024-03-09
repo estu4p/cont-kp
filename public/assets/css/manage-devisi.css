@@ -110,38 +110,23 @@
     border-radius: 5px;
     background: #ffffff;
     border: none;
-    margin-top: 20px;
+    margin-top: 5px;
+    text-align: center;
+    height:40px;
+    width:170px;
+    border-radius: 10px;
 }
 .ic{
     color: #228300;
 }
 
 
-.toggle-button {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    background-color: #ccc;
-    border: none;
-    border-radius: 34px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .toggle-button span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .toggle-button:active span {
-    background-color: #ccc;
-  }
-  
+.btn-jam{
+    background: #ffffff;
+    height:40px;
+    width:170px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    padding-left: 20px; 
+}
