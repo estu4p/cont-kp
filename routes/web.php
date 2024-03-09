@@ -102,4 +102,6 @@ Route::get('/profil-siswa', function () {
 
 Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaianMahasiswa');
 
-    
+Route::get('/input-nilai', function () {
+    return view('penilaian-siswa.input-nilai');
+});

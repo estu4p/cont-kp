@@ -49,4 +49,5 @@ a.nav-link.activee {
   position:absolute;
  bottom:10%;
  color: #302f2f;
+ opacity: 0.6;
 }
