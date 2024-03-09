@@ -13,7 +13,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswa = [
-        ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
+        ['nama' => 'iqra Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
         ['nama' => 'Fairuza Attar Aviciena', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Danni Hernando', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Febrian Adipurnowo', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
@@ -76,8 +76,7 @@ class MahasiswaController extends Controller
         //
     }
 
-
-    public function mahasiswa()
+    public function penilaian_siswa()
     {
         $mahasiswa = [
         ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
@@ -93,5 +92,6 @@ class MahasiswaController extends Controller
     ];
         // $mahasiswa = Mahasiswa::getDataMahasiswa();
         return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
+        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
     }
 }

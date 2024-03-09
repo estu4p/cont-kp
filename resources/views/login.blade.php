@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-8 row justify-content-center">
-                <div class="card   col-7 p-0" data-aos="zoom-in" data-aos-duration="2000">
+                <div class="card   col-7 p-0" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-header d-flex flex-column justify-content-center  py-2 gap-2" style="color: #660708">
                         <i class="fa-solid fa-lock text-center"></i>
                         <p class=" text-center">Log In</p>
@@ -28,8 +28,8 @@
                                     <input type="text" class="form-control" id="username" placeholder="Masukan Username / Email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Masukan Password">
+                                    <label for="password2">Password</label>
+                                    <input type="password" class="form-control" id="password2" placeholder="Masukan Password">
                                 </div>
                                 <div class="d-flex gap-0 justify-content-between row flex-row">
                                     <div class="form-check d-flex align-items-start col-5 gap-2  ">

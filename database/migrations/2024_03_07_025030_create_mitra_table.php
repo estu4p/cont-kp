@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('mitra', function (Blueprint $table) {
             $table->id();
             $table->string('nama_mitra');
+            $table->string('deskripsi_mitra');
+            $table->string('divisi_mitra');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\MahasiswaController;
@@ -24,13 +25,6 @@ use function Laravel\Prompts\alert;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
-Route::view('/login', 'login');
-Route::view('/register', 'register');
-Route::view('/resetpw', 'resetpw');
-Route::view('/otp', 'otp');
-Route::view('/new', 'newpw');
-
 
 Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -62,6 +56,8 @@ Route::get('/register', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
+Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
+
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
@@ -120,7 +116,31 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'mahasiswa']);
 Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
+Route::get('/user/login', function () {
+    return view('user.login', ['title' => "Login"]);
+});
+Route::get('/user/register', function () {
+    return view('user.register', ['title' => "Register"]);
+});
+Route::get('/user/reset-password', function () {
+    return view('user.reset', ['title' => "Reset Password"]);
+});
+Route::get('/user/reset-password/otp', function () {
+    return view('user.otp', ['title' => "Reset Password - OTP"]);
+});
+Route::get('/user/reset-password/new-password', function () {
+    return view('user.new-password', ['title' => "Reset Password - New Password"]);
+});
+Route::get('/user/reset-password/confirm', function () {
+    return view('user.confirm', ['title' => "Reset Password - Confirm"]);
+});
 
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
+});
+
+Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaianMahasiswa');
+
+Route::get('/input-nilai', function () {
+    return view('penilaian-siswa.input-nilai');
 });

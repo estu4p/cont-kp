@@ -22,6 +22,7 @@ body{
   color: #000; /* Ubah warna teks tautan */
   text-decoration: none; /* Hilangkan garis bawah */
   list-style-type: none; /* Menghilangkan bullet */
+
 }
 
 .nav-link:hover {
@@ -32,6 +33,7 @@ a.nav-link.activee {
   font-weight: bold; /* Menebalkan tautan aktif */
   background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
   color: #fff; /* Warna teks untuk tautan aktif */
+
 }
 
 
@@ -39,10 +41,6 @@ a.nav-link.activee {
   text-align: center;
 }
 
-  .logo {
-    margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
-  }
-  .logout{
-    position:absolute;
-   bottom:10%;
-  }
+.logo {
+  margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
+}

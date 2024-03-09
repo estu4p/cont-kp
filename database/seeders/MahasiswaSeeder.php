@@ -15,7 +15,7 @@ class MahasiswaSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 5000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Mahasiswa::create([
                 'nama_mahasiswa' => $faker->name,
                 'email' => $faker->email,
