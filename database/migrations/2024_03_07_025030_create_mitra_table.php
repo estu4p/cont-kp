@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_mitra');
             $table->string('deskripsi_mitra');
+            $table->string('divisi_mitra');
             $table->timestamps();
         });
     }
