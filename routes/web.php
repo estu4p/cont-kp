@@ -98,7 +98,7 @@ Route::get('/adminbeforepayment', function () {
 
 
 
-Route::get('/contributingforuniv', [MahasiswaController::class, 'mahasiswa']);
+Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 
 
 
