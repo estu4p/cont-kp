@@ -4,18 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Mail\SendEmail;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Auth\to;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
 
 
 class ResetPasswordController extends Controller
@@ -62,22 +55,23 @@ class ResetPasswordController extends Controller
         if ($otpFromSession !== $inputOtp) {
             return redirect()->back()->with('error', 'Invalid OTP');
 
-        $user = User::where('email', $request->email)->first();
-        // Cek apakah pengguna ditemukan
-        if (!$user) {
-            return back()->withErrors(['email' => 'User not found.']);
-        }
-        //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
-        if ($user->otp !== $request->otp) {
-            return response()->json([
-                'error' => ' Invalid OTP'
-            ], 400);
+            $user = User::where('email', $request->email)->first();
+            // Cek apakah pengguna ditemukan
+            if (!$user) {
+                return back()->withErrors(['email' => 'User not found.']);
+            }
+            //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
+            if ($user->otp !== $request->otp) {
+                return response()->json([
+                    'error' => ' Invalid OTP'
+                ], 400);
 
-        }
+            }
 
-        // Hapus OTP dari session setelah diverifikasi
-        $request->session()->forget('otp_' . $request->email);
-        return view('newpw', ['email' => $request->email]);
+            // Hapus OTP dari session setelah diverifikasi
+            $request->session()->forget('otp_' . $request->email);
+            return view('newpw', ['email' => $request->email]);
+        } 
     }
 
     public function newPassword(Request $request)
