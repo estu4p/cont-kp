@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\MahasiswaController;
@@ -62,6 +63,8 @@ Route::get('/register', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
+Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
+
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
