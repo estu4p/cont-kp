@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
-use Illuminate\Support\Facades\Password;
-use App\Http\Controllers\Auth\to;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Password;
 
 
 class ResetPasswordController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('resetpw');
     }
 
@@ -24,58 +25,60 @@ class ResetPasswordController extends Controller
         $request->validate([
             'email' => 'required|email',
         ]);
-
-        $user = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        if ($user === Password::RESET_LINK_SENT) {
-            $otp = Str::random(4);
-            Mail::to($request->email)->send(new SendEmail($otp));
-            return response()->json([
-                'message' => 'OTP has been sent to your email'
-            ]);
-        } else {
-            return response()->json([
-                'error' => 'Unable to send OTP'
-            ], 400);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['error' => 'User not found.'], 404);
         }
+        $otp = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        Session::put('otp_', $otp);
+        Session::put('reset_password', $request->email);
+        // Kirim OTP ke email pengguna
+        try {
+            Mail::to($request->email)->send(new SendEmail($otp));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send OTP email. Please try again later.'], 500);
+        }
+        return view('otp', ['email' => $request->email, 'otp' => $otp]);
     }
 
-    public function verifyOTP(Request $request){
+    public function verifyOTP(Request $request)
+    {
         $request->validate([
-            'email' => 'required|email',
-            'otp' => 'required|string',
+            'digit1' => 'required|string',
+            'digit2' => 'required|string',
+            'digit3' => 'required|string',
+            'digit4' => 'required|string',
         ]);
-        $user = User::where('email', $request->email)->first();
-        // Cek apakah pengguna ditemukan
-        if (!$user) {
-            return back()->withErrors(['email' => 'User not found.']);
+        $inputOtp = $request->digit1 . $request->digit2 . $request->digit3 . $request->digit4;
+        // Ambil OTP dari session
+        $otpFromSession = Session::get('otp_');
+        // Cek apakah OTP sesuai
+        if ($otpFromSession !== $inputOtp) {
+            return redirect()->back()->with('error', 'Invalid OTP');
         }
-        //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
-        if($user->otp !== $request->otp){
-            return response()->json([
-                'error' => ' Invalid OTP'
-            ], 400);
-        }
-        $user->otp = null;
-        $user->save();
-        return redirect()->route('password.reset', ['email' => $request->email]);
+
+        // Hapus OTP dari session setelah diverifikasi
+        $request->session()->forget('otp_' . $request->email);
+        return view('newpw', ['email' => $request->email]);
     }
 
     public function newPassword(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:5|confirmed',
         ]);
-        $user = User::where('email', $request->email)->first();
+        $reset = Session::get('reset_password');
+        $user = User::where('email', $reset)->first();
         if (!$user) {
-            return response()->json(['error' => 'User not found.'], 404);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pengguna dengan email ini tidak ditemukan.'
+            ]);
         }
-        $user->password = Hash::make($request->password);
-        $user->save();
+
+        $user->update(['password' => Hash::make($request->password)]);
+        // Bersihkan session reset_email setelah pengguna berhasil mengubah kata sandi
+        $request->session()->forget('reset_password');
         return redirect()->route('login')->with('success', 'Password has been reset successfully. Please login with your new password.');
     }
-
 }

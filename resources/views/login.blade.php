@@ -172,8 +172,8 @@
                                     <input type="text" class="form-control" id="username" placeholder="Masukan Username / Email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Masukan Password">
+                                    <label for="password2">Password</label>
+                                    <input type="password" class="form-control" id="password2" placeholder="Masukan Password">
                                 </div>
                                 <div class="d-flex gap-0 justify-content-between row flex-row">
                                     <div class="form-check d-flex align-items-start col-5 gap-2  ">

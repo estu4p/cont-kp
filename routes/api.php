@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\CobaController;
-use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -26,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
 Route::post('register', [RegisterController::class, 'register'])->name('register');
 Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
