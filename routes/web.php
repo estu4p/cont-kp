@@ -109,3 +109,6 @@ Route::get('/input-nilai', function () {
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
 });
+Route::get('/manage-shift', function () {
+    return view('mitra-pengaturan./manage-shift');
+});

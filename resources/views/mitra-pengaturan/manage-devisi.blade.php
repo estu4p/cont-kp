@@ -9,9 +9,8 @@
             <h3 class="card-title">Pengaturan</h3>
 
         </div>
-        <a class="nav-link" style="font-size: 14px; width:max-content;">Manage Divisi</a>
-        <a class="nav-link" style="font-size: 14px; width:max-content;">Manage Shift</a>
-
+        <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-devisi">Manage Divisi</a>
+        <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-shift">Manage Shift</a>
     </div>
     <div class="kanan-tabel p-4  w-100 justify-content-start">
         <div>
@@ -55,8 +54,6 @@
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
-
-
 
                                 </td>
                             </tr>
