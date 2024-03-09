@@ -20,16 +20,16 @@
             <div class="bawah w-100 d-flex flex-column p-5">
                 <div class="bawah-satu w-100 row">
                     <div class="bawah-satu-kiri col-7 d-flex flex-column">
-                        <div class="pengetahuan w-100 d-flex flex-column p-3">
-                            <h5>Pengetahuan</h5>
+                        <div class="pengetahuan w-100 d-flex flex-column p-3 py-0">
+                            <h5 >Pengetahuan</h5>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8">Pemahaman Topik Magang</p>
-                                <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                                <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                     style="background-color: #DCDCDC">10</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8">Pemahaman Topik Magang</p>
-                                <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                                <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                     style="background-color: #DCDCDC">10</p>
                             </div>
                         </div>
@@ -37,46 +37,46 @@
                             <h5>Pengetahuan</h5>
                             <div class="pemahaman-topik w-100 row ">
                                 <p class="col-8">Pemahaman Topik Magang</p>
-                                <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                                <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                     style="background-color: #DCDCDC">10</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8">Pemahaman Topik Magang</p>
-                                <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                                <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                     style="background-color: #DCDCDC">10</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8">Pemahaman Topik Magang</p>
-                                <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                                <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                     style="background-color: #DCDCDC">10</p>
                             </div>
                         </div>
                     </div>
-                    <div class="lainnya col-5 d-flex flex-column p-3">
-                        <h5 class="my-3">Pengetahuan</h5>
+                    <div class="lainnya col-5 d-flex flex-column p-3 py-0">
+                        <h5 class="+ ">Pengetahuan</h5>
                         <div class="pemahaman-topik w-100 row ">
                             <p class="col-8">Pemahaman Topik Magang</p>
-                            <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                            <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                 style="background-color: #DCDCDC">10</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8">Pemahaman Topik Magang</p>
-                            <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                            <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                 style="background-color: #DCDCDC">10</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8">Pemahaman Topik Magang</p>
-                            <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                            <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                 style="background-color: #DCDCDC">10</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8">Pemahaman Topik Magang</p>
-                            <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                            <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                 style="background-color: #DCDCDC">10</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8">Pemahaman Topik Magang</p>
-                            <p class="col-3  d-flex justify-content-center border-3 rounded border border-dark px-5 py-0"
+                            <p class="col-3  d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                 style="background-color: #DCDCDC">10</p>
                         </div>
                     </div>
