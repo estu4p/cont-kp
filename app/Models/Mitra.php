@@ -12,6 +12,6 @@ class Mitra extends Model
     protected $table = 'mitra';
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(User::class)->where('role_id', 3);
     }
 }

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 2500; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
-                'barcode' => $faker->randomLetter,
+                'barcode' => $faker->ean13(),
                 'role_id' => Role::inRandomOrder()->first()->id,
                 'password' => Hash::make('123456'),
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
