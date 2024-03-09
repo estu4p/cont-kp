@@ -96,6 +96,26 @@ Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
 
+
+
+Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
+
+
+
+
+// Route::get('/contributingforuniv', function () {
+//     return view('template.contributingforunivschool.penilaianmahasiswa');
+// });
+
+
+
+
+
+
+
+Route::get('/contributingforunivlihat', function () {
+    return view('template.contributingforunivschool.lihat');
+});
 Route::get('/user/login', function () {
     return view('user.login', ['title' => "Login"]);
 });
