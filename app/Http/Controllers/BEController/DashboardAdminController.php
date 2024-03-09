@@ -29,7 +29,7 @@ class DashboardAdminController extends Controller
 
     public function profile(Request $request)
     {
-        $profil = Mahasiswa::all();
+        $profil = User::all();
         return response()->json([
             "message" => "Success get data profile",
             "data" => $profil
@@ -38,7 +38,7 @@ class DashboardAdminController extends Controller
 
     public function detailProfile(Request $request, $id)
     {
-        $profil = Mahasiswa::find($id);
+        $profil = User::find($id);
         return response()->json([
             "message" => "Success to get detail profile",
             "data" => $profil
@@ -47,12 +47,12 @@ class DashboardAdminController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            "nama_mahasiswa" => 'required',
+            "nama_lengkap" => 'required',
             'email' => 'required|min:6',
-            'nomor_induk_mahasiswa' => 'required',
+            'nomor_induk' => 'required',
             'jurusan' => 'required',
             'no_hp' => 'required',
-            'address' => 'required',
+            'alamat' => 'required',
             'about' => 'required',
         ]);
 
@@ -63,15 +63,15 @@ class DashboardAdminController extends Controller
             ], 422);
         }
 
-        $user = Mahasiswa::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $user->fill([
-            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
-            'nomor_induk_mahasiswa' => $request->nomor_induk_mahasiswa,
+            'nomor_induk_' => $request->nomor_induk,
             'jurusan' => $request->jurusan,
             'no_hp' => $request->no_hp,
-            'address' => $request->address,
+            'alamat' => $request->alamat,
             'about' => $request->about
         ]);
 
