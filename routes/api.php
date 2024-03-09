@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\DashboardAdminController;
+use App\Http\Controllers\BEController\DataMitraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,4 @@ Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
 Route::get('dashboard/{id}', [DashboardAdminController::class, 'detailProfile']);
 Route::get('edit-profile-admin', [DashboardAdminController::class, 'profile']);
 Route::post('edit-profile-admin/{id}', [DashboardAdminController::class, 'update']);
+Route::get('data-mitra', [DataMitraController::class, 'index']);

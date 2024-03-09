@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class DataMitraController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = Mahasiswa::all();
         $mitra = Mitra::withCount('mahasiswa')->get();
-        return view("DataMitra")->with("data", $data)->with('mitra', $mitra);
+        // return view("DataMitra")->with("data", $data)->with('mitra', $mitra);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['data' => $mitra]);
+        } else {
+            return view('DataMitra')->with('data', $data)->with('mitra', $mitra);
+        }
     }
 }
