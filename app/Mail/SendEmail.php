@@ -13,13 +13,17 @@ use Illuminate\Queue\SerializesModels;
 class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $otp;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public function __construct($otp)
     {
-        //
+        $this->otp = $otp;
+    }
+
+    public function build()
+    {
+        return $this->view('sentEmail')
+            ->subject("Email verification");
     }
 
     /**
@@ -28,7 +32,7 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send OTP',
+            subject: 'Otp Mail',
         );
     }
 
@@ -38,7 +42,7 @@ class SendEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'resetpw',
+            view: 'sentEmail',
         );
     }
 

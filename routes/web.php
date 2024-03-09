@@ -26,13 +26,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::view('/login', 'login');
-Route::view('/register', 'register');
-Route::view('/resetpw', 'resetpw');
-Route::view('/otp', 'otp');
-Route::view('/new', 'newpw');
-
-
 Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/resetpw', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
