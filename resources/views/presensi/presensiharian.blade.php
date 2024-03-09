@@ -3,6 +3,7 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ asset('assets/css/presensiharian.css') }}">
+<script src="{{ asset('js/app.js') }}"></script>
 <div id="presentasi-harian">
     <div class="container">
         <div class="row">
@@ -113,27 +114,29 @@
                                   <tr>
                                     <td><input type="checkbox" id="#" name=""> &nbsp; 3</td>
                                     <td>udin nganga</td>
-                                    <td>06:25:00</td>
-                                    <td>13:05:14</td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td  class="bates">Membuat rusush</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>-- </td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td  class="bates"></td>
                                     <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
-                                    <td>hadir</td>
-                                    <td>merapikan parkiran motor</td>
+                                    <td>tidak hadir
+                                            <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i>
+                                    </td>
+                                    <td>--</td>
                                   </tr>
                                   <tr>
                                     <td><input type="checkbox" id="#" name=""> &nbsp; 4</td>
-                                    <td>aufff</td>
-                                    <td>06:25:00</td>
-                                    <td>13:05:14</td>
+                                    <td>bodat</td>
+                                    <td>07:25:00 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: red"></i></td>
+                                    <td>14:05:14 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jampulang" style="color: red"></i></td>
                                     <td>06:25:00 </td>
                                     <td>13:05:14</td>
                                     <td>06:25:00 </td>
                                     <td>13:05:14</td>
-                                    <td  class="bates">Membuat ributt anak gang sebelahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</td>
+                                    <td  class="bates">Membuat ributt anak gang </td>
                                     <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
                                     <td>hadir</td>
                                     <td>merapikan parkiran motor</td>
@@ -142,13 +145,87 @@
                          </table>
                          <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
                     </div>
+                    <div class="modal fade" id="statuskehadiran">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="padding-left: 40%;" >
+                                    <h1>Izin</h1>
+                                </div>
+                                <!-- Isi dari modal -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <!-- Baris Ke-1 -->
+                                        <div class="keterangan">
+                                            “ Maaf saya tidak dapat mengikuti magang untuk
+                                            hari ini dikarenakan saya sedang tidak enak
+                                            badan dan tubuh saya gatal karena saya jarang
+                                            mandi ”
+                                        </div>
+                                        <!-- Break Line -->
+                                        <div class="line-hr-1"></div>
+                                        <!-- Baris Ke-2 -->
+                                        Link Foto Gdrive
+                                        <div class="linkdrive"></div>
 
-                </div>
+                                        <!-- Break Line -->
+                                        <div class="line-hr-1"></div>
+                                        <!-- Baris Ke-3 -->
+                                        kategori izin
+                                        <div class="keterangan2"></div>
+                                        <div style="text-align: center;" >ganti jam</div>
+                                        <!-- Break Line -->
+                                        <div class="line-hr-1"></div>
+                                        <!-- End -->
+
+                                    </div>
+                                </div>
+                                <div style="text-align: center">
+                                    <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                                </div>
+                            </div>
+                    </div>
 
             </div>
-
+            <div class="modal fade" id="jamkerja">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Isi dari modal -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <!-- Baris Ke-1 -->
+                                <div class="keterangan">
+                                    “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
+                                    sebuah perampokan dan saya berinisiatif untuk
+                                    menolong korban”
+                                </div>
+                                <div style="text-align: center">
+                                    <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                        </div>
+                    </div>
         </div>
     </div>
 </div>
-@endsection
+</div>
+                <div class="modal fade" id="jampulang">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Isi dari modal -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Baris Ke-1 -->
+                                    <div class="keterangan">
+                                        “Maaf saya lupa pencet tombol pulang jadi
+                                        saya mencet di kost”
+                                    </div>
+                                    <div style="text-align: center">
+                                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+                </div>
+</div>
+</div>
+</div>
+</div>
 
+
+@endsection

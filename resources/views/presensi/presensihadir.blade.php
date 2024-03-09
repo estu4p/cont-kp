@@ -148,7 +148,7 @@
                             <td><input type="checkbox"></td>
                             <td>2</td>
                             <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30<i class="fa-solid fa-circle-info"></i></td>
+                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"></td>
                             <td>17:02:55</td>
                             <td>12:15:00</td>
                             <td>13:00:00</td>
@@ -164,7 +164,7 @@
                             <td><input type="checkbox"></td>
                             <td>2</td>
                             <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30<i class="fa-solid fa-circle-info"></i></td>
+                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"></td>
                             <td>17:02:55</td>
                             <td>12:15:00</td>
                             <td>13:00:00</td>
@@ -180,8 +180,27 @@
                       </table>
                       <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
                 </div>
-
-
+                <div class="modal fade" id="jamkerja">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Isi dari modal -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Baris Ke-1 -->
+                                    <div class="keterangan">
+                                        “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
+                                        sebuah perampokan dan saya berinisiatif untuk
+                                        menolong korban”
+                                    </div>
+                                    <div style="text-align: center">
+                                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+        </div>
 
 
 

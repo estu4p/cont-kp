@@ -130,26 +130,10 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-                          <td><i class="fa-regular fa-pen-to-square"></i></td>
-                        </tr>
-                        <tr>
                             <td><input type="checkbox"></td>
-                            <td>2</td>
+                            <td>1</td>
                             <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fa-solid fa-circle-info"></i></td>
+                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"></td>
                             <td>17:02:55</td>
                             <td>12:15:00</td>
                             <td>13:00:00</td>
@@ -163,7 +147,7 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>3</td>
+                            <td>2</td>
                             <td>Rabu, 23-08-2023</td>
                             <td>--</td>
                             <td>--</td>
@@ -172,13 +156,90 @@
                             <td>--</td>
                             <td>--</td>
                             <td>--</td>
-                            <td>izin <i class="fa-solid fa-circle-info"></i></td>
+                            <td>izin <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
                             <td>--</td>
                             <td>--</td>
                             <td><i class="fa-regular fa-pen-to-square"></i></td>
                         </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
                       </tbody>
                       </table>
+
+                      <div class="modal fade" id="jamkerja">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Isi dari modal -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <!-- Baris Ke-1 -->
+                                        <div class="keterangan">
+                                            “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
+                                            sebuah perampokan dan saya berinisiatif untuk
+                                            menolong korban”
+                                        </div>
+                                        <div style="text-align: center">
+                                            <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="modal fade" id="statuskehadiran">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding-left: 40%;" >
+                        <h1>Izin</h1>
+                    </div>
+                    <!-- Isi dari modal -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Baris Ke-1 -->
+                            <div class="keterangan">
+                                “ Maaf saya tidak dapat mengikuti magang untuk
+                                hari ini dikarenakan saya sedang tidak enak
+                                badan dan tubuh saya gatal karena saya jarang
+                                mandi ”
+                            </div>
+                            <!-- Break Line -->
+                            <div class="line-hr-1"></div>
+                            <!-- Baris Ke-2 -->
+                            Link Foto Gdrive
+                            <div class="linkdrive"></div>
+
+                            <!-- Break Line -->
+                            <div class="line-hr-1"></div>
+                            <!-- Baris Ke-3 -->
+                            kategori izin
+                            <div class="keterangan2"></div>
+                            <!-- Break Line -->
+                            <div class="line-hr-1"></div>
+                            <!-- End -->
+                            <div style="text-align: center" >ganti jam</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </div>
+        </div>
+
+</div>
                 </div>
 
 

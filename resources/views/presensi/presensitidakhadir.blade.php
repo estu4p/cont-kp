@@ -136,7 +136,7 @@
                             <td>--</td>
                             <td>--</td>
                             <td>--</td>
-                            <td>tidak hadir <i class="fa-solid fa-circle-info"></i></td>
+                            <td>tidak hadir  <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
                             <td>ganti jam</td>
                           </tr>
                           <tr>
@@ -149,7 +149,7 @@
                             <td>--</td>
                             <td>--</td>
                             <td>--</td>
-                            <td>tidak hadir <i class="fa-solid fa-circle-info"></i></td>
+                            <td>tidak hadir  <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
                             <td>ganti jam</td>
                           </tr>
                           <tr>
@@ -162,7 +162,7 @@
                             <td>--</td>
                             <td>--</td>
                             <td>--</td>
-                            <td>tidak hadir <i class="fa-solid fa-circle-info"></i></td>
+                            <td>tidak hadir  <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
                             <td>ganti jam</td>
                           </tr>
                           <tr>
@@ -175,7 +175,7 @@
                             <td>--</td>
                             <td>--</td>
                             <td>--</td>
-                            <td style="color: red">tidak hadir <i class="fa-solid fa-circle-info"></i></td>
+                            <td style="color: red">tidak hadir  <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
                             <td>Ganti Jam</td>
                           </tr>
 
@@ -183,8 +183,47 @@
                         </table>
                         <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
                 </div>
+                <div class="modal fade" id="statuskehadiran">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding-left: 40%;" >
+                                <h1>Izin</h1>
+                            </div>
+                            <!-- Isi dari modal -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Baris Ke-1 -->
+                                    <div class="keterangan">
+                                        “ Maaf saya tidak dapat mengikuti magang untuk
+                                        hari ini dikarenakan saya sedang tidak enak
+                                        badan dan tubuh saya gatal karena saya jarang
+                                        mandi ”
+                                    </div>
+                                    <!-- Break Line -->
+                                    <div class="line-hr-1"></div>
+                                    <!-- Baris Ke-2 -->
+                                    Link Foto Gdrive
+                                    <div class="linkdrive"></div>
 
+                                    <!-- Break Line -->
+                                    <div class="line-hr-1"></div>
+                                    <!-- Baris Ke-3 -->
+                                    kategori izin
+                                    <div class="keterangan2"></div>
+                                    <!-- Break Line -->
+                                    <div class="line-hr-1"></div>
+                                    <!-- End -->
+                                    <div style="text-align: center" >ganti jam</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center">
+                                <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+                </div>
 
+        </div>
+        </div>
 
 
 

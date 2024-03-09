@@ -105,3 +105,52 @@
     .table tr{
         background-color: white !important;
     }
+    .keterangan{
+
+        width: 471px;
+        height: 311px;
+        left: 53px;
+        top: 116px;
+        background: #F2F2F2;
+        border-radius: 5px;
+        }
+
+        .linkdrive{
+
+        width: 471px;
+        height: 51px;
+        left: 53px;
+        top: 475px;
+
+        background: #F2F2F2;
+        border-radius: 3px;
+
+        }
+        .keterangan2{
+            width: 471px;
+            height: 51px;
+            left: 53px;
+            top: 475px;
+            background: #F2F2F2;
+            border-radius: 3px;
+        }
+        .btnkembali {
+            left: 0%;
+            right: 0%;
+            top: 0%;
+            bottom: 0%;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.07em;
+            color: #858585;
+            background-color: transparent;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .btnkembali:hover {
+            color: #000000;
+        }

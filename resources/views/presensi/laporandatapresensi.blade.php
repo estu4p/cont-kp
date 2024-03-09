@@ -73,9 +73,9 @@
                                 <td>1</td>
                                 <td><a href="/datapresensisiswa">simpay</a></td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
-                                <td>100 &nbsp; <a href="/presensihadir" class="fa-solid fa-circle-info"></td>
-                                <td>80  &nbsp; <a href="/presensiizin" class="fa-solid fa-circle-info"></td>
-                                <td>70  &nbsp; <a href="/presensitidakhadir" class="fa-solid fa-circle-info"></td>
+                                <td>100 &nbsp; <a href="/presensihadir" class="fa-solid fa-circle-info" style="color: #000"></td>
+                                <td>80  &nbsp; <a href="/presensiizin" class="fa-solid fa-circle-info" style="color: #000"></td>
+                                <td>70  &nbsp; <a href="/presensitidakhadir" class="fa-solid fa-circle-info" style="color: #000"></td>
                               </tr>
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>
