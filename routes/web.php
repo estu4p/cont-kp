@@ -67,3 +67,22 @@ Route::get('/presensi', function () {
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
+
+Route::get('/user/login', function () {
+    return view('user.login', ['title' => "Login"]);
+});
+Route::get('/user/register', function () {
+    return view('user.register', ['title' => "Register"]);
+});
+Route::get('/user/reset-password', function () {
+    return view('user.reset', ['title' => "Reset Password"]);
+});
+Route::get('/user/reset-password/otp', function () {
+    return view('user.otp', ['title' => "Reset Password - OTP"]);
+});
+Route::get('/user/reset-password/new-password', function () {
+    return view('user.new-password', ['title' => "Reset Password - New Password"]);
+});
+Route::get('/user/reset-password/confirm', function () {
+    return view('user.confirm', ['title' => "Reset Password - Confirm"]);
+});
