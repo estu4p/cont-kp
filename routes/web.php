@@ -105,3 +105,7 @@ Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
+
+Route::get('/manage-devisi', function () {
+    return view('mitra-pengaturan.manage-devisi');
+});
