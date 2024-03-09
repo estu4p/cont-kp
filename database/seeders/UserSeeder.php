@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Mitra;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +19,17 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 2500; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
-                'nomor_induk_mahasiswa' => $faker->unique()->randomNumber(8),
+                'nomor_induk' => $faker->unique()->randomNumber(8),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
                 'email' => $faker->email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
+                'barcode' => $faker->randomLetter,
                 'role_id' => Role::inRandomOrder()->first()->id,
                 'password' => Hash::make('123456'),
+                'mitra_id' => Mitra::inRandomOrder()->first()->id,
+                'alamat' => $faker->address,
+                'about' => $faker->sentence,
             ]);
         }
     }

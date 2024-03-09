@@ -18,6 +18,7 @@ class MitraSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             Mitra::create([
                 'nama_mitra' => $faker->company,
+                'deskripsi_mitra' => $faker->sentence,
             ]);
         }
     }
