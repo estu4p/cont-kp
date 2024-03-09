@@ -36,7 +36,7 @@
                     <td>
                         <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
                     </td>
-                    <td class="icon"><a href="#"> <i class="fa-solid fa-file-lines"></i></a></td>
+                    <td class="icon"><a href="/input-nilai"> <i class="fa-solid fa-file-lines"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>

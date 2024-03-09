@@ -1,0 +1,101 @@
+.judul{
+    background: #404040;
+    position: relative;
+    color: rgb(236, 237, 238);
+    margin-bottom: 10px;
+    height: 150px;
+    width:96%;
+}
+.tengah-judul{
+    padding-left:50px;
+}
+
+.ikon-kiri{
+    position: absolute;
+    left:-4%;
+}
+.profil{
+    background: #BA181B;
+    width:max-content;
+    height: max-content;
+    border-radius: 50%;
+    padding:20px 23px;
+}
+.profil i{
+    font-size: 400%;
+}
+.name{
+    font-size: 30px;
+    /* font-weight: bold; */
+}
+.wadah{
+    margin-top: 50px;
+    padding-left:50px;
+}
+.bodiinput{
+    background: #FFFFFF;
+    border-radius: 10px;
+    width:96%;
+    margin-left: 0px;
+    
+}
+
+.judulmagang{
+    font-weight: bold;
+    text-align: center;
+    font-size: 25px;
+}
+.judulgrup{
+    font-weight: bold;
+    font-size: 25px;
+    opacity: 0.6;
+}
+.text-input{
+    color: #848484;
+    font-size: 20px;
+}
+.input{
+    border-radius: 5px;
+    text-align: center;
+    
+}
+.grup{
+    /* background: #b5b5b5; */
+    width:45%;
+}
+
+.submit{
+    width:10%;
+    background: #A4161A;
+    border-radius: 10px;
+    color: #F5F3F4;
+    height: 40px;
+}
+
+
+.peringatan{
+    background-color: #FFBCBD;
+    width:100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 100px;
+    padding-left:20px;
+    margin-bottom: 20px;
+}
+.peringatan h5{
+    padding-top: 25px;
+}
+
+.abu{
+    background: #dcdcdc;
+    width: 240px;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+.sertif{
+    font-weight: bold;
+    text-align: center !important;
+    font-size: 25px;
+}
