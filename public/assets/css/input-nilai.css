@@ -58,6 +58,13 @@
     border-radius: 5px;
     text-align: center;
     
+    
+}
+.inputnilai{
+    color: #0019FF;
+    width:96%;
+}
+    
 }
 .grup{
     /* background: #b5b5b5; */

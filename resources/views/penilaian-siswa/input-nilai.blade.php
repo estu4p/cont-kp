@@ -96,7 +96,7 @@
             </div>
             <div class="card-body ">
                 <label for="Inisiatif" class=" col-6">Link G-Drive</label>
-                <input class="input col-8" type="text" id="Inisiatif" placeholder="">
+                <input class="inputnilai col-8" type="text" id="Inisiatif" placeholder="">
             </div>
         </div>
     </div>
