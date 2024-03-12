@@ -12,7 +12,6 @@
             <h1 class="">Lihat Team "JAMES CLEAR"</h1>
             <p class="">MJ/UIUX/POLINES/AGST2023/06</p>
         </div>
-
     </div>
 
     <div class="container-fluid  align-items-start d-flex flex-row wadah-card row gap-4">

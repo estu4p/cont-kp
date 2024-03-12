@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+body {
+    background-color: #f8f9fa;
+    font-family: Inter;
+}
+
+.login-layout {
+    display: flex;
+}
+.bg-login {
+    width: 900px;
+}
+.logo {
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    left: 20%;
+    top: 35%;
+}
+.content-login {
+    z-index: 2;
+    position: absolute;
+    border-radius: 90px 0px 0px 0px;
+    background-color: #f8f9fa;
+    color: #000000;
+    width: 46.5%;
+    height: 100%;
+    right: 0;
+}
+.heading-login {
+    display: block;
+    font-weight: bold;
+    margin-top: 8px;
+}
+.heading-login1 {
+    display: none;
+    font-weight: bold;
+    color: #a61c1ce5;
+}
+.header-reg {
+    display: block;
+}
+.header-reg1 {
+    display: none;
+}
+.subhead {
+    font-weight: 600;
+    opacity: 0.5;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.form-login {
+    margin-top: 40px;
+    padding-top: 60px;
+    text-align: center;
+}
+.content-form {
+    font-weight: 500;
+    width: 50%;
+    margin: auto;
+}
+.label-form {
+    margin-top: 32px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.reg-button {
+    background-color: #6c757d;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 48px;
+}
+.reg-button:hover {
+    background-color: #a4161a;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 48px;
+}
+.reg-button[disabled] {
+    opacity: 0.7;
+}
+.reset-button {
+    background-color: #a61c1ce5;
+    color: white;
+    border-radius: 4px;
+    padding: 15px 80px;
+    pointer-events: none;
+}
+.reset-button:hover {
+    background-color: white;
+    color: #a61c1ce5;
+    border: 1px solid #a61c1ce5;
+    border-radius: 4px;
+    padding: 15px 80px;
+}
+.remember {
+    display: flex;
+    margin-top: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+}
+.box-reset {
+    background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 48px 40px 52px;
+    width: 50%;
+    border-radius: 12px;
+    position: relative;
+}
+.close-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 999;
+    text-decoration: none;
+}
+.box-reset p {
+    width: 75%;
+    margin: auto;
+    font-weight: 600;
+    margin-top: 24px;
+    font-size: 20px;
+}
+.box-reset input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 0.5px solid #000000;
+    margin: 20px;
+    width: 60%;
+}
+
+@media (max-width: 768px) {
+    .login-layout {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .bg-login {
+        display: none;
+    }
+    .content-login {
+        border-radius: 0;
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .logo {
+        position: relative;
+        width: 130px;
+        left: 0;
+        padding: 20px;
+        border-radius: 50%;
+        background-color: #212529;
+        margin: 60px 0px 20px;
+    }
+    .heading-login {
+        display: none;
+    }
+    .heading-login1 {
+        display: block;
+    }
+    .header-reg {
+        display: none;
+    }
+    .header-reg1 {
+        display: block;
+        color: #a61c1ce5;
+    }
+    .form-login {
+        margin-top: 12px;
+        padding-top: 0px;
+        text-align: center;
+    }
+    .bi-lock-fill {
+        display: none;
+    }
+    .subhead {
+        font-size: 12px;
+        margin-top: 0px;
+        margin-bottom: 16px;
+    }
+    .content-form {
+        font-weight: 500;
+        width: 80%;
+        margin: auto;
+    }
+    .label-form {
+        font-size: 13px;
+        margin-top: 8px;
+    }
+    .remember {
+        display: flex;
+        margin-top: 24px;
+        font-size: 12px;
+        font-weight: 500;
+        align-items: center;
+    }
+    .reg-button {
+        margin-bottom: 32px;
+    }
+    .box-reset {
+        background-color: #f8f9fa;
+        box-shadow: none;
+        text-align: center;
+        padding: 0px;
+        width: 100%;
+        border-radius: 0px;
+        position: relative;
+    }
+    .close-button {
+        position: absolute;
+        top: -100px;
+        right: 10px;
+        z-index: 999;
+        text-decoration: none;
+    }
+    .box-reset p {
+        width: 90%;
+        margin: auto;
+        font-weight: 600;
+        margin-top: 24px;
+        font-size: 14px;
+    }
+    .box-reset input {
+        font-size: 12px;
+        width: 90%;
+    }
+}

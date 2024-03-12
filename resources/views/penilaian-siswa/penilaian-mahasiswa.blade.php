@@ -7,7 +7,7 @@
     <!-- <input type="text" placeholder="cari nama mahasiswa"/> -->
 </form>
 <div class="wadah p-5">
-    <h1 style="margin-top: 10px;">Penilaian Mahasiswa</h1>
+<h1 class=" w-100 text-center" >Penilaian Mahasiswa</h1>
     <!-- <select name="page" class="page">
         <option value="page">page 1 of 1</option>
     </select>
@@ -36,7 +36,7 @@
                     <td>
                         <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
                     </td>
-                    <td class="icon"><a href="#"> <i class="fa-solid fa-file-lines"></i></a></td>
+                    <td class="icon"><a href="/input-nilai"> <i class="fa-solid fa-file-lines"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
