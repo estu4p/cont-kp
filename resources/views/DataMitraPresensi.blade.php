@@ -28,12 +28,9 @@
                 </tr>
             </thead>
             <tbody>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, harum fugit corporis suscipit nam
-                repellendus facilis. Reiciendis consequatur ea enim labore dolores praesentium, iusto, asperiores ut
-                vero alias quibusdam libero!
-
-
-
+                <div>
+                    <h2>{{ $mitra->nama_mitra }}</h2>
+                </div>
             </tbody>
         </table>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BEController;
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Mitra;
+use App\Models\Presensi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,9 @@ class DataMitraController extends Controller
             return view('DataMitra')->with('data', $data)->with('mitra', $mitra);
         }
     }
-    public function presensi()
+    public function presensi($id)
     {
-        return view('DataMitraPresensi');
+        $mitra = Mitra::findOrFail($id);
+        return view('DataMitraPresensi')->with('mitra', $mitra);
     }
 }
