@@ -25,6 +25,10 @@ class DataMitraController extends Controller
     public function presensi($id)
     {
         $mitra = Mitra::findOrFail($id);
-        return view('DataMitraPresensi')->with('mitra', $mitra);
+
+        // Ambil mahasiswa yang terkait dengan mitra (pada model mitra) (dengan role_id = 3)
+        $mahasiswas = $mitra->mahasiswa()->get();
+
+        return response()->json(['mitra' => $mitra, 'mahasiswas' => $mahasiswas]);
     }
 }

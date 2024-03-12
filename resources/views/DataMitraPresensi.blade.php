@@ -14,7 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Nama Mahasiswa</th>
                     <th scope="col">Jam Masuk</th>
                     <th scope="col">Jam pulang</th>
@@ -28,9 +28,24 @@
                 </tr>
             </thead>
             <tbody>
-                <div>
-                    <h2>{{ $mitra->nama_mitra }}</h2>
-                </div>
+                <h2>{{ $presensi->nama_mitra }}</h2>
+                @foreach ($presensi as $item)
+                    <div>
+                        <tr>
+                            <td>{{ $item->nama_lengkap }}</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                            <td>cek</td>
+                        </tr>
+                    </div>
+                @endforeach
             </tbody>
         </table>
     </div>
