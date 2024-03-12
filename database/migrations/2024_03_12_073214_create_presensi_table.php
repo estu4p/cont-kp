@@ -21,7 +21,7 @@ return new class extends Migration
             $table->time('total_jam_kerja')->nullable();
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
-            $table->string('status_kehadiran');
+            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
             $table->string('kebaikan');
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->timestamps();
