@@ -58,6 +58,7 @@ Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
 Route::get('data-mitra/presensi/{id}', [DataMitraController::class, 'presensi'])->name('dataMitra.presensi'); // menggunakan id mitra
+
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });

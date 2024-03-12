@@ -26,7 +26,7 @@
                         <th scope="row">{{ $item->id }} </th>
                         <td>{{ $item->nama_mitra }}</td>
                         <td>{{ $item->mahasiswa_count }}</td>
-                        <td><a href="{{ route('dataMitra.presensi') }}"><button
+                        <td><a href="{{ route('dataMitra.presensi', $item->id) }}"><button
                                     class="btn btn-primary">Detail</button></a></td>
                     </tr>
                 @endforeach

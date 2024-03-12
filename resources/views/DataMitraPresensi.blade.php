@@ -28,13 +28,14 @@
                 </tr>
             </thead>
             <tbody>
-                <h2>{{ $presensi->nama_mitra }}</h2>
-                @foreach ($presensi as $item)
-                    <div>
+                <h2>{{ $mitra->nama_mitra }}</h2>
+
+                <div>
+                    @foreach ($presensi as $no => $item)
                         <tr>
-                            <td>{{ $item->nama_lengkap }}</td>
-                            <td>cek</td>
-                            <td>cek</td>
+                            {{-- <td>{{ $item->nama_lengkap }}</td> --}}
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $presensi->nama_lengkap }}</td>
                             <td>cek</td>
                             <td>cek</td>
                             <td>cek</td>
@@ -44,8 +45,10 @@
                             <td>cek</td>
                             <td>cek</td>
                         </tr>
-                    </div>
-                @endforeach
+                    @endforeach
+
+                </div>
+
             </tbody>
         </table>
     </div>
