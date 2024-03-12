@@ -23,12 +23,14 @@ return new class extends Migration
             $table->boolean('aksi')->default(false);
             $table->string('status_kehadiran');
             $table->string('kebaikan');
+            $table->unsignedBigInteger('mitra_id')->nullable();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')
                 ->references('id')->on('users')
                 ->where('role', 3)
                 ->onDelete('SET NULL');
+            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
         });
     }
 
