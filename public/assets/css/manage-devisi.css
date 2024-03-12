@@ -1,132 +1,125 @@
-/* assets/Css/margepenilaiandivisi.css */
-
-/* Gaya untuk judul card */
-.card .card-header h3 {
-    font-size: 24px;
-    color: #333; /* Warna teks judul */
+.kanan-tabel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* Gaya untuk label form */
-.form-group label {
-    font-size: 18px;
-    color: #555; /* Warna teks label */
-}
-
-/* Gaya untuk tombol edit dan hapus */
-.btn-danger {
-    background-color: #dc3545; /* Warna latar belakang tombol hapus */
-    color: #fff; /* Warna teks tombol hapus */
-    border: none; /* Hapus border */
-}
-
-/* Mengubah warna tombol edit menjadi biru */
-.btn-edit {
-    background-color: #007bff; /* Warna latar belakang tombol edit */
-    color: #fff; /* Warna teks tombol edit */
-}
-
-
-/* Mengatur margin dan padding */
-.container {
-    margin-top: 20px;
-}
-
-
-.card {
+.kategori {
     margin-bottom: 20px;
-    margin-top: 10px;
 }
 
-.card-body {
-    padding: 20px;
-}
+.card-header {
+    background: linear-gradient(180deg, #000000 -12.55%, rgba(64, 64, 64, 0) 256.82%);
 
-.table {
-    margin-bottom: 0;
-}
-
-/* Responsif untuk tabel */
-.table-responsive {
-    overflow-x: auto;
-}
-.wadah{
-    position:fixed;
-    top:0;
-    left:250px;
-    height: 100%;
-    bottom:0;
-    right:0;
-    width:100%;
-    z-index:-9;
-    padding-right:250px !important;
     
 }
-.kiri-putih{
-    height:100%;
-    width:250px;
-   
-    padding-top:5% !important;
-    background-color: white;
-    display: inline-block;
-}
-.kanan-tabel{
-    width:auto;
-    display:inline-block;
-    padding-top:7% !important;
-    box-sizing: border-box;
-}
-.nav-item a {
-    color: black; /* Mengatur warna teks menjadi hitam */
-}
 
-.page, .item{
-    background: #c6c6c6;
-    border-radius:5px;
-}
-
-.manageP {
-    text-decoration: none; /* Menghapus garis link */
-    background-color: pink; /* Warna latar belakang */
-    border-radius: 7px; /* Radius border */
+.card-header h3,
+.card-header p {
+    color: white;
     
+}
+
+.form-group {
+    margin-bottom: 20px;
+    
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    background-color: #e3e3e3;
+    
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    width: 100%;
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (max-width: 767.98px) {
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 .logout{
     position: absolute;
     bottom: 10px;
 }
+#nama_kategori{
+    width:60% !important;
+}
+.kanan-tabel{
+    width:auto;
+    display:inline-block;
+    padding-top:10% !important;
+    
+    box-sizing: border-box;
+}
+.logo {
+    margin-right: 10px; /* Memberikan jarak antara gambar dan teks */
+}
+.modal-backdrop {
+    opacity: 0.5; /* Atur transparansi latar belakang */
+    z-index: 1050; /* Atur z-index latar belakang */
+}
+.kekiri{
+    position: absolute;
+    top:6%;
+    left:1%;
+}
+.kekiri i {
+    font-size: 300% !important;
 
-.col-md-auto .me-auto{
-    display: flex;
-    flex-direction: row;
 }
-.konfirmasiBackdrop{
-    background-color: transparent !important;
-    z-index: -10 !important;
+.kategori {
+    background-color: #f0f0f0;
 }
-.modal-frame-4{
-    z-index:1000 !important;
-}
-.tambah{
-    border-radius: 5px;
-    background: #ffffff;
-    border: none;
-    margin-top: 5px;
-    text-align: center;
-    height:40px;
-    width:170px;
-    border-radius: 10px;
-}
-.ic{
-    color: #228300;
+
+.sub-kategori {
+    display: flex; /* Menggunakan display flex untuk mengatur posisi teks */
+    flex-direction: column; /* Mengatur tata letak menjadi kolom */
+    margin-bottom: 150px;
+    padding: 50px 60px; 
 }
 
 
-.btn-jam{
-    background: #ffffff;
-    height:40px;
-    width:170px;
-    border-radius: 10px;
-    text-align: center;
-    margin-top: 20px;
-    padding-left: 20px; 
+.tambahkankategori-izin {
+    background-color: #f0f0f0; /* Warna abu-abu untuk latar belakang */
+    padding: 10px; /* Atur jarak antara konten dan batas elemen */
+    border-radius: 4px; /* Bundarkan sudut elemen */
 }
