@@ -153,9 +153,12 @@ Route::get('/manage-devisi', function () {
 });
 
 Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan./manage-shift');
+    return view('mitra-pengaturan.manage-shift');
 });
 
+Route::get('/Kategori-penilaian', function () {
+    return view('mitra-pengaturan.Kategori-penilaian');
+});
 
 
 
