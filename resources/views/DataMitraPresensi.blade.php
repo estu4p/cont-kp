@@ -10,25 +10,27 @@
 </head>
 
 <body>
-    <div class="container mt-5" style="width: 500px">
+    <div class="container mt-5">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nama Mitra</th>
-                    <th scope="col">Jumlah Mahasiswa</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Nama Mahasiswa</th>
+                    <th scope="col">Jam Masuk</th>
+                    <th scope="col">Jam pulang</th>
+                    <th scope="col">Jam mulai istirahat</th>
+                    <th scope="col">Jam selesai istirahat</th>
+                    <th scope="col">Total Jam Kerja</th>
+                    <th scope="col">Log Aktivitas</th>
+                    <th scope="col">Aksi</th>
+                    <th scope="col">Status Kehadiran</th>
+                    <th scope="col">Kebaikan</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($mitra as $item)
-                    <tr>
-                        <th scope="row">{{ $item->id }} </th>
-                        <td>{{ $item->nama_mitra }}</td>
-                        <td>{{ $item->mahasiswa_count }}</td>
-                        <td>@mdo</td>
-                    </tr>
-                @endforeach
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, harum fugit corporis suscipit nam
+                repellendus facilis. Reiciendis consequatur ea enim labore dolores praesentium, iusto, asperiores ut
+                vero alias quibusdam libero!
 
 
 

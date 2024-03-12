@@ -21,4 +21,8 @@ class DataMitraController extends Controller
             return view('DataMitra')->with('data', $data)->with('mitra', $mitra);
         }
     }
+    public function presensi()
+    {
+        return view('DataMitraPresensi');
+    }
 }

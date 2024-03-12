@@ -57,7 +57,7 @@ Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
-
+Route::get('data-mitra/presensi', [DataMitraController::class, 'presensi'])->name('dataMitra.presensi');
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
 });
@@ -159,6 +159,3 @@ Route::get('/manage-shift', function () {
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
 });
-
-
-

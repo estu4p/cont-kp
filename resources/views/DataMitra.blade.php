@@ -26,7 +26,8 @@
                         <th scope="row">{{ $item->id }} </th>
                         <td>{{ $item->nama_mitra }}</td>
                         <td>{{ $item->mahasiswa_count }}</td>
-                        <td>@mdo</td>
+                        <td><a href="{{ route('dataMitra.presensi') }}"><button
+                                    class="btn btn-primary">Detail</button></a></td>
                     </tr>
                 @endforeach
 
