@@ -1,7 +1,7 @@
 @extends('layouts.masterMitra')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/manage-devisi.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/manage-devisi.css') }}">
 
 <div class="container-fluid  d-flex flex-row justify-content-start gap-0 p-0 wadah">
     <div class="kiri-putih p-5 ">
