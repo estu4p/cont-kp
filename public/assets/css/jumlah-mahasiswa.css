@@ -2,14 +2,14 @@ h1 {
     color: #26577C;
     font-weight: bold;
     font-size: 40px;
-    text-align: center;
+   
 }
 input{
     width: 400px;
     background: #e8e8e8;
     border: 1px solid black;
     border-radius: 7px;
-    margin-top: 50px;
+    margin-top: 25px;
     padding-left: 10px;
 }
 form{
@@ -18,8 +18,9 @@ form{
 }
 form i{
     position: absolute;
-    top: 75%;
+    top: 60%;
     left: 10px;
+    color: #828181;
 }
 form input{
     padding-left: 30px;
@@ -32,11 +33,11 @@ form input{
 }
 
 .wadah {
-    margin-top: 50px;
-    margin-left: 125px;
+    margin-top: 20px;
+    margin-left: 30px;
 }
 
-table{  
+table{
 
     border-collapse: collapse;
     width: 100%;
@@ -45,21 +46,22 @@ table{
 }
 .wadah-tabel{
     height:max-content;
-        margin-top: 20px;
+    margin-top: 20px;
     box-sizing: border-box;
-       border-radius: 20px !important; 
-       overflow: hidden;
-          box-shadow: 0 0 15px rgb(161, 161, 161) !important; 
+    border-radius: 7px !important;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgb(161, 161, 161) !important;
 }
 
-th, td {
+td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-th {
-    /* background-color: #f2f2f2; */
+th{
+    background: #e1e1e1;
 }
+
 
 
 .active{
@@ -86,7 +88,7 @@ th {
 
 
 .icon{
-    color: #2B97C5;
+    color: #26577C;
 }
 
 .abu{

@@ -9,7 +9,7 @@
   right:0;
   top:0;
   width:100%;/* Navbar tetap di posisi */
-  z-index: 0; /* Menetapkan z-index untuk memastikan navbar tetap di depan konten */
+  z-index: 10; /* Menetapkan z-index untuk memastikan navbar tetap di depan konten */
 }
 
 .navbar-brand {

@@ -2,24 +2,53 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
-
-    protected $redirectTo = '/dashboard'; // Sesuaikan dengan rute dashboard Anda
-
-    public function __construct()
+    public function index()
     {
-        $this->middleware('guest')->except('logout');
+        return view('login');
     }
 
-    // Override method untuk menangani respons setelah login
-    protected function authenticated(Request $request, $user)
+    public function ValidateLogin(Request $request)
     {
-        return redirect($this->redirectTo)->with('success', 'Login successful.');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $login = $request->only('email', 'password');
+        $remember = $request->filled('remember');
+
+        if (Auth::attempt($login, $remember)) {
+            $user = Auth::user();
+
+            if ($user->role == 1) {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Super Admin',
+                    'redirect' => 'SuperAdmin/dashboard'
+                ], 200);
+                
+            } else if ($user->role == 2) {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Admin',
+                    'redirect' => 'Admin/dashboard'
+                ], 200);
+                
+            } else {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai User',
+                    'redirect' => 'dashboard'
+                ], 200);
+                
+            }
+        } else {
+            return response()->json([
+                'error' => 'Email atau Password yang anda masukan salah'
+            ], 422);
+        }
     }
 }
