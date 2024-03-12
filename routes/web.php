@@ -20,6 +20,7 @@ Route::get('/welcome', function () {
 Route::get('/login', function () {
     return view('login');
 });
+Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
