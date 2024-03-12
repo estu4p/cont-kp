@@ -18,7 +18,7 @@
             <a class="nav-link" href="/penilaian-mahasiswa">penilaian</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Pengaturan</a>
+            <a class="nav-link" href="/manage-devisi">Pengaturan</a>
         </li>
         <li class="nav-item">
             <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">

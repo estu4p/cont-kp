@@ -29,7 +29,7 @@
             </section>
         </div>
 
-        <aside class="main-sidebar">
+        <aside class="main-sidebarMitra">
             @include('template.sidebarMitra') <!-- bueeek master baru piqri bangke -->
         </aside>
 

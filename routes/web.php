@@ -139,7 +139,9 @@ Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
 });
 
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaianMahasiswa');
+Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
+
+Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
@@ -153,3 +155,7 @@ Route::get('/manage-devisi', function () {
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan./manage-shift');
 });
+
+
+
+

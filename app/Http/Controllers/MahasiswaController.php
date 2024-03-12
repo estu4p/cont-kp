@@ -106,8 +106,7 @@ class MahasiswaController extends Controller
         ['nama' => 'Yessa Khoirunissa', 'nip' => '2000018247', 'divisi' => 'PROGRAMMER', 'status' => 'done'],
     ];
         // $mahasiswa = Mahasiswa::getDataMahasiswa();
-        return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
-
+        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
         // return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
     }
 }
