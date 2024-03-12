@@ -8,7 +8,7 @@
     <!-- <input type="text" placeholder="cari nama mahasiswa"/> -->
 </form>
 <div class="wadah p-5 row  m-0 d-flex flex-column justify-content-center">
-    <h1 class=" w-100 text-center" style="">Penilaian Mahasiswa</h1>
+    <h1 class=" w-100 text-center" >Penilaian tas Mahasiswa</h1>
     <!-- <select name="page" class="page">
         <option value="page">page 1 of 1</option>
     </select>
