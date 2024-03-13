@@ -186,7 +186,10 @@ Route::get('/AdminUniv-Login', function () {
 });
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-}); 
+});
+Route::get('/mitra-laporanpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
 
 
 
