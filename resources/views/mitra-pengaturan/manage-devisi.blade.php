@@ -50,7 +50,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>Ui/Ux</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -60,7 +60,7 @@
                             <tr>
                                 <td>2</td>
                                 <td>Programmer</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -69,7 +69,7 @@
                             <tr>
                                 <td>3</td>
                                 <td>Digital marketing</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -78,7 +78,7 @@
                             <tr>
                                 <td>4</td>
                                 <td>Content Creator</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -87,7 +87,7 @@
                             <tr>
                                 <td>5</td>
                                 <td>Editor Vidio</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -96,7 +96,7 @@
                             <tr>
                                 <td>6</td>
                                 <td>Desain Grafis</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -105,7 +105,7 @@
                             <tr>
                                 <td>7</td>
                                 <td>Content Writer</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -114,7 +114,7 @@
                             <tr>
                                 <td>8</td>
                                 <td>Content Planner</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>
@@ -123,7 +123,7 @@
                             <tr>
                                 <td>9</td>
                                 <td>Administrasi</td>
-                                <td><i class="fa-regular fa-file-lines ic"></i></td>
+                                <td><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
                                 <td>
                                     <a class="btn btn-edit btn-sm" href="/kategoripenilaian">Edit</a>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#exampleModal" data-bs-toggle="modal" onclick="openConfirmationModal()" type="button">Hapus</button>

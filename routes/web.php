@@ -141,6 +141,24 @@ Route::get('/user/reset-password/confirm', function () {
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
 });
+Route::get('/laporandatapresensi', function () {
+    return view('presensi.laporandatapresensi');
+});
+Route::get('/datapresensisiswa', function () {
+    return view('presensi.datapresensisiswa');
+});
+Route::get('/presensi', function () {
+    return view('presensi.presensiharian');
+});
+Route::get('/presensihadir', function () {
+    return view('presensi.presensihadir');
+});
+Route::get('/presensiizin', function () {
+    return view('presensi.presensiizin');
+});
+Route::get('/presensitidakhadir', function () {
+    return view('presensi.presensitidakhadir');
+});
 
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
@@ -162,3 +180,41 @@ Route::get('/manage-shift', function () {
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
 });
+
+
+// adminUniv-afterPayment
+Route::get('/AdminUniv-Login', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Login');
+});
+Route::get('/AdminUniv-ResetPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+});
+Route::get('/mitra-laporanpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/AdminUniv-InputOTP', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+}); 
+
+Route::get('/AdminUniv-InputNewPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+}); 
+
+
+//adminUniv-afterPayment
+
+
+
+
+
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
+
+
+
+

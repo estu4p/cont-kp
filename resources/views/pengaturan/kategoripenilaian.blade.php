@@ -1,10 +1,12 @@
-@extends('layouts.masterMitra')
+@extends('layouts.master')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/kategori-penilaian.css') }}">
+<link rel="stylesheet" href="assets/css/kategoripenilaian.css">
+
+
 <!-- <div class="kanan-tabel p-5 container-fluid m-auto  w-100 justify-content-center" style="background-color:#EFAF18"> -->
     <div class="container p-5   w-100 justify-content-start" style="position:relative ;">
-        <a href="/manage-devisi" class="kekiri" style="color:black"><i class="fa-solid fa-chevron-left" style="color: black;"></i></a>
+        <a href="/pengaturan" class="kekiri" style="color:black"><i class="fa-solid fa-chevron-left" style="color: black;"></i></a>
         <h3 class="kategori">Kategori Penilaian Ui/Ux</h3>
         <div class="card">
             <div class="card-header">
@@ -36,6 +38,9 @@
                                     <input type="text" class="form-control col-7" id="nama_kategori" v-model="newPenilaian.namaKategori" placeholder="">
                                     <button type="button" class="btn btn-danger col-4">Tambahkan</button>
                                 </div>
+
+
+
                             </div>
                             <div class="form-group">
                                 <h3 class="">kreativitas</h3>
@@ -90,19 +95,30 @@
                                 <div class="tag-input mt-4 m-1 d-flex justify-content-between flex-row row ">
                                     <input type="text" class="form-control" id="nama_kategori" v-model="newPenilaian.namaKategori" placeholder="">
                                     <button type="button" class="btn btn-danger col-4">Tambahkan</button>
+                              
                                 </div>
-
-
-                                </select>
+                                <button class="btn btnsubmit" onclick="showSuccessModal()" >Submit</button> 
+                
+                                
                             </div>
+                            
+
                         </div>
+                    
+                        
                     </div>
-                    <button type="submit" class="btn btn-danger">Submit</button>
+                   
+                    <div>
+                    
+                    </div>
+                    
                 </form>
+                
             </div>
+            
         </div>
     </div>
-</div>
+
 
 <!-- Modal -->
 
@@ -136,7 +152,7 @@
                         <hr class="m-0 p-0">
                     </div>
                 </div>
-                <input class="form-control form-control-lg" type="text" placeholder="tambah kategori izin" aria-label=".form-control-lg example" style="background-color: #f0f0f0; border-style: solid; border-radius: 5px;">
+                <input class="form-control form-control-lg" type="text" placeholder="tamabah kategori izin" aria-label=".form-control-lg example" style="background-color: #f0f0f0; border-style: solid; border-radius: 5px;">
 
 
                 <button type="button" class="btn mt-4 mb-5" style="background-color: white; color: black; padding: 7px 35px; margin-left:30px" data-bs-dismiss="modal">Batal</button>
@@ -146,23 +162,46 @@
         </div>
     </div>
 </div>
-<div class="modal" id="konfirmasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="konfirmasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-frame-2">
         <div class="modal-content modal-frame-3">
             <div class="modal-body modal-frame-4 text-center">
                 <h3>Berhasil!</h3>
+                <img src="assets/images/berhasil.png" alt="Logo" class="logo">
                 <p>Kategori berhasil ditambahkan</p>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-body text-center">
+                <h3>Berhasil!</h3>
+                <img src="assets/images/berhasil.png" alt="Logo" class="logo">
+                <p>Kategori penilaian berhasil disimpan</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function showConfirmationModal() {
         // alert('asdas')
         $('#exampleModal').modal('hide');
         $('#konfirmasi').modal('show');
+        setTimeout(function(){
+        $('#konfirmasi').modal('hide');
+    },1000);
     }
-
+  function showSuccessModal() {
+    event.preventDefault();
+    $('#successModal').modal('show');
+    setTimeout(function(){
+        $('#successModal').modal('hide');
+    },1000);
+  }
     function openConfirmationModal() {
         $('#exampleModal').modal('show');
         // var myModal = new bootstrap.Modal(document.getElementById('konfirmasiBackdrop'));
@@ -170,8 +209,16 @@
     }
 
     function cancelDelete() {
+
         var myModal = new bootstrap.Modal(document.getElementById('konfirmasiBackdrop'));
         myModal.hide();
     }
+    
+  
+
+
+
+    
 </script>
+
 @endsection

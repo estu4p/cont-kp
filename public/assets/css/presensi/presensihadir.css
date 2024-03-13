@@ -1,0 +1,183 @@
+html,
+body {
+  overflow-x: hidden;
+}
+.card-header{
+    left: 456px;
+    top: 187px;
+    background: #404040;
+    color: white;
+    }
+
+    .parent-relatife{
+        position: relative;
+    }
+    .kekiri{
+        position: absolute;
+        left:-2%;
+        z-index: 10;
+        top:10px;
+        color: black;
+
+    }
+
+    .user{
+    width: 95px;
+    height: 99px;
+    left: 487px;
+    top: 214px;
+    background: #BA181B;
+    border-radius: 50px;
+    }
+    .masa {
+        width: auto;
+        height: auto;
+        background: #E9E9E9;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+        line-height: 2.0 ;
+        font-size: 12px;
+    }
+
+    .masa table th,
+    .masa table td {
+        text-align: left;
+        border-bottom: 1px solid #DACFCF;
+    }
+
+    .masa table td:nth-child(2) {
+        text-align: right;
+    }
+
+    .container-card {
+        display: flex;
+        gap: 20px;
+    }
+
+    .masuk, .target, .total, .sisa {
+        display: inline-block; /* Mengubah elemen menjadi inline-block agar lebar bisa diatur */
+        padding: 2px; /* Atur padding sesuai kebutuhan */
+        border-radius: 15px;
+        color: white;
+        width: 70px; /* Atur lebar sesuai kebutuhan */
+        text-align: center; /* Menengahkan teks di dalam span */
+        margin-left: 20px;
+    }
+
+    .masuk, .target {
+        background: #20DB1C;
+    }
+
+    .total, .sisa {
+        background-color: black;
+    }
+
+
+    .total_terlambat{
+        display: inline-block;
+        padding: 2px;
+        border-radius: 15px;
+        color: white;
+        width: 40px;
+        text-align: center;
+        background-color: black;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    .container-card2 {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .butongeser{
+    width: 60px;
+    height: 30px;
+    left: 456px;
+    top: 499px;
+    background: #404040;
+    color: white;
+    }
+
+    table {
+        margin: auto;
+        text-align: center;
+      }
+
+      th, td {
+        text-align: center;
+      }
+
+      tr th[rowspan], tr th[colspan] {
+        vertical-align: middle;
+      }
+
+      .btnpdf{
+        background-color: red;
+        color: white;
+        border-radius: 6px;
+        border-color: #ddd;
+
+
+    }
+    .table th {
+        text-align: center;
+        background-color: #DCDCDC;
+    }
+
+    .table tr td {
+        background-color: white !important;
+    }
+    .table tr{
+        background-color: white !important;
+    }
+    .keterangan{
+
+        width: 471px;
+        height: 311px;
+        left: 53px;
+        top: 116px;
+        background: #F2F2F2;
+        border-radius: 5px;
+        padding: 30px;
+        }
+
+        .linkdrive{
+
+        width: 471px;
+        height: 51px;
+        left: 53px;
+        top: 475px;
+
+        background: #F2F2F2;
+        border-radius: 3px;
+
+        }
+        .keterangan2{
+            width: 471px;
+            height: 51px;
+            left: 53px;
+            top: 475px;
+            background: #F2F2F2;
+            border-radius: 3px;
+        }
+        .btnkembali {
+            left: 0%;
+            right: 0%;
+            top: 0%;
+            bottom: 0%;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.07em;
+            color: #858585;
+            background-color: transparent;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .btnkembali:hover {
+            color: #000000;
+        }
