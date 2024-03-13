@@ -191,6 +191,10 @@ Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
 
+Route::get('/AdminUniv-InputOTP', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+}); 
+
 
 
 
