@@ -1,0 +1,85 @@
+.judul{
+    background-image: url(/assets/images/bgNavbar.png);
+    position: relative;
+    color: rgb(236, 237, 238);
+    margin-bottom: 10px;
+    height: 150px;
+    width:96%;
+}
+.tengah-judul{
+    padding-left:50px;
+}
+
+.ikon-kiri{
+    position: absolute;
+    left:-4%;
+}
+.gear{
+    position: absolute;
+    bottom:-10%;
+    right:-2%;
+    width:8%;
+}
+.wadah{
+    margin-top: 50px;
+    padding-left:50px;
+}
+
+
+.abu{
+    background: #dcdcdc;
+    width: 240px;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+.input{
+    width: 240px;
+    height: 35px;
+    padding-left: 12px;
+    border-radius: 5px;
+}
+
+label{
+    padding-left: 12px;
+}
+
+select{
+    width: 240px;  
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 12px;
+}
+.form-group{
+    margin-top: 7px;
+}
+
+.peringatan{
+    background-color: #FFBCBD;
+    width:100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 100px;
+    padding-left:20px;
+    margin-bottom: 20px;
+}
+.peringatan h5{
+    padding-top: 25px;
+}
+
+.warning{
+    color: crimson;
+}
+
+.button-bawah{
+    color: #FFFFFF;
+    background-color: #2B96C5;
+    border-radius: 7px;
+    margin-bottom: 20px !important;
+    width:30%;
+
+}
+
+
