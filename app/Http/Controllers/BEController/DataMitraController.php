@@ -34,4 +34,11 @@ class DataMitraController extends Controller
             return view('DataMitraPresensi')->with('mitra', $mitra)->with('presensi', $presensi);
         }
     }
+
+    public function presensiDetailProfile($id)
+    {
+        $presensi = Presensi::findOrFail($id);
+
+        return response()->json(['presensi' => $presensi]);
+    }
 }
