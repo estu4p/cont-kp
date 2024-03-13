@@ -1,3 +1,7 @@
+html,
+body {
+  overflow-x: hidden;
+}
 .card-header{
     left: 456px;
     top: 187px;
