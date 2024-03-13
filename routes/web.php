@@ -57,6 +57,12 @@ Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
+Route::get('/mitra/search', [DataMitraController::class, 'search'])->name('mitra.search');
+
+    
+Route::post('/mitra/store', [DataMitraController::class, 'store'])->name('mitra.store'); // Route for storing Mitra data
+
+
 
 Route::get('/', function () {
     return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
@@ -94,6 +100,9 @@ Route::get('/login', function () {
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
+});
+Route::get('/adminafterpayment', function () {
+    return view('adminafterpayment');
 });
 
 
