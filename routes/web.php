@@ -160,3 +160,19 @@ Route::get('/manage-shift', function () {
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
 });
+
+
+
+// adminUniv-afterPayment
+Route::get('/AdminUniv-Login', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Login');
+});
+Route::get('/AdminUniv-ResetPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+}); 
+
+
+
+
+
+
