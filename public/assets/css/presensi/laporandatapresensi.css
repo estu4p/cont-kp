@@ -1,0 +1,72 @@
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.card-header {
+    color: white;
+    background-color: #404040;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+.parent-relatife{
+    position: relative;
+}
+.kekiri{
+    position: absolute;
+    left:-2%;
+    z-index: 10;
+    top:10px;
+    color: black;
+
+}
+
+#date-input {
+    margin-left: 10px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    width: 90px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+.checkbox-label {
+    display: block;
+    margin-bottom: 8px;
+}
+table {
+    width: 80%; /* Atur lebar tabel */
+    margin: auto; /* Tengahkan tabel */
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: center;
+    background-color: #DCDCDC;
+}
+
+.table tr td {
+    background-color: white !important;
+}
+.table tr{
+    background-color: white !important;
+}
+.search{
+    padding-right: 10px;
+}
