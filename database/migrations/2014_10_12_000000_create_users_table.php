@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
-            $table->string('mitra_id');
+            $table->unsignedBigInteger('mitra_id')->nullable();
             $table->string('alamat');
             $table->string('about');
             $table->timestamp('email_verified_at')->nullable();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('role')->onDelete('SET NULL');
+            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
         });
     }
 
