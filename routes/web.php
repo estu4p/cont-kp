@@ -105,6 +105,9 @@ Route::post('/loginpage', [LandingPageController::class, 'login']);
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
+Route::get('/adminafterpayment', function () {
+    return view('adminafterpayment');
+});
 
 
 
