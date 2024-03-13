@@ -25,3 +25,6 @@ Route::post('/loginpage', [LandingPageController::class, 'login']);
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
+Route::get('/checkout/bronze', function () {
+    return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\login;
+use App\Models\paket;
 use App\Models\Daftar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class LandingPageController extends Controller
 
         $useremail = login::where('email', $email)->first();
         $userpass = login::where('password', $pass)->first();
-        
+
         if ($useremail && $userpass) {
             // Login berhasil
             // return redirect()->intended('/dashboard');
@@ -57,4 +58,34 @@ class LandingPageController extends Controller
             ]);
         }
     }
+    public function ChekoutPaket(Request $request)
+    {
+    //     $paket=$request->input('paket');
+    //     $metodeBayar=$request->input('MetodeBayar');
+    //     $kota=$request->input('kota');
+    //     // $harga=$request->input('price');
+    //     return response()->json(['message' => 'Paket berhasil dicheckout', 'paket' => $paket, 'metodeBayar' => $metodeBayar, 'kota' => $kota]);
+    // }
+
+        $request->validate([
+            'paket'=> 'required|in:Bronze,Silver,Gold,Premium',
+            'metode_bayar' => 'required|string',
+            'kota'=> 'required|string'
+        ]);
+        $transaksi = new paket([
+            'paket' => $request->input('paket'),
+            'metode_bayar' => $request->input('metode_bayar'),
+            'kota' => $request->input('kota'),
+        ]);
+        $transaksi->save();
+        return response()->json(['message' => 'Checkout berhasil']);
+    }
+
+        // $beli = paket ::create([
+        //     'paket' => $request->paket,
+        //     'metodeBayar' => $request->metodeBayar,
+        //     'kota'=>$request->kota]);
+
+    //     return response()->json(['paket berhasil dibeli']);
+    // }
 }
