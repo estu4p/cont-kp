@@ -24,3 +24,12 @@ Route::get('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
+
+
+
