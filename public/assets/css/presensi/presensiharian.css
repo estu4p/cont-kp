@@ -1,3 +1,8 @@
+html,
+body {
+  overflow-x: hidden;
+}
+
 #presentasi-harian {
     padding: 20px;
 }
@@ -107,7 +112,7 @@ border-radius: 20px;
 }
 
 .toggle-button {
-    display: none; 
+    display: none;
 }
 
 
