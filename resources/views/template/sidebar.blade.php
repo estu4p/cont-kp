@@ -15,7 +15,7 @@
           <a class="nav-link" href="#">Penilaian</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Pengaturan</a>
+          <a class="nav-link" href="/pengaturan">Pengaturan</a>
       </li>
   </ul>
   <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
