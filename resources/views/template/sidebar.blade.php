@@ -3,7 +3,9 @@
     <img src="assets/images/logo.png" alt="Logo" class="logo">
   <ul class="nav flex-column">
       <li class="nav-item">
+
           <a class="nav-link activee" aria-current="page" href="/dashboard">Dashboard</a>
+
       </li>
       <li class="nav-item">
           <a class="nav-link" href="/jumlah-mahasiswa">Mahasiswa</a>
@@ -22,3 +24,4 @@
 <b>Log Out</b> <i class="fa-solid fa-right-from-bracket"></i>
   </div>
 </div>
+

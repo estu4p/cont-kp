@@ -162,7 +162,6 @@ Route::get('/Kategori-penilaian', function () {
 });
 
 
-
 // adminUniv-afterPayment
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
@@ -172,6 +171,16 @@ Route::get('/AdminUniv-ResetPassword', function () {
 }); 
 
 
+
+
+
+
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
 
 
 
