@@ -25,10 +25,8 @@ class DataMitraController extends Controller
     public function presensi(Request $request, $id)
     {
         $mitra = Mitra::findOrFail($id);
+        $presensi = Presensi::where('mitra_id', $id)->get();
 
-        // Ambil mahasiswa yang terkait dengan mitra (pada model mitra) (dengan role_id = 3)
-        // $mahasiswas = $mitra->mahasiswa()->get();
-        $presensi = Presensi::findOrFail($id);
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['mitra' => $mitra, 'presensi' => $presensi,]);
