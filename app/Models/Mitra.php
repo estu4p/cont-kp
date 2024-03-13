@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Mitra extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_mitra'];
+    protected $fillable = ['nama_mitra', 'deskripsi_mitra', 'divisi_mitra'];
     protected $table = 'mitra';
+    public function mahasiswa()
+    {
+        return $this->hasMany(User::class)->where('role_id', 3);
+    }
 }

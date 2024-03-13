@@ -15,9 +15,11 @@ class MitraSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Mitra::create([
                 'nama_mitra' => $faker->company,
+                'deskripsi_mitra' => $faker->sentence,
+                'divisi_mitra' => $faker->jobTitle,
             ]);
         }
     }

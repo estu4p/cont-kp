@@ -16,7 +16,7 @@
     </script>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body>
     <div class="wrapper">
         <div class="content-wrapper">
             <section class="content">

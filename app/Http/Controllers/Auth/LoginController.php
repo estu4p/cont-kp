@@ -48,7 +48,7 @@ class LoginController extends Controller
         } else {
             return response()->json([
                 'error' => 'Email atau Password yang anda masukan salah'
-            ], 422)->withInput();
+            ], 422);
         }
     }
 }
