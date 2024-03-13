@@ -42,5 +42,6 @@ Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
 Route::get('dashboard/{id}', [DashboardAdminController::class, 'detailProfile']);
 Route::get('edit-profile-admin', [DashboardAdminController::class, 'profile']);
 Route::post('edit-profile-admin/{id}', [DashboardAdminController::class, 'update']);
-Route::get('data-mitra', [DataMitraController::class, 'index']);
+Route::get('admin/data-mitra', [DataMitraController::class, 'index']);
 Route::get('admin/data-mitra/presensi/{id}', [DataMitraController::class, 'presensi']);
+Route::get('admin/data-mitra/presensi/detail-profile/{id}', [DataMitraController::class, 'presensiDetailProfile']);
