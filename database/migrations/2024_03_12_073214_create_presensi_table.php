@@ -24,12 +24,14 @@ return new class extends Migration
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
             $table->string('kebaikan');
             $table->unsignedBigInteger('mitra_id')->nullable();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')
                 ->references('id')->on('users')
                 ->where('role', 3)
                 ->onDelete('SET NULL');
+            $table->foreign('role_id')->references('id')->on('users')->where('role_id', 3)->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
         });
     }
