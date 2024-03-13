@@ -2,7 +2,7 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('assets/css/laporandatapresensi.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/presensi/laporandatapresensi.css') }}">
 <div id="laporan-hasil-presensi">
     <div class="container-fluid p-5 ml-2">
         <div class="row">
@@ -55,7 +55,7 @@
 
                 </div>
                 <br>
-                    <table class="table table-sm table-bordered" style="font-size: 15px;">
+                    <table class="table" style="font-size: 15px;">
                             <thead>
                               <tr>
                                 <th><input type="checkbox" id="#" name=""></th>
@@ -74,8 +74,8 @@
                                 <td><a href="/datapresensisiswa">simpay</a></td>
                                 <td>MJ/UIUX/POLINES/AGST2023/06</td>
                                 <td>100 &nbsp; <a href="/presensihadir" class="fa-solid fa-circle-info" style="color: #000"></td>
-                                <td>80  &nbsp; <a href="/presensiizin" class="fa-solid fa-circle-info" style="color: #000"></td>
-                                <td>70  &nbsp; <a href="/presensitidakhadir" class="fa-solid fa-circle-info" style="color: #000"></td>
+                                <td style="color: orange">80  &nbsp; <a href="/presensiizin" class="fa-solid fa-circle-info" style="color: #000"></td>
+                                <td style="color: red">70  &nbsp; <a href="/presensitidakhadir" class="fa-solid fa-circle-info" style="color: #000"></td>
                               </tr>
                               <tr>
                                 <td><input type="checkbox" id="#" name=""></td>

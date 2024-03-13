@@ -2,7 +2,7 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('assets/css/datapresensisiswa.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/presensi/datapresensisiswa.css') }}">
 <div id="datapresensisiswa">
     <div class="container-fluid p-5 ml-2">
         <div class="row">
@@ -28,7 +28,7 @@
                 </div>
                 <br>
                 <div class="container-card">
-                    <div class="masa" >
+                    <div class="masa">
                         <table>
                             <tbody>
                                 <tr >
@@ -51,19 +51,19 @@
                             <tbody>
                                 <tr>
                                     <th>Total jam masuk</th>
-                                    <td class="masuk">47:30:50</td>
+                                    <td><span class="masuk">47:30:50</span></td>
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td class="total">16 hari</td>
+                                    <td><span class="total">16 hari</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
-                                    <td class="target">1100 jam</td>
+                                    <td><span class="target">1100 jam</td>
                                 </tr>
                                 <tr>
                                     <th>sisa</th>
-                                    <td class="sisa">152:30:10</td>
+                                    <td><span class="sisa">152:30:10</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -72,27 +72,27 @@
                         <table class="tg">
                             <thead>
                               <tr>
-                                <th class="tg-0lax" colspan="4">Total terlambat (ditandai)</th>
+                                <th colspan="4">Total terlambat (ditandai)</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td class="tg-0pky">Masuk</td>
-                                <td class="tg-0pky"><span style="color:#FFF;background-color:#000 ; border-radius: 8px;">0 x</span></td>
-                                <td class="tg-0lax">pulang</td>
-                                <td class="tg-0lax"><span style="color:#FFF;background-color:#333 ; border-radius: 8px;">0 x</span></td>
+                                <td>Masuk</td>
+                                <td><span class="total_terlambat">0 x</span></td>
+                                <td>pulang</td>
+                                <td><span class="total_terlambat"  >0 x</span></td>
                               </tr>
                               <tr>
-                                <td class="tg-0lax">Istirahat keluar</td>
-                                <td class="tg-0lax"><span style="color:#FFF;background-color:#333 ; border-radius: 8px;">0 x</span></td>
-                                <td class="tg-0lax">istirahat kembali</td>
-                                <td class="tg-0lax"><span style="color:#FFF;background-color:#333 ; border-radius: 8px;">0 x</span></td>
+                                <td>Istirahat keluar</td>
+                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td>istirahat kembali</td>
+                                <td><span class="total_terlambat"  >0 x</span></td>
                               </tr>
                               <tr>
-                                <td class="tg-0lax">Ijin keluar</td>
-                                <td class="tg-0lax"><span style="color:#FFF;background-color:#333 ; border-radius: 8px;">0 x</span></td>
-                                <td class="tg-0lax">ijin kembali</td>
-                                <td class="tg-0lax"><span style="color:#FFF;background-color:#333 ; border-radius: 8px;">0 x</span></td>
+                                <td>Ijin keluar</td>
+                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td>ijin kembali</td>
+                                <td><span class="total_terlambat"  >0 x</span></td>
                               </tr>
                             </tbody>
                             </table>
@@ -104,15 +104,15 @@
                     <button class="butongeser">>>>></button>
                 </div>
                 <br>
-                <table class="table table-sm" style="font-size: 10px;">
+                <table class="table" style="font-size: 10px;">
                     <thead>
                         <tr>
-                          <th rowspan="2"></th>
+                          <th rowspan="2"><input type="checkbox"></th>
                           <th rowspan="2">No</th>
                           <th rowspan="2">tanggal</th>
-                          <th colspan="2">jam kerja</th>
-                          <th colspan="2">jam istirahat</th>
-                          <th colspan="2">total jam kerja</th>
+                          <th colspan="2" style="border-bottom: 1px solid black;">jam kerja</th>
+                          <th colspan="2" style="border-bottom: 1px solid black;">jam istirahat</th>
+                          <th colspan="2" style="border-bottom: 1px solid black;">total jam kerja</th>
                           <th rowspan="2">log aktivitas</th>
                           <th rowspan="2">status kehadiran</th>
                           <th rowspan="2">kebaikan</th>
@@ -121,11 +121,11 @@
                         </tr>
                         <tr>
                           <th>masuk</th>
-                          <th>pulang</th>
+                          <th style="border-left: 1px solid black;" >pulang</th>
                           <th>mulai</th>
-                          <th>selesai</th>
+                          <th style="border-left: 1px solid black;">selesai</th>
                           <th>total jam</th>
-                          <th>(+)(-)</th>
+                          <th style="border-left: 1px solid black;">(+)(-)</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -177,6 +177,103 @@
                             <td>--</td>
                             <td><i class="fa-regular fa-pen-to-square"></i></td>
                           </tr>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
+
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"></td>
+                            <td>3</td>
+                            <td>kamis, 24-08-2023</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td><i class="fa-regular fa-pen-to-square"></i></td>
+                          </tr>
                       </tbody>
                       </table>
 
@@ -185,13 +282,14 @@
                             <div class="modal-content">
                                 <!-- Isi dari modal -->
                                 <div class="modal-body">
-                                    <div class="row">
+
                                         <!-- Baris Ke-1 -->
                                         <div class="keterangan">
                                             “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
                                             sebuah perampokan dan saya berinisiatif untuk
                                             menolong korban”
                                         </div>
+                                        <br>
                                         <div style="text-align: center">
                                             <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
                                 </div>
@@ -208,7 +306,7 @@
                     </div>
                     <!-- Isi dari modal -->
                     <div class="modal-body">
-                        <div class="row">
+
                             <!-- Baris Ke-1 -->
                             <div class="keterangan">
                                 “ Maaf saya tidak dapat mengikuti magang untuk
@@ -217,24 +315,30 @@
                                 mandi ”
                             </div>
                             <!-- Break Line -->
-                            <div class="line-hr-1"></div>
                             <!-- Baris Ke-2 -->
                             Link Foto Gdrive
                             <div class="linkdrive"></div>
 
                             <!-- Break Line -->
-                            <div class="line-hr-1"></div>
                             <!-- Baris Ke-3 -->
                             kategori izin
                             <div class="keterangan2"></div>
+
+
+
+
                             <!-- Break Line -->
-                            <div class="line-hr-1"></div>
                             <!-- End -->
-                            <div style="text-align: center" >ganti jam</div>
+                            <br>
+                            <div style="display: flex; justify-content: center;">
+                                <div style="background-color: #F2F2F2; padding: 5px;">ganti jam</div>
+                            </div>
+                            <br>
+                            <div style="text-align: center">
+                                <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
                         </div>
                     </div>
-                    <div style="text-align: center">
-                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+
                     </div>
                 </div>
         </div>

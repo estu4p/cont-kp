@@ -2,7 +2,7 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('assets/css/presensiharian.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/presensi/presensiharian.css') }}">
 <script src="{{ asset('js/app.js') }}"></script>
 <div id="presentasi-harian">
     <div class="container">
@@ -59,27 +59,27 @@
                             </div>
                         </div>
                         <br>
-                        <table class="table table-sm table-bordered " style="font-size: 10px;">
+                        <table class="table" style="font-size: 10px;">
                             <thead style="text-align: center;">
                                 <tr>
                                     <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" id="#" name="">&nbsp;No</th>
                                     <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                                    <th colspan="2">Jam Kerja</th>
-                                    <th colspan="2">Jam Istirahat</th>
-                                    <th colspan="2">Total Jam Kerja</th>
-                                    <th colspan="2">Log Aktivitas</th>
-                                    <th rowspan="2">Status <br>Kehadiran</th>
+                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
+                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
+                                    <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
+                                    <th colspan="2" style="border-bottom: 1px solid black;">Log Aktivitas</th>
+                                    <th rowspan="2" >Status <br>Kehadiran</th>
                                     <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
                                 </tr>
                                 <tr>
                                     <th>Masuk</th>
-                                    <th>Pulang</th>
+                                    <th style="border-left: 1px solid black;">Pulang</th>
                                     <th>Mulai</th>
-                                    <th>Selesai</th>
+                                    <th style="border-left: 1px solid black;">Selesai</th>
                                     <th>Total Jam</th>
-                                    <th>(-)(+)</th>
+                                    <th style="border-left: 1px solid black;">(-)(+)</th>
                                     <th class="bates">Log Aktivitas</th>
-                                    <th>Aksi</th>
+                                    <th style="border-left: 1px solid black;">Aksi</th>
                                 </tr>
                             </thead>
                               <tbody>
@@ -93,7 +93,11 @@
                                   <td>06:25:00 </td>
                                   <td>13:05:14</td>
                                   <td  class="bates">Membuat ributt anak gang sebelah</td>
-                                  <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                  <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                                    <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
+
+                                    <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
+                                    <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
                                   <td>hadir</td>
                                   <td>merapikan parkiran motor</td>
                                 </tr>
@@ -107,7 +111,11 @@
                                     <td>06:25:00 </td>
                                     <td>13:05:14</td>
                                     <td  class="bates">Membuat onar di kantor</td>
-                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
+
+                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
+                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
                                     <td>hadir</td>
                                     <td>merapikan parkiran motor</td>
                                   </tr>
@@ -121,10 +129,13 @@
                                     <td>--</td>
                                     <td>--</td>
                                     <td  class="bates"></td>
-                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
-                                    <td>tidak hadir
-                                            <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i>
+                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
+
+                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
+                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label>
                                     </td>
+                                    <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
                                     <td>--</td>
                                   </tr>
                                   <tr>
@@ -137,7 +148,11 @@
                                     <td>06:25:00 </td>
                                     <td>13:05:14</td>
                                     <td  class="bates">Membuat ributt anak gang </td>
-                                    <td><button class="round-button-check">&check;</button><button class="round-button-cross">&#x2717;</button></td>
+                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
+
+                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
+                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
                                     <td>hadir</td>
                                     <td>merapikan parkiran motor</td>
                                   </tr>
@@ -153,7 +168,7 @@
                                 </div>
                                 <!-- Isi dari modal -->
                                 <div class="modal-body">
-                                    <div class="row">
+
                                         <!-- Baris Ke-1 -->
                                         <div class="keterangan">
                                             “ Maaf saya tidak dapat mengikuti magang untuk
@@ -162,25 +177,30 @@
                                             mandi ”
                                         </div>
                                         <!-- Break Line -->
-                                        <div class="line-hr-1"></div>
                                         <!-- Baris Ke-2 -->
                                         Link Foto Gdrive
                                         <div class="linkdrive"></div>
 
                                         <!-- Break Line -->
-                                        <div class="line-hr-1"></div>
                                         <!-- Baris Ke-3 -->
                                         kategori izin
                                         <div class="keterangan2"></div>
-                                        <div style="text-align: center;" >ganti jam</div>
-                                        <!-- Break Line -->
-                                        <div class="line-hr-1"></div>
-                                        <!-- End -->
 
+
+
+
+                                        <!-- Break Line -->
+                                        <!-- End -->
+                                        <br>
+                                        <div style="display: flex; justify-content: center;">
+                                            <div style="background-color: #F2F2F2; padding: 5px;">ganti jam</div>
+                                        </div>
+                                        <br>
+                                        <div style="text-align: center">
+                                            <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
                                     </div>
                                 </div>
-                                <div style="text-align: center">
-                                    <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+
                                 </div>
                             </div>
                     </div>
@@ -191,7 +211,7 @@
                     <div class="modal-content">
                         <!-- Isi dari modal -->
                         <div class="modal-body">
-                            <div class="row">
+
                                 <!-- Baris Ke-1 -->
                                 <div class="keterangan">
                                     “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
@@ -211,7 +231,7 @@
                         <div class="modal-content">
                             <!-- Isi dari modal -->
                             <div class="modal-body">
-                                <div class="row">
+
                                     <!-- Baris Ke-1 -->
                                     <div class="keterangan">
                                         “Maaf saya lupa pencet tombol pulang jadi
@@ -227,5 +247,19 @@
 </div>
 </div>
 
+<script>
+    const checkButton = document.getElementById('check-button');
+const crossButton = document.getElementById('cross-button');
+
+checkButton.addEventListener('click', function() {
+    checkButton.classList.add('active');
+    crossButton.classList.remove('active');
+});
+
+crossButton.addEventListener('click', function() {
+    crossButton.classList.add('active');
+    checkButton.classList.remove('active');
+});
+</script>
 
 @endsection

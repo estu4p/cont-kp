@@ -106,23 +106,39 @@ border-radius: 20px;
     margin-right: 10px;
 }
 
+.toggle-button {
+    display: none; 
+}
+
+
 .round-button-check {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: green;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #E9E9E9;
     color: white;
-    border: none;
-    margin-right: 10px;
+    border-radius: 50%;
+    text-align: center;
+
 }
 .round-button-cross {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: red;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
     color: white;
-    border: none;
-    margin-right: 10px;
+    background-color: #E9E9E9;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#check:checked + .round-button-check {
+    background-color: #00C113;
+}
+
+#cross:checked + .round-button-cross {
+    background-color: red;
 }
 .bates{
     max-width:200px !important;
@@ -139,6 +155,7 @@ left: 53px;
 top: 116px;
 background: #F2F2F2;
 border-radius: 5px;
+padding: 30px;
 }
 
 .linkdrive{
@@ -159,6 +176,7 @@ border-radius: 3px;
     top: 475px;
     background: #F2F2F2;
     border-radius: 3px;
+    padding: 30px;
 }
 
 .btnkembali {
@@ -175,7 +193,7 @@ border-radius: 3px;
     color: #858585;
     background-color: transparent;
     border: none;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
 }
 
 .btnkembali:hover {
