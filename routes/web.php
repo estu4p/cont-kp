@@ -195,6 +195,12 @@ Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
 }); 
 
+Route::get('/AdminUniv-InputNewPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+}); 
+
+
+//adminUniv-afterPayment
 
 
 
