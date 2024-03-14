@@ -18,7 +18,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $nama_lengkap = $request->input('nama_lengkap');
-        $nomor_induk_mahasiswa = $request->input('nomor_induk_mahasiswa');
+        $nomor_induk = $request->input('nomor_induk');
         $jurusan = $request->input('jurusan');
         $email = $request->input('email');
         $username = $request->input('username');
@@ -30,7 +30,7 @@ class RegisterController extends Controller
         $user = new User();
 
         $user->nama_lengkap = $nama_lengkap;
-        $user->nomor_induk_mahasiswa = $nomor_induk_mahasiswa;
+        $user->nomor_induk = $nomor_induk;
         $user->jurusan = $jurusan;
         $user->email = $email;
         $user->username = $username;
