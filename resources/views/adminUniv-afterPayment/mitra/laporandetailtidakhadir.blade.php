@@ -14,8 +14,8 @@
                             <img src="assets/images/user.jpg" class="user">
                         </div>
                         <div>
-                            <h3 style="font-size: 50px; margin: 0;">Simpay</h3>
-                            <p style="margin: 0;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
+                            <h3 style="font-size: 30px; margin: 0;">Syalita Widyandini</h3>
+                            <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
                             <label for="search-input">Cari Mahasiswa</label>
