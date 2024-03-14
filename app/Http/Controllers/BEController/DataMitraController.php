@@ -7,6 +7,7 @@ use App\Models\Mahasiswa;
 use App\Models\Mitra;
 use App\Models\Presensi;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class DataMitraController extends Controller
@@ -21,23 +22,24 @@ class DataMitraController extends Controller
             return view('DataMitra')->with('mitra', $mitra);
         }
     }
-    public function presensi(Request $request, $id)
+    public function presensi($id)
     {
-        $mitra = Mitra::findOrFail($id);
-        $presensi = Presensi::where('mitra_id', $id)->get();
-
-
-        if ($request->is('api/*') || $request->wantsJson()) {
+        try {
+            $mitra = Mitra::findOrFail($id);
+            $presensi = Presensi::where('mitra_id', $id)->get();
             return response()->json(['mitra' => $mitra, 'presensi' => $presensi,]);
-        } else {
-            return view('DataMitraPresensi')->with('mitra', $mitra)->with('presensi', $presensi);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'data not found', 'data' => null], 404);
         }
     }
 
     public function presensiDetailProfile($id)
     {
-        $presensi = Presensi::findOrFail($id);
-
-        return response()->json(['presensi' => $presensi]);
+        try {
+            $presensi = Presensi::findOrFail($id);
+            return response()->json(['message' => 'success to get data', 'presensi' => $presensi]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Data Not Found', 'data' => null], 404);
+        }
     }
 }

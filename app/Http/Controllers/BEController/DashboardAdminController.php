@@ -39,10 +39,14 @@ class DashboardAdminController extends Controller
     public function detailProfile(Request $request, $id)
     {
         $profil = User::find($id);
-        return response()->json([
-            "message" => "Success to get detail profile",
-            "data" => $profil
-        ]);
+        if ($profil) {
+            return response()->json([
+                "message" => "Success to get detail profile",
+                "data" => $profil
+            ]);
+        } else {
+            return response()->json(['message' => 'Fail to get detail profile'], 404);
+        }
     }
     public function update(Request $request, $id)
     {
@@ -77,10 +81,13 @@ class DashboardAdminController extends Controller
 
         $user->save();
 
-
-        return response()->json([
-            'message' => 'Success to update data profile',
-            'data' => $user
-        ], 200);
+        if ($user) {
+            return response()->json([
+                'message' => 'Success to update data profile',
+                'data' => $user
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Fail to update data proifile'], 404);
+        }
     }
 }
