@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\BEController\DashboardAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +37,10 @@ Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIsti
 Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
 
-Route::get('dashboard-admin', [DashboardAdminController::class, 'index']);
-Route::get('dashboard/{id}', [DashboardAdminController::class, 'detailProfile']);
-Route::get('edit-profile-admin', [DashboardAdminController::class, 'profile']);
-Route::post('edit-profile-admin/{id}', [DashboardAdminController::class, 'update']);
-Route::get('admin/data-mitra', [DataMitraController::class, 'index']);
-Route::get('admin/data-mitra/presensi/{id}', [DataMitraController::class, 'presensi']);
-Route::get('admin/data-mitra/presensi/detail-profile/{id}', [DataMitraController::class, 'presensiDetailProfile']);
+Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
+Route::get('dashboard/admin/{id}', [AdminUnivAfterPaymentController::class, 'detailAdminProfile']);
+Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profileAdmin']);
+Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
+Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
+Route::get('admin/data-mitra/presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
+Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);
