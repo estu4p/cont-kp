@@ -110,7 +110,12 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'data not found', 'data' => null], 404);
         }
     }
-
+    public function adminUnivPengaturanPresensi()
+    {
+        return response()->json([
+            'message' => 'pengaturan presensi'
+        ]);
+    }
     public function adminUnivPresensiDetailProfile($id)
     {
         try {
@@ -119,5 +124,9 @@ class AdminUnivAfterPaymentController extends Controller
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Data Not Found', 'data' => null], 404);
         }
+    }
+
+    public function teamAktif()
+    {
     }
 }
