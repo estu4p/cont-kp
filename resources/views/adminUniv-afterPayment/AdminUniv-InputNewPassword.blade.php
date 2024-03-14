@@ -22,49 +22,53 @@
         </div>
 
         <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="password" id="password" class="form-control" placeholder="Ketikkan password baru">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                            <span id="eyeIcon" class="bi bi-eye"></span>
-                        </button>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="password" id="password1" class="form-control" placeholder="Ketikkan password baru">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary toggle-password" type="button">
+                                <span class="eye-icon bi bi-eye"></span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="input-group atas">
-                    <input type="password" id="password" class="form-control" placeholder="Konfirmasi password">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                            <span id="eyeIcon" class="bi bi-eye"></span>
-                        </button>
+                    <div class="input-group atas">
+                        <input type="password" id="password2" class="form-control" placeholder="Konfirmasi password">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary toggle-password" type="button">
+                                <span class="eye-icon bi bi-eye"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
         <div class="bawah">
             <button class="continue">Reset Password</button>
         </div>
 
     </div>
-    
-    <script>
-        const eyeIcon = document.getElementById('eyeIcon');
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordField = document.getElementById('password');
 
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcon.classList.remove('bi-eye');
-                eyeIcon.classList.add('bi-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                eyeIcon.classList.remove('bi-eye-slash');
-                eyeIcon.classList.add('bi-eye');
-            }
+    <script>
+        const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
+        togglePasswordButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const passwordField = button.parentElement.previousElementSibling;
+
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    button.querySelector('.eye-icon').classList.remove('bi-eye');
+                    button.querySelector('.eye-icon').classList.add('bi-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    button.querySelector('.eye-icon').classList.remove('bi-eye-slash');
+                    button.querySelector('.eye-icon').classList.add('bi-eye');
+                }
+            });
         });
     </script>
+
 </body>
 
 </html>
