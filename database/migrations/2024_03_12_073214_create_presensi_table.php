@@ -22,9 +22,11 @@ return new class extends Migration
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
+            $table->text('keterangan_status')->nullable();
             $table->string('kebaikan');
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
+            $table->string('barcode')->nullable()->unique();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')
