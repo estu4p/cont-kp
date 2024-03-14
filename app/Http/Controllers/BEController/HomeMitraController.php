@@ -6,6 +6,7 @@ use App\Models\Mitra;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,11 +47,11 @@ class HomeMitraController extends Controller
             'jam_masuk' => 'required|date_format:H:i:s',
         ]);
 
-        $keterangan = $request->keterangan;
+        $keterangan_status = $request->keterangan_status;
         $absensi = new Presensi();
         $absensi->id = $request-> id;
         $absensi->jam_masuk = now();
-        $absensi->keterangan = $keterangan;
+        $absensi->keterangan_status = $keterangan_status;
         $absensi->save();
 
         return response()->json(['message' => 'Jam masuk berhasil dicatat'], 200);
@@ -62,10 +63,10 @@ class HomeMitraController extends Controller
             'jam_pulang' => 'required|date_format:H:i:s',
         ]);
 
-        $keterangan = $request->keterangan;
+        $keterangan_status = $request->keterangan_status;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
         $absensi->jam_pulang = now();
-        $absensi->keterangan = $keterangan;
+        $absensi->keterangan_status = $keterangan_status;
         $absensi->save();
 
         return response()->json(['message' => 'Jam pulang berhasil dicatat'], 200);
@@ -77,10 +78,10 @@ class HomeMitraController extends Controller
             'jam_mulai_istirahat' => 'required|date_format:H:i:s',
         ]);
 
-        $keterangan = $request->keterangan;
+        $keterangan_status = $request->keterangan_status;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
         $absensi->jam_mulai_istirahat = now();
-        $absensi->keterangan = $keterangan; 
+        $absensi->keterangan_status = $keterangan_status; 
         $absensi->save();
 
         return response()->json(['message' => 'Jam mulai istirahat berhasil dicatat'], 200);
@@ -92,10 +93,10 @@ class HomeMitraController extends Controller
             'jam_selesai_istirahat' => 'required|date_format:H:i:s',
         ]);
 
-        $keterangan = $request->keterangan;
+        $keterangan_status = $request->keterangan_status;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
         $absensi->jam_selesai_istirahat = now();
-        $absensi->keterangan = $keterangan; 
+        $absensi->keterangan_status = $keterangan_status; 
         $absensi->save();
 
         return response()->json(['message' => 'Jam selesai istirahat berhasil dicatat'], 200);
@@ -107,10 +108,10 @@ class HomeMitraController extends Controller
             'total_jam_kerja' => 'required|date_format:H:i:s',
         ]);
 
-        $keterangan = $request->keterangan;
+        $keterangan_status = $request->keterangan_status;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
         $total_jam_kerja = $absensi->jam_pulang->diffInHours($absensi->jam_masuk);
-        $absensi->keterangan = $keterangan; 
+        $absensi->keterangan_status = $keterangan_status; 
         $total_jam_kerja->save();
 
         return response()->json(['total_jam_kerja' => $total_jam_kerja], 200);
@@ -137,4 +138,24 @@ class HomeMitraController extends Controller
             $presensi->log_aktivitas,
         ], 200);
     }
+
+    public function catatIzin(Request $request)
+    {
+        $request->validate([
+            'keterangan_status' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+        $keterangan_status = $request->keterangan_status; 
+
+        $absensi = new Presensi();
+        $absensi->nama_lengkap = $user->id;
+        $absensi->izin = true; 
+        $absensi->keterangan_status = $keterangan_status;
+        $absensi->status_kehadiran = 'Izin';
+        $absensi->save(); 
+
+        return response()->json(['message' => 'Izin magang tidak hadir berhasil dicatat'], 200);
+    }
+
 }
