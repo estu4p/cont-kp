@@ -1,9 +1,9 @@
-.wadah{
-    
-    padding-left:50px;
+
+/* Gaya dasar untuk kartu */
+.dashboard{
     display: flex;
 }
-/* Gaya dasar untuk kartu */
+  
 .kartu1{
       width: 300px;
       height: 300px;
@@ -28,6 +28,7 @@
       margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
       margin-left: 50px; /* Menggeser kartu ke samping kanan sejauh 20px */
     }
+  
     
     /* Gaya untuk judul */
     .kartu-judul {
@@ -52,7 +53,7 @@
     .kartu-tabel th {
       background-color: #f2f2f2;
     }
- .kartu1, .kartu2 {
+.kartu1,.kartu2 {
       color: #FFFFFF;
   }
   
@@ -62,4 +63,14 @@
     float: right; /* Mengatur gambar ke tepi kanan */
     margin-left: 20px; /* Menambahkan jarak antara gambar dengan elemen sekitarnya */
     margin-top: 120px; /* Menggeser gambar ke bawah sejauh 20px */
+  }
+
+  .buku{
+    width: 330px;
+    height: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin-left: 80px;
+    margin-top: 150px;
+    color: #0063F8;
   }
