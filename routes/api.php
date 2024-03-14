@@ -5,10 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\AdminUnivAfterPayment;
-use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\BEController\DashboardAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +37,10 @@ Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIsti
 Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
 
-Route::get('dashboard-admin', [AdminUnivAfterPayment::class, 'index']);
-Route::get('dashboard/admin/{id}', [AdminUnivAfterPayment::class, 'detailAdminProfile']);
-Route::get('edit-profile-admin', [AdminUnivAfterPayment::class, 'profileAdmin']);
-Route::post('edit-profile-admin/{id}', [AdminUnivAfterPayment::class, 'updateAdminProfile']);
-Route::get('admin/data-mitra', [AdminUnivAfterPayment::class, 'adminUnivMitra']);
-Route::get('admin/data-mitra/presensi/{id}', [AdminUnivAfterPayment::class, 'adminUnivPresensi']);
-Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPayment::class, 'adminUnivPresensiDetailProfile']);
+Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
+Route::get('dashboard/admin/{id}', [AdminUnivAfterPaymentController::class, 'detailAdminProfile']);
+Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profileAdmin']);
+Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
+Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
+Route::get('admin/data-mitra/presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
+Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);

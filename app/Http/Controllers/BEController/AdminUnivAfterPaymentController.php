@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class AdminUnivAfterPayment extends Controller
+class AdminUnivAfterPaymentController extends Controller
 {
     public function index()
     { // menampilkan seluruh data yang diperlukan
