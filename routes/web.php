@@ -190,8 +190,15 @@ Route::get('/AdminUniv-ResetPassword', function () {
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
-
-
+Route::get('/mitra-laporanpresensi-detaihadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+});
+Route::get('/mitra-laporanpresensi-detailizin', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+});
+Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
+});
 
 
 
