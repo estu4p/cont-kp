@@ -47,45 +47,34 @@ class LandingPageController extends Controller
 
         if ($useremail && $userpass) {
             // Login berhasil
-            // return redirect()->intended('/dashboard');
             return response($useremail);
         } else {
-            // Kredensial tidak valid, tampilkan pesan kesalahan
-            // return back()->withErrors(['email' => 'Email atau password tidak valid']);
+            //Jika data tidak ditemukan/ belum melakukan pendaftaran
             return response([
                 'status' => false,
-                'pesan' => 'data tidak ditemukan'
+                'pesan' => 'data tidak ditemukan, daftarkan diri terlebih dahulu'
             ]);
         }
     }
     public function ChekoutPaket(Request $request)
     {
-    //     $paket=$request->input('paket');
-    //     $metodeBayar=$request->input('MetodeBayar');
-    //     $kota=$request->input('kota');
-    //     // $harga=$request->input('price');
-    //     return response()->json(['message' => 'Paket berhasil dicheckout', 'paket' => $paket, 'metodeBayar' => $metodeBayar, 'kota' => $kota]);
-    // }
-
         $request->validate([
             'paket'=> 'required|in:Bronze,Silver,Gold,Premium',
             'metode_bayar' => 'required|string',
             'kota'=> 'required|string'
         ]);
+
         $transaksi = new paket([
             'paket' => $request->input('paket'),
             'metode_bayar' => $request->input('metode_bayar'),
             'kota' => $request->input('kota'),
         ]);
+
         $transaksi->save();
-        return response()->json(['message' => 'Checkout berhasil']);
+            return response()->json(['message' => 'Checkout berhasil',
+                'Jenis Paket' => $request->paket,
+                'Metode Bayar' => $request->metode_bayar,
+                'Kota' => $request->kota,
+            ]);
     }
-
-        // $beli = paket ::create([
-        //     'paket' => $request->paket,
-        //     'metodeBayar' => $request->metodeBayar,
-        //     'kota'=>$request->kota]);
-
-    //     return response()->json(['paket berhasil dibeli']);
-    // }
 }
