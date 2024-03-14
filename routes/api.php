@@ -30,7 +30,7 @@ Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])
 Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
-Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('pilih_mitra');
+Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
 Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang']);
 Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat']);

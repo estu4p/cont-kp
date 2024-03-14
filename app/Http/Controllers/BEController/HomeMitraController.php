@@ -24,12 +24,12 @@ class HomeMitraController extends Controller
             ]);
 
             // Ambil ID mitra yang dipilih dari formulir
-            $selectedMitraNama = $request->input('mitra');
-            $selectedDivisiNama = $request->input('divisi');
+            $selectedMitraNama = $request->input('nama_mitra');
+            $selectedDivisiNama = $request->input('divisi_mitra');
 
             // Cari ID mitra dan divisi berdasarkan nama
-            $selectedMitraId = Mitra::where('nama', $selectedMitraNama)->value('id');
-            $selectedDivisiId = Mitra::where('nama', $selectedDivisiNama)->value('id');
+            $selectedMitraId = Mitra::where('nama_mitra', $selectedMitraNama)->value('id');
+            $selectedDivisiId = Mitra::where('divisi_mitra', $selectedDivisiNama)->value('id');
 
             // Simpan ID mitra yang dipilih ke dalam sesi
             Session::put('selected_mitra_id', $selectedMitraId);
