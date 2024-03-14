@@ -10,4 +10,9 @@ class Divisi extends Model
     use HasFactory;
     protected $table = "divisi";
     protected $fillable = ['nama_divisi', 'deskripsi_divisi'];
+
+    public function divisi()
+    {
+        return $this->hasMany(User::class)->orderBy('nama_divisi');
+    }
 }
