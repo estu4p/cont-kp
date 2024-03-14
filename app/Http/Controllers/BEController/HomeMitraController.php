@@ -46,9 +46,11 @@ class HomeMitraController extends Controller
             'jam_masuk' => 'required|date_format:H:i:s',
         ]);
 
+        $keterangan = $request->keterangan;
         $absensi = new Presensi();
         $absensi->id = $request-> id;
         $absensi->jam_masuk = now();
+        $absensi->keterangan = $keterangan;
         $absensi->save();
 
         return response()->json(['message' => 'Jam masuk berhasil dicatat'], 200);
@@ -60,8 +62,10 @@ class HomeMitraController extends Controller
             'jam_pulang' => 'required|date_format:H:i:s',
         ]);
 
+        $keterangan = $request->keterangan;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_pulang = now(); 
+        $absensi->jam_pulang = now();
+        $absensi->keterangan = $keterangan;
         $absensi->save();
 
         return response()->json(['message' => 'Jam pulang berhasil dicatat'], 200);
@@ -73,8 +77,10 @@ class HomeMitraController extends Controller
             'jam_mulai_istirahat' => 'required|date_format:H:i:s',
         ]);
 
+        $keterangan = $request->keterangan;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_mulai_istirahat = now(); 
+        $absensi->jam_mulai_istirahat = now();
+        $absensi->keterangan = $keterangan; 
         $absensi->save();
 
         return response()->json(['message' => 'Jam mulai istirahat berhasil dicatat'], 200);
@@ -86,8 +92,10 @@ class HomeMitraController extends Controller
             'jam_selesai_istirahat' => 'required|date_format:H:i:s',
         ]);
 
+        $keterangan = $request->keterangan;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_selesai_istirahat = now(); 
+        $absensi->jam_selesai_istirahat = now();
+        $absensi->keterangan = $keterangan; 
         $absensi->save();
 
         return response()->json(['message' => 'Jam selesai istirahat berhasil dicatat'], 200);
@@ -99,8 +107,11 @@ class HomeMitraController extends Controller
             'total_jam_kerja' => 'required|date_format:H:i:s',
         ]);
 
+        $keterangan = $request->keterangan;
         $absensi = Presensi::where('id', $request->id)->latest()->first();
         $total_jam_kerja = $absensi->jam_pulang->diffInHours($absensi->jam_masuk);
+        $absensi->keterangan = $keterangan; 
+        $total_jam_kerja->save();
 
         return response()->json(['total_jam_kerja' => $total_jam_kerja], 200);
     }
