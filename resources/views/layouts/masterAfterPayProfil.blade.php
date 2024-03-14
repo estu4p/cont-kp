@@ -20,7 +20,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbarAfterPay')
+       
         
 
         <div class="content-wrapper">

@@ -1,0 +1,58 @@
+.otp-input {
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    margin: 0 5px;
+    font-size: 30px;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+}
+
+.kembali{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+.wadah{
+    text-align: center;
+    padding-top: 50px;
+}
+.judul{
+    color: #A4161A;
+    font-weight: bold;
+    font-size: 40px;
+}
+.teks{
+    font-size: 20px;
+    padding-top: 40px;
+    padding-bottom: 90px;
+}
+input{
+    height: 50px;
+    width: 400px;
+    border-radius: 30px;
+    padding-left: 20px;
+}
+.continue{
+    background: #A4161A;
+    width: 200px;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 30px;
+}
+.bawah{
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.iconreset{
+    font-size: 80px;
+}
+.ulang{
+    color: #A4161A;
+}

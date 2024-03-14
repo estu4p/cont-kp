@@ -123,8 +123,10 @@
  .fz9{
      font-size: 90% !important;
      color: #A4161A !important;
+     text-decoration: none;
  }
 .daftar,.icon{
     color: #660708;
+    text-decoration: none;
 }
 
