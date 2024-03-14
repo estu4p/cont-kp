@@ -38,9 +38,10 @@ class PresensiSeeder extends Seeder
                         'log_aktivitas' => $faker->sentence,
                         'aksi' => $faker->boolean,
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),
-                        'kebaikan' => $faker->sentence,
+                        'keterangan_status' => $faker->sentence,                        'kebaikan' => $faker->sentence,
                         'mitra_id' => $mitra ? $mitra->id : null,
-                        'role_id' => 3
+                        'role_id' => 3,
+                        'barcode' => $faker->ean13(),
                     ]);
                 }
             }
