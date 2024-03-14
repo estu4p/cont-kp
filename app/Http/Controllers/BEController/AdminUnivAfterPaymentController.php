@@ -7,6 +7,7 @@ use App\Models\Mitra;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Divisi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -126,7 +127,13 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function teamAktif()
+    public function daftarMitraTeamAktif()
     {
+        $divisi = Divisi::all();
+        return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+    }
+    public function daftarMitraPengaturanDivisi()
+    {
+        return response()->json(['message' => '']);
     }
 }

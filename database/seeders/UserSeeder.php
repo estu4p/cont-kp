@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Divisi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mitra;
@@ -16,7 +17,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
                 'alamat' => $faker->address,
                 'about' => $faker->sentence,
+                'nama_divisi' => Divisi::inRandomOrder()->first()->id
             ]);
         }
     }
