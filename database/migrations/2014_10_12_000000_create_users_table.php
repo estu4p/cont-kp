@@ -26,11 +26,13 @@ return new class extends Migration
             $table->string('about');
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
+            $table->unsignedBigInteger('nama_divisi')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('role')->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
+            $table->foreign('nama_divisi')->references('id')->on('divisi')->onDelete('SET NULL');
         });
     }
 
