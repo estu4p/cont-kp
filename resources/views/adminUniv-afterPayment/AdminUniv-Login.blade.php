@@ -41,14 +41,14 @@
                                         <label class="form-check-label fz7 " for="remember">Ingatkan saya</label>
                                     </div>
                                     <div class="kanan d-flex align-items-start justify-content-end gap-2 flex-row col-7 ">
-                                        <p class="fz7 "> Lupa password? <a href="/AdminUniv-ResetPassword" class="btn btn-link fz9  ">reset</a> </p>
+                                        <p class="fz7 "> Lupa password? <a href="/AdminUniv-ResetPassword" class="btn btn-link fz9  " style="text-decoration: none;">reset</a> </p>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <a href="/dashboard">
+                        <a href="/AdminUniv-Dashboard">
                             <button type="submit" class="btn btn-secondary">
                                 Log In
                             </button>

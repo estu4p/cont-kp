@@ -21,7 +21,7 @@
 
         <input type="text" placeholder="syalita123@gmail.com">
         <div class="bawah">
-            <button class="continue">Continue</button>
+        <a href="/AdminUniv-InputOTP" style="text-decoration: none;"><button class="continue"> Continue</button></a>
         </div>
 
     </div>
