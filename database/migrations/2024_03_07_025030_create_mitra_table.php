@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nama_mitra');
             $table->string('deskripsi_mitra');
-            $table->string('divisi_mitra');
+            $table->unsignedBigInteger('divisi_mitra')->nullable();
             $table->timestamps();
+
+            $table->foreign('divisi_mitra')->references('id')->on('divisi')->onDelete('SET NULL');
         });
     }
 
