@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <a href="/dashboard">
+                        <a href="/AdminUniv-Dashboard">
                             <button type="submit" class="btn btn-secondary">
                                 Log In
                             </button>
