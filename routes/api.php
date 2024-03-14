@@ -37,10 +37,12 @@ Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIsti
 Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
 
+// admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
 Route::get('dashboard/admin/{id}', [AdminUnivAfterPaymentController::class, 'detailAdminProfile']);
 Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profileAdmin']);
 Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
 Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
 Route::get('admin/data-mitra/presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
+Route::get('admin/daftar-mitra/presensi/pengaturan-presensi', [AdminUnivAfterPaymentController::class, 'adminUnivPengaturanPresensi']);
 Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);
