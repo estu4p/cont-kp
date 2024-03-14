@@ -1,15 +1,16 @@
 <?php
 
+use function Laravel\Prompts\alert;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\MahasiswaController;
 
-use function Laravel\Prompts\alert;
+use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\HomeMitraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::post('/resetpw', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/new', [ResetPasswordController::class, 'newPassword'])->name('password.new');
-
+Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
+Route::get('/mitra', [HomeMitraController::class, 'pilihMitra']);
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
