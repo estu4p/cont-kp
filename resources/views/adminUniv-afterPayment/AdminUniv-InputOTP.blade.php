@@ -27,7 +27,7 @@
         <input type="text" class="form-control otp-input" id="otp4" maxlength="1" oninput="moveToNextInput(this, null)" required>
     </div>
         <div class="bawah">
-            <button class="continue">Verify Now</button>
+            <a href="/AdminUniv-InputNewPassword" style="text-decoration: none;"><button class="continue">Verify Now</button></a>
         </div>
         <div class="belum">
         Belum menerima email? <span class="ulang">Kirim ulang</span> 

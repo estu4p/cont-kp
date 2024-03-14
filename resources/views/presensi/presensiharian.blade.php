@@ -247,19 +247,6 @@
 </div>
 </div>
 
-<script>
-    const checkButton = document.getElementById('check-button');
-const crossButton = document.getElementById('cross-button');
 
-checkButton.addEventListener('click', function() {
-    checkButton.classList.add('active');
-    crossButton.classList.remove('active');
-});
-
-crossButton.addEventListener('click', function() {
-    crossButton.classList.add('active');
-    checkButton.classList.remove('active');
-});
-</script>
 
 @endsection

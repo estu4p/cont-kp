@@ -8,8 +8,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="/assets/css/AdminUniv-InputNewPassword.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -44,10 +46,11 @@
             </div>
         </div>
         <div class="bawah">
-            <button class="continue">Reset Password</button>
+            <button class="continue" onclick="showSuccessModal()">Reset Password</button>
         </div>
-
     </div>
+    
+
 
     <script>
         const togglePasswordButtons = document.querySelectorAll('.toggle-password');
@@ -67,6 +70,19 @@
                 }
             });
         });
+
+        function showSuccessModal() {
+            swal({
+                title: "Berhasil!",
+                text: "Password berhasil diubah silahkan login kembali",
+                icon: "success",
+                buttons: false // Tidak menampilkan tombol OK
+            });
+            setTimeout(function() {
+                const urlLoginAdmin = "{{ route('login.admin') }}"
+                window.location.href = urlLoginAdmin
+            }, 2000);
+        }
     </script>
 
 </body>
