@@ -191,6 +191,17 @@ Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
 
+Route::get('/mitra-laporanpresensi-detaihadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+});
+Route::get('/mitra-laporanpresensi-detailizin', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+});
+Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
+});
+
+
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
 }); 
@@ -205,12 +216,6 @@ Route::get('/AdminUniv-Dashboard', function () {
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
-
-
-
-
-
-//adminUniv-afterPayment
 
 
 
