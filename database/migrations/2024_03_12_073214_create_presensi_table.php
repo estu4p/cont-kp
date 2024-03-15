@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -14,14 +15,15 @@ return new class extends Migration
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
-            $table->dateTime('jam_masuk');
+            $table->date('hari')->nullable()->default(DB::raw('CURRENT DATE'));
+            $table->time('jam_masuk');
             $table->dateTime('jam_pulang');
             $table->dateTime('jam_mulai_istirahat');
             $table->dateTime('jam_selesai_istirahat');
             $table->time('total_jam_kerja')->nullable();
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
-            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
+            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir', 'Ganti Jam']);
             $table->text('keterangan_status')->nullable();
             $table->string('kebaikan');
             $table->enum('status_absensi', ['Scan QR Code', 'Button']);
