@@ -52,7 +52,7 @@
                 pageLength : 5,
                 lengthMenu: [[5, 7, 10, 50, -1], [5, 7, 10, 50, 'semua']],
                 language: {
-                    searchPlaceholder: 'cari nama mahasiswa'
+                    searchPlaceholder: 'search here..'
                 }
              } )
         } );
