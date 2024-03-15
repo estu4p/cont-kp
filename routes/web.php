@@ -168,6 +168,17 @@ Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
 
+Route::get('/MitraPresensiDetailHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
+});
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
+});
+
 
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
@@ -229,7 +240,4 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-
 
