@@ -1,0 +1,69 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.tittle-container {
+    text-align: center;
+    margin-top: 50px;
+}
+.tittle-container h1 {
+    color: #333;
+    margin-top: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 58vh;
+    background-color: #f0f0f0;
+}
+
+.mb-5{
+    margin-bottom: 3rem !important;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    width:100px;
+    height: 10px;
+    margin:5px;
+}
+.card div table tr td{
+    padding:5px 10px;
+    font-size:70%;
+}
+.card div ul li{
+    list-style: none;
+}
+.merah div ul li{
+    color:red;
+}
+.plan-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.price {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.features {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+}
