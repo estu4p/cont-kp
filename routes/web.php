@@ -2,6 +2,7 @@
 
 use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
@@ -11,8 +12,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\LandingPageController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -53,35 +52,6 @@ Route::post('/loginpage', [LandingPageController::class, 'login']);    Route::ge
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
-Route::get('/login', function () {
-    return view('login');
-    Route::get('/checkout/bronze', function () {
-        return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
-    });
-});
-//     Route::get('/checkout/silver', function () {
-//         return view('checkout.silver', ['title' => "Checkout - Silver"]);
-//     });
-//     Route::get('/checkout/gold', function () {
-//         return view('checkout.gold', ['title' => "Checkout - Gold"]);
-//     });
-//     Route::get('/checkout/platinum', function () {
-//         return view('checkout.platinum', ['title' => "Checkout - Platinum"]);
-//     });
-//     Route::get('/after-checkout', function () {
-//         return view('checkout.after-checkout', ['title' => "After Checkout"]);
-//     });
-//     Route::get('/invoice', function () {
-//         return view('checkout.invoice', ['title' => "Invoice"]);
-//     });
-//     Route::get('/slip', function () {
-//         return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
-//     });
-// });
-
-
-// });
-
 Route::get('/register', function () {
     return view('landing-page.daftar', ['title' => "Daftar"]);
 });
@@ -124,7 +94,7 @@ Route::get('/login', function () {
         return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
     });
 });
-
+Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -178,6 +148,7 @@ Route::get('/laporandatapresensi', function () {
 Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
