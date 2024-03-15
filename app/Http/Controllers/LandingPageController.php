@@ -22,7 +22,7 @@ class LandingPageController extends Controller
         $request->validate([
             'fullname' => 'required|string|max:100',
             'sekolah' => 'required|string',
-            'email' => 'email|required|unique:daftar,email',
+            'email' => 'email|required|unique:daftar',
             'telephone' => 'required|regex:/^\d+$/',
             'password' => 'min:8|required'
         ]);
@@ -35,25 +35,91 @@ class LandingPageController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response()->json(['data' => $data]);
+            $login= [
+                'email' => $request->email,
+                'password' =>$request->password,
+            ];
+
+            return response()->json(['data' => $data,'login'=> $login]);
     }
     public function login(Request $request)
     {
+        // $request->validate([
+        //     'email' => 'required|email',
+        //     'password' => 'required'
+        // ],[
+        //     'email.required'=>'email wajib isi',
+        //     'password.required'=>'password wajib isi'
+        // ]);
+        // $login = [
+        //     'email' => $request->email,
+        //     'password' => $request->password
+        // ];
+        // if (Auth::attempt($login)) {
+        //     return redirect(' ')->with('success', 'Berhasil login');
+        // } else {
+        //     return redirect(' ')->withErrors('Username dan password yang dimasukkan tidak sesuai');
+        // }
+
+        // $login = $request->only('email', 'password');
+        //  if (Auth::attempt([$login])) {
+        // // Autentikasi berhasil, dapatkan data pengguna yang diautentikasi
+        // $daftar = Auth::daftar();
+        // return response()->json(['message' => 'Login successful', 'daftar'=>$daftar]);
+        // } else {
+        // // Autentikasi gagal
+        // return response()->json(['message' => 'Invalid credentials'],401);
+        // }
+
+
+        // $login= [
+        //     'email' => $request->input ('email'),
+        //     'password' =>$request->input('password'),
+        // ];
+        // if ($login) {
+        //     // Login berhasil
+        //     return response('Berhasil login');
+        // } else {
+        //     //Jika data tidak ditemukan/ belum melakukan pendaftaran
+        //     return response([
+        //         'status' => false,
+        //         'pesan' => 'data tidak ditemukan'
+        //     ]);
+        // }
+        // // }
         $email = $request->input('email');
         $pass = $request->input('password');
 
         $useremail = login::where('email', $email)->first();
-        $userpass = login::where('password', $pass)->first();
-
-        if ($useremail && $userpass) {
-            // Login berhasil
-            return response($useremail);
-        } else {
-            //Jika data tidak ditemukan/ belum melakukan pendaftaran
+        // $userpass = login::where('password', $pass)->first();
+        if ($useremail) {
+            // Verifikasi password
+            if ($useremail->password == $pass) {
+                // Login berhasil
+                return response($useremail);
+            } else {
+                // Password salah
+                return response([
+                    'status' => false,
+                    'pesan' => 'Password salah'
+                ]);
+            }
+            } else {
+            // Jika data tidak ditemukan/ belum melakukan pendaftaran
             return response([
                 'status' => false,
-                'pesan' => 'data tidak ditemukan, daftarkan diri terlebih dahulu'
+                'pesan' => 'Data tidak ditemukan'
             ]);
+
+        // if ($useremail && $userpass) {
+        //     // Login berhasil
+        //     return response($useremail);
+        // } else {
+        //     //Jika data tidak ditemukan/ belum melakukan pendaftaran
+        //     return response([
+        //         'status' => false,
+        //         'pesan' => 'data tidak ditemukan'
+        //     ]);
         }
     }
     public function ChekoutPaket(Request $request)
