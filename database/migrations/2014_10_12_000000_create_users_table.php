@@ -23,16 +23,26 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->string('alamat');
+            $table->date('tgl_lahir');
             $table->string('about');
+            $table->string('os');
+            $table->enum('status_akun', ['aktif', 'alumni']);
+            $table->string('browser');
+            $table->date('tgl_masuk')->nullable();
+            $table->date('tgl_keluar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('nama_divisi')->nullable();
+            $table->unsignedBigInteger('shift')->nullable();
+            $table->unsignedBigInteger('project')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('role')->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
             $table->foreign('nama_divisi')->references('id')->on('divisi')->onDelete('SET NULL');
+            $table->foreign('shift')->references('id')->on('shift')->onDelete('SET NULL');
+            $table->foreign('project')->references('id')->on('project')->onDelete('SET NULL');
         });
     }
 
