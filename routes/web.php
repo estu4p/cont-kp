@@ -144,3 +144,15 @@ Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
+
+Route::get('/MitraPresensiDetailHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
+});
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
+});
+
