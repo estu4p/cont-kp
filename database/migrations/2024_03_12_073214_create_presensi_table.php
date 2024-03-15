@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
             $table->text('keterangan_status')->nullable();
             $table->string('kebaikan');
+            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('divisi_id')->nullable();
