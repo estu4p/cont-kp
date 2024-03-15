@@ -2,6 +2,7 @@
 
 use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
@@ -93,7 +94,7 @@ Route::get('/login', function () {
         return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
     });
 });
-
+Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -147,6 +148,7 @@ Route::get('/laporandatapresensi', function () {
 Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });

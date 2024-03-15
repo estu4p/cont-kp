@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -23,6 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/daftar', [LandingPageController::class, 'lpdaftar'])->name('daftar');
+Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
+Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
 Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
 Route::post('register', [RegisterController::class, 'register'])->name('register');
 Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
