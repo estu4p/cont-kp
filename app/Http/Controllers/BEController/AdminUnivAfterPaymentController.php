@@ -130,7 +130,9 @@ class AdminUnivAfterPaymentController extends Controller
     public function daftarMitraTeamAktif()
     {
         // $divisi = Divisi::all();
-        $divisi = Divisi::withCount('divisi')->get();
+        $divisi = Divisi::withCount('mahasiswa')->get();
+        // $jml_mahasiswa = User::where('role_id', 3)->orderBy('nama_divisi', 'asc')->get();
+        // $divisi = Divisi::withCount('divisi')->get();
 
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }

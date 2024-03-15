@@ -11,8 +11,8 @@ class Divisi extends Model
     protected $table = "divisi";
     protected $fillable = ['nama_divisi', 'deskripsi_divisi'];
 
-    public function divisi()
+    public function mahasiswa()
     {
-        return $this->hasMany(User::class)->orderBy('nama_divisi');
+        return $this->hasMany(Presensi::class, 'divisi_id');
     }
 }
