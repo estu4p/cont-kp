@@ -40,6 +40,8 @@ Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstiraha
 Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat']);
 Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
+Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
+Route::post('/barcode', [HomeMitraController::class, 'barcode']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
