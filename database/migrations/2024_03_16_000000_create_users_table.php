@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
             $table->string('alamat');
+            $table->enum('kota', ['Kota Surabaya', 'kota Semarang']);
             $table->date('tgl_lahir');
             $table->string('about');
             $table->string('os');
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger('divisi_id')->nullable();
             $table->unsignedBigInteger('shift_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('paket_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
@@ -44,6 +46,7 @@ return new class extends Migration
             $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('SET NULL');
             $table->foreign('shift_id')->references('id')->on('shift')->onDelete('SET NULL');
             $table->foreign('project_id')->references('id')->on('project')->onDelete('SET NULL');
+            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('SET NULL');
         });
     }
 
