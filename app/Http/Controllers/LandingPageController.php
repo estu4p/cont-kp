@@ -22,7 +22,7 @@ class LandingPageController extends Controller
         $request->validate([
             'fullname' => 'required|string|max:100',
             'sekolah' => 'required|string',
-            'email' => 'email|required|unique:daftar,email',
+            'email' => 'email|required|unique:daftar',
             'telephone' => 'required|regex:/^\d+$/',
             'password' => 'min:8|required'
         ]);
@@ -35,26 +35,66 @@ class LandingPageController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response()->json(['data' => $data]);
+            $login= [
+                'email' => $request->email,
+                'password' =>$request->password,
+            ];
+
+
+            return response()->json(['data' => $data,'login'=> $login]);
+    }
+    public function index()
+    {
+        return view("landing-page.login");
     }
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        $useremail = login::where('email', $email)->first();
-        $userpass = login::where('password', $pass)->first();
-
-        if ($useremail && $userpass) {
-            // Login berhasil
-            return response($useremail);
-        } else {
-            //Jika data tidak ditemukan/ belum melakukan pendaftaran
-            return response([
-                'status' => false,
-                'pesan' => 'data tidak ditemukan, daftarkan diri terlebih dahulu'
-            ]);
+        $useremail = Daftar::where('email', $email)->first();
+        // $userpass = Daftar::where('password', $pass)->first();
+        if ($useremail|| Hash::check( $pass, $useremail->password)) {
+            return back()->withErrors(['email' => 'Email atau password salah']);
         }
+        auth()->login($useremail);
+
+        // Redirect ke halaman yang sesuai
+        return redirect()->intended('/dashboard');
+        // if ($useremail) {
+        //     // Verifikasi password
+        //     if ($useremail->password == $pass) {
+        //         // Login berhasil
+        //         return response($useremail);
+        //     } else {
+        //         // Password salah
+        //         return response([
+        //             'status' => false,
+        //             'pesan' => 'email atau password yang dimasukkan salah'
+        //         ]);
+        //     }
+        //     } else {
+        //     // Jika data tidak ditemukan/ belum melakukan pendaftaran
+        //     return response([
+        //         'status' => false,
+        //         'pesan' => 'Data tidak ditemukan'
+        //     ]);
+        // }
+
+        // if ($useremail && $userpass) {
+        //     // Login berhasil
+        //     return response($useremail);
+        // } else {
+        //     //Jika data tidak ditemukan/ belum melakukan pendaftaran
+        //     return response([
+        //         'status' => false,
+        //         'pesan' => 'data tidak ditemukan'
+        //     ]);
+        // }
     }
     public function ChekoutPaket(Request $request)
     {
