@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Divisi;
 use App\Models\Mitra;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class MitraSeeder extends Seeder
             Mitra::create([
                 'nama_mitra' => $faker->company,
                 'deskripsi_mitra' => $faker->sentence,
-                'divisi_mitra' => $faker->jobTitle,
+                'divisi_mitra' => Divisi::inRandomOrder()->first()->id,
             ]);
         }
     }

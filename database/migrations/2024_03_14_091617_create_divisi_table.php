@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mitra', function (Blueprint $table) {
+        Schema::create('divisi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_mitra');
-            $table->string('deskripsi_mitra');
-            $table->unsignedBigInteger('divisi_mitra')->nullable();
+            $table->string('nama_divisi');
+            $table->text('deskripsi_divisi')->nullable();
             $table->timestamps();
-
-            $table->foreign('divisi_mitra')->references('id')->on('divisi')->onDelete('SET NULL');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mitra');
+        Schema::dropIfExists('divisi');
     }
 };

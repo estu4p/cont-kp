@@ -1,15 +1,17 @@
 <?php
 
+use function Laravel\Prompts\alert;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\MahasiswaController;
 
-use function Laravel\Prompts\alert;
+use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\HomeMitraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::post('/resetpw', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/new', [ResetPasswordController::class, 'newPassword'])->name('password.new');
-
+Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
+Route::get('/mitra', [HomeMitraController::class, 'pilihMitra']);
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
@@ -91,7 +94,7 @@ Route::get('/login', function () {
         return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
     });
 });
-
+Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -138,8 +141,23 @@ Route::get('/user/reset-password/new-password', function () {
 Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
+
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
+
+Route::get('/user', function () {
+    return view('user.home', [
+        'title' => "Home",
+        'nama' => "Syalita Widyandini",
+        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
+    ]);
+});
+Route::get('/user/barcode', function () {
+    return view('user.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
+
 });
 
 
@@ -161,6 +179,7 @@ Route::get('/laporandatapresensi', function () {
 Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
@@ -180,6 +199,17 @@ Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
+});
+
+Route::get('/MitraPresensiDetailHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
+});
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
 
 
@@ -243,7 +273,4 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-
 

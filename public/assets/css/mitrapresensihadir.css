@@ -1,0 +1,176 @@
+.card-header{
+    left: 456px;
+    top: 187px;
+    background: #404040;
+    color: white;
+    }
+
+
+    .parent-relatife{
+        position: relative;
+    }
+    .kekiri{
+        position: absolute;
+        left:-2%;
+        z-index: 10;
+        top:10px;
+        color: black;
+
+    }
+
+    .user{
+    width: 95px;
+    height: 99px;
+    left: 487px;
+    top: 214px;
+    background: white;
+    border-radius: 50px;
+    }
+    .masa {
+        height: max-content;
+        background: #E9E9E9;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .masa table th,
+    .masa table td {
+        text-align: left;
+    }
+
+    .masa table td:nth-child(2) {
+        text-align: right;
+    }
+
+    .container-card {
+        display: flex;
+        gap: 20px;
+    }
+
+    .masuk, .target{
+        background-color: #20DB1C;
+        border-radius: 15px;
+        color: white;
+    }
+
+    .total, .sisa{
+        background-color: black;
+        border-radius: 15px;
+        color: white;
+    }
+    .container-card2 {
+        display: flex;
+        padding-top: 20px;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .butongeser{
+    width: 60px;
+    height: 30px;
+    left: 456px;
+    top: 499px;
+    background: #404040;
+    color: white;
+    }
+    .cubo{
+        padding-top: 30px;
+    }
+
+    table {
+        margin: auto;
+        text-align: center;
+
+      }
+
+      th, td {
+        text-align: center;
+      }
+
+      tr th[rowspan], tr th[colspan] {
+        vertical-align: middle;
+      }
+
+      .btnpdf{
+        background-color: red;
+        color: white;
+        border-radius: 6px;
+        border-color: #ddd;
+
+
+    }
+    .table th {
+        text-align: center;
+        background-color: #DCDCDC;
+    }
+
+    .table tr td {
+        background-color: white !important;
+    }
+    .table tr{
+        background-color: white !important;
+    }
+    .keterangan{
+
+        width: 471px;
+        height: 311px;
+        left: 53px;
+        top: 116px;
+        background: #F2F2F2;
+        border-radius: 5px;
+        }
+
+        .linkdrive{
+
+        width: 471px;
+        height: 51px;
+        left: 53px;
+        top: 475px;
+
+        background: #F2F2F2;
+        border-radius: 3px;
+
+        }
+        .keterangan2{
+            width: 471px;
+            height: 51px;
+            left: 53px;
+            top: 475px;
+            background: #F2F2F2;
+            border-radius: 3px;
+        }
+        .btnkembali{
+            left: 0%;
+            right: 0%;
+            top: 0%;
+            bottom: 0%;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.07em;
+            color: #858585;
+            background-color: transparent;
+            border: none;
+
+            }
+.fz6{font-size: 60%;}
+.fz7{font-size: 70%;}
+.fz8{font-size: 80%;}
+.fz9{font-size: 90%;}
+
+.border {
+    display: flex;
+    padding-top: 25px;
+
+
+
+   background-color:#D9D9D9;
+}
+
+.form-control{
+    padding-top: 10px;
+}
+
+
+
