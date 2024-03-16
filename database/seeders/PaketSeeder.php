@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Divisi;
-use App\Models\Mitra;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\Models\paket;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class MitraSeeder extends Seeder
+class PaketSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +15,9 @@ class MitraSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 20; $i++) {
-            Mitra::create([
-                'nama_mitra' => $faker->company,
-                'deskripsi_mitra' => $faker->sentence,
+            paket::create([
+                'nama_paket' => $faker->randomElement(['Gold', 'Silver', 'Bronze']),
+                'metode_bayar' => $faker->randomElement(['BNI', 'Dana']),
             ]);
         }
     }
