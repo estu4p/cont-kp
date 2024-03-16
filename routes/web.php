@@ -138,12 +138,12 @@ Route::get('/user/reset-password/new-password', function () {
 Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
-Route::get('/user/home', function () {
-    return view('user.home', ['title' => "Home"]);
-});
+
 
 //user
-
+Route::get('/pemagang/home', function () {
+    return view('pemagang.home', ['title' => "Home"]);
+});
 
 
 
