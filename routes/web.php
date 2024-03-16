@@ -111,12 +111,6 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 //     return view('template.contributingforunivschool.penilaianmahasiswa');
 // });
 
-
-
-
-
-
-
 Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
