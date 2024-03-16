@@ -14,7 +14,7 @@ class PaketSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             paket::create([
                 'nama_paket' => $faker->randomElement(['Gold', 'Silver', 'Bronze']),
                 'metode_bayar' => $faker->randomElement(['BNI', 'Dana']),

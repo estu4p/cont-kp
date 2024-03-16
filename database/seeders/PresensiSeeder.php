@@ -31,6 +31,7 @@ class PresensiSeeder extends Seeder
                 if (!$existingPresensi) {
                     Presensi::create([
                         'nama_lengkap' => $user->id, // Menggunakan ID pengguna sebagai nama lengkap (asumsi nama lengkap dihapus dan digantikan dengan ID)
+                        'hari' => $faker->dateTime,
                         'jam_masuk' => $faker->dateTimeBetween('-1 year', 'now'),
                         'jam_pulang' => $faker->dateTimeBetween('-1 year', 'now'),
                         'jam_mulai_istirahat' => $faker->dateTimeBetween('-1 year', 'now'),
@@ -39,11 +40,11 @@ class PresensiSeeder extends Seeder
                         'log_aktivitas' => $faker->sentence,
                         'aksi' => $faker->boolean,
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),
-                        'keterangan_status' => $faker->sentence,                        'kebaikan' => $faker->sentence,
-                        'mitra_id' => $mitra ? $mitra->id : null,
-                        'divisi_id' => $divisi ? $divisi->id : null,
-                        'role_id' => 3,
-                        'barcode' => $faker->ean13(),
+                        'keterangan_status' => $faker->sentence,
+                        'kebaikan' => $faker->sentence,
+                        'status_absensi' => $faker->randomElement(['Scan QR Code', 'Button']),
+                        'barcode' => $faker->ean13,
+                        'hutang_presensi' => $faker->dateTime
                     ]);
                 }
             }

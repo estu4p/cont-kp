@@ -6,6 +6,7 @@ use App\Models\Divisi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Shift;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,6 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        $kota = User::first()->kota;
         for ($i = 0; $i < 100; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),
                 'password' => Hash::make('123456'),
-                'kota' => $kota,
+                'kota' => $faker->randomElement(['Kota Surabaya', 'kota Semarang']),
                 'alamat' => $faker->address,
                 'tgl_lahir' => $faker->dateTime,
                 'about' => $faker->sentence,
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
                 'role_id' => Role::inRandomOrder()->first()->id,
-                'shift_id' => Role::inRandomOrder()->first()->id,
+                'shift_id' => Shift::inRandomOrder()->first()->id,
                 'divisi_id' => Divisi::inRandomOrder()->first()->id
             ]);
         }
