@@ -19,17 +19,29 @@
             </div>
             <form class="content-form">
                 <label for="email" class="label-form">Username/Email</label>
-                <div class="d-flex">
+                <div style="height: 56px;">
                     <input type="email" name="email"
                         style="border: 0.5px solid #00000075; padding: 10px; border-radius: 4px; width: 100%;"
-                        placeholder="Masukkan username / email">
+                        placeholder="Masukkan username / email" value="">
+                    <small id="warn-email" class="text-warning bg-warning-subtle py-1 px-2 text-capitalize d-none"
+                        style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                        </svg>  email tidak diketahui</small>
                 </div>
 
                 <label for="password" class="label-form">Password</label>
-                <div class="d-flex">
+                <div style="height: 60px;">
                     <input type="password" name="password"
                         style="border: 0.5px solid #00000075; padding: 10px; border-radius: 4px; width: 100%;"
                         placeholder="Masukkan password">
+                        <small id="warn-password" class="text-danger bg-danger-subtle py-1 px-2 text-capitalize d-none"
+                        style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                        </svg>  password harus lebih dari 8 karakter</small>
                 </div>
 
                 <div class="remember">
@@ -49,4 +61,34 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const emailInput = document.querySelector('input[name="email"]');
+            const warnEmail = document.getElementById('warn-email');
+            const passwordInput = document.querySelector('input[name="password"]');
+            const warnPassword = document.getElementById('warn-password');
+
+            emailInput.addEventListener('input', function () {
+                const enteredEmail = this.value.trim();
+                const correctEmail = "{{ $email }}";
+
+                if (enteredEmail !== correctEmail) {
+                    warnEmail.classList.remove('d-none');
+                } else {
+                    warnEmail.classList.add('d-none');
+                }
+            });
+
+            passwordInput.addEventListener('input', function () {
+                const enteredPassword = this.value.trim();
+
+                if (enteredPassword.length < 8) {
+                    warnPassword.classList.remove('d-none');
+                } else {
+                    warnPassword.classList.add('d-none');
+                }
+            });
+        });
+    </script>
 @endsection
