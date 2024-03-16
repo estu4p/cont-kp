@@ -114,6 +114,19 @@ Route::get('/user/reset-password/new-password', function () {
 Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
+Route::get('/user', function () {
+    return view('user.home', [
+        'title' => "Home",
+        'nama' => "Syalita Widyandini",
+        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
+    ]);
+});
+Route::get('/user/barcode', function () {
+    return view('user.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
+});
 
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
