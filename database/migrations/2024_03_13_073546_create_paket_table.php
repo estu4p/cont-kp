@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
-            $table->paket();
-            $table->metodeBayar();
-            $table->kota();
+            $table->string('nama_paket');
+            $table->enum('metode bayar', ['BNI', 'Dana'])->default('BNI');
             $table->timestamps();
+            // kota ambil dari users ya
         });
     }
 
