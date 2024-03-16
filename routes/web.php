@@ -141,6 +141,10 @@ Route::get('/user/reset-password/new-password', function () {
 Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
+
+Route::get('/user/home', function () {
+    return view('user.home', ['title' => "Home"]);
+
 Route::get('/user', function () {
     return view('user.home', [
         'title' => "Home",
@@ -153,6 +157,7 @@ Route::get('/user/barcode', function () {
         'title' => "Barcode Pemagang",
         'nama' => "Syalita"
     ]);
+
 });
 
 
