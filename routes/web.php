@@ -44,7 +44,7 @@ Route::middleware('user')->group(function () {
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
-    Route::get('/adminbeforepayment', function () {
+Route::post('/loginpage', [LandingPageController::class, 'login']);    Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
 });
@@ -58,6 +58,7 @@ Route::get('/register', function () {
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+Route::post("/loginpage", [LandingPageController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
@@ -246,20 +247,20 @@ Route::get('/user/home', function () {
     });
 
 
-    Route::get('/AdminUniv-InputOTP', function () {
-        return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-    });
+Route::get('/AdminUniv-InputOTP', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+});
 
-    Route::get('/AdminUniv-InputNewPassword', function () {
-        return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-    });
+Route::get('/AdminUniv-InputNewPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+});
 
-    Route::get('/AdminUniv-Dashboard', function () {
-        return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-    });
-    Route::get('/AdminUniv-EditProfile', function () {
-        return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-    });
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+});
 
 
 
