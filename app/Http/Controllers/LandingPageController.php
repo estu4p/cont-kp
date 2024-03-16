@@ -20,20 +20,21 @@ class LandingPageController extends Controller
     public function lpdaftar(Request $request)
     {
         $request->validate([
-            'fullname' => 'required|string|max:100',
+            'nama_lengkap' => 'required|string|max:100',
             'sekolah' => 'required|string',
+            'no_hp' => 'required|regex:/^\d+$/',
             'email' => 'email|required|unique:daftar',
-            'telephone' => 'required|regex:/^\d+$/',
             'password' => 'min:8|required'
         ]);
 
-            $data = Daftar::create([
-                'name' => $request->fullname,
+            $data = User::create([
+                'nama_lengkap' => $request->nama_lengkap,
                 'sekolah' => $request->sekolah,
+                'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'telephone' => $request->telephone,
                 'password' => Hash::make($request->password),
             ]);
+            // dd($data);
 
             $login= [
                 'email' => $request->email,
@@ -56,45 +57,20 @@ class LandingPageController extends Controller
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        $useremail = Daftar::where('email', $email)->first();
+        $useremail = User::where('email', $email)->first();
+        // dd(Hash::make($pass));
         // $userpass = Daftar::where('password', $pass)->first();
-        if ($useremail|| Hash::check( $pass, $useremail->password)) {
-            return back()->withErrors(['email' => 'Email atau password salah']);
+        if (!$useremail && Hash::check( $pass, $useremail->password)) {
+             return back()->withErrors(['email' => 'Email atau password salah']);
         }
         auth()->login($useremail);
 
         // Redirect ke halaman yang sesuai
-        return redirect()->intended('/dashboard');
-        // if ($useremail) {
-        //     // Verifikasi password
-        //     if ($useremail->password == $pass) {
-        //         // Login berhasil
-        //         return response($useremail);
-        //     } else {
-        //         // Password salah
-        //         return response([
-        //             'status' => false,
-        //             'pesan' => 'email atau password yang dimasukkan salah'
-        //         ]);
-        //     }
-        //     } else {
-        //     // Jika data tidak ditemukan/ belum melakukan pendaftaran
-        //     return response([
-        //         'status' => false,
-        //         'pesan' => 'Data tidak ditemukan'
-        //     ]);
-        // }
-
-        // if ($useremail && $userpass) {
-        //     // Login berhasil
-        //     return response($useremail);
-        // } else {
-        //     //Jika data tidak ditemukan/ belum melakukan pendaftaran
-        //     return response([
-        //         'status' => false,
-        //         'pesan' => 'data tidak ditemukan'
-        //     ]);
-        // }
+        // return redirect()->intended('/dashboard');
+        return response()->json([
+            'pesan' => 'Anda Berhasil login',
+            'data' => $useremail
+        ]);
     }
     public function ChekoutPaket(Request $request)
     {
