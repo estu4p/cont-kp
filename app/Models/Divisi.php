@@ -13,6 +13,6 @@ class Divisi extends Model
 
     public function mahasiswa()
     {
-        return $this->hasMany(Presensi::class, 'divisi_id');
+        return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
     }
 }

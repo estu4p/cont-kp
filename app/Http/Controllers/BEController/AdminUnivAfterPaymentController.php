@@ -101,12 +101,11 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function adminUnivPresensi($id)
+    public function adminUnivPresensi()
     {
         try {
-            $mitra = Mitra::findOrFail($id);
-            $presensi = Presensi::where('mitra_id', $id)->get();
-            return response()->json(['mitra' => $mitra, 'presensi' => $presensi,]);
+            $presensi = Presensi::all();
+            return response()->json(['presensi' => $presensi]);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'data not found', 'data' => null], 404);
         }
@@ -129,11 +128,7 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function daftarMitraTeamAktif()
     {
-        // $divisi = Divisi::all();
         $divisi = Divisi::withCount('mahasiswa')->get();
-        // $jml_mahasiswa = User::where('role_id', 3)->orderBy('nama_divisi', 'asc')->get();
-        // $divisi = Divisi::withCount('divisi')->get();
-
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
     public function daftarMitraPengaturanDivisi()
@@ -184,7 +179,7 @@ class AdminUnivAfterPaymentController extends Controller
             $data->delete();
             return response()->json(['success' => true, 'message' => 'Succes to delete divisi'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'fail to delete'], 404);
+            return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
     }
 }
