@@ -152,12 +152,12 @@ Route::get('/user', function () {
         'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
     ]);
 });
+});
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
         'title' => "Barcode Pemagang",
         'nama' => "Syalita"
     ]);
-
 });
 
 

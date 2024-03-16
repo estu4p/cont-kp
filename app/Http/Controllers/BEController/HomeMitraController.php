@@ -161,9 +161,7 @@ class HomeMitraController extends Controller
     }
 
     public function barcode(Request $request)
-    {
-        return view('barcode');
-     
+    {     
         $request->validate([
             'barcode' => 'required|string|max:255',
         ]);
@@ -182,5 +180,27 @@ class HomeMitraController extends Controller
         return response()->json(['message' => 'Presensi berhasil dicatat'], 200);
     }
 
+    public function detailGantiJam(Request $request)
+    {
+        $request->validate([
+            'hari' => 'required|in:Senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu|date_format:Y-m-d',
+            'keterangan_izin' => 'required|string',
+            'status' => 'required|string|in:Ganti jam',
+        ]);
 
+        $hari = $request->hari;
+        $keterangan_izin = $request->keterangan_izin;
+        $status = $request->status;
+
+        $detailGantiJam = Presensi::where('hari', $hari)
+            ->where('keterangan_izin', $keterangan_izin)
+            ->where('status', $status)
+            ->get();
+
+        if ($detailGantiJam->isNotEmpty()) {
+            return response()->json(['data' => $detailGantiJam], 200);
+        } else {
+            return response()->json(['message' => 'Detail ganti jam tidak ditemukan'], 404);
+        }
+    }
 }

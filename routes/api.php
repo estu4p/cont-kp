@@ -42,6 +42,7 @@ Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
 Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
+Route::get('/detailGantiJam', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
