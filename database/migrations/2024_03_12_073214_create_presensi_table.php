@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('divisi_id')->nullable();
+            $table->unsignedBigInteger('paket_id')->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->timestamps();
 
@@ -40,6 +41,7 @@ return new class extends Migration
             $table->foreign('role_id')->references('id')->on('users')->where('role_id', 3)->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
             $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('SET NULL');
+            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('SET NULL');
         });
     }
 
