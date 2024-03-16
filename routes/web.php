@@ -8,11 +8,9 @@ use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\MitraDashboardController;
-use App\Http\Controllers\MitraEditProfilController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\MitraEditProfilController;
 
-use function Laravel\Prompts\alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,44 +50,24 @@ Route::middleware('user')->group(function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
-<<<<<<< HEAD
+
 // routes/web.php
-
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
-    Route::get('profile', [MitraDashboardController::class, 'showProfile'])->name('mitra.dashboard.profile');
-
-    // Tampilkan halaman edit profil
-    Route::get('edit-profile', [MitraEditProfilController::class, 'editProfile'])->name('mitra.dashboard.edit-profile');
-
-    // Proses update profil
-    Route::post('update-profile', [MitraEditProfilController::class, 'updateProfile'])->name('mitra.dashboard.update-profile');
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    
+    Route::get('/dashboard', [AuthController::class, 'dashboard']);
 });
+
+    
+
 Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
 
-Route::get('/presensi', function () {
-    return view('presensi.presensiharian');
-=======
-Route::get('/register', function () {
-    return view('landing-page.daftar', ['title' => "Daftar"]);
->>>>>>> d8211c0f4542e32776e755ca359faa3f9e04d5f7
-});
-
-Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
-Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
-
-Route::get('/', function () {
-    return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
-});
 Route::get('/dashboard-admin', function () {
     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
 });
@@ -176,7 +154,7 @@ Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
 
-
+Route::get('/data-mitra', [DataMitraController::class, 'index'])->name('dataMitra');
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
 });
