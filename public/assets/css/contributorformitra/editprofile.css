@@ -1,0 +1,111 @@
+.wadah{
+    display: flex;
+    padding-top: 10px;
+    padding-left: 50px;
+}
+.propil{
+    height: 600px;
+    width: 300px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 10px;
+
+}
+
+
+
+.gambarkiri{
+    padding-top: 30px;
+    transform: scale(1.8);
+}
+.nama{
+    padding-top: 70px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.email{
+
+    padding-top: 15px;
+}
+.about{
+    padding-top: 80px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.keterangan{
+    padding-top: 30px;
+
+    width: 90%;
+  padding-left: 35px;
+}
+.wadahedit{
+    padding-left: 30px;
+}
+.editprofil{
+    height: 600px;
+    width: 850px;
+    padding-top: 20px;
+    padding-left: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+}
+.change{
+    background: #ffffff;
+    border-radius: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    color: 000000;
+
+
+}
+
+.remove{
+    background: #ffffff;
+    color: #BA181BE8;
+    border: none;
+}
+.judulkanan{
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.input{
+    width: 97%;
+    background-color: #F2F4F8;
+    box-sizing: border-box;
+    border-bottom: 1px solid #C1C7CD;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+
+
+
+}
+#About{
+    width: 300px;
+    background-color: #F2F4F8;
+}
+.Cancel{
+    border-radius: 4px;
+    color: #ffffff;
+    background: rgba(2, 2, 2, 0.35);
+    border-color: #ffffff;
+
+
+}
+.Update{
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #A4161A;
+    border: #A4161A;
+}
+
+
+
