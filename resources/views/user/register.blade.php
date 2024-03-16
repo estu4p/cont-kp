@@ -9,52 +9,53 @@
         <div class="content-login">
             <h2 class="header-reg fw-bold text-uppercase text-center mt-2 pt-4">register</h2>
             <h2 class="header-reg1 fw-bold text-capitalize text-center mt-2 pt-4">register</h2>
-            <form class="content-form text-capitalize">
-                <label for="nama" class="mt-2 mb-2">nama lengkap<span class="text-danger">*</span></label>
+            <form class="content-form text-capitalize" action="{{ route('register') }}" method="POST">
+                @csrf
+                <label for="nama_lengkap" class="mt-2 mb-2">nama lengkap<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="text" name="nama"
+                    <input type="text" name="nama_lengkap" id="nama_lengkap"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan username / email">
                 </div>
 
-                <label for="nim" class="mt-2 fw-5 mb-2">nomor induk mahasiswa<span class="text-danger">*</span></label>
+                <label for="nomor_induk" class="mt-2 fw-5 mb-2">nomor induk mahasiswa<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="number" name="nim"
+                    <input type="number" name="nomor_induk" id="nomor_induk"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : 2000018046">
                 </div>
 
-                <label for="prodi" class="mt-2 fw-5 mb-2">program studi/jurusan<span class="text-danger">*</span></label>
+                <label for="jurusan" class="mt-2 fw-5 mb-2">program studi/jurusan<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="text" name="prodi"
+                    <input type="text" name="jurusan" id="jurusan"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : S1 Informatika">
                 </div>
 
                 <label for="email" class="mt-2 fw-5 mb-2">e-mail<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="email" name="email"
+                    <input type="email" name="email" id="email"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : raihan@gmail.com">
                 </div>
 
                 <label for="username" class="mt-2 fw-5 mb-2">username<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="text" name="username"
+                    <input type="text" name="username" id="username"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : raihan01">
                 </div>
 
-                <label for="hp" class="mt-2 fw-5 mb-2">no hp<span class="text-danger">*</span></label>
+                <label for="no_hp" class="mt-2 fw-5 mb-2">no hp<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <input type="number" name="hp"
+                    <input type="number" name="no_hp" id="no_hp"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : 08224113722">
                 </div>
 
                 <label for="password" class="mt-2 fw-5 mb-2">password</label>
                 <div class="d-flex">
-                    <input type="password" name="password"
+                    <input type="password" name="password" id="password"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan Password">
                 </div>
