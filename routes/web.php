@@ -120,6 +120,9 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
+
+
+//user
 Route::get('/user/login', function () {
     return view('user.login', ['title' => "Login"]);
 });
@@ -151,6 +154,16 @@ Route::get('/user/barcode', function () {
         'nama' => "Syalita"
     ]);
 });
+
+
+//user
+Route::get('/pemagang/home', function () {
+    return view('pemagang.home', ['title' => "Home"]);
+});
+
+
+
+
 
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');

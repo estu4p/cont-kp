@@ -32,7 +32,7 @@
                                     <div class="email">Password<span class="red-star">*</span></div>
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-lock icon"></i></span>
-                                        <input type="text" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping">
+                                        <input type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <div class="d-flex gap-0 justify-content-between row flex-row">
