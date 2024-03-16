@@ -6,6 +6,7 @@ use App\Models\Divisi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Shift;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,17 +22,26 @@ class UserSeeder extends Seeder
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
+                'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
                 'email' => $faker->email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),
-                'role_id' => Role::inRandomOrder()->first()->id,
                 'password' => Hash::make('123456'),
-                'mitra_id' => Mitra::inRandomOrder()->first()->id,
+                'kota' => $faker->randomElement(['Kota Surabaya', 'kota Semarang']),
                 'alamat' => $faker->address,
+                'tgl_lahir' => $faker->dateTime,
                 'about' => $faker->sentence,
-                'nama_divisi' => Divisi::inRandomOrder()->first()->id
+                'os' => $faker->randomElement(['Windows', 'Mac OS', 'linux']),
+                'browser' => $faker->randomElement(['Chrome', 'Edge']),
+                'tgl_masuk' => $faker->dateTime,
+                'tgl_keluar' => $faker->dateTime,
+                'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
+                'mitra_id' => Mitra::inRandomOrder()->first()->id,
+                'role_id' => Role::inRandomOrder()->first()->id,
+                'shift_id' => Shift::inRandomOrder()->first()->id,
+                'divisi_id' => Divisi::inRandomOrder()->first()->id
             ]);
         }
     }
