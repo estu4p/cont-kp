@@ -59,15 +59,18 @@
                         placeholder="Masukkan Password">
                 </div>
 
-                <label for="password" class="mt-2 fw-5 mb-2">konfirmasi password</label>
-                <div class="d-flex">
-                    <input type="password" name="password"
+                <label for="password_confirmation" class="mt-2 fw-5 mb-2">konfirmasi password</label>
+                <div>
+                    <input type="password" name="password_confirmation"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Konfirmasi password">
+                    <small id="passwordMatchError" class="text-danger d-none mt-1">Konfirmasi password harus cocok dengan
+                        password.</small>
                 </div>
 
-                <div class="button-container text-center">
-                    <button id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button>
+                <div class="button-container text-center mt-4">
+                    {{-- <button id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
+                    <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
                 </div>
             </form>
         </div>
@@ -75,29 +78,41 @@
 
     <script>
         function checkInputs() {
-            const inputs = document.querySelectorAll(
-                'input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmPasswordInput = document.querySelector('input[name="password_confirmation"]');
+            const confirmPasswordWarning = document.getElementById('passwordMatchError');
+    
+            // Mengatur peringatan
+            if (confirmPasswordInput.value.length === passwordInput.value.length) {
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    confirmPasswordWarning.classList.remove('d-none');
+                } else {
+                    confirmPasswordWarning.classList.add('d-none');
+                }
+            } else {
+                confirmPasswordWarning.classList.add('d-none');
+            }
+    
+            // Mengatur status tombol daftar
+            const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             let allFilled = true;
-
             inputs.forEach(input => {
                 if (input.value.trim() === '') {
                     allFilled = false;
                 }
             });
-
+    
             const registerButton = document.getElementById('registerButton');
-            registerButton.disabled = !allFilled;
+            registerButton.disabled = !(allFilled && passwordInput.value.length >= 8 && confirmPasswordInput.value === passwordInput.value);
         }
-
+    
         document.addEventListener('DOMContentLoaded', function() {
             checkInputs();
-
-            const inputs = document.querySelectorAll(
-                'input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
-
+    
+            const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             inputs.forEach(input => {
                 input.addEventListener('input', checkInputs);
             });
         });
-    </script>
+    </script>   
 @endsection

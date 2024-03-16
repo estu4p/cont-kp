@@ -73,27 +73,27 @@ Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->
 
 Route::get('/login', function () {
     return view('login');
-    Route::get('/checkout/bronze', function () {
-        return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
-    });
-    Route::get('/checkout/silver', function () {
-        return view('checkout.silver', ['title' => "Checkout - Silver"]);
-    });
-    Route::get('/checkout/gold', function () {
-        return view('checkout.gold', ['title' => "Checkout - Gold"]);
-    });
-    Route::get('/checkout/platinum', function () {
-        return view('checkout.platinum', ['title' => "Checkout - Platinum"]);
-    });
-    Route::get('/after-checkout', function () {
-        return view('checkout.after-checkout', ['title' => "After Checkout"]);
-    });
-    Route::get('/invoice', function () {
-        return view('checkout.invoice', ['title' => "Invoice"]);
-    });
-    Route::get('/slip', function () {
-        return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
-    });
+});
+Route::get('/checkout/bronze', function () {
+    return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
+});
+Route::get('/checkout/silver', function () {
+    return view('checkout.silver', ['title' => "Checkout - Silver"]);
+});
+Route::get('/checkout/gold', function () {
+    return view('checkout.gold', ['title' => "Checkout - Gold"]);
+});
+Route::get('/checkout/platinum', function () {
+    return view('checkout.platinum', ['title' => "Checkout - Platinum"]);
+});
+Route::get('/after-checkout', function () {
+    return view('checkout.after-checkout', ['title' => "After Checkout"]);
+});
+Route::get('/invoice', function () {
+    return view('checkout.invoice', ['title' => "Invoice"]);
+});
+Route::get('/slip', function () {
+    return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
 Route::post('/loginpage', [LandingPageController::class, 'login']);
 
@@ -125,7 +125,10 @@ Route::get('/contributingforunivlihat', function () {
 
 //user
 Route::get('/user/login', function () {
-    return view('user.login', ['title' => "Login"]);
+    return view('user.login', [
+        'title' => "Login",
+        'email' => "raihan@gmail.com"
+    ]);
 });
 Route::get('/user/register', function () {
     return view('user.register', ['title' => "Register"]);
@@ -141,6 +144,19 @@ Route::get('/user/reset-password/new-password', function () {
 });
 Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
+});
+Route::get('/user', function () {
+    return view('user.home', [
+        'title' => "Home",
+        'nama' => "Syalita Widyandini",
+        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
+    ]);
+});
+Route::get('/user/barcode', function () {
+    return view('user.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
 });
 
 // Mitra Team Aktif
