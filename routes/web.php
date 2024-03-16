@@ -363,6 +363,8 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
+
+
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
 });
