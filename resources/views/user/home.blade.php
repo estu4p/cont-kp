@@ -11,6 +11,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
@@ -46,39 +50,63 @@
         </div>
         <div class="konten">
             <div class="shif">
-                <div class="judulshif">Shift Middle</div>
+                <div class="judulshif toggle-shift">Shift Middle</div>
                 <div style="padding-bottom: 10px">
-                    <button class="masuk">Masuk</button>
+                    <button class="masuk" id="masuk" type="button" onclick="showmodal()" data-bs-toggle="modal" data-bs-target="#exampleModal">masuk</button>
                 </div>
                 <div>
-                    <button class="istirahat">Istirahat</button>
+                    <button class="btn btn-istirahat">Izin</button>
                 </div>
             </div>
             <div class="kanan">
                 <div class="kananatas  justify-content-between">
                     <div class="cardatas d-flex flex-row ">
-                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle " style="color: #b8b8b8;"></i></div>
-                        <div class="judulmasuk d-flex flex-column "><p>Masuk</p>
-                        <div class="jammasuk my-0">---</div></div>
-                        
+                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
+                        <div class="judulmasuk d-flex flex-column ">
+                            <p>Masuk</p>
+                            <div class="toggle-muncul hilang flex-column gap-0">
+                                <p class="m-0">09:30:01 AM</p>
+                                <p class="text-danger m-0" style="font-size:50%;">-00.30.01</p>
+                            </div>
+                            <div class="jammasuk my-0 toggle-hilang">---</div>
+                        </div>
+
                     </div>
                     <div class="cardatas d-flex flex-row ">
-                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle " style="color: #b8b8b8;"></i></div>
-                        <div class="judulmasuk d-flex flex-column "><p>Istirahat</p>
-                        <div class="jammasuk my-0">---</div></div>
-                        
+                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status2 ori-aktif"></i></div>
+                        <div class="judulmasuk d-flex flex-column ">
+                            <p>Istirahat</p>
+                            <div class="toggle-muncul2 hilang flex-column gap-0">
+                                <p class="m-0">09:30:01 AM</p>
+                                <p class="text-danger m-0" style="font-size:50%;">-00.30.01</p>
+                            </div>
+                            <div class="jammasuk2 my-0">---</div>
+                        </div>
+
                     </div>
                     <div class="cardatas d-flex flex-row ">
-                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle " style="color: #b8b8b8;"></i></div>
-                        <div class="judulmasuk d-flex flex-column "><p>Kembali</p>
-                        <div class="jammasuk my-0">---</div></div>
-                        
+                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status3 ori-aktif "></i></div>
+                        <div class="judulmasuk d-flex flex-column ">
+                            <p>Kembali</p>
+                            <div class="toggle-muncul3 hilang flex-column gap-0">
+                                <p class="m-0">09:30:01 AM</p>
+                                <p class="text-danger m-0" style="font-size:50%;">-00.30.01</p>
+                            </div>
+                            <div class="jammasuk3 my-0">---</div>
+                        </div>
+
                     </div>
                     <div class="cardatas d-flex flex-row ">
-                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle " style="color: #b8b8b8;"></i></div>
-                        <div class="judulmasuk d-flex flex-column "><p>Pulang</p>
-                        <div class="jammasuk my-0">---</div></div>
-                        
+                        <div style="padding:10px 5px;"><i class="fa-solid fa-circle  bundar-status4 ori-aktif"></i></div>
+                        <div class="judulmasuk d-flex flex-column ">
+                            <p>Pulang</p>
+                            <div class="toggle-muncul4 hilang flex-column gap-0">
+                                <p class="m-0">09:30:01 AM</p>
+                                <p class="text-danger m-0" style="font-size:50%;">-00.30.01</p>
+                            </div>
+                            <div class="jammasuk4 my-0">---</div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="kananbawah">
@@ -96,7 +124,7 @@
                         </div>
                         <div class="kontenperhatian">
                             <div class="keterangan border border-danger">Kemarin anda absen pulang di kost jangan diulang!</div>
-                            <div class="kurangjam  border border-danger d-flex flex-column justify-content-center">
+                            <div class="kurangjam  bordermerah d-flex flex-column justify-content-center">
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>
                                 <div class="lihat">
@@ -109,6 +137,70 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="shift()" aria-label="Close">submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // function showKeternganModal() {
+        //     swal({
+        //         title: "Keterangan",
+        //         content: "input",
+        //         button:"ok"
+        //     });
+        //     }
+        function showmodal() {
+            $('#exampleModal').modal('show');
+        }
+
+        function shift() {
+         
+
+            const masukButton = document.querySelector("#masuk");
+            if (masukButton.innerHTML === "masuk") {
+                document.querySelector(".toggle-muncul").classList.add('muncul');
+                document.querySelector(".jammasuk").classList.add("hilang");
+                document.querySelector(".bundar-status1").classList.add("merah-aktif");
+                document.querySelector(".bundar-status1").classList.remove("ori-aktif");
+                document.querySelector(".kurangjam").classList.add("borderijo");
+                document.querySelector(".kurangjam").classList.remove("bordermerah");
+                masukButton.innerHTML = "istirahat";
+                masukButton.classList.remove("masuk");
+                masukButton.classList.add("istirahat");
+            } else if (masukButton.innerHTML === "istirahat") {
+                document.querySelector(".toggle-muncul2").classList.add('muncul');
+                document.querySelector(".jammasuk2").classList.add("hilang");
+                document.querySelector(".bundar-status2").classList.add("merah-aktif");
+                document.querySelector(".bundar-status2").classList.remove("ori-aktif");
+                masukButton.innerHTML = "kembali";
+                masukButton.classList.remove("istirahat");
+                masukButton.classList.add("kembali");
+            } else if (masukButton.innerHTML === "kembali") {
+                document.querySelector(".toggle-muncul3").classList.add('muncul');
+                document.querySelector(".jammasuk3").classList.add("hilang");
+                document.querySelector(".bundar-status3").classList.add("merah-aktif");
+                document.querySelector(".bundar-status3").classList.remove("ori-aktif");
+                masukButton.innerHTML = "pulang";
+                masukButton.classList.remove("kembali");
+                masukButton.classList.add("pulang");
+            } else if (masukButton.innerHTML === "pulang") {
+                document.querySelector(".toggle-muncul4").classList.add('muncul');
+                document.querySelector(".jammasuk4").classList.add("hilang");
+                document.querySelector(".bundar-status4").classList.add("merah-aktif");
+                document.querySelector(".bundar-status4").classList.remove("ori-aktif");
+                masukButton.innerHTML = "log activity";
+                masukButton.classList.remove("kembali");
+                masukButton.classList.add("log");
+            }
+        }
+    </script>
 </body>
+
 
 </html>
