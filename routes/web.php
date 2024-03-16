@@ -2,6 +2,7 @@
 
 use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
@@ -93,7 +94,7 @@ Route::get('/login', function () {
         return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
     });
 });
-
+Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -119,6 +120,9 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
+
+
+//user
 Route::get('/user/login', function () {
     return view('user.login', ['title' => "Login"]);
 });
@@ -138,6 +142,34 @@ Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 
+Route::get('/user/home', function () {
+    return view('user.home', ['title' => "Home"]);
+
+Route::get('/user', function () {
+    return view('user.home', [
+        'title' => "Home",
+        'nama' => "Syalita Widyandini",
+        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
+    ]);
+});
+Route::get('/user/barcode', function () {
+    return view('user.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
+
+});
+
+
+//user
+Route::get('/pemagang/home', function () {
+    return view('pemagang.home', ['title' => "Home"]);
+});
+
+
+
+
+
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
 });
@@ -147,6 +179,7 @@ Route::get('/laporandatapresensi', function () {
 Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
@@ -166,6 +199,17 @@ Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
+});
+
+Route::get('/MitraPresensiDetailHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
+});
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
 
 
@@ -229,7 +273,4 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-
 

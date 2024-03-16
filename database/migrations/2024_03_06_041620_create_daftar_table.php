@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('divisi', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_divisi');
-            $table->text('deskripsi_divisi')->nullable();
-            $table->timestamps();
+        Schema::create('daftar', function (Blueprint $table) {
+         $table->id();
+         $table->string('name');
+         $table->string('sekolah');
+         $table->string('telephone');
+         $table->string('email')->unique();
+         $table->string('password');
+         $table->timestamps();
+
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('divisi');
+        Schema::dropIfExists('daftar');
     }
 };
