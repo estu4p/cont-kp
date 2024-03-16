@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Divisi;
 use App\Models\Mitra;
 use App\Models\Presensi;
 use App\Models\User;
@@ -20,7 +21,7 @@ class PresensiSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $user = User::where('role_id', 3)->inRandomOrder()->first(); // Ambil satu pengguna secara acak dengan role ID 3
             $mitra = Mitra::inRandomOrder()->first(); // Ambil satu mitra secara acak
-
+            $divisi = Divisi::inRandomOrder()->first();
             // Periksa apakah pengguna ditemukan
             if ($user) {
                 // Periksa apakah nama pengguna sudah ada dalam presensi
@@ -40,6 +41,7 @@ class PresensiSeeder extends Seeder
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),
                         'keterangan_status' => $faker->sentence,                        'kebaikan' => $faker->sentence,
                         'mitra_id' => $mitra ? $mitra->id : null,
+                        'divisi_id' => $divisi ? $divisi->id : null,
                         'role_id' => 3,
                         'barcode' => $faker->ean13(),
                     ]);

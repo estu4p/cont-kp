@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket', function (Blueprint $table) {
-        $table->id();
-        $table->paket();
-        $table->metode_bayar();
-        $table->kota();
-        $table->timestamps();
+        Schema::create('shift', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_shift');
+            $table->string('jml_jam_kerja');
+            $table->string('jam_masuk');
+            $table->string('jam_pulang');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket');
+        Schema::dropIfExists('shift');
     }
 };

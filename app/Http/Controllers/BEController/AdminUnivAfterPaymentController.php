@@ -130,12 +130,61 @@ class AdminUnivAfterPaymentController extends Controller
     public function daftarMitraTeamAktif()
     {
         // $divisi = Divisi::all();
-        $divisi = Divisi::withCount('divisi')->get();
+        $divisi = Divisi::withCount('mahasiswa')->get();
+        // $jml_mahasiswa = User::where('role_id', 3)->orderBy('nama_divisi', 'asc')->get();
+        // $divisi = Divisi::withCount('divisi')->get();
 
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
     public function daftarMitraPengaturanDivisi()
     {
-        return response()->json(['message' => 'Pengaturan Divisi']);
+        $divisi = Divisi::all();
+        return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+    }
+
+    public function addDivisi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_divisi' => 'required',
+            'deskripsi_divisi' => '',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $data = new Divisi([
+            'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan nama yang benar dari permintaan
+        ]);
+
+        $data->save();
+
+        return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+    }
+    public function updateDivisi(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_divisi' => 'required',
+            'deskripsi_divisi' => '',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'gagal update divisi',], 404);
+        }
+        $data = Divisi::find($id);
+        $data->fill([
+            'nama_divisi' => $request->nama_divisi
+        ]);
+        $data->save();
+        return response()->json(['success' => true, 'message' => 'succes to update divisi', 'data' => $data], 200);
+    }
+    public function destroyDivisi($id)
+    {
+        $data = Divisi::find($id);
+        if ($data) {
+            $data->delete();
+            return response()->json(['success' => true, 'message' => 'Succes to delete divisi'], 200);
+        } else {
+            return response()->json(['success' => false, 'message' => 'fail to delete'], 404);
+        }
     }
 }
