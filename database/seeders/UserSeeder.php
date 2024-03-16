@@ -17,21 +17,31 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
+        $kota = User::first()->kota;
         for ($i = 0; $i < 100; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
+                'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
                 'email' => $faker->email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),
-                'role_id' => Role::inRandomOrder()->first()->id,
                 'password' => Hash::make('123456'),
-                'mitra_id' => Mitra::inRandomOrder()->first()->id,
+                'kota' => $kota,
                 'alamat' => $faker->address,
+                'tgl_lahir' => $faker->dateTime,
                 'about' => $faker->sentence,
-                'nama_divisi' => Divisi::inRandomOrder()->first()->id
+                'os' => $faker->randomElement(['Windows', 'Mac OS', 'linux']),
+                'browser' => $faker->randomElement(['Chrome', 'Edge']),
+                'tgl_masuk' => $faker->dateTime,
+                'tgl_keluar' => $faker->dateTime,
+                'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
+                'mitra_id' => Mitra::inRandomOrder()->first()->id,
+                'role_id' => Role::inRandomOrder()->first()->id,
+                'shift_id' => Role::inRandomOrder()->first()->id,
+                'divisi_id' => Divisi::inRandomOrder()->first()->id
             ]);
         }
     }
