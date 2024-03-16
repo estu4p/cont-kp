@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\BEController;
 
+use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class HomeMitraController extends Controller
@@ -142,20 +144,43 @@ class HomeMitraController extends Controller
     public function catatIzin(Request $request)
     {
         $request->validate([
-            'keterangan_status' => 'required|string',
+            'id' => 'required|exists:presensi,id',
+            'status_kehadiran' => 'required|in:Hadir,Izin,Sakit,Tidak Hadir',
         ]);
 
-        $user = Auth::user();
-        $keterangan_status = $request->keterangan_status; 
-
-        $absensi = new Presensi();
-        $absensi->nama_lengkap = $user->id;
-        $absensi->izin = true; 
-        $absensi->keterangan_status = $keterangan_status;
-        $absensi->status_kehadiran = 'Izin';
-        $absensi->save(); 
-
-        return response()->json(['message' => 'Izin magang tidak hadir berhasil dicatat'], 200);
+        $status_kehadiran = $request->status_kehadiran;
+        $id = $request->id;
+        $absensi = Presensi::find($request->id);
+        if ($absensi) {
+            $absensi->status_kehadiran = $status_kehadiran;
+            $absensi->save();
+            return response()->json(['message' => 'Izin magang berhasil dicatat'], 200);
+        } else {
+            return response()->json(['message' => 'Data presensi tidak ditemukan'], 404);
+        }
     }
+
+    public function barcode(Request $request)
+    {
+        return view('barcode');
+     
+        $request->validate([
+            'barcode' => 'required|string|max:255',
+        ]);
+
+        $user = User::where('barcode', $request->barcode)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Barcode tidak valid'], 404);
+        }
+        $presensi = new Presensi();
+        $presensi->nama_lengkap = $user->id;
+        $presensi->jam_masuk = Carbon::now();
+        $presensi->status_kehadiran = 'Hadir'; 
+        $presensi->save();
+
+        return response()->json(['message' => 'Presensi berhasil dicatat'], 200);
+    }
+
 
 }
