@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
 
@@ -23,7 +22,6 @@ class RegisterController extends Controller
         $email = $request->input('email');
         $username = $request->input('username');
         $no_hp = $request->input('no_hp');
-        $role = $request->input('role');
         $barcode = $request->input('barcode');
         $password = $request->input('password');
 
@@ -35,7 +33,6 @@ class RegisterController extends Controller
         $user->email = $email;
         $user->username = $username;
         $user->no_hp = $no_hp;
-        $user->role = $role;
         $user->barcode = $barcode;
         $user->password = $password;
 

@@ -9,7 +9,6 @@ use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 
@@ -272,8 +271,7 @@ Route::get('/user/home', function () {
         return view('pengaturan.kategoripenilaian');
     });
 });
-<<<<<<< HEAD
-});
+
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
         'title' => "Barcode Pemagang",
@@ -395,5 +393,3 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
-=======
->>>>>>> e213fcc16aed760eafd6269b239483387c9f0557
