@@ -21,23 +21,27 @@ class LandingPageController extends Controller
 
     public function lpdaftar(Request $request)
     {
-        $data= new Sekolah([
-            'nama_lengkap' => $request->input ('nama_lengkap'),
-            'sekolah' => $request->input ('sekolah'),
-            'no_hp' => $request->input ('no_hp'),
-            'email' => $request->input ('email'),
-            'password' =>$request->input ('password')
-            ]);
+        $data = new Sekolah([
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'sekolah' => $request->input('sekolah'),
+            'no_hp' => $request->input('no_hp'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        ]);
 
-        $user= new Sekolah();
-        $user->nama_lengkap= $data['nama_lengkap'];
-        $user->sekolah= $data['sekolah'];
-        $user->no_hp=$data['no_hp'];
-        $user->email=$data['email'];
-        $user->password=Hash::make ($data['password']);
+        $user = new Sekolah();
+        $user->nama_lengkap = $data['nama_lengkap'];
+        $user->sekolah = $data['sekolah'];
+        $user->no_hp = $data['no_hp'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
         $user->save();
 
-            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+        return response()->json(['pesan' => 'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+    }
+    public function index()
+    {
+        return view("landing-page.login");
     }
     public function index()
     {
@@ -55,8 +59,8 @@ class LandingPageController extends Controller
         $useremail = Sekolah::where('email', $email)->first();
         // dd(Hash::make($pass));
         // $userpass = Daftar::where('password', $pass)->first();
-        if (!$useremail && Hash::check( $pass, $useremail->password)) {
-             return back()->withErrors(['email' => 'Email atau password salah']);
+        if (!$useremail && Hash::check($pass, $useremail->password)) {
+            return back()->withErrors(['email' => 'Email atau password salah']);
         }
         auth()->login($useremail);
 
@@ -70,9 +74,9 @@ class LandingPageController extends Controller
     public function ChekoutPaket(Request $request)
     {
         $request->validate([
-            'paket'=> 'required|in:Bronze,Silver,Gold,Premium',
+            'paket' => 'required|in:Bronze,Silver,Gold,Premium',
             'metode_bayar' => 'required|string',
-            'kota'=> 'required|string'
+            'kota' => 'required|string'
         ]);
 
         $transaksi = new paket([
@@ -82,10 +86,11 @@ class LandingPageController extends Controller
         ]);
 
         $transaksi->save();
-            return response()->json(['message' => 'Checkout berhasil',
-                'Jenis Paket' => $request->paket,
-                'Metode Bayar' => $request->metode_bayar,
-                'Kota' => $request->kota,
-            ]);
+        return response()->json([
+            'message' => 'Checkout berhasil',
+            'Jenis Paket' => $request->paket,
+            'Metode Bayar' => $request->metode_bayar,
+            'Kota' => $request->kota,
+        ]);
     }
 }

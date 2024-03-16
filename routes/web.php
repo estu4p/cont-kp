@@ -65,6 +65,7 @@ Route::get('/register', function () {
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+Route::post("/loginpage", [LandingPageController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
