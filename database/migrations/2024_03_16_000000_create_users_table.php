@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_lengkap');
             $table->integer('nomor_induk')->nullable();
-            $table->string('sekolah')->nullable();
             $table->string('jurusan')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique();;
@@ -32,6 +31,7 @@ return new class extends Migration
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('sekolah')->nullable();
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('divisi_id')->nullable();
@@ -41,6 +41,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            $table->foreign('sekolah')->references('id')->on('sekolah')->onDelete('SET NULL');
             $table->foreign('role_id')->references('id')->on('role')->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
             $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('SET NULL');

@@ -6,6 +6,7 @@ use App\Models\Divisi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Sekolah;
 use App\Models\Shift;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,6 @@ class UserSeeder extends Seeder
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
-                'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
                 'email' => $faker->email,
                 'username' => $faker->userName,
@@ -38,6 +38,7 @@ class UserSeeder extends Seeder
                 'tgl_masuk' => $faker->dateTime,
                 'tgl_keluar' => $faker->dateTime,
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
+                'sekolah' => Sekolah::inRandomOrder()->first()->id,
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
                 'role_id' => Role::inRandomOrder()->first()->id,
                 'shift_id' => Shift::inRandomOrder()->first()->id,
