@@ -10,6 +10,7 @@ use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Penilaian;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -185,6 +186,12 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
+    public function showKategoriPenilaian()
+    {
+        $data = Penilaian::with('kategori')->get();
+        return response()->json(['success' => true, 'nilai' => $data], 200);
+        // $kategori = SubKategoriPenilaian::where('kategori_id', '!=', null)->get();
+    }
     public function addKategoriPenilaian(Request $request)
     {
         $validator = Validator::make($request->all(), [
