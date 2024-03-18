@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckout" aria-hidden="true">
+{{-- <div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckout" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-transparent">
             <div class="my-5 d-flex flex-column justify-content-center">
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="box-reset">
@@ -30,7 +30,7 @@
         <div class="button-container text-center">
             <div class="mt-5 d-flex gap-3">
                 <a href="/user/login" class="btn btn-outline-primary fw-semibold text-decoration-none" style="padding: 10px; width: 50%;">Batal</a>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#modalCheckout" class="btn btn-outline-primary fw-semibold text-decoration-none" style="padding: 10px; width: 50%;">Yakin</button>
+                <button type="submit" onclick="location.href='{{ url('user/login') }}'" data-bs-toggle="modal"  class="btn btn-outline-primary fw-semibold text-decoration-none" style="padding: 10px; width: 50%;">Yakin</button>
                 {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
             </div>
         </div>  

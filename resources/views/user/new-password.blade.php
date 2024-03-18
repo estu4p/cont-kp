@@ -10,13 +10,15 @@
         </a>
         <h2 class="fw-bold text-capitalize" style="color: #A61C1CE5">buat password baru</h2>
         <p>Buat password baru untuk akunmu</p>
-        <form>
+        <form method="POST" action="{{ route('password.new') }}">
+            @csrf
             <input type="password" name="password" id="password" placeholder="Password baru" oninput="validatePassword()">
-            <input type="password" name="konfirm" id="konfirm" placeholder="Konfirmasi Password baru" style="margin-top: 0; margin-bottom: 0;" oninput="validatePassword()">
+            <input type="password" name="password_confirmation" id="konfirm" placeholder="Konfirmasi Password baru" style="margin-top: 0; margin-bottom: 0;" oninput="validatePassword()">
             <small id="passwordMatchError" class="text-danger" style="display: none;">Password dan konfirmasi password harus sama!</small>
             <div class="button-container text-center">
                 <div class="my-5">
-                    <a href="/user/reset-password/confirm" id="change" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 60px; pointer-events: none; opacity: 0.5;">Reset Password</a>
+                    {{-- <a href="/user/reset-password/confirm" id="change" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 60px; pointer-events: none; opacity: 0.5;">Reset Password</a> --}}
+                    <button id="change" type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 60px; pointer-events: none; opacity: 0.5;">Reset Password</button>
                     {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
                 </div>
             </div>  

@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register');
+        return view('user.register');
     }
 
     public function register(Request $request)
@@ -38,6 +38,7 @@ class RegisterController extends Controller
 
         $user->save();
 
-        return redirect()->route('login')->with('success', 'User registered successfully!');
+        // return redirect()->route('user.login')->with('success', 'User registered successfully!');
+        return view('user.login', ['title' => "Login"]);
     }
 }
