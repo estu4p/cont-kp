@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ShiftSeeder::class,
             PaketSeeder::class,
             ProjectSeeder::class,
+            SekolahSeeder::class,
             UserSeeder::class,
             PresensiSeeder::class,
             KategoriPenilaian::class,

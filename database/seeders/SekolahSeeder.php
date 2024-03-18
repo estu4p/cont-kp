@@ -14,13 +14,13 @@ class SekolahSeeder extends Seeder
      */
     public function run(): void
     {
-        $sekolah = ['Pengetahuan', 'Kreativitas', 'Kedisiplinan', 'Kejujuran', 'Kerja Sama'];
+        $sekolah = ['SMA 3', 'UGM', 'UNY', 'UNNES', 'UNDIP'];
         for ($i = 0; $i < 5; $i++) {
             Sekolah::create([
-                'nama' => 'Nama Sekolah',
+                'nama_lengkap' => 'Nama Penanggung Jawab Sekolah',
                 'sekolah' => $sekolah[$i],
                 'email' => 'email.sekolah@gmail.com',
-                'no_hp' => 07669865,
+                'no_hp' => '07669865',
                 'password' => Hash::make('123456'),
             ]);
         }
