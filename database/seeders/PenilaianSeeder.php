@@ -16,7 +16,7 @@ class PenilaianSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Penilaian::create([
                 'nama_lengkap' => User::inRandomOrder()->first()->id,
                 'sub_id' => SubKategoriPenilaian::inRandomOrder()->first()->id,
