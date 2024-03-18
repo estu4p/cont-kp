@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('sekolah')->nullable();
             $table->string('email')->nullable();
-            $table->bigInteger('no_hp')->nullable();
+            $table->string('no_hp')->nullable();
             $table->string('password')->nullable();
             $table->timestamps();
         });
