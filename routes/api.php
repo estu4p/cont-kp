@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/daftar', [LandingPageController::class, 'lpdaftar'])->name('daftar');
+Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
 Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
