@@ -27,11 +27,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/resetpw', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-Route::post('/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
-Route::post('/new', [ResetPasswordController::class, 'newPassword'])->name('password.new');
+Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
+Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,7 @@ class ResetPasswordController extends Controller
 {
     public function index()
     {
-        return view("landing-page.resetPassword")->with("title", "reset password");
+        return view('user.reset');
     }
 
     public function resetPassword(Request $request)
@@ -30,13 +31,13 @@ class ResetPasswordController extends Controller
         $otp = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
         Session::put('otp_', $otp);
         Session::put('reset_password', $request->email);
-        // Kirim OTP ke email pengguna
+
         try {
             Mail::to($request->email)->send(new SendEmail($otp));
+            return redirect()->to('/user/reset-password/otp');
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to send OTP email. Please try again later.'], 500);
+            Log::error($e->getMessage());
         }
-        return view('otp', ['email' => $request->email, 'otp' => $otp]);
     }
 
     public function verifyOTP(Request $request)
@@ -65,17 +66,17 @@ class ResetPasswordController extends Controller
                 return response()->json([
                     'error' => ' Invalid OTP'
                 ], 400);
-
             }
 
             // Hapus OTP dari session setelah diverifikasi
             $request->session()->forget('otp_' . $request->email);
-            return view('newpw', ['email' => $request->email]);
-        } 
+        }
+        return redirect()->to('/user/reset-password/new-password');
     }
-
+    
     public function newPassword(Request $request)
     {
+        // dd($request->session);
         $request->validate([
             'password' => 'required|string|min:5|confirmed',
         ]);
@@ -87,10 +88,12 @@ class ResetPasswordController extends Controller
                 'message' => 'Pengguna dengan email ini tidak ditemukan.'
             ]);
         }
-
+        
         $user->update(['password' => Hash::make($request->password)]);
         // Bersihkan session reset_email setelah pengguna berhasil mengubah kata sandi
         $request->session()->forget('reset_password');
-        return redirect()->route('login')->with('success', 'Password has been reset successfully. Please login with your new password.');
+        // return redirect()->route('user.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
+        // return redirect()->to('user/login');
+        return redirect()->to('/user/reset-password/confirm');
     }
 }
