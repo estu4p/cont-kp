@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <button class="Cancel">Cancel</button>
+                <a href="/contributorformitra-dashboard"><button class="Cancel">Cancel</button></a>
                 <button class="Update" onclick="showSuccessModal()">Update</button>
             </div>
         </div>
@@ -71,12 +71,15 @@
 <script>
 
 function showSuccessModal() {
-            swal({
-                title: "Berhasil!",
-                text: "Perubahan berhasil disimpan",
-                icon: "success",
-            });
-        }
+    swal({
+        title: "Berhasil!",
+        text: "Perubahan berhasil disimpan",
+        icon: "success",
+    }).then((result) => {
+
+        window.location.href = "/contributorformitra-dashboard";
+    });
+}
   </script>
 @endsection
 

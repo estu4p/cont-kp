@@ -235,11 +235,14 @@ Route::get('/kategoripenilaian', function () {
 
 
 
-Route::get('/mitra-dashboard', function () {
+Route::get('/contributorformitra-dashboard', function () {
     return view('contributorformitra.dashboard');
 });
-Route::get('/mitra-editprofile', function () {
+Route::get('/contributorformitra-editprofile', function () {
     return view('contributorformitra.editprofile');
+});
+Route::get('/contributorformitra-devisi', function () {
+    return view('contributorformitra.devisi');
 });
 
 

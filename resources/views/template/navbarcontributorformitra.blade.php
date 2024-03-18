@@ -13,7 +13,7 @@
                     <span class="profile-name">Mitra</span>
                 </div>
                 <div class="navbar-logo">
-                    <a href="/mitra-editprofile"><img src="assets/images/user2.png" alt="Profile Logo"></a>
+                    <a href="/contributorformitra-editprofile"><img src="assets/images/user2.png" alt="Profile Logo"></a>
                 </div>
             </div>
 
