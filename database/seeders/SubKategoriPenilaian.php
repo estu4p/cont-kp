@@ -15,9 +15,9 @@ class SubKategoriPenilaian extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             ModelsSubKategoriPenilaian::create([
-                'kategori_id' => KategoriPenilaian::inRandomOrder('id')->first()->id,
+                'kategori_id' => KategoriPenilaian::inRandomOrder()->first()->id,
                 'nama_sub_kategori' => $faker->randomElement(['Desain Thinking', 'Pemahaman Penerapan Desain']),
             ]);
         }
