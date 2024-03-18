@@ -10,24 +10,26 @@
         </a>
         <h2 class="fw-bold text-capitalize" style="color: #A61C1CE5">verifikasi code</h2>
         <p class="w-75 mx-auto fw-semibold mt-4 fs-6 mb-5">Masukan 4 digit kode OTP yang dikirimkan melalui E-Mail</p>
-        <form action="">
+        <form method="POST" action="{{ route('otp.verify') }}">
+            @csrf
             <div class="d-flex justify-content-center">
                 <!-- OTP Input 1 -->
-                <input type="text" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
+                <input type="text" name="digit1" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
                     id="otp1" oninput="moveToNext(this); validateOTP()" />
                 <!-- OTP Input 2 -->
-                <input type="text" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
+                <input type="text" name="digit2" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
                     id="otp2" oninput="moveToNext(this); validateOTP()" />
                 <!-- OTP Input 3 -->
-                <input type="text" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
+                <input type="text" name="digit3" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
                     id="otp3" oninput="moveToNext(this); validateOTP()" />
                 <!-- OTP Input 4 -->
-                <input type="text" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
+                <input type="text" name="digit4" maxlength="1" class="form-control text-center shadow-sm" style="width: 3.2rem; height: 3.2rem; margin: 0 12px; text-align: center; font-size: 1.2rem; background-color: #eceff2; border: 0;"
                     id="otp4" oninput="validateOTP()" />
             </div>
             <div class="button-container text-center">
                 <div class="mt-5">
-                    <a href="/user/reset-password/new-password" id="kirim-otp" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim OTP</a>
+                    {{-- <a href="/user/reset-password/new-password" id="kirim-otp" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim OTP</a> --}}
+                    <button  id="kirim-otp" type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim OTP</button>
                     <p class="mt-5 fw-medium" style="margin-bottom: -20px;">Belum menerima email? <a href="/user/reset-password"
                         class="text-decoration-none" style="color: #A61C1CE5;">Kirim ulang</a></p>
                     {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}

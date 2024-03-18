@@ -27,11 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
-Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
-Route::post('register', [RegisterController::class, 'register'])->name('register');
-Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
-Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
+Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
+Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
 Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
@@ -40,6 +40,9 @@ Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstiraha
 Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat']);
 Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
+Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
+Route::post('/barcode', [HomeMitraController::class, 'barcode']);
+Route::get('/detailGantiJam', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);

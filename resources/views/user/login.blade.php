@@ -17,7 +17,8 @@
                 <h5 class="heading-login1">Hi Welcome Back</h5>
                 <h5 class="subhead">Log in to continue</h5>
             </div>
-            <form class="content-form">
+            <form class="content-form" action="{{ route('user.login') }}" method="POST">
+                @csrf
                 <label for="email" class="label-form">Username/Email</label>
                 <div class="d-flex">
                     <input type="email" name="email"
@@ -42,7 +43,7 @@
                 </div>
 
                 <div class="button-container text-center">
-                    <button class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
+                    <button type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
                     <p style="margin-bottom: -20px; font-size: 12px">Belum punya akun? <a href="/user/register"
                             class="text-decoration-none" style="color: #A61C1CE5;">Daftar</a></p>
                 </div>
