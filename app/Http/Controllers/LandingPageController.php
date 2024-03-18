@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class LandingPageController extends Controller
 {
 
+    
     public function lpdaftar(Request $request)
     {
         $data= new User([
@@ -25,37 +26,17 @@ class LandingPageController extends Controller
             'no_hp' => $request->input ('no_hp'),
             'email' => $request->input ('email'),
             'password' =>$request->input ('password')
+            ]);
 
-            // 'nama_lengkap' => 'required|string|max:100',
-            // 'sekolah' => 'required|string',
-            // 'no_hp' => 'required|regex:/^\d+$/',
-            // 'email' => 'email|required|unique:daftar',
-            // 'password' => 'min:8|required'
-        ]);
-        // $user= new User();
-        // $user->nama_lengkap= $data['nama_lengkap'];
-        // $user->sekolah= $data['sekolah'];
-        // $user->no_hp=$data['no_hp'];
-        // $user->email=$data['email'];
-        // $user->password=Hash::make ($data['password']);
-        $data->save();
+        $user= new User();
+        $user->nama_lengkap= $data['nama_lengkap'];
+        $user->sekolah= $data['sekolah'];
+        $user->no_hp=$data['no_hp'];
+        $user->email=$data['email'];
+        $user->password=Hash::make ($data['password']);
+        $user->save();
 
-            // $data = User::create([
-            //     'nama_lengkap' => $request->nama_lengkap,
-            //     'sekolah' => $request->sekolah,
-            //     'no_hp' => $request->no_hp,
-            //     'email' => $request->email,
-            //     'password' => Hash::make($request->password),
-            // ]);
-            // dd($user);
-
-            // $login= [
-            //     'email' => $request->email,
-            //     'password' =>$request->password,
-            // ];
-
-
-            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $data]);
+            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
     }
     public function index()
     {
