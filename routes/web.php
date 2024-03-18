@@ -253,3 +253,39 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+Route::get('/super-admin', function () {
+    return view('super-admin.dashboard', [
+        'title' => "Super Admin - Dashboard",
+        'subscription' => 300,
+        'admin_sistem' => 200
+    ]);
+});
+Route::get('/super-admin/ubah-profil', function () {
+    return view('super-admin.edit', [
+        'title' => "Super Admin - Ubah Profil",
+        'nama' => "Jay Antonio",
+        'email' => 'antoniojay@gmail.com',
+        'hp' => "081326273187",
+        'alamat' => "Jateng",
+        'about' => "Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data"
+    ]);
+});
+Route::get('/super-admin/data-admin', function () {
+    // $admins = App\Models\Admin::paginate(4);
+    $admins = [
+        ['id' => 1, 'nama' => 'Joy', 'lokasi' => 'Yogyakarta'],
+        ['id' => 2, 'nama' => 'Vior', 'lokasi' => 'Jawa Tengah'],
+        ['id' => 3, 'nama' => 'Ilham', 'lokasi' => 'Yogyakarta'],
+        ['id' => 4, 'nama' => 'Blue', 'lokasi' => 'Jawa Tengah'],
+        ['id' => 5, 'nama' => 'Green', 'lokasi' => 'Yogyakarta'],
+        ['id' => 6, 'nama' => 'Black', 'lokasi' => 'Jawa Tengah'],
+        ['id' => 7, 'nama' => 'Purple', 'lokasi' => 'Yogyakarta'],
+        ['id' => 8, 'nama' => 'Emerald', 'lokasi' => 'Jawa Tengah'],
+        ['id' => 9, 'nama' => 'Sage', 'lokasi' => 'Yogyakarta'],
+        ['id' => 10, 'nama' => 'Sky', 'lokasi' => 'Jawa Tengah'],
+    ];
+    return view('super-admin.data-admin', [
+        'title' => "Data Admin",
+        'admins' => $admins,
+    ]);
+});
