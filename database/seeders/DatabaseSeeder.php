@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\PaketSeeder;
 use Database\Seeders\DivisiSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,8 +18,15 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             DivisiSeeder::class,
             MitraSeeder::class,
+            ShiftSeeder::class,
+            PaketSeeder::class,
+            ProjectSeeder::class,
+            SekolahSeeder::class,
             UserSeeder::class,
-            PresensiSeeder::class
+            PresensiSeeder::class,
+            KategoriPenilaian::class,
+            SubKategoriPenilaian::class,
+            PenilaianSeeder::class,
         ]);
     }
 }

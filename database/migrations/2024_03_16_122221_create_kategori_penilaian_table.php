@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket', function (Blueprint $table) {
+        Schema::create('kategori_penilaian', function (Blueprint $table) {
             $table->id();
-            $table->paket();
-            $table->metodeBayar();
-            $table->kota();
+            $table->unsignedBigInteger('divisi_id');
+            $table->string('nama_kategori');
             $table->timestamps();
+
+            $table->foreign('divisi_id')->references('id')->on('divisi');
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket');
+        Schema::dropIfExists('kateogri_penilaian');
     }
 };

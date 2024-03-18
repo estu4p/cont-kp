@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\BEController;
 
+use App\Models\KategoriPenilaian;
+use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Penilaian;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -101,12 +104,11 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function adminUnivPresensi($id)
+    public function adminUnivPresensi()
     {
         try {
-            $mitra = Mitra::findOrFail($id);
-            $presensi = Presensi::where('mitra_id', $id)->get();
-            return response()->json(['mitra' => $mitra, 'presensi' => $presensi,]);
+            $presensi = Presensi::all();
+            return response()->json(['presensi' => $presensi]);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'data not found', 'data' => null], 404);
         }
@@ -127,15 +129,12 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif()
+    public function daftarMitraTeamAktif() // daftarMitra-teamAktif
     {
-        // $divisi = Divisi::all();
         $divisi = Divisi::withCount('mahasiswa')->get();
-        // $jml_mahasiswa = User::where('role_id', 3)->orderBy('nama_divisi', 'asc')->get();
-        // $divisi = Divisi::withCount('divisi')->get();
-
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
+
     public function daftarMitraPengaturanDivisi()
     {
         $divisi = Divisi::all();
@@ -184,7 +183,69 @@ class AdminUnivAfterPaymentController extends Controller
             $data->delete();
             return response()->json(['success' => true, 'message' => 'Succes to delete divisi'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'fail to delete'], 404);
+            return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
+    }
+
+    public function showKategoriPenilaian()
+    {
+        $kategori = KategoriPenilaian::with('kategori')->get();
+        return response()->json(['success' => true, 'nilai' => $kategori], 200);
+    }
+    public function addKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'divisi_id' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add kategori penilaian',], 400);
+        }
+        $data = new KategoriPenilaian([
+            'divisi_id' => $request->input('divisi_id'),
+            'nama_kategori' => $request->input('nama_kategori')
+        ]);
+        $data->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success to add data'
+        ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kategori_id' => 'required',
+            'nama_sub_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add Sub Kategori',], 400);
+        }
+
+        $data = new SubKategoriPenilaian([
+            'kategori_id' => $request->input('kategori_id'),
+            'nama_sub_kategori' => $request->input('nama_sub_kategori')
+        ]);
+
+        $data->save();
+
+        return response()->json([
+            'message' => 'success to add Sub Kategori'
+        ]);
+    }
+
+    public function teamAktifKlik($id)
+    {
+        $divisi = Divisi::with('anggotaDivisi')->find($id);
+
+        if (!$divisi) {
+            return response()->json(['message' => 'Divisi not found'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Success to get detail data divisi with mahasiswa',
+            'data' => $divisi
+        ]);
     }
 }

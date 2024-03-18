@@ -20,7 +20,6 @@ class MitraSeeder extends Seeder
             Mitra::create([
                 'nama_mitra' => $faker->company,
                 'deskripsi_mitra' => $faker->sentence,
-                'divisi_mitra' => Divisi::inRandomOrder()->first()->id,
             ]);
         }
     }
