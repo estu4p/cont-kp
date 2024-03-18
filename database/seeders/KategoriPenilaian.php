@@ -14,11 +14,11 @@ class KategoriPenilaian extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 10; $i++) {
+        $kategori = ['Pengetahuan', 'Kreativitas', 'Kedisiplinan', 'Kejujuran', 'Kerja Sama'];
+        for ($i = 0; $i < 5; $i++) {
             ModelsKategoriPenilaian::create([
                 'divisi_id' => Divisi::inRandomOrder()->first()->id,
-                'nama_kategori' => $faker->randomElement(['Pengetahuan', 'Kreativitas']),
+                'nama_kategori' => $kategori[$i],
             ]);
         }
     }

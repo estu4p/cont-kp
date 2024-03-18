@@ -188,9 +188,8 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function showKategoriPenilaian()
     {
-        $data = Penilaian::with('kategori')->get();
-        return response()->json(['success' => true, 'nilai' => $data], 200);
-        // $kategori = SubKategoriPenilaian::where('kategori_id', '!=', null)->get();
+        $kategori = KategoriPenilaian::with('kategori')->get();
+        return response()->json(['success' => true, 'nilai' => $kategori], 200);
     }
     public function addKategoriPenilaian(Request $request)
     {
