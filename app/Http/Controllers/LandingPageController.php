@@ -52,7 +52,7 @@ class LandingPageController extends Controller
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        $useremail = User::where('email', $email)->first();
+        $useremail = Sekolah::where('email', $email)->first();
         // dd(Hash::make($pass));
         // $userpass = Daftar::where('password', $pass)->first();
         if (!$useremail && Hash::check( $pass, $useremail->password)) {
