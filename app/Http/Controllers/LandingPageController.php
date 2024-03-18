@@ -19,7 +19,7 @@ class LandingPageController extends Controller
 
     public function lpdaftar(Request $request)
     {
-        $data=([
+        $data= new User([
             'nama_lengkap' => $request->input ('nama_lengkap'),
             'sekolah' => $request->input ('sekolah'),
             'no_hp' => $request->input ('no_hp'),
@@ -32,13 +32,13 @@ class LandingPageController extends Controller
             // 'email' => 'email|required|unique:daftar',
             // 'password' => 'min:8|required'
         ]);
-        $user= new User();
-        $user->nama_lengkap= $data['nama_lengkap'];
-        $user->sekolah= $data['sekolah'];
-        $user->no_hp=$data['no_hp'];
-        $user->email=$data['email'];
-        $user->password=Hash::make ($data['password']);
-        $user->save();
+        // $user= new User();
+        // $user->nama_lengkap= $data['nama_lengkap'];
+        // $user->sekolah= $data['sekolah'];
+        // $user->no_hp=$data['no_hp'];
+        // $user->email=$data['email'];
+        // $user->password=Hash::make ($data['password']);
+        $data->save();
 
             // $data = User::create([
             //     'nama_lengkap' => $request->nama_lengkap,
@@ -55,7 +55,7 @@ class LandingPageController extends Controller
             // ];
 
 
-            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $data]);
     }
     public function index()
     {
