@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
             $table->string('nama_paket');
-            $table->enum('metode bayar', ['BNI', 'Dana'])->default('BNI');
+            $table->enum('metode_bayar', ['BNI', 'Dana'])->default('BNI');
             $table->timestamps();
             // kota ambil dari users ya
         });
