@@ -19,29 +19,43 @@ class LandingPageController extends Controller
 
     public function lpdaftar(Request $request)
     {
-        $request->validate([
-            'fullname' => 'required|string|max:100',
-            'sekolah' => 'required|string',
-            'email' => 'email|required|unique:daftar',
-            'telephone' => 'required|regex:/^\d+$/',
-            'password' => 'min:8|required'
+        $data=([
+            'nama_lengkap' => $request->input ('nama_lengkap'),
+            'sekolah' => $request->input ('sekolah'),
+            'no_hp' => $request->input ('no_hp'),
+            'email' => $request->input ('email'),
+            'password' =>$request->input ('password')
+
+            // 'nama_lengkap' => 'required|string|max:100',
+            // 'sekolah' => 'required|string',
+            // 'no_hp' => 'required|regex:/^\d+$/',
+            // 'email' => 'email|required|unique:daftar',
+            // 'password' => 'min:8|required'
         ]);
+        $user= new User();
+        $user->nama_lengkap= $data['nama_lengkap'];
+        $user->sekolah= $data['sekolah'];
+        $user->no_hp=$data['no_hp'];
+        $user->email=$data['email'];
+        $user->password=Hash::make ($data['password']);
+        $user->save();
 
-            $data = Daftar::create([
-                'name' => $request->fullname,
-                'sekolah' => $request->sekolah,
-                'email' => $request->email,
-                'telephone' => $request->telephone,
-                'password' => Hash::make($request->password),
-            ]);
+            // $data = User::create([
+            //     'nama_lengkap' => $request->nama_lengkap,
+            //     'sekolah' => $request->sekolah,
+            //     'no_hp' => $request->no_hp,
+            //     'email' => $request->email,
+            //     'password' => Hash::make($request->password),
+            // ]);
+            // dd($user);
 
-            $login= [
-                'email' => $request->email,
-                'password' =>$request->password,
-            ];
+            // $login= [
+            //     'email' => $request->email,
+            //     'password' =>$request->password,
+            // ];
 
 
-            return response()->json(['data' => $data,'login'=> $login]);
+            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
     }
     public function index()
     {
@@ -56,45 +70,20 @@ class LandingPageController extends Controller
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        $useremail = Daftar::where('email', $email)->first();
+        $useremail = User::where('email', $email)->first();
+        // dd(Hash::make($pass));
         // $userpass = Daftar::where('password', $pass)->first();
-        if ($useremail|| Hash::check( $pass, $useremail->password)) {
-            return back()->withErrors(['email' => 'Email atau password salah']);
+        if (!$useremail && Hash::check( $pass, $useremail->password)) {
+             return back()->withErrors(['email' => 'Email atau password salah']);
         }
         auth()->login($useremail);
 
         // Redirect ke halaman yang sesuai
-        return redirect()->intended('/dashboard');
-        // if ($useremail) {
-        //     // Verifikasi password
-        //     if ($useremail->password == $pass) {
-        //         // Login berhasil
-        //         return response($useremail);
-        //     } else {
-        //         // Password salah
-        //         return response([
-        //             'status' => false,
-        //             'pesan' => 'email atau password yang dimasukkan salah'
-        //         ]);
-        //     }
-        //     } else {
-        //     // Jika data tidak ditemukan/ belum melakukan pendaftaran
-        //     return response([
-        //         'status' => false,
-        //         'pesan' => 'Data tidak ditemukan'
-        //     ]);
-        // }
-
-        // if ($useremail && $userpass) {
-        //     // Login berhasil
-        //     return response($useremail);
-        // } else {
-        //     //Jika data tidak ditemukan/ belum melakukan pendaftaran
-        //     return response([
-        //         'status' => false,
-        //         'pesan' => 'data tidak ditemukan'
-        //     ]);
-        // }
+        // return redirect()->intended('/dashboard');
+        return response()->json([
+            'pesan' => 'Anda Berhasil login',
+            'data' => $useremail
+        ]);
     }
     public function ChekoutPaket(Request $request)
     {
