@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\login;
 use App\Models\paket;
 use App\Models\Daftar;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,10 +18,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class LandingPageController extends Controller
 {
 
-    
+
     public function lpdaftar(Request $request)
     {
-        $data= new User([
+        $data= new Sekolah([
             'nama_lengkap' => $request->input ('nama_lengkap'),
             'sekolah' => $request->input ('sekolah'),
             'no_hp' => $request->input ('no_hp'),
@@ -28,7 +29,7 @@ class LandingPageController extends Controller
             'password' =>$request->input ('password')
             ]);
 
-        $user= new User();
+        $user= new Sekolah();
         $user->nama_lengkap= $data['nama_lengkap'];
         $user->sekolah= $data['sekolah'];
         $user->no_hp=$data['no_hp'];
