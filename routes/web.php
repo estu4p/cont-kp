@@ -426,3 +426,21 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
+Route::get('/super-admin/langganan', function() {
+    $members = [
+        ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
+        ['id' => 2, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
+        ['id' => 3, 'nama' => 'Danni Hernando', 'email' => 'dannihernando17@gmail.com', 'pt' => 'Universitas Semarang', 'paket' => 'Bronze', 'lokasi' => 'Semarang', 'status' => 'Tidak Aktif'],
+        ['id' => 4, 'nama' => 'Febrian Adipurnowo', 'email' => 'febrianadip@gmail.com', 'pt' => 'Universitas Gadjah Mada', 'paket' => 'Gold', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
+        ['id' => 5, 'nama' => 'Yessa Khoirunnisa', 'email' => 'yessaakhh@gmail.com', 'pt' => 'Universitas Indonesia', 'paket' => 'Platinum', 'lokasi' => 'Depok', 'status' => 'Tidak Aktif'],
+        ['id' => 6, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz1@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
+        ['id' => 7, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda1@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
+        ['id' => 8, 'nama' => 'Danni Hernando', 'email' => 'dannihernando171@gmail.com', 'pt' => 'Universitas Semarang', 'paket' => 'Bronze', 'lokasi' => 'Semarang', 'status' => 'Tidak Aktif'],
+        ['id' => 9, 'nama' => 'Febrian Adipurnowo', 'email' => 'febrianadip1@gmail.com', 'pt' => 'Universitas Gadjah Mada', 'paket' => 'Gold', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
+        ['id' => 10, 'nama' => 'Yessa Khoirunnisa', 'email' => 'yessaakhh1@gmail.com', 'pt' => 'Universitas Indonesia', 'paket' => 'Platinum', 'lokasi' => 'Depok', 'status' => 'Tidak Aktif'],
+    ];
+    return view('super-admin.langganan', [
+        'title' => "Langganan",
+        'members' => $members,
+    ]);
+});
