@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\BEController;
 
+use App\Models\KategoriPenilaian;
+use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Penilaian;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -181,5 +184,54 @@ class AdminUnivAfterPaymentController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
+    }
+
+    public function showKategoriPenilaian()
+    {
+        $data = Penilaian::with('kategori')->get();
+        return response()->json(['success' => true, 'nilai' => $data], 200);
+        // $kategori = SubKategoriPenilaian::where('kategori_id', '!=', null)->get();
+    }
+    public function addKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'divisi_id' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add kategori penilaian',], 400);
+        }
+        $data = new KategoriPenilaian([
+            'divisi_id' => $request->input('divisi_id'),
+            'nama_kategori' => $request->input('nama_kategori')
+        ]);
+        $data->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success to add data'
+        ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kategori_id' => 'required',
+            'nama_sub_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add Sub Kategori',], 400);
+        }
+
+        $data = new SubKategoriPenilaian([
+            'kategori_id' => $request->input('kategori_id'),
+            'nama_sub_kategori' => $request->input('nama_sub_kategori')
+        ]);
+
+        $data->save();
+
+        return response()->json([
+            'message' => 'success to add Sub Kategori'
+        ]);
     }
 }

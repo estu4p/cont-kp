@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
             PaketSeeder::class,
             ProjectSeeder::class,
             UserSeeder::class,
-            PresensiSeeder::class
+            PresensiSeeder::class,
+            KategoriPenilaian::class,
+            SubKategoriPenilaian::class,
+            PenilaianSeeder::class,
         ]);
     }
 }
