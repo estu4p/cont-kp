@@ -129,11 +129,12 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif()
+    public function daftarMitraTeamAktif() // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
+
     public function daftarMitraPengaturanDivisi()
     {
         $divisi = Divisi::all();
@@ -231,6 +232,20 @@ class AdminUnivAfterPaymentController extends Controller
 
         return response()->json([
             'message' => 'success to add Sub Kategori'
+        ]);
+    }
+
+    public function teamAktifKlik($id)
+    {
+        $divisi = Divisi::with('anggotaDivisi')->find($id);
+
+        if (!$divisi) {
+            return response()->json(['message' => 'Divisi not found'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Success to get detail data divisi with mahasiswa',
+            'data' => $divisi
         ]);
     }
 }
