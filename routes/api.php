@@ -53,6 +53,7 @@ Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPayme
 Route::get('admin/daftar-mitra/team-aktif', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
 
 Route::get('admin/daftar-mitra/pengaturan-divisi', [AdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi']); //daftar divisi
+Route::get('admin/daftar-mitra/showPenilaian', [AdminUnivAfterPaymentController::class, 'showKategoriPenilaian']);
 Route::post('admin/daftar-mitra/add-divisi', [AdminUnivAfterPaymentController::class, 'addDivisi']);
 Route::post('admin/daftar-mitra/update-divisi/{id}', [AdminUnivAfterPaymentController::class, 'updateDivisi']);
 Route::delete('admin/daftar-mitra/destroy-divisi/{id}', [AdminUnivAfterPaymentController::class, 'destroyDivisi']);
