@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\PaketSeeder;
+use Database\Seeders\DivisiSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            RoleSeeder::class,
+            DivisiSeeder::class,
+            MitraSeeder::class,
+            ShiftSeeder::class,
+            PaketSeeder::class,
+            ProjectSeeder::class,
+            SekolahSeeder::class,
+            UserSeeder::class,
+            PresensiSeeder::class,
+            KategoriPenilaian::class,
+            SubKategoriPenilaian::class,
+            PenilaianSeeder::class,
+        ]);
     }
 }

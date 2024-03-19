@@ -21,8 +21,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbar')
-        <!-- bueeek master baru piqri bangke -->
+        @include('template.navbarAfterPay')
+        
 
         <div class="content-wrapper">
             <section class="content">
@@ -31,7 +31,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebarAfterPay') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebarAfterPay') 
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">

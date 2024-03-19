@@ -3,9 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +20,7 @@ class SendEmail extends Mailable
 
     public function build()
     {
-        return $this->view('sentEmail')
+        return $this->view('user.sentEmail')
             ->subject("Email verification");
     }
 
@@ -42,7 +40,7 @@ class SendEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'sentEmail',
+            view: 'user.sentEmail',
         );
     }
 

@@ -131,6 +131,146 @@ body {
     margin: 20px;
     width: 60%;
 }
+.modal {
+    display: none; /* Sembunyikan modal secara default */
+    position: fixed; /* Tetapkan posisi modal */
+    z-index: 1; /* Menetapkan indeks z tinggi untuk modal */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; /* Tinggikan modal */
+    overflow: auto; /* Aktifkan scroll jika konten lebih panjang dari modal */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.4
+    ); /* Warna latar belakang dengan transparansi */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Tempatkan modal di tengah layar */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Sesuaikan lebar konten modal */
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.home {
+    background-image: url("../images/bg-home.png");
+    height: 330px;
+    border-radius: 0px 0px 40px 0px;
+    padding: 40px 60px;
+}
+.date {
+    font-weight: 400;
+    font-size: 20px;
+}
+#time {
+    margin-left: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+.bi-calendar4-week {
+    width: 32px;
+}
+.quotes {
+    text-align: center;
+    margin: 40px;
+    font-style: italic;
+}
+.profile {
+    background: #00000066;
+    border-radius: 40px;
+    display: flex;
+    margin-inline: 12px;
+}
+.profile p {
+    text-weight: 400;
+    margin-top: 20px;
+    margin-bottom: -3px;
+    font-size: 18px;
+}
+.profile span {
+    font-size: 14px;
+}
+.img-profile {
+    width: 80px;
+    height: 80px;
+    padding: 4px;
+}
+.logout {
+    margin-left: auto;
+    font-size: 32px;
+    font-weight: 500;
+    color: white;
+    background: transparent;
+    width: 60px;
+}
+.kehadiran {
+    height: 120px;
+    background-color: #eceff2;
+    border-radius: 8px;
+    padding: 16px;
+}
+.lingkaran {
+    width: 12px;
+    height: 12px;
+    background-color: #b8b8b8;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+.absen {
+    text-align: center;
+    width: 25%;
+}
+.content-home {
+    display: flex;
+}
+.btn-barcode {
+    font-weight: 400;
+    text-decoration: none;
+    border: 0;
+    text-align: right;
+    background: transparent;
+    margin-bottom: 10px;
+    color: #a61c1ce5;
+    width: 100%;
+}
+.shift {
+    text-transform: capitalize;
+    font-weight: 650;
+    margin: 40px 40px 40px;
+    padding-top: 40px;
+}
+.btn-masuk {
+    width: 75%;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    height: 52px;
+    background-color: #626f78;
+    border: 0;
+    color: white;
+}
+.btn-izin {
+    width: 75%;
+    border-radius: 8px;
+    border: 2px solid #626f78;
+    height: 52px;
+}
 
 @media (max-width: 768px) {
     .login-layout {
@@ -226,6 +366,120 @@ body {
     }
     .box-reset input {
         font-size: 12px;
+        width: 90%;
+    }
+    .date {
+        font-weight: 400;
+        font-size: 12px;
+    }
+    #time {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .home {
+        background-image: url("../images/bg-home.png");
+        height: 240px;
+        border-radius: 0px 0px 40px 0px;
+        padding: 20px 30px;
+    }
+    .bi-calendar4-week {
+        width: 16px;
+    }
+    .quotes {
+        text-align: center;
+        margin: 40px;
+        font-style: italic;
+        font-size: 16px;
+    }
+    .profile {
+        background: #00000066;
+        border-radius: 12px;
+        display: flex;
+        height: 52px;
+        margin-left: -10px;
+    }
+    .profile p {
+        text-weight: 400;
+        margin-top: 10px;
+        margin-bottom: -6px;
+        font-size: 12px;
+    }
+    .profile span {
+        font-size: 10px;
+    }
+    .img-profile {
+        width: 32px;
+        height: 32px;
+    }
+    .logout {
+        margin-left: auto;
+        font-size: 32px;
+        background: transparent;
+        width: 40px;
+        margin-top: -12px;
+    }
+    .content-home {
+        flex-direction: column;
+        margin-bottom: 20%;
+    }
+    .w-75 {
+        width: 100% !important;
+    }
+    .kehadiran {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .rounded {
+        border-radius: 0 !important;
+    }
+    .text-end {
+        text-align: center !important;
+    }
+    .me-3 {
+        margin-right: 0 !important;
+    }
+    .d-flex.justify-content-end.me-3 {
+        justify-content: center !important;
+    }
+    .text-danger.text-center {
+        text-align: center !important;
+    }
+    .py-5.px-3 {
+        padding: 10px !important;
+    }
+    .w-75 {
+        width: 100% !important;
+    }
+    .gap-3 {
+        gap: 10px !important;
+    }
+    .btn-barcode {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .shift {
+        text-transform: capitalize;
+        font-weight: 650;
+        font-size: 20px;
+        width: 400%;
+        margin: 0px;
+        padding-top: 20px;
+    }
+    .button-absen {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: white;
+        padding: 10px;
+        gap: 8px;
+        border-radius: 0px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse; /* Reverse the order of buttons */
+        z-index: 999;
+    }    
+    .modal-content {
         width: 90%;
     }
 }

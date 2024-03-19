@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login');
+        return view('user.login');
     }
 
     public function ValidateLogin(Request $request)
@@ -38,12 +38,21 @@ class LoginController extends Controller
                     'redirect' => 'Admin/dashboard'
                 ], 200);
                 
+            } else if ($user->role == 3) {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Mahasiswa  Siswa',
+                    'redirect' => 'pemagang/home'
+                ], 200);
+            } else if ($user->role == 4) {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Dosen',
+                    'redirect' => 'Dosen/dashboard'
+                ], 200);
             } else {
                 return response()->json([
-                    'message' => 'Login berhasil sebagai User',
-                    'redirect' => 'dashboard'
+                    'message' => 'Login berhasil sebagai Mitra',
+                    'redirect' => 'pemagang/home'
                 ], 200);
-                
             }
         } else {
             return response()->json([

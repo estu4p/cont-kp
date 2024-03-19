@@ -32,7 +32,7 @@
                                     <div class="email">Password<span class="red-star">*</span></div>
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-lock icon"></i></span>
-                                        <input type="text" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping">
+                                        <input type="password" class="form-control" placeholder="password" aria-label="password" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <div class="d-flex gap-0 justify-content-between row flex-row">
@@ -41,14 +41,14 @@
                                         <label class="form-check-label fz7 " for="remember">Ingatkan saya</label>
                                     </div>
                                     <div class="kanan d-flex align-items-start justify-content-end gap-2 flex-row col-7 ">
-                                        <p class="fz7 "> Lupa password? <a href="/AdminUniv-ResetPassword" class="btn btn-link fz9  ">reset</a> </p>
+                                        <p class="fz7 "> Lupa password? <a href="/AdminUniv-ResetPassword" class="btn btn-link fz9  " style="text-decoration: none;">reset</a> </p>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <a href="/dashboard">
+                        <a href="/AdminUniv-Dashboard">
                             <button type="submit" class="btn btn-secondary">
                                 Log In
                             </button>
