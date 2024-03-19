@@ -41,15 +41,9 @@ class LoginController extends Controller
                     'redirect' => 'Admin/dashboard'
                 ], 200);
             } else if ($user->role == 3) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Mahasiswa  Siswa',
-                    'redirect' => 'pemagang/home'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else if ($user->role == 4) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Dosen',
-                    'redirect' => 'Dosen/dashboard'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else {
                 return redirect('/AdminUniv-Dashboard');
             }
