@@ -366,15 +366,15 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-}); 
+});
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-}); 
+});
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-}); 
+});
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
@@ -426,3 +426,7 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
+Route::get('/UserScanQRDefault', function () {
+    return view('user.UserScanQR.Home-Default');
+});
+
