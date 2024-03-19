@@ -11,12 +11,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Penilaian;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminUnivAfterPaymentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     // dashboard
     { // menampilkan seluruh data yang diperlukan
         $jumlah_mitra = Mitra::all()->count();
@@ -24,12 +25,15 @@ class AdminUnivAfterPaymentController extends Controller
 
         // Mengambil nama siswa dari koleksi data
 
-        return response()->json([
-            "message" => "Success get data",
-            "jumlah mitra" => $jumlah_mitra,
-            "jumlah siswa" => $jumlah_siswa,
-
-        ]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "message" => "Success get data",
+                "jumlah mitra" => $jumlah_mitra,
+                "jumlah siswa" => $jumlah_siswa,
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
+        }
     }
     public function profileAdmin(Request $request)
     {
@@ -42,13 +46,14 @@ class AdminUnivAfterPaymentController extends Controller
     public function detailAdminProfile(Request $request, $id)
     {
         $profil = User::find($id);
-        if ($profil) {
+        if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
-                "message" => "Success to get detail profile",
-                "data" => $profil
+                'profile' => $profil
             ]);
         } else {
-            return response()->json(['message' => 'Fail to get detail profile'], 404);
+            return view('adminUniv-afterPayment.AdminUniv-EditProfile', [
+                'profil' => $profil
+            ]);
         }
     }
     public function updateAdminProfile(Request $request, $id)
@@ -269,22 +274,28 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json($user);
     }
 
-    public function teamAktifSuntingTeam()
+    public function teamAktifSuntingTeam(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+        $user->fill([
+            'nama_lengkap' => $request->nama_lengkap,
+            'nomor_induk' => $request->nomor_induk,
+            'jurusan' => $request->jurusan,
+            'kota' => $request->kota,
+            'tgl_lahir' => $request->tgl_lahir,
+            'no_hp' => $request->no_hp,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => $request->password,
+            'tgl_masuk' => $request->tgl_masuk,
+        ]);
         return response()->json([
             'message' => 'sunting team'
         ]);
     }
 
-    public function teamAktifDetailHadir(Request $request, $id)
+    public function teamAktifDetailHadir($id)
     {
-        $validator = Validator::make($request->all(), [
-            'role_id' => 3,
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 0);
-        }
-
         $presensi = Presensi::where('nama_lengkap', $id)->first();
         return response()->json([
 

@@ -11,6 +11,7 @@ use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 
@@ -375,10 +376,8 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-Route::get('/AdminUniv-Dashboard', [AdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
+Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
+Route::get('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 
 
 
