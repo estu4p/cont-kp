@@ -11,12 +11,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Penilaian;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminUnivAfterPaymentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     // dashboard
     { // menampilkan seluruh data yang diperlukan
         $jumlah_mitra = Mitra::all()->count();
@@ -24,12 +25,15 @@ class AdminUnivAfterPaymentController extends Controller
 
         // Mengambil nama siswa dari koleksi data
 
-        return response()->json([
-            "message" => "Success get data",
-            "jumlah mitra" => $jumlah_mitra,
-            "jumlah siswa" => $jumlah_siswa,
-
-        ]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "message" => "Success get data",
+                "jumlah mitra" => $jumlah_mitra,
+                "jumlah siswa" => $jumlah_siswa,
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
+        }
     }
     public function profileAdmin(Request $request)
     {
@@ -42,13 +46,14 @@ class AdminUnivAfterPaymentController extends Controller
     public function detailAdminProfile(Request $request, $id)
     {
         $profil = User::find($id);
-        if ($profil) {
+        if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
-                "message" => "Success to get detail profile",
-                "data" => $profil
+                'profile' => $profil
             ]);
         } else {
-            return response()->json(['message' => 'Fail to get detail profile'], 404);
+            return view('adminUniv-afterPayment.AdminUniv-EditProfile', [
+                'profil' => $profil
+            ]);
         }
     }
     public function updateAdminProfile(Request $request, $id)
