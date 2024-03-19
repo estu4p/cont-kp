@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\login;
 use App\Models\paket;
 use App\Models\Daftar;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,44 +18,54 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class LandingPageController extends Controller
 {
 
+
     public function lpdaftar(Request $request)
     {
-        $request->validate([
-            'fullname' => 'required|string|max:100',
-            'sekolah' => 'required|string',
-            'email' => 'email|required|unique:daftar,email',
-            'telephone' => 'required|regex:/^\d+$/',
-            'password' => 'min:8|required'
-        ]);
-
-            $data = Daftar::create([
-                'name' => $request->fullname,
-                'sekolah' => $request->sekolah,
-                'email' => $request->email,
-                'telephone' => $request->telephone,
-                'password' => Hash::make($request->password),
+        $data= new Sekolah([
+            'nama_lengkap' => $request->input ('nama_lengkap'),
+            'sekolah' => $request->input ('sekolah'),
+            'no_hp' => $request->input ('no_hp'),
+            'email' => $request->input ('email'),
+            'password' =>$request->input ('password')
             ]);
 
-            return response()->json(['data' => $data]);
+        $user= new Sekolah();
+        $user->nama_lengkap= $data['nama_lengkap'];
+        $user->sekolah= $data['sekolah'];
+        $user->no_hp=$data['no_hp'];
+        $user->email=$data['email'];
+        $user->password=Hash::make ($data['password']);
+        $user->save();
+
+            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+    }
+    public function index()
+    {
+        return view("landing-page.login");
     }
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
         $email = $request->input('email');
         $pass = $request->input('password');
 
-        $useremail = login::where('email', $email)->first();
-        $userpass = login::where('password', $pass)->first();
-
-        if ($useremail && $userpass) {
-            // Login berhasil
-            return response($useremail);
-        } else {
-            //Jika data tidak ditemukan/ belum melakukan pendaftaran
-            return response([
-                'status' => false,
-                'pesan' => 'data tidak ditemukan, daftarkan diri terlebih dahulu'
-            ]);
+        $useremail = Sekolah::where('email', $email)->first();
+        // dd(Hash::make($pass));
+        // $userpass = Daftar::where('password', $pass)->first();
+        if (!$useremail && Hash::check( $pass, $useremail->password)) {
+             return back()->withErrors(['email' => 'Email atau password salah']);
         }
+        auth()->login($useremail);
+
+        // Redirect ke halaman yang sesuai
+        // return redirect()->intended('/dashboard');
+        return response()->json([
+            'pesan' => 'Anda Berhasil login',
+            'data' => $useremail
+        ]);
     }
     public function ChekoutPaket(Request $request)
     {

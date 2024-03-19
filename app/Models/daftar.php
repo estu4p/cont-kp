@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Daftar extends Model
 {
     use HasFactory;
-    protected $fillable = ['name',
+    protected $table = "users";
+    protected $fillable = ['nama_lengkap',
                         'sekolah',
                         'email',
-                        'telephone',
+                        'no_hp',
                         'password'];
 
-    protected $table = 'daftar';
+    // protected $table = 'users';
 }

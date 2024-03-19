@@ -22,14 +22,14 @@ body{
   color: #000; /* Ubah warna teks tautan */
   text-decoration: none; /* Hilangkan garis bawah */
   list-style-type: none; /* Menghilangkan bullet */
-
+  cursor: pointer;
 }
 
 .nav-link:hover {
   background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
 }
 
-a.nav-link.activee {
+a.nav-link.active {
   font-weight: bold; /* Menebalkan tautan aktif */
   background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
   color: #fff; /* Warna teks untuk tautan aktif */
@@ -51,3 +51,11 @@ a.nav-link.activee {
  color: #302f2f;
  opacity: 0.6;
 }
+.swal-button--confirm {
+    background-color: red;
+    color: white;
+}
+.swal-button--cancel{
+    background-color: darkgray;
+}
+

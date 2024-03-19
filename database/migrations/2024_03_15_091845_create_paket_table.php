@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daftar', function (Blueprint $table) {
-         $table->id();
-         $table->string('name');
-         $table->string('sekolah');
-         $table->string('telephone');
-         $table->string('email')->unique();
-         $table->string('password');
-         $table->timestamps();
-
+        Schema::create('paket', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_paket');
+            $table->enum('metode_bayar', ['BNI', 'Dana'])->default('BNI');
+            $table->timestamps();
+            // kota ambil dari users ya
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daftar');
+        Schema::dropIfExists('paket');
     }
 };
