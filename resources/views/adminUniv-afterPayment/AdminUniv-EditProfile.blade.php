@@ -12,64 +12,70 @@
             <div class="about">About</div>
             <div class="keterangan">{{ $profil->about }}</div>
         </div>
-        <div class="wadahedit d-flex">
-            <div class="editprofil p-5">
-                <div class="atas d-flex flex-row  col-5">
-                    <img src="assets/images/Rectangle 22.png" alt="Profile Logo" class="gambarkanan mx-0"
-                        style="width:80px;">
-                    <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
-                        <button class="change m-0 py-1 px-2">Change Photo</button>
-                        <button class="remove m-0">remove</button>
-                    </div>
-                </div>
-                <div class="tengah row ">
-                    <div class="judulkanan">Personal Details</div>
-                    <div class="isi col-12 row justify-content-evenly  ">
-                        <div class="form-group  col-6   p-2">
-                            <label for="username">Nama lengkap</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text"id="name"
-                                    placeholder="{{ $profil->nama_lengkap }}">
-                            </div>
-                        </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="NoHP">No HP</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text"id="NoHP"
-                                    placeholder="{{ $profil->no_hp }}">
-                            </div>
-                        </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="email">Email</label>
-                            <div class=" mb-3">
-                                <input class="input form-control" type="email"id="email"
-                                    placeholder="{{ $profil->email }}">
-                            </div>
-                        </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="alamat">Alamat</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text"id="alamat"
-                                    placeholder="{{ $profil->kota }}">
-                            </div>
+        <form action="{{ route('adminUniv.updateProfile', $profil->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="wadahedit d-flex">
+
+                <div class="editprofil p-5">
+                    <div class="atas d-flex flex-row  col-5">
+                        <img src="assets/images/Rectangle 22.png" alt="Profile Logo" class="gambarkanan mx-0"
+                            style="width:80px;">
+                        <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
+                            <button class="change m-0 py-1 px-2">Change Photo</button>
+                            <button class="remove m-0">remove</button>
                         </div>
                     </div>
-                </div>
-                <div class="bawah p-0 col-6">
-                    <div class="judulkanan">Additional Info</div>
-                    <div class="form-group form-floating">
-                        <!-- <label for="alamat">About</label> -->
-                        <div class="col-12  ">
-                            <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="{{ $profil->about }}"></textarea>
+                    <div class="tengah row ">
+                        <div class="judulkanan">Personal Details</div>
+                        <div class="isi col-12 row justify-content-evenly  ">
+                            <div class="form-group  col-6   p-2">
+                                <label for="username">Nama lengkap</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text"id="name"
+                                        placeholder="{{ $profil->nama_lengkap }}" name="nama_lengkap">
+                                </div>
+                            </div>
+                            <div class="form-group  col-6   p-2">
+                                <label for="NoHP">No HP</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text"id="NoHP"
+                                        placeholder="{{ $profil->no_hp }}" name="no_hp">
+                                </div>
+                            </div>
+                            <div class="form-group  col-6   p-2">
+                                <label for="email">Email</label>
+                                <div class=" mb-3">
+                                    <input class="input form-control" type="email"id="email"
+                                        placeholder="{{ $profil->email }}" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group  col-6   p-2">
+                                <label for="alamat">Alamat</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text"id="alamat"
+                                        placeholder="{{ $profil->kota }}" name="alamat">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                    <button class="Cancel">Cancel</button>
-                    <button class="Update" onclick="showSuccessModal()">Update</button>
+                    <div class="bawah p-0 col-6">
+                        <div class="judulkanan">Additional Info</div>
+                        <div class="form-group form-floating">
+                            <!-- <label for="alamat">About</label> -->
+                            <div class="col-12  ">
+                                <textarea id="About" name="about" class="form-control " style="width:97%;" placeholder="{{ $profil->about }}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                        <button class="Cancel">Cancel</button>
+                        <a href="{{ route('adminUniv.editProfile', $profil->id) }}"><button class="Update"
+                                onclick="showSuccessModal()" value="save" type="submit">Update</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <script>
