@@ -27,11 +27,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
-Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
-Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
+// Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
+// Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+// Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+// Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+// Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
 
@@ -43,7 +43,8 @@ Route::middleware('user')->group(function () {
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
-Route::post('/loginpage', [LandingPageController::class, 'login']);    Route::get('/adminbeforepayment', function () {
+    Route::post('/loginpage', [LandingPageController::class, 'login']);
+    Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
 });
@@ -55,8 +56,8 @@ Route::get('/register', function () {
     return view('landing-page.daftar', ['title' => "Daftar"]);
 });
 
-Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+// Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
+// Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
@@ -92,7 +93,7 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
-Route::post('/loginpage', [LandingPageController::class, 'login']);
+// Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -137,6 +138,12 @@ Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 
+
+Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
+
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
 
@@ -159,6 +166,7 @@ Route::get('/user/home', function () {
     Route::get('/pemagang/home', function () {
         return view('pemagang.home', ['title' => "Home"]);
     });
+
 
 
 
@@ -242,20 +250,20 @@ Route::get('/user/home', function () {
     });
 
 
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
+    Route::get('/AdminUniv-InputOTP', function () {
+        return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+    });
 
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
+    Route::get('/AdminUniv-InputNewPassword', function () {
+        return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+    });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
+    Route::get('/AdminUniv-Dashboard', function () {
+        return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+    });
+    Route::get('/AdminUniv-EditProfile', function () {
+        return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+    });
 
 
 
@@ -366,15 +374,17 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-}); 
+});
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-}); 
+});
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-}); 
+});
+
+
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
@@ -386,6 +396,8 @@ Route::get('/AdminUniv-EditProfile', function () {
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
+
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
@@ -397,6 +409,8 @@ Route::get('/super-admin', function () {
         'admin_sistem' => 200
     ]);
 });
+
+
 Route::get('/super-admin/ubah-profil', function () {
     return view('super-admin.edit', [
         'title' => "Super Admin - Ubah Profil",
@@ -426,7 +440,7 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
-Route::get('/super-admin/langganan', function() {
+Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
         ['id' => 2, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],

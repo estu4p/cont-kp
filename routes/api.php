@@ -35,10 +35,10 @@ Route::post('/user/reset-password/new-password', [ResetPasswordController::class
 
 Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
-Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang']);
-Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat']);
-Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat']);
-Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
+Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang']);
+Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat']);
+Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat']);
+Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
 Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
