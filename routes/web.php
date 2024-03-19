@@ -1,6 +1,8 @@
 <?php
 
 use function Laravel\Prompts\alert;
+
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
@@ -43,7 +45,8 @@ Route::middleware('user')->group(function () {
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
-Route::post('/loginpage', [LandingPageController::class, 'login']);    Route::get('/adminbeforepayment', function () {
+    Route::post('/loginpage', [LandingPageController::class, 'login']);
+    Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
 });
@@ -242,20 +245,20 @@ Route::get('/user/home', function () {
     });
 
 
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
+    Route::get('/AdminUniv-InputOTP', function () {
+        return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+    });
 
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
+    Route::get('/AdminUniv-InputNewPassword', function () {
+        return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+    });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
+    Route::get('/AdminUniv-Dashboard', function () {
+        return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+    });
+    Route::get('/AdminUniv-EditProfile', function () {
+        return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+    });
 
 
 
@@ -366,15 +369,13 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-}); 
+});
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-}); 
+});
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-}); 
+Route::get('/AdminUniv-Dashboard', [AdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
@@ -426,7 +427,7 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
-Route::get('/super-admin/langganan', function() {
+Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
         ['id' => 2, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
