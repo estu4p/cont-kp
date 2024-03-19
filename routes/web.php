@@ -455,3 +455,7 @@ Route::get('/super-admin/langganan', function () {
         'members' => $members,
     ]);
 });
+Route::get('/UserScanQRDefault', function () {
+    return view('user.UserScanQR.Home-Default');
+});
+
