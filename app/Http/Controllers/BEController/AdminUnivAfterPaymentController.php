@@ -268,4 +268,28 @@ class AdminUnivAfterPaymentController extends Controller
         $user = User::where('role_id', 3)->where('mitra_id', $id)->get();
         return response()->json($user);
     }
+
+    public function teamAktifSuntingTeam()
+    {
+        return response()->json([
+            'message' => 'sunting team'
+        ]);
+    }
+
+    public function teamAktifDetailHadir(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'role_id' => 3,
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 0);
+        }
+
+        $presensi = Presensi::where('nama_lengkap', $id)->first();
+        return response()->json([
+
+            'message' => 'detail hadir',
+            'data' => $presensi
+        ]);
+    }
 }
