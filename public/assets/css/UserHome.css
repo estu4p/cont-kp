@@ -94,11 +94,12 @@
     color: aliceblue;
     border-radius: 10px;
 }
-.btn-istirahat{
+.izin{
     width: 60%;
     height: 50px;
     border-radius: 10px;
     background-color: transparent;
+    border: 1px solid black !important;
 }
 .kanan{
     width: 75%;
@@ -225,12 +226,40 @@
 }
 .bordermerah{
     border: 1px solid red;
+    color: red;
 }
 .borderijo{
     border:1px solid green;
+    color: green;
+}
+
+.judulmodal{
+    text-align: center;
+}
+
+.bawahmodal{
+    text-align: right;
+    padding-top: 20px;
+    display: flex;
+}
+
+#pesan, .inputt{
+    width: 100%;
+    background-color: #E9ECEF;
+    padding-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 
-
-
-
+.judulinput{
+    font-weight: bold;
+    padding-top: 0px;
+}
+.izin-hilang{
+    display: none !important;
+}
+.modalheader{
+    text-align: center !important;
+}
