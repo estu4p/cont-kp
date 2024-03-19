@@ -32,11 +32,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
-Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
-Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
-Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
+// Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
+// Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+// Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+// Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+// Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
 
@@ -66,8 +66,8 @@ Route::get('/register', function () {
     return view('landingPage.daftar', ['title' => "Daftar"]);
 });
 
-Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+// Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
+// Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
@@ -103,7 +103,7 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
-Route::post('/loginpage', [LandingPageController::class, 'login']);
+// Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -176,6 +176,12 @@ Route::get('/mitra-teamAktif', [MitraTeamAktifController::class, 'teamAktif'])->
 Route::get('/mitra-seeAllTeam', [MitraTeamAktifController::class, 'seeAllTeam'])->name('mitra-seeAllTeam');
 Route::get('/mitra-profileTeam/{username}', [MitraTeamAktifController::class, 'profileMahasiswa'])->name('mitra-profileMahasiswa');
 Route::get('/mitra-anggotaTeam/{divisi}', [MitraTeamAktifController::class, 'anggotaTeam'])->name('mitra-anggotaTeam');
+
+
+Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
 
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
@@ -303,6 +309,8 @@ Route::get('/AdminUniv-Dashboard', function () {
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
+
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });

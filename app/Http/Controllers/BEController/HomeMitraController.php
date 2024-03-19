@@ -10,16 +10,15 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class HomeMitraController extends Controller
 {
-    public function pilihMitra (Request $request)
+    public function pilihMitra(Request $request)
     {
         $mitra = Mitra::all();
         $divisi = Mitra::all();
-        
+
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'nama_mitra' => 'required|string',
@@ -40,83 +39,130 @@ class HomeMitraController extends Controller
 
             return redirect()->route('home_masuk')->with('success', 'Anda telah memilih mitra!');
         }
-        return view('pilihmitra', compact('mitra', 'divisi')); 
+        return view('pilihmitra', compact('mitra', 'divisi'));
     }
 
     public function jamMasuk(Request $request)
     {
-        $request->validate([
-            'jam_masuk' => 'required|date_format:H:i:s',
-        ]);
+        $nama_lengkap = $request->input('id');
+        $hari = $request->input('hari');
+        $jam_masuk = $request->input('jam_masuk');
+        $status_kehadiran = $request->input('status_kehadiran');
+        $keterangan_status = $request->input('keterangan_status');
+        $kebaikan = $request->input('kebaikan');
+        $status_absensi = $request->input('status_absensi');
 
-        $keterangan_status = $request->keterangan_status;
-        $absensi = new Presensi();
-        $absensi->id = $request-> id;
-        $absensi->jam_masuk = now();
-        $absensi->keterangan_status = $keterangan_status;
-        $absensi->save();
+        $data = new Presensi;
 
-        return response()->json(['message' => 'Jam masuk berhasil dicatat'], 200);
+        $data->nama_lengkap = $nama_lengkap;
+        $data->hari = $hari;
+        $data->keterangan_status = $keterangan_status;
+        $data->kebaikan = $kebaikan;
+        $data->status_absensi = $status_absensi;
+        $data->jam_masuk = $jam_masuk;
+        $data->status_kehadiran = $status_kehadiran;
+        $data->save();
+
+        if ($data) {
+            return response([
+                'pesan' => 'data berhasil',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response([
+                'pesan' => 'data tidak ada',
+            ], 404);
+        }
     }
 
-    public function jamPulang(Request $request)
+    public function jamPulang(Request $request, string $id)
     {
-        $request->validate([
-            'jam_pulang' => 'required|date_format:H:i:s',
-        ]);
+        $data = Presensi::where('id', $id)->first();
 
-        $keterangan_status = $request->keterangan_status;
-        $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_pulang = now();
-        $absensi->keterangan_status = $keterangan_status;
-        $absensi->save();
+        if ($data) {
+            $jam_pulang = $request->input('jam_pulang');
+            $data->jam_pulang = $jam_pulang;
+            $data->save();
 
-        return response()->json(['message' => 'Jam pulang berhasil dicatat'], 200);
+            return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
+        }
+    }
+    
+
+    public function jamMulaiIstirahat(Request $request,string $id)
+    {
+        $data = Presensi::where('id', $id)->first();
+
+        if ($data) {
+            $jam_mulai_istirahat = $request->input('jam_mulai_istirahat');
+            $data->jam_mulai_istirahat = $jam_mulai_istirahat;
+            $data->save();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
+        }
     }
 
-    public function jamMulaiIstirahat(Request $request)
+    public function jamSelesaiIstirahat(Request $request, string $id)
     {
-        $request->validate([
-            'jam_mulai_istirahat' => 'required|date_format:H:i:s',
-        ]);
+        $data = Presensi::where('id', $id)->first();
 
-        $keterangan_status = $request->keterangan_status;
-        $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_mulai_istirahat = now();
-        $absensi->keterangan_status = $keterangan_status; 
-        $absensi->save();
+        if ($data) {
+            $jam_selesai_istirahat = $request->input('jam_selesai_istirahat');
+            $data->jam_selesai_istirahat = $jam_selesai_istirahat;
+            $data->save();
 
-        return response()->json(['message' => 'Jam mulai istirahat berhasil dicatat'], 200);
+            return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
+        }
     }
 
-    public function jamSelesaiIstirahat(Request $request)
+    public function totalJamKerja(Request $request, $id)
     {
-        $request->validate([
-            'jam_selesai_istirahat' => 'required|date_format:H:i:s',
-        ]);
+        $data = Presensi::where('id', $id)->first();
 
-        $keterangan_status = $request->keterangan_status;
-        $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $absensi->jam_selesai_istirahat = now();
-        $absensi->keterangan_status = $keterangan_status; 
-        $absensi->save();
+        if ($data) {
+            $jam_masuk = Carbon::parse($data->jam_masuk); // Pastikan ini adalah objek Carbon
+            $jam_pulang = Carbon::parse($data->jam_pulang);
 
-        return response()->json(['message' => 'Jam selesai istirahat berhasil dicatat'], 200);
-    }
+            if ($jam_masuk && $jam_pulang) {
+                $total_jam_kerja = $jam_masuk->diffInHours($jam_pulang);
+                $data->total_jam_kerja = $total_jam_kerja;
+                $data->save();
 
-    public function totalJamKerja(Request $request)
-    {
-        $request->validate([
-            'total_jam_kerja' => 'required|date_format:H:i:s',
-        ]);
-
-        $keterangan_status = $request->keterangan_status;
-        $absensi = Presensi::where('id', $request->id)->latest()->first();
-        $total_jam_kerja = $absensi->jam_pulang->diffInHours($absensi->jam_masuk);
-        $absensi->keterangan_status = $keterangan_status; 
-        $total_jam_kerja->save();
-
-        return response()->json(['total_jam_kerja' => $total_jam_kerja], 200);
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $data,
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'Jam masuk atau jam pulang belum diisi',
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
+        }
     }
 
     public function catatLogAktivitas(Request $request)
@@ -131,7 +177,7 @@ class HomeMitraController extends Controller
         $presensi->jam_mulai_istirahat = now();
         $presensi->jam_selesai_istirahat = now();
         $presensi->status_kehadiran = 'Hadir';
-        $presensi->kebaikan = 'Tidak ada';  
+        $presensi->kebaikan = 'Tidak ada';
         $presensi->save();
 
         return response()->json([
@@ -161,7 +207,7 @@ class HomeMitraController extends Controller
     }
 
     public function barcode(Request $request)
-    {     
+    {
         $request->validate([
             'barcode' => 'required|string|max:255',
         ]);
@@ -174,7 +220,7 @@ class HomeMitraController extends Controller
         $presensi = new Presensi();
         $presensi->nama_lengkap = $user->id;
         $presensi->jam_masuk = Carbon::now();
-        $presensi->status_kehadiran = 'Hadir'; 
+        $presensi->status_kehadiran = 'Hadir';
         $presensi->save();
 
         return response()->json(['message' => 'Presensi berhasil dicatat'], 200);
