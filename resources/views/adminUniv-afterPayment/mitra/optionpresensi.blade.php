@@ -1,10 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.masterAfterPay')
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('assets/css/presensi/presensiharian.css') }}">
+<link href="/assets/css//optionpresensi.css" rel="stylesheet">
 <script src="{{ asset('js/app.js') }}"></script>
 <div id="presentasi-harian">
+    <i class="fs-1 fa-solid fa-chevron-left"></i>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -18,9 +19,9 @@
                     <div class="card-body"  >
                         <div class="row">
                             <div style=" display: flex; justify-content: space-between;">
-                                <a class="btn" href="/laporandatapresensi">
-                                  <i class="fa-regular fa-eye"></i>
-                                  Lihat Laporan Presensi
+                                <a class="btn" href="/mitra-pengaturpersensi">
+                                    <i class="fa-solid fa-gear"></i>
+                                  perngatur presensi
                                 </a>
                                 <div>
                                 <div style="float:left;">
@@ -85,7 +86,7 @@
                               <tbody>
                                 <tr>
                                   <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
-                                  <td class="bates" href><a href="/datapresensisiswa">simpay</a></td>
+                                  <td class="bates" href><a href="/mitra-detailprofil">simpay</a></td>
                                   <td>06:25:00</td>
                                   <td>13:05:14</td>
                                   <td>06:25:00 </td>

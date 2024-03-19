@@ -27,7 +27,7 @@
                         </div>
                         <div class="modal-body">
                             <!-- Form for adding new data -->
-                            <form action="{{ route('mitra.store') }}" method="POST">
+                            <form action="{{ route('mitra') }}" method="POST">
                                 @csrf <!-- CSRF Protection -->
                                 <div class="form-group">
                                     <label for="name">Name:</label>
