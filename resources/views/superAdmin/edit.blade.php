@@ -1,4 +1,4 @@
-@extends('layouts.superadmin')
+@extends('layouts.superAdmin')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/super-admin.css') }}">

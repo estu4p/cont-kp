@@ -33,7 +33,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar-superadmin')
+            @include('template.sidebarSuperAdmin')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">

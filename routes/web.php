@@ -62,7 +62,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 Route::get('/register', function () {
-    return view('landing-page.daftar', ['title' => "Daftar"]);
+    return view('landingPage.daftar', ['title' => "Daftar"]);
 });
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
@@ -71,7 +71,7 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 
 
 Route::get('/', function () {
-    return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
+    return view('landingPage.index', ['title' => "Controlling Magang - Landing Page"]);
 });
 Route::get('/dashboard-admin', function () {
     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
@@ -143,16 +143,16 @@ Route::get('/user/login', function () {
 Route::get('/user/register', function () {
     return view('user.register', ['title' => "Register"]);
 });
-Route::get('/user/reset-password', function () {
+Route::get('/user/resetPassword', function () {
     return view('user.reset', ['title' => "Reset Password"]);
 });
-Route::get('/user/reset-password/otp', function () {
+Route::get('/user/resetPassword/otp', function () {
     return view('user.otp', ['title' => "Reset Password - OTP"]);
 });
-Route::get('/user/reset-password/new-password', function () {
-    return view('user.new-password', ['title' => "Reset Password - New Password"]);
+Route::get('/user/resetPassword/newPassword', function () {
+    return view('user.newPassword', ['title' => "Reset Password - New Password"]);
 });
-Route::get('/user/reset-password/confirm', function () {
+Route::get('/user/resetPassword/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 Route::get('/user', function () {
@@ -452,7 +452,7 @@ Route::get('/super-admin/langganan', function () {
         ['id' => 9, 'nama' => 'Febrian Adipurnowo', 'email' => 'febrianadip1@gmail.com', 'pt' => 'Universitas Gadjah Mada', 'paket' => 'Gold', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
         ['id' => 10, 'nama' => 'Yessa Khoirunnisa', 'email' => 'yessaakhh1@gmail.com', 'pt' => 'Universitas Indonesia', 'paket' => 'Platinum', 'lokasi' => 'Depok', 'status' => 'Tidak Aktif'],
     ];
-    return view('super-admin.langganan', [
+    return view('superAdmin.langganan', [
         'title' => "Langganan",
         'members' => $members,
     ]);
