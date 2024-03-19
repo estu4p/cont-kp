@@ -101,6 +101,9 @@ Route::post('/loginpage', [LandingPageController::class, 'login']);
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
+Route::get('/adminafterpayment', function () {
+    return view('mitra.adminafterpayment');
+});
 
 
 
@@ -348,14 +351,57 @@ Route::get('/Kategori-penilaian', function () {
 
 
 // adminUniv-afterPayment
+
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
+
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
+
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/mitra-adminunivmitra', function () {
+    return view('adminUniv-afterPayment.mitra.adminunivmitra');
+});
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
+});
+
+Route::get('/mitra-adminunivmitra', function () {
+    return view('adminUniv-afterPayment.mitra.adminunivmitra');
+});
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
 Route::get('/mitra-laporanpresensi-detaihadir', function () {
