@@ -374,6 +374,15 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+
+});
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+
 });
 
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
@@ -427,6 +436,12 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
+
+Route::get('/UserScanQRDefault', function () {
+    return view('user.UserScanQR.Home-Default');
+});
+
+
 Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
