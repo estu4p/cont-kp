@@ -1,6 +1,8 @@
 <?php
 
 use function Laravel\Prompts\alert;
+
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;

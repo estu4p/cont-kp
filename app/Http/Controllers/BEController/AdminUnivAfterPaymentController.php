@@ -17,9 +17,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AdminUnivAfterPaymentController extends Controller
 {
     public function index()
+    // dashboard
     { // menampilkan seluruh data yang diperlukan
-        $jumlah_mitra = Mitra::all();
-        $jumlah_siswa = User::where("role_id", 1)->get();
+        $jumlah_mitra = Mitra::all()->count();
+        $jumlah_siswa = User::where("role_id", 3)->count();
 
         // Mengambil nama siswa dari koleksi data
 
@@ -51,6 +52,7 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
     public function updateAdminProfile(Request $request, $id)
+    // edit profil
     {
         $validator = Validator::make($request->all(), [
             "nama_lengkap" => 'required',
@@ -94,6 +96,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function adminUnivMitra(Request $request)
+    // univ - mitra
     {
         $mitra = Mitra::withCount('mahasiswa')->get();
 
@@ -105,6 +108,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function adminUnivPresensi()
+    // Univ - Mitra - Daftar Mitra -  Option - Presensi
     {
         try {
             $presensi = Presensi::all();
@@ -120,6 +124,7 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
     public function adminUnivPresensiDetailProfile($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Presensi - Detail Profile
     {
         try {
             $presensi = Presensi::findOrFail($id);
@@ -129,19 +134,22 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif() // daftarMitra-teamAktif
+    public function daftarMitraTeamAktif()
+    // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
 
     public function daftarMitraPengaturanDivisi()
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = Divisi::all();
         return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
     }
 
     public function addDivisi(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
@@ -161,6 +169,7 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
     }
     public function updateDivisi(Request $request, $id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
@@ -177,6 +186,7 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['success' => true, 'message' => 'succes to update divisi', 'data' => $data], 200);
     }
     public function destroyDivisi($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $data = Divisi::find($id);
         if ($data) {
@@ -188,11 +198,13 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function showKategoriPenilaian()
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
         return response()->json(['success' => true, 'nilai' => $kategori], 200);
     }
     public function addKategoriPenilaian(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $validator = Validator::make($request->all(), [
             'divisi_id' => 'required',
@@ -214,6 +226,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function addSubKategoriPenilaian(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $validator = Validator::make($request->all(), [
             'kategori_id' => 'required',
@@ -236,6 +249,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function teamAktifKlik($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $divisi = Divisi::with('anggotaDivisi')->find($id);
 
@@ -247,5 +261,11 @@ class AdminUnivAfterPaymentController extends Controller
             'message' => 'Success to get detail data divisi with mahasiswa',
             'data' => $divisi
         ]);
+    }
+
+    public function teamAktifSeeAllTeam($id)
+    {
+        $user = User::where('role_id', 3)->where('mitra_id', $id)->get();
+        return response()->json($user);
     }
 }
