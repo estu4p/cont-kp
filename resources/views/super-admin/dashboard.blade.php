@@ -1,5 +1,5 @@
-@include('template.navbarSuper')
-@extends('layouts.superAdmin')
+@include('template.navbar-super')
+@extends('layouts.superadmin')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/super-admin.css') }}">

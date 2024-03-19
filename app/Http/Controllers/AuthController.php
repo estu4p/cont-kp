@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function index()
     {
         $title = 'login';
-        return view("landingPage.login")->with("title", $title);
+        return view("landing-page.login")->with("title", $title);
     }
 
     public function login(Request $request)

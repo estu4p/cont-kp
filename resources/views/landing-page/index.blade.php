@@ -2,42 +2,18 @@
 
 @section('content')
     <nav class="px-5 pt-3 pb-2 shadow bg-white sticky-top z-auto">
-        <ul class="d-flex list-unstyled text-capitalize navbar-menu">
-            <li>
-                <a href="#"><img src="assets/images/logo.png" width="60px" class="img-nav" alt="Logo"></a>
-            </li>
-            <li class="nav-desktop">
-                <ul class="d-flex gap-5 fs-4 fw-semibold m-auto">
-                    <li style="width: 50px;"><a href="#fitur" class="menu-navbar">fitur</a></li>
-                    <li style="width: 50px;"><a href="#paket" class="menu-navbar">harga</a></li>
-                    <li style="width: 180px;"><a href="#footer" class="menu-navbar">tentang kami</a></li>
-                </ul>
-            </li>
-            <li class="nav-desktop">
-                <ul class="d-flex fs-4 fw-semibold my-auto gap-5">
-                    <li style="width: 50px;"><a href="/register" class="menu-reg">daftar</a></li>
-                    <li style="width: 50px;"><a href="/loginpage" class="menu-reg">login</a></li>
-                </ul>
-            </li>
-            <li class="nav-mobile">
-                <button class="border-0 bg-transparent" id="menuButton">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                        class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                    </svg>
-                </button>
-            </li>
+        <ul class="d-flex list-unstyled text-capitalize ">
+            <li><img src="assets/images/logo.png" width="60px" class="ms-2"></li>
+            <div class="d-flex gap-5 fs-4 fw-semibold m-auto">
+                <li><a href="#fitur" class="menu-navbar">fitur</a></li>
+                <li><a href="#paket" class="menu-navbar">harga</a></li>
+                <li><a href="#footer" class="menu-navbar">tentang kami</a></li>
+            </div>
+            <div class="d-flex fs-4 fw-semibold my-auto gap-5">
+                <li><a href="/register" class="menu-reg">daftar</a></li>
+                <li><a href="/loginpage" class="menu-reg">login</a></li>
+            </div>
         </ul>
-        <div class="list-mobile list-unstyled text-capitalize py-3 d-none z-2" id="mobileMenu">
-            <ul>
-                <li><a href="#fitur" class="menu-mobile">fitur</a></li>
-                <li><a href="#paket" class="menu-mobile">harga</a></li>
-                <li><a href="#footer" class="menu-mobile">tentang kami</a></li>
-                <li><a href="/register" class="menu-mobile">daftar</a></li>
-                <li><a href="/loginpage" class="menu-mobile">login</a></li>
-            </ul>
-        </div>
     </nav>
 
     <section id="header" class="header-landing">
@@ -72,10 +48,10 @@
 
     <section id="fitur" class="fitur">
         <p class="title-fitur text-capitalize fw-semibold mx-auto">fitur aplikasi kami</p>
-        <div class="container text-center py-5">
+        <div class="container text-center py-5" style="padding: 20px 60px 10px 60px;">
             <div class="row align-items-center gap-5">
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/1.png" class="mx-auto my-4" width="108px" alt="...">
                         <div class="card-body mt-2">
                             <h5 class="fw-bolder" style="font-size: 18px; height: 48px;">Presensi Bagi Siswa/Mahasiswa
@@ -86,23 +62,21 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/2.png" class="mx-auto my-4" width="108px" alt="...">
                         <div class="card-body mt-2">
                             <h5 class="fw-bolder" style="font-size: 18px; height: 48px;">Penilaian Magang bagi
                                 Siswa/Mahasiswa</h5>
-                            <p class="card-text px-3" style="font-size: 15px; line-height: 1.2; height: 60px;">
-                                Penilaian
+                            <p class="card-text px-3" style="font-size: 15px; line-height: 1.2; height: 60px;">Penilaian
                                 magang dilakukan oleh mitra di aplikasi ketika siswa selesai melaksanakan magang</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/1.png" class="mx-auto my-4" width="108px" alt="...">
                         <div class="card-body mt-2">
-                            <h5 class="fw-bolder" style="font-size: 18px; height: 48px;">Pantau Aktivitas
-                                Siswa/Mahasiwa
+                            <h5 class="fw-bolder" style="font-size: 18px; height: 48px;">Pantau Aktivitas Siswa/Mahasiwa
                             </h5>
                             <p class="card-text px-3" style="font-size: 15px; line-height: 1.2; height: 60px;">Pantau
                                 aktivitas Siswa/Mahasiswa dengan menggunakan Log Activity</p>
@@ -112,7 +86,7 @@
             </div>
             <div class="row align-items-center gap-5 mt-5">
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/4.png" class="mx-auto my-4" width="96px" alt="...">
                         <div class="card-body">
                             <h5 class="fw-bolder" style="font-size: 18px; height: 30px;">Web yang Responsive</h5>
@@ -123,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/5.png" class="mx-auto my-4" width="108px" alt="...">
                         <div class="card-body mt-2">
                             <h5 class="fw-bolder" style="font-size: 18px; height: 48px;">Pengelolaan Izin
@@ -134,7 +108,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/6.png" class="mx-auto my-4" width="108px"
                             style="padding-top: 40px; padding-bottom: 28px;" alt="...">
                         <div class="card-body mt-2">
@@ -146,9 +120,9 @@
                 </div>
             </div>
             <div class="row align-items-center gap-5 mt-5 mb-4">
-                <div class="col card-bottom"></div>
+                <div class="col"></div>
                 <div class="col">
-                    <div class="card px-2 py-5 shadow border-0" style="border-radius: 16px;">
+                    <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/7.png" class="mx-auto my-4" width="108px" alt="...">
                         <div class="card-body mt-2">
                             <h5 class="fw-bolder" style="font-size: 18px; height: 56px;">Tesedia fitur Presensi
@@ -158,8 +132,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card-bottom"></div>
+                <div class="col"></div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -409,8 +384,8 @@
             <div class="container container-footer">
                 <div class="row align-items-center">
                     <div class="col-4">
-                        <div class="d-flex logo-footer">
-                            <img src="assets/images/logo.png" />
+                        <div class="d-flex">
+                            <img src="assets/images/logo.png" width="70px" />
                             <h4 class="text-uppercase my-auto ms-3 fw-bold">seven.inc</h4>
                         </div>
                         <p class="mt-4">+6282934397492</p>
@@ -445,16 +420,15 @@
                             <a href=""
                                 style="background-color: #A61C1CE5; border-radius: 100%; text-align: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                                    fill="currentColor" class="bi bi-facebook" style="color: white;"
-                                    viewBox="0 0 16 16">
+                                    fill="currentColor" class="bi bi-facebook" style="color: white;" viewBox="0 0 16 16">
                                     <path
                                         d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
                                 </svg>
                             </a>
-                            <a href="" style="background-color: #A61C1CE5; text-align: center;">
+                            <a href=""
+                                style="background-color: #A61C1CE5; text-align: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                                    fill="currentColor" class="bi bi-linkedin" style="color: white; border-radius: 100%;"
-                                    viewBox="0 0 16 16">
+                                    fill="currentColor" class="bi bi-linkedin" style="color: white; border-radius: 100%;" viewBox="0 0 16 16">
                                     <path
                                         d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
                                 </svg>
@@ -464,21 +438,21 @@
                     <div class="col-2"></div>
                     <div class="col-2 text-capitalize">
                         <h3 class="mb-4">fitur</h3>
-                        <a href="" class=" text-decoration-none text-white">presensi siswa</a>
-                        <a href="" class=" text-decoration-none text-white">penilaian siswa</a>
-                        <a href="" class=" text-decoration-none text-white">pantau siswa</a>
-                        <a href="" class=" text-decoration-none text-white">pengaturan team</a>
+                        <p>presensi siswa</p>
+                        <p>penilaian siswa</p>
+                        <p>pantau siswa</p>
+                        <p>pengaturan team</p>
                     </div>
                     <div class="col-2 text-capitalize">
                         <h3 class="mb-4">harga</h3>
-                        <a href="#paket" class=" text-decoration-none text-white">bronze</a>
-                        <a href="#paket" class=" text-decoration-none text-white">silver</a>
-                        <a href="#paket" class=" text-decoration-none text-white">gold</a>
-                        <a href="#paket" class=" text-decoration-none text-white">platinum</a>
+                        <p>bronze</p>
+                        <p>silver</p>
+                        <p>gold</p>
+                        <p>platinum</p>
                     </div>
                     <div class="col-2 text-capitalize">
                         <h3 class="mb-4">tools bisnis</h3>
-                        <a href="" class=" text-decoration-none text-white">presensi siswa</a>
+                        <p>presensi siswa</p>
                     </div>
                 </div>
             </div>
@@ -487,15 +461,4 @@
             <span class="fs-3 fw-bold" style="vertical-align: middle;">&copy;</span> 2023 pt.seven inc
         </p>
     </footer>
-
-    <script>
-        document.getElementById("menuButton").addEventListener("click", function() {
-            var mobileMenu = document.getElementById("mobileMenu");
-            if (mobileMenu.classList.contains("d-none")) {
-                mobileMenu.classList.remove("d-none");
-            } else {
-                mobileMenu.classList.add("d-none");
-            }
-        });
-    </script>
 @endsection
