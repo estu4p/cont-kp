@@ -143,6 +143,7 @@ Route::get('/user/reset-password/confirm', function () {
 
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
+});
 
     Route::get('/user', function () {
         return view('user.home', [
@@ -398,6 +399,7 @@ Route::get('/pengaturan', function () {
 });
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
+
 });
 
 Route::get('/super-admin', function () {
@@ -460,3 +462,4 @@ Route::get('/super-admin/langganan', function () {
         'members' => $members,
     ]);
 });
+
