@@ -165,88 +165,78 @@ class HomeMitraController extends Controller
         }
     }
 
-    public function catatLogAktivitas(Request $request)
+    public function catatLogAktivitas(Request $request, $id)
     {
-        $log_aktivitas = $request->input('log_aktivitas');
+        $data = Presensi::where('id', $id)->first();
 
-        $presensi = new Presensi();
+        if ($data) {
+            $log_aktivitas = $request->input('log_aktivitas');
+            $data->log_aktivitas = $log_aktivitas;
+            $data->save();
 
-        $presensi->log_aktivitas = $log_aktivitas;
-        $presensi->jam_masuk = now();
-        $presensi->jam_pulang = now();
-        $presensi->jam_mulai_istirahat = now();
-        $presensi->jam_selesai_istirahat = now();
-        $presensi->status_kehadiran = 'Hadir';
-        $presensi->kebaikan = 'Tidak ada';
-        $presensi->save();
-
-        return response()->json([
-            'status' => 'success',
-            'data' =>
-            $presensi->log_aktivitas,
-        ], 200);
-    }
-
-    public function catatIzin(Request $request)
-    {
-        $request->validate([
-            'id' => 'required|exists:presensi,id',
-            'status_kehadiran' => 'required|in:Hadir,Izin,Sakit,Tidak Hadir',
-        ]);
-
-        $status_kehadiran = $request->status_kehadiran;
-        $id = $request->id;
-        $absensi = Presensi::find($request->id);
-        if ($absensi) {
-            $absensi->status_kehadiran = $status_kehadiran;
-            $absensi->save();
-            return response()->json(['message' => 'Izin magang berhasil dicatat'], 200);
+            return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
         } else {
-            return response()->json(['message' => 'Data presensi tidak ditemukan'], 404);
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
         }
     }
 
-    public function barcode(Request $request)
+    public function catatIzin(Request $request, $id)
     {
-        $request->validate([
-            'barcode' => 'required|string|max:255',
-        ]);
+        $data = Presensi::where('id', $id)->first();
 
-        $user = User::where('barcode', $request->barcode)->first();
+        if ($data) {
+            $status_kehadiran = $request->input('status_kehadiran');
+            $data->status_kehadiran = $status_kehadiran;
+            $data->save();
 
-        if (!$user) {
-            return response()->json(['message' => 'Barcode tidak valid'], 404);
+            return response()->json([
+                'status' => 'Izin magang berhasil dicatat',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'Data presensi tidak ditemukan',
+            ], 404);
         }
-        $presensi = new Presensi();
-        $presensi->nama_lengkap = $user->id;
-        $presensi->jam_masuk = Carbon::now();
-        $presensi->status_kehadiran = 'Hadir';
-        $presensi->save();
-
-        return response()->json(['message' => 'Presensi berhasil dicatat'], 200);
     }
 
-    public function detailGantiJam(Request $request)
+    public function barcode(Request $request, $id)
     {
-        $request->validate([
-            'hari' => 'required|in:Senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu|date_format:Y-m-d',
-            'keterangan_izin' => 'required|string',
-            'status' => 'required|string|in:Ganti jam',
-        ]);
+        $data = Presensi::where('id', $id)->first();
 
-        $hari = $request->hari;
-        $keterangan_izin = $request->keterangan_izin;
-        $status = $request->status;
+        if ($data) {
+            $barcode = $request->input('barcode');
+            $data->barcode = $barcode;
+            $data->save();
 
-        $detailGantiJam = Presensi::where('hari', $hari)
-            ->where('keterangan_izin', $keterangan_izin)
-            ->where('status', $status)
-            ->get();
-
-        if ($detailGantiJam->isNotEmpty()) {
-            return response()->json(['data' => $detailGantiJam], 200);
+            return response()->json([
+                'status' => 'Presensi berhasil dicatat',
+                'data' => $data,
+            ], 200);
         } else {
-            return response()->json(['message' => 'Detail ganti jam tidak ditemukan'], 404);
+            return response()->json([
+                'status' => 'Barcode tidak valid',
+            ], 404);
+        }
+    }
+
+    public function detailGantiJam(Request $request, $id)
+    {
+        $data = Presensi::select('hari', 'keterangan_status', 'status_kehadiran')->find($id);   
+        if ($data) {
+            return response([
+                'pesan' => 'data berhasil di tampilkan',
+                'data' => $data,
+            ], 200);
+        } else {
+            return response([
+                'pesan' => 'data tidak ada',
+            ], 404);
         }
     }
 }

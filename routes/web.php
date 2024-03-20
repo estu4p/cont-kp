@@ -282,7 +282,7 @@ Route::get('/user/home', function () {
     Route::get('/kategoripenilaian', function () {
         return view('pengaturan.kategoripenilaian');
     });
-});
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -428,20 +428,13 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
 });
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 
@@ -503,15 +496,13 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
-<<<<<<< HEAD
-=======
+
 
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
 
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
@@ -530,7 +521,3 @@ Route::get('/super-admin/langganan', function () {
         'members' => $members,
     ]);
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
