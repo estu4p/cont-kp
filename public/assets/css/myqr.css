@@ -1,0 +1,50 @@
+body {
+    background-color: black !important;
+    font-family: Arial, sans-serif;
+   
+    text-align: center !important;
+}
+
+.qr-container {
+    margin-top: 30px;
+}
+
+.qr-image {
+    width: 250px;
+    height: 250px;
+}
+
+.text-container {
+    margin-top: 30px;
+}
+
+.kembali {
+    background-color:transparent;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    padding-top: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}
+.wadah{
+    background-color: #F8F9FA;
+    width: 30%;
+    text-align: center;
+    margin-left: 35%;
+    margin-top: 100px;
+    padding-top: 20px;
+    padding-bottom: 70px;
+    border-radius: 30px;
+}
+.btnqr{
+    
+    border: none;
+    background-color: transparent;
+    
+}

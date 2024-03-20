@@ -1,0 +1,265 @@
+.header{
+    background-image: url(/assets/images/pictBG.png);
+    
+    background-size: cover;
+    color: rgb(236, 237, 238);
+    margin-bottom: 10px;
+    height: 200px;
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 30px;
+    padding-top: 5px;
+}
+.atas{ 
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    font-size: 20px;
+    margin: auto;
+}
+.tengah{
+    text-align: center;
+    padding-top: 30px;
+    font-style: italic;
+}
+.bawah{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+   
+}
+
+.profil{
+    background: #BA181B;
+    width:max-content;
+    height: max-content;
+    border-radius: 50%;
+    padding:10px 12px;
+}
+.judul{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+}
+.logout{
+    font-size: 30px;
+    
+}
+.fz9{
+    font-size: 90%;
+}
+.tengah-judul{
+    width: max-content;
+}
+
+.wadah{
+    
+    width: 98%;
+    margin: auto;
+}
+.qr{
+    text-align: right;
+   
+}
+
+.btnqr{
+    
+    border: none;
+    background-color: transparent;
+    
+}
+.konten{
+   
+    display: flex;
+    height: 420px;
+}
+.shif{
+    
+    width: 25%;
+    height: auto;
+    text-align: center;
+}
+.judulshif{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    
+}
+.masuk, .kembali, .istirahat, .pulang, .log{
+    width: 60%;
+    height: 50px;
+    background-color: #626F78;
+    color: aliceblue;
+    border-radius: 10px;
+}
+.izin{
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid black !important;
+}
+.kanan{
+    width: 75%;
+}
+.kananatas{
+    width: 100%;
+    height: 30%;
+
+    display: flex;
+}
+.kananbawah{
+    width: 100%;
+    height: 70%;
+    display: flex;
+}
+.cardatas{
+    width: 20%;
+    height: 80%;
+    background-color: #ECEFF2;
+    padding-left: 40px;
+    border-radius: 10px;
+}
+.judulmasuk{
+    padding-top: 10px;
+    font-weight: bold;
+}
+.jammasuk{
+    font-weight: bold;
+}
+.kebaikan{
+    width: 50%;
+    height: 100%;
+    /* border-color: #626F78; */
+    padding-left: 30px;
+    border-radius: 10px;
+}
+.perhatian{
+    width: 50%;
+    height: 100%;
+}
+.sudah{
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.grubbuton{
+    text-align: right;
+    padding-right: 35px;
+    padding-top: 20px;
+    height: 60px;
+}
+.batal{
+    width: 30%;
+    background-color: transparent;
+    border: none;
+    height: 100%;
+}
+.tambahkan{
+    width: 30%;
+    background-color: #626F78;
+    color: white;
+    border-radius: 3px;
+    height: 100%;
+    
+}
+.perhatian{
+    text-align: center;
+    height: 100%; 
+    
+}
+.judulperhatian{
+    font-weight: bold;
+    color: #F82525;
+    font-size: 18px;
+    height: 20%;
+}
+.kontenperhatian{
+    display: flex;
+    justify-content: space-between;
+    height: 90%;
+}
+.keterangan{
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    color: #F82525;
+    padding-top: 100px;
+   
+}
+.kurangjam{
+    width: 40%;
+    height: 100%;
+    border-radius: 5px;
+    text-align: center;
+    color: #F82525;
+   
+   
+}
+.milik{
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+.angkakurang{
+    background-color: #E9ECEF;
+    width: 50%;
+    height: 20%;
+    padding-top: 15px;
+    border-radius: 5px;
+}
+.lihat{
+    padding-top: 0px;
+}
+.hilang{
+    display:none;
+}
+.muncul{
+    display:inline-block
+}
+.ori-aktif{
+    color:#b8b8b8;
+}
+.merah-aktif{
+    color:red;
+}
+.bordermerah{
+    border: 1px solid red;
+    color: red;
+}
+.borderijo{
+    border:1px solid green;
+    color: green;
+}
+
+.judulmodal{
+    text-align: center;
+}
+
+.bawahmodal{
+    text-align: right;
+    padding-top: 20px;
+    display: flex;
+}
+
+#pesan, .inputt{
+    width: 100%;
+    background-color: #E9ECEF;
+    padding-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+
+.judulinput{
+    font-weight: bold;
+    padding-top: 0px;
+}
+.izin-hilang{
+    display: none !important;
+}
+.modalheader{
+    text-align: center !important;
+}

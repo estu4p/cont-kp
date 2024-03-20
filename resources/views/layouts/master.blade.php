@@ -25,7 +25,7 @@
     <div class="wrapper">
 
         @include('template.navbar')
-        <!-- bueeek master baru piqri bangke -->
+       
 
         <div class="content-wrapper">
             <section class="content">
@@ -34,7 +34,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebar')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">
@@ -50,7 +50,6 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
     <script>
-        
         $(document).ready( function () {
             var table = $('#example').DataTable( {
                 pageLength : 5,
@@ -62,5 +61,4 @@
         } );
     </script>
 </body>
-
 </html>

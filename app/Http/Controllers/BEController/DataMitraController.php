@@ -15,13 +15,14 @@ class DataMitraController extends Controller
     {
         $data = User::all();
         $mitra = Mitra::withCount('mahasiswa')->get();
-
+    
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['data' => $mitra]);
         } else {
-            return view('DataMitra')->with('data', $data)->with('mitra', $mitra);
+            return view('DataMitra', compact('data', 'mitra'));
         }
     }
+    
     public function presensi(Request $request, $id)
     {
         $mitra = Mitra::findOrFail($id);
