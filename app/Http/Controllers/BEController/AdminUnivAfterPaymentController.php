@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Penilaian;
+use App\Models\Project;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -62,8 +63,6 @@ class AdminUnivAfterPaymentController extends Controller
         $validator = Validator::make($request->all(), [
             "nama_lengkap" => 'required',
             'email' => 'required|min:6',
-            // 'nomor_induk' => 'required',
-            // 'jurusan' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
             'about' => 'required',
@@ -77,18 +76,8 @@ class AdminUnivAfterPaymentController extends Controller
         }
 
         $user = User::findOrFail($id);
-
-        // $user->fill([
-        //     'nama_lengkap' => $request->nama_lengkap,
-        //     'email' => $request->email,
-        //     'nomor_induk_' => $request->nomor_induk,
-        //     'jurusan' => $request->jurusan,
-        //     'no_hp' => $request->no_hp,
-        //     'alamat' => $request->alamat,
-        //     'about' => $request->about
-        // ]);
         $user->update($request->all());
-        // $user->save();
+
         return redirect()->route('adminUniv.editProfile', $user->id);
     }
 
