@@ -1,0 +1,60 @@
+/* Style untuk judul */
+/* p { */
+    /* font-size: 24px; */
+    /* margin-bottom: 20px; */
+    /* color: #0e0d0d; Warna teks */
+     /* text-align: weigh; Memusatkan judul */
+  /* } */
+  
+  /* Style untuk form-check */
+  .form-check {
+    margin-bottom: 10px;
+    color: #141313;
+  }
+  
+  /* Style untuk tombol */
+  .btn-primary {
+    background-color: #141313;
+    border-color: #1b1a1a;
+    color: #fff; /* Warna teks tombol */
+  }
+  
+  .btn-primary:hover {
+    background-color: #161414;
+    border-color: #161414;
+  }
+  
+  .btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  .h3{
+    color: #0056b3;
+  }
+  /* .container h3 { */
+    /* font-size: 50px; Ukuran judul */
+    /* margin: 0; Hilangkan margin atas dan bawah */
+    /* color: #cc1515; Warna teks judul */
+/* } */
+
+/* Gaya khusus untuk deskripsi */
+.container p {
+    margin: 0; /* Hilangkan margin atas dan bawah */
+    font-size: 18px; /* Ukuran font untuk deskripsi */
+    color: #1b1313; /* Warna teks deskripsi */
+}
+
+
+.abs-kiri{
+  position: absolute;
+  top:20%;
+  left:0;
+}
+.wadah{
+  position: relative;
+}
+.p-0{
+  color: #e91111;
+}
+.p{
+  color: black;
+}

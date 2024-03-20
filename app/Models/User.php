@@ -14,14 +14,30 @@ class User extends Authenticatable
     protected $fillable = [
         'nama_lengkap',
         'nomor_induk',
+        'sekolah',
         'jurusan',
         'email',
         'username',
         'no_hp',
-        'alamat',
+        'barcode',
         'password',
-        'role_id',
+        'kota',
+        'alamat',
+        'tgl_lahir',
         'about',
+        'os',
+        'status_akun',
+        'browser',
+        'tgl_masuk',
+        'tgl_keluar',
+        'email_verified_at',
+        'mitra_id',
+        'role_id',
+        'divisi_id',
+        'shift_id',
+        'paket_id',
+        'project_id'
+
     ];
 
     protected $hidden = [

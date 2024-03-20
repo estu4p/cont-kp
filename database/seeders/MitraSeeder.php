@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Divisi;
 use App\Models\Mitra;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
