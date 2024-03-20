@@ -12,6 +12,10 @@ class LoginController extends Controller
     {
         return view('user.login');
     }
+    public function adminUnivLogin()
+    {
+        return view('adminUniv-afterPayment.AdminUniv-Login');
+    }
 
     public function ValidateLogin(Request $request)
     {
@@ -31,13 +35,11 @@ class LoginController extends Controller
                     'message' => 'Login berhasil sebagai Super Admin',
                     'redirect' => 'SuperAdmin/dashboard'
                 ], 200);
-                
             } else if ($user->role == 2) {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Admin',
                     'redirect' => 'Admin/dashboard'
                 ], 200);
-                
             } else if ($user->role == 3) {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Mahasiswa  Siswa',
