@@ -37,6 +37,7 @@ class UserSeeder extends Seeder
                 'browser' => $faker->randomElement(['Chrome', 'Edge']),
                 'tgl_masuk' => $faker->dateTime,
                 'tgl_keluar' => $faker->dateTime,
+                'konfirmasi_email' => $faker->randomElement(['Sudah', 'Belum']),
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
                 'sekolah' => Sekolah::inRandomOrder()->first()->id,
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
