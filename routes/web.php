@@ -382,9 +382,9 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 }); // pakai id supaya dapat detail profil cth detailprofil/{id}
 
-Route::get('/mitra-adminunivmitra', function () {
-    return view('adminUniv-afterPayment.mitra.adminunivmitra');
-});
+// Route::get('/mitra-adminunivmitra', function () {
+//     return view('adminUniv-afterPayment.mitra.adminunivmitra');
+// });   // kenapa duplikat nih
 
 Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
