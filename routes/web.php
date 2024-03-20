@@ -414,23 +414,17 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
 
 
 
 
 
-Route::get('/pengaturan', function () {
-    return view('pengaturan.margepenilaiandivisi');
-});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
+Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
 Route::get('/super-admin', [SuperadminSistemController::class, 'dashboard'])->name('super-admin.dashboard');
 Route::get('/super-admin/ubah-profil', [SuperadminSistemController::class, 'editProfile'])->name('super-admin.edit-profile');
