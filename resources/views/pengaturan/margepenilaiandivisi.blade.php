@@ -20,13 +20,13 @@
             <p class="membuat">Membuat Kategori Penilaian Per Divisi</p>
         </div>
         <div>
-                            <select name="page" class="page">
-        <option value="page">page 1 of 1</option>
-    </select>
-    <select name="item" class="item">
-        <option value="item">5 item per page</option>
-    </select>
-                            </div>
+            <select name="page" class="page">
+                <option value="page">page 1 of 1</option>
+            </select>
+            <select name="item" class="item">
+                <option value="item">5 item per page</option>
+            </select>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -34,7 +34,7 @@
                         <form action="#">
                             <div class="form-group">
                                 <label for="nama_divisi"></label>
-                                
+
                             </div>
                         </form>
                     </div>
@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr >
+                            <tr>
                                 <td>1</td>
                                 <td>Ui/Ux</td>
                                 <td>
@@ -57,7 +57,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                            <tr >
+                            <tr>
                                 <td>2</td>
                                 <td>Programmer</td>
                                 <td>
@@ -82,7 +82,7 @@
                                 </td>
                             </tr>
 
-                        
+
                             <tr>
                                 <td>4</td>
                                 <td>Content Creator</td>
@@ -91,7 +91,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                        
+
                             <tr>
                                 <td>5</td>
                                 <td>Editor Vidio</td>
@@ -100,7 +100,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                       
+
                             <tr>
                                 <td>6</td>
                                 <td>Desain Grafis</td>
@@ -109,7 +109,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                        
+
                             <tr>
                                 <td>7</td>
                                 <td>Content Writer</td>
@@ -118,7 +118,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                        
+
                             <tr>
                                 <td>8</td>
                                 <td>Content Planner</td>
@@ -127,7 +127,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmationModal()">Hapus</button>
                                 </td>
                             </tr>
-                      
+
                             <tr>
                                 <td>9</td>
                                 <td>Administrasi</td>
@@ -139,33 +139,33 @@
                         </tbody>
                     </table>
                     <div>
-                        
+
                     </div>
 
                 </div>
                 <div>
-                    
+
                 </div>
             </div>
-            
-            
+
+
         </div>
-        
+
         <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-        
-    
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+
     </div>
 </div>
 
@@ -198,20 +198,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-body text-center ">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Berhasil!</h5>
-                <div>
-            <div>
-                 <img src="assets/images/berhasil.png" alt="Logo" class="logo">
-            </div>
-                
-            <div class="modal-body text-center">
-                <p>Data berhasil dihapus</p>
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Berhasil!</h5>
+                    <div>
+                        <div>
+                            <img src="assets/images/berhasil.png" alt="Logo" class="logo">
+                        </div>
+
+                        <div class="modal-body text-center">
+                            <p>Data berhasil dihapus</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 </div>
 
 

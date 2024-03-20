@@ -167,5 +167,14 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
-
+//USER ADMIN SISTEM/LOKASI (SEVEN INC)
+Route::get('/AdminSistem-Dashboard', function () {
+    return view('SistemLokasi.AdminSistem-Dashboard');
+});
+Route::get('/AdminSistem-Editprofile', function () {
+    return view('SistemLokasi.AdminSistem-Editprofile');
+});
+Route::get('/AdminSistem-Subcription', function () {
+    return view('SistemLokasi.AdminSistem-Subcription');
+});
 

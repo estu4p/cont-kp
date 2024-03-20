@@ -157,8 +157,7 @@
 
                 <button type="button" class="btn mt-4 mb-5" style="background-color: white; color: black; padding: 7px 35px; margin-left:30px" data-bs-dismiss="modal">Batal</button>
                 <button type="button" class="btn mt-4 mb-5" style="background-color: red; color: white; padding: 7px 35px;" onclick="showConfirmationModal()">Tambahkan</button>
-
-            </div>
+             </div>
         </div>
     </div>
 </div>
