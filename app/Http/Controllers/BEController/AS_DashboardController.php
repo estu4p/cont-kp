@@ -10,7 +10,7 @@ class AS_DashboardController extends Controller
 {
     public function filterDashboard()
     {
-        // Menghitung total subcription
+        // Menghitung total subscription
         $totalSubscription = MitraMahasiswa::count();
         
         // Menghitung total aktif dan tidak aktif
@@ -18,7 +18,7 @@ class AS_DashboardController extends Controller
         $totalTidakAktif = MitraMahasiswa::where('jumlah_subcription', 'tidak aktif')->count();
 
         return response()->json([
-            'total_subcription' => $totalSubcription,
+            'total_subscription' => $totalSubscription,
             'total_aktif' => $totalAktif,
             'total_tidak_aktif' => $totalTidakAktif,
         ]);
