@@ -40,10 +40,10 @@ Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang']);
 Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat']);
 Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat']);
 Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
-Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
-Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
-Route::post('/barcode', [HomeMitraController::class, 'barcode']);
-Route::get('/detailGantiJam', [HomeMitraController::class, 'detailGantiJam']);
+Route::post('/catatLogAktivitas/{id}', [HomeMitraController::class, 'catatLogAktivitas']);
+Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::get('/detailGantiJam/{id}', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
