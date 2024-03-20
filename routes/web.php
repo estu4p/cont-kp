@@ -264,6 +264,8 @@ Route::get('/Kategori-penilaian', function () {
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
+Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
@@ -292,10 +294,7 @@ Route::get('/AdminUniv-InputNewPassword', function () {
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-// Route::get('/AdminUniv-EditProfile', function () {
-//     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-// }); diganti yang bawah ya, yang ada id nya
+})->name('adminUniv.dashboard');
 
 
 
