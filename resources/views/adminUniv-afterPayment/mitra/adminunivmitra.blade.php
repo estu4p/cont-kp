@@ -38,9 +38,14 @@
                         MITRA
                         <i class="fa-solid fa-ellipsis-vertical klik " data-toggle="modal" data-target="#exampleModal"></i>
                     </div>
-                    <div class="card-body">
-                        <h5>{{ $data->nama_mitra }}</h5>
-                        <p style="margin-left: 100px">{{ $data->mahasiswa_count }} Orang</p>
+                    {{-- dari BE, pake flex mas jangan pake margin left :) --}}
+                    <div class="card-body flex justify-content-between">
+                        <div>
+                            <h5>{{ $data->nama_mitra }}</h5>
+                        </div>
+                        <div>
+                            <p>{{ $data->mahasiswa_count }} Orang</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
