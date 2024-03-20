@@ -4,8 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BEController\DashboardAdminController;
+use App\Http\Controllers\BEController\DataMitraController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
 
@@ -23,6 +29,9 @@ use App\Http\Controllers\BEController\HomeMitraController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/loginn', [ApiAuthController::class, 'login']);
 
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');

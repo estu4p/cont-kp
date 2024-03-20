@@ -13,7 +13,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,18 +57,23 @@ Route::middleware('user')->group(function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
-Route::get('/register', function () {
-    return view('landing-page.daftar', ['title' => "Daftar"]);
-});
+
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
-Route::get('/', function () {
-    return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
+
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard']);
 });
+
+    
+
+Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
 Route::get('/dashboard-admin', function () {
     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
 });
@@ -202,6 +209,8 @@ Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
+
+
 
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
