@@ -1,0 +1,307 @@
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.header-logo {
+    width: 100px;
+    height: auto;
+    
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 400px; /* Ukuran lebar */
+    height: 40px; /* Ukuran tinggi */
+    margin-left: auto; /* Menggeser ke kanan */
+}
+.page, .item{
+    background: #c6c6c6;
+    border-radius:5px;
+    
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    width: 100%; /* Lebar input mengikuti parentnya */
+    
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #F2F4F8;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+}
+.Bronze{
+    background-color:#AF3333 ;
+    border-radius: 30px;
+    text-align: center;
+    color:white;
+    width: 100px;
+    height: 30px;
+    padding-top: 3px;
+}
+.Silver{
+    background-color:#1A4CFF;
+    border-radius: 30px;
+    text-align: center;
+    color:white;
+    width: 100px;
+    height: 30px;
+    padding-top: 3px;
+}
+.Gold{
+    background-color:#1AA158;
+    border-radius: 30px;
+    text-align: center;
+    color:white;
+    width: 10%;
+    width: 100px;
+    height: 30px;
+    padding-top: 3px;
+}
+.Platinum{
+    background-color:#4A1A88;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    width: 10%;
+    width: 100px;
+    height: 30px;
+    padding-top: 3px;
+}
+.aksi{
+    display: flex;
+}
+.line{
+    padding-top: 1px;
+}
+.search-wadah{
+border-radius: 10px;
+box-sizing: border-box;
+}
+.inputsearch{
+    background-color: transparent;
+    border: none !important;
+    outline: none !important;
+    
+}
+.swal-button--cancel {
+    background-color: red !important;
+    color: white !important;
+}
+
+.swal-button--confirm {
+    background-color: white !important;
+    color: black !important;
+}
+#edit-pelanggan {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.modalbodi{
+    display: flex;
+    /* margin-right: 90px; */
+}
+.wadah{
+    width: 700px;
+
+    
+}
+.kiri{
+    width: 50%;
+   
+    
+
+}
+.kanann {
+    width: 50%;
+    padding-left: 20px;
+
+}
+.inputt{
+    width: 300px;
+    
+    
+    
+}
+.inputt2{
+    width: 150px;
+    background-color: #E1E2E5;
+    
+}
+.inputt3{
+    width: 300px;
+    background-color: #E1E2E5;
+    
+}
+.wadah-icon{
+    position: relative !important;
+    background-color: yellow !important;
+}
+.iconnya{
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+.dropdown-menu {
+    display: none;
+}
+.red-icon {
+    color:#FF0606;
+}
+.blue-icon {
+    color: #0040FF;
+}
+.opsions{
+    margin-bottom: 40px;
+    height: 40px;
+    padding:20px auto !important;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+  .select-selected {
+    background-color: rgb(255, 255, 255);
+    border:1px solid grey;
+    width:100% !important;
+    border-radius: 5px;
+    box-shadow: 0 0 2px black !important;
+  }
+  
+  /* Style the arrow inside the select element: */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #0b0b0b transparent transparent transparent;
+  }
+  
+  /* Point the arrow upwards when the select box is open (active): */
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #4e4e4e transparent;
+    top: 7px;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected {
+    color: #1d1d1d;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+  
+  /* Style items (options): */
+  .select-items {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border:1px solid grey;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+
+
