@@ -30,15 +30,12 @@
         <div class="atas">
             <div class="kalender">
                 <i class="fa-solid fa-calendar-days"></i>
-<<<<<<< HEAD
                 <span>{{ now()->isoFormat('dddd, D MMMM YYYY') }}</span>
             </div>
             <div id="jam" class="jam">{{ now()->format('H:i:s') }}</div>
-=======
                 <span class="kalender" id="kalender">Rabu, 23 Agustus 2023</span>
             </div>
             <div class="jam" id="jam"></div>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
         </div>
         <div class="tengah">
             <h3>"Change your life now for better future"</h3>
@@ -67,12 +64,9 @@
             <div class="shif">
                 <div class="judulshif toggle-shift">Shift Middle</div>
                 <div style="padding-bottom: 10px">
-<<<<<<< HEAD
                     <button class="masuk" id="masuk" type="button" onclick="showmodal()" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">masuk</button>
-=======
                     <button class="masuk" id="masuk" type="button" onclick="showmodal()" data-bs-toggle="modal" data-bs-target="#exampleModal">Masuk</button>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                 </div>
                 <div>
                     <button type="button" class="btn izin" data-bs-toggle="modal" data-bs-target="#izin" onclick="showmodalizin()">
@@ -85,7 +79,6 @@
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
                         <div class="judulmasuk d-flex flex-column ">
-<<<<<<< HEAD
                             <form action="{{ route('jamMasuk') }}" method="POST">
                                 @csrf
                                 <p>Masuk</p>
@@ -95,21 +88,17 @@
                                 </div>
                             </form>
                             <div class="jammasuk my-0 toggle-hilang">---</div>
-=======
                             <p>Masuk</p>
                             <div class=" flex-column gap-0">
                                 <div class="jammasuk my-0 ">---</div>
                                 <p class="text-danger hilang toggle-muncul m-0" style="font-size:75%;">-00.30.01</p>
                             </div>
-
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                         </div>
                     </div>
 
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status2 ori-aktif"></i></div>
                         <div class="judulmasuk d-flex flex-column ">
-<<<<<<< HEAD
                             <form action="{{ route('jamMulaiIstirahat') }}" method="POST">
                                 @csrf
                                 <p>Istirahat</p>
@@ -119,13 +108,11 @@
                                 </div>
                             </form>
                             <div class="jammasuk2 my-0">---</div>
-=======
                             <p>Istirahat</p>
                             <div class=" flex-column gap-0">
                                 <div class="jammasuk2 my-0 ">---</div>
                                 <!-- <p class="text-danger hilang toggle-muncul2 m-0" style="font-size:60%;">-00.30.01</p> -->
                             </div>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                         </div>
                     </div>
 
@@ -133,7 +120,7 @@
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status3 ori-aktif "></i>
                         </div>
                         <div class="judulmasuk d-flex flex-column ">
-<<<<<<< HEAD
+
                             <form action="{{ route('jamSelesaiIstirahat') }}" method="POST">
                                 @csrf
                                 <p>Kembali</p>
@@ -143,13 +130,11 @@
                                 </div>
                             </form>
                             <div class="jammasuk3 my-0">---</div>
-=======
                             <p>Kembali</p>
                             <div class=" flex-column gap-0">
                                 <div class="jammasuk3 my-0 ">---</div>
                                 <!-- <p class="text-danger hilang toggle-muncul3 m-0" style="font-size:60%;">-00.30.01</p> -->
                             </div>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                         </div>
                     </div>
 
@@ -157,7 +142,6 @@
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle  bundar-status4 ori-aktif"></i>
                         </div>
                         <div class="judulmasuk d-flex flex-column ">
-<<<<<<< HEAD
                             <form action="{{ route('jamPulang') }}" method="POST">
                                 @csrf
                                 <p>Pulang</p>
@@ -167,13 +151,11 @@
                                 </div>
                             </form>
                             <div class="jammasuk4 my-0">---</div>
-=======
                             <p>Pulang</p>
                             <div class=" flex-column gap-0">
                                 <div class="jammasuk4 my-0 ">---</div>
                                 <!-- <p class="text-danger hilang toggle-muncul4 m-0" style="font-size:60%;">-00.30.01</p> -->
                             </div>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                         </div>
                     </div>
                 </div>
@@ -181,12 +163,9 @@
                 <div class="kananbawah">
                     <div class="kebaikan border border-secondary mx-3">
                         <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-<<<<<<< HEAD
                         <textarea id="pesan" name="pesan" rows="6" cols="65"
                             placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF;"></textarea>
-=======
                         <textarea id="pesan" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                         <div class="grubbuton">
                             <button class="batal">Batal</button>
                             <button class="tambahkan">Tambahkan</button>
@@ -213,12 +192,9 @@
         </div>
     </div>
 
-<<<<<<< HEAD
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-=======
     <div class="modal" tabindex="-1" id="izin" aria-labelledby="exampleModalLabel" aria-hidden="true">
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -229,7 +205,6 @@
                 </div>
                 <hr style="width:100%;">
                 <div class="modal-body">
-<<<<<<< HEAD
                     <form action="{{ url('/jamMasuk') }}" method="POST">
                         @csrf
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
@@ -243,7 +218,6 @@
                         <button type="submit" class="btn btn-primary" aria-label="Close">submit
                         </button>
                     </form>
-=======
                 <div class="grupinput">
                         <p class="judulinput">Alasan izin</p>
                         <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Ketik alasan"></textarea>
@@ -274,8 +248,6 @@
                     <div class="bawahmodal">
                         <button type="button" class="btn btn-danger submitmodal" data-bs-dismiss="modal" onclick="shift()" aria-label="Close">Submit</button>
                     </div>
-
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
                 </div>
             </div>
         </div>
@@ -290,8 +262,6 @@
         }
 
         function shift() {
-<<<<<<< HEAD
-=======
             var now = new Date();
             var hours = now.getHours().toString().padStart(2, '0');
             var minutes = now.getMinutes().toString().padStart(2, '0');
@@ -318,7 +288,7 @@
                 selisihMenit.toString().padStart(2, '0') + ":" +
                 selisihDetik.toString().padStart(2, '0');
 
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
+
             const masukButton = document.querySelector("#masuk");
             if (masukButton.innerHTML === "Masuk") {
                 document.querySelector('.jammasuk').innerText = timeString;
@@ -362,7 +332,6 @@
             }
         }
 
-<<<<<<< HEAD
         function updateClock() {
             var now = new Date();
             var jam = now.getHours();
@@ -387,7 +356,6 @@
 
         // Panggil fungsi updateClock untuk pertama kali
         updateClock();
-=======
         function izin() {
             const izinButton = document.querySelector(".btn.izin");
             if (izinButton) {
@@ -432,7 +400,6 @@
 
         // Panggil updateTime sekali untuk menetapkan waktu awal
         updateTime()
->>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
     </script>
 
 </body>
