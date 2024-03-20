@@ -232,7 +232,11 @@ Route::get('/manage-shift', function () {
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
+
     }); 
+
+
+
 
 Route::get('/MitraPresensiDetailIzin', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailIzin');
@@ -343,6 +347,16 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+//USER ADMIN SISTEM/LOKASI (SEVEN INC)
+Route::get('/AdminSistem-Dashboard', function () {
+    return view('SistemLokasi.AdminSistem-Dashboard');
+});
+Route::get('/AdminSistem-Editprofile', function () {
+    return view('SistemLokasi.AdminSistem-Editprofile');
+});
+Route::get('/AdminSistem-Subcription', function () {
+    return view('SistemLokasi.AdminSistem-Subcription');
+});
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
