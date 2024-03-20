@@ -261,9 +261,9 @@ Route::get('/AdminUniv-InputNewPassword', function () {
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
 });
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
+// Route::get('/AdminUniv-EditProfile', function () {
+//     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+// }); diganti yang bawah ya, yang ada id nya
 
 
 
