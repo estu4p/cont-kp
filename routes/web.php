@@ -232,7 +232,7 @@ Route::get('/manage-shift', function () {
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
-
+});
 Route::get('/MitraPresensiDetailIzin', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailIzin');
 });
@@ -351,7 +351,7 @@ Route::get('/AdminSistem-Editprofile', function () {
 });
 Route::get('/AdminSistem-Subcription', function () {
     return view('SistemLokasi.AdminSistem-Subcription');
-
+});
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
