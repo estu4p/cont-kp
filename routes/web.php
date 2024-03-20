@@ -13,7 +13,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,18 +57,23 @@ Route::middleware('user')->group(function () {
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
-Route::get('/register', function () {
-    return view('landing-page.daftar', ['title' => "Daftar"]);
-});
+
 
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
-Route::get('/', function () {
-    return view('landing-page.index', ['title' => "Controlling Magang - Landing Page"]);
+
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard']);
 });
+
+    
+
+Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
 Route::get('/dashboard-admin', function () {
     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
 });
@@ -100,6 +107,9 @@ Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
+});
+Route::get('/adminafterpayment', function () {
+    return view('mitra.adminafterpayment');
 });
 
 
@@ -164,10 +174,10 @@ Route::get('/user/barcode', function () {
 Route::get('/pemagang/home', function () {
     return view('pemagang.home', ['title' => "Home"]);
 });
+
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
-
 
 
 
@@ -204,15 +214,11 @@ Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
 
+
+
+
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
-});
-
-Route::get('/MitraPresensiDetailIzin', function () {
-    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
-});
-Route::get('/MitraPresensiDetailTidakHadir', function () {
-    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
 
 
@@ -226,6 +232,22 @@ Route::get('/manage-shift', function () {
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
+});
+
+
+Route::get('/manage-devisi', function () {
+    return view('mitra-pengaturan.manage-devisi');
+
+});
+
+Route::get('/manage-shift', function () {
+    return view('mitra-pengaturan.manage-shift');
 });
 
 
@@ -250,6 +272,18 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
 
+Route::get('/Kategori-penilaian', function () {
+    return view('mitra-pengaturan.Kategori-penilaian');
+});
+
+
+
+// adminUniv-afterPayment
+Route::get('/AdminUniv-Login', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Login');
+})->name('login.admin');
+Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
@@ -266,6 +300,37 @@ Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
 
+Route::get('/AdminUniv-ResetPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+});
+Route::get('/mitra-laporanpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/mitra-laporanpresensi-detaihadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+});
+Route::get('/mitra-laporanpresensi-detailizin', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+});
+Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
+});
+
+
+
+Route::get('/AdminUniv-InputOTP', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+});
+
+Route::get('/AdminUniv-InputNewPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+});
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+})->name('adminUniv.dashboard');
+
 
 
 
@@ -276,6 +341,7 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -351,14 +417,51 @@ Route::get('/Kategori-penilaian', function () {
 
 
 // adminUniv-afterPayment
-Route::get('/AdminUniv-Login', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Login');
-})->name('login.admin');
+
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
+
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
+}); // pakai id supaya dapat detail profil cth detailprofil/{id}
+
+// Route::get('/mitra-adminunivmitra', function () {
+//     return view('adminUniv-afterPayment.mitra.adminunivmitra');
+// });   // kenapa duplikat nih
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
 Route::get('/mitra-laporanpresensi-detaihadir', function () {
@@ -378,6 +481,7 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
@@ -387,6 +491,7 @@ Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
 
+
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 Route::get('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
@@ -395,12 +500,12 @@ Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentCont
 
 
 
-Route::get('/pengaturan', function () {
-    return view('pengaturan.margepenilaiandivisi');
-});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
+Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
 Route::get('/super-admin', function () {
     return view('super-admin.dashboard', [
