@@ -232,7 +232,12 @@ Route::get('/manage-shift', function () {
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
-});
+
+    }); 
+
+
+
+
 Route::get('/MitraPresensiDetailIzin', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailIzin');
 });
@@ -359,6 +364,7 @@ Route::get('/user/barcode', function () {
         'nama' => "Syalita"
     ]);
 });
+
 
 
 //user
