@@ -1,6 +1,6 @@
 .header{
     background-image: url(/assets/images/pictBG.png);
-    
+
     background-size: cover;
     color: rgb(236, 237, 238);
     margin-bottom: 10px;
@@ -12,7 +12,7 @@
     border-bottom-right-radius: 30px;
     padding-top: 5px;
 }
-.atas{ 
+.atas{
     display: flex;
     justify-content: space-between;
     width: 90%;
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: space-between;
     width: 90%;
-   
+
 }
 
 .profil{
@@ -53,29 +53,29 @@
 }
 
 .wadah{
-    
+
     width: 98%;
     margin: auto;
 }
 .qr{
     text-align: right;
-   
+
 }
 
 .btnqr{
-    
+
     border: none;
     background-color: transparent;
     border-radius: 10px;
     color: #A4161A;
 }
 .konten{
-   
+
     display: flex;
     height: 420px;
 }
 .shif{
-    
+
     width: 25%;
     height: auto;
     text-align: center;
@@ -85,7 +85,7 @@
     font-size: 30px;
     padding-top: 90px;
     padding-bottom: 40px;
-    
+
 }
 .masuk, .kembali, .istirahat, .pulang, .log{
     width: 60%;
@@ -163,12 +163,12 @@
     color: white;
     border-radius: 3px;
     height: 100%;
-    
+
 }
 .perhatian{
     text-align: center;
-    height: 100%; 
-    
+    height: 100%;
+
 }
 .judulperhatian{
     font-weight: bold;
@@ -187,7 +187,7 @@
     border-radius: 5px;
     color: #F82525;
     padding-top: 100px;
-   
+
 }
 .kurangjam{
     width: 40%;
@@ -195,8 +195,8 @@
     border-radius: 5px;
     text-align: center;
     color: #F82525;
-   
-   
+
+
 }
 .milik{
     padding-top: 50px;
@@ -240,26 +240,19 @@
 .bawahmodal{
     text-align: right;
     padding-top: 20px;
-    display: flex;
 }
 
 #pesan, .inputt{
-    width: 100%;
+    width: 95%;
     background-color: #E9ECEF;
-    padding-top: 3px;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 
 .judulinput{
     font-weight: bold;
-    padding-top: 0px;
+    padding-top: 20px;
 }
 .izin-hilang{
     display: none !important;
-}
-.modalheader{
-    text-align: center !important;
 }

@@ -1,6 +1,8 @@
 <?php
 
 use function Laravel\Prompts\alert;
+
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
@@ -9,6 +11,7 @@ use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 
@@ -98,6 +101,9 @@ Route::get('/slip', function () {
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
 });
+Route::get('/adminafterpayment', function () {
+    return view('mitra.adminafterpayment');
+});
 
 
 
@@ -146,6 +152,7 @@ Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamP
 
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
+});
 
     Route::get('/user', function () {
         return view('user.home', [
@@ -351,14 +358,57 @@ Route::get('/Kategori-penilaian', function () {
 
 
 // adminUniv-afterPayment
+
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
+
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
+
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/mitra-adminunivmitra', function () {
+    return view('adminUniv-afterPayment.mitra.adminunivmitra');
+});
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
+});
+
+Route::get('/mitra-adminunivmitra', function () {
+    return view('adminUniv-afterPayment.mitra.adminunivmitra');
+});
+
+Route::get('/mitra-daftarmitra', function () {
+    return view('adminUniv-afterPayment.mitra.daftarmitra');
+});
+
+Route::get('/mitra-pengaturpersensi', function () {
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+});
+
+Route::get('/mitra-optionpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.optionpresensi');
+});
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
 Route::get('/mitra-laporanpresensi-detaihadir', function () {
@@ -378,16 +428,28 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+
 });
+
+Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
+Route::get('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
+Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
 
 
@@ -400,6 +462,7 @@ Route::get('/pengaturan', function () {
 
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
+
 });
 
 Route::get('/super-admin', function () {
@@ -440,6 +503,15 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
+<<<<<<< HEAD
+=======
+
+Route::get('/UserScanQRDefault', function () {
+    return view('user.UserScanQR.Home-Default');
+});
+
+
+>>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
 Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
@@ -458,3 +530,7 @@ Route::get('/super-admin/langganan', function () {
         'members' => $members,
     ]);
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d7b71752495f8db0405d8c08d3bdf297add9fe3
