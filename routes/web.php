@@ -316,6 +316,7 @@ Route::get('/user/barcode', function () {
 });
 
 
+
 //user
 Route::get('/pemagang/home', function () {
     return view('pemagang.home', ['title' => "Home"]);

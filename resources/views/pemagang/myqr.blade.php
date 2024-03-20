@@ -36,8 +36,8 @@
     </div>
 
     <div class="button-container">
-        <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembali</a></button>
+        <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembal</a></button>
     </div>
 </body>
 
-</html>User with button-Home-View My Barcode
+</html>
