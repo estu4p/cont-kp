@@ -201,11 +201,15 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function showKategoriPenilaian()
+    public function showKategoriPenilaian(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
-        return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        } else {
+            return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
+        }
     }
     public function addKategoriPenilaian(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
