@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum');
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('sekolah')->nullable();
             $table->unsignedBigInteger('mitra_id')->nullable();
