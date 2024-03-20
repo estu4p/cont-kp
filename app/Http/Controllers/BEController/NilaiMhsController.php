@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\BEController;
 
 use App\Http\Controllers\Controller;
-use App\Models\NilaiMahasiswa; 
+use App\Models\NilaiMahasiswa;
 use Illuminate\Http\Request;
 
 class NilaiMhsController extends Controller
