@@ -51,10 +51,7 @@ class LoginController extends Controller
                     'redirect' => 'Dosen/dashboard'
                 ], 200);
             } else {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Mitra',
-                    'redirect' => 'pemagang/home'
-                ], 200);
+                return redirect('/AdminUniv-Dashboard');
             }
         } else {
             return response()->json([
