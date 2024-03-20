@@ -364,9 +364,7 @@ Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
 
-Route::get('/mitra-adminunivmitra', function () {
-    return view('adminUniv-afterPayment.mitra.adminunivmitra');
-});
+Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
 
 Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
@@ -382,7 +380,7 @@ Route::get('/mitra-optionpresensi', function () {
 
 Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
-});
+}); // pakai id supaya dapat detail profil cth detailprofil/{id}
 
 Route::get('/mitra-adminunivmitra', function () {
     return view('adminUniv-afterPayment.mitra.adminunivmitra');
@@ -423,12 +421,6 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
 
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 Route::get('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
@@ -438,12 +430,12 @@ Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentCont
 
 
 
-Route::get('/pengaturan', function () {
-    return view('pengaturan.margepenilaiandivisi');
-});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
+Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
 Route::get('/super-admin', function () {
     return view('super-admin.dashboard', [

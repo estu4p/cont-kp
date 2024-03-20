@@ -96,11 +96,12 @@ class AdminUnivAfterPaymentController extends Controller
     // univ - mitra
     {
         $mitra = Mitra::withCount('mahasiswa')->get();
+        // $mitra = Mitra::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
         } else {
-            return view('DataMitra')->with('mitra', $mitra);
+            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
         }
     }
 
@@ -138,11 +139,17 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
 
-    public function daftarMitraPengaturanDivisi()
+    public function daftarMitraPengaturanDivisi(Request
+    $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = Divisi::all();
-        return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+        }
     }
 
     public function addDivisi(Request $request)
