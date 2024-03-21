@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Penilaian;
+use App\Models\Project;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -62,8 +63,6 @@ class AdminUnivAfterPaymentController extends Controller
         $validator = Validator::make($request->all(), [
             "nama_lengkap" => 'required',
             'email' => 'required|min:6',
-            // 'nomor_induk' => 'required',
-            // 'jurusan' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
             'about' => 'required',
@@ -77,18 +76,8 @@ class AdminUnivAfterPaymentController extends Controller
         }
 
         $user = User::findOrFail($id);
-
-        // $user->fill([
-        //     'nama_lengkap' => $request->nama_lengkap,
-        //     'email' => $request->email,
-        //     'nomor_induk_' => $request->nomor_induk,
-        //     'jurusan' => $request->jurusan,
-        //     'no_hp' => $request->no_hp,
-        //     'alamat' => $request->alamat,
-        //     'about' => $request->about
-        // ]);
         $user->update($request->all());
-        // $user->save();
+
         return redirect()->route('adminUniv.editProfile', $user->id);
     }
 
@@ -279,6 +268,26 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function teamAktifSuntingTeam(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            // 'nama_lengkap' => 'required',
+            // 'nomor_induk' => 'required',
+            // 'jurusan' => 'required',
+            // 'kota' => 'required',
+            // 'tgl_lahir' => 'required',
+            // 'no_hp' => 'required',
+            // 'username' => 'required',
+            // 'email' => 'required',
+            // 'password' => 'required',
+            // 'tgl_masuk' => 'required',
+            // 'tgl_keluar' => 'required',
+            // 'divisi' => 'required',
+            // 'status_absensi' => 'required',
+            // 'status_akun' => 'required',
+            'konfirmasi_email' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Masukkan data dengan benar'], 404);
+        }
         $user = User::findOrFail($id);
         $user->fill([
             'nama_lengkap' => $request->nama_lengkap,
@@ -291,9 +300,23 @@ class AdminUnivAfterPaymentController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'tgl_masuk' => $request->tgl_masuk,
+            'tgl_keluar' => $request->tgl_keluar,
+            'divisi' => $request->divisi,
+            'project' => $request->tgl_lahir, //
+            'shift' => $request->shift, //
+            'os' => $request->os, //
+            'browser' => $request->browser, //
+            'status_absensi' => $request->status_absensi,
+            'status_akun' => $request->status_akun,
+            'konfirmasi_email' => $request->konfirmasi_email,
         ]);
+
+        $status_absensi = Presensi::where('status_absensi', $request->status_absensi)->first();
+        if (!$status_absensi) {
+            return response()->json(['message' => 'Error status absensi'], 404);
+        }
         return response()->json([
-            'message' => 'sunting team'
+            'message' => 'Berhasil sunting'
         ]);
     }
 
