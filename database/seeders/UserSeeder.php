@@ -6,6 +6,8 @@ use App\Models\Divisi;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Paket;
+use App\Models\Project;
 use App\Models\Sekolah;
 use App\Models\Shift;
 use Illuminate\Database\Seeder;
@@ -44,7 +46,9 @@ class UserSeeder extends Seeder
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
                 'role_id' => Role::inRandomOrder()->first()->id,
                 'shift_id' => Shift::inRandomOrder()->first()->id,
-                'divisi_id' => Divisi::inRandomOrder()->first()->id
+                'divisi_id' => Divisi::inRandomOrder()->first()->id,
+                'project_id' => Project::inRandomOrder()->first()->id,
+                'paket_id' => Paket::inRandomOrder()->first()->id,
             ]);
         }
     }

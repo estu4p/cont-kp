@@ -13,11 +13,13 @@ class PaketSeeder extends Seeder
      */
     public function run(): void
     {
+        $paket = ['Gold', 'Silver', 'Bronze'];
+        $metode = ['BNI', 'Dana'];
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 3; $i++) {
             paket::create([
-                'nama_paket' => $faker->randomElement(['Gold', 'Silver', 'Bronze']),
-                'metode_bayar' => $faker->randomElement(['BNI', 'Dana']),
+                'nama_paket' => $paket[$i],
+                'metode_bayar' => $faker->randomElement($metode),
             ]);
         }
     }
