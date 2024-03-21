@@ -268,6 +268,26 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function teamAktifSuntingTeam(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nama_lengkap' => 'required',
+            'nomor_induk' => 'required',
+            'jurusan' => 'required',
+            'kota' => 'required',
+            'tgl_lahir' => 'required',
+            'no_hp' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'tgl_masuk' => 'required',
+            'tgl_keluar' => 'required',
+            'divisi' => 'required',
+            'status_absensi' => 'required',
+            'status_akun' => 'required',
+            'konfirmasi_email' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 0);
+        }
         $user = User::findOrFail($id);
         $user->fill([
             'nama_lengkap' => $request->nama_lengkap,
@@ -282,12 +302,13 @@ class AdminUnivAfterPaymentController extends Controller
             'tgl_masuk' => $request->tgl_masuk,
             'tgl_keluar' => $request->tgl_keluar,
             'divisi' => $request->divisi,
-            'project' => User::where('project_id'),
-            'shift' => User::where('shift_id'),
-            'os' => User::where('os'),
-            'browser' => User::where('browser'),
+            'project' => $request->tgl_lahir, //
+            'shift' => $request->shift, //
+            'os' => $request->os, //
+            'browser' => $request->browser, //
             'status_absensi' => $request->status_absensi,
             'status_akun' => $request->status_akun,
+            'konfirmasi_email' => $request->konfirmasi_email,
 
         ]);
         $user->save();
