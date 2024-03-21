@@ -269,24 +269,24 @@ class AdminUnivAfterPaymentController extends Controller
     public function teamAktifSuntingTeam(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_lengkap' => 'required',
-            'nomor_induk' => 'required',
-            'jurusan' => 'required',
-            'kota' => 'required',
-            'tgl_lahir' => 'required',
-            'no_hp' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'tgl_masuk' => 'required',
-            'tgl_keluar' => 'required',
-            'divisi' => 'required',
-            'status_absensi' => 'required',
-            'status_akun' => 'required',
+            // 'nama_lengkap' => 'required',
+            // 'nomor_induk' => 'required',
+            // 'jurusan' => 'required',
+            // 'kota' => 'required',
+            // 'tgl_lahir' => 'required',
+            // 'no_hp' => 'required',
+            // 'username' => 'required',
+            // 'email' => 'required',
+            // 'password' => 'required',
+            // 'tgl_masuk' => 'required',
+            // 'tgl_keluar' => 'required',
+            // 'divisi' => 'required',
+            // 'status_absensi' => 'required',
+            // 'status_akun' => 'required',
             'konfirmasi_email' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 0);
+            return response()->json(['message' => 'Masukkan data dengan benar'], 404);
         }
         $user = User::findOrFail($id);
         $user->fill([
@@ -309,11 +309,14 @@ class AdminUnivAfterPaymentController extends Controller
             'status_absensi' => $request->status_absensi,
             'status_akun' => $request->status_akun,
             'konfirmasi_email' => $request->konfirmasi_email,
-
         ]);
-        $user->save();
+
+        $status_absensi = Presensi::where('status_absensi', $request->status_absensi)->first();
+        if (!$status_absensi) {
+            return response()->json(['message' => 'Error status absensi'], 404);
+        }
         return response()->json([
-            'message' => 'sunting team'
+            'message' => 'Berhasil sunting'
         ]);
     }
 
