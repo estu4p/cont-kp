@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_lengkap');
             $table->bigInteger('nomor_induk')->nullable();
+            $table->string('foto_profil')->nullable();
             $table->string('jurusan')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique()->nullable();
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            // $table->bigInteger('subscription')->nullable();
             $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('sekolah')->nullable();
