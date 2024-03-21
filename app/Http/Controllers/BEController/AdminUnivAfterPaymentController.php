@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Models\KategoriPenilaian;
-use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Mitra;
-use App\Models\Presensi;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Divisi;
-use App\Models\Penilaian;
 use App\Models\Project;
+use App\Models\Presensi;
+use App\Models\Penilaian;
+use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
+use App\Models\KategoriPenilaian;
+use App\Http\Controllers\Controller;
+use App\Models\SubKategoriPenilaian;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -277,18 +278,22 @@ class AdminUnivAfterPaymentController extends Controller
             'no_hp' => 'required',
             'username' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'tgl_masuk' => 'required',
             'tgl_keluar' => 'required',
             'divisi' => 'required',
             'status_absensi' => 'required',
             'status_akun' => 'required',
             'konfirmasi_email' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password' // Ensure confirm_password matches password
         ]);
+
         if ($validator->fails()) {
             return response()->json(['message' => 'Masukkan data dengan benar'], 404);
         }
+
         $user = User::findOrFail($id);
+
         $user->fill([
             'nama_lengkap' => $request->nama_lengkap,
             'nomor_induk' => $request->nomor_induk,
@@ -298,7 +303,6 @@ class AdminUnivAfterPaymentController extends Controller
             'no_hp' => $request->no_hp,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => $request->password,
             'tgl_masuk' => $request->tgl_masuk,
             'tgl_keluar' => $request->tgl_keluar,
             'konfirmasi_email' => $request->konfirmasi_email,
@@ -307,11 +311,14 @@ class AdminUnivAfterPaymentController extends Controller
             'status_akun' => $request->status_akun,
         ]);
 
+        // Hash the password
+        $user->password = Hash::make($request->password);
+
         $user->save();
-        return response()->json([
-            'message' => 'Berhasil sunting'
-        ]);
+
+        return response()->json(['message' => 'Berhasil sunting'], 200);
     }
+
 
     public function teamAktifDetailHadir($id)
     {
