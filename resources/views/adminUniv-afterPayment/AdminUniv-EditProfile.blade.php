@@ -7,12 +7,12 @@
 
         <div class="propil">
             <img src="assets/images/Rectangle 22.png" alt="Profile Logo" class="gambarkiri">
-            <div class="nama">{{ $profil->nama_lengkap }}</div>
-            <div class="email">{{ $profil->email }}</div>
+            <div class="nama">{{ $user->nama_lengkap }}</div>
+            <div class="email">{{ $user->email }}</div>
             <div class="about">About</div>
-            <div class="keterangan">{{ $profil->about }}</div>
+            <div class="keterangan">{{ $user->about }}</div>
         </div>
-        <form action="{{ route('adminUniv.updateProfile', $profil->id) }}" method="POST">
+        <form action="{{ route('adminUniv.updateProfile', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="wadahedit d-flex">
@@ -33,28 +33,28 @@
                                 <label for="username">Nama lengkap</label>
                                 <div class="input-group mb-3">
                                     <input class="input form-control" type="text"id="name"
-                                        placeholder="{{ $profil->nama_lengkap }}" name="nama_lengkap">
+                                        placeholder="{{ $user->nama_lengkap }}" name="nama_lengkap">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="NoHP">No HP</label>
                                 <div class="input-group mb-3">
                                     <input class="input form-control" type="text"id="NoHP"
-                                        placeholder="{{ $profil->no_hp }}" name="no_hp">
+                                        placeholder="{{ $user->no_hp }}" name="no_hp">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="email">Email</label>
                                 <div class=" mb-3">
                                     <input class="input form-control" type="email"id="email"
-                                        placeholder="{{ $profil->email }}" name="email">
+                                        placeholder="{{ $user->email }}" name="email">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="alamat">Alamat</label>
                                 <div class="input-group mb-3">
                                     <input class="input form-control" type="text"id="alamat"
-                                        placeholder="{{ $profil->kota }}" name="alamat">
+                                        placeholder="{{ $user->kota }}" name="alamat">
                                 </div>
                             </div>
                         </div>
@@ -64,14 +64,14 @@
                         <div class="form-group form-floating">
                             <!-- <label for="alamat">About</label> -->
                             <div class="col-12  ">
-                                <textarea id="About" name="about" class="form-control " style="width:97%;" placeholder="{{ $profil->about }}"></textarea>
+                                <textarea id="About" name="about" class="form-control " style="width:97%;" placeholder="{{ $user->about }}"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
                         <button class="Cancel">Cancel</button>
-                        <a href="{{ route('adminUniv.editProfile', $profil->id) }}"><button class="Update"
-                                onclick="showSuccessModal()" value="save" type="submit">Update</button></a>
+                        <a href=""><button class="Update" onclick="showSuccessModal()" value="save"
+                                type="submit">Update</button></a>
                     </div>
                 </div>
             </div>

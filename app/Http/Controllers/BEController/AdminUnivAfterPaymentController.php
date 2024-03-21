@@ -45,17 +45,16 @@ class AdminUnivAfterPaymentController extends Controller
             "data" => $profil
         ]);
     }
-    public function detailAdminProfile(Request $request, $id)
+    public function detailAdminProfile(Request $request)
     {
-        $profil = User::find($id);
+        // $profil = User::find($id);
+        $user = auth()->user();
         if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
-                'profile' => $profil
+                'profil' => $user
             ]);
         } else {
-            return view('adminUniv-afterPayment.AdminUniv-EditProfile', [
-                'profil' => $profil
-            ]);
+            return view('adminUniv-afterPayment.AdminUniv-EditProfile', compact('user'));
         }
     }
     public function updateAdminProfile(Request $request, $id)
