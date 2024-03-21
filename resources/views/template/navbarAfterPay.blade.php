@@ -9,10 +9,9 @@
                 <i class="fa-solid fa-bell fa-2x"></i>
             </div>
             <div class="d-flex justify-content-evenly flex-row ">
-                <a href="{{ route('adminUniv.editProfile', ['id' => auth()->user()->id]) }}">
+                <a href="{{ route('adminUniv.editProfile') }}">
                     <div class="navbar-profile">
-                        <a href="{{ route('adminUniv.editProfile', ['id' => auth()->user()->id]) }}"
-                            style="text-decoration: none; color: #000;">
+                        <a href="{{ route('adminUniv.editProfile') }}" style="text-decoration: none; color: #000;">
                             <span class="profile-name">Nama Profil</span>
                             <span class="profile-status">Status Profil</span>
                         </a>
