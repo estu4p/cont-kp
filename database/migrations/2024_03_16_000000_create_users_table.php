@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('nomor_induk')->nullable();
             $table->string('foto_profil')->nullable();
             $table->string('jurusan')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('username')->unique()->nullable();
             $table->string('no_hp');
             $table->string('barcode')->nullable()->unique();
