@@ -342,6 +342,7 @@ class AdminUnivAfterPaymentController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
         } else {
+            return view('adminUniv-afterPayment.mitra.laporanpresensi')->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
     public function teamAktifDetailHadir($id)
