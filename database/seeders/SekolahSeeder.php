@@ -18,8 +18,8 @@ class SekolahSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < 5; $i++) {
             Sekolah::create([
+                'nama_sekolah' => $sekolah[$i],
                 'nama_lengkap' => 'Nama Penanggung Jawab Sekolah',
-                'sekolah' => $sekolah[$i],
                 'email' => $faker->email,
                 'no_hp' => '07669865',
                 'password' => Hash::make('123456'),

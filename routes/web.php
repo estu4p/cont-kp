@@ -324,7 +324,7 @@ Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
 
-Route::get('/mitra-laporanpresensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi'])->name('adminUniv.laporanPresensi');
+// Route::get('/mitra-laporanpresensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi'])->name('adminUniv.laporanPresensi');
 
 Route::get('/mitra-laporanpresensi-detaihadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
@@ -453,9 +453,7 @@ Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
 });
 
-Route::get('/mitra-laporanpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.laporanpresensi');
-});
+Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi'])->name('adminUniv.laporanPresensi');
 
 Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
 
