@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Models\KategoriPenilaian;
-use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Mitra;
-use App\Models\Presensi;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Project;
+use App\Models\Presensi;
 use App\Models\Penilaian;
+use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
+use App\Models\KategoriPenilaian;
+use App\Http\Controllers\Controller;
+use App\Models\SubKategoriPenilaian;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -62,8 +64,6 @@ class AdminUnivAfterPaymentController extends Controller
         $validator = Validator::make($request->all(), [
             "nama_lengkap" => 'required',
             'email' => 'required|min:6',
-            // 'nomor_induk' => 'required',
-            // 'jurusan' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
             'about' => 'required',
@@ -77,18 +77,8 @@ class AdminUnivAfterPaymentController extends Controller
         }
 
         $user = User::findOrFail($id);
-
-        // $user->fill([
-        //     'nama_lengkap' => $request->nama_lengkap,
-        //     'email' => $request->email,
-        //     'nomor_induk_' => $request->nomor_induk,
-        //     'jurusan' => $request->jurusan,
-        //     'no_hp' => $request->no_hp,
-        //     'alamat' => $request->alamat,
-        //     'about' => $request->about
-        // ]);
         $user->update($request->all());
-        // $user->save();
+
         return redirect()->route('adminUniv.editProfile', $user->id);
     }
 
@@ -96,11 +86,12 @@ class AdminUnivAfterPaymentController extends Controller
     // univ - mitra
     {
         $mitra = Mitra::withCount('mahasiswa')->get();
+        // $mitra = Mitra::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
         } else {
-            return view('DataMitra')->with('mitra', $mitra);
+            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
         }
     }
 
@@ -138,11 +129,17 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
 
-    public function daftarMitraPengaturanDivisi()
+    public function daftarMitraPengaturanDivisi(Request
+    $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = Divisi::all();
-        return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+        }
     }
 
     public function addDivisi(Request $request)
@@ -194,11 +191,15 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function showKategoriPenilaian()
+    public function showKategoriPenilaian(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
-        return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        } else {
+            return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
+        }
     }
     public function addKategoriPenilaian(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
@@ -268,7 +269,31 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function teamAktifSuntingTeam(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nama_lengkap' => 'required',
+            'nomor_induk' => 'required',
+            'jurusan' => 'required',
+            'kota' => 'required',
+            'tgl_lahir' => 'required',
+            'no_hp' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'tgl_masuk' => 'required',
+            'tgl_keluar' => 'required',
+            'divisi' => 'required',
+            'status_absensi' => 'required',
+            'status_akun' => 'required',
+            'konfirmasi_email' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password' // Ensure confirm_password matches password
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Masukkan data dengan benar'], 404);
+        }
+
         $user = User::findOrFail($id);
+
         $user->fill([
             'nama_lengkap' => $request->nama_lengkap,
             'nomor_induk' => $request->nomor_induk,
@@ -278,13 +303,22 @@ class AdminUnivAfterPaymentController extends Controller
             'no_hp' => $request->no_hp,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => $request->password,
             'tgl_masuk' => $request->tgl_masuk,
+            'tgl_keluar' => $request->tgl_keluar,
+            'konfirmasi_email' => $request->konfirmasi_email,
+            'divisi' => $request->divisi,
+            'status_absensi' => $request->status_absensi,
+            'status_akun' => $request->status_akun,
         ]);
-        return response()->json([
-            'message' => 'sunting team'
-        ]);
+
+        // Hash the password
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json(['message' => 'Berhasil sunting'], 200);
     }
+
 
     public function teamAktifDetailHadir($id)
     {
