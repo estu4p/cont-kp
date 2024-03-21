@@ -38,7 +38,7 @@ Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassw
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/barcode', [HomeMitraController::class, 'barcode']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
@@ -151,6 +151,7 @@ Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 
+
 Route::get('/user/home', function () {
     return view('user.home', ['title' => "Home"]);
 });
@@ -182,6 +183,15 @@ Route::get('/pemagang/MyQR', function () {
 
 
 
+    Route::get('/profil-siswa', function () {
+        return view('jumlah-mahasiswa.profil-siswa');
+    });
+    Route::get('/laporandatapresensi', function () {
+        return view('presensi.laporandatapresensi');
+    });
+    Route::get('/datapresensisiswa', function () {
+        return view('presensi.datapresensisiswa');
+    });
 
 Route::get('/profil-siswa', function () {
     return view('jumlah-mahasiswa.profil-siswa');
@@ -254,6 +264,13 @@ Route::get('/manage-devisi', function () {
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
 });
+
+    Route::get('/pengaturan', function () {
+        return view('pengaturan.margepenilaiandivisi');
+    });
+    Route::get('/kategoripenilaian', function () {
+        return view('pengaturan.kategoripenilaian');
+    });
 
 
 // adminUniv-afterPayment
@@ -357,6 +374,7 @@ Route::get('/AdminSistem-Editprofile', function () {
 Route::get('/AdminSistem-Subcription', function () {
     return view('SistemLokasi.AdminSistem-Subcription');
 });
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -497,12 +515,13 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
 });
+
+
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
@@ -515,6 +534,11 @@ Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentCont
 
 
 
+
+
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
 
 
 Route::get('/kategoripenilaian', function () {
@@ -530,6 +554,8 @@ Route::get('/super-admin', function () {
         'admin_sistem' => 200
     ]);
 });
+
+
 Route::get('/super-admin/ubah-profil', function () {
     return view('super-admin.edit', [
         'title' => "Super Admin - Ubah Profil",
@@ -559,6 +585,7 @@ Route::get('/super-admin/data-admin', function () {
         'admins' => $admins,
     ]);
 });
+
 
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');

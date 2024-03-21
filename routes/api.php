@@ -36,20 +36,22 @@ Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login'
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
+Route::post('/user/register/barcode', [RegisterController::class, 'registerWithBarcode']);
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
 Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
-Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang']);
-Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat']);
-Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat']);
-Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
-Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
-Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
-Route::post('/barcode', [HomeMitraController::class, 'barcode']);
-Route::get('/detailGantiJam', [HomeMitraController::class, 'detailGantiJam']);
+Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang']);
+Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat']);
+Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat']);
+Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
+Route::post('/catatLogAktivitas/{id}', [HomeMitraController::class, 'catatLogAktivitas']);
+Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::get('/detailGantiJam/{id}', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
