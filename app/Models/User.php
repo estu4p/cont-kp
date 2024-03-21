@@ -25,6 +25,7 @@ class User extends Authenticatable
         'kota',
         'alamat',
         'tgl_lahir',
+        'konfirmasi_email',
         'about',
         'os',
         'status_akun',

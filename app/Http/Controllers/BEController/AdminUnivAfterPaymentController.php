@@ -269,20 +269,20 @@ class AdminUnivAfterPaymentController extends Controller
     public function teamAktifSuntingTeam(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            // 'nama_lengkap' => 'required',
-            // 'nomor_induk' => 'required',
-            // 'jurusan' => 'required',
-            // 'kota' => 'required',
-            // 'tgl_lahir' => 'required',
-            // 'no_hp' => 'required',
-            // 'username' => 'required',
-            // 'email' => 'required',
-            // 'password' => 'required',
-            // 'tgl_masuk' => 'required',
-            // 'tgl_keluar' => 'required',
-            // 'divisi' => 'required',
-            // 'status_absensi' => 'required',
-            // 'status_akun' => 'required',
+            'nama_lengkap' => 'required',
+            'nomor_induk' => 'required',
+            'jurusan' => 'required',
+            'kota' => 'required',
+            'tgl_lahir' => 'required',
+            'no_hp' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'tgl_masuk' => 'required',
+            'tgl_keluar' => 'required',
+            'divisi' => 'required',
+            'status_absensi' => 'required',
+            'status_akun' => 'required',
             'konfirmasi_email' => 'required',
         ]);
         if ($validator->fails()) {
@@ -301,20 +301,13 @@ class AdminUnivAfterPaymentController extends Controller
             'password' => $request->password,
             'tgl_masuk' => $request->tgl_masuk,
             'tgl_keluar' => $request->tgl_keluar,
+            'konfirmasi_email' => $request->konfirmasi_email,
             'divisi' => $request->divisi,
-            'project' => $request->tgl_lahir, //
-            'shift' => $request->shift, //
-            'os' => $request->os, //
-            'browser' => $request->browser, //
             'status_absensi' => $request->status_absensi,
             'status_akun' => $request->status_akun,
-            'konfirmasi_email' => $request->konfirmasi_email,
         ]);
 
-        $status_absensi = Presensi::where('status_absensi', $request->status_absensi)->first();
-        if (!$status_absensi) {
-            return response()->json(['message' => 'Error status absensi'], 404);
-        }
+        $user->save();
         return response()->json([
             'message' => 'Berhasil sunting'
         ]);
