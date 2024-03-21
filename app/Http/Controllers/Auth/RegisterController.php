@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Picqer\Barcode\BarcodeGeneratorPNG;
-
+use Illuminate\Support\Facades\Hash;
 
 
 class RegisterController extends Controller
 {
+    protected $barcodeGenerator;
+    protected $userModel;
+
     public function index()
     {
         return view('user.register');
@@ -39,9 +42,25 @@ class RegisterController extends Controller
         $user->password = $password;
 
         $user->save();
+        if ($user) {
+            return response([
+                'pesan' => 'user berhasil',
+                'user$user' => $user,
+            ], 200);
+        } else {
+            return response([
+                'pesan' => 'Gagal',
+            ], 404);
+        }
 
         // return redirect()->route('user.login')->with('success', 'User registered successfully!');
         return view('user.login', ['title' => "Login"]);
+    }
+
+    public function __construct(BarcodeGeneratorPNG $barcodeGenerator, User $userModel)
+    {
+        $this->barcodeGenerator = $barcodeGenerator;
+        $this->userModel = $userModel;
     }
 
     public function generateBarcode($userData)
@@ -51,37 +70,13 @@ class RegisterController extends Controller
         return $barcode;
     }
 
-    public function showRegisterForm()
+    public function showRegisterForm(Request $request)
     {
-        $barcodeData = 'unique_data_for_each_user'; // Data unik untuk setiap pengguna (misalnya ID pengguna)
-        $barcode = $this->generateBarcode($barcodeData);
+        $userData = "data pengguna";
+        $barcode = $this->generateBarcode($userData);
+        
+        $register = $this->register($request);
 
-        return view('register', ['barcode' => $barcode]);
-    }
-
-    public function registerWithBarcode(Request $request)
-    {
-        // Menerima data yang dikirim dari aplikasi mobile (seperti barcode)
-        $barcode = $request->input('barcode');
-
-        // Mencari pengguna berdasarkan barcode
-        $user = User::where('barcode', $barcode)->first();
-
-        // Jika pengguna tidak ditemukan berdasarkan barcode, kembalikan respons error
-        if (!$user) {
-            return response()->json(['error' => 'Barcode tidak valid'], 400);
-        }
-        $user->nama_lengkap = $request->input('nama_lengkap');
-        $user->nomor_induk = $request->input('nomor_induk');
-        $user->jurusan = $request->input('jurusan');
-        $user->email = $request->input('email');
-        $user->username = $request->input('username');
-        $user->no_hp = $request->input('no_hp');
-        $user->password = bcrypt($request->input('password')); // Anda juga bisa menggunakan Hash::make untuk mengenkripsi password
-
-        $user->save();
-
-        // return response()->json(['success' => true, 'message' => 'Registrasi berhasil'], 200);
-        return view('user.login', ['title' => "Login"]);
+        return view('user.register', ['barcode' => $barcode, 'register' => $register]);
     }
 }

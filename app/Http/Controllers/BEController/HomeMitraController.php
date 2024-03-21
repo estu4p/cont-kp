@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BEController;
 
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Divisi;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -17,7 +18,7 @@ class HomeMitraController extends Controller
     public function pilihMitra(Request $request)
     {
         $mitra = Mitra::all();
-        $divisi = Mitra::all();
+        $divisi = Divisi::all(); 
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
@@ -25,22 +26,27 @@ class HomeMitraController extends Controller
                 'divisi_mitra' => 'required|string',
             ]);
 
-            // Ambil ID mitra yang dipilih dari formulir
+            // Ambil nama mitra dan divisi yang dipilih dari formulir
             $selectedMitraNama = $request->input('nama_mitra');
             $selectedDivisiNama = $request->input('divisi_mitra');
 
-            // Cari ID mitra dan divisi berdasarkan nama
+            // Cari ID mitra berdasarkan nama
             $selectedMitraId = Mitra::where('nama_mitra', $selectedMitraNama)->value('id');
-            $selectedDivisiId = Mitra::where('divisi_mitra', $selectedDivisiNama)->value('id');
 
-            // Simpan ID mitra yang dipilih ke dalam sesi
+            // Cari ID divisi berdasarkan nama
+            $selectedDivisiId = Divisi::where('nama_divisi', $selectedDivisiNama)->value('id');
+
+            // Simpan ID mitra dan divisi yang dipilih ke dalam sesi
             Session::put('selected_mitra_id', $selectedMitraId);
             Session::put('selected_divisi_id', $selectedDivisiId);
 
-            return redirect()->route('home_masuk')->with('success', 'Anda telah memilih mitra!');
+            // return redirect()->route('home_masuk')->with('success', 'Anda telah memilih mitra!');
+            return response()->json(['status' => 'success', 'message' => 'Anda telah memilih mitra!']);
         }
-        return view('pilihmitra', compact('mitra', 'divisi'));
+
+        // return view('pilihmitra', compact('mitra', 'divisi'));
     }
+
 
     public function jamMasuk(Request $request)
     {
@@ -207,18 +213,31 @@ class HomeMitraController extends Controller
 
     public function barcode(Request $request, $id)
     {
-        $data = Presensi::where('id', $id)->first();
-
-        if ($data) {
-            $barcode = $request->input('barcode');
-            $data->barcode = $barcode;
-            $data->save();
-
-            return response()->json([
-                'status' => 'Presensi berhasil dicatat',
-                'data' => $data,
-            ], 200);
-        } else {
+        $data = Presensi::find($id);
+       if($data){
+        $lastBarcodeTime = $request->session()->get('lastBarcodeTime', null);
+        $currentTime = Carbon::now();
+            if(!$lastBarcodeTime || $currentTime->deffInMinutes($lastBarcodeTime) >= 5){
+                $barcode = time();
+                $data->barcode = $barcode;
+                $data->save();
+                
+                $data->jam_masuk = $currentTime;
+                $data->status_kehadiran = 'Hadir';
+                $data->save();
+                $request->session()->put('lastBarcodeTime', $currentTime);
+                return response()->json([
+                   'status' => 'Presensi berhasil dicatat',
+                   'data' => $data,
+                    'barcode' => $barcode
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'Anda hanya dapat mengubah barcode setiap 5 menit',
+                    'remaining_time' => 5 - $currentTime->diffInMinutes($lastBarcodeTime)
+                ], 403);
+            }
+       } else {
             return response()->json([
                 'status' => 'Barcode tidak valid',
             ], 404);

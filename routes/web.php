@@ -36,7 +36,8 @@ Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassw
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/barcode', [HomeMitraController::class, 'barcode']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::get('/barcode/{id}', [HomeMitraController::class, 'barcode']);
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {

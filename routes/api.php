@@ -29,6 +29,7 @@ Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login'
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
 Route::post('/user/register/barcode', [RegisterController::class, 'registerWithBarcode']);
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
