@@ -319,7 +319,28 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['message' => 'Berhasil sunting'], 200);
     }
 
+    public function laporanDataPresensi()
+    {
+        $presensi = User::where('role_id', 3)->get();
 
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->whereNotNull('jam_masuk')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+    }
     public function teamAktifDetailHadir($id)
     {
         $presensi = Presensi::where('nama_lengkap', $id)->first();
