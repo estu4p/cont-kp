@@ -75,9 +75,9 @@ class ManageDivisiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -86,23 +86,23 @@ class ManageDivisiController extends Controller
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
-            'jml_jam_kerja'=> $request->input('jml_jam_kerja'),
-            'jam_masuk'=> $request->input('jam_masuk'),
-            'jam_pulang'=> $request->input('jam_pulang'),
+            'jml_jam_kerja' => $request->input('jml_jam_kerja'),
+            'jam_masuk' => $request->input('jam_masuk'),
+            'jam_pulang' => $request->input('jam_pulang'),
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true, 'message'=> 'Berhasil menambahkan shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -111,14 +111,14 @@ class ManageDivisiController extends Controller
         $data = Shift::find($id);
         $data->fill([
             'nama_shift' => $request->nama_shift,
-            'jml_jam_kerja'=> $request->jml_jam_kerja,
-            'jam_masuk'=> $request->jam_masuk,
-            'jam_pulang'=> $request->jam_pulang,
+            'jml_jam_kerja' => $request->jml_jam_kerja,
+            'jam_masuk' => $request->jam_masuk,
+            'jam_pulang' => $request->jam_pulang,
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true,'message'=> 'Berhasil update shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil update shift'], 200);
     }
 
     public function deleteShift($id)
