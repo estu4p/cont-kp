@@ -175,6 +175,10 @@ Route::get('/pemagang/home', function () {
     return view('pemagang.home', ['title' => "Home"]);
 });
 
+Route::get('/pemagang/MyQR', function () {
+    return view('pemagang.myqr', ['title' => "MyQR"]);
+});
+
 
 
 
@@ -212,15 +216,9 @@ Route::get('/input-nilai', function () {
 
 
 
+
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
-});
-
-Route::get('/MitraPresensiDetailIzin', function () {
-    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
-});
-Route::get('/MitraPresensiDetailTidakHadir', function () {
-    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
 
 
@@ -234,6 +232,27 @@ Route::get('/manage-shift', function () {
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
+
+    }); 
+
+
+
+
+Route::get('/MitraPresensiDetailIzin', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailIzin');
+});
+Route::get('/MitraPresensiDetailTidakHadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
+});
+
+
+Route::get('/manage-devisi', function () {
+    return view('mitra-pengaturan.manage-devisi');
+
+});
+
+Route::get('/manage-shift', function () {
+    return view('mitra-pengaturan.manage-shift');
 });
 
 
@@ -241,7 +260,50 @@ Route::get('/Kategori-penilaian', function () {
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
+Route::get('/AdminUniv-ResetPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+});
+Route::get('/mitra-laporanpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.laporanpresensi');
+});
+
+Route::get('/mitra-laporanpresensi-detaihadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+});
+Route::get('/mitra-laporanpresensi-detailizin', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+});
+Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
+});
+
+Route::get('/Kategori-penilaian', function () {
+    return view('mitra-pengaturan.Kategori-penilaian');
+});
+
+
+
+// adminUniv-afterPayment
+Route::get('/AdminUniv-Login', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Login');
+})->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+
+
+Route::get('/AdminUniv-InputOTP', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
+});
+
+Route::get('/AdminUniv-InputNewPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+});
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+});
 
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
@@ -259,6 +321,7 @@ Route::get('/mitra-laporanpresensi-detailizin', function () {
 Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
+
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -284,6 +347,16 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+//USER ADMIN SISTEM/LOKASI (SEVEN INC)
+Route::get('/AdminSistem-Dashboard', function () {
+    return view('SistemLokasi.AdminSistem-Dashboard');
+});
+Route::get('/AdminSistem-Editprofile', function () {
+    return view('SistemLokasi.AdminSistem-Editprofile');
+});
+Route::get('/AdminSistem-Subcription', function () {
+    return view('SistemLokasi.AdminSistem-Subcription');
+});
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -291,6 +364,7 @@ Route::get('/user/barcode', function () {
         'nama' => "Syalita"
     ]);
 });
+
 
 
 //user
@@ -423,6 +497,14 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+
+});
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
 
 
