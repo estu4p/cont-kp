@@ -320,10 +320,10 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function laporanDataPresensi(Request $request)
     {
-        $presensi = User::with('nama')->get();
+        $presensi = User::where('role_id', 3)->get();
 
         $kehadiranPerNama = Presensi::select('nama_lengkap')
-            ->groupBy('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
             ->get()
             ->map(function ($item, $key) {
                 $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
