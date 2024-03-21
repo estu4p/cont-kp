@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
@@ -59,3 +60,7 @@ Route::post('admin/daftar-mitra/update-divisi/{id}', [AdminUnivAfterPaymentContr
 Route::delete('admin/daftar-mitra/destroy-divisi/{id}', [AdminUnivAfterPaymentController::class, 'destroyDivisi']);
 Route::post('admin/daftar-mitra/pengaturan-divisi/kategori-penilaian', [AdminUnivAfterPaymentController::class, 'addKategoriPenilaian']);
 Route::post('admin/daftar-mitra/pengaturan-divisi/sub-kategori-penilaian', [AdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian']);
+
+//Contributor for univ
+Route::get('dashboard-univ', [ContributorUnivController::class, 'index']);
+
