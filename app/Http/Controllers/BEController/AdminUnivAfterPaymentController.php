@@ -319,7 +319,11 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['message' => 'Berhasil sunting'], 200);
     }
 
-
+    public function laporanDataPresensi()
+    {
+        $presensi = User::where('role_id', 3)->get();
+        return response()->json(['message' => 'success get data', 'data' => $presensi], 200);
+    }
     public function teamAktifDetailHadir($id)
     {
         $presensi = Presensi::where('nama_lengkap', $id)->first();
