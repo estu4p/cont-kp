@@ -26,7 +26,6 @@ return new class extends Migration
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir', 'Ganti Jam']);
             $table->text('keterangan_status')->nullable();
             $table->string('kebaikan');
-            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('barcode')->nullable()->unique();
             $table->time('hutang_presensi')->nullable();
             $table->timestamps();

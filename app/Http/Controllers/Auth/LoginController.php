@@ -10,7 +10,11 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login');
+        return view('user.login');
+    }
+    public function adminUnivLogin()
+    {
+        return view('adminUniv-afterPayment.AdminUniv-Login');
     }
 
     public function ValidateLogin(Request $request)
@@ -27,32 +31,26 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->role == 1) {
+                return redirect()->to('/pemagang/home');
+            } else if ($user->role == 2) {
+                return redirect()->to('/pemagang/home');
                 return response()->json([
                     'message' => 'Login berhasil sebagai Super Admin',
                     'redirect' => 'SuperAdmin/dashboard'
                 ], 200);
-                
             } else if ($user->role == 2) {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Admin',
                     'redirect' => 'Admin/dashboard'
                 ], 200);
-                
             } else if ($user->role == 3) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Mahasiswa / Siswa',
-                    'redirect' => 'Mahasiswa/dashboard'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else if ($user->role == 4) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Dosen',
-                    'redirect' => 'Dosen/dashboard'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Mitra',
-                    'redirect' => 'Mitra/dashboard'
-                ], 200);
+                return redirect()->to('/pemagang/home');
+
+                return redirect('/AdminUniv-Dashboard');
             }
         } else {
             return response()->json([

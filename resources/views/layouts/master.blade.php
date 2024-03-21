@@ -25,7 +25,7 @@
     <div class="wrapper">
 
         @include('template.navbar')
-        <!-- bueeek master baru piqri bangke -->
+       
 
         <div class="content-wrapper">
             <section class="content">
@@ -34,7 +34,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebar')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">

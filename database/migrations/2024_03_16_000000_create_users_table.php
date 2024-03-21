@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
-            $table->integer('nomor_induk')->nullable();
+            $table->bigInteger('nomor_induk')->nullable();
             $table->string('jurusan')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique()->nullable();
@@ -27,9 +27,11 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('os')->nullable();
             $table->enum('status_akun', ['aktif', 'alumni'])->nullable();
+            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('sekolah')->nullable();
             $table->unsignedBigInteger('mitra_id')->nullable();

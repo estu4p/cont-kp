@@ -56,6 +56,7 @@
     <div class="container">
         <div class="barcode-box">
             <h6 class="text-uppercase">{{ $nama }}'s qr code</h6>
+            {!! QrCode::size(200)->generate($nama); !!}
             <img src="/assets/images/Barcode.png" width="180px" alt="">
         </div>
         <button style="border: none; background-color: transparent; color: white; text-transform: capitalize; font-size: 18px; font-weight: 600;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
