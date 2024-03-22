@@ -556,3 +556,7 @@ Route::get('/admin/setting/user', function() {
         'users' => $users
     ]);
 });
+
+Route::get('/', function () {
+    return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
