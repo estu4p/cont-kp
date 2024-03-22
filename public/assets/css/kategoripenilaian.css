@@ -1,3 +1,8 @@
+htm,
+comment code
+body{
+    overflow: hidden;
+}
 .kanan-tabel {
     display: flex;
     flex-direction: column;

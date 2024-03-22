@@ -4,10 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BEController\DashboardAdminController;
+use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,25 +30,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::post('/loginn', [ApiAuthController::class, 'login']);
+
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
+Route::post('/user/register/barcode', [RegisterController::class, 'registerWithBarcode']);
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
 Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
-Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang']);
-Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat']);
-Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat']);
-Route::post('/totalJamKerja', [HomeMitraController::class, 'totalJamKerja']);
-Route::post('/catatLogAktivitas', [HomeMitraController::class, 'catatLogAktivitas']);
-Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin']);
-Route::post('/barcode', [HomeMitraController::class, 'barcode']);
-Route::get('/detailGantiJam', [HomeMitraController::class, 'detailGantiJam']);
+Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang']);
+Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat']);
+Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat']);
+Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
+Route::post('/catatLogAktivitas/{id}', [HomeMitraController::class, 'catatLogAktivitas']);
+Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::get('/detailGantiJam/{id}', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
 Route::get('dashboard-admin', [AdminUnivAfterPaymentController::class, 'index']);
@@ -64,3 +75,13 @@ Route::post('admin/daftar-mitra/pengaturan-divisi/kategori-penilaian', [AdminUni
 Route::post('admin/daftar-mitra/pengaturan-divisi/sub-kategori-penilaian', [AdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian']);
 
 Route::get('admin/daftar-mitra/team-aktif/klik/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifKlik']);
+Route::get('admin/daftar-mitra/see-all-team/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam']);
+Route::post('admin/daftar-mitra/sunting/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam']);
+Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
+Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+
+//Contributor for univ
+Route::get('dashboard-univ', [ContributorUnivController::class, 'index']);
+
+//Contributor for Mitra
+// Route::get('manageDivisi', [ContributorForMitra::class,'daftarMitraPengaturanDivisi']);

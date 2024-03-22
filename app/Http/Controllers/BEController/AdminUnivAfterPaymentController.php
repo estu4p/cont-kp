@@ -2,33 +2,40 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Models\KategoriPenilaian;
-use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Mitra;
-use App\Models\Presensi;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Project;
+use App\Models\Presensi;
 use App\Models\Penilaian;
+use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
+use App\Models\KategoriPenilaian;
+use App\Http\Controllers\Controller;
+use App\Models\SubKategoriPenilaian;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminUnivAfterPaymentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+    // dashboard
     { // menampilkan seluruh data yang diperlukan
-        $jumlah_mitra = Mitra::all();
-        $jumlah_siswa = User::where("role_id", 1)->get();
+        $jumlah_mitra = Mitra::all()->count();
+        $jumlah_siswa = User::where("role_id", 3)->count();
 
         // Mengambil nama siswa dari koleksi data
 
-        return response()->json([
-            "message" => "Success get data",
-            "jumlah mitra" => $jumlah_mitra,
-            "jumlah siswa" => $jumlah_siswa,
-
-        ]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "message" => "Success get data",
+                "jumlah mitra" => $jumlah_mitra,
+                "jumlah siswa" => $jumlah_siswa,
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
+        }
     }
     public function profileAdmin(Request $request)
     {
@@ -41,22 +48,22 @@ class AdminUnivAfterPaymentController extends Controller
     public function detailAdminProfile(Request $request, $id)
     {
         $profil = User::find($id);
-        if ($profil) {
+        if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
-                "message" => "Success to get detail profile",
-                "data" => $profil
+                'profile' => $profil
             ]);
         } else {
-            return response()->json(['message' => 'Fail to get detail profile'], 404);
+            return view('adminUniv-afterPayment.AdminUniv-EditProfile', [
+                'profil' => $profil
+            ]);
         }
     }
     public function updateAdminProfile(Request $request, $id)
+    // edit profil
     {
         $validator = Validator::make($request->all(), [
             "nama_lengkap" => 'required',
             'email' => 'required|min:6',
-            'nomor_induk' => 'required',
-            'jurusan' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
             'about' => 'required',
@@ -70,41 +77,26 @@ class AdminUnivAfterPaymentController extends Controller
         }
 
         $user = User::findOrFail($id);
+        $user->update($request->all());
 
-        $user->fill([
-            'nama_lengkap' => $request->nama_lengkap,
-            'email' => $request->email,
-            'nomor_induk_' => $request->nomor_induk,
-            'jurusan' => $request->jurusan,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'about' => $request->about
-        ]);
-
-        $user->save();
-
-        if ($user) {
-            return response()->json([
-                'message' => 'Success to update data profile',
-                'data' => $user
-            ], 200);
-        } else {
-            return response()->json(['message' => 'Fail to update data proifile'], 404);
-        }
+        return redirect()->route('adminUniv.editProfile', $user->id);
     }
 
     public function adminUnivMitra(Request $request)
+    // univ - mitra
     {
         $mitra = Mitra::withCount('mahasiswa')->get();
+        // $mitra = Mitra::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
         } else {
-            return view('DataMitra')->with('mitra', $mitra);
+            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
         }
     }
 
     public function adminUnivPresensi()
+    // Univ - Mitra - Daftar Mitra -  Option - Presensi
     {
         try {
             $presensi = Presensi::all();
@@ -120,6 +112,7 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
     public function adminUnivPresensiDetailProfile($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Presensi - Detail Profile
     {
         try {
             $presensi = Presensi::findOrFail($id);
@@ -129,19 +122,28 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif() // daftarMitra-teamAktif
+    public function daftarMitraTeamAktif()
+    // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
         return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
     }
 
-    public function daftarMitraPengaturanDivisi()
+    public function daftarMitraPengaturanDivisi(Request
+    $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = Divisi::all();
-        return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+        }
     }
 
     public function addDivisi(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
@@ -161,6 +163,7 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
     }
     public function updateDivisi(Request $request, $id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
@@ -177,6 +180,7 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['success' => true, 'message' => 'succes to update divisi', 'data' => $data], 200);
     }
     public function destroyDivisi($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $data = Divisi::find($id);
         if ($data) {
@@ -187,12 +191,18 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function showKategoriPenilaian()
+    public function showKategoriPenilaian(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
-        return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        } else {
+            return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
+        }
     }
     public function addKategoriPenilaian(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $validator = Validator::make($request->all(), [
             'divisi_id' => 'required',
@@ -214,6 +224,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function addSubKategoriPenilaian(Request $request)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $validator = Validator::make($request->all(), [
             'kategori_id' => 'required',
@@ -236,6 +247,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
     public function teamAktifKlik($id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $divisi = Divisi::with('anggotaDivisi')->find($id);
 
@@ -246,6 +258,100 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json([
             'message' => 'Success to get detail data divisi with mahasiswa',
             'data' => $divisi
+        ]);
+    }
+
+    public function teamAktifSeeAllTeam($id)
+    {
+        $user = User::where('role_id', 3)->where('mitra_id', $id)->get();
+        return response()->json($user);
+    }
+
+    public function teamAktifSuntingTeam(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_lengkap' => 'required',
+            'nomor_induk' => 'required',
+            'jurusan' => 'required',
+            'kota' => 'required',
+            'tgl_lahir' => 'required',
+            'no_hp' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'tgl_masuk' => 'required',
+            'tgl_keluar' => 'required',
+            'divisi' => 'required',
+            'status_absensi' => 'required',
+            'status_akun' => 'required',
+            'konfirmasi_email' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password' // Ensure confirm_password matches password
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Masukkan data dengan benar'], 404);
+        }
+
+        $user = User::findOrFail($id);
+
+        $user->fill([
+            'nama_lengkap' => $request->nama_lengkap,
+            'nomor_induk' => $request->nomor_induk,
+            'jurusan' => $request->jurusan,
+            'kota' => $request->kota,
+            'tgl_lahir' => $request->tgl_lahir,
+            'no_hp' => $request->no_hp,
+            'username' => $request->username,
+            'email' => $request->email,
+            'tgl_masuk' => $request->tgl_masuk,
+            'tgl_keluar' => $request->tgl_keluar,
+            'konfirmasi_email' => $request->konfirmasi_email,
+            'divisi' => $request->divisi,
+            'status_absensi' => $request->status_absensi,
+            'status_akun' => $request->status_akun,
+        ]);
+
+        // Hash the password
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json(['message' => 'Berhasil sunting'], 200);
+    }
+    public function laporanDataPresensi(Request $request)
+    {
+        $presensi = User::where('role_id', 3)->get();
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->whereNotNull('jam_masuk')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporanpresensi')
+                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
+        }
+    }
+    public function teamAktifDetailHadir($id)
+    {
+        $presensi = Presensi::where('nama_lengkap', $id)->first();
+        return response()->json([
+
+            'message' => 'detail hadir',
+            'data' => $presensi
         ]);
     }
 }
