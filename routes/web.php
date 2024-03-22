@@ -179,6 +179,9 @@ Route::get('/pemagang/home', function () {
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
+Route::get('/pemagang/detail', function () {
+    return view('pemagang.gantiJam', ['title' => "MyQR"]);
+});
 
 
 
@@ -271,30 +274,6 @@ Route::get('/kategoripenilaian', function () {
 });
 
 
-// adminUniv-afterPayment
-Route::get('/AdminUniv-Login', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Login');
-})->name('login.admin');
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
-Route::get('/mitra-laporanpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.laporanpresensi');
-});
-
-Route::get('/mitra-laporanpresensi-detaihadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
-});
-Route::get('/mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
-});
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
-});
-
-Route::get('/Kategori-penilaian', function () {
-    return view('mitra-pengaturan.Kategori-penilaian');
-});
 
 
 
@@ -304,6 +283,9 @@ Route::get('/AdminUniv-Login', function () {
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
 
+Route::get('/AdminUniv-ResetPassword', function () {
+    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+});
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
@@ -313,18 +295,13 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
+Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
+Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
 
-Route::get('/mitra-laporanpresensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi'])->name('adminUniv.laporanPresensi');
+Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
+
+Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
 Route::get('/mitra-laporanpresensi-detaihadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
@@ -336,30 +313,16 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
 
-
-
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
-
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
-
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-})->name('adminUniv.dashboard');
-
-
-
-
-
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
+
+
+
 
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
 Route::get('/AdminSistem-Dashboard', function () {
@@ -447,37 +410,6 @@ Route::get('/Kategori-penilaian', function () {
 });
 
 
-// adminUniv-afterPayment
-
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
-
-Route::get('/mitra-laporanpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.laporanpresensi');
-});
-
-Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
-
-Route::get('/mitra-daftarmitra', function () {
-    return view('adminUniv-afterPayment.mitra.daftarmitra');
-});
-
-Route::get('/mitra-pengaturpersensi', function () {
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
-});
-
-Route::get('/mitra-optionpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.optionpresensi');
-});
-
-Route::get('/mitra-detailprofil', function () {
-    return view('adminUniv-afterPayment.mitra.detailprofil');
-}); // pakai id supaya dapat detail profil cth detailprofil/{id}
-
-// Route::get('/mitra-adminunivmitra', function () {
-//     return view('adminUniv-afterPayment.mitra.adminunivmitra');
-// });   // kenapa duplikat nih
 
 Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
@@ -514,19 +446,7 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
 
-
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-});
-
-
-Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
-Route::get('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
-Route::put('/AdminUniv-EditProfile/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
 
 
@@ -544,17 +464,15 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
 Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
-Route::get('/super-admin', function () {
+Route::get('/superAdmin', function () {
     return view('super-admin.dashboard', [
         'title' => "Super Admin - Dashboard",
         'subscription' => 300,
         'admin_sistem' => 200
     ]);
 });
-
-
-Route::get('/super-admin/ubah-profil', function () {
-    return view('super-admin.edit', [
+Route::get('/superAdmin/ubahProfil', function () {
+    return view('superAdmin.edit', [
         'title' => "Super Admin - Ubah Profil",
         'nama' => "Jay Antonio",
         'email' => 'antoniojay@gmail.com',
@@ -563,7 +481,7 @@ Route::get('/super-admin/ubah-profil', function () {
         'about' => "Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data"
     ]);
 });
-Route::get('/super-admin/data-admin', function () {
+Route::get('/superAdmin/data-admin', function () {
     // $admins = App\Models\Admin::paginate(4);
     $admins = [
         ['id' => 1, 'nama' => 'Joy', 'lokasi' => 'Yogyakarta'],
@@ -589,7 +507,7 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
-Route::get('/super-admin/langganan', function () {
+Route::get('/superAdmin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
         ['id' => 2, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
@@ -605,5 +523,36 @@ Route::get('/super-admin/langganan', function () {
     return view('super-admin.langganan', [
         'title' => "Langganan",
         'members' => $members,
+    ]);
+});
+
+Route::get('/admin/setting/quotes', function() {
+    $quotes = [
+        ['id' => 1, 'quotes' => "Change your life now for better future"],
+        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+    ];
+    return view('admin.setting.quotes', [
+        'title' => "Admin - Setting Jam & Quotes",
+        'quotes' => $quotes
+    ]);
+});
+Route::get('/admin/setting/user', function() {
+    $users = [
+        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
+        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
+        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
+        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
+    ];
+    return view('admin.setting.user', [
+        'title' => "Admin - User & Organization",
+        'users' => $users
     ]);
 });

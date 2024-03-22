@@ -15,6 +15,9 @@ use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\ContributorForMitra;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -83,3 +86,10 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 //Contributor for univ
 Route::get('/dashboard-univ', [\App\Http\Controllers\BEController\SchoolController::class, 'index']);
 
+//Contributor for Mitra
+Route::get('daftar-divisi', [ContributorForMitra::class,'daftarDivisi']);
+Route::post('add-divisi', [ContributorForMitra::class,'addDivisi']);
+Route::put('update-divisi/{id?}', [ContributorForMitra::class,'updateDivisi']);
+Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
+
+Route::get('', [ContributorForMitra::class,'']);
