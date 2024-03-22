@@ -82,8 +82,8 @@
                                 <hr class="m-0">
                                 <div class="justify-content-center  gap-0 row flex-column">
                                     <div class="  py-2  row mx-auto d-flex flex-row  align-items-center">
-                                        <div class="d-flex flex-row p-0 col-6 justify-content-between">
-                                            <b class="tg-0pky mx-0 fz6 ">Masuk</b>
+                                        <div class="d-flex flex-row p-0  col-6 justify-content-between">
+                                            <b class="tg-0pky mx-0 fz6  ">Masuk</b>
                                             <span class=" py-0 px-1 fz6 mx-1"
                                                 style="color:#FFF;background-color:#000 ; border-radius: 8px;">0 x</span>
 
@@ -172,12 +172,12 @@
                                         <th rowspan="2">catatan</th>
 
 
-                                    <tr>
+                                    <tr class="">
                                         <th>masuk</th>
                                         <th>pulang</th>
                                         <th>mulai</th>
                                         <th>selesai</th>
-                                        <th>total jam</th>
+                                        <th style="white-space: nowrap">total jam</th>
                                         <th>(+)(-)</th>
                                     </tr>
                                 </thead>
