@@ -48,9 +48,9 @@ class LoginController extends Controller
             } else if ($user->role == 4) {
                 return redirect()->to('/pemagang/home');
             } else {
-                return redirect()->to('/pemagang/home');
+                return redirect()->to('/AdminUniv-Dashboard');
 
-                return redirect('/AdminUniv-Dashboard');
+                // return redirect('/AdminUniv-Dashboard');
             }
         } else {
             return response()->json([
