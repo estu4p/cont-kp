@@ -138,7 +138,7 @@ Route::get('/user/login', function () {
 Route::get('/user/register', function () {
     return view('user.register', ['title' => "Register"]);
 });
-Route::get('/user/resetPassword', function () {
+Route::get('/user/reset-password', function () {
     return view('user.reset', ['title' => "Reset Password"]);
 });
 Route::get('/user/reset-password/otp', function () {
@@ -147,7 +147,7 @@ Route::get('/user/reset-password/otp', function () {
 Route::get('/user/reset-password/new-password', function () {
     return view('user.new-password', ['title' => "Reset Password - New Password"]);
 });
-Route::get('/user/resetPassword/confirm', function () {
+Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 
@@ -576,7 +576,7 @@ Route::get('/superAdmin/data-admin', function () {
         ['id' => 9, 'nama' => 'Sage', 'lokasi' => 'Yogyakarta'],
         ['id' => 10, 'nama' => 'Sky', 'lokasi' => 'Jawa Tengah'],
     ];
-    return view('superAdmin.dataAdmin', [
+    return view('super-admin.data-admin', [
         'title' => "Data Admin",
         'admins' => $admins,
     ]);
