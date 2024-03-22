@@ -13,7 +13,7 @@ use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
-use App\Http\BEController\ContributorUniv\SchoolControlller as BE;
+use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 /*
 |--------------------------------------------------------------------------
@@ -81,5 +81,5 @@ Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentControl
 Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
 
 //Contributor for univ
-Route::get('/dashboard-univ', [BEController\SchoolController::class, 'index']);
+Route::get('/dashboard-univ', [\App\Http\Controllers\BEController\SchoolController::class, 'index']);
 
