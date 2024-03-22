@@ -13,6 +13,7 @@ use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,3 +83,5 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 //Contributor for univ
 Route::get('dashboard-univ', [ContributorUnivController::class, 'index']);
 
+//Contributor for Mitra
+// Route::get('manageDivisi', [ContributorForMitra::class,'daftarMitraPengaturanDivisi']);
