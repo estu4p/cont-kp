@@ -2,7 +2,7 @@
 </head>
 
 <body>
-    <a href="/super-admin/ubah-profil" class="navbar d-flex justify-content-between text-decoration-none" style=" color: #000000;">
+    <a href="/superAdmin/ubahProfil" class="navbar d-flex justify-content-between text-decoration-none" style=" color: #000000;">
       <div class="kosongan"></div>
         <div class="kanan d-flex flex-row justify-content-between gap-5">
             <div class="ml-5 mr-2">

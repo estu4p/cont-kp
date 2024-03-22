@@ -20,9 +20,9 @@
             <form class="content-form" action="{{ route('user.login') }}" method="POST">
                 @csrf
                 <label for="email" class="label-form">Username/Email</label>
-                <div style="height: 56px;">
+                <div style="height: 36px;">
                     <input type="email" name="email"
-                        style="border: 0.5px solid #00000075; padding: 10px; border-radius: 4px; width: 100%;"
+                        style="border: 0.5px solid #00000075; padding: 8px 10px; border-radius: 4px; width: 100%;"
                         placeholder="Masukkan username / email" value="">
                     <small id="warn-email" class="text-warning bg-warning-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -33,9 +33,9 @@
                 </div>
 
                 <label for="password" class="label-form">Password</label>
-                <div style="height: 60px;">
+                <div style="height: 40px;">
                     <input type="password" name="password"
-                        style="border: 0.5px solid #00000075; padding: 10px; border-radius: 4px; width: 100%;"
+                        style="border: 0.5px solid #00000075; padding: 8px 10px; border-radius: 4px; width: 100%;"
                         placeholder="Masukkan password">
                         <small id="warn-password" class="text-danger bg-danger-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -48,7 +48,7 @@
                 <div class="remember">
                     <div class="d-flex"><input type="checkbox" name="remember" id="remember" class="me-2"
                             style="color: #A61C1CE5;">
-                        <label for="remember" class="mb-0">Ingat saya</label>
+                        <label for="remember" class="mb-0">Ingat Saya</label>
                     </div>
                     <p class="ms-auto mb-0">Lupa kata sandi? <a href="/user/reset-password" class="text-decoration-none"
                             style="color:#A61C1CE5;">Reset</a></p>
@@ -56,8 +56,8 @@
 
                 <div class="button-container text-center">
                     <button type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
-                    <p style="margin-bottom: -20px; font-size: 12px">Belum punya akun? <a href="/user/register"
-                            class="text-decoration-none" style="color: #A61C1CE5;">Daftar</a></p>
+                    <p style="margin-bottom: -20px; font-size: 12px; font-weight: 400;">Belum punya akun? <a href="/user/register"
+                            class="text-decoration-none fw-bold" style="color: #A61C1CE5;">Daftar</a></p>
                 </div>
             </form>
         </div>

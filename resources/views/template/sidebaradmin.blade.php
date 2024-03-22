@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="assets/Css/sidebar.css">
 <div class="sidebar">
-    <img src="assets/images/logo.png" alt="Logo" class="logo">
+    <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo">
   <ul class="nav flex-column">
       <li class="nav-item">
 

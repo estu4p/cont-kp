@@ -51,7 +51,7 @@ body {
     font-size: 20px;
 }
 .form-login {
-    margin-top: 40px;
+    margin-top: 24px;
     padding-top: 60px;
     text-align: center;
 }
@@ -69,7 +69,7 @@ body {
     background-color: #6c757d;
     color: white;
     border-radius: 4px;
-    padding: 6px 48px;
+    padding: 4px 56px;
 }
 .reg-button:hover {
     background-color: #a4161a;
@@ -97,8 +97,8 @@ body {
 .remember {
     display: flex;
     margin-top: 48px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     align-items: center;
 }
 .box-reset {
