@@ -2,16 +2,18 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/super-admin.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <div class="d-flex gap-4 mt-0 mb-5 px-5">
         <div class="bg-white rounded text-center" style="padding: 80px 50px 40px; width: 30%;">
             <div>
                 <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="">
-                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $nama }}</h4>
+                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $nama }}
+                </h4>
                 <p class=" fw-light ">{{ $email }}</p>
             </div>
             <div>
                 <h5 style="opacity: 0.8; font-size: 20px; font-weight: 700; margin-top: 6rem;">About</h5>
-                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{$about}}</p>
+                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $about }}</p>
             </div>
         </div>
         <div class="bg-white rounded" style="padding: 80px 80px 40px; width: 70%;">
@@ -61,10 +63,20 @@
                         style="background-color: #F2F4F8;" placeholder="{{ $about }}"></textarea>
                 </div>
                 <div class="d-flex gap-3 mt-4">
-                    <button style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0; margin-left: auto;">Cancel</button>
-                    <button style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
+                    <button
+                        style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0; margin-left: auto;">Cancel</button>
+                    <button
+                        style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;"
+                        onclick="showAlert()">Update</button>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function showAlert() {
+            swal("Profil berhasil diperbarui!", {
+                icon: "success",
+            });
+        }
+    </script>
 @endsection

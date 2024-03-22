@@ -14,6 +14,7 @@
         </div>
     </div>
 
+
     <div class="container-fluid  align-items-start d-flex flex-row wadah-card row gap-4">
         <div class="row col-3 align-items-center  ">
             <div class="card col-12 py-4 px-3">
@@ -106,7 +107,7 @@
                     </div>
                     <div class="form-group">
                         <label for="absen">Status absensi</label>
-                        <select id="absen" name="absen">
+                        <select id="absen" name="absen" class="opsion">
                             <option value="apple">Pilih status absensi</option>
                             <option value="banana">Scan QR Code</option>
                             <option value="banana">Button (Klik Tombol)</option>

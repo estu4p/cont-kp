@@ -8,7 +8,7 @@
           <a class="nav-link" href="/AdminUniv-Dashboard">Dashboard</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Mitra</a>
+          <a class="nav-link" href="/mitra-adminunivmitra">Mitra</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" href="#">Pengaturan</a>
