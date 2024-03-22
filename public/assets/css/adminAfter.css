@@ -1,0 +1,30 @@
+.sub-menu {
+    border-radius: 8px;
+    text-align: left;
+    width: 70%;
+    margin-left: 20%;
+    opacity: 0.5;
+    padding-left: 0; /* Menghilangkan padding kiri default */
+}
+.sub-menu .active {
+    background-color: #e5383b60;
+    padding-left: 1rem;
+    margin-left: -1rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+.line {
+    width: 50%;
+    border: none;
+    height: 1.5px;
+    background-color: #000;
+    margin: 10px auto;
+}
+.privilege-item {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 10px;
+    padding: 4px 8px;
+    margin-left: 8px;
+    margin-bottom: 4px;
+}
