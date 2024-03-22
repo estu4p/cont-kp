@@ -36,7 +36,7 @@
 }
 
 .card-body {
-    padding: 20px;
+    padding:0 20px;
 }
 
 .table {
@@ -46,7 +46,7 @@
 
 /* Responsif untuk tabel */
 .table-responsive {
-    overflow-x: auto;
+  
 }
 .wadah{
     position:fixed;
@@ -168,4 +168,8 @@ border-radius: 9px;
 }
 .putih{
     color: #FFFFFF;
+}
+#example{
+    overflow: scroll  !important;
+    height: max-content;
 }
