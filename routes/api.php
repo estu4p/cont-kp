@@ -15,7 +15,7 @@ use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\HomeMitraController;
+// use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\ContributorForMitra;
 
 /*
