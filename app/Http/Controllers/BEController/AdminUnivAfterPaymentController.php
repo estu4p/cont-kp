@@ -57,12 +57,8 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function updateAdminProfile(Request $request)
     {
-        // Validate the incoming request data
-        $user = $request->validate([
-            'nama_lengkap' => 'nullable',
-            'about' => 'nullable'
-        ]);
-        // Retrieve the currently authenticated user
+
+
         $user = auth()->user();
         // Update the user's profile with the validated data
         $user->update([

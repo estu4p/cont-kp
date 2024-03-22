@@ -32,28 +32,28 @@
                                 <label for="username">Nama lengkap</label>
                                 <div class="input-group mb-3">
                                     <input class="input form-control" type="text"id="name"
-                                        placeholder="{{ $user->nama_lengkap }}" name="nama_lengkap">
+                                        value="{{ $user->nama_lengkap }}" name="nama_lengkap">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="NoHP">No HP</label>
                                 <div class="input-group mb-3">
-                                    <input class="input form-control" type="text"id="NoHP"
-                                        placeholder="{{ $user->no_hp }}" name="no_hp">
+                                    <input class="input form-control" type="text"id="NoHP" value="{{ $user->no_hp }}"
+                                        name="no_hp">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="email">Email</label>
                                 <div class=" mb-3">
-                                    <input class="input form-control" type="email"id="email"
-                                        placeholder="{{ $user->email }}" name="email">
+                                    <input class="input form-control" type="email"id="email" value="{{ $user->email }}"
+                                        name="email">
                                 </div>
                             </div>
                             <div class="form-group  col-6   p-2">
                                 <label for="alamat">Alamat</label>
                                 <div class="input-group mb-3">
-                                    <input class="input form-control" type="text"id="alamat"
-                                        placeholder="{{ $user->kota }}" name="kota">
+                                    <input class="input form-control" type="text"id="alamat" value="{{ $user->kota }}"
+                                        name="kota">
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="judulkanan">Additional Info</div>
                         <div class="form-group form-floating">
                             <!-- <label for="alamat">About</label> -->
-                            <div class="col-12  ">
+                            <div class="col-12">
                                 <textarea id="About" name="about" class="form-control " style="width:97%;" placeholder="{{ $user->about }}"></textarea>
                             </div>
                         </div>
