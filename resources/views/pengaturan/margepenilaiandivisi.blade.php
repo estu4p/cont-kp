@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <link rel="stylesheet" href="assets/css/margepenilaiandivisi.css">
+<link rel="stylesheet" href="assets/css/margepenilaiandivisi.css">
 
     <div class="container-fluid d-flex flex-row justify-content-start gap-0 p-0 wadah">
         <div class="kiri-putih p-5 ">
@@ -150,23 +150,20 @@
             $('#confirmationModal').modal('show');
         }
 
-        function deleteData() {
-            // Tambahkan logika untuk menghapus data di sini
+    function deleteData() {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Dara berhasil dihapus",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
 
-            // Tutup modal konfirmasi
-            $('#confirmationModal').modal('hide');
 
-            // Tampilkan modal berhasil dihapus
-            $('#successModal').modal('show');
 
-            // Set timeout untuk menyembunyikan modal berhasil dihapus setelah beberapa waktu
-            setTimeout(function() {
-                $('#successModal').modal('hide');
-            }, 1000); // Waktu dalam milidetik (3000 = 3 detik)
-        }
-
-        function cancelData() {
-            // Tambahkan logika untuk menghapus data di sini
+    function cancelData() {
+        // Tambahkan logika untuk membatalkan operasi di sini
 
             // Tutup modal konfirmasi
             $('#confirmationModal').modal('hide');
@@ -174,4 +171,3 @@
         }
     </script>
 @endsection
-
