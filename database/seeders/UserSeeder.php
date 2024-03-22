@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'nomor_induk' => $faker->unique()->randomNumber(8),
                 'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
-                'email' => $faker->email,
+                'email' => 'example@gmail.com',
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),

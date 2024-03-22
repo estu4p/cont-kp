@@ -31,6 +31,9 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->role == 1) {
+                return redirect()->to('/pemagang/home');
+            } else if ($user->role == 2) {
+                return redirect()->to('/pemagang/home');
                 return response()->json([
                     'message' => 'Login berhasil sebagai Super Admin',
                     'redirect' => 'SuperAdmin/dashboard'

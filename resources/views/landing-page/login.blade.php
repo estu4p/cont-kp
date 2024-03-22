@@ -30,7 +30,7 @@
                             style="color: #A61C1CE5;">
                         <label for="remember" class="mb-0">Ingat saya</label>
                     </div>
-                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="/resetPassword" class="text-decoration-none"
+                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="/reset-password" class="text-decoration-none"
                             style="color:#A61C1CE5;">Reset</a></p>
                 </div>
 
