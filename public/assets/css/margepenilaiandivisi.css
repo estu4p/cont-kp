@@ -49,32 +49,28 @@
   
 }
 .wadah{
-    position:fixed;
     top:0;
     left:250px;
     height: 100%;
-    bottom:0;
-    right:0;
     width:100%;
-    z-index:-9;
-    padding-right:250px !important;
-    
+    padding-left:250px !important;
 }
 .kiri-putih{
     height:100%;
     width:250px;
-   
-    padding-top:5% !important;
+    position:fixed;
+   top:0;
     background-color: white;
     display: inline-block;
+ 
 }
 .kanan-tabel{
     width:auto;
     display:inline-block;
-    padding-top:10% !important;
-    
+    padding-top:7% !important;
     box-sizing: border-box;
 }
+
 .nav-item a {
     color: black; /* Mengatur warna teks menjadi hitam */
 
