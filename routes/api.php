@@ -1,19 +1,20 @@
 <?php
 
 use Illuminate\Http\Request;
+use BEController\SchoolController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BEController\ContributorUnivController;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\ApiAuthController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\HomeMitraController;
-
+use App\Http\Controllers\BEController\DashboardAdminController;
+use App\Http\Controllers\BEController\ContributorUnivController;
+use App\Http\BEController\ContributorUniv\SchoolControlller as BE;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -80,5 +81,5 @@ Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentControl
 Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
 
 //Contributor for univ
-Route::get('dashboard-univ', [ContributorUnivController::class, 'index']);
+Route::get('/dashboard-univ', [BEController\SchoolController::class, 'index']);
 
