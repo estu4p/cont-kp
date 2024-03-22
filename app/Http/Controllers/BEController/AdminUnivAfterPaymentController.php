@@ -57,8 +57,6 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function updateAdminProfile(Request $request)
     {
-
-
         $user = auth()->user();
         // Update the user's profile with the validated data
         $user->update([
