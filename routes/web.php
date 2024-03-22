@@ -536,3 +536,7 @@ Route::get('/superAdmin/langganan', function () {
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
+
+Route::get('/', function () {
+    return view('landing-page.index', ['title' => 'Controlling Magang']);
+});

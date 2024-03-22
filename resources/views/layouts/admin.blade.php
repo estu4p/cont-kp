@@ -24,7 +24,7 @@
 <body class="hold-transition sidebar-mini layout-fixed" style="background-color: #EEEEEE;">
     <div class="wrapper">
 
-        @include('template.navbarsuper')
+        @include('template.navbar-super')
 
         <div class="content-wrapper">
             <section class="content">
