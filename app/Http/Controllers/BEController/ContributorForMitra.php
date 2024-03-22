@@ -6,21 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\Shift;
+use App\Models\KategoriPenilaian;
+use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Validator;
 
 
 
-
-class ManageDivisiController extends Controller
+class ContributorForMitra extends Controller
 {
-    public function daftarMitraPengaturanDivisi(Request $request)
+    public function daftarDivisi(Request $request)
     {
         $divisi = Divisi::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi]);
         } else {
-            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+            return view('manage.margepenilaiandivisi', ['divisi' => $divisi]);
         }
     }
 
@@ -68,6 +69,59 @@ class ManageDivisiController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
+    }
+
+    public function showKategoriPenilaian(Request $request)
+    {
+        $kategori = KategoriPenilaian::with('kategori')->get();
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'nilai' => $kategori], 200);
+        } else {
+            return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
+        }
+    }
+
+    public function addKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'divisi_id' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add kategori penilaian',], 400);
+        }
+        $data = new KategoriPenilaian([
+            'divisi_id' => $request->input('divisi_id'),
+            'nama_kategori' => $request->input('nama_kategori')
+        ]);
+        $data->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success to add data'
+        ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kategori_id' => 'required',
+            'nama_sub_kategori' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Fail to add Sub Kategori',], 400);
+        }
+
+        $data = new SubKategoriPenilaian([
+            'kategori_id' => $request->input('kategori_id'),
+            'nama_sub_kategori' => $request->input('nama_sub_kategori')
+        ]);
+
+        $data->save();
+
+        return response()->json([
+            'message' => 'success to add Sub Kategori'
+        ]);
     }
 
 
@@ -123,6 +177,12 @@ class ManageDivisiController extends Controller
 
     public function deleteShift($id)
     {
-        //
+        $data = Shift::find($id);
+        if ($data) {
+            $data->delete();
+            return response()->json(['success' => true, 'message' => 'Berhasil menghapus shift'], 200);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Data tidak ditemukan'], 404);
+        }
     }
 }
