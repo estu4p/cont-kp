@@ -17,4 +17,13 @@ class Presensi extends Model
     {
         return $this->belongsTo(User::class, 'nama_lengkap');
     }
+    public function sekolah()
+    {
+        return $this->belongsTo(Sekolah::class, 'nama_sekolah');
+    }
+    // untuk detail presensi
+    public function presensis()
+    {
+        return $this->hasMany(Presensi::class);
+    }
 }
