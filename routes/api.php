@@ -84,4 +84,9 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 Route::get('dashboard-univ', [ContributorUnivController::class, 'index']);
 
 //Contributor for Mitra
-// Route::get('manageDivisi', [ContributorForMitra::class,'daftarMitraPengaturanDivisi']);
+Route::get('daftar-divisi', [ContributorForMitra::class,'daftarDivisi']);
+Route::post('add-divisi', [ContributorForMitra::class,'addDivisi']);
+Route::put('update-divisi/{id?}', [ContributorForMitra::class,'updateDivisi']);
+Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
+
+Route::get('', [ContributorForMitra::class,'']);
