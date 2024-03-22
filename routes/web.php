@@ -430,3 +430,13 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
+Route::get('/UserScanQR', function () {
+    return view('user.UserScanQR.Scanqr');
+});
+
+Route::get('/TableGantiJam', function () {
+    return view('user.UserScanQR.TableGantiJam');
+});
+
+
+
