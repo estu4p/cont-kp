@@ -12,9 +12,8 @@
             <div class="about">About</div>
             <div class="keterangan">{{ $user->about }}</div>
         </div>
-        <form action="{{ route('adminUniv.updateProfile', $user->id) }}" method="POST">
+        <form action="{{ route('adminUniv.updateProfile') }}" method="POST">
             @csrf
-            @method('PUT')
             <div class="wadahedit d-flex">
 
                 <div class="editprofil p-5">
@@ -54,7 +53,7 @@
                                 <label for="alamat">Alamat</label>
                                 <div class="input-group mb-3">
                                     <input class="input form-control" type="text"id="alamat"
-                                        placeholder="{{ $user->kota }}" name="alamat">
+                                        placeholder="{{ $user->kota }}" name="kota">
                                 </div>
                             </div>
                         </div>
@@ -69,7 +68,7 @@
                         </div>
                     </div>
                     <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                        <button class="Cancel">Cancel</button>
+                        <a href="/AdminUniv-Dashboard"><button class="Cancel" type="button">Cancel</button></a>
                         <a href=""><button class="Update" onclick="showSuccessModal()" value="save"
                                 type="submit">Update</button></a>
                     </div>
