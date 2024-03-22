@@ -16,11 +16,10 @@ class SchoolController extends Controller
         $kehadiran_izin= Presensi::where("status_kehadiran", 'izin')->count();
 
         return response()->json([
-            "Dasnoard" => "Success get data",
+            "Dashboard" => "Success get data",
             "jumlah Mahasiswa"=> $jumlah_Mahasiswa,
             "jumlah Masuk"=>$kehasiran_masuk,
-            "jumlah Izin"=>$kehadiran_izin,
-
+            "jumlah Izin" =>$kehadiran_izin
         ]);
     }
 }
