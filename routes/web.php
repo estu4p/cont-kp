@@ -309,9 +309,11 @@ Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControlle
 
 Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
-Route::get('/mitra-laporanpresensi-detaihadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+Route::get('/mitra-laporanpresensi', function () {
+    return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
+Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('/mitra-laporanpresensi-detaihadir', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
 Route::get('/mitra-laporanpresensi-detailizin', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailizin');
 });
@@ -435,9 +437,9 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
-Route::get('/mitra-laporanpresensi-detaihadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailhadir');
-});
+// Route::get('/mitra-laporanpresensi-detaihadir', function () {
+//     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
+// });
 Route::get('/mitra-laporanpresensi-detailizin', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailizin');
 });
