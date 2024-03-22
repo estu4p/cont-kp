@@ -11,6 +11,9 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+
 
 
 class HomeMitraController extends Controller
@@ -18,7 +21,7 @@ class HomeMitraController extends Controller
     public function pilihMitra(Request $request)
     {
         $mitra = Mitra::all();
-        $divisi = Divisi::all(); 
+        $divisi = Divisi::all();
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
@@ -100,9 +103,9 @@ class HomeMitraController extends Controller
             ], 404);
         }
     }
-    
 
-    public function jamMulaiIstirahat(Request $request,string $id)
+
+    public function jamMulaiIstirahat(Request $request, string $id)
     {
         $data = Presensi::where('id', $id)->first();
 
@@ -213,22 +216,31 @@ class HomeMitraController extends Controller
 
     public function barcode(Request $request, $id)
     {
-        $data = Presensi::find($id);
-       if($data){
-        $lastBarcodeTime = $request->session()->get('lastBarcodeTime', null);
-        $currentTime = Carbon::now();
-            if(!$lastBarcodeTime || $currentTime->deffInMinutes($lastBarcodeTime) >= 5){
+        $presensi = Presensi::where('nama_lengkap', $id)->first();
+        if ($presensi) {
+            $currentTime = Carbon::now();
+            $sessionKey = 'lastBarcodeTime_' . $id;
+            $lastBarcodeTime = $request->session()->get($sessionKey, null);
+
+            if (!$lastBarcodeTime || $id !== $request->session()->get('lastUserId')) {
+                $request->session()->put($sessionKey, $currentTime);
+                $request->session()->put('lastUserId', $id);
+            }
+
+            if (!$lastBarcodeTime || $currentTime->diffInMinutes($lastBarcodeTime) >= 5) {
                 $barcode = time();
-                $data->barcode = $barcode;
-                $data->save();
-                
-                $data->jam_masuk = $currentTime;
-                $data->status_kehadiran = 'Hadir';
-                $data->save();
-                $request->session()->put('lastBarcodeTime', $currentTime);
+                $presensi->barcode = $barcode;
+                $presensi->save();
+
+                $presensi->jam_masuk = $currentTime;
+                $presensi->status_kehadiran = 'Hadir';
+                $presensi->save();
+
+                $request->session()->put($sessionKey, $currentTime);
+
                 return response()->json([
-                   'status' => 'Presensi berhasil dicatat',
-                   'data' => $data,
+                    'status' => 'Presensi berhasil dicatat',
+                    'data' => $presensi,
                     'barcode' => $barcode
                 ], 200);
             } else {
@@ -237,16 +249,46 @@ class HomeMitraController extends Controller
                     'remaining_time' => 5 - $currentTime->diffInMinutes($lastBarcodeTime)
                 ], 403);
             }
-       } else {
+        } else {
             return response()->json([
-                'status' => 'Barcode tidak valid',
+                'status' => 'User ID tidak valid atau tidak memiliki presensi'
             ], 404);
         }
     }
 
+    public function generateQRCode(Request $request, $id)
+    {
+        $presensi = Presensi::where('nama_lengkap', $id)->first();
+        if (!$presensi) {
+            return response()->json([
+                'status' => 'Pengguna tidak ditemukan'
+            ], 404);
+        }
+        $izin = $request->input('izin', false);
+
+        $qrCode = QrCode::size(100)->generate("ID: $id");
+        $filename = "qrcode_$id.png";
+        $path = public_path("barcodes/$filename");
+        file_put_contents($path, $qrCode);
+        
+        // Update 'barcode' column pada model Presensi
+        $presensi->barcode = "/barcodes/$filename";
+        $presensi->save();
+        // Jika ada izin, simpan status izin pada presensi
+        if ($izin) {
+            $presensi->izin = true;
+            $presensi->save();
+        }
+
+        return response()->json([
+            'status' => 'QR Code berhasil dibuat dan disimpan',
+            'barcode_url' => asset("barcodes/$filename")
+        ]);
+    }
+
     public function detailGantiJam(Request $request, $id)
     {
-        $data = Presensi::select('hari', 'keterangan_status', 'status_kehadiran')->find($id);   
+        $data = Presensi::select('hari', 'keterangan_status', 'status_kehadiran')->find($id);
         if ($data) {
             return response([
                 'pesan' => 'data berhasil di tampilkan',

@@ -5,15 +5,11 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Picqer\Barcode\BarcodeGeneratorPNG;
-use Illuminate\Support\Facades\Hash;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class RegisterController extends Controller
 {
-    protected $barcodeGenerator;
-    protected $userModel;
-
     public function index()
     {
         return view('user.register');
@@ -57,26 +53,20 @@ class RegisterController extends Controller
         return view('user.login', ['title' => "Login"]);
     }
 
-    public function __construct(BarcodeGeneratorPNG $barcodeGenerator, User $userModel)
+    public function generateQRCode($userData)
     {
-        $this->barcodeGenerator = $barcodeGenerator;
-        $this->userModel = $userModel;
-    }
-
-    public function generateBarcode($userData)
-    {
-        $generator = new BarcodeGeneratorPNG();
-        $barcode = 'data:image/png;base64,' . base64_encode($generator->getBarcode($userData, $generator::TYPE_CODE_128));
-        return $barcode;
+        $qrCodeString = QrCode::size(300)->generate($userData);
+        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCodeString);
+        return $qrCodeDataUri;
     }
 
     public function showRegisterForm(Request $request)
     {
         $userData = "data pengguna";
-        $barcode = $this->generateBarcode($userData);
+        $qrCode = $this->generateQRCode($userData);
         
         $register = $this->register($request);
 
-        return view('user.register', ['barcode' => $barcode, 'register' => $register]);
+        return view('user.register', ['QRcode' => $qrCode, 'register' => $register]);
     }
 }
