@@ -2,9 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="assets/css/margepenilaiandivisi.css">
-
-<div class="container-fluid d-flex flex-row justify-content-start gap-0 p-0 wadah">
-    <div class="kiri-putih p-5 ">
+<div class="kiri-putih p-5">
         <div class="card-header">
             <h3 class="card-title">Pengaturan</h3>
         </div>
@@ -13,6 +11,8 @@
             <a class=>Manage penilaian</a>
         </li>
     </div>
+<div class="container-fluid d-flex flex-row justify-content-start gap-0 p-0 wadah ">
+    
     <div class="kanan-tabel p-5 w-100 justify-content-start">
         <div>
             <h3 class="manage">Manage Penilaian Divisi</h3>
