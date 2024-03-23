@@ -100,3 +100,7 @@ Route::post('add-shift', [ContributorForMitra::class,'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
+Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
+Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
+Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
+Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
