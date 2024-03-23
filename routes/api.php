@@ -16,6 +16,7 @@ use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,9 +89,17 @@ Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
 
 //Contributor for Mitra
-Route::get('daftar-divisi', [ContributorForMitra::class,'daftarDivisi']);
+Route::get('daftar-divisi', [ContributorForMitra::class,'showDaftarDivisi']);
 Route::post('add-divisi', [ContributorForMitra::class,'addDivisi']);
-Route::put('update-divisi/{id?}', [ContributorForMitra::class,'updateDivisi']);
+Route::put('update-divisi/{id}', [ContributorForMitra::class,'updateDivisi']);
 Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
 
-Route::get('', [ContributorForMitra::class,'']);
+Route::get('kategori-penilaian', [ContributorForMitra::class,'showKategoriPenilaian']);
+Route::post('add-kategori-penilaian', [ContributorForMitra::class,'addKategoriPenilaian']);
+Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class,'addSubKategoriPenilaian']);
+
+Route::get('data-shift', [ContributorForMitra::class,'showDataShift']);
+Route::post('add-shift', [ContributorForMitra::class,'addShift']);
+Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
+Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
+
