@@ -173,7 +173,7 @@
 
 
                                     <tr class="">
-                                        <th>masuk</th>
+                                        <th>masukf</th>
                                         <th>pulang</th>
                                         <th>mulai</th>
                                         <th>selesai</th>
