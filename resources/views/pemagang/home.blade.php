@@ -131,7 +131,7 @@
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>
                                 <div class="lihat">
-                                    <a href="#">Lihat Detail </a>
+                                    <a href="/pemagang/detail">Lihat Detail </a>
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/lihat.css') }}">
 
 
-    <div class="container-fluid border  row justify-content-center">
+    <div class="container-fluid border  row justify-content-center mt-5">
         <div class="card border col-11 d-flex flex-column p-0">
             <div class="atas border w-100 row justify-content-start align-items-center p-2 m-0 bg-black">
                 <div class="gambar-atas d-flex justify-content-center align-items-center">

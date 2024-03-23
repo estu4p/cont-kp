@@ -2,18 +2,42 @@
 
 @section('content')
     <nav class="px-5 pt-3 pb-2 shadow bg-white sticky-top z-auto">
-        <ul class="d-flex list-unstyled text-capitalize ">
+        <ul class="d-flex list-unstyled text-capitalize align-items-center justify-content-between">
             <li><img src="assets/images/logo.png" width="60px" class="ms-2"></li>
-            <div class="d-flex gap-5 fs-4 fw-semibold m-auto">
-                <li><a href="#fitur" class="menu-navbar">fitur</a></li>
-                <li><a href="#paket" class="menu-navbar">harga</a></li>
-                <li><a href="#footer" class="menu-navbar">tentang kami</a></li>
-            </div>
-            <div class="d-flex fs-4 fw-semibold my-auto gap-5">
-                <li><a href="/register" class="menu-reg">daftar</a></li>
-                <li><a href="/loginpage" class="menu-reg">login</a></li>
-            </div>
+            <li class="nav-desktop d-none d-md-block">
+                <div class="d-flex fs-4 fw-semibold m-auto">
+                    <a href="#fitur" class="menu-navbar">fitur</a>
+                    <a href="#paket" class="menu-navbar">harga</a>
+                    <a href="#footer" class="menu-navbar">tentang kami</a>
+                </div>
+            </li>
+            <li class="nav-desktop d-none d-md-block">
+                <div class="d-flex fs-4 fw-semibold my-auto">
+                    <a href="/register" class="menu-reg">daftar</a>
+                    <a href="/loginpage" class="menu-reg">login</a>
+                </div>
+            </li>
+            <li class="nav-mobile d-md-none">
+                <button class="border-0 bg-transparent" id="menuButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                        class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </button>
+            </li>
         </ul>
+        <div class="list-mobile list-unstyled text-capitalize" id="mobileMenu">
+            <div class="d-flex flex-column fs-5 fw-semibold m-auto mt-2 gap-1">
+                <a href="#fitur" class="menu-navbar">fitur</a>
+                <a href="#paket" class="menu-navbar">harga</a>
+                <a href="#footer" class="menu-navbar">tentang kami</a>
+            </div>
+            <div class="d-flex flex-column fs-5 fw-semibold gap-2 my-2">
+                <a href="/register" class="menu-reg">daftar</a>
+                <a href="/loginpage" class="menu-reg">login</a>
+            </div>
+        </div>
     </nav>
 
     <section id="header" class="header-landing">
@@ -39,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 text-center mb-4 mt-5 mt-md-0 pt-4 d-none d-sm-block">
+                <div class="col-md-6 text-center mb-4 mt-5 mt-md-0 pt-4 img-header">
                     <img src="assets/images/landing.png" class="img-fluid mt-5 mt-md-0" width="600px" alt="">
                 </div>
             </div>
@@ -48,7 +72,7 @@
 
     <section id="fitur" class="fitur">
         <p class="title-fitur text-capitalize fw-semibold mx-auto">fitur aplikasi kami</p>
-        <div class="container text-center py-5" style="padding: 20px 60px 10px 60px;">
+        <div class="container text-center py-5">
             <div class="row align-items-center gap-5">
                 <div class="col">
                     <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
@@ -120,7 +144,7 @@
                 </div>
             </div>
             <div class="row align-items-center gap-5 mt-5 mb-4">
-                <div class="col"></div>
+                <div class="col col-last"></div>
                 <div class="col">
                     <div class="card px-2 py-5 shadow border-0" style="width: 22rem; border-radius: 16px;">
                         <img src="assets/images/fitur/7.png" class="mx-auto my-4" width="108px" alt="...">
@@ -132,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col"></div>
+                <div class="col col-last"></div>
             </div>
         </div>
         </div>
@@ -420,15 +444,16 @@
                             <a href=""
                                 style="background-color: #A61C1CE5; border-radius: 100%; text-align: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                                    fill="currentColor" class="bi bi-facebook" style="color: white;" viewBox="0 0 16 16">
+                                    fill="currentColor" class="bi bi-facebook" style="color: white;"
+                                    viewBox="0 0 16 16">
                                     <path
                                         d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
                                 </svg>
                             </a>
-                            <a href=""
-                                style="background-color: #A61C1CE5; text-align: center;">
+                            <a href="" style="background-color: #A61C1CE5; text-align: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                                    fill="currentColor" class="bi bi-linkedin" style="color: white; border-radius: 100%;" viewBox="0 0 16 16">
+                                    fill="currentColor" class="bi bi-linkedin" style="color: white; border-radius: 100%;"
+                                    viewBox="0 0 16 16">
                                     <path
                                         d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
                                 </svg>
@@ -461,4 +486,13 @@
             <span class="fs-3 fw-bold" style="vertical-align: middle;">&copy;</span> 2023 pt.seven inc
         </p>
     </footer>
+
+    <script>
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 @endsection
