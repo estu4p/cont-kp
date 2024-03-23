@@ -16,6 +16,7 @@ use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorForMitra;
+use App\Http\Controllers\BEController\PresensiMitraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,4 +100,10 @@ Route::get('data-shift', [ContributorForMitra::class,'showDataShift']);
 Route::post('add-shift', [ContributorForMitra::class,'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
+
+
+Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
+Route::get('presensi/{id}/by-name', [PresensiMitraController::class, 'getPresensiById']);
+
+
 
