@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use BEController\SchoolController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApiAuthController;
@@ -32,10 +31,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/loginn', [ApiAuthController::class, 'login']);
-
+//landing page
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
+
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
