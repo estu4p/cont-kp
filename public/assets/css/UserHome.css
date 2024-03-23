@@ -44,6 +44,7 @@
 }
 .logout{
     font-size: 30px;
+    
 }
 .fz9{
     font-size: 90%;
@@ -66,8 +67,7 @@
     
     border: none;
     background-color: transparent;
-    border-radius: 10px;
-    color: #A4161A;
+    
 }
 .konten{
    

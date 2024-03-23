@@ -32,7 +32,9 @@
         <div class="bawah mx-auto">
             <div class="judul d-flex flex-row justify-content-start">
                 <div class="  tengah-judul d-flex flex-row align-items-center gap-3 ">
-                    <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user" style="color: #ffffff; font-size:20px;"></i></div>
+                    <div class="profil d-flex justify-content-center align-items-center ">
+                        <i class="fa-solid fa-user" style="color: #ffffff; font-size:20px;"></i>
+                    </div>
                     <div class="kekanan  d-flex  flex-column gap-0 justify-content-start">
                         <p class="name fz9 m-0"><b>JAMES CLEAR</b></p>
                         <p class="nip fz9 m-0">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
@@ -40,13 +42,15 @@
                 </div>
             </div>
             <div class="logout">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <a href="/user/login">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: white;"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr">Lihat QR Code Saya</button>
+            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
         </div>
         <div class="konten">
             <div class="shif">
@@ -105,7 +109,7 @@
                                 <!-- <p class="text-danger hilang toggle-muncul4 m-0" style="font-size:60%;">-00.30.01</p> -->
                             </div>
                         </div>
-
+                       
                     </div>
                 </div>
                 <div class="kananbawah">
@@ -127,7 +131,7 @@
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>
                                 <div class="lihat">
-                                    <a href="#">Lihat Detail </a>
+                                    <a href="/pemagang/detail">Lihat Detail </a>
                                 </div>
                             </div>
                         </div>
@@ -141,14 +145,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <div class="  d-flex justify-content-between align-items-center p-3" >
-                <div></div>
-                    <h5 class="modal-title" >Izin</h5>
+                <div class="  d-flex justify-content-between align-items-center p-3">
+                    <div></div>
+                    <h5 class="modal-title">Izin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <hr style="width:100%;">
                 <div class="modal-body">
-                <div class="grupinput">
+                    <div class="grupinput">
                         <p class="judulinput">Alasan izin</p>
                         <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Ketik alasan"></textarea>
                     </div>
@@ -174,7 +178,7 @@
             <div class="modal-content " style="text-align: center;">
                 <div class="modal-body">
                     <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Keterangan</h1>
-                    <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)" style="background-color: #E9ECEF";></textarea>
+                    <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)" style="background-color: #E9ECEF" ;></textarea>
                     <div class="bawahmodal">
                         <button type="button" class="btn btn-danger submitmodal" data-bs-dismiss="modal" onclick="shift()" aria-label="Close">Submit</button>
                     </div>
@@ -257,6 +261,7 @@
             } else if (masukButton.innerHTML === "Log Activity") {
                 masukButton.style.background = "#CBD3D6";
                 masukButton.style.color = "#a4a4a4";
+                masukButton.disabled = true;
 
 
             }
@@ -267,6 +272,10 @@
             if (izinButton) {
 
                 izinButton.innerHTML = "Telah Izin";
+                izinButton.disabled = true;
+                
+
+            } else{
 
             }
             ubahTombolMasuk();
@@ -278,6 +287,7 @@
                 masukButton.innerHTML = "Izin";
                 masukButton.style.backgroundColor = "#CBD3D6";
                 masukButton.style.color = "#2d2d2d";
+                masukButton.disabled = true;
             }
         }
 

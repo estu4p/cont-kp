@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>{{ $title }}</title>
     {{-- fontawesome --}}
     <script src="https://kit.fontawesome.com/edd6108211.js" crossorigin="anonymous"></script>
 {{-- bs --}}

@@ -15,6 +15,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+.btn-red {
+    background-color: red !important;
+    color: white !important;
+}
+
+        </style>
 </head>
 
 <body>
@@ -34,19 +41,19 @@
                 <div class="  tengah-judul d-flex flex-row align-items-center gap-3 ">
                     <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user" style="color: #ffffff; font-size:20px;"></i></div>
                     <div class="kekanan  d-flex  flex-column gap-0 justify-content-start">
-                        <p class="name fz9 m-0"><b>JAMES CLEAR</b></p>
+                        <p class="name fz9 m-0"><b>PIQRI</b></p>
                         <p class="nip fz9 m-0">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
                     </div>
                 </div>
             </div>
             <div class="logout">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <button  onclick="showSweet()" style="background-color: transparent; border: none;"><i class="fa-solid text-white fa-arrow-right-from-bracket"></i>
             </div>
         </div>
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr">Lihat QR Code Saya</button>
+             <a href="/Scanqr" class="btnqr">Lihat Barcode Saya</a>
         </div>
         <div class="konten">
             <div class="shif">
@@ -127,7 +134,7 @@
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>
                                 <div class="lihat">
-                                    <a href="#">Lihat Detail </a>
+                                    <a href="/TableGantiJam">Lihat Detail </a>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +271,7 @@
         function izin() {
             const izinButton = document.querySelector(".btn.izin");
             if (izinButton) {
+                izinButton.style.display = "none";
 
                 izinButton.innerHTML = "Telah Izin";
 
@@ -305,6 +313,34 @@
 
         // Panggil updateTime sekali untuk menetapkan waktu awal
         updateTime()
+
+        function showSweet() {
+            swal({
+    title: "Log Out",
+    text: "Apa anda yakin ingin keluar?",
+    buttons: {
+        cancel: {
+            text: "Tidak",
+            value: false,
+            visible: true,
+            className: "",
+            closeModal: true,
+        },
+        confirm: {
+            text: "Ya",
+            value: true,
+            visible: true,
+            className: "btn-red",
+            closeModal: true
+        }
+    }
+}).then((willLogout) => {
+    if (willLogout) {
+        window.location.href = "/user/login";
+    }
+});
+
+}
     </script>
 
 </body>
