@@ -335,33 +335,43 @@ class AdminUnivAfterPaymentController extends Controller
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
-    public function teamAktifDetailHadir(Request $request, $id)
+    public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        $userId = $request->user()->id; // Mengambil ID pengguna dari sesi atau token otentikasi
-        dd($userId);
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->first();
 
-        // Mengambil presensi berdasarkan ID pengguna
-        $presensi = Presensi::where('id', $userId)->first();
-
-        if ($presensi) {
-            if ($request->is('api/*') || $request->wantsJson()) {
-                return response()->json([
-                    'message' => 'success get detail data',
-                    'data' => $presensi,
-                ]);
-            } else {
-                return view('adminUniv-afterPayment.mitra.laporandetailhadir')->with('presensi', $presensi);
-            }
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'data' => $presensi
+            ]);
         } else {
-            // Handle jika presensi tidak ditemukan untuk pengguna tersebut
-            if ($request->is('api/*') || $request->wantsJson()) {
-                return response()->json([
-                    'message' => 'Presensi tidak ditemukan untuk pengguna ini',
-                ], 404);
-            } else {
-                // Misalnya, redirect ke halaman lain atau tampilkan pesan error
-                abort(404, 'Presensi tidak ditemukan untuk pengguna ini');
-            }
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
         }
+
+        // $userId = User::findOrFail($id);
+        // dd($userId);
+
+        // // Mengambil presensi berdasarkan ID pengguna
+        // $presensi = Presensi::where('id', $userId)->first();
+
+        // if ($presensi) {
+        //     if ($request->is('api/*') || $request->wantsJson()) {
+        //         return response()->json([
+        //             'message' => 'success get detail data',
+        //             'data' => $presensi,
+        //         ]);
+        //     } else {
+        //         return view('adminUniv-afterPayment.mitra.laporandetailhadir')->with('presensi', $presensi);
+        //     }
+        // } else {
+        //     // Handle jika presensi tidak ditemukan untuk pengguna tersebut
+        //     if ($request->is('api/*') || $request->wantsJson()) {
+        //         return response()->json([
+        //             'message' => 'Presensi tidak ditemukan untuk pengguna ini',
+        //         ], 404);
+        //     } else {
+        //         // Misalnya, redirect ke halaman lain atau tampilkan pesan error
+        //         abort(404, 'Presensi tidak ditemukan untuk pengguna ini');
+        //     }
+        // }
     }
 }

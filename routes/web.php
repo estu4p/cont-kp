@@ -307,7 +307,7 @@ Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
 Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
-Route::get('/mitra-laporanpresensi-detaihadir', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
+Route::get('/mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
 Route::get('/mitra-laporanpresensi-detailizin', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailizin');
 });
@@ -582,7 +582,7 @@ Route::get('/superAdmin/langganan', function () {
     ]);
 });
 
-Route::get('/admin/setting/quotes', function() {
+Route::get('/admin/setting/quotes', function () {
     $quotes = [
         ['id' => 1, 'quotes' => "Change your life now for better future"],
         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
@@ -598,7 +598,7 @@ Route::get('/admin/setting/quotes', function() {
         'quotes' => $quotes
     ]);
 });
-Route::get('/admin/setting/user', function() {
+Route::get('/admin/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
         ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
