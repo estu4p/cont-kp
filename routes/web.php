@@ -11,7 +11,8 @@ use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController 
+as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 
@@ -275,7 +276,7 @@ Route::get('/user/home', function () {
     Route::get('/kategoripenilaian', function () {
         return view('pengaturan.kategoripenilaian');
     });
-});
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -325,6 +326,11 @@ Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 });
 
+
+
+
+
+// contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
@@ -335,6 +341,27 @@ Route::get('/MitraPresensiDetailIzin', function () {
 Route::get('/MitraPresensiDetailTidakHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
+
+Route::get('/MitraPresensi', function () {
+    return view('user.ContributorForMitra.MitraPresensi');
+});
+
+Route::get('/dataPresensi', function () {
+    return view('user.ContributorForMitra.dataPresensi');
+});
+Route::get('/presensiaccept', function () {
+    return view('user.ContributorForMitra.presensiaccept');
+});
+Route::get('/presensireject', function () {
+    return view('user.ContributorForMitra.presensireject');
+});
+
+Route::get('/allpresensi', function () {
+    return view('user.ContributorForMitra.allpresensi');
+});
+
+
+
 
 
 Route::get('/manage-devisi', function () {
