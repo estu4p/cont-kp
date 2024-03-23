@@ -3,6 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/manage-devisi.css') }}">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modal</title>
 <!-- Bootstrap CSS -->
@@ -55,7 +56,9 @@
                             <tr>
                                 <td class="ratakanan">1</td>
                                 <td>Ui/Ux</td>
+
                                 <td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
                                 <td>
                                     <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
                                     <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
@@ -181,6 +184,7 @@
 
         // Tutup modal edit
         $('#editModal').modal('hide');
+
     }
 
     // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
@@ -297,6 +301,7 @@
             // Mengosongkan input file
             $("#fileInput").val('');
         });
+
     });
 </script>
 
