@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Response;
+
 
 
 
@@ -213,47 +215,19 @@ class HomeMitraController extends Controller
             ], 404);
         }
     }
-
-    public function barcode(Request $request, $id)
+    public function download()
     {
-        $presensi = Presensi::where('nama_lengkap', $id)->first();
-        if ($presensi) {
-            $currentTime = Carbon::now();
-            $sessionKey = 'lastBarcodeTime_' . $id;
-            $lastBarcodeTime = $request->session()->get($sessionKey, null);
-
-            if (!$lastBarcodeTime || $id !== $request->session()->get('lastUserId')) {
-                $request->session()->put($sessionKey, $currentTime);
-                $request->session()->put('lastUserId', $id);
-            }
-
-            if (!$lastBarcodeTime || $currentTime->diffInMinutes($lastBarcodeTime) >= 5) {
-                $barcode = time();
-                $presensi->barcode = $barcode;
-                $presensi->save();
-
-                $presensi->jam_masuk = $currentTime;
-                $presensi->status_kehadiran = 'Hadir';
-                $presensi->save();
-
-                $request->session()->put($sessionKey, $currentTime);
-
-                return response()->json([
-                    'status' => 'Presensi berhasil dicatat',
-                    'data' => $presensi,
-                    'barcode' => $barcode
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 'Anda hanya dapat mengubah barcode setiap 5 menit',
-                    'remaining_time' => 5 - $currentTime->diffInMinutes($lastBarcodeTime)
-                ], 403);
-            }
-        } else {
-            return response()->json([
-                'status' => 'User ID tidak valid atau tidak memiliki presensi'
-            ], 404);
-        }
+        return response()->streamDownload(
+            function () {
+                echo QrCode::size(200)
+                    ->format('png')
+                    ->generate('https://harrk.dev');
+            },
+            'qr-code.png',
+            [
+                'Content-Type' => 'image/png',
+            ]
+        );
     }
 
     public function generateQRCode(Request $request, $id)
@@ -264,26 +238,34 @@ class HomeMitraController extends Controller
                 'status' => 'Pengguna tidak ditemukan'
             ], 404);
         }
-        $izin = $request->input('izin', false);
 
-        $qrCode = QrCode::size(100)->generate("ID: $id");
-        $filename = "qrcode_$id.png";
-        $path = public_path("barcodes/$filename");
-        file_put_contents($path, $qrCode);
-        
-        // Update 'barcode' column pada model Presensi
-        $presensi->barcode = "/barcodes/$filename";
-        $presensi->save();
-        // Jika ada izin, simpan status izin pada presensi
-        if ($izin) {
-            $presensi->izin = true;
+        $currentTime = Carbon::now();
+        $sessionKey = 'lastBarcodeTime_' . $id;
+        $lastBarcodeTime = $request->session()->get($sessionKey, null);
+
+        if (!$lastBarcodeTime || $currentTime->diffInMinutes($lastBarcodeTime) >= 5) {
+            $qrCode = QrCode::size(300)->generate("ID: $id");
+            $filename = "qrcode_$id.png";
+            $path = public_path("barcodes/$filename");
+            file_put_contents($path, $qrCode);
+            $path = str_replace('\\', '/', $path);
+            // dd($path);
+            
+            $presensi->barcode = "/barcodes/$filename";
             $presensi->save();
-        }
 
-        return response()->json([
-            'status' => 'QR Code berhasil dibuat dan disimpan',
-            'barcode_url' => asset("barcodes/$filename")
-        ]);
+            $request->session()->put($sessionKey, $currentTime);
+
+            return response()->json([
+                'status' => 'QR Code berhasil dibuat dan disimpan',
+                'barcode_url' => asset("barcodes/$filename")
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'Anda hanya dapat mengubah barcode setiap 5 menit',
+                'remaining_time' => 5 - $currentTime->diffInMinutes($lastBarcodeTime)
+            ], 403);
+        }
     }
 
     public function detailGantiJam(Request $request, $id)
