@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -14,27 +15,26 @@ return new class extends Migration
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
-            $table->dateTime('jam_masuk');
-            $table->dateTime('jam_pulang');
-            $table->dateTime('jam_mulai_istirahat');
-            $table->dateTime('jam_selesai_istirahat');
+            $table->date('hari')->nullable();
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_pulang')->nullable();
+            $table->time('jam_mulai_istirahat')->nullable();
+            $table->time('jam_selesai_istirahat')->nullable();
             $table->time('total_jam_kerja')->nullable();
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
-            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']);
+            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir', 'Ganti Jam']);
             $table->text('keterangan_status')->nullable();
             $table->string('kebaikan');
-            $table->unsignedBigInteger('mitra_id')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
+            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('barcode')->nullable()->unique();
+            $table->time('hutang_presensi')->nullable();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')
                 ->references('id')->on('users')
                 ->where('role', 3)
                 ->onDelete('SET NULL');
-            $table->foreign('role_id')->references('id')->on('users')->where('role_id', 3)->onDelete('SET NULL');
-            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
         });
     }
 
