@@ -1,4 +1,4 @@
-@include('template.navbar-super')
+@include('template.navbar-super', ['superAdmin', $superAdmin])
 @extends('layouts.superadmin')
 
 @section('content')
@@ -7,9 +7,12 @@
     <div class="p-5">
         <h4 class="text-capitalize fw-bold mb-4">data admin</h4>
         <button
+            id="addAdmin"
             style="background-color: #A4161A; color: white; padding: 6px 10px; border-radius: 8px; border: 0; margin: 40px 0px 30px;"
-            data-bs-toggle="modal" data-bs-target="#addUserModal">Add
-            User</button>
+            style="background-color: #A4161A; color: white; padding: 6px 10px; border-radius: 8px; border: 0; margin: 40px 0px 30px;"
+            onclick="showModal()">
+            Add User
+        </button>
 
         {{-- Modal Tambah --}}
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
@@ -20,7 +23,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="text-capitalize">
+                        <form id="form-addUser" class="text-capitalize" method="POST" action="{{ route('super-admin.add-admin') }}">
+                            @csrf
                             <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
                                 <h6>profile photo</h6>
                                 <div class="d-flex gap-4">
@@ -41,59 +45,58 @@
                             <div class="mt-3 d-flex flex-column">
                                 <label for="nama"
                                     style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama</label>
-                                <input type="text" name="nama" placeholder="Nama"
+                                <input type="text" name="nama_lengkap" placeholder="Nama" required
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
+                                    id="nama_lengkap">
                             </div>
                             <div class="mt-3 d-flex flex-column">
                                 <label for="username"
                                     style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">username</label>
-                                <input type="text" name="username" placeholder="Username"
+                                <input type="text" name="username" placeholder="Username" required
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
+                                    id="username">
                             </div>
                             <div class="mt-3 d-flex flex-column">
                                 <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email
                                     address</label>
-                                <input type="email" name="email" placeholder="E-Mail"
+                                <input type="email" name="email" placeholder="E-Mail" required
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
+                                    id="email">
                             </div>
                             <div class="mt-3 d-flex flex-column">
                                 <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No
                                     HP</label>
-                                <input type="number" name="hp" placeholder="08328732777"
+                                <input type="text" name="no_hp" placeholder="08328732777" required
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
+                                    id="no_hp">
                             </div>
                             <div class="d-flex gap-4">
                                 <div class="mt-3 d-flex flex-column w-50">
                                     <label for="password"
                                         style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">password</label>
-                                    <input type="password" name="password" placeholder="Masukkan Password"
+                                    <input type="password" name="password" placeholder="Masukkan Password" required
                                         class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                        id="">
+                                        id="password">
                                 </div>
                                 <div class="mt-3 d-flex flex-column w-50">
-                                    <label for="konfirm" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
+                                    <label for="password_confirmation" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
                                         password</label>
-                                    <input type="text" name="konfirm" placeholder="Ulangi Password"
+                                    <input type="text" name="password_confirmation" placeholder="Ulangi Password" required
                                         class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                        id="">
+                                        id="password_confirmation">
                                 </div>
                             </div>
                             <div class="mt-3 d-flex flex-column">
                                 <label for="lokasi"
                                     style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">lokasi</label>
-                                <select name="lokasi" id="lokasi" class="form-select"
-                                    style="background-color: #F2F4F8;">
+                                <select name="kota" id="lokasi" class="form-select" style="background-color: #F2F4F8;" required>
                                     <option value="">Pilih Lokasi</option>
-                                    <option value="yogyakarta">Yogyakarta</option>
-                                    <option value="jawa tengah">Jawa Tengah</option>
+                                    <option value="Kota Surabaya">Kota Surabaya</option>
+                                    <option value="Kota Semarang">Kota Semarang</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button onclick="alert()" type="button"
+                                <button type="submit"
                                     style="background-color: #A4161A; border: 0; border-radius: 8px; color: white; padding: 6px 10px;">Submit</button>
                             </div>
                         </form>
@@ -108,25 +111,53 @@
                     <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" height="80" alt="">
                     <div class="d-flex flex-column text-capitalize text-left fw-semibold"
                         style="font-size: 12px; margin-top: 4px;">
-                        <p style="line-height: 24px;">admin {{ $admin['id'] }} <br>nama: {{ $admin['nama'] }} <br>lokasi:
-                            {{ $admin['lokasi'] }}</p>
+                        <p style="line-height: 24px;">admin {{ $admin->id }} <br>nama: {{ $admin->nama_lengkap }} <br>lokasi:
+                            {{ $admin->kota }}</p> {{-- lokasi --}}
                     </div>
                     <div style="margin-left: auto; margin-top: 28px;">
-                        <button class="btn btn-info"
+                        <button class="btn btn-info edit-button"
                             style="color: white; padding: 6px 12px; border-radius: 8px; border: 0; font-size: 14px;"
-                            data-bs-toggle="modal" data-bs-target="#addUserModal">Edit</button>
-                        <button onclick="showAlert()" class="btn btn-danger"
+                            data-bs-toggle="modal" data-id="{{ $admin->id }}">Edit</button>
+                        {{-- form delete admin --}}
+                        <form id="formDeleteAdmin" action="" method="POST" style="display: none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        <button onclick="showAlert('{{ $admin->username }}', '{{ $admin->nama_lengkap }}')" class="btn btn-danger"
                             style="color: white; padding: 6px 12px; border-radius: 8px; border: 0; font-size: 14px;">Hapus</button>
                     </div>
                 </div>
             </div>
         @endforeach
-        {{-- {{ $admins->links() }} --}}
+        {{-- <div class="d-flex justify-content-center mt-4">
+            {{ $admins->links() }}
+        </div> --}}
     </div>
-    <script>
-        function showAlert() {
+    
+    @if (session('success'))
+        <script>
+            successMessage = "{{ session('success') }}";
+            swal(successMessage, {
+                icon: "success",
+            });
+        </script>
+    @elseif (session('error'))
+        <script>
+            errorMessage = "{{ session('error') }}";
             swal({
-                    title: "Apakah Anda yakin ingin menghapus?",
+                title: "Data Gagal Diperbaharui!",
+                text: errorMessage,
+                icon: "error",
+                button: "OK!",
+                });
+        </script>
+    @endif
+
+    <script>
+        // Alert delete admin
+        function showAlert(username, namaAdmin) {
+            swal({
+                    title: "Apakah Anda yakin ingin menghapus data " + namaAdmin + "?",
                     text: "Data yang dihapus tidak dapat dikembalikan!",
                     icon: "warning",
                     buttons: ["Batal", "Hapus"],
@@ -134,19 +165,13 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Data berhasil dihapus!", {
-                            icon: "success",
-                        });
+                        var formDelete = document.getElementById('formDeleteAdmin');
+                        formDelete.setAttribute('action', '/super-admin/data-admin/delete/' + username);
+                        formDelete.submit();
                     } else {
                         swal("Data tidak jadi dihapus.");
                     }
                 });
-        }
-
-        function alert() {
-            swal("Data berhasil ditambahkan!", {
-                icon: "success",
-            });
         }
 
         function previewPhoto(input) {
@@ -170,6 +195,53 @@
         function removePhoto() {
             $('#photoInput').val(null); // Clear file input
             $('#previewImage').attr('src', '{{ asset('assets/images/User Thumb.png') }}'); // Set default image
+        }
+
+        // Fungsi untuk menambahkan @method('PATCH') ke dalam form
+        function addPatchMethod(method) {
+            var form = document.getElementById('form-addUser');
+            var patchInput = document.createElement('input');
+            patchInput.setAttribute('type', 'hidden');
+            patchInput.setAttribute('name', '_method');
+            patchInput.setAttribute('value', method);
+            form.appendChild(patchInput);
+        }
+
+        // Show Alert Edit
+        $('.edit-button').click(function() {
+            let adminId = $(this).data('id');
+
+            $.ajax({
+                url: '/super-admin/data-admin/showAlertEdit/' + adminId,
+                type: 'GET',
+                success: function (response) {
+                    $('#nama_lengkap').val(response.admin.nama_lengkap);
+                    $('#username').val(response.admin.username);
+                    $('#email').val(response.admin.email);
+                    $('#no_hp').val(response.admin.no_hp);
+                    $('#lokasi').val(response.admin.kota);
+                    $('#password').removeAttr('required');
+                    $('#password_confirmation').removeAttr('required');
+                    $('#form-addUser').attr('action', '/super-admin/data-admin/update/' + response.admin.username);
+                    addPatchMethod('PATCH');
+                    $('#addUserModal').modal('show');
+                }
+            });
+        });
+
+        function showModal() {
+            // $('#addUserModal').on('hidden.bs.modal', function () { 
+                $('#nama_lengkap').val('');
+                $('#username').val('');
+                $('#email').val('');
+                $('#no_hp').val('');
+                $('#lokasi').val('');
+                $('#password').val('');
+                $('#password_confirmation').val('');
+                $('#form-addUser').attr('action', '/super-admin/data-admin/add');
+                addPatchMethod('POST');
+                $('#addUserModal').modal('show');
+            // });
         }
     </script>
 @endsection

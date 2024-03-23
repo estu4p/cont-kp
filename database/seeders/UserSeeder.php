@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),
                 'password' => Hash::make('123456'),
-                'kota' => $faker->randomElement(['Kota Surabaya', 'kota Semarang']),
+                'kota' => $faker->randomElement(['Kota Surabaya', 'Kota Semarang']),
                 'alamat' => $faker->address,
                 'tgl_lahir' => $faker->dateTime,
                 'about' => $faker->sentence,

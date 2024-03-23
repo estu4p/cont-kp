@@ -10,8 +10,8 @@
             </div>
             <div class="d-flex justify-content-evenly flex-row text-center">
                 <div class="navbar-profile">
-                    <span class="profile-name fw-bold">Nama Profil</span>
-                    <span class="profile-status" style="font-size: 14px;">Status Profil</span>
+                    <span class="profile-name fw-bold">{{ $superAdmin->nama_lengkap }}</span>
+                    <span class="profile-status" style="font-size: 14px;">{{ $superAdmin->status_akun }}</span>
                 </div>
                 <div class="navbar-logo">
                     <img src="{{ asset('assets/images/Rectangle 22.png') }}" alt="Profile Logo">

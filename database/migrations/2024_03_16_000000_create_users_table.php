@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
             $table->string('alamat')->nullable();
-            $table->enum('kota', ['Kota Surabaya', 'kota Semarang'])->nullable();
+            $table->enum('kota', ['Kota Surabaya', 'Kota Semarang'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('about')->nullable();
             $table->string('os')->nullable();

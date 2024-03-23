@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\MitraTeamAktifController;
+use App\Http\Controllers\SuperadminSistemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,7 +157,7 @@ Route::get('/user', function () {
         'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
     ]);
 });
-});
+
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
         'title' => "Barcode Pemagang",
@@ -423,42 +424,14 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
-Route::get('/super-admin', function () {
-    return view('super-admin.dashboard', [
-        'title' => "Super Admin - Dashboard",
-        'subscription' => 300,
-        'admin_sistem' => 200
-    ]);
-});
-Route::get('/super-admin/ubah-profil', function () {
-    return view('super-admin.edit', [
-        'title' => "Super Admin - Ubah Profil",
-        'nama' => "Jay Antonio",
-        'email' => 'antoniojay@gmail.com',
-        'hp' => "081326273187",
-        'alamat' => "Jateng",
-        'about' => "Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data"
-    ]);
-});
-Route::get('/super-admin/data-admin', function () {
-    // $admins = App\Models\Admin::paginate(4);
-    $admins = [
-        ['id' => 1, 'nama' => 'Joy', 'lokasi' => 'Yogyakarta'],
-        ['id' => 2, 'nama' => 'Vior', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 3, 'nama' => 'Ilham', 'lokasi' => 'Yogyakarta'],
-        ['id' => 4, 'nama' => 'Blue', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 5, 'nama' => 'Green', 'lokasi' => 'Yogyakarta'],
-        ['id' => 6, 'nama' => 'Black', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 7, 'nama' => 'Purple', 'lokasi' => 'Yogyakarta'],
-        ['id' => 8, 'nama' => 'Emerald', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 9, 'nama' => 'Sage', 'lokasi' => 'Yogyakarta'],
-        ['id' => 10, 'nama' => 'Sky', 'lokasi' => 'Jawa Tengah'],
-    ];
-    return view('super-admin.data-admin', [
-        'title' => "Data Admin",
-        'admins' => $admins,
-    ]);
-});
+Route::get('/super-admin', [SuperadminSistemController::class, 'dashboard'])->name('super-admin.dashboard');
+Route::get('/super-admin/ubah-profil', [SuperadminSistemController::class, 'editProfile'])->name('super-admin.edit-profile');
+Route::patch('/super-admin/ubah-profil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('super-admin.update-profile');
+Route::get('/super-admin/data-admin', [SuperadminSistemController::class, 'dataAdmin'])->name('super-admin.data-admin');
+Route::get('/super-admin/data-admin/showAlertEdit/{id}', [SuperadminSistemController::class, 'showAlertEditAdmin']);
+Route::patch('/super-admin/data-admin/update/{username}', [SuperadminSistemController::class, 'updateAdmin'])->name('super-admin.update-admin');
+Route::delete('/super-admin/data-admin/delete/{username}', [SuperadminSistemController::class, 'deleteAdmin'])->name('super-admin.delete-admin');
+Route::post('/super-admin/data-admin/add', [SuperadminSistemController::class, 'addAdmin'])->name('super-admin.add-admin');
 Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
