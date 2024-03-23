@@ -337,41 +337,31 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->first();
-
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
+        // $presensiAll = Presensi::where('nama_lengkap', $nama_lengkap)->get();
+        // $presensiAll = Presensi::findOrFail($nama_lengkap);
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-                'data' => $presensi
+                'data' => $presensi,
+
             ]);
         } else {
             return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
         }
-
-        // $userId = User::findOrFail($id);
-        // dd($userId);
-
-        // // Mengambil presensi berdasarkan ID pengguna
-        // $presensi = Presensi::where('id', $userId)->first();
-
-        // if ($presensi) {
-        //     if ($request->is('api/*') || $request->wantsJson()) {
-        //         return response()->json([
-        //             'message' => 'success get detail data',
-        //             'data' => $presensi,
-        //         ]);
-        //     } else {
-        //         return view('adminUniv-afterPayment.mitra.laporandetailhadir')->with('presensi', $presensi);
-        //     }
-        // } else {
-        //     // Handle jika presensi tidak ditemukan untuk pengguna tersebut
-        //     if ($request->is('api/*') || $request->wantsJson()) {
-        //         return response()->json([
-        //             'message' => 'Presensi tidak ditemukan untuk pengguna ini',
-        //         ], 404);
-        //     } else {
-        //         // Misalnya, redirect ke halaman lain atau tampilkan pesan error
-        //         abort(404, 'Presensi tidak ditemukan untuk pengguna ini');
-        //     }
-        // }
     }
 }

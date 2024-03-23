@@ -57,7 +57,7 @@
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td><span class="total">{{ $presensi-> }} hari</td>
+                                    <td><span class="total">{{ $presensi->total_kehadiran }} hari</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
@@ -134,18 +134,17 @@
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td>Senin, 21-08-2023</td>
-                            <td>06:25:00</td>
-                            <td>13:05:14</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>07:00:53 </td>
-                            <td> 00:30:53</td>
-                            <td>Membuat tampilan website e-com..</td>
-                            <td>Hadir</td>
-                            <td>Merapikan parkiran motor</td>
-                            <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
+                            <td>{{ $presensi->hari }}</td>
+                            <td>{{ $presensi->jam_masuk }}</td>
+                            <td>{{ $presensi->jam_pulang }}</td>
+                            <td>{{ $presensi->jam_mulai_istirahat }}</td>
+                            <td>{{ $presensi->jam_selesai_istirahat }}</td>
+                            <td>{{ $presensi->total_jam_kerja }}</td>
+                            <td>{{ $presensi->hutang_presensi }}</td>
+                            <td>{{ $presensi->log_aktivitas }}</td>
+                            <td>{{ $presensi->status_kehadiran }}</td>
+                            <td>{{ $presensi->kebaikan }}</td>
+                            <td>{{ $presensi->keterangan_status }}</td>
                         </tr>
                     </tbody>
                 </table>
