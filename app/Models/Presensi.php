@@ -21,9 +21,4 @@ class Presensi extends Model
     {
         return $this->belongsTo(Sekolah::class, 'nama_sekolah');
     }
-    // untuk detail presensi
-    public function presensis()
-    {
-        return $this->hasMany(Presensi::class);
-    }
 }

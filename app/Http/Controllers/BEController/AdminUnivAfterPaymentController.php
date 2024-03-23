@@ -335,15 +335,33 @@ class AdminUnivAfterPaymentController extends Controller
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
-    public function teamAktifDetailHadir(Request $request)
+    public function teamAktifDetailHadir(Request $request, $id)
     {
-        $user = auth()->user();
+        $userId = $request->user()->id; // Mengambil ID pengguna dari sesi atau token otentikasi
+        dd($userId);
 
-        // Mengambil semua data presensi yang terkait dengan pengguna tertentu
-        $presensi = Presensi::whereHas('user', function ($query) use ($user) {
-            $query->where('id', $user->id);
-        })->get();
+        // Mengambil presensi berdasarkan ID pengguna
+        $presensi = Presensi::where('id', $userId)->first();
 
-        return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
+        if ($presensi) {
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json([
+                    'message' => 'success get detail data',
+                    'data' => $presensi,
+                ]);
+            } else {
+                return view('adminUniv-afterPayment.mitra.laporandetailhadir')->with('presensi', $presensi);
+            }
+        } else {
+            // Handle jika presensi tidak ditemukan untuk pengguna tersebut
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Presensi tidak ditemukan untuk pengguna ini',
+                ], 404);
+            } else {
+                // Misalnya, redirect ke halaman lain atau tampilkan pesan error
+                abort(404, 'Presensi tidak ditemukan untuk pengguna ini');
+            }
+        }
     }
 }
