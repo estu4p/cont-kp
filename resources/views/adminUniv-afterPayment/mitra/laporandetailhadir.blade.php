@@ -14,7 +14,7 @@
                             <img src="assets/images/user.jpg" class="user">
                         </div>
                         <div>
-                            <h3 style="font-size: 30px; margin: 0;">{{ $user->nama_lengkap }}</h3>
+                            <h3 style="font-size: 30px; margin: 0;">{{ $presensi->nama_lengkap }}</h3>
                             <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
@@ -145,107 +145,6 @@
                             <td>Hadir</td>
                             <td>Merapikan parkiran motor</td>
                             <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"
-                                    style="color: red"></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>3</td>
-                            <td>Rabu, 23-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"
-                                    style="color: red"></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>4</td>
-                            <td>Kamis, 24-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"
-                                    style="color: red"></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>5</td>
-                            <td>jumat, 22-08-2023</td>
-                            <td>12:54:40</td>
-                            <td>21:00:04</td>
-                            <td>18:00:30</td>
-                            <td>18:59:00</td>
-                            <td>05:30:07 </td>
-                            <td style="color: red">-00:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja">
-                            </td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td>-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja">
-                            </td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td>-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
 
                         </tr>
                     </tbody>
