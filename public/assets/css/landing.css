@@ -1,24 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+.nav-mobile,
+.list-mobile {
+    display: none;
+}
+.menu-navbar,
+.menu-reg {
+    padding: 10px 20px;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+}
+
+.menu-navbar {
+    color: #000;
+}
+
 .menu-reg {
     color: #a61c1c;
-    text-decoration: none;
 }
-.menu-reg:hover {
-    border: 2px solid #a61c1c;
-    border-radius: 8px;
-    color: #a61c1c;
-    padding: 4px 8px 4px 8px;
+
+.menu-navbar:before,
+.menu-reg:before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    z-index: -1;
 }
-.menu-navbar {
-    text-decoration: none;
-    color: black;
+.menu-navbar:hover:before {
+    background-color: #a61c1c;
 }
 .menu-navbar:hover {
-    background-color: #a61c1c;
-    border-radius: 20px;
-    padding: 0px 15px 0px 15px;
     color: #ffffff;
+}
+.menu-reg:hover {
+    color: #a61c1c;
+    border: 2px solid #a61c1c;
+    border-radius: 8px;
 }
 .header-landing {
     background-image: url("../images/bg.png");
@@ -48,10 +71,18 @@
     background-image: url("../images/title-s2.png");
     font-size: 36px;
     color: white;
-    width: 584px;
+    width: 100%;
+    max-width: 584px;
     height: 128px;
     text-align: center;
     padding: 24px;
+    display: flex; /* Menjadikan konten menjadi flexbox */
+    justify-content: center; /* Memusatkan konten secara horizontal */
+}
+.card {
+    border-radius: 16px;
+    width: 22rem;
+    margin: 0 auto; /* Untuk membuat card berada di tengah */
 }
 .card-paket:hover {
     border: 0px;
@@ -120,9 +151,9 @@
     transform: translateX(-50%);
 }
 .invoice {
-    font-family:Arial, Helvetica, sans-serif; 
-    width: 30%; 
-    margin: auto; 
+    font-family: Arial, Helvetica, sans-serif;
+    width: 30%;
+    margin: auto;
     border: 0.5px solid rgba(0, 0, 0, 0.2);
     text-align: center;
     background-color: white;
@@ -135,6 +166,28 @@
     height: 2px;
     background-color: black;
     margin: 30px auto;
+}
+.img-header {
+    display: block;
+}
+.d-flex {
+    display: flex;
+    align-items: center; /* Menyusun elemen secara vertikal di tengah */
+}
+
+.d-flex img {
+    width: 70px; /* Lebar gambar */
+    margin-right: 10px; /* Jarak antara gambar dan teks */
+}
+
+.d-flex h4 {
+    margin: 0; /* Menghapus margin bawaan */
+    font-weight: bold;
+}
+#footer .col-2 a {
+    display: block; /* Anchor berjejer ke bawah */
+    text-align: center;
+    margin-bottom: 10px; /* Jarak antara setiap anchor */
 }
 
 @media (max-width: 992px) {
@@ -154,6 +207,51 @@
 }
 
 @media (max-width: 768px) {
+    .img-header {
+        display: none;
+    }
+    .nav-mobile {
+        display: block;
+        margin-left: auto;
+        margin-top: 12px;
+    }
+    .list-mobile.active {
+        display: block;
+    }
+    .nav-desktop {
+        display: none;
+    }
+    .title-fitur {
+        font-size: 24px;
+        height: auto;
+        padding: 12px;
+    }
+    .container {
+        padding: 20px;
+    }
+    .card {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px; /* Menambahkan ruang antara kartu */
+    }
+    
+    .card img {
+        width: 80px; /* Mengurangi lebar gambar */
+    }
+
+    .card-body {
+        padding: 1rem; /* Mengurangi padding pada konten kartu */
+    }
+
+    .card-body h5 {
+        font-size: 16px; /* Mengurangi ukuran font judul */
+        height: auto; /* Mengubah ketinggian menjadi otomatis */
+    }
+
+    .card-body p {
+        font-size: 14px; /* Mengurangi ukuran font teks */
+        height: auto; /* Mengubah ketinggian menjadi otomatis */
+    }
     #paket .col-3 {
         flex: 0 0 100%;
         max-width: 100%;
@@ -186,10 +284,10 @@
         align-items: center;
         padding: 0px;
     }
-    .label-img{
+    .label-img {
         display: none;
     }
-    .img-checkout{
+    .img-checkout {
         display: none;
     }
     .checkout {
@@ -200,15 +298,69 @@
         margin: auto;
         align-items: center;
         padding: 0px;
-        background-color: #F2F4F7;
+        background-color: #f2f4f7;
     }
     .after-checkout {
         border-radius: 36px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+            0 4px 16px 0 rgba(0, 0, 0, 0.1);
         max-width: 540px;
         margin: 0 auto;
         padding: 60px 80px 40px;
         position: relative;
+    }
+    #footer .container-footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #footer .col-4 {
+        flex: 0 0 100%; /* Mengubah lebar kolom menjadi 100% */
+        max-width: 100%; /* Mengubah lebar maksimum menjadi 100% */
+        text-align: center; /* Memastikan konten berada di tengah */
+        margin-bottom: 20px; /* Menambahkan margin bawah antar kolom */
+    }
+    
+    #footer .col-4 p {
+        font-size: 14px; /* Mengurangi ukuran font pada teks */
+        margin-bottom: 8px; /* Menambahkan margin bawah pada paragraf */
+    }
+
+    #footer .col-4 img {
+        display: block; /* Agar gambar berada di tengah */
+        margin: 0 auto; /* Memusatkan gambar ke tengah */
+    }
+
+    #footer .d-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Memusatkan elemen secara horizontal */
+        align-items: center; /* Memusatkan elemen secara vertikal */
+    }
+    
+    #footer .d-flex img {
+        width: 70px; /* Mengatur lebar gambar */
+        margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
+    }
+    
+    #footer .d-flex h4 {
+        font-size: 18px;
+        margin: 0;
+        margin-right: 33%;
+    }
+    #footer .col-4 .d-flex {
+        justify-content: center; /* Memusatkan tautan sosial media ke tengah */
+    }
+
+    #footer .col-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px; /* Menambahkan ruang antara tautan */
+    }
+    .col-2 a {
+        display: block; /* Mengubah tautan menjadi blok, sehingga berjejer ke bawah */
+        margin-bottom: 10px; /* Menambahkan jarak antara setiap tautan */
     }
 }
 
@@ -222,4 +374,32 @@
     .remember {
         flex-direction: column;
     }
+    .card {
+        width: 100%;
+    }
+    .col-last {
+        display: none;
+    }
+    #footer .col-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    #footer .d-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Memusatkan elemen secara horizontal */
+        align-items: center; /* Memusatkan elemen secara vertikal */
+    }
+    
+    #footer .d-flex img {
+        width: 70px; /* Mengatur lebar gambar */
+        margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
+    }
+    
+    #footer .d-flex h4 {
+        font-size: 18px;
+        margin: 0;
+        margin-right: 33%;
+    }   
 }
