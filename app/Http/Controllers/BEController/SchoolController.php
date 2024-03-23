@@ -24,7 +24,7 @@ class SchoolController extends Controller
         ]);
     }
     public function jumlahMahasiswa()
-    {
+    {   //Menampilkan Data Mahasiswa 
         $JM = User::where("role_id",3)
                 ->select( "nama_lengkap", "nomor_induk","divisi_id","status_akun")
                 ->get();
