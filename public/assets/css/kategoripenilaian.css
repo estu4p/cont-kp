@@ -137,14 +137,16 @@ body{
         text-align: center;
 }
 .btnsubmit {
-    position: relative;  
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     padding: 5px 15px;
     color: white;
     background: #A4161A;
     border-radius: 9px;
-    left: 450px;
-    top: 200px;
+    z-index: 1000; /* Pastikan z-index lebih tinggi dari elemen lain jika diperlukan */
 }
+
 
 
 
