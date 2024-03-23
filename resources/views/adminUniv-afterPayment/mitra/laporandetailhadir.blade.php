@@ -14,7 +14,7 @@
                             <img src="assets/images/user.jpg" class="user">
                         </div>
                         <div>
-                            <h3 style="font-size: 30px; margin: 0;">{{ $presensi->nama_lengkap }}</h3>
+                            <h3 style="font-size: 30px; margin: 0;">{{ $presensi->user->nama_lengkap }}</h3>
                             <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
@@ -39,11 +39,11 @@
                                 </tr>
                                 <tr>
                                     <th>Jam Default Masuk</th>
-                                    <td>07.00</td>
+                                    <td>{{ $presensi->jam_masuk }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Default Pulang</th>
-                                    <td>21:00:00</td>
+                                    <td>{{ $presensi->jam_pulang }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -53,11 +53,11 @@
                             <tbody>
                                 <tr>
                                     <th>Total jam masuk</th>
-                                    <td><span class="masuk">47:30:50</span></td>
+                                    <td><span class="masuk">{{ $presensi->total_jam_kerja }}</span></td>
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td><span class="total">16 hari</td>
+                                    <td><span class="total">{{ $presensi-> }} hari</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
