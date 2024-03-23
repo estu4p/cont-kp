@@ -516,6 +516,18 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
+Route::get('/TableGantiJam', function () {
+    return view('user.UserScanQR.TableGantiJam');
+});
+
+Route::get('/Scanqr', function () {
+    return view('user.UserScanQR.Scanqr');
+});
+
+
+
+
+
 
 Route::get('/superAdmin/langganan', function () {
     $members = [
