@@ -106,12 +106,12 @@ Route::post('add-shift', [ContributorForMitra::class,'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
-
+//Contributor for Mitra - Presensi
 Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
-Route::get('presensi/{id}/by-name', [PresensiMitraController::class, 'getPresensiById']);
-
-
-
+Route::get('presensi/by-name', [PresensiMitraController::class, 'getPresensiByNama']);
+Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiAccept']);
+Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
+Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
 
 
 Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
