@@ -79,24 +79,25 @@ Route::post('admin/daftar-mitra/pengaturan-divisi/sub-kategori-penilaian', [Admi
 Route::get('admin/daftar-mitra/team-aktif/klik/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifKlik']);
 Route::get('admin/daftar-mitra/see-all-team/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam']);
 Route::post('admin/daftar-mitra/sunting/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam']);
-Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
 Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
+Route::get('admin/daftar-mitra/detail-izin/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailIzin']);
+Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [\App\Http\Controllers\BEController\SchoolController::class, 'index']);
 
 //Contributor for Mitra
-Route::get('daftar-divisi', [ContributorForMitra::class,'showDaftarDivisi']);
-Route::post('add-divisi', [ContributorForMitra::class,'addDivisi']);
-Route::put('update-divisi/{id}', [ContributorForMitra::class,'updateDivisi']);
+Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
+Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
+Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
 Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
 
-Route::get('kategori-penilaian', [ContributorForMitra::class,'showKategoriPenilaian']);
-Route::post('add-kategori-penilaian', [ContributorForMitra::class,'addKategoriPenilaian']);
-Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class,'addSubKategoriPenilaian']);
+Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenilaian']);
+Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);
+Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class, 'addSubKategoriPenilaian']);
 
-Route::get('data-shift', [ContributorForMitra::class,'showDataShift']);
-Route::post('add-shift', [ContributorForMitra::class,'addShift']);
-Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
+Route::get('data-shift', [ContributorForMitra::class, 'showDataShift']);
+Route::post('add-shift', [ContributorForMitra::class, 'addShift']);
+Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
-
