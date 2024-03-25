@@ -86,7 +86,7 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
-Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
+Route::get('/lihatprofil', [SchoolController::class, 'Lihatprofil']);
 
 
 //Contributor for Mitra
