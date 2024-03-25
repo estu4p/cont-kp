@@ -1,3 +1,10 @@
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
 .wadah{
     display: flex;
     padding-top: 10px;
@@ -24,11 +31,11 @@
     font-size: 20px;
     width: 80%;
     margin-left: 10%;
-   
-   
+
+
 }
 .email{
-   
+
     padding-top: 15px;
     width: auto;
     width: 80%;
@@ -44,15 +51,15 @@
 }
 .keterangan{
     padding-top: 30px;
-   
+
     width: 100%;
   padding-left: 35px;
   height: 200px; /* Tentukan tinggi maksimal div */
- 
+
 }
 .wadahedit{
     padding-left: 30px;
-    
+
 }
 .editprofil{
     height: 650px;

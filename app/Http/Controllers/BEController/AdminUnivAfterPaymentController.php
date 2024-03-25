@@ -57,8 +57,6 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function updateAdminProfile(Request $request)
     {
-
-
         $user = auth()->user();
         // Update the user's profile with the validated data
         $user->update([
@@ -319,7 +317,7 @@ class AdminUnivAfterPaymentController extends Controller
             ->get()
             ->map(function ($item, $key) {
                 $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereNotNull('jam_masuk')
+                    ->where('status_kehadiran', 'hadir')
                     ->count();
                 $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'izin')
@@ -331,19 +329,39 @@ class AdminUnivAfterPaymentController extends Controller
             });
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+            return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
             return view('adminUniv-afterPayment.mitra.laporanpresensi')
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
-    public function teamAktifDetailHadir($id)
+    public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        $presensi = Presensi::where('nama_lengkap', $id)->first();
-        return response()->json([
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
+        // $presensiAll = Presensi::where('nama_lengkap', $nama_lengkap)->get();
+        // $presensiAll = Presensi::findOrFail($nama_lengkap);
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'data' => $presensi,
 
-            'message' => 'detail hadir',
-            'data' => $presensi
-        ]);
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
+        }
     }
 }
