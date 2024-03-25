@@ -16,7 +16,6 @@ use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\PresensiMitraController;
 
 
@@ -111,12 +110,6 @@ Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']
 Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
 Route::get('presensi/{id}/by-name', [PresensiMitraController::class, 'getPresensiById']);
 
-
-
-
-
-Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
-Route::get('presensi/{id}/by-name', [PresensiMitraController::class, 'getPresensiById']);
 
 
 
