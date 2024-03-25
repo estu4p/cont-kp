@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
+use App\Models\User;
+use App\Models\Presensi;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -91,7 +93,7 @@ class ContributorForMitra extends Controller
             'nama_kategori' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => 'Gagal menambhakan kategori penilaian',], 400);
+            return response()->json(['message' => 'Gagal menambahkan kategori penilaian',], 400);
         }
         $data = new KategoriPenilaian([
             'divisi_id' => $request->input('divisi_id'),
