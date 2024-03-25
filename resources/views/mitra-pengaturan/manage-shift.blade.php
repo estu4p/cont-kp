@@ -131,9 +131,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!-- Modal edit shif -->
 <div class="modal fade modal-sm" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -211,8 +208,8 @@
             "<td>" + jam + "</td>" +
             "<td>" + istirahat + "</td>" +
             "<td>" +
-            "<button class='btn btn-edit btn-sm' data-bs-target='#editModal' data-bs-toggle='modal' onclick='eeditModal(5)' type='button'>Edit</button>" +
-            "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='edeleteDivisi(5)' type='button'>Hapus</button>" +
+            "<button class='btn btn-edit btn-sm' data-bs-target='#editModal' data-bs-toggle='modal' onclick='editModal(5)' type='button'>Edit</button>" +
+            "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='deleteDivisi(5)' type='button'>Hapus</button>" +
             "</td>" +
             "</tr>";
 
