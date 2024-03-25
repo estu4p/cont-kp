@@ -15,8 +15,8 @@
 </div>
     <div class="isi row row-cols-3">
         <div class="col" style="display: flex" >
-            <i class="icon fa-solid fa-pen-nib"></i><a href=""></a> UI/UX Designer<br>
-            20 Anggota
+            <i class="icon fa-solid fa-pen-nib"></i><a href="/contributorformitra-devisi-teamaktif"> UI/UX Designer<br>
+            20 Anggota</a>
         </div>
         <div class="col" style="display: flex" >
             <i class="icon fa-solid fa-bag-shopping"></i>Marketing & Sales<br>

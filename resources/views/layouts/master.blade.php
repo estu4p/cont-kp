@@ -8,6 +8,9 @@
     {{-- fontawesome --}}
     <script src="https://kit.fontawesome.com/edd6108211.js" crossorigin="anonymous"></script>
 {{-- bs --}}
+<!-- Import jQuery Full Version (Local file) -->
+<script src="/path/to/jquery-3.6.0.js"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,7 +28,7 @@
     <div class="wrapper">
 
         @include('template.navbar')
-        <!-- bueeek master baru piqri bangke -->
+       
 
         <div class="content-wrapper">
             <section class="content">
@@ -34,7 +37,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebar') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebar')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">
@@ -49,16 +52,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
+    <!-- jQuery CDN (Full version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
     <script>
-        $(document).ready( function () {
-            var table = $('#example').DataTable( {
-                pageLength : 5,
-                lengthMenu: [[5, 7, 10, 50, -1], [5, 7, 10, 50, 'semua']],
+      $(document).ready(function() {
+            var table = $('#example').DataTable({
+                pageLength: 5,
+                lengthMenu: [
+                    [5, 7, 10, 50, -1],
+                    [5, 7, 10, 50, 'semua']
+                ],
                 language: {
                     searchPlaceholder: 'cari nama mahasiswa'
-                }
-             } )
-        } );
+                },
+                scrollY: '400px' // Atur tinggi tabel sesuai kebutuhan Anda
+            });
+        });
     </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/contributorformitra/lihatprofile.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ <div class="ruangan">
     <div class="topconten">
         <div>
             <a href="/contributorformitra-devisi-Seeallteams"><i class="icon fa-solid fa-angle-left"></i></a>
@@ -129,7 +130,58 @@
             </div>
     </div>
     <div class="lihathutangjam">
-        <h1>Lihat Hutang Jam Siswa/Mahasiswa</h1>
-        <p>Klik pada link untuk melihat sertifikat dan penilaian siswa/mahasiswa</p>
-
+        <div class="isinya">
+            <p style="font-size: 30px">Lihat Hutang Jam Siswa/Mahasiswa</p>
+            <p style="margin-top: -2%">Klik pada link untuk melihat sertifikat dan penilaian siswa/mahasiswa</p>
+        </div>
     </div>
+    <br>
+    <br>
+
+    <div class="hutangjam">
+        <br>
+        <label>hutang Jam</label>
+        <input type="text" value="hhh:mm:ss" class="input2">
+        <label class="note"> *hhh:maks 999, mm&ss:maks 59</label>
+    </div>
+<br>
+<br>
+    <div class="container">
+        <button id="btnSimpan" class="buttonsimpan btn-primary">Simpan</button>
+    </div>
+</div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Berhasil !</h5>
+                </div>
+                <div>
+                    <img src="assets/images/berhasil.png" class="berhasil">
+                </div>
+                <br>
+
+                <div class="modal-body">
+                    Profil mahasiswa berhasil diperbarui
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    document.getElementById('btnSimpan').addEventListener('click', function () {
+        $('#successModal').modal('show');
+        setTimeout(function () {
+            $('#successModal').modal('hide');
+        }, 1000);
+    });
+</script>
+
+@endsection
