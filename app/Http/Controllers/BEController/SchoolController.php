@@ -24,7 +24,7 @@ class SchoolController extends Controller
         ]);
     }
     public function jumlahMahasiswa()
-    {   //Menampilkan Data Mahasiswa 
+    {   //Menampilkan Data Mahasiswa
         $JM = User::where("role_id",3)
                 ->select( "nama_lengkap", "nomor_induk","divisi_id","status_akun")
                 ->get();
@@ -32,6 +32,25 @@ class SchoolController extends Controller
         return response()->json([
             "jumlah Mahasiswa" => "view data Mahasiswa ",
             "data" => $JM
+        ]);
+    }
+    public function Lihatprofil($id)
+    {
+        //$profil = User:: all();
+        $mahasiswa = User::where("role_id", 3)
+                    ->where("id", $id)
+                    ->select("nama_lengkap", "nomor_induk", "divisi_id", "status_akun")
+                    ->first();
+
+             if (!$mahasiswa) {
+                return response()->json([
+                "message" => "Mahasiswa tidak ditemukan"
+                ], 404);
+                }
+
+        return response()->json([
+            "massage" => "Lihat profil Mahasiswa ",
+            "data" => $mahasiswa
         ]);
     }
 
