@@ -199,7 +199,7 @@
             '<td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
             '<td>' +
             '<button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>' +
-            '<button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>' +
+            '<button class="btn btn-danger btn-sm tomboll" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>' +
             '</td>' +
             '</tr>';
 
@@ -212,16 +212,6 @@
             icon: "success",
             text: "Perubahan berhasil disimpan",
             timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
-            buttons: false // Sembunyikan tombol "OK"
-        });
-    }
-
-    function showedit() {
-        swal({
-            title: "Berhasil !",
-            icon: "success",
-            text: "Perubahan berhasil disimpan",
-            timer: 3000, // Pesan akan ditutup otomatis setelah 3 detik
             buttons: false // Sembunyikan tombol "OK"
         });
     }
