@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BEController;
 
 use App\Models\User;
+use App\Models\Shift;
 use App\Models\Presensi;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class SchoolController extends Controller
         ]);
     }
     public function jumlahMahasiswa()
-    {   //Menampilkan Data Mahasiswa 
+    {   //Menampilkan Data Mahasiswa
         $JM = User::where("role_id",3)
                 ->select( "nama_lengkap", "nomor_induk","divisi_id","status_akun")
                 ->get();
@@ -33,6 +34,26 @@ class SchoolController extends Controller
             "jumlah Mahasiswa" => "view data Mahasiswa ",
             "data" => $JM
         ]);
+    }
+    public function Lihatprofil(Request $request)
+    {
+        //Data Mahasiswa- Lihat profile
+        $profile = User::all()->where("role_id",3)->first();
+        $presensi = Presensi ::where('id', $profile->id)
+        ->select("hutang_presensi")->first();
+        $Shift= Shift::where('id', $profile->id)
+        ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+            "massage" => "Lihat profil Mahasiswa ",
+            "data" => $profile,
+            "Shift"=>$Shift,
+            "presensi"=>$presensi,
+          ]);  
+        } else {
+            return view('jumlah-mahasiswa.profil-siswa', ["data" => $profile,"Shift"=>$Shift,"presensi"=>$presensi,]);
+        }
     }
 
 }
