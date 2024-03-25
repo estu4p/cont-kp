@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
-use App\Models\User;
-use App\Models\Presensi;
 use Illuminate\Support\Facades\Validator;
+
 
 
 class ContributorForMitra extends Controller
@@ -56,19 +55,13 @@ class ContributorForMitra extends Controller
             return response()->json(['message' => 'Gagal update divisi',], 404);
         }
         $data = Divisi::find($id);
-        if (!$data) {
-            return response()->json(['message' => 'Data divisi tidak ditemukan'], 404);
-        }
-
         $data->fill([
-            'nama_divisi' => $request->input('nama_divisi'), // Menggunakan input() untuk mengakses nilai input
-            'deskripsi_divisi' => $request->input('deskripsi_divisi')
+            'nama_divisi' => $request->nama_divisi,
+            'deskripsi_divisi' => $request->deskripsi_divisi
         ]);
         $data->save();
-
         return response()->json(['success' => true, 'message' => 'Berhasil update divisi', 'data' => $data], 200);
     }
-
     public function destroyDivisi($id)
     {
         $data = Divisi::find($id);
@@ -329,4 +322,5 @@ class ContributorForMitra extends Controller
             return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir', compact('presensi'));
         }
     }
+
 }
