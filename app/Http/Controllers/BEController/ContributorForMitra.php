@@ -203,4 +203,124 @@ class ContributorForMitra extends Controller
         }
     }
 
+    public function laporanPresensi(Request $request)
+    {
+        $presensi = User::where('role_id', 3)->get();
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Berhasil mendapat data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporanpresensi')
+                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
+        }
+    }
+
+    public function laporanPresensiDetailHadir($nama_lengkap, Request $request)
+    {
+        $presensiDetail = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'hadir')->get();
+
+        if ($presensiDetail->isEmpty()) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Berhasil mendapat data', 'Detail Hadir' => $presensiDetail], 200);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
+        }
+    }
+
+    public function laporanPresensiDetailIzin($nama_lengkap, Request $request)
+    {
+        $presensiDetail = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'izin')->get();
+
+        if ($presensiDetail->isEmpty()) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => 'Berhasil mendapat data', 'Detail Izin' => $presensiDetail], 200);
+        } else {
+                return view('adminUniv-afterPayment.mitra.laporandetailizin', compact('presensi'));
+        }
+    }
+
+    public function laporanPresensiDetailTidakHadir($nama_lengkap, Request $request)
+    {
+        $presensiDetail = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Tidak Hadir')->get();
+
+        if ($presensiDetail->isEmpty()) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Berhasil mendapat data', 'Detail Tidak Hadir'=> $presensiDetail],200);
+        }else {
+            return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir', compact('presensi'));
+        }
+    }
+
 }
