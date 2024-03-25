@@ -82,5 +82,3 @@ function showSuccessModal() {
 }
   </script>
 @endsection
-
-
