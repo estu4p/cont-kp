@@ -77,5 +77,4 @@ Route::post('admin/daftar-mitra/pengaturan-divisi/sub-kategori-penilaian', [Admi
 Route::get('admin/daftar-mitra/team-aktif/klik/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifKlik']);
 Route::get('admin/daftar-mitra/see-all-team/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam']);
 Route::post('admin/daftar-mitra/sunting/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam']);
-Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
 Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
