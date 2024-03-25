@@ -7,10 +7,11 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
+use App\Models\Presensi;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Validator;
 
-
+use function Laravel\Prompts\alert;
 
 class ContributorForMitra extends Controller
 {
@@ -141,9 +142,9 @@ class ContributorForMitra extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -152,23 +153,23 @@ class ContributorForMitra extends Controller
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
-            'jml_jam_kerja'=> $request->input('jml_jam_kerja'),
-            'jam_masuk'=> $request->input('jam_masuk'),
-            'jam_pulang'=> $request->input('jam_pulang'),
+            'jml_jam_kerja' => $request->input('jml_jam_kerja'),
+            'jam_masuk' => $request->input('jam_masuk'),
+            'jam_pulang' => $request->input('jam_pulang'),
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true, 'message'=> 'Berhasil menambahkan data shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -181,14 +182,14 @@ class ContributorForMitra extends Controller
 
         $data->fill([
             'nama_shift' => $request->input('nama_shift'),
-            'jml_jam_kerja'=> $request->input('jml_jam_kerja'),
-            'jam_masuk'=> $request->input('jam_masuk'),
-            'jam_pulang'=> $request->input('jam_pulang'),
+            'jml_jam_kerja' => $request->input('jml_jam_kerja'),
+            'jam_masuk' => $request->input('jam_masuk'),
+            'jam_pulang' => $request->input('jam_pulang'),
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true,'message'=> 'Berhasil update data shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
     }
 
     public function destroyShift($id)
@@ -202,5 +203,26 @@ class ContributorForMitra extends Controller
             return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
         }
     }
+    public function scan()
+    {
+        return view('User.ContributorForMitra.barcode', [
+            'title' => "Barcode Pemagang",
+            'nama' => "Syalita"
+        ]);
+    }
 
+    public function validasi(Request $request)
+    {
+        $cek = Presensi::where([
+            'id' => $request->id,
+        ]);
+
+        if ($cek) {
+            return alert('Anda sudah presensi');
+        }
+        Presensi::create([
+            'id' => $request->id
+        ]);
+        return alert('success');
+    }
 }

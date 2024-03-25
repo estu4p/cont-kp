@@ -64,9 +64,11 @@
     <div class="container">
         <div class="barcode-box">
             <h6 class="text-uppercase">{{ $nama }}'s qr code</h6>
-            {{-- {!! QrCode::size(200)->generate($nama); !!} --}}
+            <div id="reader" width="600px"></div>
+            {{-- {!! QrCode::size(200)->generate($nama) !!} --}}
             <img src="/assets/images/Barcode.png" width="180px" alt="">
         </div>
+        <input type="hidden" id="result" name="result">
         <button
             style="border: none; background-color: transparent; color: white; text-transform: capitalize; font-size: 18px; font-weight: 600;"><svg
                 xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -78,5 +80,61 @@
             </svg>simpan</button>
     </div>
 </body>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    // $('#result').val('test');
+    function onScanSuccess(decodedText, decodedResult) {
+        // alert(decodedText);
+        $('#result').val(decodedText);
+        let id = decodedText;
+        html5QrcodeScanner.clear().then(_ => {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+
+                url: "{{ route('validasi') }}",
+                type: 'POST',
+                data: {
+                    _methode: "POST",
+                    _token: CSRF_TOKEN,
+                    qr_code: id
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        alert('berhasil');
+                    } else {
+                        alert('gagal');
+                    }
+
+                }
+            });
+        }).catch(error => {
+            alert('something wrong');
+        });
+
+    }
+
+    function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        // console.warn(`Code scan error = ${error}`);
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", {
+            fps: 10,
+            qrbox: {
+                width: 250,
+                height: 250
+            }
+        },
+        /* verbose= */
+        false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+</script>
+
 
 </html>

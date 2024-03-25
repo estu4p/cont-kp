@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
@@ -229,7 +230,7 @@ Route::get('/input-nilai', function () {
 
 
 
-
+// Contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
@@ -397,6 +398,15 @@ Route::get('/MitraPresensiDetailIzin', function () {
 Route::get('/MitraPresensiDetailTidakHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
+
+Route::get('/mitra-presensi-barcode', function () {
+    return view('User.ContributorForMitra.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
+});
+Route::post('/mitra-presensi-barcode/validasi', [ContributorForMitra::class, 'validasi'])->name('validasi');
+
 
 
 Route::get('/manage-devisi', function () {
