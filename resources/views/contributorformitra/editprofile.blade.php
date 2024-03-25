@@ -1,16 +1,16 @@
-@extends('layouts.masterSistemProfile')
+@extends('layouts.masterMitraprofile')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="{{ asset('assets/css/contributorformitra/editprofile.css') }}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="wadah">
 
     <div class="propil">
-        <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com </div>
+        <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkiri">
+        <div class="nama">Zayn Abdullah</div>
+        <div class="email">zaynabdullah123@gmail.com</div>
         <div class="about">About</div>
-        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi datat</div>
+        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
     </div>
 
     <div id="preview" class="preview"></div>
@@ -18,7 +18,7 @@
         <div class="editprofil p-5">
             <div class="atas d-flex flex-row  col-5">
                 <div id="previewZone">
-                    <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
+                    <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkanan">
                 </div>
                 <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
                     <label for="imageInput" class="custom-file-upload">
@@ -38,7 +38,7 @@
                     <div class="form-group  col-6   p-2">
                         <label for="username">Nama lengkap</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="name" placeholder="Atun Khostriatun">
+                            <input class="input form-control" type="text" id="name" placeholder="Zayn Abdullah">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
@@ -50,7 +50,7 @@
                     <div class="form-group  col-6   p-2">
                         <label for="email">Email</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="email" id="email" placeholder="wahyudiatkinson@gmail.com">
+                            <input class="input form-control" type="email" id="email" placeholder="zaynabdullah123@gmail.com">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
+                <a href="{{ url('/contributorformitra-dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
                 <button class="Update" onclick="showSuccessModal()">Update</button>
             </div>
         </div>
@@ -105,7 +105,7 @@
 
     function setDefaultImage() {
         const previewZone = document.getElementById('previewZone');
-        previewZone.innerHTML = '<img src="assets/images/atun.png"  class="img-fluid">';
+        previewZone.innerHTML = '<img src="assets/images/user2.png"  class="img-fluid">';
     }
 
     // Call the setDefaultImage function when the page is loaded
@@ -113,7 +113,7 @@
     window.addEventListener('DOMContentLoaded', setDefaultImage);
 
     function setDefaultImage() {
-        const defaultImageSrc = 'assets/images/atun.png';
+        const defaultImageSrc = 'assets/images/user2.png';
 
         const previewImage = document.querySelector('.gambarkiri');
         previewImage.src = defaultImageSrc;

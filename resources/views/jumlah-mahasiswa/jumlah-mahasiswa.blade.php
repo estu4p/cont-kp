@@ -20,7 +20,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>NIP</th>
+                <th>NIP</th>x
                 <th>Divisi</th>
                 <th>Status</th>
                 <th></th>
@@ -42,6 +42,6 @@
         </tbody>
     </table>
     </div>
-    
+
 </div>
 @endsection
