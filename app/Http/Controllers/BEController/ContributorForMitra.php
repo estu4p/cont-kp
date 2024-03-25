@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
+use App\Models\User;
+use App\Models\Presensi;
 use Illuminate\Support\Facades\Validator;
 
 
