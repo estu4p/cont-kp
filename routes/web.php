@@ -2,19 +2,20 @@
 
 use function Laravel\Prompts\alert;
 
-use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\SchoolController;
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
 
 /*
@@ -189,22 +190,10 @@ Route::get('/pemagang/detail', function () {
     return view('pemagang.gantiJam', ['title' => "MyQR"]);
 });
 
+//lihat profil contributor for univ 
+Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
 
 
-
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
-Route::get('/laporandatapresensi', function () {
-    return view('presensi.laporandatapresensi');
-});
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
-
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });

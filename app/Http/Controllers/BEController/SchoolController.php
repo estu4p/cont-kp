@@ -35,7 +35,7 @@ class SchoolController extends Controller
             "data" => $JM
         ]);
     }
-    public function Lihatprofil()
+    public function Lihatprofil(Request $request)
     {
         //Data Mahasiswa- Lihat profile
         $profile = User::all()->where("role_id",3)->first();
@@ -44,13 +44,16 @@ class SchoolController extends Controller
         $Shift= Shift::where('id', $profile->id)
         ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
 
-        return response()->json([
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
             "data" => $profile,
             "Shift"=>$Shift,
             "presensi"=>$presensi,
-            
-        ]);
+          ]);  
+        } else {
+            return view('jumlah-mahasiswa.profil-siswa', ["data" => $profile,"Shift"=>$Shift,"presensi"=>$presensi,]);
+        }
     }
 
 }
