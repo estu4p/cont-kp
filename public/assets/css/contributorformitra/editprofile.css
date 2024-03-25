@@ -11,69 +11,84 @@ body {
     padding-left: 50px;
 }
 .propil{
-    height: 600px;
+    height: 650px;
     width: 300px;
     text-align: center;
-    background: #ffffff;
+    background: #FFFFFF;
     border-radius: 10px;
-
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    height: 650px; /* Tentukan tinggi maksimal div */
+    overflow-y: scroll; /* Selalu tampilkan scroll vertikal */
 }
-
-
-
 .gambarkiri{
     padding-top: 30px;
-    transform: scale(1.8);
+    transform: scale(1.7);
 }
 .nama{
     padding-top: 70px;
     font-weight: bold;
     font-size: 20px;
+    width: 80%;
+    margin-left: 10%;
+
+
 }
 .email{
 
     padding-top: 15px;
+    width: auto;
+    width: 80%;
+    margin-left: 10%;
+    text-align: justify;
 }
 .about{
-    padding-top: 80px;
+    padding-top: 100px;
     font-weight: bold;
     font-size: 20px;
+    width: auto;
+
 }
 .keterangan{
     padding-top: 30px;
 
-    width: 90%;
+    width: 100%;
   padding-left: 35px;
+  height: 200px; /* Tentukan tinggi maksimal div */
+
 }
 .wadahedit{
     padding-left: 30px;
+
 }
 .editprofil{
-    height: 600px;
+    height: 650px;
     width: 850px;
     padding-top: 20px;
     padding-left: 20px;
-    background: #ffffff;
+    background: #FFFFFF;
     border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 95%;
 }
+/* .gambarkanan{
+    transform: scale(1.2);
+} */
 .change{
-    background: #ffffff;
-    border-radius: 10px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    align-items: center;
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    color: 000000;
-
+color: #000000;
+box-sizing: border-box;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 12px;
+width: 100px;
+height: 40px;
+border: 2px solid rgba(0, 0, 0, 0.5);
+border-radius: 5px;
 
 }
-
 .remove{
-    background: #ffffff;
+    background: #FFFFFF;
     color: #BA181BE8;
     border: none;
 }
@@ -84,35 +99,42 @@ body {
 }
 .input{
     width: 97%;
+
     background-color: #F2F4F8;
-    box-sizing: border-box;
-    border-bottom: 1px solid #C1C7CD;
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
-
-
-
 }
 #About{
     width: 300px;
     background-color: #F2F4F8;
 }
 .Cancel{
-    border-radius: 4px;
+    border-radius: 7px;
     color: #ffffff;
-    background: rgba(2, 2, 2, 0.35);
-    border-color: #ffffff;
-
-
+    background-color: #7a7a7a;
 }
 .Update{
-    border-radius: 4px;
+    border-radius: 7px;
     color: #ffffff;
     background-color: #A4161A;
-    border: #A4161A;
 }
+/* Media Query untuk tampilan responsif */
+@media screen and (max-width: 768px) {
+    .nama,
+    .email,
+    .about,
+    .keterangan {
+        white-space: normal; /* Mengatur agar teks dapat wrap */
+        text-overflow: unset; /* Menghapus ellipsis untuk teks yang wrap */
+        max-width: 100%; /* Mengatur lebar maksimal agar teks tidak keluar dari container */
+        padding-top: 10px; /* Mengurangi padding atas untuk responsivitas */
+        padding-left: 0; /* Menghapus padding kiri untuk responsivitas */
+    }
 
+    .gambarkiri {
+        padding-top: 10px; /* Mengurangi padding atas untuk gambar */
+        transform: scale(1.2); /* Mengurangi skala gambar untuk responsivitas */
+    }
 
-
+    .about {
+        font-size: 16px; /* Mengurangi ukuran font untuk about pada tampilan kecil */
+    }
+}

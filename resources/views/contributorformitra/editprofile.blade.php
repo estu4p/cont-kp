@@ -6,9 +6,9 @@
 <div class="wadah">
 
     <div class="propil">
-        <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com</div>
+        <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkiri">
+        <div class="nama">Zayn Abdullah</div>
+        <div class="email">zaynabdullah123@gmail.com</div>
         <div class="about">About</div>
         <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
     </div>
@@ -18,7 +18,7 @@
         <div class="editprofil p-5">
             <div class="atas d-flex flex-row  col-5">
                 <div id="previewZone">
-                    <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
+                    <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkanan">
                 </div>
                 <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
                     <label for="imageInput" class="custom-file-upload">
@@ -38,7 +38,7 @@
                     <div class="form-group  col-6   p-2">
                         <label for="username">Nama lengkap</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="name" placeholder="Atun Khostriatun">
+                            <input class="input form-control" type="text" id="name" placeholder="Zayn Abdullah">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
@@ -50,7 +50,7 @@
                     <div class="form-group  col-6   p-2">
                         <label for="email">Email</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="email" id="email" placeholder="wahyudiatkinson@gmail.com">
+                            <input class="input form-control" type="email" id="email" placeholder="zaynabdullah123@gmail.com">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
+                <a href="{{ url('/contributorformitra-dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
                 <button class="Update" onclick="showSuccessModal()">Update</button>
             </div>
         </div>
@@ -105,53 +105,77 @@
 
     function setDefaultImage() {
         const previewZone = document.getElementById('previewZone');
-        previewZone.innerHTML = '<img src="assets/images/atun.png"  class="img-fluid">';
+        previewZone.innerHTML = '<img src="assets/images/user2.png"  class="img-fluid">';
     }
 
     // Call the setDefaultImage function when the page is loaded
     // Menetapkan gambar default saat dokumen dimuat
-window.addEventListener('DOMContentLoaded', setDefaultImage);
+    window.addEventListener('DOMContentLoaded', setDefaultImage);
 
-function setDefaultImage() {
-    const defaultImageSrc = 'assets/images/atun.png';
+    function setDefaultImage() {
+        const defaultImageSrc = 'assets/images/user2.png';
 
-    const previewImage = document.querySelector('.gambarkiri');
-    previewImage.src = defaultImageSrc;
+        const previewImage = document.querySelector('.gambarkiri');
+        previewImage.src = defaultImageSrc;
 
-    const previewImage2 = document.querySelector('.gambarkanan');
-    previewImage2.src = defaultImageSrc;
-}
-
-function handleImageChange(event) {
-    const file = event.target.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const previewImage = document.querySelector('.gambarkiri');
-            previewImage.src = e.target.result;
-
-            const previewImage2 = document.querySelector('.gambarkanan');
-            previewImage2.src = e.target.result; // Mengubah gambar kanan juga
-        };
-
-        reader.readAsDataURL(file);
+        const previewImage2 = document.querySelector('.gambarkanan');
+        previewImage2.src = defaultImageSrc;
     }
-}
 
-// Menambahkan event listener pada elemen input gambar
-const imageInput = document.getElementById('imageInput');
-imageInput.addEventListener('change', handleImageChange);
+    function handleImageChange(event) {
+        const file = event.target.files[0];
 
-// Menambahkan event listener pada elemen span dengan kelas "remove"
-const removeButton = document.querySelector('.remove');
-removeButton.addEventListener('click', function() {
-    setDefaultImage(); // Memanggil fungsi untuk menetapkan gambar default
-});
+        if (file) {
+            const reader = new FileReader();
 
-</script>
-  </script>
+            reader.onload = function(e) {
+                const previewImage = document.querySelector('.gambarkiri');
+                previewImage.src = e.target.result;
+
+                const previewImage2 = document.querySelector('.gambarkanan');
+                previewImage2.src = e.target.result; // Mengubah gambar kanan juga
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Menambahkan event listener pada elemen input gambar
+    const imageInput = document.getElementById('imageInput');
+    imageInput.addEventListener('change', handleImageChange);
+
+    // Menambahkan event listener pada elemen span dengan kelas "remove"
+    const removeButton = document.querySelector('.remove');
+    removeButton.addEventListener('click', function() {
+        setDefaultImage(); // Memanggil fungsi untuk menetapkan gambar default
+    });
+    function updateProfile() {
+        // Ambil nilai dari input
+        var nameValue = document.getElementById('name').value;
+        var emailValue = document.getElementById('email').value;
+        var aboutValue = document.getElementById('About').value;
+
+        // Ubah data yang ditampilkan
+        document.querySelector('.nama').textContent = nameValue;
+        document.querySelector('.email').textContent = emailValue;
+        document.querySelector('.keterangan').textContent = aboutValue;
+    }
+
+    function showSuccessModal() {
+        // Panggil fungsi updateProfile
+        updateProfile();
+
+        // Tampilkan modal sukses
+        // Misalnya, dengan SweetAlert atau modal lainnya
+        // Contoh menggunakan alert sederhana
+        $('#successModal').modal('show');
+
+        // Sembunyikan modal setelah beberapa detik (contoh: 1 detik)
+        setTimeout(function() {
+            $('#successModal').modal('hide');
+        }, 1000);
+    }
+</script
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
-
-

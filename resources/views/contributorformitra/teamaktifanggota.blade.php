@@ -6,7 +6,7 @@
 <div class="ruangan">
 <div class="top">
     <div>
-      <a href="/contributorformitra-devisi"><i class="keluar bi bi-chevron-left"></i></a>
+      <a href="/contributorformitra-devisi"><i class="keluar bi bi-chevron-left" style="color: black"></i></a>
     </div>
     <div class="input">
         <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
@@ -40,8 +40,8 @@
       </div>
     </div>
     <br>
-    <br>
 
+<div class="tabel">
 <table class="table">
 <thead>
   <tr>
@@ -59,44 +59,123 @@
     <td>Reva Fidela Pantjoro</td>
     <td>2000018247</td>
     <td>UI/UX</td>
-    <td></td>
-    <td></td>
+    <td><span class="status">active</span></td>
+    <td><div class="dropdown">
+        <i class="bi bi-info-circle-fill" href="#" role="button" id="infoDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="infoDropdown">
+          <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a></li>
+          <li><a class="dropdown-item" href="#"></a></li>
+
+        </ul>
+      </div></td>
   </tr>
   <tr>
     <td>2</td>
     <td>Fairuza Attar Aviciena</td>
     <td>2000018247</td>
     <td>UI/UX</td>
-    <td></td>
-    <td></td>
+    <td><span class="status">active</span></td>
+    <td><div class="dropdown">
+        <i class="bi bi-info-circle-fill" href="#" role="button" id="infoDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="infoDropdown">
+            <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+
+
+        </ul>
+      </div></td>
   </tr>
   <tr>
     <td>3</td>
     <td>Danni Hernando</td>
     <td>2000018247</td>
     <td>UI/UX</td>
-    <td></td>
-    <td></td>
+    <td><span class="status">active</span></td>
+    <td><div class="dropdown">
+        <i class="bi bi-info-circle-fill" href="#" role="button" id="infoDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="infoDropdown">
+            <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+
+        </ul>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>4</td>
     <td>Azizi Shafa Asadel</td>
     <td>2000018247</td>
     <td>UI/UX</td>
-    <td></td>
-    <td></td>
+    <td><span class="status">inactive</span></td>
+    <td><div class="dropdown">
+        <i class="bi bi-info-circle-fill" href="#" role="button" id="infoDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="infoDropdown">
+            <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+
+        </ul>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>5</td>
     <td>Yessica tamara</td>
     <td>2000018247</td>
     <td>UI/UX</td>
-    <td></td>
-    <td></td>
+    <td><span class="status">done</span></td>
+    <td><div class="dropdown">
+        <i class="bi bi-info-circle-fill" href="#" role="button" id="infoDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="infoDropdown">
+            <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+
+        </ul>
+      </div>
+    </td>
   </tr>
 </tbody>
 </table>
+</div>
 
+<nav aria-label="Page navigation example">
+    <ul class="pagination page">
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+    </ul>
+  </nav>
 
 </div>
+<script>
+
+    var statusElements = document.querySelectorAll('.table tbody tr td:nth-child(5)');
+
+    statusElements.forEach(function(element) {
+      var status = element.textContent.trim().toLowerCase();
+      var className = '';
+      switch(status) {
+        case 'active':
+          className = 'active';
+          break;
+        case 'inactive':
+          className = 'inactive';
+          break;
+        case 'done':
+          className = 'done';
+        break;
+      }
+
+      // Tambahkan kelas CSS yang sesuai ke elemen <span>
+      var spanElement = element.querySelector('span');
+      if (spanElement) {
+        spanElement.classList.add(className);
+      }
+    });
+  </script>
+
 @endsection
