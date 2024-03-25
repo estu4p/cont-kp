@@ -34,12 +34,23 @@ class SchoolController extends Controller
             "data" => $JM
         ]);
     }
-    public function Lihatprofil()
+    public function Lihatprofil($id)
     {
-        $profil = User:: all("role_id",3);
+        //$profil = User:: all();
+        $mahasiswa = User::where("role_id", 3)
+                    ->where("id", $id)
+                    ->select("nama_lengkap", "nomor_induk", "divisi_id", "status_akun")
+                    ->first();
+
+             if (!$mahasiswa) {
+                return response()->json([
+                "message" => "Mahasiswa tidak ditemukan"
+                ], 404);
+                }
+
         return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
-            "data" => $profil
+            "data" => $mahasiswa
         ]);
     }
 
