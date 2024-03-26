@@ -21,7 +21,7 @@
                 <card class="datadiri">
                     <div class="form-group">
                         <label for="username">Nama lengkap</label>
-                        <input class="input" type="text" class="form-control" id="name" placeholder="james clear" value={{$profile->nama_lengkap}}>
+                        <input class="input" type="text" class="form-control" id="name" placeholder="james clear" value="{{ isset($data) ? $data->nama_lengkap : '' }}" >
                     </div>
                     <div class="form-group">
                         <label for="nim">Nomor induk mahasiswa</label>
@@ -151,7 +151,7 @@
                 <card class="tools">
                     <div class="form-group">
                         <label for="status">Hutang jam</label>
-                        <div class="abu">hhh:mm:ss</div>
+                        <div class="abu">{{ isset($presensi) ? $presensi->hutang_presensi : '' }}</div>
                     </div>
                     <div class="warning">*hhh:maks 999, mm&ss:maks 59</div>
                 </card>
