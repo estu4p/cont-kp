@@ -587,6 +587,7 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
+
 Route::get('/super-admin/langganan', function () {
     $members = [
         ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
@@ -604,4 +605,10 @@ Route::get('/super-admin/langganan', function () {
         'title' => "Langganan",
         'members' => $members,
     ]);
+});
+Route::get('/UserPresensi', function () {
+    return view('mitra_presensi.scanbarcode');
+});
+Route::get('/UserScanBarcode', function () {
+    return view('mitra_presensi.scanpresensiharian');
 });
