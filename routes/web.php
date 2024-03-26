@@ -284,10 +284,8 @@ Route::get('/AdminUniv-Login', function () {
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
 
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
-
+Route::get('/AdminUniv-ResetPassword', [BEControllerAdminUnivAfterPaymentController::class, 'viewResetPassword']);
+Route::post('AdminUniv-ResetPassword', [BEControllerAdminUnivAfterPaymentController::class, 'resetPasswordAdmin'])->name('adminUniv.password.reset');
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
 });
