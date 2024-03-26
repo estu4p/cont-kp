@@ -582,6 +582,8 @@ Route::get('/superAdmin/langganan', function () {
     ]);
 });
 
+
+
 Route::get('/admin/setting/quotes', function () {
     $quotes = [
         ['id' => 1, 'quotes' => "Change your life now for better future"],
@@ -615,4 +617,66 @@ Route::get('/admin/setting/user', function () {
 
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/contributorformitra-dashboard', function () {
+    return view('contributorformitra.dashboard');
+});
+Route::get('/contributorformitra-editprofile', function () {
+    return view('contributorformitra.editprofile');
+});
+Route::get('/contributorformitra-devisi', function () {
+    return view('contributorformitra.devisi');
+});
+Route::get('/contributorformitra-devisi-Seeallteams', function () {
+    return view('contributorformitra.devisi-Seeallteams');
+});
+
+Route::get('/contributorformitra-devisi-LihatProfil', function () {
+    return view('contributorformitra.Lihat-Profil-Mahasiswa');
+});
+
+Route::get('/contributorformitra-devisi-teamaktif', function () {
+    return view('contributorformitra.teamaktifanggota');
 });
