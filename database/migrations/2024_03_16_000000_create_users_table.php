@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lengkap');
+            $table->string('nama_lengkap')->nullable();
             $table->bigInteger('nomor_induk')->nullable();
             $table->string('foto_profil')->nullable();
             $table->string('jurusan')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('username')->unique()->nullable();
             $table->string('no_hp');
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
             $table->string('alamat')->nullable();
-            $table->enum('kota', ['Kota Surabaya', 'kota Semarang'])->nullable();
+            $table->string('kota');
             $table->date('tgl_lahir')->nullable();
             $table->string('about')->nullable();
             $table->string('os')->nullable();

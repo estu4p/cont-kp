@@ -5,17 +5,16 @@ namespace App\Http\Controllers\BEController;
 use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Divisi;
-use App\Models\Project;
 use App\Models\Presensi;
-use App\Models\Penilaian;
 use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
 use App\Models\KategoriPenilaian;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use function PHPUnit\Framework\isEmpty;
 
 class AdminUnivAfterPaymentController extends Controller
 {
@@ -37,7 +36,7 @@ class AdminUnivAfterPaymentController extends Controller
             return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
         }
     }
-    public function profileAdmin(Request $request)
+    public function profileAdmin()
     {
         $profil = User::all();
         return response()->json([
@@ -45,42 +44,34 @@ class AdminUnivAfterPaymentController extends Controller
             "data" => $profil
         ]);
     }
-    public function detailAdminProfile(Request $request, $id)
+    public function detailAdminProfile(Request $request)
     {
-        $profil = User::find($id);
+        // $profil = User::find($id);
+        $user = auth()->user();
         if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
-                'profile' => $profil
+                'profil' => $user
             ]);
         } else {
-            return view('adminUniv-afterPayment.AdminUniv-EditProfile', [
-                'profil' => $profil
-            ]);
+            return view('adminUniv-afterPayment.AdminUniv-EditProfile', compact('user'));
         }
     }
-    public function updateAdminProfile(Request $request, $id)
-    // edit profil
+    public function updateAdminProfile(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            "nama_lengkap" => 'required',
-            'email' => 'required|min:6',
-            'no_hp' => 'required',
-            'alamat' => 'required',
-            'about' => 'required',
+        $user = auth()->user();
+        // Update the user's profile with the validated data
+        $user->update([
+            'nama_lengkap' => $request->nama_lengkap,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'kota' => $request->kota,
+            'about' => $request->about,
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-
-        return redirect()->route('adminUniv.editProfile', $user->id);
+        // Redirect back to the edit profile page
+        return redirect()->route('adminUniv.editProfile');
     }
+
 
     public function adminUnivMitra(Request $request)
     // univ - mitra
@@ -327,7 +318,7 @@ class AdminUnivAfterPaymentController extends Controller
             ->get()
             ->map(function ($item, $key) {
                 $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereNotNull('jam_masuk')
+                    ->where('status_kehadiran', 'hadir')
                     ->count();
                 $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'izin')
@@ -339,18 +330,64 @@ class AdminUnivAfterPaymentController extends Controller
             });
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+            return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
             return view('adminUniv-afterPayment.mitra.laporanpresensi')
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
-    public function teamAktifDetailHadir($id)
+    public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        $presensi = Presensi::where('nama_lengkap', $id)->first();
-        return response()->json([
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
+        // $presensiAll = Presensi::where('nama_lengkap', $nama_lengkap)->get();
+        // $presensiAll = Presensi::findOrFail($nama_lengkap);
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'data' => $presensi,
 
-            'message' => 'detail hadir',
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
+        }
+    }
+
+    public function teamAktifDetailIzin($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Izin')->get();
+
+
+        return response()->json([
+            'data' => $presensi
+        ]);
+    }
+
+    public function teamAktifDetailTidakHadir($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Tidak Hadir')->get();
+
+        if (!$presensi) {
+            return response()->json(
+                ['message' => 'null']
+            );
+        }
+
+
+        return response()->json([
             'data' => $presensi
         ]);
     }

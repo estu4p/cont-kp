@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="assets/Css/sidebar.css">
 <div class="sidebar">
-    <img src="assets/images/logo.png" alt="Logo" class="logo">
+    <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo">
   <ul class="nav flex-column">
       <li class="nav-item">
 
@@ -18,7 +18,7 @@
           <a class="nav-link" href="#">Paket</a>
       </li>
       <li class="nav-item">
-    <a class="nav-link" href="{{ route('manage-devisi') }}">Pengaturan</a>
+    <a class="nav-link" href="/manage-devisi">Pengaturan</a>
 </li>
 
     <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
