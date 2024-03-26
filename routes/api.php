@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use BEController\SchoolController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApiAuthController;
@@ -8,15 +9,16 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\SchoolController;
-use App\Http\Controllers\BEController\SchoolControlller;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
+use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
+
 use App\Http\Controllers\BEController\PresensiMitraController;
+
+use App\Http\Controllers\BEController\ContributorForMitra;
 
 
 /*
@@ -36,11 +38,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/loginn', [ApiAuthController::class, 'login']);
-//landing page
+
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
-
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
@@ -82,28 +83,27 @@ Route::post('admin/daftar-mitra/pengaturan-divisi/sub-kategori-penilaian', [Admi
 Route::get('admin/daftar-mitra/team-aktif/klik/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifKlik']);
 Route::get('admin/daftar-mitra/see-all-team/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam']);
 Route::post('admin/daftar-mitra/sunting/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam']);
-Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
 Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
+Route::get('admin/daftar-mitra/detail-izin/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailIzin']);
+Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir']);
 
 //Contributor for univ
-Route::get('/dashboard-univ', [SchoolController::class, 'index']);
-Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
-Route::get('/lihatprofil', [SchoolController::class, 'Lihatprofil']);
-
+Route::get('/dashboard-univ', [\App\Http\Controllers\BEController\SchoolController::class, 'index']);
 
 //Contributor for Mitra
-Route::get('daftar-divisi', [ContributorForMitra::class,'showDaftarDivisi']);
-Route::post('add-divisi', [ContributorForMitra::class,'addDivisi']);
-Route::put('update-divisi/{id}', [ContributorForMitra::class,'updateDivisi']);
+Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
+Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
+Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
 Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
 
-Route::get('kategori-penilaian', [ContributorForMitra::class,'showKategoriPenilaian']);
-Route::post('add-kategori-penilaian', [ContributorForMitra::class,'addKategoriPenilaian']);
-Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class,'addSubKategoriPenilaian']);
+Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenilaian']);
+Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);
+Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class, 'addSubKategoriPenilaian']);
 
-Route::get('data-shift', [ContributorForMitra::class,'showDataShift']);
-Route::post('add-shift', [ContributorForMitra::class,'addShift']);
-Route::put('update-shift/{id}', [ContributorForMitra::class,'updateShift']);
+Route::get('data-shift', [ContributorForMitra::class, 'showDataShift']);
+Route::post('add-shift', [ContributorForMitra::class, 'addShift']);
+Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
 //Contributor for Mitra - Presensi
@@ -118,3 +118,7 @@ Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
 Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
 Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
 Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+Route::get('/laporan-presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
+Route::get('/laporan-presensi-detail/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
+Route::get('/laporan-presensi-detail/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+

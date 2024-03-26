@@ -48,7 +48,6 @@
 .profile-name,
 .profile-status {
   display: block;
-  text-align: right;
 }
 .navbar-logo {
   width: 40px; /* Ubah ukuran lebar gambar profil */
