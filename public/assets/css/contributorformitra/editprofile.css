@@ -1,3 +1,10 @@
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
 .wadah{
     display: flex;
     padding-top: 10px;
@@ -10,7 +17,9 @@
     background: #FFFFFF;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    
+    overflow: hidden;
+    height: 650px; /* Tentukan tinggi maksimal div */
+    overflow-y: scroll; /* Selalu tampilkan scroll vertikal */
 }
 .gambarkiri{
     padding-top: 30px;
@@ -20,24 +29,37 @@
     padding-top: 70px;
     font-weight: bold;
     font-size: 20px;
+    width: 80%;
+    margin-left: 10%;
+
+
 }
 .email{
-   
+
     padding-top: 15px;
+    width: auto;
+    width: 80%;
+    margin-left: 10%;
+    text-align: justify;
 }
 .about{
     padding-top: 100px;
     font-weight: bold;
     font-size: 20px;
+    width: auto;
+
 }
 .keterangan{
     padding-top: 30px;
-   
-    width: 90%;
+
+    width: 100%;
   padding-left: 35px;
+  height: 200px; /* Tentukan tinggi maksimal div */
+
 }
 .wadahedit{
     padding-left: 30px;
+
 }
 .editprofil{
     height: 650px;
@@ -47,6 +69,7 @@
     background: #FFFFFF;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 95%;
 }
 /* .gambarkanan{
     transform: scale(1.2);
@@ -92,4 +115,26 @@ border-radius: 5px;
     border-radius: 7px;
     color: #ffffff;
     background-color: #A4161A;
+}
+/* Media Query untuk tampilan responsif */
+@media screen and (max-width: 768px) {
+    .nama,
+    .email,
+    .about,
+    .keterangan {
+        white-space: normal; /* Mengatur agar teks dapat wrap */
+        text-overflow: unset; /* Menghapus ellipsis untuk teks yang wrap */
+        max-width: 100%; /* Mengatur lebar maksimal agar teks tidak keluar dari container */
+        padding-top: 10px; /* Mengurangi padding atas untuk responsivitas */
+        padding-left: 0; /* Menghapus padding kiri untuk responsivitas */
+    }
+
+    .gambarkiri {
+        padding-top: 10px; /* Mengurangi padding atas untuk gambar */
+        transform: scale(1.2); /* Mengurangi skala gambar untuk responsivitas */
+    }
+
+    .about {
+        font-size: 16px; /* Mengurangi ukuran font untuk about pada tampilan kecil */
+    }
 }

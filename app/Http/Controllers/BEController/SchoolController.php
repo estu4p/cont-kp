@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\BEController;
 
 use App\Models\User;
-use App\Models\Shift;
 use App\Models\Presensi;
-use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +11,7 @@ class SchoolController extends Controller
 {
     public function index(Request $request)
     { // menampilkan seluruh data yang diperlukan
-        $jumlah_Mahasiswa = User::where("role_id", 3)->count();
+        $jumlah_Mahasiswa = User::where("role_id", 3)->get();
         $kehasiran_masuk= Presensi::where("status_kehadiran", 'hadir')->count();
         $kehadiran_izin= Presensi::where("status_kehadiran", 'izin')->count();
 
@@ -33,20 +31,16 @@ class SchoolController extends Controller
         }
 
     }
-    public function jumlahMahasiswa(Request $request)
+    public function jumlahMahasiswa()
     {   //Menampilkan Data Mahasiswa
         $JM = User::where("role_id",3)
                 ->select( "nama_lengkap", "nomor_induk","divisi_id","status_akun")
                 ->get();
-        if ($request->is('api/*') || $request->wantsJson()) {
-              return response()->json([
+
+        return response()->json([
             "jumlah Mahasiswa" => "view data Mahasiswa ",
             "data" => $JM
         ]);
-        } else {
-            return view('jumlah-mahasiswa.profil-siswa', ["data" => $JM]);
-        }
-
     }
     public function Lihatprofil(Request $request)
     {

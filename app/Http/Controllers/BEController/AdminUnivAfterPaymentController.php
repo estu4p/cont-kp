@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use function PHPUnit\Framework\isEmpty;
 
 class AdminUnivAfterPaymentController extends Controller
 {
@@ -363,5 +364,31 @@ class AdminUnivAfterPaymentController extends Controller
         } else {
             return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
         }
+    }
+
+    public function teamAktifDetailIzin($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Izin')->get();
+
+
+        return response()->json([
+            'data' => $presensi
+        ]);
+    }
+
+    public function teamAktifDetailTidakHadir($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Tidak Hadir')->get();
+
+        if (!$presensi) {
+            return response()->json(
+                ['message' => 'null']
+            );
+        }
+
+
+        return response()->json([
+            'data' => $presensi
+        ]);
     }
 }
