@@ -27,14 +27,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($mahasiswa as $key => $mhs)
+            @foreach($data as $key => $mhs)
             <tr class="{{ $key % 2 == 0 ? 'abu' : 'putih' }}">
                 <td>{{ $key + 1 }}</td>
-                <td>{{ $mhs['nama'] }}</td>
-                <td>{{ $mhs['nip'] }}</td>
-                <td>{{ $mhs['divisi'] }}</td>
+                <td>{{ $mhs->nama_lengkap }}</td>
+                <td>{{ $mhs->nomor_induk }}</td>
+                <td>{{ $mhs->divisi_id }}</td>
                 <td>
-                    <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
+                    <div class="{{ strtolower($mhs->status_akun) }}">{{ $mhs->status_akun }}</div>
                 </td>
                 <td><a href="/profil-siswa"> <i class="fa-solid fa-circle-info icon"></i></a></td>
             </tr>
@@ -42,6 +42,6 @@
         </tbody>
     </table>
     </div>
-    
+
 </div>
 @endsection
