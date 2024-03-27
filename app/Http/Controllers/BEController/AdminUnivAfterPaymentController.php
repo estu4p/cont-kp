@@ -11,9 +11,15 @@ use App\Models\KategoriPenilaian;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use function PHPUnit\Framework\isEmpty;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Log;
+
+
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 
 class AdminUnivAfterPaymentController extends Controller
 {
@@ -35,6 +41,90 @@ class AdminUnivAfterPaymentController extends Controller
             return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
         }
     }
+
+    public function viewResetPassword()
+    {
+        return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+    }
+    public function resetPasswordAdmin(Request $request)
+    { {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return response()->json(['error' => 'User not found.'], 404);
+            }
+            $otp = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+            Session::put('otp_', $otp);
+            Session::put('reset_password', $request->email);
+
+            try {
+                Mail::to($request->email)->send(new SendEmail($otp));
+                return redirect()->to('/AdminUniv-InputOTP');
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+            }
+        }
+    }
+
+    public function verifyOTP(Request $request)
+    {
+        $request->validate([
+            'digit1' => 'required|string',
+            'digit2' => 'required|string',
+            'digit3' => 'required|string',
+            'digit4' => 'required|string',
+        ]);
+
+        $inputOtp = $request->digit1 . $request->digit2 . $request->digit3 . $request->digit4;
+        // Ambil OTP dari session
+        $otpFromSession = Session::get('otp_');
+        // Cek apakah OTP sesuai
+        if ($otpFromSession !== $inputOtp) {
+            return redirect()->back()->with('error', 'Invalid OTP');
+
+            $user = User::where('email', $request->email)->first();
+            // Cek apakah pengguna ditemukan
+            if (!$user) {
+                return back()->withErrors(['email' => 'User not found.']);
+            }
+            //mengecek apakah otp yang dimasukan sesuai dengan yang diharapka atau telah dikirim di email
+            if ($user->otp !== $request->otp) {
+                return response()->json([
+                    'error' => ' Invalid OTP'
+                ], 400);
+            }
+
+            // Hapus OTP dari session setelah diverifikasi
+            $request->session()->forget('otp_' . $request->email);
+        }
+        return redirect()->to('/user/reset-password/new-password');
+    }
+
+    public function newPassword(Request $request)
+    {
+        // dd($request->session);
+        $request->validate([
+            'password' => 'required|string|min:5|confirmed',
+        ]);
+        $reset = Session::get('reset_password');
+        $user = User::where('email', $reset)->first();
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pengguna dengan email ini tidak ditemukan.'
+            ]);
+        }
+
+        $user->update(['password' => Hash::make($request->password)]);
+        // Bersihkan session reset_email setelah pengguna berhasil mengubah kata sandi
+        $request->session()->forget('reset_password');
+        // return redirect()->route('user.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
+        // return redirect()->to('user/login');
+        return redirect()->to('/AdminUniv-InputNewPassword');
+    }
+
     public function profileAdmin()
     {
         $profil = User::all();
@@ -337,9 +427,26 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
-        // $presensiAll = Presensi::where('nama_lengkap', $nama_lengkap)->get();
-        // $presensiAll = Presensi::findOrFail($nama_lengkap);
+        $user = User::findOrFail($nama_lengkap);
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'hadir')->get();
+        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_default_masuk')
+            ->whereNotNull('jam_default_pulang')
+            ->select('jam_default_masuk', 'jam_default_pulang')
+            ->first();
+        $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->count();
+
+        // menghitung total jam masuk
+        $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_masuk')
+            ->whereNotNull('jam_pulang')
+            ->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))) AS total_jam_masuk')
+            ->first();
+
+        // mengambil nilai target dari database
+        $target = Presensi::where('nama_lengkap', $nama_lengkap)->whereNotNull('target')->first();
+
+
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
             ->get()
@@ -358,10 +465,39 @@ class AdminUnivAfterPaymentController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
                 'data' => $presensi,
-
+                'total masuk' => $total_masuk,
+                'jam_default' => $jam_default,
+                'total_jam_masuk' => $total_jam_masuk,
+                'target' => $target
             ]);
         } else {
-            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi'));
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi', 'user', 'total_masuk', 'jam_default', 'total_jam_masuk', 'target'));
         }
+    }
+
+    public function teamAktifDetailIzin($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Izin')->get();
+
+
+        return response()->json([
+            'data' => $presensi
+        ]);
+    }
+
+    public function teamAktifDetailTidakHadir($nama_lengkap)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Tidak Hadir')->get();
+
+        if (!$presensi) {
+            return response()->json(
+                ['message' => 'null']
+            );
+        }
+
+
+        return response()->json([
+            'data' => $presensi
+        ]);
     }
 }

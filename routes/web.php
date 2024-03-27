@@ -2,20 +2,20 @@
 
 use function Laravel\Prompts\alert;
 
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\SchoolController;
-use App\Http\Controllers\AdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
+use App\Http\Controllers\BEController\DataMitraController;
+use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\HomeMitraController;
 
 
 /*
@@ -184,10 +184,22 @@ Route::get('/pemagang/detail', function () {
     return view('pemagang.gantiJam', ['title' => "MyQR"]);
 });
 
-//lihat profil contributor for univ 
-Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
 
 
+
+Route::get('/profil-siswa', function () {
+    return view('jumlah-mahasiswa.profil-siswa');
+});
+Route::get('/laporandatapresensi', function () {
+    return view('presensi.laporandatapresensi');
+});
+Route::get('/datapresensisiswa', function () {
+    return view('presensi.datapresensisiswa');
+});
+
+Route::get('/profil-siswa', function () {
+    return view('jumlah-mahasiswa.profil-siswa');
+});
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
@@ -218,7 +230,7 @@ Route::get('/input-nilai', function () {
 
 
 
-
+// Contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
@@ -272,10 +284,8 @@ Route::get('/AdminUniv-Login', function () {
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
 
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
-
+Route::get('/AdminUniv-ResetPassword', [BEControllerAdminUnivAfterPaymentController::class, 'viewResetPassword']);
+Route::post('AdminUniv-ResetPassword', [BEControllerAdminUnivAfterPaymentController::class, 'resetPasswordAdmin'])->name('adminUniv.password.reset');
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
 });
@@ -292,15 +302,13 @@ Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControlle
 
 Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
-Route::get('/mitra-laporanpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.laporanpresensi');
-});
-Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
-Route::get('/mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
-Route::get('/mitra-laporanpresensi-detailizin', function () {
+
+Route::get('/AdminUniv-mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('/AdminUniv-mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
+Route::get('/AdminUniv-mitra-laporanpresensi-detailizin', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailizin');
 });
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
 
@@ -387,8 +395,13 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir');
 });
 
-
-
+Route::get('/mitra-presensi-barcode', function () {
+    return view('User.ContributorForMitra.barcode', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Syalita"
+    ]);
+});
+Route::post('/mitra-presensi-barcode/validasi', [ContributorForMitra::class, 'validasi'])->name('mitra.validasi');
 
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
@@ -437,16 +450,6 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-
-});
-
-Route::get('/AdminUniv-Dashboard', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-});
-Route::get('/AdminUniv-EditProfile', function () {
-    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-
-
 });
 
 
@@ -467,12 +470,7 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
 Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
-
-
-Route::get('/super-admin', function () {
-});
 Route::get('/superAdmin', function () {
-
     return view('super-admin.dashboard', [
         'title' => "Super Admin - Dashboard",
         'subscription' => 300,
@@ -510,44 +508,9 @@ Route::get('/superAdmin/data-admin', function () {
 });
 
 
-
-
-Route::get('/contributorformitra-dashboard', function () {
-    return view('contributorformitra.dashboard');
-});
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
-Route::get('/contributorformitra-devisi', function () {
-    return view('contributorformitra.devisi');
-});
-Route::get('/contributorformitra-devisi-Seeallteams', function () {
-    return view('contributorformitra.devisi-Seeallteams');
-});
-
-Route::get('/contributorformitra-devisi-LihatProfil', function () {
-    return view('contributorformitra.Lihat-Profil-Mahasiswa');
-});
-
-Route::get('/contributorformitra-devisi-teamaktif', function () {
-    return view('contributorformitra.teamaktifanggota');
-});
-
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
-
-Route::get('/TableGantiJam', function () {
-    return view('user.UserScanQR.TableGantiJam');
-});
-
-Route::get('/Scanqr', function () {
-    return view('user.UserScanQR.Scanqr');
-});
-
-
-
-
 
 
 Route::get('/superAdmin/langganan', function () {

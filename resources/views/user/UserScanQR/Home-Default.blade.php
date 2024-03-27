@@ -53,7 +53,7 @@
     </div>
     <div class="wadah">
         <div class="qr">
-             <a href="/Scanqr" class="btnqr">Lihat Barcode Saya</a>
+             <a href="/UserScanQR" class="btnqr">Lihat Barcode Saya</a>
         </div>
         <div class="konten">
             <div class="shif">
