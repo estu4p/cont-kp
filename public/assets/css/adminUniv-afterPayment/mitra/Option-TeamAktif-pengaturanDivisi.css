@@ -1,0 +1,251 @@
+/* assets/Css/margepenilaiandivisi.css */
+
+/* Gaya untuk judul card */
+.card .card-header h3 {
+  font-size: 24px;
+  color: #333; /* Warna teks judul */
+}
+
+/* Gaya untuk label form */
+.form-group label {
+  font-size: 18px;
+  color: #555; /* Warna teks label */
+}
+
+/* Gaya untuk tombol edit dan hapus */
+.btn-danger {
+  background-color: #dc3545; /* Warna latar belakang tombol hapus */
+  color: #fff; /* Warna teks tombol hapus */
+  border: none; /* Hapus border */
+}
+
+/* Mengubah warna tombol edit menjadi biru */
+.btn-edit {
+  background-color: #007bff; /* Warna latar belakang tombol edit */
+  color: #fff; /* Warna teks tombol edit */
+}
+
+
+/* Mengatur margin dan padding */
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding:0 20px;
+}
+.btn-tambah {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color:#FFFFFF;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%; /* Lebar tabel 100% dari kontainer */
+  height: auto; /* Tinggi tabel menyesuaikan konten */
+  font-size: 14px; /* Ukuran font pada sel tabel */
+  margin-bottom: 0; /* Margin bawah diatur menjadi 0 */
+  margin-top: -8px; /* Margin atas diatur menjadi -8px */
+}
+    
+
+/* Responsif untuk tabel */
+.table-responsive {
+
+}
+.wadah{
+  top:0;
+  left:100px;
+  height: 100%;
+  width:100%;
+  padding-left:30px !important;
+
+}
+.kanan-tabel{
+  width:auto;
+  display:inline-block;
+  padding-top:7% !important;
+  box-sizing: border-box;
+}
+
+.nav-item a {
+  color: black; /* Mengatur warna teks menjadi hitam */
+
+}
+
+.page, .item{
+  background: #c6c6c6;
+  border-radius:5px;
+  
+}
+
+.manageP {
+  text-decoration: none;
+  background-color: pink; 
+  border-radius: 7px; 
+}
+.logout{
+  position: absolute;
+  bottom: 10px;
+}
+
+.col-md-auto .me-auto{
+  display: flex;
+  flex-direction: row;
+}
+.konfirmasiBackdrop{
+  background-color: transparent !important;
+  z-index: -10 !important;
+}
+.modal-frame-4{
+  z-index:1000 !important;
+}
+
+.modal-dialog{
+top: 30%;
+background: #FFFFFF;
+border-radius: 10px;
+
+}
+.modal-body{
+
+left: 0%;
+right: 0%;
+top: 42.39%;
+bottom: 51.46%;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+
+color: #000000;
+
+}
+.modal-title{
+
+left: 40.73%;
+right: 44.69%;
+top: 9.71%;
+bottom: 78.96%;
+width: 100%;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 29px;
+line-height: 35px;
+color: #000000;
+}
+
+.btnbatal{
+color: white;
+border: none;
+background: #E5383B;
+border-radius: 9px;
+
+}
+.btnya{
+  color: black;
+
+background: white;
+border-radius: 9px;
+}
+.abu{
+  color: #555;
+}
+.putih{
+  color: #FFFFFF;
+}
+#example{
+  overflow: scroll  !important;
+  height: max-content;
+}
+.labelmodal{
+  font-weight: bold;
+}
+.inputmodal{
+  width: 100%;
+  background-color: #F2F4F8;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  padding-left: 10px;
+}
+.judulmodal{
+  font-weight: bold;
+}
+.grupinput{
+  margin-top: 20px;
+}
+.textdivisi{
+  font-weight: bold;
+  font-size: 20px;
+}
+.tambahgambar{
+  display: flex;
+  margin-top: 20px;
+  
+}
+.gambar{
+  background-color: transparent;
+  width: 140px;
+  height: 140px;
+  border-radius: 70px;
+  font-size: 90px;
+  color: #555;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform: rotate(90deg);
+    
+}
+.addgambar{
+  background-color: transparent;
+  border-radius: 5px;
+  width: 130px;
+  height: 40px;
+  margin-top: 50px;
+}
+.remove{
+  background: none;
+  border: none;
+  border-radius: 5px;
+  width: auto;
+  height: 40px;
+  margin-top: 50px;
+  color: #dc3545;
+}
+.NamaDivisi{
+  color: #000000;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.inputmodall, .inputmodalll{
+  width: 100%;
+  background-color: #F2F4F8;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: auto;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px
+}
+
+.iconn{
+  color: #000000;
+}

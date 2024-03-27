@@ -315,6 +315,18 @@ Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
 
+Route::get('/Option-Team Aktif', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif');
+});
+Route::get('/Option-Team Aktif-pengaturanDivisi', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
+});  
+Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
+    return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
+});  
+Route::get('/OptionTeamAktifKlikUiUx', function () {
+    return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
+});  
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
