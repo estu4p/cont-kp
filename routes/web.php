@@ -352,15 +352,15 @@ Route::get('/pemagang/home', function () {
 
 
 
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
-Route::get('/laporandatapresensi', function () {
-    return view('presensi.laporandatapresensi');
-});
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
+// Route::get('/profil-siswa', function () {
+//     return view('jumlah-mahasiswa.profil-siswa');
+// });
+// Route::get('/laporandatapresensi', function () {
+//     return view('presensi.laporandatapresensi');
+// });
+// Route::get('/datapresensisiswa', function () {
+//     return view('presensi.datapresensisiswa');
+// });
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
