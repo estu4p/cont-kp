@@ -45,6 +45,7 @@
     height: auto;
     padding-left: 12px;
     border-radius: 5px;
+    
 }
 
 label{
@@ -58,7 +59,7 @@ select{
     padding-left: 12px;
 }
 .form-group{
-    margin-top: 7px;
+    margin-top: 10px;
 }
 
 .peringatan{
