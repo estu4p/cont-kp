@@ -7,7 +7,7 @@
     <div class="container-fluid p-5 ml-2">
         <div class="row">
             <div class="col-md-12 parent-relatife">
-                <a href="/mitra-laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
+                <a href="/AdminUniv-mitra-laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                 <div class="card">
                     <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
                         <div style="overflow: hidden;">
