@@ -68,7 +68,11 @@
             {{-- {!! QrCode::size(200)->generate($nama) !!} --}}
             <img src="/assets/images/Barcode.png" width="180px" alt="">
         </div>
-        <input type="hidden" id="result" name="result">
+
+
+        <input type="" id="result" name="result">
+
+
         <button
             style="border: none; background-color: transparent; color: white; text-transform: capitalize; font-size: 18px; font-weight: 600;"><svg
                 xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -88,31 +92,36 @@
     // $('#result').val('test');
     function onScanSuccess(decodedText, decodedResult) {
         // alert(decodedText);
+
+        console.log(`Code scanned = ${decodedText}`, decodedResult);
+
         $('#result').val(decodedText);
+
         let id = decodedText;
-        html5QrcodeScanner.clear().then(_ => {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
 
-                url: "{{ route('validasi') }}",
-                type: 'POST',
-                data: {
-                    _methode: "POST",
-                    _token: CSRF_TOKEN,
-                    qr_code: id
-                },
-                success: function(response) {
-                    console.log(response);
-                    if (response.status == 200) {
-                        alert('berhasil');
-                    } else {
-                        alert('gagal');
-                    }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        $.ajax({
+            type: "POST",
+            url: "{{ route('mitra.validasi') }}",
+            data: {
+                id: decodedText
+            },
+            success: function(response) {
+                if (response.presensi) {
+                    // Tampilkan data presensi jika ditemukan
+                    console.log(response.presensi);
+                } else {
+                    console.log(response.message); // Barcode tidak ditemukan
                 }
-            });
-        }).catch(error => {
-            alert('something wrong');
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
         });
 
     }

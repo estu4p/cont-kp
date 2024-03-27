@@ -403,9 +403,7 @@ Route::get('/mitra-presensi-barcode', function () {
         'nama' => "Syalita"
     ]);
 });
-Route::post('/mitra-presensi-barcode/validasi', [ContributorForMitra::class, 'validasi'])->name('validasi');
-
-
+Route::post('/mitra-presensi-barcode/validasi', [ContributorForMitra::class, 'validasi'])->name('mitra.validasi');
 
 Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');

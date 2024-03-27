@@ -64,7 +64,7 @@
     <div class="container">
         <div class="barcode-box">
             <h6 class="text-uppercase">{{ $nama }}'s qr code</h6>
-            {{-- {!! QrCode::size(200)->generate($nama); !!} --}}
+            {!! QrCode::size(200)->generate($nama) !!}
             <img src="/assets/images/Barcode.png" width="180px" alt="">
         </div>
         <button

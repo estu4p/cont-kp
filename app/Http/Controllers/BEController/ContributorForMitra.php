@@ -203,26 +203,28 @@ class ContributorForMitra extends Controller
             return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
         }
     }
-    public function scan()
+    public function scan(Request $request)
     {
-        return view('User.ContributorForMitra.barcode', [
-            'title' => "Barcode Pemagang",
-            'nama' => "Syalita"
-        ]);
+        dd($request);
+        // return view('User.ContributorForMitra.barcode', [
+        //     'title' => "Barcode Pemagang",
+        //     'nama' => "Syalita"
+        // ]);
     }
 
     public function validasi(Request $request)
     {
-        $cek = Presensi::where([
-            'id' => $request->id,
-        ]);
+        $id = $request->input('id');
 
-        if ($cek) {
-            return alert('Anda sudah presensi');
+        // Periksa apakah decodedText sama dengan barcode di tabel presensi
+        $presensi = Presensi::where('barcode', $id)->first();
+
+        if ($presensi) {
+            // Jika ada, tampilkan isi dari tabel presensi
+            $dataPresensi = $presensi->toArray();
+            return response()->json(['presensi' => $dataPresensi]);
+        } else {
+            return response()->json(['message' => 'Barcode tidak ditemukan dalam tabel presensi.']);
         }
-        Presensi::create([
-            'id' => $request->id
-        ]);
-        return alert('success');
     }
 }
