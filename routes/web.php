@@ -196,7 +196,8 @@ Route::get('/datapresensisiswa', function () {
 });
 
 Route::get('/presensi-contributor-univ', function () {
-    return view('presensi.presensiharian')->name('presensi.con');
+    return view('presensi.presensiharian');
+    // return view('presensi.presensiharian')->name('presensi.con');
 });
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
