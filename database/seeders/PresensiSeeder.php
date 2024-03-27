@@ -16,6 +16,10 @@ class PresensiSeeder extends Seeder
      */
     public function run(): void
     {
+        // Menentukan jumlah detik untuk merepresentasikan 3600 jam
+        $jumlah_detik = 3600 * 3600; // 3600 jam * 3600 detik per jam
+        // Mengonversi jumlah detik ke dalam format waktu (HH:MM:SS)
+        $waktu_format = gmdate("H:i:s", $jumlah_detik);
         $faker = \Faker\Factory::create('id_ID');
 
         for ($i = 0; $i < 100; $i++) {
@@ -43,7 +47,8 @@ class PresensiSeeder extends Seeder
                         'keterangan_status' => $faker->sentence,
                         'kebaikan' => $faker->sentence,
                         'barcode' => $faker->ean13,
-                        'hutang_presensi' => $faker->dateTime
+                        'hutang_presensi' => $faker->dateTime,
+                        'target' => 3600
                     ]);
                 }
             }

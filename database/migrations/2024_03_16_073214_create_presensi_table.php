@@ -12,6 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
@@ -30,6 +32,7 @@ return new class extends Migration
             $table->string('kebaikan');
             $table->string('barcode')->nullable()->unique();
             $table->time('hutang_presensi')->nullable();
+            $table->bigInteger('target')->nullable();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')

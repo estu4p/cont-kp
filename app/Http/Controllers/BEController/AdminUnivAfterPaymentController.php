@@ -427,25 +427,25 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        // $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->first();
         $user = User::findOrFail($nama_lengkap);
-        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->get();
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'hadir')->get();
         $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
             ->first();
         $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->count();
-        // $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->whereNotNull('jam_default_masuk')
-        //     ->selectRaw('SUM(TIME_TO_SEC(jam_default_masuk)) AS total_jam_masuk')
-        //     ->first();
-        // $total_masuk_waktu = gmdate("H:i:s", $total_jam_masuk->total_jam_masuk);
 
+        // menghitung total jam masuk
         $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)
             ->whereNotNull('jam_masuk')
             ->whereNotNull('jam_pulang')
             ->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))) AS total_jam_masuk')
             ->first();
+
+        // mengambil nilai target dari database
+        $target = Presensi::where('nama_lengkap', $nama_lengkap)->whereNotNull('target')->first();
+
 
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
@@ -468,9 +468,10 @@ class AdminUnivAfterPaymentController extends Controller
                 'total masuk' => $total_masuk,
                 'jam_default' => $jam_default,
                 'total_jam_masuk' => $total_jam_masuk,
+                'target' => $target
             ]);
         } else {
-            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi', 'user', 'total_masuk', 'jam_default', 'total_jam_masuk'));
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi', 'user', 'total_masuk', 'jam_default', 'total_jam_masuk', 'target'));
         }
     }
 

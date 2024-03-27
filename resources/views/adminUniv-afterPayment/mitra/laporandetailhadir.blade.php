@@ -61,7 +61,7 @@
                                 </tr>
                                 <tr>
                                     <th>target</th>
-                                    <td><span class="target">1100 jam</td>
+                                    <td><span class="target">{{ $target->target }} jam</td>
                                 </tr>
                                 <tr>
                                     <th>sisa</th>
