@@ -15,6 +15,7 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 
 
 /*
@@ -429,15 +430,15 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
-// Route::get('/mitra-laporanpresensi-detaihadir', function () {
-//     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
-// });
-Route::get('/mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+// CONTRIBUTOR FOR MITRA PRSENSI
+Route::get('/mitra/laporanpresensi',[ContributorForMitra::class,'laporanPresensi']);
+Route::get('/mitra-laporanpresensi-detailhadir', function() {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
-});
+Route::get('/mitra-laporanpresensi-detailhadir/{id}',[ContributorForMitra::class,'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -616,3 +617,5 @@ Route::get('/admin/setting/user', function () {
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
+
+
