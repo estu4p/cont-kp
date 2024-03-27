@@ -310,6 +310,13 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+Route::get('/datasiswa', function () {
+    return view('adminUniv-afterPayment.dataSiswa');
+});
+Route::get('/profilsiswa', function () {
+    return view('adminUniv-afterPayment.profilSiswa');
+});
+
 
 
 
