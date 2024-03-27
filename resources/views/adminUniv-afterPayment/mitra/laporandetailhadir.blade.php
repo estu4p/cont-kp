@@ -14,7 +14,7 @@
                             <img src="assets/images/user.jpg" class="user">
                         </div>
                         <div>
-                            <h3 style="font-size: 30px; margin: 0;">{{ $presensi->user->nama_lengkap }}</h3>
+                            <h3 style="font-size: 30px; margin: 0;">{{ $user->nama_lengkap }}</h3>
                             <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
@@ -39,11 +39,11 @@
                                 </tr>
                                 <tr>
                                     <th>Jam Default Masuk</th>
-                                    <td>{{ $presensi->jam_masuk }}</td>
+                                    <td>{{ $jam_default->jam_default_masuk }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Default Pulang</th>
-                                    <td>{{ $presensi->jam_pulang }}</td>
+                                    <td>{{ $jam_default->jam_default_pulang }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -53,11 +53,11 @@
                             <tbody>
                                 <tr>
                                     <th>Total jam masuk</th>
-                                    <td><span class="masuk">{{ $presensi->total_jam_kerja }}</span></td>
+                                    <td><span class="masuk">{{ $total_jam_masuk->total_jam_masuk }}</span></td>
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td><span class="total">{{ $presensi->total_kehadiran }} hari</td>
+                                    <td><span class="total">{{ $total_masuk }} hari</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
@@ -131,21 +131,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>{{ $presensi->hari }}</td>
-                            <td>{{ $presensi->jam_masuk }}</td>
-                            <td>{{ $presensi->jam_pulang }}</td>
-                            <td>{{ $presensi->jam_mulai_istirahat }}</td>
-                            <td>{{ $presensi->jam_selesai_istirahat }}</td>
-                            <td>{{ $presensi->total_jam_kerja }}</td>
-                            <td>{{ $presensi->hutang_presensi }}</td>
-                            <td>{{ $presensi->log_aktivitas }}</td>
-                            <td>{{ $presensi->status_kehadiran }}</td>
-                            <td>{{ $presensi->kebaikan }}</td>
-                            <td>{{ $presensi->keterangan_status }}</td>
-                        </tr>
+                        @foreach ($presensi as $no => $item)
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>{{ $no + 1 }}</td>
+                                <td>{{ $item->hari }}</td>
+                                <td>{{ $item->jam_masuk }}</td>
+                                <td>{{ $item->jam_pulang }}</td>
+                                <td>{{ $item->jam_mulai_istirahat }}</td>
+                                <td>{{ $item->jam_selesai_istirahat }}</td>
+                                <td>{{ $item->total_jam_kerja }}</td>
+                                <td>{{ $item->hutang_presensi }}</td>
+                                <td>{{ $item->log_aktivitas }}</td>
+                                <td>{{ $item->status_kehadiran }}</td>
+                                <td>{{ $item->kebaikan }}</td>
+                                <td>{{ $item->keterangan_status }}</td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
                 <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
