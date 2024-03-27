@@ -121,7 +121,7 @@
                                 <td>-</td>
                                 <td>
                                     <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="edeleteDivisi(4)" type="button">Hapus</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(4)" type="button">Hapus</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -212,7 +212,6 @@
             "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='deleteDivisi(5)' type='button'>Hapus</button>" +
             "</td>" +
             "</tr>";
-
         // Menambahkan baris baru ke tabel
         $("#example tbody").append(newRow);
 
