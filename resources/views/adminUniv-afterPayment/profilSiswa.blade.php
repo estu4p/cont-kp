@@ -1,7 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.masterAfterPay')
 
 @section('content')
+
+
 <link rel="stylesheet" href="{{ asset('assets/css/profil-siswa.css') }}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="wadah">
 
 
@@ -151,7 +154,7 @@
                 <card class="tools">
                     <div class="form-group">
                         <label for="status">Hutang jam</label>
-                        <div class="abu">{{ isset($presensi) ? $presensi->hutang_presensi : '' }}</div>
+                        <div class="abu">hhh:mm:ss</div>
                     </div>
                     <div class="warning">*hhh:maks 999, mm&ss:maks 59</div>
                 </card>
@@ -186,7 +189,12 @@
 
     </div>
     <div class="tengah-button w-100 d-flex justify-content-center p-4">
-        <button class="button-bawah m-auto py-1">Simpan</button>
+        <button class="button-bawah m-auto py-1" onclick=" showsukses()">Simpan</button>
     </div>
 </div>
+<script>
+    function showsukses(){
+        swal("Good job!", "You clicked the button!", "success");
+    }
+</script>
 @endsection
