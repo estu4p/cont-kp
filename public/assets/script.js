@@ -1,5 +1,5 @@
 const imgInput = document.getElementById('image')
-const previewZone = document.getElementById('preview')
+cont previewZone = document.getElementById('preview')
 
 imgInput.addEventListener("change",()=>{
     const file=imgInput.file[0]

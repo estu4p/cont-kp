@@ -42,10 +42,7 @@ Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_
 Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
 
 Route::middleware('user')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    });
-    Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
@@ -184,9 +181,11 @@ Route::get('/pemagang/detail', function () {
     return view('pemagang.gantiJam', ['title' => "MyQR"]);
 });
 
-//lihat profil contributor for univ 
-Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
 
+//contributor univ
+Route::get('/dashboard/contributor-univ',[SchoolController::class, 'index'])->name('dashboard.mahasiswa');
+Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
+Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil']);
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
@@ -195,8 +194,8 @@ Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
 
-Route::get('/presensi', function () {
-    return view('presensi.presensiharian');
+Route::get('/presensi-contributor-univ', function () {
+    return view('presensi.presensiharian')->name('presensi.con');
 });
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
@@ -497,18 +496,6 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
-Route::get('/TableGantiJam', function () {
-    return view('user.UserScanQR.TableGantiJam');
-});
-
-Route::get('/Scanqr', function () {
-    return view('user.UserScanQR.Scanqr');
-});
-
-
-
-
-
 
 Route::get('/superAdmin/langganan', function () {
     $members = [
@@ -583,6 +570,8 @@ Route::get('/superAdmin/langganan', function () {
     ]);
 });
 
+
+
 Route::get('/admin/setting/quotes', function () {
     $quotes = [
         ['id' => 1, 'quotes' => "Change your life now for better future"],
@@ -616,4 +605,66 @@ Route::get('/admin/setting/user', function () {
 
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/contributorformitra-dashboard', function () {
+    return view('contributorformitra.dashboard');
+});
+Route::get('/contributorformitra-editprofile', function () {
+    return view('contributorformitra.editprofile');
+});
+Route::get('/contributorformitra-devisi', function () {
+    return view('contributorformitra.devisi');
+});
+Route::get('/contributorformitra-devisi-Seeallteams', function () {
+    return view('contributorformitra.devisi-Seeallteams');
+});
+
+Route::get('/contributorformitra-devisi-LihatProfil', function () {
+    return view('contributorformitra.Lihat-Profil-Mahasiswa');
+});
+
+Route::get('/contributorformitra-devisi-teamaktif', function () {
+    return view('contributorformitra.teamaktifanggota');
 });
