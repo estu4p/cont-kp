@@ -48,21 +48,24 @@ class SchoolController extends Controller
     public function Lihatprofil(Request $request)
     {
         //Data Mahasiswa- Lihat profile
-        $profile = User::all()->where("role_id",3)->first();
-        $presensi = Presensi ::where('id', $profile->id)
+        $lihat = User::where("role_id",3)->first();
+        $presensi = Presensi ::where('id', $lihat->id)
         ->select("hutang_presensi")->first();
-        $Shift= Shift::where('id', $profile->id)
+        $Shift= Shift::where('id', $lihat->id)
         ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
 
+        // dd($lihat);
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
-            "data" => $profile,
+            "profile" => $lihat,
             "Shift"=>$Shift,
             "presensi"=>$presensi,
           ]);
         } else {
-            return view('jumlah-mahasiswa.profil-siswa', ["data" => $profile,"Shift"=>$Shift,"presensi"=>$presensi,]);
+            return view('jumlah-mahasiswa.profil-siswa',
+            compact('lihat','Shift','presensi'));
+            // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
         }
     }
 
