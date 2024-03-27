@@ -14,6 +14,7 @@ use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
@@ -424,15 +425,15 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
-// Route::get('/mitra-laporanpresensi-detaihadir', function () {
-//     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
-// });
-Route::get('/mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+// CONTRIBUTOR FOR MITRA PRSENSI
+Route::get('/mitra/laporanpresensi',[ContributorForMitra::class,'laporanPresensi']);
+Route::get('/mitra-laporanpresensi-detailhadir', function() {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
-});
+Route::get('/mitra-laporanpresensi-detailhadir/{id}',[ContributorForMitra::class,'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -655,6 +656,7 @@ Route::get('/', function () {
 
 
 
+
 Route::get('/contributorformitra-dashboard', function () {
     return view('contributorformitra.dashboard');
 });
@@ -675,3 +677,4 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
+

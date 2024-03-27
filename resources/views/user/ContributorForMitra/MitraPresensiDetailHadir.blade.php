@@ -8,14 +8,14 @@
         <div class="container-fluid p-5 ml-2">
             <div class="row">
                 <div class="col-md-12 parent-relatife ">
-                    <a href="/laporandatapresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
+                    <a href="/mitra/laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                     <div class="card">
                         <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
                             <div style="overflow: hidden;">
                                 <img src="assets/images/user.png" class="user">
                             </div>
                             <div>
-                                <h3 style="font-size: 40px; margin: 0;">Y</h3>
+                                <h3 style="font-size: 40px; margin: 0;">{{ $user->nama_lengkap}}</h3>
                                 <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                             </div>
                             <div style="align-self: center;">
@@ -182,10 +182,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
                           <td>1</td>
-                          <td>Senin, 21-08-2023</td>
+                          <td>{{$item->hari}}</td>
                           <td>06:25:00</td>
                           <td>13:05:14</td>
                           <td>12:15:00</td>
@@ -198,109 +199,9 @@
                           <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
 
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>1</td>
-                                        <td>Senin, 21-08-2023</td>
-                                        <td>06:25:00</td>
-                                        <td>13:05:14</td>
-                                        <td>12:15:00</td>
-                                        <td>13:00:00</td>
-                                        <td>07:00:53 </td>
-                                        <td> 00:30:53</td>
-                                        <td>Membuat tampilan website e-com..</td>
-                                        <td>Hadir</td>
-                                        <td>Merapikan parkiran motor</td>
-                                        <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
+                                    @endforeach
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
