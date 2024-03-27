@@ -1,8 +1,8 @@
 @extends('layouts.masterAfterPay')
 
 @section('content')
-<link rel="stylesheet"
-    href="{{ asset('assets/css/adminUniv-afterPayment/mitra/Option-TeamAktif-pengaturanDivisi.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/Option-TeamAktif-pengaturanDivisi.css') }}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <head>
@@ -12,9 +12,13 @@
 
         <div class="kanan-tabel p-5 w-100 justify-content-start">
             <div>
-                <h1 class="manage">Pengaturan Divisi</h1>
+                <div style="display: flex; font-size: 24px">
+                    <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
+                    <p style=""><u>Pengaturan Divisi</p>
+                </div>
+                <!-- <h1 class="manage">Pengaturan Divisi</h1> -->
             </div>
-            <button class="btn-tambah" onclick="openDepartmentModal()"><i class="fa-solid fa-circle-plus"></i>Tambah
+            <button class="btn-tambah" data-bs-toggle="modal" data-bs-target="#foto" onclick=""><i class="fa-solid fa-circle-plus"></i>Tambah
                 Divisi</button>
             <div>
                 <select name="page" class="page">
@@ -47,9 +51,8 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#konfirmasi">Hapus</button>
+                                        <button type="button" class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,8 +61,7 @@
                                     <td><i class="fa-regular fa-file-lines"></i></td>
                                     <td>
                                         <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -68,8 +70,7 @@
                                     <td><i class="fa-regular fa-file-lines"></i></td>
                                     <td>
                                         <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -78,8 +79,7 @@
                                     <td><i class="fa-regular fa-file-lines"></i></td>
                                     <td>
                                         <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
                                     </td>
                                 </tr>
 
@@ -90,8 +90,7 @@
                                     <td><i class="fa-regular fa-file-lines"></i></td>
                                     <td>
                                         <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
                                     </td>
                                 </tr>
 
@@ -134,8 +133,7 @@
 
 
     <!-- ModalkonfirmasiDihapus -->
-    <div class="modal fade" id="konfirmasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="konfirmasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -150,9 +148,7 @@
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
 
-                                <button type="submit" class="btn btn-light" data-bs-dismiss="modal"
-                                    data-bs-toggle="modal" data-bs-target="#sukseshapus"
-                                    onclick="deleteData()">Ya</button>
+                                <button type="submit" class="btn btn-light" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sukseshapus" onclick="deleteData()">Ya</button>
 
                             </div>
                         </div>
@@ -162,7 +158,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -189,135 +185,168 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"
-                        aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="sowsukses()">Simpan</button>
-
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="">
+                        Simpan
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="textdivisi">Profil Divisi</div>
+                    <div class="tambahgambar gap-3">
+                        <div class="gambar border d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-pen-nib"></i>
+                            <!-- <input type="file" id="fileInput" style="display: none;"> -->
+                        </div>
+                        <div>
+                            <button class="addgambar">Add Photo</button>
+                        </div>
+                        <div>
+                            <button class="remove">Remove</button>
+                        </div>
+                    </div>
+                    <div class="grupinputt">
+                        <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
+                        <input type="text" class="inputmodall" placeholder="Masukkan nama divisi">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                    Simpan
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    function sowsukses() {
-        swal("Good job!", "You clicked the button!", "success");
-    }
-
-    function showConfirmationModal() {
-        $('#confirmationModal').modal('show');
-    }
-
-    function deleteData() {
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Dara berhasil dihapus",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    }
-
-
-
-    function cancelData() {
-        // Tambahkan logika untuk membatalkan operasi di sini
-
-        // Tutup modal konfirmasi
-        $('#confirmationModal').modal('hide');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ambil elemen modal
-        var modal = document.getElementById('department-modal');
-
-        // Ambil tombol yang membuka modal
-        var openModalButton = document.getElementById('open-department-modal');
-
-        // Ambil tombol-tombol di dalam modal
-        var cancelButton = document.getElementById('cancel-button');
-        var saveButton = document.getElementById('save-button');
-
-        // Fungsi untuk membuka modal
-        function openModal() {
-            modal.style.display = 'block'; // Tampilkan modal saat tombol ditekan
+        function sowsukses() {
+            swal("Good job!", "You clicked the button!", "success");
         }
 
-        // Fungsi untuk menutup modal
-        function closeModal() {
-            modal.style.display = 'none'; // Sembunyikan modal saat tombol ditekan
+        function showConfirmationModal() {
+            $('#confirmationModal').modal('show');
         }
 
-        // Event listener untuk membuka modal saat tombol ditekan
-        openModalButton.addEventListener('click', openModal);
+        function deleteData() {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Dara berhasil dihapus",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
 
-        // Event listener untuk menutup modal saat tombol "Batal" ditekan
-        cancelButton.addEventListener('click', closeModal);
 
-        // Event listener untuk menutup modal saat tombol "Simpan" ditekan
-        saveButton.addEventListener('click', function(event) {
-            // Lakukan operasi penyimpanan data atau validasi formulir di sini
 
-            // Setelah selesai, tutup modal
-            closeModal();
-        });
+        function cancelData() {
+            // Tambahkan logika untuk membatalkan operasi di sini
 
-        // Event listener untuk menutup modal saat klik di luar area modal
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                closeModal();
+            // Tutup modal konfirmasi
+            $('#confirmationModal').modal('hide');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil elemen modal
+            var modal = document.getElementById('department-modal');
+
+            // Ambil tombol yang membuka modal
+            var openModalButton = document.getElementById('open-department-modal');
+
+            // Ambil tombol-tombol di dalam modal
+            var cancelButton = document.getElementById('cancel-button');
+            var saveButton = document.getElementById('save-button');
+
+            // Fungsi untuk membuka modal
+            function openModal() {
+                modal.style.display = 'block'; // Tampilkan modal saat tombol ditekan
             }
+
+            // Fungsi untuk menutup modal
+            function closeModal() {
+                modal.style.display = 'none'; // Sembunyikan modal saat tombol ditekan
+            }
+
+            // Event listener untuk membuka modal saat tombol ditekan
+            openModalButton.addEventListener('click', openModal);
+
+            // Event listener untuk menutup modal saat tombol "Batal" ditekan
+            cancelButton.addEventListener('click', closeModal);
+
+            // Event listener untuk menutup modal saat tombol "Simpan" ditekan
+            saveButton.addEventListener('click', function(event) {
+                // Lakukan operasi penyimpanan data atau validasi formulir di sini
+
+                // Setelah selesai, tutup modal
+                closeModal();
+            });
+
+            // Event listener untuk menutup modal saat klik di luar area modal
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            });
         });
-    });
-    // Fungsi untuk menampilkan modal
-    function showModal() {
-        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-        myModal.show();
-    }
+        // Fungsi untuk menampilkan modal
+        // function showModal() {
+        //     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        //     myModal.show();
+        // }
 
-    // Fungsi untuk menampilkan modal konfirmasi keberhasilan
-    function sowsukses() {
-        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-        successModal.show();
-    }
+        // Fungsi untuk menampilkan modal konfirmasi keberhasilan
+        
 
-    // Event listener untuk tombol "Add Photo"
-    document.querySelector('.addgambar').addEventListener('click', function() {
-        document.getElementById('fileInput').click();
-    });
+        // Event listener untuk tombol "Add Photo"
+        document.querySelector('.addgambar').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
 
-    // Event listener untuk input file
-    document.getElementById('fileInput').addEventListener('change', function() {
-        var file = this.files[0];
-        var reader = new FileReader();
+        // Event listener untuk input file
+        document.getElementById('fileInput').addEventListener('change', function() {
+            var file = this.files[0];
+            var reader = new FileReader();
 
-        reader.onload = function(e) {
+            reader.onload = function(e) {
+                var imagePreview = document.querySelector('.gambar');
+                imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Preview Gambar">';
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        // Event listener untuk tombol "Remove"
+        document.querySelector('.remove').addEventListener('click', function() {
             var imagePreview = document.querySelector('.gambar');
-            imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Preview Gambar">';
-        };
+            imagePreview.innerHTML =
+                '<i class="fa-regular fa-image"></i><input type="file" id="fileInput" style="display: none;">';
+        });
+        // Fungsi untuk membuka modal departemen
+        function openDepartmentModal() {
+            var departmentModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            departmentModal.show();
+        }
 
-        reader.readAsDataURL(file);
-    });
-
-    // Event listener untuk tombol "Remove"
-    document.querySelector('.remove').addEventListener('click', function() {
-        var imagePreview = document.querySelector('.gambar');
-        imagePreview.innerHTML =
-            '<i class="fa-regular fa-image"></i><input type="file" id="fileInput" style="display: none;">';
-    });
-    // Fungsi untuk membuka modal departemen
-    function openDepartmentModal() {
-        var departmentModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-        departmentModal.show();
-    }
-
-    // Fungsi untuk menangani klik tombol "Simpan"
-    function sowsukses() {
-        swal("Good job!", "You clicked the button!", "success");
-    }
+        // Fungsi untuk menangani klik tombol "Simpan"
+       
     </script>
     @endsection

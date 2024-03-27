@@ -5,10 +5,10 @@
         <li class="nav-item">
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="/contributorformitra-dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Devisi</a>
+            <a class="nav-link" href="/contributorformitra-devisi">Devisi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Presensi</a>

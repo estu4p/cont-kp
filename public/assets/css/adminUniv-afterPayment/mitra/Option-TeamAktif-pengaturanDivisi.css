@@ -62,10 +62,10 @@
 }
 .wadah{
   top:0;
-  left:250px;
+  left:100px;
   height: 100%;
   width:100%;
-  padding-left:250px !important;
+  padding-left:30px !important;
 
 }
 .kanan-tabel{
@@ -209,6 +209,7 @@ border-radius: 9px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transform: rotate(90deg);
     
 }
 .addgambar{
@@ -243,4 +244,8 @@ border-radius: 9px;
   padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px
+}
+
+.iconn{
+  color: #000000;
 }
