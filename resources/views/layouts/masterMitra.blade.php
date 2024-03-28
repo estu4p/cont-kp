@@ -20,7 +20,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbarcontributorformitra')
+        @include('template.navbarprofileadmin')
         <!-- bueeek master baru piqri bangke -->
 
         <div class="content-wrapper">
@@ -30,7 +30,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebarcontributorformitra') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebarMitra') <!-- bueeek master baru piqri bangke -->
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">
@@ -46,7 +46,7 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
     <script>
-
+        
         $(document).ready( function () {
             var table = $('#example').DataTable( {
                 pageLength : 5,
