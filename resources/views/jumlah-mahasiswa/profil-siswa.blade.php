@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/profil-siswa.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/profil-mahasiswa.css') }}">
 <div class="wadah">
 
 
@@ -21,27 +21,32 @@
                 <card class="datadiri">
                     <div class="form-group">
                         <label for="username">Nama lengkap</label>
-                        <input class="input" type="text" class="form-control" id="name" placeholder="james clear" value="{{ isset($data) ? $data->nama_lengkap : '' }}" >
+                        <input class="input" type="text" class="form-control" id="name" placeholder="james clear"
+                        value="{{$lihat->nama_lengkap}}" name="nama_lengkap" >
                     </div>
                     <div class="form-group">
                         <label for="nim">Nomor induk mahasiswa</label>
-                        <input class="input" type="text" class="form-control" id="nim" placeholder="2102****343">
+                        <input class="input" type="text" class="form-control" id="nim" placeholder="2102****343"
+                        value="{{ $lihat->nomor_induk }}" name="nomor_induk">
                     </div>
                     <div class="form-group">
                         <label for="prodi">Program studi/ Jurusan</label>
-                        <input class="input" type="text" class="form-control" id="prodi" placeholder="D4 - Manajemen Transportasi Udara ">
+                        <input class="input" type="text" class="form-control" id="prodi" placeholder="D4 - Manajemen Transportasi Udara "
+                         value="{{ $lihat->jurusan }}" name="jurusan">
                     </div>
                     <div class="form-group">
                         <label for="tempatlahir">Tempat lahir</label>
-                        <input class="input" type="text" class="form-control" id="tempatlahir" placeholder="Atas kasur">
+                        <input class="input" type="text" class="form-control" id="tempatlahir" placeholder="Atas kasur"
+                         value="{{ $lihat->kota }}" name="kota">
                     </div>
                     <div class="form-group">
                         <label for="tanggallahir">Tanggal lahir</label>
-                        <input class="input" type="date" class="form-control" id="tanggallahir" placeholder="">
-                    </div>
+                        <input class="input" type="date" class="form-control" id="tanggallahir" placeholder=""
+                         value="{{ $lihat->tgl_lahir }}" name="tgl_lahir">
                     <div class="form-group">
                         <label for="nohp">Nomor HP</label>
-                        <input class="input" type="text" class="form-control" id="nohp" placeholder="08644363464">
+                        <input class="input" type="text" class="form-control" id="nohp" placeholder="08644363464"
+                         value="{{ $lihat->no_hp }}" name="no_hp">
                     </div>
                 </card>
             </div>
@@ -53,11 +58,13 @@
                 <card class="akun">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input class="input" type="text" class="form-control" id="Username" placeholder="james123">
+                        <input class="input" type="text" class="form-control" id="Username" placeholder="james123"
+                         value="{{ $lihat->username}}" name="username">
                     </div>
                     <div class="form-group">
                         <label for="email">E-Mail</label>
-                        <input class="input" type="text" class="form-control" id="email" placeholder="james123@gmail.com">
+                        <input class="input" type="text" class="form-control" id="email" placeholder="james123@gmail.com"
+                        value="{{ $lihat->email }}" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -74,23 +81,25 @@
                 <card class="masuk">
                     <div class="form-group">
                         <label for="tanggalmasuk">Tanggal masuk</label>
-                        <input class="input" type="date" class="form-control" id="tanggalmasuk" placeholder="">
+                        <input class="input" type="date" class="form-control" id="tanggalmasuk" placeholder=""
+                        value="{{ $lihat->tgl_masuk }}" name="tgl_masuk">
                     </div>
                     <div class="form-group">
                         <label for="tanggalkeluar">Tanggal keluar</label>
-                        <input class="input" type="date" class="form-control" id="tanggalkeluar" placeholder="">
+                        <input class="input" type="date" class="form-control" id="tanggalkeluar" placeholder=""
+                        value="{{$lihat->tgl_keluar }}" name="tgl_keluar">
                     </div>
                     <div class="form-group">
                         <label for="devisi">Devisi</label>
-                        <div class="abu">programer</div>
+                        <div class="abu">{{  $lihat->divisi_id }}</div>
                     </div>
                     <div class="form-group">
                         <label for="Project">Project</label>
-                        <div class="abu">controlling magang</div>
+                        <div class="abu">{{ $lihat->project_id }} </div>
                     </div>
                     <div class="form-group">
                         <label for="Shift">Shift</label>
-                        <div class="abu">Shift Pagi (06.30 - 13.00)</div>
+                        <div class="abu">{{  $lihat->shift_id }}</div>
                     </div>
             </div>
         </div>
@@ -99,11 +108,11 @@
                 <card class="tools">
                     <div class="form-group">
                         <label for="OS">OS</label>
-                        <div class="abu">Windows</div>
+                        <div class="abu">{{ $lihat->os }}</div>
                     </div>
                     <div class="form-group">
                         <label for="browser">Browser</label>
-                        <div class="abu">Crome</div>
+                        <div class="abu">{{ $lihat->browser}}</div>
                     </div>
                     <div class="form-group">
                         <label for="absen">Status absensi</label>
@@ -115,11 +124,11 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Status akun</label>
-                        <div class="abu">Aktif</div>
+                        <div class="abu">{{  $lihat->status_akun}}</div>
                     </div>
                     <div class="form-group">
                         <label for="konfirmasi">konfirmasi email</label>
-                        <div class="abu">Sudah konfirmasi</div>
+                        <div class="abu">{{ $lihat->konfirmasi_email}}</div>
                     </div>
                 </card>
             </div>
@@ -129,15 +138,15 @@
                 <card class="tools">
                     <div class="form-group">
                         <label for="jamker">Minimal kerja (Jumlah kerja)</label>
-                        <div class="abu">06:45:00</div>
+                        <div class="abu">{{$Shift->jml_jam_kerja}}</div>
                     </div>
                     <div class="form-group">
                         <label for="browser">Jam Default masuk</label>
-                        <div class="abu">06:30:00</div>
+                        <div class="abu">{{$Shift->jam_masuk}}</div>
                     </div>
                     <div class="form-group">
                         <label for="status">Jam Default pulang</label>
-                        <div class="abu">21:00:00</div>
+                        <div class="abu">{{$Shift->jam_pulang}}</div>
                     </div>
                 </card>
             </div>
@@ -151,7 +160,7 @@
                 <card class="tools">
                     <div class="form-group">
                         <label for="status">Hutang jam</label>
-                        <div class="abu">{{ isset($presensi) ? $presensi->hutang_presensi : '' }}</div>
+                        <div class="abu">{{ $presensi->hutang_presensi }}</div>
                     </div>
                     <div class="warning">*hhh:maks 999, mm&ss:maks 59</div>
                 </card>
