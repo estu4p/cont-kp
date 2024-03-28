@@ -183,6 +183,10 @@ Route::get('/pemagang/detail', function () {
 });
 
 
+//lihat profil contributor for univ
+Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
+
+
 //contributor univ
 Route::get('/dashboard/contributor-univ',[SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
@@ -442,7 +446,15 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+
 });
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+
 
 
 
@@ -616,6 +628,15 @@ Route::get('/', function () {
 });
 
 
+Route::get('/mitrapresensi-ScanBarcode', function () {
+    return view('mitra-presensi.scanbarcode');
+});
+
+Route::get('/mitrapresensi-ScanPresensiharian', function () {
+    return view('mitra-presensi.scanpresensiharian');
+});
+
+
 
 
 
@@ -677,4 +698,5 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
+
 
