@@ -15,15 +15,16 @@
             </div>
         </div>
     </div>
-    
+
     <div class="text-capitalize p-5" style="background-color: #F2F4F7; max-height: 100%;">
         <h4 class="text-center fw-bold">selesaikan pembayaran anda</h4>
         <div class="checkout mt-5">
             <form class="fw-medium">
                 <label for="paket" class="mt-4">paket<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <div style="background-color: #E9E9E9; padding: 16px 20px 16px 20px;" class="label-img"><img
-                            src="{{ asset('assets/images/icon/paket.png') }}" /></div>
+                    <div style="background-color: #E9E9E9; padding: 12px 15px 12px 15px;" class="label-img">
+                        <img src="{{ asset('assets/images/icon/paket.png') }}" style="width: 25px" class="icon-labelinput">
+                    </div>
                     {{-- <script>
                         var currentUrl = window.location.pathname;
                         var urlParts = currentUrl.split('/');
@@ -36,11 +37,15 @@
 
                 <label for="bayar" class="mt-4">metode pembayaran<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <div style="background-color: #E9E9E9; padding: 16px 18px 16px 18px;" class="label-img"><img
-                            src="{{ asset('assets/images/icon/bayar.png') }}" /></div>
-                    <select style="border: 2px solid #E9E9E9; padding: 16px; border-radius: 0px 8px 8px 0px; width: 100%;"
+                    <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img
+                            src="{{ asset('assets/images/icon/bayar.png') }}" style="width: 25px" class="icon-labelinput">
+                    </div>
+                    {{-- <select style="border: 2px solid #E9E9E9; padding: 16px; border-radius: 0px 8px 8px 0px; width: 100%;"
                         id="bayar">
-                        <option value="">Pilih Metode Pembayaran</option>
+                        <option value="">Pilih Metode Pembayaran</option> --}}
+                    <select id="selectKota" type="email" name="kota"
+                        style="border: 2px solid #E9E9E9; padding: 16px; border-radius: 0px 8px 8px 0px; width: 100%;">
+                        <option value="" selected disabled hidden>Pilih Metode Pembayaran</option>
                         <option value="mandiri">Mandiri Virtual Account</option>
                         <option value="bca">BCA Virtual Account</option>
                         <option value="bri">BRI Virtual Account</option>
@@ -52,12 +57,13 @@
 
                 <label for="kota" class="mt-4">kota<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <div style="background-color: #E9E9E9; padding: 16px 20px 16px 20px;" class="label-img"><img
-                            src="{{ asset('assets/images/icon/paket.png') }}" /></div>
-                    <select type="email" name="kota"
+                    <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img
+                            src="{{ asset('assets/images/icon/kota.png') }}" style="width: 25px" class="icon-labelinput">
+                    </div>
+                    <select id="selectKota" type="email" name="kota"
                         style="border: 2px solid #E9E9E9; padding: 16px; border-radius: 0px 8px 8px 0px; width: 100%;">
-                        <option value="">Pilih Kota Anda</option>
-                        <option value="yogyakarta">Yogyakarta</option>
+                        <option value="" selected disabled hidden>Pilih Kota</option>
+                        <option value="yogyakarta" type="radio">Yogyakarta</option>
                         <option value="jawa tengah">Jawa Tengah</option>
                         <option value="jawa barat">Jawa Barat</option>
                         <option value="jawa timur">Jawa Timur</option>
@@ -72,6 +78,9 @@
                 </div>
             </form>
         </div>
+        <div style="text-align: center">
+        <p>Dengan melakukan checkout, maka Anda setuju dengan<br><p style="color: red">Ketentuan Penggunaan kami</p>dan mengonfirmasi bahwa<br>Anda telah membaca<p style="color:red">Kebijakan Privasi</p>kami.</p>
+    </div>
     </div>
 
     <footer style="background-color: #A61C1CE5; margin-bottom: -48px; position: absolute; bottom: 0; width: 100%;">
