@@ -184,8 +184,8 @@ Route::get('/pemagang/detail', function () {
     return view('pemagang.gantiJam', ['title' => "MyQR"]);
 });
 
-//lihat profil contributor for univ 
-Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
+//lihat profil contributor for univ
+Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
 
 
 Route::get('/laporandatapresensi', function () {
@@ -437,7 +437,6 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
@@ -445,8 +444,6 @@ Route::get('/AdminUniv-Dashboard', function () {
 });
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-
-
 });
 
 
@@ -656,4 +653,12 @@ Route::get('/admin/setting/user', function () {
 
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
+
+Route::get('/mitrapresensi-ScanBarcode', function () {
+    return view('mitra-presensi.scanbarcode');
+});
+
+Route::get('/mitrapresensi-ScanPresensiharian', function () {
+    return view('mitra-presensi.scanpresensiharian');
 });
