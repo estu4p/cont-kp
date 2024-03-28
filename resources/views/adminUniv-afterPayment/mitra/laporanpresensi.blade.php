@@ -80,11 +80,11 @@
                                     href="{{ route('adminUniv.detailHadir', $item->nama_lengkap) }}}}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>
                             <td style="color: orange">{{ $item->total_izin }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailizin" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                                    href="{{ route('adminUniv.detailIzin', $item->nama_lengkap) }}"
+                                    class="fa-solid fa-circle-info" style="color: #000"></td>
                             <td style="color: red">{{ $item->total_ketidakhadiran }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailtidakhadir" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                                    href="{{ route('adminUniv.detailTidakHadir', $item->nama_lengkap) }}"
+                                    class="fa-solid fa-circle-info" style="color: #000"></td>
                         </tr>
                     @endforeach
 
