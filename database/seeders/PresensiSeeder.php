@@ -30,6 +30,8 @@ class PresensiSeeder extends Seeder
                     Presensi::create([
                         'nama_lengkap' => $user->id, // Menggunakan ID pengguna sebagai nama lengkap (asumsi nama lengkap dihapus dan digantikan dengan ID)
                         'hari' => $faker->dateTime,
+                        'jam_default_masuk' => '06:30:00',
+                        'jam_default_pulang' => '13:00:00',
                         'jam_masuk' => '06:30:00',
                         'jam_pulang' => '13:00:00',
                         'jam_mulai_istirahat' => '12:00:00',
@@ -41,7 +43,8 @@ class PresensiSeeder extends Seeder
                         'keterangan_status' => $faker->sentence,
                         'kebaikan' => $faker->sentence,
                         'barcode' => $faker->ean13,
-                        'hutang_presensi' => $faker->dateTime
+                        'hutang_presensi' => $faker->dateTime,
+                        'target' => 3600,
                     ]);
                 }
             }

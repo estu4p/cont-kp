@@ -183,9 +183,9 @@ Route::get('/pemagang/detail', function () {
 
 
 //contributor univ
-Route::get('/dashboard/contributor-univ',[SchoolController::class, 'index'])->name('dashboard.mahasiswa');
+Route::get('/dashboard/contributor-univ', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
-Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil']);
+Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil']);
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
@@ -294,12 +294,12 @@ Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControll
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
-Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
-Route::get('/mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
-Route::get('/mitra-laporanpresensi-detailizin', function () {
+Route::get('/AdminUniv-mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('/AdminUniv-mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
+Route::get('/AdminUniv-mitra-laporanpresensi-detailizin', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailizin');
 });
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
 
