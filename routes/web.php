@@ -446,7 +446,6 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-
 });
 
 Route::get('/AdminUniv-Dashboard', function () {
@@ -454,7 +453,7 @@ Route::get('/AdminUniv-Dashboard', function () {
 });
 Route::get('/AdminUniv-EditProfile', function () {
     return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-
+});
 
 
 
@@ -698,6 +697,3 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
-
-
-
