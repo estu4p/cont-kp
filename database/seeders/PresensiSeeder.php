@@ -40,6 +40,7 @@ class PresensiSeeder extends Seeder
                         'log_aktivitas' => $faker->sentence,
                         'aksi' => $faker->boolean,
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),
+                        'status_ganti_jam' => $faker->randomElement(['Ganti Jam', 'Tidak Ganti Jam']),
                         'keterangan_status' => $faker->sentence,
                         'kebaikan' => $faker->sentence,
                         'barcode' => $faker->ean13,

@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\BEController;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Divisi;
+use App\Mail\SendEmail;
+use App\Models\Sekolah;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Hash;
+
+
 use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
-use App\Mail\SendEmail;
-use Illuminate\Support\Facades\Log;
-
-
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -427,22 +429,39 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
-        // $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->first();
+        // NIM
         $user = User::findOrFail($nama_lengkap);
+        // menampilkan divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+        // untuk menampilkan data sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
+
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
         $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
             ->first();
-        $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->count();
 
+        // total hari masuk
+        $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->count();
 
+        // total jam masuk
         $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)
             ->whereNotNull('jam_masuk')
             ->whereNotNull('jam_pulang')
-            ->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))) AS total_jam_masuk')
+            ->where('status_kehadiran', 'Hadir')
+            ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
             ->first();
+
+        // total jam masuk format integer
+        $totalJamMasuk = $total_jam_masuk->total_jam_masuk;
+        // Membuat objek Carbon dari total jam masuk
+        $carbonJamMasuk = Carbon::parse($totalJamMasuk);
+        // Mendapatkan jumlah jam dari waktu masuk sebagai integer
+        $jamMasukInteger = $carbonJamMasuk->hour;
 
         // target lulus
         $target = Presensi::where('nama_lengkap', $nama_lengkap)
@@ -450,10 +469,9 @@ class AdminUnivAfterPaymentController extends Controller
             ->pluck('target')
             ->first();
 
-        $total_jam_masuk_detik = strtotime($total_jam_masuk->total_jam_masuk);
-        $total_jam_masuk_jam = floor($total_jam_masuk_detik / 3600);
-        $sisa_waktu_detik = $target - $total_jam_masuk_detik;
-        $sisa_waktu_jam = floor($sisa_waktu_detik / 3600);
+        // sisa
+        $sisa = $target - $jamMasukInteger;
+
 
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
@@ -476,37 +494,146 @@ class AdminUnivAfterPaymentController extends Controller
                 'total masuk' => $total_masuk,
                 'jam_default' => $jam_default,
                 'total_jam_masuk' => $total_jam_masuk,
+                'total_jam_masuk_integer' => $jamMasukInteger,
                 'target lulus' => $target,
-                'sisa_waktu' => $sisa_waktu_jam
+                'sisa' => $sisa
             ]);
         } else {
-            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi', 'user', 'total_masuk', 'jam_default', 'total_jam_masuk', 'target', 'sisa_waktu_jam'));
+            return view('adminUniv-afterPayment.mitra.laporandetailhadir', compact('presensi', 'divisi', 'sekolah', 'user', 'total_masuk', 'jam_default', 'total_jam_masuk', 'target', 'sisa'));
         }
     }
 
-    public function teamAktifDetailIzin($nama_lengkap)
+    public function teamAktifDetailIzin(Request $request, $nama_lengkap)
     {
+        // NIM
+        $user = User::findOrFail($nama_lengkap);
+        // menampilkan divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+        // untuk menampilkan data sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
+
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Izin')->get();
 
+        $date = Carbon::createFromFormat('Y-m-d', '2023-08-11');
+        $dayName = $date->format('l');
 
-        return response()->json([
-            'data' => $presensi
-        ]);
+        // jam default
+        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_default_masuk')
+            ->whereNotNull('jam_default_pulang')
+            ->select('jam_default_masuk', 'jam_default_pulang')
+            ->first();
+
+        // total hari masuk
+        $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->count();
+
+        // total jam masuk
+        $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_masuk')
+            ->whereNotNull('jam_pulang')
+            ->where('status_kehadiran', 'Hadir')
+            ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+            ->first();
+
+        // total jam masuk format integer
+        $totalJamMasuk = $total_jam_masuk->total_jam_masuk;
+        // Membuat objek Carbon dari total jam masuk
+        $carbonJamMasuk = Carbon::parse($totalJamMasuk);
+        // Mendapatkan jumlah jam dari waktu masuk sebagai integer
+        $jamMasukInteger = $carbonJamMasuk->hour;
+
+        // target lulus
+        $target = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('target')
+            ->pluck('target')
+            ->first();
+
+        // sisa
+        $sisa = $target - $jamMasukInteger;
+
+
+        if ($request->is('api/*')) {
+            return response()->json([
+                'data' => $presensi,
+                'jam default' => $jam_default,
+                'total hari masuk' => $total_masuk,
+                'total jam masuk' => $total_jam_masuk,
+                'target' => $target,
+                'sisa' => $sisa,
+                'sekolah' => $sekolah
+
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporandetailizin', compact('user', 'divisi', 'sekolah', 'presensi', 'jam_default', 'total_masuk', 'total_jam_masuk', 'target', 'sisa'));
+        }
     }
 
-    public function teamAktifDetailTidakHadir($nama_lengkap)
+    public function teamAktifDetailTidakHadir(Request $request, $nama_lengkap)
     {
+        // NIM
+        $user = User::findOrFail($nama_lengkap);
+        // menampilkan divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+        // untuk menampilkan data sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
+
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Tidak Hadir')->get();
 
-        if (!$presensi) {
-            return response()->json(
-                ['message' => 'null']
-            );
+        $date = Carbon::createFromFormat('Y-m-d', '2023-08-11');
+        $dayName = $date->format('l');
+
+        // jam default
+        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_default_masuk')
+            ->whereNotNull('jam_default_pulang')
+            ->select('jam_default_masuk', 'jam_default_pulang')
+            ->first();
+
+        // total hari masuk
+        $total_masuk = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->count();
+
+        // total jam masuk
+        $total_jam_masuk = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_masuk')
+            ->whereNotNull('jam_pulang')
+            ->where('status_kehadiran', 'Hadir')
+            ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+            ->first();
+
+        // total jam masuk format integer
+        $totalJamMasuk = $total_jam_masuk->total_jam_masuk;
+        // Membuat objek Carbon dari total jam masuk
+        $carbonJamMasuk = Carbon::parse($totalJamMasuk);
+        // Mendapatkan jumlah jam dari waktu masuk sebagai integer
+        $jamMasukInteger = $carbonJamMasuk->hour;
+
+        // target lulus
+        $target = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('target')
+            ->pluck('target')
+            ->first();
+
+        // sisa
+        $sisa = $target - $jamMasukInteger;
+
+
+        if ($request->is('api/*')) {
+            return response()->json([
+                'data' => $presensi,
+                'jam default' => $jam_default,
+                'total hari masuk' => $total_masuk,
+                'total jam masuk' => $total_jam_masuk,
+                'target' => $target,
+                'sisa' => $sisa,
+                'sekolah' => $sekolah
+
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir', compact('user', 'divisi', 'sekolah', 'presensi', 'jam_default', 'total_masuk', 'total_jam_masuk', 'target', 'sisa'));
         }
-
-
-        return response()->json([
-            'data' => $presensi
-        ]);
     }
 }

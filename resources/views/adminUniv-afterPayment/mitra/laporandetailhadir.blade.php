@@ -15,7 +15,9 @@
                         </div>
                         <div>
                             <h3 style="font-size: 30px; margin: 0;">{{ $user->nama_lengkap }}</h3>
-                            <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
+                            <p style="margin: 0;">NIP:
+                                MJ/{{ $divisi->nama_divisi }}/{{ $sekolah->nama_sekolah }}/{{ $user->tgl_masuk }}/{{ $user->id }}
+                            </p>
                         </div>
                         <div style="align-self: center;">
                             <label for="search-input">Cari Status Kehadiran</label>
@@ -65,7 +67,7 @@
                                 </tr>
                                 <tr>
                                     <th>sisa</th>
-                                    <td><span class="sisa">{{ $sisa_waktu_jam }}</td>
+                                    <td><span class="sisa">{{ $sisa }} jam</td>
                                 </tr>
                             </tbody>
                         </table>

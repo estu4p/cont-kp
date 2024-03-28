@@ -297,12 +297,12 @@ Route::get('/mitra-laporanpresensi', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
 Route::get('/AdminUniv-mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
-Route::get('/AdminUniv-mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
-});
+
+Route::get('/AdminUniv-mitra-laporanpresensi-detailizin/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailIzin'])->name('adminUniv.detailIzin');
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
+Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -426,13 +426,13 @@ Route::get('/mitra-detailprofil', function () {
 });
 
 // CONTRIBUTOR FOR MITRA PRSENSI
-Route::get('/mitra/laporanpresensi',[ContributorForMitra::class,'laporanPresensi']);
-Route::get('/mitra-laporanpresensi-detailhadir', function() {
+Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);
+Route::get('/mitra-laporanpresensi-detailhadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
-Route::get('/mitra-laporanpresensi-detailhadir/{id}',[ContributorForMitra::class,'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
-Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
-Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+Route::get('/mitra-laporanpresensi-detailhadir/{id}', [ContributorForMitra::class, 'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
 
 
 
@@ -677,4 +677,3 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
-
