@@ -1,4 +1,4 @@
-/* assets/Css/margepenilaiandivisi.css */
+.swic/* assets/Css/margepenilaiandivisi.css */
 
 /* Gaya untuk judul card */
 .card .card-header h3 {
@@ -50,15 +50,19 @@
     overflow-x: auto;
 }
 .wadah{
-   
     top:0;
     left:250px;
     height: 100%;
-
     width:100%;
-   
     padding-left:250px !important;
-    
+}
+.wadahh{
+    top:0;
+    left:0px;
+    height: 100%;
+    width:70%;
+    padding-left:0px !important;
+    padding-right: 100px;
 }
 .kiri-putih{
     height:100%;
@@ -72,7 +76,7 @@
 .kanan-tabel{
     width:auto;
     display:inline-block;
-    padding-top:7% !important;
+    padding-top:2% !important;
     box-sizing: border-box;
 }
 .nav-item a {
@@ -127,6 +131,86 @@
     width:170px;
     border-radius: 10px;
     text-align: center;
-    margin-top: 20px;
-    padding-left: 20px; 
 }
+.labelmodal{
+    font-weight: bold;
+}
+.inputmodal{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+ 
+    padding-left: 10px;
+}
+.judulmodal{
+    font-weight: bold;
+}
+.grupinput{
+    margin-top: 20px;
+}
+.textdivisi{
+    font-weight: bold;
+    font-size: 20px;
+}
+.tambahgambar{
+    display: flex;
+    margin-top: 20px;
+    
+}
+.gambar{
+    background-color: transparent;
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    font-size: 90px;
+    color: #555;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+      
+}
+.addgambar{
+    background-color: transparent;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    margin-top: 50px;
+}
+.remove{
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    height: 40px;
+    margin-top: 50px;
+    color: #dc3545;
+}
+.NamaDivisi{
+    color: #000000;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.inputmodall, .inputmodalll{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.ratakanan {
+    text-align: right;
+}
+.tomboll{
+    margin-left: 5px;
+}
+

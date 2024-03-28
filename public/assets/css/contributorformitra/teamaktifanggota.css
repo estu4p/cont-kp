@@ -1,0 +1,131 @@
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.ruangan {
+    height: 1000px;
+}
+
+.top {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+}
+
+.keluar {
+    font-size: 40px;
+
+    padding-left: 20px;
+}
+.input {
+    width: 600px;
+    height: 40px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    background: #e9e9e9;
+}
+.inputsearch {
+    box-sizing: border-box;
+    width: 567px;
+    height: 38px;
+    background: #e9e9e9;
+    border: none;
+}
+.h1 {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 130%;
+    /* or 62px */
+    text-align: center;
+
+    color: #26577c;
+}
+.filter {
+    margin-left: 10%;
+    display: flex;
+}
+
+.tombolturun {
+    background-color: #d9d9d9;
+}
+.tabel {
+    margin-left: 10%;
+    margin-right: 2%;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #969696;
+    color: #565759;
+}
+
+.table th {
+    border: none;
+    border-bottom: 2px solid #969696;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+    padding: 8px;
+    vertical-align: middle; /* Untuk middle align vertikal */
+}
+
+.table th {
+    background-color: #f2f4f8; /* Perubahan pada bagian ini */
+}
+
+.table td:nth-child(2) {
+    text-align: left;
+}
+.table th:nth-child(2) {
+    text-align: left;
+}
+.table td {
+    border: none;
+    border-bottom: 1px solid #dddddd;
+}
+.table tr:nth-child(odd) td {
+    background-color: #d8dadf;
+}
+
+/* Warna untuk baris genap */
+.table tr:nth-child(even) td {
+    background-color: #f2f4f8;
+}
+.bi {
+    color: #2b96c5;
+}
+.page {
+    padding-left: 50%;
+    text-decoration: underline;
+    color: black;
+
+}
+
+.active {
+    color: white;
+    width: 80px;
+    display: inline-block;
+    background: #2b97c5;
+    border-radius: 7px;
+}
+.inactive {
+    color: white;
+    width: 80px;
+    display: inline-block;
+    background: #E5383B;
+    border-radius: 7px;
+}
+.done {
+    color: white;
+    width: 80px;
+    display: inline-block;
+    background: #1AA158;
+    border-radius: 7px;
+
+}
+
+

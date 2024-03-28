@@ -1,0 +1,226 @@
+
+/* Gaya untuk judul card */
+.card .card-header h3 {
+    font-size: 24px;
+    color: #333; /* Warna teks judul */
+}
+
+/* Gaya untuk label form */
+.form-group label {
+    font-size: 18px;
+    color: #555; /* Warna teks label */
+}
+
+/* Gaya untuk tombol edit dan hapus */
+.btn-danger {
+    background-color: #dc3545; /* Warna latar belakang tombol hapus */
+    color: #fff; /* Warna teks tombol hapus */
+    border: none; /* Hapus border */
+}
+
+/* Mengubah warna tombol edit menjadi biru */
+.btn-edit {
+    background-color: #007bff; /* Warna latar belakang tombol edit */
+    color: #fff; /* Warna teks tombol edit */
+}
+
+
+/* Mengatur margin dan padding */
+.container {
+    margin-top: 20px;
+}
+
+
+.card {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+/* Responsif untuk tabel */
+.table-responsive {
+    overflow-x: auto;
+}
+.wadah{
+    top:0;
+    left:250px;
+    height: 100%;
+    width:100%;
+    padding-left:250px !important;
+}
+.atas{
+  display: flex;
+  margin-bottom: 50px;
+}
+.ikon{
+  font-size: 30px;
+  margin-right: 30px;
+  color: #000000;
+  margin-top: 20px;
+}
+.wadahh{
+    top:0;
+    left:0px;
+    height: 100%;
+    width:70%;
+    padding-left:0px !important;
+    padding-right: 100px;
+}
+.judull{
+    margin-top: 25px;
+}
+.kiri-putih{
+    height:100%;
+    width:250px;
+    position:fixed;
+   top:0;
+    background-color: white;
+    display: inline-block;
+ 
+}
+.kanan-tabel{
+    width:auto;
+    display:inline-block;
+    padding-top:2% !important;
+    box-sizing: border-box;
+}
+.nav-item a {
+    color: black; /* Mengatur warna teks menjadi hitam */
+}
+
+.page, .item{
+    background: #c6c6c6;
+    border-radius:5px;
+}
+
+.manageP {
+    text-decoration: none; /* Menghapus garis link */
+    background-color: pink; /* Warna latar belakang */
+    border-radius: 7px; /* Radius border */
+    
+}
+.logout{
+    position: absolute;
+    bottom: 10px;
+}
+
+.col-md-auto .me-auto{
+    display: flex;
+    flex-direction: row;
+}
+.konfirmasiBackdrop{
+    background-color: transparent !important;
+    z-index: -10 !important;
+}
+.modal-frame-4{
+    z-index:1000 !important;
+}
+.tambah{
+    border-radius: 5px;
+    background: #ffffff;
+    border: none;
+    margin-top: 5px;
+    text-align: center;
+    height:40px;
+    width:170px;
+    border-radius: 10px;
+}
+.ic{
+    color: #228300;
+}
+.btn-jam{
+    background: #ffffff;
+    height:40px;
+    width:170px;
+    border-radius: 10px;
+    text-align: center;
+}
+.labelmodal{
+    font-weight: bold;
+}
+.inputmodal{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+ 
+    padding-left: 10px;
+}
+.judulmodal{
+    font-weight: bold;
+}
+.grupinput{
+    margin-top: 20px;
+}
+.textdivisi{
+    font-weight: bold;
+    font-size: 20px;
+}
+.tambahgambar{
+    display: flex;
+    margin-top: 20px;
+    
+}
+.gambar{
+    background-color: transparent;
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    font-size: 90px;
+    color: #555;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+      
+}
+.addgambar{
+    background-color: transparent;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    margin-top: 50px;
+}
+.remove{
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    height: 40px;
+    margin-top: 50px;
+    color: #dc3545;
+}
+.NamaDivisi{
+    color: #000000;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.inputmodall, .inputmodalll{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.ratakanan {
+    text-align: right;
+}
+.tomboll{
+    margin-left: 5px;
+}
+

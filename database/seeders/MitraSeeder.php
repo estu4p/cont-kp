@@ -20,6 +20,8 @@ class MitraSeeder extends Seeder
             Mitra::create([
                 'nama_mitra' => $faker->company,
                 'deskripsi_mitra' => $faker->sentence,
+                'status_absensi' => $faker->randomElement(['Scan QR Code', 'Button']),
+
             ]);
         }
     }

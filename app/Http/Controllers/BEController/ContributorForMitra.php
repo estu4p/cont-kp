@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
+use App\Models\User;
+use App\Models\Presensi;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -91,7 +93,7 @@ class ContributorForMitra extends Controller
             'nama_kategori' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => 'Gagal menambhakan kategori penilaian',], 400);
+            return response()->json(['message' => 'Gagal menambahkan kategori penilaian',], 400);
         }
         $data = new KategoriPenilaian([
             'divisi_id' => $request->input('divisi_id'),
@@ -203,4 +205,81 @@ class ContributorForMitra extends Controller
         }
     }
 
+    public function laporanPresensi(Request $request)
+    {
+        $presensi = User::where('role_id', 3)->get();
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Berhasil mendapat data', 'kehadiran_per_nama' => $kehadiranPerNama, 'data' => $presensi], 200);
+        } else {
+            return view('user.ContributorForMitra.laporanpresensi')
+                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
+        }
+    }
+
+    public function laporanPresensiDetailHadir(Request $request,$nama_lengkap,)
+    {
+        $user = User::findOrFail($nama_lengkap);
+        $presensi = Presensi::where('nama_lengkap' ,$nama_lengkap)->get();
+
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Berhasil mendapat data', 'Detail Hadir' => $presensi, 'data' => $user], 200);
+        } else {
+            return view('user.ContributorForMitra.MitraPresensiDetailHadir', compact(['presensi', 'user']));
+        }
+    }
+
+    public function laporanPresensiDetailIzin($nama_lengkap, Request $request)
+    {
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'izin')->get();
+
+        if ($presensi->isEmpty()) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => 'Berhasil mendapat data', 'Detail Izin' => $presensi], 200);
+        } else {
+                return view('Payment.mitra.laporandetaiadminUniv-afterlizin', compact('presensi'));
+        }
+    }
+
+    public function laporanPresensiDetailTidakHadir($nama_lengkap, Request $request)
+    {
+        $user->User::findOrFail($nama_lengkap);
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'tidak hadir')->get();
+    
+        if (!$presensi->isEmpty()) {
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => 'Berhasil mendapat data', 'Detail Izin' => $presensi,], 200); 
+            } else {
+                return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir', compact('presensi', 'user'));
+            }
+        } else {
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            } else {
+                // Jika tidak ada data, Anda mungkin ingin menangani ini sesuai dengan kebutuhan aplikasi Anda, misalnya, dengan menampilkan pesan kesalahan di halaman HTML.
+                return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir')->with('Data tidak ditemukan');
+            }
+        }
+    }
+    
 }
