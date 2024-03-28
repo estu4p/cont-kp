@@ -39,9 +39,10 @@
                         <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal" data-target="#exampleModal"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Opsi 1</a></li>
-                        <li><a class="dropdown-item" href="#">Opsi 2</a></li>
-                        <li><a class="dropdown-item" href="#">Opsi 3</a></li>
+                        <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
+                        <li><a class="dropdown-item" href="Option-TeamAktif">Data Divisi siswa/Mahasiswa</a></li>
+                        <li><a class="dropdown-item" href="#">Laporan Presensi Siswa/Mahasiswa</a></li>
+                        <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
                     </ul>
                 </div>
             </div>

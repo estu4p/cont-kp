@@ -8,6 +8,8 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 2%;
+    display: flex;
+    margin-bottom: 50px;
 }
 
 .topcontent > div:first-child {
@@ -28,6 +30,9 @@ body {
     border: none;
     border-radius: 10px;
     background: white;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
 
 
 }
@@ -59,7 +64,7 @@ body {
     color: white;
     height: 100%;
     padding: 0 10px;
-    
+    height: 60px;
 
 
 }
@@ -80,7 +85,7 @@ body {
 
 .bawahan {
     padding-left: 10%;
-    height: 120%;
+    height: 60%;
     box-sizing: border-box;
     border: 1px solid #000000;
     border-radius: 0 0 10px 10px;
@@ -97,7 +102,7 @@ body {
     z-index: 1;
     left: 30%;
     top: 10%;
-    height: 30px;
+    height: auto;
 
   }
 
