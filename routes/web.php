@@ -212,6 +212,14 @@ Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
 
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
+
+
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
 Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
@@ -308,9 +316,24 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/pengaturan', function () {
-    return view('pengaturan.margepenilaiandivisi');
+Route::get('/Option-TeamAktif', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif');
 });
+Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
+});  
+Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
+    return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
+});  
+Route::get('/OptionTeamAktifKlikUiUx', function () {
+    return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
+});  
+Route::get('/Option-TeamAktif-SeeAllTeams', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
+}); 
+Route::get('/profilSiswa', function () {
+    return view('adminUniv-afterPayment.mitra.profilSiswa');
+}); 
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
