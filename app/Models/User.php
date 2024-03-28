@@ -60,6 +60,6 @@ class User extends Authenticatable
     }
     public function sekolah()
     {
-        return $this->belongsTo(User::class, 'sekolah');
+        return $this->belongsTo(Sekolah::class);
     }
 }

@@ -121,7 +121,7 @@
                                 <td>-</td>
                                 <td>
                                     <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(4)" type="button">Hapus</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="edeleteDivisi(4)" type="button">Hapus</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -131,9 +131,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!-- Modal edit shif -->
 <div class="modal fade modal-sm" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -195,6 +192,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function sowsukses() {
         // Mendapatkan nilai input dari modal
