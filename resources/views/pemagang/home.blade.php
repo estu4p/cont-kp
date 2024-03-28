@@ -164,32 +164,34 @@
     <div class="modal" tabindex="-1" id="izin" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="  d-flex justify-content-between align-items-center p-3">
                     <div></div>
                     <h5 class="modal-title">Izin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <hr style="width:100%;">
-                <div class="modal-body">
-                    <div class="grupinput">
-                        <p class="judulinput">Alasan izin</p>
-                        <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Ketik alasan"></textarea>
-                    </div>
-                    <div class="grupinput">
-                        <label for="PemecahanMasalah" class="judulinput" style="padding-top: 30px;">Bukti
-                            foto</label>
-                        <div>
-                            <input class="input inputt" type="text" id="PemecahanMasalah"
-                                placeholder="Masukan link Gdrive">
+                <form action="{{route ('catatIzin')}}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="grupinput">
+                            <p class="judulinput">Alasan izin</p>
+                            <textarea id="pesan" name="keterangan_status" rows="6" cols="60" placeholder="Ketik alasan"></textarea>
+                        </div>
+                        <div class="grupinput">
+                            <label for="PemecahanMasalah" class="judulinput" style="padding-top: 30px;">Bukti
+                                foto</label>
+                            <div>
+                                <input class="input inputt" type="text" id="PemecahanMasalah" name="bukti_foto_izin"
+                                    placeholder="Masukan link Gdrive">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="izin()" aria-label="Close"
-                        data-bs-dismiss="modal">Submit</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" onclick="izin()" aria-label="Close"
+                            data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -215,6 +217,7 @@
                             <input type="hidden" name="keterangan_status" value="null">
                             <input type="hidden" name="kebaikan" value="tidak ada">
                             <input type="hidden" name="status_kehadiran" value="Hadir">
+                            <input type="text" name="log_aktivitas" value="tidak ada">
                             <button type="submit" class="btn btn-danger submitmodal" data-bs-dismiss="modal"
                                 aria-label="Close">Submit</button>
                         </form>

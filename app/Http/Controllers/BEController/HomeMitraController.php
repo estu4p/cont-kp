@@ -155,7 +155,8 @@ class HomeMitraController extends Controller
             ], 404);
         }
     }
-
+    
+    
     public function totalJamKerja(Request $request, $id)
     {
         $data = Presensi::where('nama_lengkap', $id)->first();
@@ -185,19 +186,21 @@ class HomeMitraController extends Controller
         }
     }
 
-    public function catatLogAktivitas(Request $request, $id)
+    public function catatLogAktivity(Request $request)
     {
-        $data = Presensi::where('id', $id)->first();
+        $user = Auth::user();
+        $data = Presensi::where('nama_lengkap', 40)->latest()->first();
 
         if ($data) {
-            $log_aktivitas = $request->input('log_aktivitas');
-            $data->log_aktivitas = $log_aktivitas;
-            $data->save();
+            $data->update([
+                'log_aktivitas' => $request->log_aktivitas
+            ]);
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 40)->latest()->first();
 
-            return response()->json([
-                'status' => 'success',
-                'data' => $data,
-            ], 200);
+            return view('pemagang/home', [
+                'button' => 'Log Activity',
+                'data' => $dataPresensi
+            ]);
         } else {
             return response()->json([
                 'status' => 'Data tidak ditemukan',
@@ -205,38 +208,32 @@ class HomeMitraController extends Controller
         }
     }
 
-    public function catatIzin(Request $request, $id)
+    public function catatIzin(Request $request)
     {
-        $data = Presensi::where('id', $id)->first();
+        $user = Auth::user();
+        $data = Presensi::where('nama_lengkap', 40)->latest()->first();
 
         if ($data) {
-            $status_kehadiran = $request->input('status_kehadiran');
-            $data->status_kehadiran = $status_kehadiran;
+
+            $keterangan_status = $request->input('keterangan_status');
+            $bukti_foto_izin = $request->input('bukti_foto_izin');
+
+            $data->keterangan_status = $keterangan_status;
+            $data->bukti_foto_izin = $bukti_foto_izin;
+
             $data->save();
 
-            return response()->json([
-                'status' => 'Izin magang berhasil dicatat',
-                'data' => $data,
-            ], 200);
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 40)->latest()->first();
+
+            return view('pemagang/home', [
+                'button' => 'Log Activity',
+                'data' => $dataPresensi
+            ]);
         } else {
             return response()->json([
                 'status' => 'Data presensi tidak ditemukan',
             ], 404);
         }
-    }
-    public function download()
-    {
-        return response()->streamDownload(
-            function () {
-                echo QrCode::size(200)
-                    ->format('png')
-                    ->generate('https://harrk.dev');
-            },
-            'qr-code.png',
-            [
-                'Content-Type' => 'image/png',
-            ]
-        );
     }
 
     public function generateQRCode(Request $request, $id)
