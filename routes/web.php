@@ -37,9 +37,14 @@ Route::post('/user/register', [RegisterController::class, 'register'])->name('re
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
+// Home Mitra User
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
-Route::get('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
+
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
@@ -174,7 +179,9 @@ Route::get('/user/barcode', function () {
 
 //user
 Route::get('/pemagang/home', function () {
-    return view('pemagang.home', ['title' => "Home"]);
+    return view('pemagang.home', [
+        'title' => "Home"
+    ]);
 });
 
 Route::get('/pemagang/MyQR', function () {
@@ -350,9 +357,12 @@ Route::get('/user/barcode', function () {
 
 //user
 Route::get('/pemagang/home', function () {
-    return view('pemagang.home', ['title' => "Home"]);
+    return view('pemagang.home', [
+        'title' => "Home",
+        'button' => "Masuk",
+        'route' => '/jamMasuk'
+    ]);
 });
-
 
 
 

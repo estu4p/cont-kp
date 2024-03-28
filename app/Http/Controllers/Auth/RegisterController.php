@@ -49,8 +49,8 @@ class RegisterController extends Controller
             ], 404);
         }
 
-        // return redirect()->route('user.login')->with('success', 'User registered successfully!');
-        return view('user.login', ['title' => "Login"]);
+        return redirect()->route('user.login')->with('success', 'User registered successfully!');
+        // return view('user.login', ['title' => "Login"]);
     }
 
     public function generateQRCode($userData)
