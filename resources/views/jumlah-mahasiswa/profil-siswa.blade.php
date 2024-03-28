@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/profil-mahasiswa.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/profil-siswa.css') }}">
 <div class="wadah">
 
 
@@ -103,15 +103,15 @@
                     </div>
                     <div class="form-group">
                         <label for="devisi">Devisi</label>
-                        <div class="abu">{{  $lihat->divisi_id }}</div>
+                        <div class="abu">{{ $divisi->nama_divisi }}</div>
                     </div>
                     <div class="form-group">
                         <label for="Project">Project</label>
-                        <div class="abu">{{ $lihat->project_id }} </div>
+                        <div class="abu">{{ $project->nama_project }} </div>
                     </div>
                     <div class="form-group">
                         <label for="Shift">Shift</label>
-                        <div class="abu">{{  $lihat->shift_id }}</div>
+                        <div class="abu">{{ $Shift->nama_shift }}</div>
                     </div>
             </div>
         </div>
