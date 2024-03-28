@@ -187,10 +187,34 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'data not found', 'data' => null], 404);
         }
     }
-    public function adminUnivPengaturanPresensi()
+    public function adminUnivPengaturanPresensi($id)
     {
+        // Admin Univ-Mitra-Daftar Mitra-Option-Presensi-Pengaturan Presensi
+        $optionPresensi = Mitra::findOrFail($id);
+
         return response()->json([
-            'message' => 'pengaturan presensi'
+            'message' => 'pengaturan presensi',
+            'Status Absensi' => $optionPresensi
+        ]);
+    }
+    public function updateAdminUnivPengaturanPresensi(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status_absensi' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'gagal update divisi',], 404);
+        }
+
+        $mitra = Mitra::find($id);
+        $mitra->fill([
+            'status_absensi' => $request->status_absensi
+        ]);
+        $mitra->save();
+
+        return response()->json([
+            'message' => 'update pengaturan',
+            'data' => $mitra
         ]);
     }
     public function adminUnivPresensiDetailProfile($id)
