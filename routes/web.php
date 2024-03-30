@@ -188,7 +188,7 @@ Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil'])->name('lih
 
 
 //contributor univ
-Route::get('/dashboard/contributor-univ', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
+Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil']);
 
