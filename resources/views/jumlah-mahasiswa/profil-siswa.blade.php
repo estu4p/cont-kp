@@ -21,27 +21,39 @@
                 <card class="datadiri  ">
                     <div class="form-group ">
                         <label for="username">Nama lengkap</label>
-                        <input class="input" type="text" class="form-control" id="name" {{-- placeholder="james clear" --}} value="{{$lihat->nama_lengkap}}" name="nama_lengkap">
+                        <input class="input" type="text" class="form-control" id="name"
+                        {{-- placeholder="james clear" --}}
+                        value="{{$lihat->nama_lengkap}}" name="nama_lengkap" >
                     </div>
                     <div class="form-group">
                         <label for="nim">Nomor induk mahasiswa</label>
-                        <input class="input" type="text" class="form-control" id="nim" {{-- placeholder="2102****343" --}} value="{{ $lihat->nomor_induk }}" name="nomor_induk">
+                        <input class="input" type="text" class="form-control" id="nim"
+                        {{-- placeholder="2102****343" --}}
+                        value="{{ $lihat->nomor_induk }}" name="nomor_induk">
                     </div>
                     <div class="form-group">
                         <label for="prodi">Program studi/ Jurusan</label>
-                        <input class="input" type="text" class="form-control" id="prodi" {{-- placeholder="D4 - Manajemen Transportasi Udara " --}} value="{{ $lihat->jurusan }}" name="jurusan">
+                        <input class="input" type="text" class="form-control" id="prodi"
+                        {{-- placeholder="D4 - Manajemen Transportasi Udara " --}}
+                         value="{{ $lihat->jurusan }}" name="jurusan">
                     </div>
                     <div class="form-group">
                         <label for="tempatlahir">Tempat lahir</label>
-                        <input class="input" type="text" class="form-control" id="tempatlahir" {{-- placeholder="Atas kasur" --}} value="{{ $lihat->kota }}" name="kota">
+                        <input class="input" type="text" class="form-control" id="tempatlahir"
+                        {{-- placeholder="Atas kasur" --}}
+                         value="{{ $lihat->kota }}" name="kota">
                     </div>
                     <div class="form-group">
                         <label for="tanggallahir">Tanggal lahir</label>
-                        <input class="input" type="date" class="form-control" id="tanggallahir" {{-- placeholder="" --}} value="{{ $lihat->tgl_lahir }}" name="tgl_lahir">
-                        <div class="form-group">
-                            <label for="nohp">Nomor HP</label>
-                            <input class="input" type="text" class="form-control" id="nohp" {{-- placeholder="08644363464" --}} value="{{ $lihat->no_hp }}" name="no_hp">
-                        </div>
+                        <input class="input" type="date" class="form-control" id="tanggallahir"
+                        {{-- placeholder="" --}}
+                         value="{{ $lihat->tgl_lahir }}" name="tgl_lahir">
+                    <div class="form-group">
+                        <label for="nohp">Nomor HP</label>
+                        <input class="input" type="text" class="form-control" id="nohp"
+                        {{-- placeholder="08644363464" --}}
+                         value="{{ $lihat->no_hp }}" name="no_hp">
+                    </div>
                 </card>
             </div>
         </div>
@@ -52,19 +64,25 @@
                 <card class="akun">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input class="input" type="text" class="form-control" id="Username" {{-- placeholder="james123" --}} value="{{ $lihat->username}}" name="username">
+                        <input class="input" type="text" class="form-control" id="Username"
+                        {{-- placeholder="james123" --}}
+                         value="{{ $lihat->username}}" name="username">
                     </div>
                     <div class="form-group">
                         <label for="email">E-Mail</label>
-                        <input class="input" type="text" class="form-control" id="email" {{-- placeholder="james123@gmail.com" --}} value="{{ $lihat->email }}" name="email">
+                        <input class="input" type="text" class="form-control" id="email"
+                        {{-- placeholder="james123@gmail.com" --}}
+                        value="{{ $lihat->email }}" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input class="input" type="text" class="form-control" id="password" placeholder="isi jika ingin dirubah">
+                        <input class="input" type="text" class="form-control" id="password"
+                        placeholder="isi jika ingin dirubah">
                     </div>
                     <div class="form-group">
                         <label for="konfirmasi">Ulangi password</label>
-                        <input class="input" type="text" class="form-control" id="konfirmasi" placeholder="ulangi password">
+                        <input class="input" type="text" class="form-control" id="konfirmasi"
+                        placeholder="ulangi password">
                     </div>
             </div>
         </div>
@@ -73,11 +91,15 @@
                 <card class="masuk">
                     <div class="form-group">
                         <label for="tanggalmasuk">Tanggal masuk</label>
-                        <input class="input" type="date" class="form-control" id="tanggalmasuk" {{-- placeholder="" --}} value="{{ $lihat->tgl_masuk }}" name="tgl_masuk">
+                        <input class="input" type="date" class="form-control" id="tanggalmasuk"
+                        {{-- placeholder="" --}}
+                        value="{{ $lihat->tgl_masuk }}" name="tgl_masuk">
                     </div>
                     <div class="form-group">
                         <label for="tanggalkeluar">Tanggal keluar</label>
-                        <input class="input" type="date" class="form-control" id="tanggalkeluar" {{-- placeholder="" --}} value="{{$lihat->tgl_keluar }}" name="tgl_keluar">
+                        <input class="input" type="date" class="form-control" id="tanggalkeluar"
+                        {{-- placeholder="" --}}
+                        value="{{$lihat->tgl_keluar }}" name="tgl_keluar">
                     </div>
                     <div class="form-group">
                         <label for="devisi">Devisi</label>
@@ -115,7 +137,7 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Status akun</label>
-                        <div class="abu">{{ $lihat->status_akun}}</div>
+                        <div class="abu">{{  $lihat->status_akun}}</div>
                     </div>
                     <div class="form-group">
                         <label for="konfirmasi">konfirmasi email</label>
@@ -190,18 +212,18 @@
     </div>
 </div>
 <script>
-    function sukses() {
+    function sukses(){
         swal({
-            title: "Berhasil",
-            text: "Profil mahasiswa berhasil diperbarui",
-            icon: "success",
-            buttons: false,
-        });
+        title: "Berhasil",
+        text: "Profil mahasiswa berhasil diperbarui",
+        icon: "success",
+        buttons: false,
+    });
 
-        // Menghilangkan pesan swal setelah 2 detik
-        setTimeout(function() {
-            swal.close();
-        }, 2000);
+    // Menghilangkan pesan swal setelah 2 detik
+    setTimeout(function() {
+        swal.close();
+    }, 2000);
     }
 </script>
 @endsection
