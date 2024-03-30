@@ -41,7 +41,6 @@ class UserSeeder extends Seeder
                 'tgl_keluar' => $faker->dateTime,
                 'konfirmasi_email' => $faker->randomElement(['Sudah', 'Belum']),
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
-                // 'status_absensi' => $faker->randomElement(['Scan QR Code', 'Button']),
                 'sekolah' => Sekolah::inRandomOrder()->first()->id,
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
                 'role_id' => Role::inRandomOrder()->first()->id,

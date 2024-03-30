@@ -4,6 +4,8 @@ namespace App\Http\Controllers\BEController;
 
 use App\Models\User;
 use App\Models\Shift;
+use App\Models\Divisi;
+use App\Models\Project;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,21 +50,42 @@ class SchoolController extends Controller
     public function Lihatprofil(Request $request)
     {
         //Data Mahasiswa- Lihat profile
-        $profile = User::all()->where("role_id",3)->first();
-        $presensi = Presensi ::where('id', $profile->id)
+        $lihat = User::where("role_id",3)->first();
+        // dd($lihat);
+        $presensi = Presensi::where('id', $lihat->id)
         ->select("hutang_presensi")->first();
-        $Shift= Shift::where('id', $profile->id)
+        $divisi = Divisi::where('id', $lihat->divisi_id)
+        ->select("nama_divisi")->first();
+        $project = Project :: where ('id', $lihat->project_id)
+        ->select("nama_project")->first();
+        $Shift= Shift::where('id', $lihat->shift_id)
         ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
 
+
+        // $lihat = User::where("role_id", 3)
+        // ->where('nama_lengkap', 'nama_lengkap') // Ubah 'nama_lengkap' dengan nilai yang ingin Anda cari
+        // ->get();
+
+        // if ($lihat) {
+        //     $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
+        //     $divisi = Divisi::where('id', $lihat->divisi_id)->select("nama_divisi")->first();
+        //     $project = Project::where('id', $lihat->project_id)->select("nama_project")->first();
+        //     $shift = Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+        // };
+        // dd($lihat);
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
-            "data" => $profile,
+            "profile" => $lihat,
             "Shift"=>$Shift,
             "presensi"=>$presensi,
+            "project"=> $project,
+            "divisi"=>$divisi
           ]);
         } else {
-            return view('jumlah-mahasiswa.profil-siswa', ["data" => $profile,"Shift"=>$Shift,"presensi"=>$presensi,]);
+            return view('jumlah-mahasiswa.profil-siswa',
+            compact('lihat','Shift','presensi','project','divisi'));
+            // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
         }
     }
 
