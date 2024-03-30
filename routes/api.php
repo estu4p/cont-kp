@@ -64,7 +64,8 @@ Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profi
 Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
 Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
 Route::get('admin/data-mitra/presensi', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
-Route::get('admin/daftar-mitra/presensi/pengaturan-presensi', [AdminUnivAfterPaymentController::class, 'adminUnivPengaturanPresensi']);
+Route::get('admin/daftar-mitra/presensi/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPengaturanPresensi']);
+Route::post('admin/daftar-mitra/presensi/update/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminUnivPengaturanPresensi']);
 Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);
 Route::get('admin/daftar-mitra/team-aktif', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
 
@@ -104,8 +105,7 @@ Route::post('add-shift', [ContributorForMitra::class, 'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
-Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
-Route::get('/laporan-presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
-
+Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
+Route::get('/laporan-presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
+Route::get('/laporan-presensi-detail/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
+Route::get('/laporan-presensi-detail/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
