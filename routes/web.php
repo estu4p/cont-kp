@@ -1,21 +1,22 @@
 <?php
 
+use BaconQrCode\Encoder\QrCode;
 use function Laravel\Prompts\alert;
-
-use App\Http\Controllers\AdminUnivAfterPaymentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\MitraController;
+use App\Http\Controllers\BEController\QRCodeController;
+use App\Http\Controllers\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
-
+use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,18 @@ Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verify
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
 Route::post('/barcode', [HomeMitraController::class, 'barcode']);
+Route::post('/scanner', [QRCodeController::class, 'store'])->name('scanner');
+
+
+// Route::post('/barcode/mitra', [MitraController::class, 'generateQRCode'])->name('mitra-scan');
+
 
 Route::middleware('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
+    });
+    Route::get('/scanner', function (){
+        return view('QRCode');
     });
     Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
     Route::get('/presensi', function () {
@@ -126,7 +135,6 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
-
 
 //user
 Route::get('/user/login', function () {
