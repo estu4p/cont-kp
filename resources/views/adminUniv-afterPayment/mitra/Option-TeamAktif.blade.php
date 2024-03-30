@@ -5,8 +5,12 @@
 <link rel="stylesheet" href="{{ asset('assets/css//adminUniv-afterPayment/Option-TeamAktif.css') }}">
 <div class="topcontent">
     <div style="display: flex;">
-        <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
-        <p style="font-size: 24px"><u>Data Divisi</p>
+        <div class="">
+            <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
+        </div>
+        <div class="kembali">
+            <p style="font-size: 24px"><u>Data Divisi</p>
+        </div>
     </div>
     <div>
         <div class="input">
@@ -97,24 +101,15 @@
         <img src="assets/images/list-search-line.png" class="icon" style="width:70px;height:70px; ">Research & Development<br>
         20 Anggota
     </div>
-    <div class="col" style="display: flex">
-        <img src="assets/images/list-search-line.png" class="icon" style="width:70px;height:70px; ">Research & Development<br>
-        20 Anggota
-    </div>
-    <div class="col" style="display: flex">
-        <img src="assets/images/list-search-line.png" class="icon" style="width:70px;height:70px; ">Research & Development<br>
-        20 Anggota
-    </div>
-    <div class="col" style="display: flex">
-        <img src="assets/images/list-search-line.png" class="icon" style="width:70px;height:70px; ">Research & Development<br>
-        20 Anggota
-    </div>
+
+
+
     <div>
     </div>
-    </div>
+</div>
 <div class="bawah">
-<a href="/contributorformitra-devisi-Seeallteams" style="color: #A4161A">lihat data seluruh siswa...</a>
-    <a href="/Option-Team Aktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i class="fa-solid fa-gear"></i></a>
+    <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
+    <a href="/Option-TeamAktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i class="fa-solid fa-gear"></i></a>
 
 </div>
 @endsection

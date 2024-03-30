@@ -19,6 +19,11 @@ class ResetPasswordController extends Controller
         return view('user.reset');
     }
 
+    public function indexAdminUniv()
+    {
+        return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
+    }
+
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -40,6 +45,26 @@ class ResetPasswordController extends Controller
         }
     }
 
+    public function adminUnivResetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['error' => 'User not found.'], 404);
+        }
+        $otp = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        Session::put('otp_', $otp);
+        Session::put('reset_password', $request->email);
+
+        try {
+            Mail::to($request->email)->send(new SendEmail($otp));
+            return redirect()->to('/AdminUniv-InputOTP');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+    }
     public function verifyOTP(Request $request)
     {
         $request->validate([
@@ -73,7 +98,7 @@ class ResetPasswordController extends Controller
         }
         return redirect()->to('/user/reset-password/new-password');
     }
-    
+
     public function newPassword(Request $request)
     {
         // dd($request->session);
@@ -88,7 +113,7 @@ class ResetPasswordController extends Controller
                 'message' => 'Pengguna dengan email ini tidak ditemukan.'
             ]);
         }
-        
+
         $user->update(['password' => Hash::make($request->password)]);
         // Bersihkan session reset_email setelah pengguna berhasil mengubah kata sandi
         $request->session()->forget('reset_password');

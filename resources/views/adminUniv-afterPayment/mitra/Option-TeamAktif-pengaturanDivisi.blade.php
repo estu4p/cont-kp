@@ -4,161 +4,155 @@
 <link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/Option-TeamAktif-pengaturanDivisi.css') }}">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Q8i/X+965R3a7ePfVcP1KtH6o5f80tEPso2db+Wt/lq3S1gqPk9CJ5o4lI5G0Bnx" crossorigin="anonymous">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-JcKb8q3z7RH6w4zL7f7FL6nGekd9v/tdTKO/m2+jOMaxXaC0P0Jpam5PMvzR6pF5" crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div class="container-fluid d-flex flex-row justify-content-start gap-0 p-0 wadah ">
-
-        <div class="kanan-tabel p-5 w-100 justify-content-start">
-            <div>
-                <div style="display: flex; font-size: 24px">
-                    <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
-                    <p style=""><u>Pengaturan Divisi</p>
+    <div class="container-fluid  d-flex flex-row justify-content-start gap-0 p-0 wadahh">
+        <div class="kanan-tabel p-4  w-100 justify-content-start">
+            <div class="atas">
+                <div class="ikon">
+                    <a href="Option-TeamAktif"><i class="icon fa-solid fa-angle-left" style=" color: #000000;"></i></a>
                 </div>
-                <!-- <h1 class="manage">Pengaturan Divisi</h1> -->
+                <div class="judull">
+                <h3 class="manage">Pengaturan Divisi</h3>
+                </div>
             </div>
-            <button class="btn-tambah" data-bs-toggle="modal" data-bs-target="#foto" onclick=""><i class="fa-solid fa-circle-plus"></i>Tambah
-                Divisi</button>
-            <div>
-                <select name="page" class="page">
-                    <option value="page">page 1 of 1</option>
-                </select>
-                <select name="item" class="item">
-                    <option value="item">5 item per page</option>
-                </select>
-            </div>
-            <div class="card py-0">
-                <div class="card-body  py-0 my-0">
+            <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-circle-plus"></i>
+                Tambah divisi
+            </button>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="nama_divisi"></label>
+                            </form>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="example">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Divisi</th>
-                                    <th scope="col">penilaian</th>
+                                    <th scope="col">Penilaian</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody style="overflow: scroll;">
+                            <tbody>
                                 <tr>
-                                    <td>1</td>
+                                    <td class="ratakanan">1</td>
                                     <td>Ui/Ux Designer</td>
-                                    <td>
-                                        <a href="/TeamAktif-kategoripenilaian-UiuX">
-                                            <i class="fa-regular fa-file-lines"></i>
-                                        </a>
-                                    </td>
+
+                                    <td class="ratakanan"><a href="/TeamAktif-kategoripenilaian-UiuX"><i class="fa-regular fa-file-lines ic"></i></a></td>
 
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
                                     </td>
                                 </tr>
+                                <!-- tambahkan baris data yang lain di sini -->
                                 <tr>
-                                    <td>2</td>
+                                    <td class="ratakanan">2</td>
                                     <td>Programmer</td>
-                                    <td><i class="fa-regular fa-file-lines"></i></td>
+
+                                    <td class="ratakanan"><a href="#"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>3</td>
+                                    <td class="ratakanan">3</td>
                                     <td>Digital Marketing</td>
-                                    <td><i class="fa-regular fa-file-lines"></i></td>
+
+                                    <td class="ratakanan"><a href="#"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(2)" type="button">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(2)" type="button">Hapus</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>4</td>
-                                    <td>Content Creator</td>
-                                    <td><i class="fa-regular fa-file-lines"></i></td>
+                                    <td class="ratakanan">4</td>
+                                    <td>Conten Creator</td>
+
+                                    <td class="ratakanan"><a href="#"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(3)" type="button">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(3)" type="button">Hapus</button>
                                     </td>
                                 </tr>
-
-
                                 <tr>
-                                    <td>5</td>
+                                    <td class="ratakanan">5</td>
                                     <td>Editor Vidio</td>
-                                    <td><i class="fa-regular fa-file-lines"></i></td>
+
+                                    <td class="ratakanan"><a href="#"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
                                     <td>
-                                        <button type="button" class="btn btn-edit btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi">Hapus</button>
+                                        <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(4)" type="button">Hapus</button>
                                     </td>
                                 </tr>
-
                             </tbody>
+
                         </table>
-                        <div>
-
-
-                        </div>
-                        <div>
-
-                        </div>
-                    </div>
-                    <div>
-
                     </div>
                 </div>
-
-
             </div>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
-
-
-
+    </div>
     </div>
 
-
-    <!-- ModalkonfirmasiDihapus -->
-    <div class="modal fade" id="konfirmasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Modal edit divisi -->
+    <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-body text-center ">
-                        <h5 class="modal-title text-center" id="exampleModalLabel">Berhasil!</h5>
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="textdivisi">Edit Divisi</div>
+                    <div class="tambahgambar gap-3">
+                        <div class="gambar border d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-pen-nib"></i>
+                            <input type="file" id="fileInput" style="display: none;">
+                        </div>
                         <div>
-
-                            <div class="modal-body text-center">
-                                <p>Apakah anda ingin menghapus ?</p>
-
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-
-                                <button type="submit" class="btn btn-light" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sukseshapus" onclick="deleteData()">Ya</button>
-
-                            </div>
+                            <button class="addgambar">Add Photo</button>
+                        </div>
+                        <div>
+                            <button class="remove">Remove</button>
                         </div>
                     </div>
+                    <div class="grupinputt">
+                        <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
+                        <input type="text" class="inputmodalll" id="editNamaDivisi" placeholder="Masukkan nama divisi">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="foto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal tambah divisi -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -185,168 +179,162 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="">
-                        Simpan
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="textdivisi">Profil Divisi</div>
-                    <div class="tambahgambar gap-3">
-                        <div class="gambar border d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-pen-nib"></i>
-                            <!-- <input type="file" id="fileInput" style="display: none;"> -->
-                        </div>
-                        <div>
-                            <button class="addgambar">Add Photo</button>
-                        </div>
-                        <div>
-                            <button class="remove">Remove</button>
-                        </div>
-                    </div>
-                    <div class="grupinputt">
-                        <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                        <input type="text" class="inputmodall" placeholder="Masukkan nama divisi">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
-                    Simpan
-                </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function sowsukses() {
-            swal("Good job!", "You clicked the button!", "success");
+        // Variabel global untuk menyimpan indeks divisi yang akan diedit
+        let editedIndex = null;
+
+        // Fungsi untuk menampilkan modal edit dengan data divisi yang dipilih
+        function editModal(index) {
+            // Simpan indeks divisi yang akan diedit
+            editedIndex = index;
+
+            // Dapatkan data divisi dari tabel
+            const row = document.querySelectorAll('#example tbody tr')[index];
+            const namaDivisi = row.querySelectorAll('td')[1].innerText;
+
+            // Isi input modal dengan data divisi yang dipilih
+            document.getElementById('editNamaDivisi').value = namaDivisi;
+
+            // Tampilkan modal edit
+            $('#editModal').modal('show');
         }
 
-        function showConfirmationModal() {
-            $('#confirmationModal').modal('show');
-        }
+        // Fungsi untuk menyimpan perubahan pada divisi yang diedit
+        function updateDivisi() {
+            // Dapatkan nilai input dari modal
+            const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
 
-        function deleteData() {
-            Swal.fire({
-                position: "center",
+            // Perbarui data divisi pada tabel dengan nilai yang diedit
+            const row = document.querySelectorAll('#example tbody tr')[editedIndex];
+            row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
+
+            // Tampilkan pesan sukses
+            swal({
+                title: "Berhasil !",
                 icon: "success",
-                title: "Dara berhasil dihapus",
-                showConfirmButton: false,
-                timer: 1500
+                text: "Perubahan berhasil disimpan",
+                timer: 1500,
+                buttons: false
+            });
+
+            // Tutup modal edit
+            $('#editModal').modal('hide');
+
+        }
+
+        // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
+        function sowsukses() {
+            // Dapatkan nilai input dari modal
+            var namaDivisi = document.querySelector('.inputmodall').value;
+
+            // Buat elemen HTML untuk baris baru dalam tabel
+            var newRow = '<tr>' +
+                '<td class = "ratakanan">' + (document.querySelectorAll('#example tbody tr').length + 1) + '</td>' +
+                '<td>' + namaDivisi + '</td>' +
+                '<td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
+                '<td>' +
+                '<button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(5)" type="button">Edit</button>' +
+                '<button class="btn btn-danger btn-sm tomboll" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(5)" type="button">Hapus</button>' +
+                '</td>' +
+                '</tr>';
+
+            // Sisipkan baris baru ke dalam tabel
+            document.querySelector('#example tbody').insertAdjacentHTML('beforeend', newRow);
+
+            // Tampilkan pesan sukses
+            swal({
+                title: "Berhasil !",
+                icon: "success",
+                text: "Perubahan berhasil disimpan",
+                timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
+                buttons: false // Sembunyikan tombol "OK"
             });
         }
 
+        function deleteDivisi(index) {
+            // Tampilkan modal konfirmasi penghapusan
+            swal({
+                title: "Hapus",
+                text: "Apakah Anda ingin menghapus divisi ini?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    // Hapus baris divisi dari tabel
+                    document.querySelector('#example tbody').deleteRow(index);
 
-
-        function cancelData() {
-            // Tambahkan logika untuk membatalkan operasi di sini
-
-            // Tutup modal konfirmasi
-            $('#confirmationModal').modal('hide');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ambil elemen modal
-            var modal = document.getElementById('department-modal');
-
-            // Ambil tombol yang membuka modal
-            var openModalButton = document.getElementById('open-department-modal');
-
-            // Ambil tombol-tombol di dalam modal
-            var cancelButton = document.getElementById('cancel-button');
-            var saveButton = document.getElementById('save-button');
-
-            // Fungsi untuk membuka modal
-            function openModal() {
-                modal.style.display = 'block'; // Tampilkan modal saat tombol ditekan
-            }
-
-            // Fungsi untuk menutup modal
-            function closeModal() {
-                modal.style.display = 'none'; // Sembunyikan modal saat tombol ditekan
-            }
-
-            // Event listener untuk membuka modal saat tombol ditekan
-            openModalButton.addEventListener('click', openModal);
-
-            // Event listener untuk menutup modal saat tombol "Batal" ditekan
-            cancelButton.addEventListener('click', closeModal);
-
-            // Event listener untuk menutup modal saat tombol "Simpan" ditekan
-            saveButton.addEventListener('click', function(event) {
-                // Lakukan operasi penyimpanan data atau validasi formulir di sini
-
-                // Setelah selesai, tutup modal
-                closeModal();
-            });
-
-            // Event listener untuk menutup modal saat klik di luar area modal
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    closeModal();
+                    // Tampilkan pesan sukses
+                    swal("Berhasil!", "Divisi berhasil dihapus.", {
+                        icon: "success",
+                        timer: 1500,
+                        buttons: false
+                    });
+                } else {
+                    // Tampilkan pesan bahwa data aman
+                    swal("Data Anda aman.");
                 }
             });
-        });
-        // Fungsi untuk menampilkan modal
-        // function showModal() {
-        //     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-        //     myModal.show();
-        // }
-
-        // Fungsi untuk menampilkan modal konfirmasi keberhasilan
-        
-
-        // Event listener untuk tombol "Add Photo"
+        }
         document.querySelector('.addgambar').addEventListener('click', function() {
             document.getElementById('fileInput').click();
         });
 
-        // Event listener untuk input file
         document.getElementById('fileInput').addEventListener('change', function() {
             var file = this.files[0];
             var reader = new FileReader();
-
             reader.onload = function(e) {
-                var imagePreview = document.querySelector('.gambar');
-                imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Preview Gambar">';
+                var imageSrc = e.target.result;
+                document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;" />';
             };
-
             reader.readAsDataURL(file);
         });
 
-        // Event listener untuk tombol "Remove"
         document.querySelector('.remove').addEventListener('click', function() {
-            var imagePreview = document.querySelector('.gambar');
-            imagePreview.innerHTML =
-                '<i class="fa-regular fa-image"></i><input type="file" id="fileInput" style="display: none;">';
+            document.querySelector('.gambar').innerHTML = '<i class="far fa-image"></i>';
+            document.getElementById('fileInput').value = ''; // Clear input value
         });
-        // Fungsi untuk membuka modal departemen
-        function openDepartmentModal() {
-            var departmentModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-            departmentModal.show();
-        }
-
-        // Fungsi untuk menangani klik tombol "Simpan"
-       
     </script>
+    <script>
+        $(document).ready(function() {
+            // Ketika tombol "Add Photo" diklik
+            $(".addgambar").click(function() {
+                // Membuka dialog untuk memilih gambar
+                $("#fileInput").click();
+            });
+
+            // Ketika input gambar dipilih
+            $("#fileInput").change(function() {
+                // Mendapatkan file yang dipilih
+                var file = $(this)[0].files[0];
+                // Memeriksa apakah ada file yang dipilih
+                if (file) {
+                    // Membaca file sebagai URL data
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Menampilkan gambar di wadah gambar
+                        $(".gambar").html('<img src="' + e.target.result + '" class="img-fluid">');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Ketika tombol "Remove" diklik
+            $(".remove").click(function() {
+                // Menghapus gambar dari wadah gambar
+                $(".gambar").html('<i class="fa-regular fa-image"></i>');
+                // Mengosongkan input file
+                $("#fileInput").val('');
+            });
+
+        });
+    </script>
+
     @endsection

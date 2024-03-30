@@ -12,13 +12,13 @@
                 <a href="/AdminUniv-EditProfile">
                     <div class="navbar-profile">
                         <a href="/AdminUniv-EditProfile" style="text-decoration: none; color: #000;">
-                            <span class="profile-name">Nama Profil</span>
-                            <span class="profile-status">Status Profil</span>
+                            <span class="profile-name">Wahyu Atkinson</span>
+                            <span class="profile-status">Admin</span>
                         </a>
 
                     </div>
                     <div class="navbar-logo">
-                        <img src="assets/images/Rectangle 22.png" alt="Profile Logo">
+                        <img src="assets/images/Rectangle 22 (3).png" alt="Profile Logo">
                     </div>
                 </a>
 
