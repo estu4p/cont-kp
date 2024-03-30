@@ -6,7 +6,7 @@
 <div class="wadah">
 
     <div class="propil">
-        <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkiri">
+        <img src="assets/images/assets/images/Rectangle 22.png" alt="Profile Logo" class="gambarkiri">
         <div class="nama">Zayn Abdullah</div>
         <div class="email">zaynabdullah123@gmail.com</div>
         <div class="about">About</div>
@@ -18,7 +18,7 @@
         <div class="editprofil p-5">
             <div class="atas d-flex flex-row  col-5">
                 <div id="previewZone">
-                    <img src="assets/images/user2.png" alt="Profile Logo" class="gambarkanan">
+                    <img src="assets/images/Rectangle 22.png" alt="Profile Logo" class="gambarkanan">
                 </div>
                 <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
                     <label for="imageInput" class="custom-file-upload">
@@ -105,7 +105,7 @@
 
     function setDefaultImage() {
         const previewZone = document.getElementById('previewZone');
-        previewZone.innerHTML = '<img src="assets/images/user2.png"  class="img-fluid">';
+        previewZone.innerHTML = '<img src="assets/images/Rectangle 22.png"  class="img-fluid">';
     }
 
     // Call the setDefaultImage function when the page is loaded
@@ -113,7 +113,7 @@
     window.addEventListener('DOMContentLoaded', setDefaultImage);
 
     function setDefaultImage() {
-        const defaultImageSrc = 'assets/images/user2.png';
+        const defaultImageSrc = 'assets/images/Rectangle 22.png';
 
         const previewImage = document.querySelector('.gambarkiri');
         previewImage.src = defaultImageSrc;

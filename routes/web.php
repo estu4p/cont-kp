@@ -322,19 +322,25 @@ Route::get('/Option-TeamAktif', function () {
 });
 Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
-});  
+});
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
-});  
+});
 Route::get('/OptionTeamAktifKlikUiUx', function () {
     return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
-});  
+
+});
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+
 Route::get('/Option-TeamAktif-SeeAllTeams', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
-}); 
+});
 Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
-}); 
+});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
@@ -470,6 +476,14 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+});
+
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
 
 // Route::get('/AdminUniv-Dashboard', function () {
