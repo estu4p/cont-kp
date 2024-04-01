@@ -74,16 +74,17 @@
                         <tr>
                             <td><input type="checkbox" id="#" name=""></td>
                             <td>{{ $no + 1 }}</td>
-                            <td><a href="#">{{ $item->user->nama_lengkap }}</a></td>
-                            <td>MJ/UIUX/POLINES/{{ $item->user->nomor_induk }}/AGST2023/06</td>
-                            <td>{{ $item->total_kehadiran }} &nbsp; <a href="/mitra-laporanpresensi-detaihadir"
+                            <td><a href="">{{ $item->user->nama_lengkap }}</a></td>
+                            <td>MJ/UIUX/{{ $item->user->sekolah }}/{{ $item->user->nomor_induk }}/AGST2023/06</td>
+                            <td>{{ $item->total_kehadiran }} &nbsp; <a
+                                    href="{{ route('adminUniv.detailHadir', $item->nama_lengkap) }}}}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>
                             <td style="color: orange">{{ $item->total_izin }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailizin" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                                    href="{{ route('adminUniv.detailIzin', $item->nama_lengkap) }}"
+                                    class="fa-solid fa-circle-info" style="color: #000"></td>
                             <td style="color: red">{{ $item->total_ketidakhadiran }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailtidakhadir" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                                    href="{{ route('adminUniv.detailTidakHadir', $item->nama_lengkap) }}"
+                                    class="fa-solid fa-circle-info" style="color: #000"></td>
                         </tr>
                     @endforeach
 

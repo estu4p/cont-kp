@@ -8,14 +8,14 @@
         <div class="container-fluid p-5 ml-2">
             <div class="row">
                 <div class="col-md-12 parent-relatife ">
-                    <a href="/laporandatapresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
+                    <a href="/mitra/laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                     <div class="card">
                         <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
                             <div style="overflow: hidden;">
                                 <img src="assets/images/user.png" class="user">
                             </div>
                             <div>
-                                <h3 style="font-size: 40px; margin: 0;">Y</h3>
+                                <h3 style="font-size: 40px; margin: 0;">{{ $user->nama_lengkap}}</h3>
                                 <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                             </div>
                             <div style="align-self: center;">
@@ -57,22 +57,22 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">47:30:50</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasukFormatted }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
                                     <b class="fz7">total masuk</b>
-                                    <p class="total fz6 my-auto px-1 py-0">16 hari</p>
+                                    <p class="total fz6 my-auto px-1 py-0">{{ $totalMasukHari }} hari</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex  py-2  align-items-center  flex-row justify-content-between">
                                     <b class="fz7">target</b>
-                                    <p class="target fz6 my-auto px-1 py-01">1100 jam</p>
+                                    <p class="target fz6 my-auto px-1 py-01">{{ $target }} jam</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">152:30:10</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -173,7 +173,7 @@
 
 
                                     <tr class="">
-                                        <th>masukf</th>
+                                        <th>masuk</th>
                                         <th>pulang</th>
                                         <th>mulai</th>
                                         <th>selesai</th>
@@ -182,125 +182,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>1</td>
-                                        <td>Senin, 21-08-2023</td>
-                                        <td>06:25:00</td>
-                                        <td>13:05:14</td>
-                                        <td>12:15:00</td>
-                                        <td>13:00:00</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>2022-11-06</td>
+                                        <td>13:58:14</td>
+                                        <td>15:23:31</td>
+                                        <td>14:16:26</td>
+                                        <td>06:55:53</td>
                                         <td>07:00:53 </td>
-                                        <td> 00:30:53</td>
-                                        <td>Membuat tampilan website e-com..</td>
+                                        <td>00:00:04</td>
+                                        <td>Membuat tampilan website e-com.</td>
                                         <td>Hadir</td>
                                         <td>Merapikan parkiran motor</td>
                                         <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
 
-
-
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
-
-
-                                    </tr>
+                                    @endforeach
+                                     
                                 </tbody>
                             </table>
                         </div>

@@ -30,18 +30,22 @@ class PresensiSeeder extends Seeder
                     Presensi::create([
                         'nama_lengkap' => $user->id, // Menggunakan ID pengguna sebagai nama lengkap (asumsi nama lengkap dihapus dan digantikan dengan ID)
                         'hari' => $faker->dateTime,
-                        'jam_masuk' => $faker->dateTimeBetween('-1 year', 'now'),
-                        'jam_pulang' => $faker->dateTimeBetween('-1 year', 'now'),
-                        'jam_mulai_istirahat' => $faker->dateTimeBetween('-1 year', 'now'),
-                        'jam_selesai_istirahat' => $faker->dateTimeBetween('-1 year', 'now'),
-                        'total_jam_kerja' => $faker->randomFloat(2, 0, 8), // Misalnya, total jam kerja antara 0 dan 8 jam
+                        'jam_default_masuk' => '06:30:00',
+                        'jam_default_pulang' => '13:00:00',
+                        'jam_masuk' => '06:30:00',
+                        'jam_pulang' => '13:00:00',
+                        'jam_mulai_istirahat' => '12:00:00',
+                        'jam_selesai_istirahat' => '12:15:00',
+                        'total_jam_kerja' => '06:15:00', // Misalnya, total jam kerja antara 0 dan 8 jam
                         'log_aktivitas' => $faker->sentence,
                         'aksi' => $faker->boolean,
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),
+                        'status_ganti_jam' => $faker->randomElement(['Ganti Jam', 'Tidak Ganti Jam']),
                         'keterangan_status' => $faker->sentence,
                         'kebaikan' => $faker->sentence,
                         'barcode' => $faker->ean13,
-                        'hutang_presensi' => $faker->dateTime
+                        'hutang_presensi' => $faker->dateTime,
+                        'target' => 3600,
                     ]);
                 }
             }
