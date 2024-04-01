@@ -27,7 +27,6 @@
 
     <div class="text-container">
             <h3>Iqra's QR Code</h3 >
-            <p>konek linkedin bang</p> <!-- hapus kalau data udah jadi -->
         </div>
         <div class="qr-container">
             <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="Syalita's QR Code" class="qr-image">

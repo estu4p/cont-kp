@@ -2,8 +2,8 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/profil-siswa.css') }}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="wadah">
-
 
     <div class="judul d-flex flex-column justify-content-start">
         <a href="/jumlah-mahasiswa"> <i class="fa-solid text-dark ikon-kiri fa-chevron-left icon fs-1 p-2"></i></a>
@@ -16,10 +16,10 @@
 
 
     <div class="container-fluid  align-items-start d-flex flex-row wadah-card row gap-4">
-        <div class="row col-3 align-items-center  ">
-            <div class="card col-12 py-4 px-3">
-                <card class="datadiri">
-                    <div class="form-group">
+        <div class="row w-100 gap-3 py-5 align-items-start ">
+            <div class="card col-3  py-4 px-3">
+                <card class="datadiri  ">
+                    <div class="form-group ">
                         <label for="username">Nama lengkap</label>
                         <input class="input" type="text" class="form-control" id="name"
                         {{-- placeholder="james clear" --}}
@@ -59,7 +59,7 @@
         </div>
 
 
-        <div class="row col-3 align-items-center  ">
+        <div class="row col-3 align-items-center   ">
             <div class="card col-12 py-4 px-3">
                 <card class="akun">
                     <div class="form-group">
@@ -86,7 +86,7 @@
                     </div>
             </div>
         </div>
-        <div class="row col-3 align-items-center  ">
+        <div class="row col-3 align-items-center   ">
             <div class="card col-12 py-4 px-3">
                 <card class="masuk">
                     <div class="form-group">
@@ -115,7 +115,7 @@
                     </div>
             </div>
         </div>
-        <div class="row col-3 align-items-center ">
+        <div class="row col-3 align-items-center  ">
             <div class="card col-12 py-4 px-3">
                 <card class="tools">
                     <div class="form-group">
@@ -146,7 +146,7 @@
                 </card>
             </div>
         </div>
-        <div class="row col-3 align-items-center ">
+        <div class="row col-3 align-items-center  ">
             <div class="card col-12 py-4 px-3">
                 <card class="tools">
                     <div class="form-group">
@@ -208,7 +208,22 @@
 
     </div>
     <div class="tengah-button w-100 d-flex justify-content-center p-4">
-        <button class="button-bawah m-auto py-1">Simpan</button>
+        <button class="button-bawah m-auto py-1" onclick="sukses()">Simpan</button>
     </div>
 </div>
+<script>
+    function sukses(){
+        swal({
+        title: "Berhasil",
+        text: "Profil mahasiswa berhasil diperbarui",
+        icon: "success",
+        buttons: false,
+    });
+
+    // Menghilangkan pesan swal setelah 2 detik
+    setTimeout(function() {
+        swal.close();
+    }, 2000);
+    }
+</script>
 @endsection

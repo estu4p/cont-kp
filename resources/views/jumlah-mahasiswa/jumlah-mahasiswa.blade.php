@@ -3,17 +3,17 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/jumlah-mahasiswa.css') }}">
 <form action="" method="GET">
-<!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-    <!-- <input type="text" placeholder="cari nama mahasiswa"/> -->
+<i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" placeholder="cari nama mahasiswa"/>
 </form>
 <div class="wadah p-5">
-    <h1 style="margin-top: 10px;">Data Mahasiswa</h1>
-    <!-- <select name="page" class="page">
+    <h1 style="margin-top: 10px;  text-align: center;">Data Mahasiswa</h1>
+    <select name="page" class="page">
         <option value="page">page 1 of 1</option>
     </select>
     <select name="item" class="item">
         <option value="item">5 item per page</option>
-    </select>  -->
+    </select> 
     <div class="wadah-tabel w-100 p-0">
         <table class="" id="example">
         <thead>

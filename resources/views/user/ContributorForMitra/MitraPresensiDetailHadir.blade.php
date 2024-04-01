@@ -192,7 +192,7 @@
                           <td>12:15:00</td>
                           <td>13:00:00</td>
                           <td>07:00:53 </td>
-                          <td> 00:30:53</td>
+                          <td>00:30:53</td>
                           <td>Membuat tampilan website e-com..</td>
                           <td>Hadir</td>
                           <td>Merapikan parkiran motor</td>
@@ -200,8 +200,7 @@
 
                                     </tr>
                                     @endforeach
-                                    
-                                    
+                                     
                                 </tbody>
                             </table>
                         </div>

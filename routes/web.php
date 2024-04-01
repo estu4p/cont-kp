@@ -61,7 +61,11 @@ Route::get('/dashboard', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-
+Route::get('/register', function() {
+    return view('landing-page.daftar', [
+        'title' => "Landing Page - Register"
+    ]);
+});
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -188,7 +192,7 @@ Route::get('/pemagang/detail', function () {
 
 
 //contributor for univ
-Route::get('/dashboard/contributor-univ', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
+Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
@@ -322,19 +326,25 @@ Route::get('/Option-TeamAktif', function () {
 });
 Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
-});  
+});
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
-});  
+});
 Route::get('/OptionTeamAktifKlikUiUx', function () {
     return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
-});  
+
+});
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+
 Route::get('/Option-TeamAktif-SeeAllTeams', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
-}); 
+});
 Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
-}); 
+});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
@@ -458,10 +468,10 @@ Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresen
 Route::get('/mitra-laporanpresensi-detailhadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
-Route::get('/mitra-laporanpresensi-detailhadir/{id}', [ContributorForMitra::class, 'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
-Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
-Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
 
+Route::get('/mitra-laporanpresensi-detailhadir/{id}',[ContributorForMitra::class,'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailIzin'])->name('cont.mitrapresensi.detailizin');
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -470,6 +480,14 @@ Route::get('/AdminUniv-InputOTP', function () {
 
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
+});
+
+
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
 });
 
 // Route::get('/AdminUniv-Dashboard', function () {
@@ -584,9 +602,17 @@ Route::get('/admin/setting/user', function () {
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
     ];
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];    
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
-        'users' => $users
+        'users' => $users,
+        'mhs' => $mhs,
     ]);
 });
 
