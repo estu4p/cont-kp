@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
 
 .nav-mobile,
 .list-mobile {
@@ -461,3 +461,80 @@
         margin-right: 33%;
     }
 }
+
+.icon-labelinput{
+height: 25px;
+width: 10px;
+}
+
+
+.dalam{
+/* Frame 2427 */
+
+box-sizing: border-box;
+
+
+width: 420px;
+height: 216px;
+
+
+background: #A61C1C;
+border: 1px solid #DCDCDC;
+border-radius: 5px;
+
+}
+
+.list-pembayaran{
+
+box-sizing: border-box;
+display: flex;
+text-align: center;
+font-size: 12px;
+width: 200px;
+height: 38px;
+margin-top: 25px;
+margin-left: 5px;
+background: #FFFFFF;
+border-radius: 5px;
+}
+
+
+
+.list-pembayaran input[type="radio"] {
+    margin-left: 3%;
+    margin-right: 10px;
+    transform: scale(2);
+}
+
+
+.list-pembayaran {
+    display: flex;
+    align-items: center;
+}
+
+.list-pembayaran .ikon {
+    margin-right: auto;
+}
+.btn{
+    text-align: left;
+}
+
+.dalam2{
+overflow-y: scroll;
+box-sizing: border-box;
+margin-left: 16%;
+bottom: 2%;
+background: #F2F4F8;
+border: 1px solid #C1C7CD;
+border-radius: 5px;
+}
+
+.btn-text {
+    padding: 15px;
+    border: 2px solid #E9E9E9;
+    border-radius: 0px 8px 8px 0px;
+    width: 100%;
+}
+
+
+

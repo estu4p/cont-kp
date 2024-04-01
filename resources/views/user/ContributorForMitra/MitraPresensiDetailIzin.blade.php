@@ -15,7 +15,7 @@
                                 <img src="assets/images/user.png" class="user">
                             </div>
                             <div>
-                                <h3 style="font-size: 40px; margin: 0;">Y</h3>
+                                <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
                                 <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                             </div>
                             <div style="align-self: center;">
@@ -162,142 +162,42 @@
                                     <tr>
                                         <th rowspan="2"><input type="checkbox"></th>
                                         <th rowspan="2">No</th>
-                                        <th rowspan="2">tanggal</th>
-                                        <th colspan="2">jam kerja</th>
-                                        <th colspan="2">jam istirahat</th>
-                                        <th colspan="2">total jam kerja</th>
-                                        <th rowspan="2">status kehadiran</th>
-                                        <th rowspan="2">status ganti jam</th>
+                                        <th rowspan="2">Tanggal</th>
+                                        <th colspan="2">Jam Kerja</th>
+                                        <th colspan="2">Jam Istirahat</th>
+                                        <th colspan="2">Total Jam Kerja</th>
+                                        <th rowspan="2">Status Kehadiran</th>
+                                        <th rowspan="2">Status Ganti Jam</th>
 
                                     <tr>
-                                        <th>masuk</th>
-                                        <th>pulang</th>
-                                        <th>mulai</th>
-                                        <th>selesai</th>
-                                        <th>total jam</th>
+                                        <th>Masuk</th>
+                                        <th>Pulang</th>
+                                        <th>Mulai</th>
+                                        <th>Selesai</th>
+                                        <th style="white-space: nowrap">total jam</th>
                                         <th>(+)(-)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
                                         <td>1</td>
-                                        <td>Senin, 21-08-2023</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td> -- </td>
+                                        <td>{{$item->hari}}</td>
+                                        <td>2022-12-19</td>
+                                        <td>02:39:53</td>
+                                        <td>04:04:37</td>
+                                        <td>07:50:28</td>
+                                        <td>10:03:25</td>
+                                        <td>00:00:07</td>
                                         <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>
                                         <td>Ganti jam</td>
 
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
+                                    @endforeach
+            
                                 </tbody>
                             </table>
                         </div>

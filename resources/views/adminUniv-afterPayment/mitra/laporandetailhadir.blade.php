@@ -1,26 +1,31 @@
 @extends('layouts.masterAfterPay')
 
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/laporandetailhadir.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/laporandetailhadir.css') }}">
     <div class="container-fluid p-5 ml-2">
         <div class="row">
             <div class="col-md-12 parent-relatife">
-                <a href="/mitra-laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
+                <a href="/AdminUniv-mitra-laporanpresensi" class="kekiri"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                 <div class="card">
                     <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
                         <div style="overflow: hidden;">
                             <img src="assets/images/user.jpg" class="user">
                         </div>
                         <div>
-                            <h3 style="font-size: 30px; margin: 0;">Syalita Widyandini</h3>
-                            <p style="margin: 0;">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
+                            <h3 style="font-size: 30px; margin: 0;">{{ $user->nama_lengkap }}</h3>
+                            <p style="margin: 0;">NIP:
+                                MJ/{{ $divisi->nama_divisi }}/{{ $sekolah->nama_sekolah }}/{{ $user->tgl_masuk }}/{{ $user->id }}
+                            </p>
                         </div>
                         <div style="align-self: center;">
                             <label for="search-input">Cari Status Kehadiran</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="search-input" class="form-control" placeholder="     Pencarian" aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
-                                <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:black"></i>
+                                <input type="text" id="search-input" class="form-control" placeholder="     Pencarian"
+                                    aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
+                                <i class="fa-solid fa-search"
+                                    style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:black"></i>
                             </div>
                         </div>
                     </div>
@@ -36,11 +41,11 @@
                                 </tr>
                                 <tr>
                                     <th>Jam Default Masuk</th>
-                                    <td>06:30:00</td>
+                                    <td>{{ $jam_default->jam_default_masuk }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Default Pulang</th>
-                                    <td>21:00:00</td>
+                                    <td>{{ $jam_default->jam_default_pulang }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,19 +55,19 @@
                             <tbody>
                                 <tr>
                                     <th>Total jam masuk</th>
-                                    <td><span class="masuk">47:30:50</span></td>
+                                    <td><span class="masuk">{{ $total_jam_masuk->total_jam_masuk }}</span></td>
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td><span class="total">16 hari</td>
+                                    <td><span class="total">{{ $total_masuk }} hari</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
-                                    <td><span class="target">1100 jam</td>
+                                    <td><span class="target">{{ $target }} jam</td>
                                 </tr>
                                 <tr>
                                     <th>sisa</th>
-                                    <td><span class="sisa">152:30:10</td>
+                                    <td><span class="sisa">{{ $sisa }} jam</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -70,207 +75,109 @@
                     <div class="masa">
                         <table class="tg">
                             <thead>
-                              <tr>
-                                <th colspan="4">Total terlambat (ditandai)</th>
-                              </tr>
+                                <tr>
+                                    <th colspan="4">Total terlambat (ditandai)</th>
+                                </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Masuk</td>
-                                <td><span class="total_terlambat">0 x</span></td>
-                                <td>pulang</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
-                              </tr>
-                              <tr>
-                                <td>Istirahat keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
-                                <td>istirahat kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
-                              </tr>
-                              <tr>
-                                <td>Ijin keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
-                                <td>ijin kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
-                              </tr>
+                                <tr>
+                                    <td>Masuk</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                    <td>pulang</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Istirahat keluar</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                    <td>istirahat kembali</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ijin keluar</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                    <td>ijin kembali</td>
+                                    <td><span class="total_terlambat">0 x</span></td>
+                                </tr>
                             </tbody>
-                            </table>
+                        </table>
                     </div>
                 </div>
                 <br>
-                <div class="container-card2" >
-                    <button class="butongeser"><<<<</button>
-                    <button class="butongeser">>>>></button>
+                <div class="container-card2">
+                    <button class="butongeser">
+                        <<<<< /button>
+                            <button class="butongeser">>>>></button>
                 </div>
                 <br>
                 <table class="table  " style="font-size: 10px; ">
                     <thead>
                         <tr>
-                          <th rowspan="2"><input type="checkbox"></th>
-                          <th rowspan="2">No</th>
-                          <th rowspan="2">tanggal</th>
-                          <th colspan="2" style="border-bottom: 1px solid black;">jam kerja</th>
-                          <th colspan="2" style="border-bottom: 1px solid black;">jam istirahat</th>
-                          <th colspan="2" style="border-bottom: 1px solid black;">total jam kerja</th>
-                          <th rowspan="2">log aktivitas</th>
-                          <th rowspan="2">status kehadiran</th>
-                          <th rowspan="2">kebaikan</th>
-                          <th rowspan="2">catatan</th>
+                            <th rowspan="2"><input type="checkbox"></th>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">tanggal</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">jam kerja</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">jam istirahat</th>
+                            <th colspan="2" style="border-bottom: 1px solid black;">total jam kerja</th>
+                            <th rowspan="2">log aktivitas</th>
+                            <th rowspan="2">status kehadiran</th>
+                            <th rowspan="2">kebaikan</th>
+                            <th rowspan="2">catatan</th>
                         </tr>
                         <tr>
-                          <th>masuk</th>
-                          <th style="border-left: 1px solid black;">pulang</th>
-                          <th>mulai</th>
-                          <th style="border-left: 1px solid black;">selesai</th>
-                          <th>total jam</th>
-                          <th style="border-left: 1px solid black;">(+)(-)</th>
+                            <th>masuk</th>
+                            <th style="border-left: 1px solid black;">pulang</th>
+                            <th>mulai</th>
+                            <th style="border-left: 1px solid black;">selesai</th>
+                            <th>total jam</th>
+                            <th style="border-left: 1px solid black;">(+)(-)</th>
                         </tr>
-                      </thead>
-                      <tbody >
-                        <tr>
-                          <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>Senin, 21-08-2023</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td> 00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
+                    </thead>
+                    <tbody>
+                        @foreach ($presensi as $no => $item)
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>{{ $no + 1 }}</td>
+                                <td>{{ $item->hari }}</td>
+                                <td>{{ $item->jam_masuk }}</td>
+                                <td>{{ $item->jam_pulang }}</td>
+                                <td>{{ $item->jam_mulai_istirahat }}</td>
+                                <td>{{ $item->jam_selesai_istirahat }}</td>
+                                <td>{{ $item->total_jam_kerja }}</td>
+                                <td>{{ $item->hutang_presensi }}</td>
+                                <td>{{ $item->log_aktivitas }}</td>
+                                <td>{{ $item->status_kehadiran }}</td>
+                                <td>{{ $item->kebaikan }}</td>
+                                <td>{{ $item->keterangan_status }}</td>
+                            </tr>
+                        @endforeach
 
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"  style="color: red" ></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>3</td>
-                            <td>Rabu, 23-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"  style="color: red" ></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>4</td>
-                            <td>Kamis, 24-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"  style="color: red" ></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td style="color: red">-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>5</td>
-                            <td>jumat, 22-08-2023</td>
-                            <td>12:54:40</td>
-                            <td>21:00:04</td>
-                            <td>18:00:30</td>
-                            <td>18:59:00</td>
-                            <td>05:30:07 </td>
-                            <td style="color: red">-00:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td>-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Selasa, 22-08-2023</td>
-                            <td>08:52:30 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"></td>
-                            <td>17:02:55</td>
-                            <td>12:15:00</td>
-                            <td>13:00:00</td>
-                            <td>05:10:23 </td>
-                            <td>-02:30:53</td>
-                            <td>Membuat tampilan admin w ebsite...</td>
-                            <td>Hadir</td>
-                            <td>Mengangkat galon</td>
-                            <td>Semangat jangan putus asa</td>
-
-                        </tr>
-                      </tbody>
-                      </table>
-                      <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
-                </div>
+                    </tbody>
+                </table>
+                <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+            </div>
         </div>
     </div>
 
-                <div class="modal fade" id="jamkerja">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Isi dari modal -->
-                            <div class="modal-body">
+    <div class="modal fade" id="jamkerja">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Isi dari modal -->
+                <div class="modal-body">
 
-                                    <!-- Baris Ke-1 -->
-                                    <div class="keterangan">
-                                        “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
-                                        sebuah perampokan dan saya berinisiatif untuk
-                                        menolong korban”
-                                    </div>
-                                    <BR></BR>
-                                    <div style="text-align: center">
-                                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
-                            </div>
-                        </div>
+                    <!-- Baris Ke-1 -->
+                    <div class="keterangan">
+                        “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
+                        sebuah perampokan dan saya berinisiatif untuk
+                        menolong korban”
+                    </div>
+                    <BR></BR>
+                    <div style="text-align: center">
+                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     </div>
-        </div>
-
-
-
-
-
+    </div>
 @endsection

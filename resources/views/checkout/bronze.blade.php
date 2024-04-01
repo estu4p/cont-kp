@@ -80,6 +80,8 @@
                     </div>
                 </div>
 
+
+
                 <div class="button-container">
                     <button class="border-0 mt-5 fs-5 fw-semibold"
                         style="background-color: #A61C1CE5; color: white; padding: 12px 32px; border-radius: 20px;"
@@ -145,5 +147,4 @@
         });
     });
 </script>
-
 @endsection

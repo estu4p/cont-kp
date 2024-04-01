@@ -1,0 +1,154 @@
+htm,
+comment code
+body{
+    overflow: hidden;
+}
+.kanan-tabel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.kategori {
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background: linear-gradient(180deg, #000000 -12.55%, rgba(64, 64, 64, 0) 256.82%);
+
+    
+}
+
+.card-header h3,
+.card-header p {
+    color: white;
+    
+}
+
+.form-group {
+    margin-bottom: 20px;
+    
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+ }
+
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    width: 100%;
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (max-width: 767.98px) {
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+.logout{
+    position: absolute;
+    bottom: 10px;
+}
+#nama_kategori{
+    width:60% !important;
+}
+.kanan-tabel{
+    width:auto;
+    display:inline-block;
+    padding-top:10% !important;
+    
+    box-sizing: border-box;
+}
+.logo {
+    margin-right: 10px; /* Memberikan jarak antara gambar dan teks */
+}
+.modal-backdrop {
+    opacity: 0.5; /* Atur transparansi latar belakang */
+    z-index: 1050; /* Atur z-index latar belakang */
+}
+.kekiri{
+    position: absolute;
+    top:6%;
+    left:1%;
+    font-size: 10px;
+
+}
+.kekiri i {
+    font-size: 300% !important;
+
+}
+.kategori {
+    background-color: #f0f0f0;
+}
+
+.sub-kategori {
+    display: flex; /* Menggunakan display flex untuk mengatur posisi teks */
+    flex-direction: column; /* Mengatur tata letak menjadi kolom */
+    margin-bottom: 150px;
+    padding: 50px 60px; 
+}
+
+
+.tambahkankategori-izin {
+    background-color: #f0f0f0; /* Warna abu-abu untuk latar belakang */
+    padding: 10px; /* Atur jarak antara konten dan batas elemen */
+    border-radius: 4px;/* Bundarkan sudut elemen*/
+}
+ .modal-header {
+        text-align: center;
+        padding-top: 20px ;
+     }
+.modal-title {
+        width: 100%;
+        text-align: center;
+}
+.btnsubmit {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px 15px;
+    color: white;
+    background: #A4161A;
+    border-radius: 9px;
+    z-index: 1000; /* Pastikan z-index lebih tinggi dari elemen lain jika diperlukan */
+}
+
+
+
+
