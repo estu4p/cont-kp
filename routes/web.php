@@ -336,7 +336,7 @@ Route::get('/OptionTeamAktifKlikUiUx', function () {
 });
 
 
-});
+
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
@@ -644,7 +644,7 @@ Route::get('/admin/setting/user', function () {
         ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
-    ];  
+    ];
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
         'users' => $users,
