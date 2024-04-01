@@ -28,9 +28,8 @@
                     <br>Batas Tanggal : 30/10/2024
                     <br><b>Silahkan Cek E-mail Untuk Invoice</b>
                 </div>
-                <div class="modal-footer border-0 text-center">
+                <div class="modal-footer border-0 d-grid justify-content-center"> <!-- Menambahkan kelas d-grid dan properti CSS justify-content -->
                     <a href="/AdminPaket"><button type="button" class="btn btn-success"><b>Selesai</b></button></a>
-
                 </div>
             </div>
         </div>
