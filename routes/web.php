@@ -463,7 +463,7 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
-// CONTRIBUTOR FOR MITRA PRSENSI
+// CONTRIBUTOR FOR MITRA PRESENSI
 Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);
 Route::get('/mitra-laporanpresensi-detailhadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');

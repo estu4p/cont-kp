@@ -57,22 +57,22 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">47:30:50</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasukFormatted }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
                                     <b class="fz7">total masuk</b>
-                                    <p class="total fz6 my-auto px-1 py-0">16 hari</p>
+                                    <p class="total fz6 my-auto px-1 py-0">{{ $totalMasukHari }} hari</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex  py-2  align-items-center  flex-row justify-content-between">
                                     <b class="fz7">target</b>
-                                    <p class="target fz6 my-auto px-1 py-01">1100 jam</p>
+                                    <p class="target fz6 my-auto px-1 py-01">{{ $target }} jam</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">152:30:10</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -185,18 +185,18 @@
                                     @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
-                          <td>1</td>
-                          <td>{{$item->hari}}</td>
-                          <td>06:25:00</td>
-                          <td>13:05:14</td>
-                          <td>12:15:00</td>
-                          <td>13:00:00</td>
-                          <td>07:00:53 </td>
-                          <td>00:30:53</td>
-                          <td>Membuat tampilan website e-com..</td>
-                          <td>Hadir</td>
-                          <td>Merapikan parkiran motor</td>
-                          <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>2022-11-06</td>
+                                        <td>13:58:14</td>
+                                        <td>15:23:31</td>
+                                        <td>14:16:26</td>
+                                        <td>06:55:53</td>
+                                        <td>07:00:53 </td>
+                                        <td>00:00:04</td>
+                                        <td>Membuat tampilan website e-com.</td>
+                                        <td>Hadir</td>
+                                        <td>Merapikan parkiran motor</td>
+                                        <td>Kemarin anda absen pulang di kost, jangan di ulang</td>
 
                                     </tr>
                                     @endforeach
