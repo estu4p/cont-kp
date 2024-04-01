@@ -47,32 +47,17 @@ class SchoolController extends Controller
             return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM]);
         }
     }
-    public function Lihatprofil(Request $request)
+    public function Lihatprofil(Request $request, $id)
     {
-        //Data Mahasiswa- Lihat profile
-        $lihat = User::where("role_id",3)->first();
-        // dd($lihat);
-        $presensi = Presensi::where('id', $lihat->id)
-        ->select("hutang_presensi")->first();
-        $divisi = Divisi::where('id', $lihat->divisi_id)
-        ->select("nama_divisi")->first();
-        $project = Project :: where ('id', $lihat->project_id)
-        ->select("nama_project")->first();
-        $Shift= Shift::where('id', $lihat->shift_id)
-        ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+        //Data Mahasiswa- Lihat profile detail 
+        $lihat = User::findOrFail($id);
 
-
-        // $lihat = User::where("role_id", 3)
-        // ->where('nama_lengkap', 'nama_lengkap') // Ubah 'nama_lengkap' dengan nilai yang ingin Anda cari
-        // ->get();
-
-        // if ($lihat) {
-        //     $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
-        //     $divisi = Divisi::where('id', $lihat->divisi_id)->select("nama_divisi")->first();
-        //     $project = Project::where('id', $lihat->project_id)->select("nama_project")->first();
-        //     $shift = Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
-        // };
-        // dd($lihat);
+        // Logika untuk mendapatkan data profil sesuai dengan data user
+        $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
+        $divisi = Divisi::where('id', $lihat->divisi_id)->select("nama_divisi")->first();
+        $project = Project::where('id', $lihat->project_id)->select("nama_project")->first();
+        $Shift = Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+    
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
