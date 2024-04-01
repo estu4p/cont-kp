@@ -188,13 +188,13 @@ Route::get('/pemagang/detail', function () {
 
 
 //lihat profil contributor for univ
-Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
+// Route::get('/profil-siswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jumlahMahasiswa');
 
 
-//contributor univ
+//contributor for univ
 Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
-Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil']);
+Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');

@@ -36,7 +36,7 @@
                 <td>
                     <div class="{{ strtolower($mhs->status_akun) }}">{{ $mhs->status_akun }}</div>
                 </td>
-                <td><a href="/profil-siswa"> <i class="fa-solid fa-circle-info icon"></i></a></td>
+                <td><a href="{{route('detail-profil-siswa', $mhs->id)}}"> <i class="fa-solid fa-circle-info icon"></i></a></td>
             </tr>
             @endforeach
         </tbody>
