@@ -20,11 +20,11 @@
         <h3 class="card-title">Pengaturan</h3>
     </div>
     <a class="" href="/manage-devisi">
-        <div class="nav-devisi" style="background-color:  #f9caca;">
+        <div class="nav-devisi" style="background-color:  #f9caca; font-weight: bold;">
             <li>Manage Divisi</li>
         </div>
     </a>
-    <a class=" " style="font-size: 14px; width:max-content;" href="/manage-shift">
+    <a class=" " href="/manage-shift">
         <div class="nav-devisi">
             <li>Manage Shift</li>
         </div>
@@ -54,8 +54,8 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped" id="examplee" >
-                <thead >
+            <table class="table table-striped" id="examplee">
+                <thead>
                     <tr>
                         <th scope="col" class="ratatengah">No</th>
                         <th scope="col" class="namadiv">Nama Divisi</th>
@@ -111,8 +111,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
+                <div class="buttongrup gap-3">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -146,8 +148,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                <div class="buttongrup gap-3">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                </div>
             </div>
         </div>
     </div>

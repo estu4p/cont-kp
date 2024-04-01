@@ -232,6 +232,7 @@
    font-size: 15px;
    padding-top: 5px;
    padding-bottom: 5px;
+   margin-top: 10px;
    
 }
 a {
@@ -244,4 +245,13 @@ a {
 .namadiv{
     width: 50%;
     
+}
+.buttongrup{
+    margin-right: 35%;
+}
+.button-grup{
+    margin-right: 25%;
+}
+.btn-batal{
+    background: transparent;
 }
