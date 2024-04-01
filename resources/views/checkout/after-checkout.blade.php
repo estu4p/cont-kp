@@ -9,10 +9,9 @@
                 <p class="fw-semibold pt-3">total harga: 1.000.000</p>
                 <p class="fw-medium">no tujuan rekening : 384720392378247343</p>
                 <p class="fw-medium" style="font-size: 12px; margin: -8px 0px 8px;">batas tanggal pembayaran 30/10/2023</p>
-                <p class="fw-bold">silahkan check e-mail untuk invoice</p>
-                <button class="border-0 mt-3 fs-5 fw-semibold"
-                    style="background-color: #00C844; color: white; padding: 8px 40px; border-radius: 12px;" type="button"
-                    data-bs-toggle="modal" data-bs-target="#">Selesai</button>
+                <p class="fw-bold mb-5">silahkan check e-mail untuk invoice</p>
+                <a href="/slip" class="border-0 fs-5 fw-semibold text-decoration-none"
+                    style="background-color: #00C844; color: white; padding: 8px 40px; border-radius: 12px;">Selesai</a>
             </div>
         </div>
     </div>

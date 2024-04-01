@@ -28,7 +28,7 @@
                 </select>
 
                 <div class="text-center mt-5 mb-5">
-                    <a href="/barcode" id="submit-button" class="reg-button border-0 shadow fw-semibold text-decoration-none"
+                    <a href="/user/barcode" id="submit-button" class="reg-button border-0 shadow fw-semibold text-decoration-none"
                         style="background-color: #A61C1CE5; padding: 10px 20px; pointer-events: none; opacity: 0.5;">Submit</a>
                 </div>
             </form>
