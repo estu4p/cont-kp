@@ -15,7 +15,7 @@
                                 <img src="assets/images/user.png" class="user">
                             </div>
                             <div>
-                                <h3 style="font-size: 40px; margin: 0;">Y</h3>
+                                <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
                                 <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                             </div>
                             <div style="align-self: center;">
@@ -179,123 +179,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
                                         <td>1</td>
-                                        <td>Senin, 21-08-2023</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td> -- </td>
+                                        <td>{{$item->hari}}</td>
+                                        <td>2016-04-12</td>
+                                        <td>18:34:19</td>
+                                        <td>10:10:07</td>
+                                        <td>06:46:27</td>
+                                        <td>23:19:47</td>
+                                        <td>00:00:03</td>
                                         <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>
                                         <td>Ganti jam</td>
 
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>2</td>
-                                        <td>Selasa, 22-08-2023</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>-- </td>
-                                        <td>--</td>
-                                        <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
-                                                data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
-                                        </td>
-                                        <td>Ganti jam</td>
-
+                                    @endforeach
 
                                     </tr>
                                 </tbody>

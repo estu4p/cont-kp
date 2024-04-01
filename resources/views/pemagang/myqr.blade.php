@@ -32,7 +32,17 @@
                     use App\Models\User;
                     use Illuminate\Support\Facades\Auth;
 
+
                     $id = Auth::user()->id;
+
+    <div class="text-container">
+            <h3>Iqra's QR Code</h3 >
+        </div>
+        <div class="qr-container">
+            <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="Syalita's QR Code" class="qr-image">
+        </div>
+        
+    </div>
 
                     $presensi = Presensi::join('users', 'presensi.nama_lengkap', '=', 'users.id')
                                         ->select('users.nama_lengkap as nama')

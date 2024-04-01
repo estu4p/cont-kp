@@ -20,9 +20,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbarMitra')
-
-
         <div class="content-wrapper">
             <section class="content">
                 @yield('content')
