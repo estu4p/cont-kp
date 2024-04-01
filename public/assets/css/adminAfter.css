@@ -28,3 +28,7 @@
     margin-left: 8px;
     margin-bottom: 4px;
 }
+.selectedDataBody td {
+    background-color: #A4161A;
+    color: white;
+}

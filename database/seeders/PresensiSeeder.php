@@ -30,10 +30,6 @@ class PresensiSeeder extends Seeder
                     Presensi::create([
                         'nama_lengkap' => $user->id, // Menggunakan ID pengguna sebagai nama lengkap (asumsi nama lengkap dihapus dan digantikan dengan ID)
                         'hari' => $faker->dateTime,
-                        'jam_default_masuk' => '06:30:00',
-                        'jam_default_pulang' => '13:00:00',
-                        'jam_masuk' => '06:30:00',
-                        'jam_pulang' => '13:00:00',
                         'jam_mulai_istirahat' => '12:00:00',
                         'jam_selesai_istirahat' => '12:15:00',
                         'total_jam_kerja' => '06:15:00', // Misalnya, total jam kerja antara 0 dan 8 jam
