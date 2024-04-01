@@ -1,7 +1,8 @@
 <?php
 
-use function Laravel\Prompts\alert;
+use App\Models\Presensi;
 
+use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -12,9 +13,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
@@ -321,19 +322,19 @@ Route::get('/Option-TeamAktif', function () {
 });
 Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
-});  
+});
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
-});  
+});
 Route::get('/OptionTeamAktifKlikUiUx', function () {
     return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
-});  
+});
 Route::get('/Option-TeamAktif-SeeAllTeams', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
-}); 
+});
 Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
-}); 
+});
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
@@ -470,6 +471,61 @@ Route::get('/AdminUniv-InputOTP', function () {
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
+
+Route::get('/mitra-presensi-barcode/masuk', function () {
+    return view('User.ContributorForMitra.barcode_jam-masuk', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+    ]);
+});
+Route::get('/mitra-presensi-barcode/istirahat', function () {
+    return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+
+    ]);
+});
+Route::get('/mitra-presensi-barcode/selesai-istirahat', function () {
+    return view('User.ContributorForMitra.barcode_jam-selesai-istirahat', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+
+    ]);
+});
+Route::get('/mitra-presensi-barcode/pulang', function () {
+    $presensi = Presensi::all();
+
+    // Ambil data presensi terbaru
+    $latestPresensi = Presensi::latest()->first();
+    $pulang = strtotime($latestPresensi->jam_pulang);
+    $masuk = strtotime($latestPresensi->jam_masuk);
+
+    // Hitung selisih waktu
+    $diffInSeconds = $pulang - $masuk;
+
+    // Ubah selisih waktu ke dalam format jam:menit:detik
+    $totalHours = floor($diffInSeconds / 3600);
+    $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
+    $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
+
+    $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+
+    return view('User.ContributorForMitra.barcode_jam-pulang', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => $presensi,
+        'total' => $total
+    ]);
+});
+Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
+Route::post('/mitra-presensi-barcode/jam-mulai-istirahat', [ContributorForMitra::class, 'jam_mulai_istirahat'])->name('barcode.jam-mulai-istirahat');
+Route::post('/mitra-presensi-barcode/jam-selesai-istirahat', [ContributorForMitra::class, 'jam_selesai_istirahat'])->name('barcode.jam-selesai-istirahat');
+Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
+
+
 
 // Route::get('/AdminUniv-Dashboard', function () {
 //     return view('adminUniv-afterPayment.AdminUniv-Dashboard');
