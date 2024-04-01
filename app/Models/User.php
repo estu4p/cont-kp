@@ -15,6 +15,7 @@ class User extends Authenticatable
     protected $fillable = [
         'nama_lengkap',
         'nomor_induk',
+        'foto_profil',
         'sekolah',
         'jurusan',
         'email',
@@ -80,5 +81,10 @@ class User extends Authenticatable
     public function sekolah()
     {
         return $this->belongsTo(User::class, 'sekolah');
+    }
+
+    public function perguruanTinggi()
+    {
+        return $this->belongsTo(Sekolah::class, 'sekolah');
     }
 }

@@ -2,7 +2,7 @@
 </head>
 
 <body>
-    <a href="/superAdmin/ubahProfil" class="navbar d-flex justify-content-between text-decoration-none" style=" color: #000000;">
+    <a href="/superAdmin/editProfil" class="navbar d-flex justify-content-between text-decoration-none" style=" color: #000000;">
       <div class="kosongan"></div>
         <div class="kanan d-flex flex-row justify-content-between gap-5">
             <div class="ml-5 mr-2">
@@ -14,7 +14,11 @@
                     <span class="profile-status" style="font-size: 14px;">{{ $superAdmin->status_akun }}</span>
                 </div>
                 <div class="navbar-logo">
-                    <img src="{{ asset('assets/images/Rectangle 22.png') }}" alt="Profile Logo">
+                    @if ($superAdmin->foto_profil)
+                        <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Profile Logo">
+                    @else
+                        <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Profile Logo">
+                    @endif
                 </div>
             </div>
 

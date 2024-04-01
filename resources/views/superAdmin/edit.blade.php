@@ -6,7 +6,11 @@
     <div class="d-flex gap-4 mt-0 mb-5 px-5">
         <div class="bg-white rounded text-center" style="padding: 80px 50px 40px; width: 30%;">
             <div>
-                <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="">
+                @if ($superAdmin->foto_profil)
+                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil">
+                @else
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
+                @endif
                 <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap }}
                 </h4>
                 <p class=" fw-light ">{{ $superAdmin->email }}</p>
@@ -18,16 +22,29 @@
         </div>
         <div class="bg-white rounded" style="padding: 80px 80px 40px; width: 70%;">
             <div class="d-flex gap-4">
-                <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" alt="">
+                @if ($superAdmin->foto_profil)
+                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil">
+                @else
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
+                @endif
                 <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                    <button
-                        style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">change
-                        photo</button>
-                    <button
+                    <form action="{{ route('superAdmin.updateFoto', $superAdmin->username) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
+                        <input type="file" name="foto_profil" id="uploadFoto" style="display: none;" onchange="uploadFile()">
+                        <button type="button" onclick="document.getElementById('uploadFoto').click()" style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
+                            Change photo
+                        </button>
+                    </form>
+                    <form id="deleteFoto" action="" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button onclick="showAlertDeleteProfile('{{ $superAdmin->username }}')"
                         style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
                 </div>
             </div>
-            <form action="{{ route('super-admin.update-profile', $superAdmin->username )}}" method="POST">
+            <form action="{{ route('superAdmin.updateProfile', $superAdmin->username )}}" method="POST">
                 @csrf
                 @method('PATCH')
                 <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">personal details</h6>
@@ -66,7 +83,7 @@
                 </div>
                 <div class="d-flex gap-3 mt-4">
                     <button
-                        type="button" onclick="window.location.href='{{ route('super-admin.dashboard') }}'"
+                        type="button" onclick="window.location.href='{{ route('superAdmin.dashboard') }}'"
                         style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0; margin-left: auto;">Cancel</button>
                     <button
                         type="submit"
@@ -94,4 +111,27 @@
                 });
         </script>
     @endif
+    <script>
+        // alert delete foto profile
+        function showAlertDeleteProfile($username) {
+            swal({
+                text: "Hapus Foto Profil?",
+                icon: "warning",
+                buttons: ["Batal", "Hapus"],
+                dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        var formDelete = document.getElementById('deleteFoto');
+                        formDelete.setAttribute('action', '/superAdmin/langganan/fotoProfil/' + $username);
+                        formDelete.submit();
+                    } else {
+                        swal("Data subscription tidak jadi dihapus.");
+                    }
+                });
+        }
+
+        function uploadFile() {
+            document.getElementById('uploadFoto').form.submit();
+        }
+    </script>
 @endsection

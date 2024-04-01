@@ -16,7 +16,7 @@ use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-
+use App\Http\Controllers\BEController\SuperadminSistemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -191,7 +191,7 @@ Route::get('/pemagang/detail', function () {
 });
 
 //lihat profil contributor for univ 
-Route::get('/profil-siswa',[SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
+Route::get('/profil-siswa', [SchoolController::class, 'Lihatprofil'])->name('lihatprofilmahasiswa');
 
 
 Route::get('/laporandatapresensi', function () {
@@ -463,43 +463,21 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
 Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
-Route::get('/superAdmin', function () {
-    return view('super-admin.dashboard', [
-        'title' => "Super Admin - Dashboard",
-        'subscription' => 300,
-        'admin_sistem' => 200
-    ]);
-});
-Route::get('/superAdmin/ubahProfil', function () {
-    return view('superAdmin.edit', [
-        'title' => "Super Admin - Ubah Profil",
-        'nama' => "Jay Antonio",
-        'email' => 'antoniojay@gmail.com',
-        'hp' => "081326273187",
-        'alamat' => "Jateng",
-        'about' => "Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data"
-    ]);
-});
-Route::get('/superAdmin/data-admin', function () {
-    // $admins = App\Models\Admin::paginate(4);
-    $admins = [
-        ['id' => 1, 'nama' => 'Joy', 'lokasi' => 'Yogyakarta'],
-        ['id' => 2, 'nama' => 'Vior', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 3, 'nama' => 'Ilham', 'lokasi' => 'Yogyakarta'],
-        ['id' => 4, 'nama' => 'Blue', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 5, 'nama' => 'Green', 'lokasi' => 'Yogyakarta'],
-        ['id' => 6, 'nama' => 'Black', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 7, 'nama' => 'Purple', 'lokasi' => 'Yogyakarta'],
-        ['id' => 8, 'nama' => 'Emerald', 'lokasi' => 'Jawa Tengah'],
-        ['id' => 9, 'nama' => 'Sage', 'lokasi' => 'Yogyakarta'],
-        ['id' => 10, 'nama' => 'Sky', 'lokasi' => 'Jawa Tengah'],
-    ];
-    return view('superAdmin.dataAdmin', [
-        'title' => "Data Admin",
-        'admins' => $admins,
-    ]);
-});
-
+// Super Admin
+Route::get('/superAdmin', [SuperadminSistemController::class, 'dashboard'])->name('superAdmin.dashboard');
+Route::get('/superAdmin/editProfil', [SuperadminSistemController::class, 'editProfile'])->name('superAdmin.editProfile');
+Route::patch('/superAdmin/editProfil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('superAdmin.updateProfile');
+Route::patch('/superAdmin/editFoto/{username}', [SuperadminSistemController::class, 'updateFoto'])->name('superAdmin.updateFoto');
+Route::delete('/superAdmin/langganan/fotoProfil/{username}', [SuperadminSistemController::class, 'deleteFoto'])->name('superAdmin.deleteFoto');
+Route::get('/superAdmin/dataAdmin', [SuperadminSistemController::class, 'dataAdmin'])->name('superAdmin.dataAdmin');
+Route::post('/superAdmin/dataAdmin/add', [SuperadminSistemController::class, 'addAdmin'])->name('superAdmin.addAdmin');
+Route::get('/superAdmin/dataAdmin/showAlertEdit/{adminId}', [SuperadminSistemController::class, 'showAlertEditAdmin'])->name('superAdmin.showAlertEdit');
+Route::patch('/superAdmin/dataAdmin/update/{username}', [SuperadminSistemController::class, 'updateAdmin'])->name('superAdmin.updateAdmin');
+Route::delete('/superAdmin/dataAdmin/delete/{username}', [SuperadminSistemController::class, 'deleteAdmin'])->name('superAdmin.deleteAdmin');
+Route::get('/superAdmin/langganan', [SuperadminSistemController::class, 'langganan'])->name('superAdmin.langganan');
+Route::get('/superAdmin/langganan/showAlertEdit/{id}', [SuperadminSistemController::class, 'showAlertEditLangganan'])->name('superAdmin.showAlertEditLangganan');
+Route::patch('/superAdmin/langganan/update/{id}', [SuperadminSistemController::class, 'updateLangganan'])->name('superAdmin.updateLangganan');
+Route::delete('/superAdmin/langganan/delete/{id}', [SuperadminSistemController::class, 'deleteLangganan'])->name('superAdmin.deleteLangganan');
 
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
@@ -513,29 +491,6 @@ Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
 });
 
-
-
-
-
-
-Route::get('/superAdmin/langganan', function () {
-    $members = [
-        ['id' => 1, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
-        ['id' => 2, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
-        ['id' => 3, 'nama' => 'Danni Hernando', 'email' => 'dannihernando17@gmail.com', 'pt' => 'Universitas Semarang', 'paket' => 'Bronze', 'lokasi' => 'Semarang', 'status' => 'Tidak Aktif'],
-        ['id' => 4, 'nama' => 'Febrian Adipurnowo', 'email' => 'febrianadip@gmail.com', 'pt' => 'Universitas Gadjah Mada', 'paket' => 'Gold', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
-        ['id' => 5, 'nama' => 'Yessa Khoirunnisa', 'email' => 'yessaakhh@gmail.com', 'pt' => 'Universitas Indonesia', 'paket' => 'Platinum', 'lokasi' => 'Depok', 'status' => 'Tidak Aktif'],
-        ['id' => 6, 'nama' => 'Raihan Hafidz', 'email' => 'raihanhafidz1@gmail.com', 'pt' => 'Universitas Ahmad Dahlan', 'paket' => 'Bronze', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
-        ['id' => 7, 'nama' => 'Syalita Widyandini', 'email' => 'syalitawyda1@gmail.com', 'pt' => 'Politeknik Negeri Semarang', 'paket' => 'Silver', 'lokasi' => 'Semarang', 'status' => 'Aktif'],
-        ['id' => 8, 'nama' => 'Danni Hernando', 'email' => 'dannihernando171@gmail.com', 'pt' => 'Universitas Semarang', 'paket' => 'Bronze', 'lokasi' => 'Semarang', 'status' => 'Tidak Aktif'],
-        ['id' => 9, 'nama' => 'Febrian Adipurnowo', 'email' => 'febrianadip1@gmail.com', 'pt' => 'Universitas Gadjah Mada', 'paket' => 'Gold', 'lokasi' => 'Yogyakarta', 'status' => 'Aktif'],
-        ['id' => 10, 'nama' => 'Yessa Khoirunnisa', 'email' => 'yessaakhh1@gmail.com', 'pt' => 'Universitas Indonesia', 'paket' => 'Platinum', 'lokasi' => 'Depok', 'status' => 'Tidak Aktif'],
-    ];
-    return view('super-admin.langganan', [
-        'title' => "Langganan",
-        'members' => $members,
-    ]);
-});
 Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });

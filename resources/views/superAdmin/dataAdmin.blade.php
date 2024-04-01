@@ -23,7 +23,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="form-addUser" class="text-capitalize" method="POST" action="{{ route('super-admin.add-admin') }}">
+                        <form id="form-addUser" class="text-capitalize" method="POST" action="{{ route('superAdmin.addAdmin') }}">
                             @csrf
                             <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
                                 <h6>profile photo</h6>
@@ -166,7 +166,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         var formDelete = document.getElementById('formDeleteAdmin');
-                        formDelete.setAttribute('action', '/super-admin/data-admin/delete/' + username);
+                        formDelete.setAttribute('action', '/superAdmin/dataAdmin/delete/' + username);
                         formDelete.submit();
                     } else {
                         swal("Data tidak jadi dihapus.");
@@ -212,7 +212,7 @@
             let adminId = $(this).data('id');
 
             $.ajax({
-                url: '/super-admin/data-admin/showAlertEdit/' + adminId,
+                url: '/superAdmin/dataAdmin/showAlertEdit/' + adminId,
                 type: 'GET',
                 success: function (response) {
                     $('#nama_lengkap').val(response.admin.nama_lengkap);
@@ -222,7 +222,7 @@
                     $('#lokasi').val(response.admin.kota);
                     $('#password').removeAttr('required');
                     $('#password_confirmation').removeAttr('required');
-                    $('#form-addUser').attr('action', '/super-admin/data-admin/update/' + response.admin.username);
+                    $('#form-addUser').attr('action', '/superAdmin/dataAdmin/update/' + response.admin.username);
                     addPatchMethod('PATCH');
                     $('#addUserModal').modal('show');
                 }
@@ -238,7 +238,7 @@
                 $('#lokasi').val('');
                 $('#password').val('');
                 $('#password_confirmation').val('');
-                $('#form-addUser').attr('action', '/super-admin/data-admin/add');
+                $('#form-addUser').attr('action', '/superAdmin/dataAdmin/add');
                 addPatchMethod('POST');
                 $('#addUserModal').modal('show');
             // });
