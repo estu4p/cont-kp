@@ -1,0 +1,188 @@
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+  }
+
+  .checkout-container {
+    width: 400px;
+    height: 380px;
+    margin: 40px auto;
+    border: 1px solid #ccc;
+    padding: 22px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .checkout-header {
+    text-align: center;
+    margin-top: 40px;
+
+  }
+
+  .checkout-group {
+    display: block;
+    margin-top: 25px;
+  }
+
+  .checkout-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .checkout-inputbronze {
+    width: 350px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .checkout-button {
+    background-color: #AF3333;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 40px auto 0;
+    display: block;
+    font-size: 15px;
+  }
+
+  .checkout-terms {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 70px;
+  }
+
+  .checkout-group {
+  width: 22pc;
+
+
+  }
+
+  .wadah {
+    margin-top: 20px;
+  }
+
+  .checkout-terms a {
+    color: #007bff;
+    text-decoration: none;
+
+  }
+
+  img {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1350px;
+    height: 80px;
+  }
+  .selek{
+    position: relative;
+    width: 22pc;
+  }
+  .bungkus-opsi{
+    position: absolute;
+    display: none;
+    top:100%;
+    left:0;
+    right:0;
+  }
+  .muncul{
+    display: inline-block;
+  }
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 400px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .payment-option {
+    width: calc(33% - 10px); /* Adjust width as needed */
+    margin-bottom: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .payment-option.active {
+    background-color: #eee;
+  }
+
+  .payment-option img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+.form-select {
+    font-size: 13px;
+}
+
+
+
+.modal-content {
+    border-radius: 20px; /* Menentukan sudut melengkung untuk modal */
+}
+
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+
+.modal-header {
+    background-color: white;
+    color: white;
+    border-radius: 30px;
+}
+.modal-header .btn-close {
+    display: none;
+}
+
+
+.modal-footer {
+    background-color: white;
+    color: white;
+    border-radius: 30px;
+}
+
+
+.btn-close {
+    color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.modal-header img {
+    max-width: 110px;
+    height: auto;
+    display: block;
+    margin: 210px auto;
+    border-radius: 5px;
+}
+
+#payment-method-list {
+    display: none;
+}

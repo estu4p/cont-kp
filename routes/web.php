@@ -626,3 +626,35 @@ Route::get('/admin/setting/user', function() {
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
+
+Route::get('/AdminPaket', function () {
+    return view('user.AdminUnivAfterPayment.AdminPaket');
+});
+
+Route::get('/Riwayat', function () {
+    return view('user.AdminUnivAfterPayment.Riwayat');
+});
+
+Route::get('/CheckoutBronze', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutBronze');
+});
+
+Route::get('/CheckoutSilver', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutSilver');
+});
+
+Route::get('/CheckoutGold', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutGold');
+});
+
+Route::get('/CheckoutPlatinum', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutPlatinum');
+});
+
+Route::get('/RiwayatJangkaWaktu', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
+});
+
+Route::get('/RiwayatPembelian', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatPembelian');
+});
