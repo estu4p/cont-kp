@@ -12,7 +12,7 @@
         </a>
         <a href="/RiwayatPembelian" style="text-decoration: none;">
             <button class="button-with-icon riwayatpembelian"><i class="fas fa-history"></i> Riwayat Pembelian</button>
-        </a>w
+        </a>
 
     </div>
     <div class="isie">

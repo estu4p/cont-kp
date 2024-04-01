@@ -1,188 +1,541 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
 
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    border-radius: 10px;
-  }
-
-  .checkout-container {
-    width: 400px;
-    height: 380px;
-    margin: 40px auto;
-    border: 1px solid #ccc;
-    padding: 22px;
-    border-radius: 40px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  .checkout-header {
-    text-align: center;
-    margin-top: 40px;
-
-  }
-
-  .checkout-group {
-    display: block;
-    margin-top: 25px;
-  }
-
-  .checkout-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 15px;
-  }
-
-  .checkout-inputbronze {
-    width: 350px;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 15px;
-  }
-
-  .checkout-button {
-    background-color: #AF3333;
-    color: #fff;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    margin: 40px auto 0;
-    display: block;
-    font-size: 15px;
-  }
-
-  .checkout-terms {
-    text-align: center;
-    font-size: 12px;
-    margin-top: 70px;
-  }
-
-  .checkout-group {
-  width: 22pc;
-
-
-  }
-
-  .wadah {
-    margin-top: 20px;
-  }
-
-  .checkout-terms a {
-    color: #007bff;
+.nav-mobile,
+.list-mobile {
+    display: none;
+}
+.menu-navbar,
+.menu-reg {
+    padding: 10px 20px;
+    display: inline-block;
+    position: relative;
     text-decoration: none;
+}
 
-  }
+.menu-navbar {
+    color: #000;
+}
 
-  img {
+.menu-reg {
+    color: #a61c1c;
+}
+
+.menu-navbar:before,
+.menu-reg:before {
+    content: "";
     position: absolute;
-    bottom: 0px;
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    z-index: -1;
+}
+.menu-navbar:hover:before {
+    background-color: #a61c1c;
+}
+.menu-navbar:hover {
+    color: #ffffff;
+}
+.menu-reg:hover {
+    color: #a61c1c;
+    border: 2px solid #a61c1c;
+    border-radius: 8px;
+}
+.header-landing {
+    background-image: url("../images/bg.png");
+    height: 636px;
+}
+.content-header {
+    padding: 50px 40px 0px 20px;
+}
+.btn-header {
+    color: white;
+    background-color: #a61c1c;
+    border: 0;
+    border-radius: 12px;
+    padding: 16px 28px;
+    text-decoration: none;
+}
+.btn-header:hover {
+    color: #a61c1c;
+    background-color: white;
+    border: 3px solid #a61c1c;
+    transform: scale(2, 3);
+}
+.fitur {
+    background-color: #f2f4f7;
+}
+.title-fitur {
+    background-image: url("../images/title-s2.png");
+    font-size: 36px;
+    color: white;
+    width: 100%;
+    max-width: 584px;
+    height: 128px;
+    text-align: center;
+    padding: 24px;
+    display: flex; /* Menjadikan konten menjadi flexbox */
+    justify-content: center; /* Memusatkan konten secara horizontal */
+}
+.card {
+    border-radius: 16px;
+    width: 22rem;
+    margin: 0 auto; /* Untuk membuat card berada di tengah */
+}
+.card-paket:hover {
+    border: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.register {
+    padding: 80px;
+    font-family: "Montserrat", sans-serif;
+}
+.box-form {
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 0 rgba(0, 0, 0, 0.19);
+    width: 80%;
+    max-width: 540px;
+    margin: auto;
+    align-items: center;
+    padding: 60px 80px 60px;
+}
+.button-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+.img-container {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+.box-checkout {
+    border-radius: 12px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 0 rgba(0, 0, 0, 0.19);
+    width: 80%;
+    max-width: 540px;
+    margin: 20% auto;
+    padding: 60px 80px 80px;
+    position: relative;
+}
+.checkout {
+    border-radius: 28px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 0 rgba(0, 0, 0, 0.19);
+    width: 80%;
+    max-width: 540px;
+    margin: 0 auto;
+    margin-top: 40%;
+    padding: 60px;
+    position: block;
+    background-color: white;
+}
+.after-checkout {
+    border-radius: 36px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 100px 80px 40px;
+    position: relative;
+}
+.img-checkout {
+    position: absolute;
+    bottom: 80%;
+    width: 160px;
+    border-radius: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 16px 0 rgba(0, 0, 0, 0.19);
+    z-index: 1;
     left: 50%;
     transform: translateX(-50%);
-    width: 1350px;
-    height: 80px;
-  }
-  .selek{
-    position: relative;
-    width: 22pc;
-  }
-  .bungkus-opsi{
-    position: absolute;
-    display: none;
-    top:100%;
-    left:0;
-    right:0;
-  }
-  .muncul{
-    display: inline-block;
-  }
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  .container {
-    width: 400px;
-    margin: 50px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .payment-option {
-    width: calc(33% - 10px); /* Adjust width as needed */
-    margin-bottom: 10px;
+}
+.invoice {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 30%;
+    margin: auto;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
     text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer;
-  }
-
-  .payment-option.active {
-    background-color: #eee;
-  }
-
-  .payment-option img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
-  }
-
-.form-select {
-    font-size: 13px;
-}
-
-
-
-.modal-content {
-    border-radius: 20px; /* Menentukan sudut melengkung untuk modal */
-}
-
-.modal-body {
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    border-radius: 15px;
-}
-
-
-.modal-header {
     background-color: white;
-    color: white;
-    border-radius: 30px;
+    padding: 0.5rem 0.5rem 1.25rem;
+    margin-top: 2rem;
 }
-.modal-header .btn-close {
-    display: none;
+.line {
+    width: 80%;
+    border: none;
+    height: 2px;
+    background-color: black;
+    margin: 30px auto;
 }
-
-
-.modal-footer {
-    background-color: white;
-    color: white;
-    border-radius: 30px;
-}
-
-
-.btn-close {
-    color: white;
-    display: flex;
-    justify-content: center;
-    border-radius: 30px;
-}
-
-.modal-header img {
-    max-width: 110px;
-    height: auto;
+.img-header {
     display: block;
-    margin: 210px auto;
+}
+#footer .d-flex {
+    display: flex;
+    align-items: center; /* Menyusun elemen secara vertikal di tengah */
+}
+
+#footer .d-flex img {
+    width: 70px; /* Lebar gambar */
+    margin-right: 10px; /* Jarak antara gambar dan teks */
+}
+
+.d-flex h4 {
+    margin: 0; /* Menghapus margin bawaan */
+    font-weight: bold;
+}
+#footer .col-2 a {
+    display: block; /* Anchor berjejer ke bawah */
+    text-align: center;
+    margin-bottom: 10px; /* Jarak antara setiap anchor */
+}
+.icon-labelinput {
+    height: 25px;
+    width: 10px;
+}
+.dalam {
+    /* Frame 2427 */
+
+    box-sizing: border-box;
+
+    width: 420px;
+    height: 216px;
+
+    background: #a61c1c;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
 }
+.list-pembayaran {
+    box-sizing: border-box;
+    display: flex;
+    text-align: center;
+    font-size: 12px;
+    width: 200px;
+    height: 38px;
+    margin-top: 25px;
+    margin-left: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+}
+.list-pembayaran input[type="radio"] {
+    margin-left: 3%;
+    margin-right: 10px;
+    transform: scale(2);
+}
+.list-pembayaran {
+    display: flex;
+    align-items: center;
+}
+.list-pembayaran .ikon {
+    margin-right: auto;
+}
+.btn {
+    text-align: left;
+}
+.dalam2 {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    margin-left: 16%;
+    bottom: 2%;
+    background: #f2f4f8;
+    border: 1px solid #c1c7cd;
+    border-radius: 5px;
+}
+.btn-text {
+    padding: 15px;
+    border: 2px solid #e9e9e9;
+    border-radius: 0px 8px 8px 0px;
+    width: 100%;
+}
 
-#payment-method-list {
-    display: none;
+@media (max-width: 992px) {
+    #paket .col-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .fw-semibold.fs-5 p {
+        font-size: 16px;
+    }
+    .fw-semibold.fs-5 p.mb-5 {
+        font-size: 16px;
+    }
+    .box-form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-header {
+        display: none;
+    }
+    .nav-mobile {
+        display: block;
+        margin-left: auto;
+        margin-top: 12px;
+    }
+    .list-mobile.active {
+        display: block;
+    }
+    .nav-desktop {
+        display: none;
+    }
+    .title-fitur {
+        font-size: 24px;
+        height: auto;
+        padding: 12px;
+    }
+    .container {
+        padding: 20px;
+    }
+    .card {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px; /* Menambahkan ruang antara kartu */
+    }
+
+    .card img {
+        width: 80px; /* Mengurangi lebar gambar */
+    }
+
+    .card-body {
+        padding: 1rem; /* Mengurangi padding pada konten kartu */
+    }
+
+    .card-body h5 {
+        font-size: 16px; /* Mengurangi ukuran font judul */
+        height: auto; /* Mengubah ketinggian menjadi otomatis */
+    }
+
+    .card-body p {
+        font-size: 14px; /* Mengurangi ukuran font teks */
+        height: auto; /* Mengubah ketinggian menjadi otomatis */
+    }
+    #paket .col-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+    .container-footer {
+        padding: 24px 12px 24px 12px;
+    }
+
+    .col-4,
+    .col-2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .text-uppercase {
+        font-size: 14px;
+    }
+
+    .text-capitalize {
+        font-size: 14px;
+    }
+    .box-form {
+        width: 100%;
+        border-radius: 0px;
+        box-shadow: none;
+        max-width: 540px;
+        margin: auto;
+        align-items: center;
+        padding: 0px;
+    }
+    .label-img {
+        display: none;
+    }
+    .img-checkout {
+        display: none;
+    }
+    .checkout {
+        width: 100%;
+        border-radius: 0px;
+        box-shadow: none;
+        max-width: 540px;
+        margin: auto;
+        align-items: center;
+        padding: 0px;
+        background-color: #f2f4f7;
+    }
+    .after-checkout {
+        border-radius: 36px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+            0 4px 16px 0 rgba(0, 0, 0, 0.1);
+        max-width: 540px;
+        margin: 0 auto;
+        padding: 60px 80px 40px;
+        position: relative;
+    }
+    #footer .container-footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #footer .col-4 {
+        flex: 0 0 100%; /* Mengubah lebar kolom menjadi 100% */
+        max-width: 100%; /* Mengubah lebar maksimum menjadi 100% */
+        text-align: center; /* Memastikan konten berada di tengah */
+        margin-bottom: 20px; /* Menambahkan margin bawah antar kolom */
+    }
+
+    #footer .col-4 p {
+        font-size: 14px; /* Mengurangi ukuran font pada teks */
+        margin-bottom: 8px; /* Menambahkan margin bawah pada paragraf */
+    }
+
+    #footer .col-4 img {
+        display: block; /* Agar gambar berada di tengah */
+        margin: 0 auto; /* Memusatkan gambar ke tengah */
+    }
+
+    #footer .d-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Memusatkan elemen secara horizontal */
+        align-items: center; /* Memusatkan elemen secara vertikal */
+    }
+
+    #footer .d-flex img {
+        width: 70px; /* Mengatur lebar gambar */
+        margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
+    }
+
+    #footer .d-flex h4 {
+        font-size: 18px;
+        margin: 0;
+        margin-right: 33%;
+    }
+    #footer .col-4 .d-flex {
+        justify-content: center; /* Memusatkan tautan sosial media ke tengah */
+    }
+
+    #footer .col-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px; /* Menambahkan ruang antara tautan */
+    }
+    #footer .col-2 a {
+        display: block; /* Mengubah tautan menjadi blok, sehingga berjejer ke bawah */
+        margin-bottom: 10px; /* Menambahkan jarak antara setiap tautan */
+    }
+}
+
+@media (max-width: 576px) {
+    .box-form input[type="text"],
+    .box-form input[type="email"],
+    .box-form input[type="number"],
+    .box-form input[type="password"] {
+        width: calc(100% - 50px);
+    }
+    .remember {
+        flex-direction: column;
+    }
+    .card {
+        width: 100%;
+    }
+    .col-last {
+        display: none;
+    }
+    #footer .col-2 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    #footer .d-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Memusatkan elemen secara horizontal */
+        align-items: center; /* Memusatkan elemen secara vertikal */
+    }
+
+    #footer .d-flex img {
+        width: 70px; /* Mengatur lebar gambar */
+        margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
+    }
+
+    #footer .d-flex h4 {
+        font-size: 18px;
+        margin: 0;
+        margin-right: 33%;
+    }
+}
+
+.icon-labelinput{
+height: 25px;
+width: 10px;
+}
+
+
+.dalam{
+/* Frame 2427 */
+
+box-sizing: border-box;
+
+
+width: 420px;
+height: 216px;
+
+
+background: #A61C1C;
+border: 1px solid #DCDCDC;
+border-radius: 5px;
+
+}
+
+.list-pembayaran{
+
+box-sizing: border-box;
+display: flex;
+text-align: center;
+font-size: 12px;
+width: 200px;
+height: 38px;
+margin-top: 25px;
+margin-left: 5px;
+background: #FFFFFF;
+border-radius: 5px;
+}
+
+
+
+.list-pembayaran input[type="radio"] {
+    margin-left: 3%;
+    margin-right: 10px;
+    transform: scale(2);
+}
+
+
+.list-pembayaran {
+    display: flex;
+    align-items: center;
+}
+
+.list-pembayaran .ikon {
+    margin-right: auto;
+}
+.btn{
+    text-align: left;
+}
+
+.dalam2{
+overflow-y: scroll;
+box-sizing: border-box;
+margin-left: 16%;
+bottom: 2%;
+background: #F2F4F8;
+border: 1px solid #C1C7CD;
+border-radius: 5px;
+}
+
+.btn-text {
+    padding: 15px;
+    border: 2px solid #E9E9E9;
+    border-radius: 0px 8px 8px 0px;
+    width: 100%;
+}
+.img-fluid{
+    padding-left: 32%;
+    padding-top: -50px;
 }
