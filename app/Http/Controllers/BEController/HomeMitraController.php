@@ -62,15 +62,13 @@ class HomeMitraController extends Controller
         $hari = $request->input('hari');
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
-        $keterangan_status = $request->input('keterangan_status');
-        $kebaikan = $request->input('kebaikan');
+        $keterangan_jam_masuk = $request->input('keterangan');
 
         $data = new Presensi;
 
         $data->nama_lengkap = $nama_lengkap;
         $data->hari = $hari;
-        $data->keterangan_status = $keterangan_status;
-        $data->kebaikan = $kebaikan;
+        $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
         $data->save();
@@ -91,14 +89,14 @@ class HomeMitraController extends Controller
     public function jamMulaiIstirahat(Request $request)
     {
         // $user = Auth::user();
-        $id = 1;
-        $data = Presensi::where('nama_lengkap', $id)->latest()->first();
+        $data = Presensi::where('nama_lengkap', 1)->latest();
 
         if ($data) {
             $data->update([
-                'jam_mulai_istirahat' => $request->jam
+                'jam_mulai_istirahat' => $request->jam,
+                'keterangan_jam_mulai_istirahat' => $request->keterangan
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Masuk Kembali',
@@ -115,10 +113,11 @@ class HomeMitraController extends Controller
     public function jamSelesaiIstirahat(Request $request)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
+        $data = Presensi::where('nama_lengkap', 1)->latest();
         if ($data) {
             $data->update([
-                'jam_selesai_istirahat' => $request->jam
+                'jam_selesai_istirahat' => $request->jam,
+                'keterangan_jam_selesai_istirahat' => $request->keterangan
             ]);
             $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
@@ -137,16 +136,18 @@ class HomeMitraController extends Controller
     public function jamPulang(Request $request,)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
+        $data = Presensi::where('nama_lengkap', 1)->latest();
 
         if ($data) {
             $data->update([
-                'jam_pulang' => $request->jam
+                'jam_pulang' => $request->jam,
+                'keterangan_jam_pulang' => $request->keterangan
             ]);
             $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',
+                'route' => '/catatLogAktivity',
                 'data' => $dataPresensi
             ]);
         } else {
@@ -186,16 +187,15 @@ class HomeMitraController extends Controller
         }
     }
 
-    public function catatLogAktivity(Request $request)
-    {
+    public function kebaikan(Request $request){
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 40)->latest()->first();
+        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
 
         if ($data) {
             $data->update([
-                'log_aktivitas' => $request->log_aktivitas
+                'kebaikan' => $request->kebaikan
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 40)->latest()->first();
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',
@@ -208,10 +208,33 @@ class HomeMitraController extends Controller
         }
     }
 
+    public function catatLogAktivity(Request $request)
+    {
+        $user = Auth::user();
+        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
+
+        if ($data) {
+            $data->update([
+                'log_aktivitas' => $request->log_aktivitas
+            ]);
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
+
+            return view('pemagang/home', [
+                'button' => 'Log Activity',
+                'logActivitySubmitted' => true,
+                'data' => $dataPresensi
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'Data tidak ditemukan',
+            ], 404);
+        }
+    }
+
     public function catatIzin(Request $request)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 40)->latest()->first();
+        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
 
         if ($data) {
 
@@ -223,7 +246,7 @@ class HomeMitraController extends Controller
 
             $data->save();
 
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 40)->latest()->first();
+            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',

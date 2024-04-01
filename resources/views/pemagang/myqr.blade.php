@@ -34,7 +34,7 @@
 
 
                     $id = Auth::user()->id;
-
+                ?>
     <div class="text-container">
             <h3>Iqra's QR Code</h3 >
         </div>

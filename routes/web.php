@@ -394,6 +394,7 @@ Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstiraha
 Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
 Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
 Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
+Route::post('/kebaikan', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
 Route::post('/catatLogAktivity', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 
 

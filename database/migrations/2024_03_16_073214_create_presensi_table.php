@@ -19,9 +19,13 @@ return new class extends Migration
             $table->time('jam_default_masuk');
             $table->time('jam_default_pulang');
             $table->time('jam_masuk')->nullable();
+            $table->string('keterangan_jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
+            $table->string('keterangan_jam_pulang')->nullable();
             $table->time('jam_mulai_istirahat')->nullable();
+            $table->string('keterangan_jam_mulai_istirahat')->nullable();
             $table->time('jam_selesai_istirahat')->nullable();
+            $table->string('Keterangan_jam_selesai_istirahat')->nullable();
             $table->time('total_jam_kerja')->nullable();
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);

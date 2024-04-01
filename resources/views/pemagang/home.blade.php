@@ -21,8 +21,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+    .masuk:disabled {
+        opacity: 0.5; 
+    }
+</style>
 </head>
 
 <body>
@@ -66,11 +72,11 @@
                 <div class="judulshif toggle-shift">Shift Middle</div>
                 <div style="padding-bottom: 10px">
                     <button class="masuk" id="masuk" type="button" onclick="showmodal()" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">{{ $button }}</button>
+                        data-bs-target="{{ $button == 'Log Activity' ? '#logactivity' : '#exampleModal' }}" {{ $button == 'Log Activity' && isset($logActivitySubmitted) ? 'disabled' : '' }}>{{ $button }}</button>
                 </div>
                 <div>
                     <button type="button" class="btn izin" data-bs-toggle="modal" data-bs-target="#izin"
-                        onclick="showmodalizin()">
+                        onclick="showmodalizin()" {{ $button == 'Log Activity' ? 'hidden' : '' }}>
                         Izin
                     </button>
                 </div>
@@ -82,7 +88,7 @@
                         <div class="judulmasuk d-flex flex-column ">
                             <p>Masuk</p>
                             <div class="toggle-muncul flex-column gap-0">
-                                @if(isset($data))
+                                @if (isset($data))
                                     <div>{{ $data->jam_masuk }}</div>
                                     <p class="text-danger m-0" style="font-size:50%;">-00.30.01</p>
                                 @endif
@@ -95,7 +101,7 @@
                         <div class="judulmasuk d-flex flex-column ">
                             <p>Istirahat</p>
                             <div class="toggle-muncul flex-column gap-0">
-                                @if(isset($data))
+                                @if (isset($data))
                                     <div>{{ $data->jam_mulai_istirahat }}</div>
                                 @endif
                             </div>
@@ -108,20 +114,20 @@
                         <div class="judulmasuk d-flex flex-column ">
                             <p>Kembali</p>
                             <div class="toggle-muncul flex-column gap-0">
-                                @if(isset($data))
+                                @if (isset($data))
                                     <div>{{ $data->jam_selesai_istirahat }}</div>
                                 @endif
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle  bundar-status4 ori-aktif"></i>
                         </div>
                         <div class="judulmasuk d-flex flex-column ">
                             <p>Pulang</p>
                             <div class="toggle-muncul flex-column gap-0">
-                                @if(isset($data))
+                                @if (isset($data))
                                     <div>{{ $data->jam_pulang }}</div>
                                 @endif
                             </div>
@@ -131,14 +137,17 @@
 
                 <div class="kananbawah">
                     <div class="kebaikan border border-secondary mx-3">
-                        <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-                        <textarea id="pesan" name="pesan" rows="6"
-                            placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan"
-                            style="background-color: #E9ECEF; width: 95%;"></textarea>
-                        <div class="grubbuton">
-                            <button class="batal">Batal</button>
-                            <button class="tambahkan">Tambahkan</button>
-                        </div>
+                        <form action="{{ route('kebaikan') }}" method="POST">
+                            @csrf
+                            <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
+                            <textarea id="pesan" name="kebaikan" rows="6"
+                                placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan"
+                                style="background-color: #E9ECEF; width: 95%;"></textarea>
+                            <div class="grubbuton">
+                                <button class="batal">Batal</button>
+                                <button class="tambahkan" type="submit">Tambahkan</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="perhatian">
                         <div>
@@ -170,7 +179,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <hr style="width:100%;">
-                <form action="{{route ('catatIzin')}}" method="POST">
+                <form action="{{ route('catatIzin') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="grupinput">
@@ -181,8 +190,8 @@
                             <label for="PemecahanMasalah" class="judulinput" style="padding-top: 30px;">Bukti
                                 foto</label>
                             <div>
-                                <input class="input inputt" type="text" id="PemecahanMasalah" name="bukti_foto_izin"
-                                    placeholder="Masukan link Gdrive">
+                                <input class="input inputt" type="text" id="PemecahanMasalah"
+                                    name="bukti_foto_izin" placeholder="Masukan link Gdrive">
                             </div>
                         </div>
                     </div>
@@ -196,33 +205,52 @@
         </div>
     </div>
 
-
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content " style="text-align: center;">
-                <div class="modal-body">
-                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Keterangan</h1>
-                    <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)"
-                        style="background-color: #E9ECEF" ;></textarea>
-                    <div class="bawahmodal">
-                        <form action="{{ $route ?? null }}" method="POST">
-                            @csrf
+                <form action="{{ $route ?? null }}" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Keterangan</h1>
+                        <textarea id="pesan" name="keterangan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)"
+                            style="background-color: #E9ECEF" ;></textarea>
+                        <div class="bawahmodal">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                             <input type="hidden" name="id" value="1">
-                            <input type="text" name="jam" id="jam_masuk"
+                            <input type="text" name="jam" id="jam"
                                 value="{{ now()->format('H:i:s') }}">
                             <input type="hidden" name="hari" value="{{ date('Y-m-d') }}">
-                            <input type="hidden" name="keterangan_status" value="null">
-                            <input type="hidden" name="kebaikan" value="tidak ada">
                             <input type="hidden" name="status_kehadiran" value="Hadir">
-                            <input type="text" name="log_aktivitas" value="tidak ada">
                             <button type="submit" class="btn btn-danger submitmodal" data-bs-dismiss="modal"
                                 aria-label="Close">Submit</button>
-                        </form>
+                        </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="logactivity" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="  d-flex justify-content-between align-items-center p-3">
+                    <div></div>
+                    <h5 class="modal-title">Activity Log</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <hr style="width:100%;">
+                <form action="{{ route('catatLogAktivity') }}" method="POST" >
+                    @csrf
+                    <div class="modal-body">
+                        <div class="grupinput">
+                            <textarea id="pesan" name="log_aktivitas" rows="6" cols="60" placeholder="Ketik alasan"></textarea>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" aria-label="Close"
+                            data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -235,6 +263,35 @@
         function showmodalizin() {
             $('#izin').modal('show');
         }
+
+        function showmodalLogActivity() {
+            $('#logactivity').modal('show');
+        }
+
+        
+
+        function updateClock() {
+        var now = new Date();
+        var jam = now.getHours();
+        var menit = now.getMinutes();
+        var detik = now.getSeconds();
+        
+        // Tambahkan angka 0 di depan jika nilai jam, menit, atau detik kurang dari 10
+        jam = jam < 10 ? '0' + jam : jam;
+        menit = menit < 10 ? '0' + menit : menit;
+        detik = detik < 10 ? '0' + detik : detik;
+        
+        // Ubah nilai input dengan id "jam" menjadi jam sekarang
+        document.getElementById('jam').value = jam + ':' + menit + ':' + detik;
+        }
+
+        // Panggil fungsi updateClock setiap detik (1000 milidetik)
+        setInterval(updateClock, 1000);
+
+        // Panggil fungsi updateClock saat dokumen dimuat
+        window.onload = function() {
+        updateClock();
+        };
 
         // function shift() {
         //     var now = new Date();
@@ -359,7 +416,7 @@
 
         // // Panggil updateTime sekali untuk menetapkan waktu awal
         // updateTime()
-    </script>
+    </scrip>
 
 </body>
 
