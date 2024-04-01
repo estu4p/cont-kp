@@ -57,22 +57,22 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">47:30:50</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasukFormatted }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
                                     <b class="fz7">total masuk</b>
-                                    <p class="total fz6 my-auto px-1 py-0">16 hari</p>
+                                    <p class="total fz6 my-auto px-1 py-0">{{ $totalMasukHari }} hari</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex  py-2  align-items-center  flex-row justify-content-between">
                                     <b class="fz7">target</b>
-                                    <p class="target fz6 my-auto px-1 py-01">1100 jam</p>
+                                    <p class="target fz6 my-auto px-1 py-01">{{ $target }} jam</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">152:30:10</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -182,14 +182,14 @@
                                 @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>1</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{$item->hari}}</td>
-                                        <td>2016-04-12</td>
-                                        <td>18:34:19</td>
-                                        <td>10:10:07</td>
-                                        <td>06:46:27</td>
-                                        <td>23:19:47</td>
-                                        <td>00:00:03</td>
+                                        <td>{{$item->jam_masuk}}</td>
+                                        <td>{{$item->jam_pulang}}</td>
+                                        <td>{{$item->jam_mulai_istirahat}}</td>
+                                        <td>{{$item->jam_selesai_istirahat}}</td>
+                                        <td>{{$item->total_jam_kerja}}</td>
+                                        <td>00:00:00</td>
                                         <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>
