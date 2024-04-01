@@ -62,7 +62,7 @@ Route::get('/dashboard', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-Route::get('/register', function() {
+Route::get('/register', function () {
     return view('landing-page.daftar', [
         'title' => "Landing Page - Register"
     ]);
@@ -336,7 +336,7 @@ Route::get('/OptionTeamAktifKlikUiUx', function () {
 });
 
 
-});
+
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
@@ -473,9 +473,9 @@ Route::get('/mitra-laporanpresensi-detailhadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
 
-Route::get('/mitra-laporanpresensi-detailhadir/{id}',[ContributorForMitra::class,'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
-Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailIzin'])->name('cont.mitrapresensi.detailizin');
-Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
+Route::get('/mitra-laporanpresensi-detailhadir/{id}', [ContributorForMitra::class, 'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailIzin'])->name('cont.mitrapresensi.detailizin');
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -644,7 +644,7 @@ Route::get('/admin/setting/user', function () {
         ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
-    ];  
+    ];
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
         'users' => $users,
