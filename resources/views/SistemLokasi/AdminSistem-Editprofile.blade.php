@@ -91,13 +91,14 @@
 </div>
 
 <script>
-    function showSuccessModal() {
-        event.preventDefault();
-        $('#successModal').modal('show');
-        setTimeout(function() {
-            $('#successModal').modal('hide');
-        }, 1000);
-    }
+   function showSuccessModal() {
+    event.preventDefault();
+    $('#successModal').modal('show');
+    setTimeout(function() {
+        $('#successModal').modal('hide');
+        window.location.href = '/AdminSistem-Dashboard'; 
+    }, 1000);
+}
 
     const imgInput = document.getElementById('imageInput');
     const previewZone = document.getElementById('previewZone');

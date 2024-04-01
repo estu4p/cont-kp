@@ -33,134 +33,133 @@
                 <option value="item">5 item per page</option>
             </select>
         </div>
+        <div class="tabel">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Perguruan Tinggi</th>
+                        <th>Paket Berlangganan</th>
+                        <th>Lokasi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        <table>
-            <thead style="background-color: white;">
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Perguruan Tinggi</th>
-                    <th>Paket Berlangganan</th>
-                    <th>Lokasi</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Raihan Hafidz</td>
-                    <td>valhanhafidz@gmail.com</td>
-                    <td>Universitas Ahmad Dahlan</td>
-                    <td>
-                        <div class="Bronze">Bronze</di>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                    <tr>
+                        <td>1</td>
+                        <td>Raihan Hafidz</td>
+                        <td>valhanhafidz@gmail.com</td>
+                        <td>Universitas Ahmad Dahlan</td>
+                        <td>
+                            <div class="Bronze">Bronze</di>
+                        </td>
+                        <td>Yogyakarta</td>
+                        <td class="aksi d-flex flex-row justify-content-around">
+                            <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
 
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
+                                <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                            </button>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr style="background-color: white;">
-                    <td>2</td>
-                    <td>Syolita Widyandini</td>
-                    <td>syalitawdya@gmail.com</td>
-                    <td>Universitas Indonesia</td>
-                    <td>
-                        <div class="Silver">Silver</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                            <button style="border: none;" onclick="showdeletemodal()">
+                                <i class="fa-solid fa-trash-can red-icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Syolita Widyandini</td>
+                        <td>syalitawdya@gmail.com</td>
+                        <td>Universitas Indonesia</td>
+                        <td>
+                            <div class="Silver">Silver</div>
+                        </td>
+                        <td>Yogyakarta</td>
+                        <td class="aksi d-flex flex-row justify-content-around">
+                            <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
 
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
+                                <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                            </button>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
+                            <button style="border: none;" onclick="showdeletemodal()">
+                                <i class="fa-solid fa-trash-can red-icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
 
-                    <td>3</td>
-                    <td>Canni Hernanda</td>
-                    <td>dannhernando1/@gmail.com</td>
-                    <td>Universitas Negeri Yogyakarta</td>
-                    <td>
-                        <div class="Bronze">Bronze</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                        <td>3</td>
+                        <td>Canni Hernanda</td>
+                        <td>dannhernando1/@gmail.com</td>
+                        <td>Universitas Negeri Yogyakarta</td>
+                        <td>
+                            <div class="Bronze">Bronze</div>
+                        </td>
+                        <td>Yogyakarta</td>
+                        <td class="aksi d-flex flex-row justify-content-around">
+                            <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
 
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
+                                <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                            </button>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
+                            <button style="border: none;" onclick="showdeletemodal()">
+                                <i class="fa-solid fa-trash-can red-icon"></i>
 
-                        </button>
-                    </td>
-                </tr>
-                <tr>
+                            </button>
+                        </td>
+                    </tr>
 
-                <tr style="background-color: white;">
-                    <td>4</td>
-                    <td>Fetnan Adipurmowo</td>
-                    <td>febrianadip@gmail.com</td>
-                    <td>Universitas Gadjah Mada</td>
-                    <td>
-                        <div class="Gold">Gold</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
+                    <tr>
+                        <td>4</td>
+                        <td>Fetnan Adipurmowo</td>
+                        <td>febrianadip@gmail.com</td>
+                        <td>Universitas Gadjah Mada</td>
+                        <td>
+                            <div class="Gold">Gold</div>
+                        </td>
+                        <td>Yogyakarta</td>
+                        <td class="aksi d-flex flex-row justify-content-around">
+                            <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                                <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                            </button>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
+                            <button style="border: none;" onclick="showdeletemodal()">
+                                <i class="fa-solid fa-trash-can red-icon"></i>
+                            </button>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>5</td>
-                    <td>Yessa Khoirunissa</td>
-                    <td>Yessaakhh@gmail.com</td>
-                    <td>Universitas Alma ata</td>
-                    <td>
-                        <div class="Platinum">Platinum</di>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class="d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                    <tr>
+                        <td>5</td>
+                        <td>Yessa Khoirunissa</td>
+                        <td>Yessaakhh@gmail.com</td>
+                        <td>Universitas Alma ata</td>
+                        <td>
+                            <div class="Platinum">Platinum</di>
+                        </td>
+                        <td>Yogyakarta</td>
+                        <td class="aksi d-flex flex-row justify-content-around">
+                            <button class="d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                                <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
 
 
-                        </button>
+                            </button>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+                            <button style="border: none;" onclick="showdeletemodal()">
+                                <i class="fa-solid fa-trash-can red-icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -211,7 +210,7 @@
                         <div class="kanann">
                             <div class="form-group">
                                 <label for="paket-berlangganan">Paket Berlangganan:</label>
-                                <div class="custom-select" >
+                                <div class="custom-select">
                                     <select class="inputt" id="paket-berlangganan" name="paket-berlangganan">
                                         <option class="opsions" value="Bronze">Bronze</option>
                                         <hr>
@@ -223,7 +222,7 @@
                                         <hr>
                                     </select>
                                 </div>
-                       
+
 
                             </div>
                             <div style="display: flex;">
@@ -231,9 +230,9 @@
                                     <label for="start-date">Start Date:</label>
                                     <input class="inputt2" type="date" id="start-date" name="start-date" value="2023-10-23">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="end-date">End Date:</label>
+                                    <span>to</span>
                                     <input class="inputt2" type="date" id="end-date" name="end-date" value="2024-01-23">
                                 </div>
                             </div>
@@ -243,7 +242,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="status-berlangganan">Status Berlangganan:</label>
-                                <div class="custom-select" >
+                                <div class="custom-select">
                                     <select class="inputt" id="paket-berlangganan" name="paket-berlangganan">
                                         <option class="opsions" value="Akti">Aktif</option>
                                         <hr>

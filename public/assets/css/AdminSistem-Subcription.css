@@ -31,9 +31,10 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    width: 400px; /* Ukuran lebar */
-    height: 40px; /* Ukuran tinggi */
-    margin-left: auto; /* Menggeser ke kanan */
+    width: 400px;
+    margin-left: auto; 
+  
+   
 }
 .page, .item{
     background: #c6c6c6;
@@ -45,7 +46,7 @@ header {
     padding: 10px;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
-    width: 100%; /* Lebar input mengikuti parentnya */
+    width: 100%;
     
 }
 
@@ -58,16 +59,22 @@ header {
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    
+    /* border-radius: 40px; */
+    margin-top: 15px;
 }
-
+.tabel{
+    margin-top: 15px;
+    /* background-color: red; */
+    /* width: 100%; */
+    border-radius: 8%;
+    overflow-x: auto;
+    /* border: ridge; */
+}
 th, td {
     padding: 8px;
     text-align: left;
-    border: 1px solid #F2F4F8;
+    /* border: ridge; */
 }
 
 .pagination {
@@ -129,11 +136,14 @@ th, td {
 .search-wadah{
 border-radius: 10px;
 box-sizing: border-box;
+background-color: white;
 }
 .inputsearch{
-    background-color: transparent;
+    background-color:transparent;
     border: none !important;
     outline: none !important;
+
+
     
 }
 .swal-button--cancel {
@@ -205,7 +215,6 @@ input, select {
     
 }
 .inputt2{
-    width: 150px;
     background-color: #E1E2E5;
     
 }
