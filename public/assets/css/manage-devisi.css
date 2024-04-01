@@ -48,6 +48,7 @@
 /* Responsif untuk tabel */
 .table-responsive {
     overflow-x: auto;
+    width: 95%;
 }
 .wadah{
     top:0;
@@ -114,7 +115,8 @@
     border-radius: 5px;
     background: #ffffff;
     border: none;
-    margin-top: 5px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     text-align: center;
     height:40px;
     width:170px;
@@ -164,7 +166,7 @@
     width: 140px;
     height: 140px;
     border-radius: 70px;
-    font-size: 90px;
+    font-size: 70px;
     color: #555;
     border: 2px solid #ccc;
     display: flex;
@@ -207,10 +209,39 @@
     padding-bottom: 10px
 }
 
-.ratakanan {
-    text-align: right;
+.ratatengah {
+    text-align: center;
 }
 .tomboll{
     margin-left: 5px;
 }
 
+.grupselect{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nav-devisi{
+   font-size: 14px; 
+   width:max-content; 
+   border-radius: 10px;
+   width: 100%;
+   text-align: center;
+   font-size: 15px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   
+}
+a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: inherit; /* Mewarisi warna teks dari elemen induk */
+}
+/* .tangah{
+    text-align: center;
+} */
+.namadiv{
+    width: 50%;
+    
+}

@@ -30,7 +30,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebarMitra') <!-- bueeek master baru piqri bangke -->
+            @include('template.sidebarMitra') 
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">

@@ -19,8 +19,17 @@
     <div class="card-header">
         <h3 class="card-title">Pengaturan</h3>
     </div>
-    <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-devisi">Manage Divisi</a>
-    <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-shift">Manage Shift</a>
+    <a class="" href="/manage-devisi">
+        <div class="nav-devisi" style="background-color:  #f9caca;">
+            <li>Manage Divisi</li>
+        </div>
+    </a>
+    <a class=" " style="font-size: 14px; width:max-content;" href="/manage-shift">
+        <div class="nav-devisi">
+            <li>Manage Shift</li>
+        </div>
+    </a>
+
 </div>
 <div class="container-fluid  d-flex flex-row justify-content-start gap-0 p-0 wadah">
     <div class="kanan-tabel p-4  w-100 justify-content-start">
@@ -32,43 +41,43 @@
             <i class="fa-solid fa-circle-plus"></i>
             Tambah divisi
         </button>
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="#">
-                            <div class="form-group">
-                                <label for="nama_divisi"></label>
-                        </form>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="example">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Divisi</th>
-                                <th scope="col">Penilaian</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="ratakanan">1</td>
-                                <td>Ui/Ux</td>
-
-                                <td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
-
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                            <!-- tambahkan baris data yang lain di sini -->
-                        </tbody>
-                    </table>
-                </div>
+        <div class="grupselect gap-3">
+            <div class="">
+                <select name="page" class="page">
+                    <option value="page">page 1 of 1</option>
+                </select>
             </div>
+            <div class="">
+                <select name="item" class="item">
+                    <option value="item">5 item per page</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped" id="examplee" >
+                <thead >
+                    <tr>
+                        <th scope="col" class="ratatengah">No</th>
+                        <th scope="col" class="namadiv">Nama Divisi</th>
+                        <th scope="col" class="ratatengah">Penilaian</th>
+                        <th scope="col" class="ratatengah">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ratatengah">1</td>
+                        <td>Ui/Ux</td>
+
+                        <td class="ratatengah"><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
+
+                        <td class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <!-- tambahkan baris data yang lain di sini -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -90,7 +99,7 @@
                         <input type="file" id="fileInput" style="display: none;">
                     </div>
                     <div>
-                        <button class="addgambar">Add Photo</button>
+                        <button class="addgambar">Edit Photo</button>
                     </div>
                     <div>
                         <button class="remove">Remove</button>
@@ -154,7 +163,7 @@
         editedIndex = index;
 
         // Dapatkan data divisi dari tabel
-        const row = document.querySelectorAll('#example tbody tr')[index];
+        const row = document.querySelectorAll('#examplee tbody tr')[index];
         const namaDivisi = row.querySelectorAll('td')[1].innerText;
 
         // Isi input modal dengan data divisi yang dipilih
@@ -170,7 +179,7 @@
         const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
 
         // Perbarui data divisi pada tabel dengan nilai yang diedit
-        const row = document.querySelectorAll('#example tbody tr')[editedIndex];
+        const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
         row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
 
         // Tampilkan pesan sukses
@@ -194,17 +203,17 @@
 
         // Buat elemen HTML untuk baris baru dalam tabel
         var newRow = '<tr>' +
-            '<td class = "ratakanan">' + (document.querySelectorAll('#example tbody tr').length + 1) + '</td>' +
+            '<td class = "ratatengah">' + (document.querySelectorAll('#examplee tbody tr').length + 1) + '</td>' +
             '<td>' + namaDivisi + '</td>' +
-            '<td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
-            '<td>' +
+            '<td class="ratatengah" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
+            '<td class="ratatengah">' +
             '<button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>' +
             '<button class="btn btn-danger btn-sm tomboll" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>' +
             '</td>' +
             '</tr>';
 
         // Sisipkan baris baru ke dalam tabel
-        document.querySelector('#example tbody').insertAdjacentHTML('beforeend', newRow);
+        document.querySelector('#examplee tbody').insertAdjacentHTML('beforeend', newRow);
 
         // Tampilkan pesan sukses
         swal({
@@ -227,7 +236,7 @@
         }).then((willDelete) => {
             if (willDelete) {
                 // Hapus baris divisi dari tabel
-                document.querySelector('#example tbody').deleteRow(index);
+                document.querySelector('#examplee tbody').deleteRow(index);
 
                 // Tampilkan pesan sukses
                 swal("Berhasil!", "Divisi berhasil dihapus.", {

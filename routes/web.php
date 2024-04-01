@@ -238,15 +238,16 @@ Route::get('/MitraPresensiDetailHadir', function () {
 
 
 Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
+    $title="pengaturan";
+    return view('mitra-pengaturan.manage-devisi', ['title' =>$title]);
 });
 
 Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
+    return view('mitra-pengaturan.manage-shift',['title'=>'shift']);
 });
 
 Route::get('/Kategori-penilaian', function () {
-    return view('mitra-pengaturan.Kategori-penilaian');
+    return view('mitra-pengaturan.Kategori-penilaian',['title'=>'penilaian']);
 });
 
 

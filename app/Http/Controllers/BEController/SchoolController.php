@@ -51,7 +51,7 @@ class SchoolController extends Controller
     {
         //Data Mahasiswa- Lihat profile
         $lihat = User::where("role_id",3)->first();
-        // dd($lihat);
+        dd($lihat);
         $presensi = Presensi::where('id', $lihat->id)
         ->select("hutang_presensi")->first();
         $divisi = Divisi::where('id', $lihat->divisi_id)
@@ -62,9 +62,9 @@ class SchoolController extends Controller
         ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
 
 
-        // $lihat = User::where("role_id", 3)
-        // ->where('nama_lengkap', 'nama_lengkap') // Ubah 'nama_lengkap' dengan nilai yang ingin Anda cari
-        // ->get();
+        $lihat = User::where("role_id", 3)
+        ->where('nama_lengkap', 'nama_lengkap') // Ubah 'nama_lengkap' dengan nilai yang ingin Anda cari
+        ->get();
 
         // if ($lihat) {
         //     $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
