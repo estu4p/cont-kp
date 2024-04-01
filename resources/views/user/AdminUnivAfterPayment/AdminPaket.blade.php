@@ -1,4 +1,4 @@
-@extends('layouts.layout-admin')
+@extends('layouts.masterAfterPay')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/adminbeforepayment.css') }}">
@@ -37,7 +37,10 @@
                     </tr>
                 </table>
             </div>
-            <button type="button" class="btn btn-outline-danger mb-4 rounded-pill">Coba Sekarang</button>
+            <a href="/CheckoutBronze">
+                <button type="button" class="btn btn-outline-danger mb-4 rounded-pill">Upgrade</button>
+            </a>
+
         </div>
 
         <div class="card col-3">
@@ -64,7 +67,10 @@
                     </tr>
                 </table>
             </div>
-            <button type="button" class="btn btn-outline-primary mb-4 rounded-pill">Coba Sekarang</button>
+            <a href="/CheckoutSilver">
+                <button type="button" class="btn btn-outline-primary mb-4 rounded-pill">Upgrade</button>
+            </a>
+
         </div>
 
         <div class="card col-3">
@@ -91,7 +97,10 @@
                     </tr>
                 </table>
             </div>
-            <button type="button" class="btn btn-outline-success mb-4 rounded-pill">Coba Sekarang</button>
+            <a href="/CheckoutGold">
+                <button type="button" class="btn btn-outline-success mb-4 rounded-pill">Upgrade</button>
+            </a>
+
         </div>
 
         <div class="card col-3">
@@ -119,11 +128,13 @@
                 </table>
 
             </div>
-            <button type="button" class="btn btn-outline-secondary mb-4 rounded-pill">Coba Sekarang</button>
+            <a href="/CheckoutPlatinum">
+                <button type="button" class="btn btn-outline-secondary mb-4 rounded-pill">Upgrade</button>
+            </a>
+
         </div>
     </div>
 </body>
 </html>
-               
 
 

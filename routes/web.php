@@ -644,7 +644,15 @@ Route::get('/admin/setting/user', function () {
         ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
-    ];  
+    ];
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];
+    
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
         'users' => $users,
@@ -712,73 +720,220 @@ Route::get('/', function () {
 });
 
 
-Route::get('/mitrapresensi-ScanBarcode', function () {
-    return view('mitra-presensi.scanbarcode');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/AdminPaket', function () {
+    return view('user.AdminUnivAfterPayment.AdminPaket');
 });
 
-Route::get('/mitrapresensi-ScanPresensiharian', function () {
-    return view('mitra-presensi.scanpresensiharian');
+Route::get('/CheckoutBronze', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutBronze');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/contributorformitra-dashboard', function () {
-    return view('contributorformitra.dashboard');
-});
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
-Route::get('/contributorformitra-devisi', function () {
-    return view('contributorformitra.devisi');
-});
-Route::get('/contributorformitra-devisi-Seeallteams', function () {
-    return view('contributorformitra.devisi-Seeallteams');
+Route::get('/CheckoutSilver', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutSilver');
 });
 
-Route::get('/contributorformitra-devisi-LihatProfil', function () {
-    return view('contributorformitra.Lihat-Profil-Mahasiswa');
+Route::get('/CheckoutGold', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutGold');
 });
 
-Route::get('/contributorformitra-devisi-teamaktif', function () {
-    return view('contributorformitra.teamaktifanggota');
+Route::get('/CheckoutPlatinum', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutPlatinum');
+});
+
+Route::get('/RiwayatJangkaWaktu', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
+});
+
+Route::get('/RiwayatPembelian', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatPembelian');
 });

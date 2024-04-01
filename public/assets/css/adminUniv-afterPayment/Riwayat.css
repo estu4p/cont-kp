@@ -1,0 +1,257 @@
+.kiri-putih{
+    height:100%;
+    width:250px;
+    position:fixed;
+    top:0;
+    background-color: white;
+    display: inline-block;
+
+}
+
+.jangkawaktu {
+    margin-top: 100px;
+
+    width: 230px;
+    margin-left: -30px;
+
+
+}
+
+.riwayatpembelian {
+    padding-top: 50px;
+    width: 230px;
+    margin-left: -30px;
+}
+
+.kartu {
+    width: 830px;
+    height: 100px;
+    background-color: white;
+    margin-left: 260px;
+    margin-top: 100px;
+    border-radius: 8px;
+    border-color: red;
+
+}
+.kartu2 {
+    width: 830px;
+    height: 100px;
+    background-color: white;
+    margin-left: 260px;
+    margin-top: 30px;
+    border-radius: 8px;
+    border-color: red;
+}
+.kartu3 {
+    width: 830px;
+    height: 100px;
+    background-color: white;
+    margin-left: 260px;
+    margin-top: 30px;
+    border-radius: 8px;
+    border-color: red;
+}.kartu4 {
+    width: 830px;
+    height: 100px;
+    background-color: white;
+    margin-left: 260px;
+    margin-top: 30px;
+    border-radius: 8px;
+    border-color: red;
+}.kartu5 {
+    width: 830px;
+    height: 100px;
+    background-color: white;
+    margin-left: 260px;
+    margin-top: 30px;
+    border-radius: 8px;
+    border-color: red;
+}
+
+
+.pkt {
+    padding-left: 30px;
+    padding-top: 25px;
+}
+
+.thn {
+    padding-left: 30px;
+    margin-top: -20px;
+}
+
+.gambar {
+    width: 20px;
+    height: auto;
+}
+
+.lns {
+    padding-left: 200px;
+    margin-top: -50px;
+}
+
+.tb {
+    padding-left: 360px;
+    margin-top: -50px;
+}
+
+.ttb {
+    padding-left: 368px;
+    margin-top: -13px;
+    font-size: 10px;
+}
+
+.tbr {
+    padding-left: 510px;
+    margin-top: -58px;
+}
+
+.ttbr {
+    padding-left: 535px;
+    font-size: 10px;
+    margin-top: -13px;
+}
+
+.blue-button {
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 700px;
+    margin-top: -50px;
+    border-radius: 15px;
+  }
+
+  .blue-button:hover {
+    background-color: darkblue;
+
+  }
+
+  .button-with-icon {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    height: 50px;
+    margin-left:-30px;
+  }
+
+  .button-with-icon:hover {
+    background-color: #A4161A33;
+    color: #A4161A;
+  }
+
+  .button-with-icon i {
+    margin-right: 20px;
+  }
+
+  .stt {
+    padding-left: 50px;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #B0B0B0;
+  }
+
+  .ceklis {
+    width: 12px;
+    height: auto;
+  }
+
+  .aktif {
+    padding-left: 42px;
+    font-size: 12px;
+
+  }
+
+  .np {
+    padding-left: 150px;
+    margin-top: -68px;
+    font-size: 12px;
+    color: #B0B0B0;
+  }
+
+  .nnp {
+    font-size: 12px;
+    padding-left: 147px;
+  }
+
+  .H {
+    font-size: 12px;
+    color: #B0B0B0;
+    padding-left: 280px;
+    margin-top: -68px;
+  }
+
+  .jt {
+    font-size: 12px;
+    padding-left: 260px;
+  }
+
+  .pkt2 {
+    font-size: 12px;
+    color: #B0B0B0;
+    padding-left: 380px;
+    margin-top: -68px;
+
+    }
+
+    .brz {
+        font-size: 12px;
+        padding-left: 375px;
+    }
+
+    .tgl {
+        font-size: 12px;
+        color: #B0B0B0;
+        padding-left: 470px;
+        margin-top: -70px;
+    }
+
+    .ttgl {
+        font-size: 12px;
+        padding-left: 460px;
+        margin-top: 19px;
+    }
+
+    .mp {
+        font-size: 12px;
+        color: #B0B0B0;
+        padding-left: 590px;
+        margin-top: -72px;
+    }
+
+    .lb {
+        width: 50px;
+        height: auto;
+        margin-left: 500px;
+        font-size: 10px;
+    }
+
+    .mtp {
+        font-size: 12px;
+        padding-left: 67px;
+    }
+
+    .acr {
+        padding-left: 750px;
+        margin-top: -60px;
+    }
+
+    .sp {
+        margin-top: -5px;
+        padding-left: 80px;
+    }
+
+
+
+
+
+
+
