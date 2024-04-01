@@ -79,12 +79,12 @@
                             <td>{{ $item->total_kehadiran }} &nbsp; <a
                                     href="{{route('cont.mitrapresensi', $item->nama_lengkap)}}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>
-                            <td style="color: orange">{{ $item->total_izin }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailizin" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                            <td style="color: orange">{{ $item->total_izin + $item->total_sakit}} &nbsp; <a
+                                href="{{ route('cont.mitrapresensi.detailizin', ['nama_lengkap' => $item->nama_lengkap]) }}"
+                                class="fa-solid fa-circle-info" style="color: #000"></td>
                             <td style="color: red">{{ $item->total_ketidakhadiran }} &nbsp; <a
-                                    href="/mitra-laporanpresensi-detailtidakhadir" class="fa-solid fa-circle-info"
-                                    style="color: #000"></td>
+                                    href="{{ route('cont.mitrapresensi.detailtidakhadir', ['nama_lengkap' => $item->nama_lengkap]) }}"
+                                    class="fa-solid fa-circle-info" style="color: #000"></td>
                         </tr>
                     @endforeach
 

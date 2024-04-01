@@ -88,7 +88,7 @@ Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentC
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
-Route::get('/lihatprofil', [SchoolController::class, 'Lihatprofil']);
+Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
 
 //Contributor for Mitra
 Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);

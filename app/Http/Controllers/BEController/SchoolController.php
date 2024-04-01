@@ -4,6 +4,8 @@ namespace App\Http\Controllers\BEController;
 
 use App\Models\User;
 use App\Models\Shift;
+use App\Models\Divisi;
+use App\Models\Project;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,26 +47,29 @@ class SchoolController extends Controller
             return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM]);
         }
     }
-    public function Lihatprofil(Request $request)
+    public function Lihatprofil(Request $request, $id)
     {
-        //Data Mahasiswa- Lihat profile
-        $lihat = User::where("role_id",3)->first();
-        $presensi = Presensi ::where('id', $lihat->id)
-        ->select("hutang_presensi")->first();
-        $Shift= Shift::where('id', $lihat->id)
-        ->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+        //Data Mahasiswa- Lihat profile detail 
+        $lihat = User::findOrFail($id);
 
-        // dd($lihat);
+        // Logika untuk mendapatkan data profil sesuai dengan data user
+        $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
+        $divisi = Divisi::where('id', $lihat->divisi_id)->select("nama_divisi")->first();
+        $project = Project::where('id', $lihat->project_id)->select("nama_project")->first();
+        $Shift = Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+    
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "massage" => "Lihat profil Mahasiswa ",
             "profile" => $lihat,
             "Shift"=>$Shift,
             "presensi"=>$presensi,
+            "project"=> $project,
+            "divisi"=>$divisi
           ]);
         } else {
             return view('jumlah-mahasiswa.profil-siswa',
-            compact('lihat','Shift','presensi'));
+            compact('lihat','Shift','presensi','project','divisi'));
             // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
         }
     }

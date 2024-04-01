@@ -50,7 +50,7 @@
                             <p class="mb-1">Name: {{ $user['nama'] }}</p>
                             <div class="d-flex flex-wrap">Privilege:
                                 @foreach ($user['privilege'] as $privilege)
-                                    <span class="privilege-item">{{ $privilege }}</span>
+                                    <span class="privilege-item" style="font-size: 10px; font-weight: 500;">{{ $privilege }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -226,11 +226,69 @@
                             </div>
                         </div>
                         <div class="mt-3 d-flex flex-column">
-                            <label for="siswa" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">siswa</label>
-                            <select name="siswa" id="siswa" class="form-select"
-                                style="background-color: #F2F4F8;">
-                                <option value="">Tambah mahasiswa</option>
-                            </select>
+                            <label for="mahasiswa" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">
+                                pilih mahasiswa</label>
+                            <div class="d-flex">
+                                <button id="pilihMetode" class="py-2 border-0 border-bottom"
+                                    style="background-color: #F2F4F8; width: 100%;" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample"
+                                    style="border: 2px solid #E9E9E9; padding: 15px; border-radius: 0px 8px 8px 0px; width: 100%;">
+                                    Pilih Mahasiswa<i class="fa-solid fa-caret-down" style="padding-left: 70%;"></i>
+                                </button>
+                            </div>
+
+                            <div class="collapse" id="collapseExample">
+                                <div class="px-3 py-2 mt-2 border-0 border-bottom"
+                                    style="background-color: #F2F4F8; width: 100%;">
+                                    <div class="d-flex" style="width: 100%;">
+                                        <p class="text-capitalize">available users</p>
+                                        <button class="border-0 bg-transparent"
+                                            style="margin-left: 70%; margin-top: -20px; right: 0;"
+                                            onclick="toggleCollapse()">
+                                            <i class="fa-solid fa-caret-up"></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <input type="text" name="search" id="search"
+                                            placeholder="Cari berdasarkan NIM"
+                                            class="px-2 py-1 border-0 border-bottom rounded mb-2"
+                                            style="background-color: #ffffff; border: 0.5px solid #0000003f; font-size: 12px;">
+                                        <table class="table table-bordered text-center"
+                                            style="width: 100%; font-size: 12px;">
+                                            <thead>
+                                                <td><input type="checkbox" id="checkAll"></td>
+                                                <td>NIM</td>
+                                                <td>Nama</td>
+                                                <td>Prodi</td>
+                                                <td><button class="border-0 bg-transparent"
+                                                        style="opacity: 0; pointer-event: none;"></button></td>
+                                            </thead>
+                                            <tbody id="tableBody">
+                                            </tbody>
+                                        </table>
+
+                                        <p class="text-capitalize my-2">selected users</p>
+                                        <table class="table table-bordered text-center"
+                                            style="width: 100%; font-size: 12px;">
+                                            <thead>
+                                                <tr>
+                                                    <td>NIM</td>
+                                                    <td>Nama</td>
+                                                    <td>Prodi</td>
+                                                    <td><button class="border-0 bg-transparent"
+                                                            style="opacity: 0; pointer-event: none;"></button></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="selectedDataBody" class="table-danger">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button onclick="alert()" type="button"
@@ -418,6 +476,103 @@
     </div>
 
     <script>
+        var data = [{
+                nim: '647825343329',
+                nama: 'rudi',
+                prodi: 'TI'
+            },
+            {
+                nim: '647825343330',
+                nama: 'Almi',
+                prodi: 'TI'
+            },
+            {
+                nim: '647825343331',
+                nama: 'Jaka',
+                prodi: 'TI'
+            },
+            {
+                nim: '647825343332',
+                nama: 'Yessa Khoirunissa',
+                prodi: 'TI'
+            },
+            {
+                nim: '647825343333',
+                nama: 'Febrian Adipurnowo',
+                prodi: 'TI'
+            },
+        ];
+
+        var tbody = document.getElementById('tableBody');
+        var selectedDataBody = document.getElementById('selectedDataBody');
+        var checkAllCheckbox = document.getElementById('checkAll');
+
+        data.forEach(function(item) {
+            var row = `<tr>
+                            <td><input type="checkbox" style="color:#A4161A;"></td>
+                            <td>${item.nim}</td>
+                            <td>${item.nama}</td>
+                            <td>${item.prodi}</td>
+                            <td><button class="border-0 bg-transparent" style="color:#A4161A;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>`;
+            tbody.innerHTML += row;
+        });
+
+        function handleCheckAll() {
+            var checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = checkAllCheckbox.checked;
+            });
+            // Memperbarui data terpilih setelah semua checkbox diatur
+            updateSelectedData();
+        }
+
+        // Event listener untuk checkbox "checkAll"
+        checkAllCheckbox.addEventListener('change', handleCheckAll);
+
+        function updateSelectedData() {
+            selectedDataBody.innerHTML = ''; // Hapus data sebelumnya
+
+            var checkboxes = document.querySelectorAll('#tableBody input[type="checkbox"]:checked');
+            checkboxes.forEach(function(checkbox) {
+                var row = checkbox.parentElement.parentElement.cloneNode(true);
+                row.firstElementChild.remove(); // Hapus checkbox
+                selectedDataBody.appendChild(row);
+            });
+        }
+
+        // Tambahkan event listener untuk checkbox di tabel utama
+        tbody.addEventListener('change', updateSelectedData);
+
+        document.getElementById('search').addEventListener('input', function() {
+            var searchTerm = this.value.toLowerCase();
+            var rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(function(row) {
+                var nim = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (nim.includes(searchTerm)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        function toggleCollapse() {
+            var collapseElement = document.getElementById("collapseExample");
+            var isCollapsed = collapseElement.classList.contains("show");
+
+            if (isCollapsed) {
+                collapseElement.classList.remove("show");
+            }
+        }
+
         function filterUsers(role) {
             const userItems = document.querySelectorAll('.user-item-' + role);
             const allUserItems = document.querySelectorAll('[class^="user-item-"]');
