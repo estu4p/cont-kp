@@ -142,11 +142,11 @@ border-radius: 20px;
     text-align: center;
 }
 
-#check:checked + .round-button-check {
+.round-button-check {
     background-color: #00C113;
 }
 
-#cross:checked + .round-button-cross {
+.round-button-cross {
     background-color: red;
 }
 .bates{
@@ -264,4 +264,16 @@ i .fs-1 {
 }
 .close{
     width: 80px;
+}
+
+.gantijam{
+    background-color: #a7284e; /* Warna hijau */
+    
+    padding: 10px 20px; 
+}
+.tidak{
+    background-color: #28a745; /* Warna hijau */
+    
+    padding: 10px 20px; 
+
 }

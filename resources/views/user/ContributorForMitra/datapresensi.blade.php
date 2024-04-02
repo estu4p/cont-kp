@@ -296,17 +296,26 @@
                       </tbody>
                       </table>
                       <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+
+
+
+
+
+
+                      {{-----------modallllllllllllllllllllllllllll-----}}
                     
                       <div class="modal fade" id="statuskehadiran">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header" style="padding-left: 100%;">
+                                <div class="modal-header" style="padding-left: 40%;">
                                     <h1>Izin</h1>
                                 </div>
+                                
                                 <!-- Isi dari modal -->
-                                <div class="modal-body">
+                                <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
                 
                                     <!-- Baris Ke-1 -->
+                             
                                     <div class="keterangan">
                                         “ Maaf saya tidak dapat mengikuti magang untuk
                                         hari ini dikarenakan saya sedang tidak enak
@@ -316,49 +325,43 @@
                                     <!-- Break Line -->
                                     <!-- Baris Ke-2 -->
                                     Link Foto Gdrive
-                                    <div class="linkdrive"><div class="mb-3">
-                                        <div class="input-group">
-                                          <span class="input-group-text" id="basic-addon3"></span>
-                                          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                                        </div></div>
+                                    <textarea class="form-control" placeholder id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea"></label>
                 
                                     <!-- Break Line -->
                                     <!-- Baris Ke-3 -->
                                     kategori izin
-                                   
-                                        <div class="dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          Dropdown link
-                                        </a>
-                                      
-                                        <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="#">Action</a></li>
-                                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        </ul>
-                                      </div></div>
-                                    
+                                  <select class="form-select" aria-label="Default select example">
+                                          <option selected>Pilih kategori izin</option>
+                                          <option value="1">Sakit dengan surat dokter </option>
+                                          <option value="2">sakit tanpa surat dokter</option>
+                                            <option value="3">keperluan sekolah/kampus</option>
+                                            <option value="4">keperluan lainnya</option>
+                                    </select>
                 
-                
-                
-                
+                                    </div>   
                                     <!-- Break Line -->
                                     <!-- End -->
-                                    <div class="b">
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <button id="button1" class="btn btn-primary d-grid" type="button" onclick="handleButtonClick(1)">Button 1</button>
-                                        </div>
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <button id="button2" class="btn btn-primary gap-2" type="button" onclick="handleButtonClick(2)">Button 2</button>
-                                        </div>
+                                    <div>
+                
+                                      <div class="d-grid gap-2 d-md-block">
+                                        <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
+                                        <div class="d">
+                                        <button id="button2" class="btn btn-primary_tidak" type="button" onclick="handleButtonClick(2)">tidak ganti jam</button>
+                                      </div>
+                                    </div>
                                     </div>
                                     <div style="text-align: center">
-                                        <button class="btnkembali" data-bs-dismiss="modal">simpan</button>
+                                        <button class="btn btn-primary save" data-bs-dismiss="modal">simpan</button>
+                                        </div>
                                     </div>
+                                 
                                 </div>
                 
                             </div>
-        </div>
+                        </div>    
+                      
+                        </div>
 
 </div>
                 </div>

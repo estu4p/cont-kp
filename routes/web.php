@@ -554,19 +554,16 @@ Route::get('/MitraPresensi', function () {
     return view('user.ContributorForMitra.MitraPresensi');
 });
 
-Route::get('/dataPresensi', function () {
-    return view('user.ContributorForMitra.dataPresensi');
-});
-Route::get('/presensiaccept', function () {
-    return view('user.ContributorForMitra.presensiaccept');
-});
-Route::get('/presensireject', function () {
-    return view('user.ContributorForMitra.presensireject');
+Route::get('/datapresensi', function () {
+    return view('user.ContributorForMitra.datapresensi');
 });
 
-Route::get('/allpresensi', function () {
-    return view('user.ContributorForMitra.allpresensi');
+
+Route::get('/laporanpresensi', function () {
+    return view('user.ContributorForMitra.laporanpresensi');
 });
+
+
 
 
 

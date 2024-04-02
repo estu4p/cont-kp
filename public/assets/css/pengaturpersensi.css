@@ -25,7 +25,7 @@
   }
   
   .btn-primary:focus, .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
   }
   .h3{
     color: #0056b3;
@@ -57,4 +57,59 @@
 }
 .p{
   color: black;
+}
+.simpan{
+
+color: #e91111;
+}
+.container {
+  margin-bottom: 10px;
+}
+
+.round {
+  display: inline-block;
+  position: relative;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type="checkbox"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #727679;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + label:before {
+  background-color:blue;
+}
+
+input[type="checkbox"] + label:after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+input[type="checkbox"]:checked + label:after {
+  display: block;
 }

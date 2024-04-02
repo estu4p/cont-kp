@@ -265,3 +265,15 @@ i .fs-1 {
 .close{
     width: 80px;
 }
+
+.gantijam{
+    background-color: #a7284e; /* Warna hijau */
+    
+    padding: 10px 20px; 
+}
+.tidak{
+    background-color: #28a745; /* Warna hijau */
+    
+    padding: 10px 20px; 
+
+}

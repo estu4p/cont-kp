@@ -191,4 +191,14 @@ table {
     .btnkembali:hover {
         color: #000000;
     }
+    .gantijam{
+        background-color: #a7284e; /* Warna hijau */
+        
+        padding: 10px 20px; 
+    }
+    .tidak{
+        background-color: #28a745; /* Warna hijau */
+        
+        padding: 10px 20px;
+    }
     
