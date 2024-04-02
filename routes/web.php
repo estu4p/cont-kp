@@ -602,17 +602,9 @@ Route::get('/admin/setting/user', function () {
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
     ];
-    $mhs = [
-        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
-        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
-        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
-        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
-        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
-    ];    
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
         'users' => $users,
-        'mhs' => $mhs,
     ]);
 });
 
