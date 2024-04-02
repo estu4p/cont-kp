@@ -20,8 +20,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbarprofileadmin')
-        <!-- bueeek master baru piqri bangke -->
+        @include('template.navbarMitra')
+
 
         <div class="content-wrapper">
             <section class="content">
@@ -46,7 +46,7 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
     <script>
-        
+
         $(document).ready( function () {
             var table = $('#example').DataTable( {
                 pageLength : 5,

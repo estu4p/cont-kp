@@ -453,6 +453,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
+        // dd($nama_lengkap);
         // NIM
         $user = User::findOrFail($nama_lengkap);
         // menampilkan divisi
@@ -463,7 +464,7 @@ class AdminUnivAfterPaymentController extends Controller
         $sekolah = Sekolah::find($sekolah_user);
 
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
@@ -544,7 +545,7 @@ class AdminUnivAfterPaymentController extends Controller
         $dayName = $date->format('l');
 
         // jam default
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
@@ -611,7 +612,7 @@ class AdminUnivAfterPaymentController extends Controller
         $dayName = $date->format('l');
 
         // jam default
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
