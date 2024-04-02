@@ -11,6 +11,7 @@ use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 
 
 
@@ -241,187 +242,28 @@ class ContributorForMitra extends Controller
 
     public function laporanPresensiDetailHadir(Request $request,$nama_lengkap)
     {
+        //validasi nama lengkap
         $user = User::findOrFail($nama_lengkap);
-        $presensi = User::where('role_id', 3)->get();
 
-        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
-        $kehadiranPerNama = Presensi::select('nama_lengkap')
-            ->groupBy('nama_lengkap')->with('user')
-            ->get()
-            ->map(function ($item) {
-                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'hadir')
-                    ->count();
-                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
-                    ->count();
-                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'Tidak Hadir')
-                    ->count();
-                return $item;
-            });
+        // Menampilkan Divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+
+        // // Menampilkan Sekolah
+        // $sekolah_user = $user->sekolah;
+        // $sekolah = Sekolah::find($sekolah_user);
+
+        // Mengambil data presensi dengan status Hadir
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
+
+        // $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        //     ->whereNotNull('jam_default_masuk')
+        //     ->whereNotNull('jam_default_pulang')
+        //     ->select('jam_default_masuk', 'jam_default_pulang')
+        //     ->first();
 
         // Hitung total jam masuk dalam format waktu
         $totalJamMasuk = $presensi->sum(function ($item) {
-            // Ubah format jam masuk menjadi array jam, menit, dan detik
-            $jam_masuk_parts = explode(':', $item->jam_masuk);
-
-        // Pastikan format jam masuk sesuai (HH:MM:SS)
-        if (count($jam_masuk_parts) == 3) {
-            // Ambil jam, menit, dan detik dari jam masuk
-            $jam = intval($jam_masuk_parts[0]);
-            $menit = intval($jam_masuk_parts[1]);
-            $detik = intval($jam_masuk_parts[2]);
-
-            // Hitung total detik dari jam masuk
-            $totalDetik = $jam * 3600 + $menit * 60 + $detik;
-
-            // Kembalikan total detik
-            return $totalDetik;
-        } else {
-            // Jika format jam masuk tidak sesuai, kembalikan nilai 0
-            return 0;
-        }
-    });
-
-        // Konversi total jam masuk dari detik ke format jam:menit:detik
-        $jam = floor($totalJamMasuk / 3600);
-        $menit = floor(($totalJamMasuk % 3600) / 60);
-        $detik = $totalJamMasuk % 60;
-
-        $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
-
-        // Hitung total masuk (dalam jam)
-        $totalMasukJam = $totalJamMasuk / 3600;
-
-        // Hitung total masuk (dalam hari)
-        $totalMasukHari = $totalMasukJam / 24;
-
-        // Hitung sisa
-        $target = 1100; // Ganti dengan nilai target sesuai kebutuhan
-        $sisa = $target - $totalMasukJam;
-
-        // Kirim data ke tampilan
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json([
-                'message' => 'Berhasil mendapat data',
-                'presensi' => $presensi,
-                'kehadiran' => $kehadiranPerNama,
-                'totalJamMasuk' => $totalJamMasukFormatted,
-                'totalMasuk' => $totalMasukHari,
-                'target' => $target,
-                'sisa' => $sisa
-            ], 200);
-        } else {
-            return view('user.ContributorForMitra.MitraPresensiDetailHadir', compact(['presensi', 'user', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa']));
-        }
-    }
-
-    public function laporanPresensiDetailIzin($nama_lengkap, Request $request)
-    {
-        $user = User::findOrFail($nama_lengkap);
-        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)
-                        ->where(function ($query) {
-                            $query->where('status_kehadiran', 'izin')
-                                  ->orWhere('status_kehadiran', 'sakit');
-                        })->get();
-
-        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
-        $kehadiranPerNama = Presensi::select('nama_lengkap')
-            ->groupBy('nama_lengkap')->with('user')
-            ->get()
-            ->map(function ($item) {
-                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'hadir')
-                    ->count();
-                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
-                    ->count();
-                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'Tidak Hadir')
-                    ->count();
-            return $item;
-        });
-
-       // Hitung total jam masuk dalam format waktu
-       $totalJamMasuk = $presensi->sum(function ($item) {
-            // Ubah format jam masuk menjadi array jam, menit, dan detik
-            $jam_masuk_parts = explode(':', $item->jam_masuk);
-
-        // Pastikan format jam masuk sesuai (HH:MM:SS)
-        if (count($jam_masuk_parts) == 3) {
-            // Ambil jam, menit, dan detik dari jam masuk
-            $jam = intval($jam_masuk_parts[0]);
-            $menit = intval($jam_masuk_parts[1]);
-            $detik = intval($jam_masuk_parts[2]);
-
-            // Hitung total detik dari jam masuk
-            $totalDetik = $jam * 3600 + $menit * 60 + $detik;
-
-            // Kembalikan total detik
-            return $totalDetik;
-        } else {
-            // Jika format jam masuk tidak sesuai, kembalikan nilai 0
-            return 0;
-        }
-    });
-
-        // Konversi total jam masuk dari detik ke format jam:menit:detik
-        $jam = floor($totalJamMasuk / 3600);
-        $menit = floor(($totalJamMasuk % 3600) / 60);
-        $detik = $totalJamMasuk % 60;
-
-        $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
-
-        // Hitung total masuk (dalam jam)
-        $totalMasukJam = floor($totalJamMasuk / 3600);
-
-        // Hitung total masuk (dalam hari)
-        $totalMasukHari = $totalMasukJam / 24;
-
-        // Hitung sisa
-        $target = 1100; // Ganti dengan nilai target sesuai kebutuhan
-        $sisa = $target - $totalMasukJam;
-
-        if ($request->is('api/*') || $request->wantsJson()) {
-                return response()->json([
-                    'message' => 'Berhasil mendapat data',
-                    'Detail Izin' => $presensi,
-                    'kehadiran' => $kehadiranPerNama,
-                    'totalJamMasuk' => $totalJamMasukFormatted,
-                    'totalMasuk' => $totalMasukHari,
-                    'target' => $target,
-                    'sisa' => $sisa
-                ], 200);
-        } else {
-                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'user', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa']));
-        }
-    }
-
-    public function laporanPresensiDetailTidakHadir($nama_lengkap, Request $request)
-    {
-        $user = User::findOrFail($nama_lengkap);
-        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'tidak hadir')->get();
-
-        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
-        $kehadiranPerNama = Presensi::select('nama_lengkap')
-            ->groupBy('nama_lengkap')->with('user')
-            ->get()
-            ->map(function ($item) {
-                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'hadir')
-                    ->count();
-                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
-                    ->count();
-                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->where('status_kehadiran', 'Tidak Hadir')
-                    ->count();
-            return $item;
-        });
-
-       // Hitung total jam masuk dalam format waktu
-       $totalJamMasuk = $presensi->sum(function ($item) {
         // Ubah format jam masuk menjadi array jam, menit, dan detik
         $jam_masuk_parts = explode(':', $item->jam_masuk);
 
@@ -453,25 +295,267 @@ class ContributorForMitra extends Controller
         // Hitung total masuk (dalam jam)
         $totalMasukJam = floor($totalJamMasuk / 3600);
 
-        // Hitung total masuk (dalam hari)
-        $totalMasukHari = $totalMasukJam / 24;
+        $tjammasuk = Presensi::where('nama_lengkap', $nama_lengkap)
+        ->whereNotNull('jam_masuk')
+        ->whereNotNull('jam_pulang')
+        ->where('status_kehadiran', 'Hadir')
+        ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+        ->first();
 
-        // Hitung sisa
-        $target = 1100; // Ganti dengan nilai target sesuai kebutuhan
+        // total jam masuk format integer
+        $totalJamMasuk = $tjammasuk->total_jam_masuk;
+
+        // total masuk dalam detik
+        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
+
+        // Hitung total masuk dalam jam
+        $totalMasukJam = floor($jamMasukDetik / 3600);
+
+        // Hitung total masuk dalam hari
+        $totalMasukHari = $presensi->count();
+
+        $target = 1100;
+
+        // sisa
         $sisa = $target - $totalMasukJam;
+        // Konversi sisa jam ke format jam:menit:detik
+        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item, $key) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'izin')
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+                return $item;
+            });
+
+        // Kirim data ke tampilan
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'message' => 'Berhasil mendapat data',
+                'presensi' => $presensi,
+                'totalJamMasuk' => $totalJamMasuk,
+                'totalMasuk' => $totalMasukHari,
+                'target lulus' => $target,
+                'sisa' => $sisa
+            ], 200);
+        } else {
+            return view('user.ContributorForMitra.MitraPresensiDetailHadir', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
+        }
+    }
+
+    public function laporanPresensiDetailIzin($nama_lengkap, Request $request)
+    {
+        $user = User::findOrFail($nama_lengkap);
+
+        // Menampilkan Divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)
+                        ->where(function ($query) {
+                            $query->where('status_kehadiran', 'izin')
+                                  ->orWhere('status_kehadiran', 'sakit');
+                        })->get();
+
+        // Hitung total jam masuk dalam format waktu
+        $totalJamMasuk = $presensi->sum(function ($item) {
+            // Ubah format jam masuk menjadi array jam, menit, dan detik
+            $jam_masuk_parts = explode(':', $item->jam_masuk);
+    
+            // Pastikan format jam masuk sesuai (HH:MM:SS)
+            if (count($jam_masuk_parts) == 3) {
+                // Ambil jam, menit, dan detik dari jam masuk
+                $jam = intval($jam_masuk_parts[0]);
+                $menit = intval($jam_masuk_parts[1]);
+                $detik = intval($jam_masuk_parts[2]);
+    
+                // Hitung total detik dari jam masuk
+                $totalDetik = $jam * 3600 + $menit * 60 + $detik;
+    
+                // Kembalikan total detik
+                return $totalDetik;
+            } else {
+                // Jika format jam masuk tidak sesuai, kembalikan nilai 0
+                return 0;
+            }
+        });
+
+        // Konversi total jam masuk dari detik ke format jam:menit:detik
+        $jam = floor($totalJamMasuk / 3600);
+        $menit = floor(($totalJamMasuk % 3600) / 60);
+        $detik = $totalJamMasuk % 60;
+
+        $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
+
+        // Hitung total masuk (dalam jam)
+        $totalMasukJam = floor($totalJamMasuk / 3600);
+
+        $tjammasuk = Presensi::where('nama_lengkap', $nama_lengkap)
+        ->whereNotNull('jam_masuk')
+        ->whereNotNull('jam_pulang')
+        ->where('status_kehadiran', 'Hadir')
+        ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+        ->first();
+
+        // total jam masuk format integer
+        $totalJamMasuk = $tjammasuk->total_jam_masuk;
+
+        // total masuk dalam detik
+        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
+
+        // Hitung total masuk dalam jam
+        $totalMasukJam = floor($jamMasukDetik / 3600);
+
+        // Hitung total masuk dalam hari
+        $totalMasukHari = $presensi->count();
+
+        $target = 1100;
+
+        // sisa
+        $sisa = $target - $totalMasukJam;
+        // Konversi sisa jam ke format jam:menit:detik
+        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+
+        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+            return $item;
+        });
 
         if ($request->is('api/*') || $request->wantsJson()) {
                 return response()->json([
-                    'message' => 'Berhasil mendapat data', 
+                    'message' => 'Berhasil mendapat data',
                     'Detail Izin' => $presensi,
                     'kehadiran' => $kehadiranPerNama,
-                    'totalJamMasuk' => $totalJamMasukFormatted,
+                    'totalJamMasuk' => $totalJamMasuk,
                     'totalMasuk' => $totalMasukHari,
                     'target' => $target,
                     'sisa' => $sisa
                 ], 200);
         } else {
-                return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir', compact(['presensi', 'user', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa']));
+                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
+        }
+    }
+
+    public function laporanPresensiDetailTidakHadir($nama_lengkap, Request $request)
+    {
+        $user = User::findOrFail($nama_lengkap);
+
+        // Menampilkan Divisi
+        $divisi_user = $user->divisi_id;
+        $divisi = Divisi::find($divisi_user);
+
+        $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'tidak hadir')->get();
+
+        // Hitung total jam masuk dalam format waktu
+        $totalJamMasuk = $presensi->sum(function ($item) {
+            // Ubah format jam masuk menjadi array jam, menit, dan detik
+            $jam_masuk_parts = explode(':', $item->jam_masuk);
+    
+            // Pastikan format jam masuk sesuai (HH:MM:SS)
+            if (count($jam_masuk_parts) == 3) {
+                // Ambil jam, menit, dan detik dari jam masuk
+                $jam = intval($jam_masuk_parts[0]);
+                $menit = intval($jam_masuk_parts[1]);
+                $detik = intval($jam_masuk_parts[2]);
+    
+                // Hitung total detik dari jam masuk
+                $totalDetik = $jam * 3600 + $menit * 60 + $detik;
+    
+                // Kembalikan total detik
+                return $totalDetik;
+            } else {
+                // Jika format jam masuk tidak sesuai, kembalikan nilai 0
+                return 0;
+            }
+        });
+
+        // Konversi total jam masuk dari detik ke format jam:menit:detik
+        $jam = floor($totalJamMasuk / 3600);
+        $menit = floor(($totalJamMasuk % 3600) / 60);
+        $detik = $totalJamMasuk % 60;
+
+        $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
+
+        // Hitung total masuk (dalam jam)
+        $totalMasukJam = floor($totalJamMasuk / 3600);
+
+        $tjammasuk = Presensi::where('nama_lengkap', $nama_lengkap)
+        ->whereNotNull('jam_masuk')
+        ->whereNotNull('jam_pulang')
+        ->where('status_kehadiran', 'Hadir')
+        ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+        ->first();
+
+        // total jam masuk format integer
+        $totalJamMasuk = $tjammasuk->total_jam_masuk;
+
+        // total masuk dalam detik
+        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
+
+        // Hitung total masuk dalam jam
+        $totalMasukJam = floor($jamMasukDetik / 3600);
+
+        // Hitung total masuk dalam hari
+        $totalMasukHari = $presensi->count();
+
+        $target = 1100;
+
+        // sisa
+        $sisa = $target - $totalMasukJam;
+        // Konversi sisa jam ke format jam:menit:detik
+        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+
+        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
+        $kehadiranPerNama = Presensi::select('nama_lengkap')
+            ->groupBy('nama_lengkap')->with('user')
+            ->get()
+            ->map(function ($item) {
+                $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'hadir')
+                    ->count();
+                $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
+                    ->count();
+                $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
+                    ->where('status_kehadiran', 'Tidak Hadir')
+                    ->count();
+            return $item;
+        });
+        
+        //return ke tampilan
+        if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Berhasil mendapat data', 
+                    'Detail Izin' => $presensi,
+                    'kehadiran' => $kehadiranPerNama,
+                    'totalJamMasuk' => $totalJamMasuk,
+                    'totalMasuk' => $totalMasukHari,
+                    'target' => $target,
+                    'sisa' => $sisa
+                ], 200);
+        } else {
+                return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
         }
     }
     
