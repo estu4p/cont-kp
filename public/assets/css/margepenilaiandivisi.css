@@ -46,7 +46,7 @@
 
 /* Responsif untuk tabel */
 .table-responsive {
-  
+
 }
 .wadah{
     top:0;
@@ -62,7 +62,7 @@
    top:0;
     background-color: white;
     display: inline-block;
- 
+
 }
 .kanan-tabel{
     width:auto;
@@ -79,13 +79,13 @@
 .page, .item{
     background: #c6c6c6;
     border-radius:5px;
-    
+
 }
 
 .manageP {
     text-decoration: none;
-    background-color: pink; 
-    border-radius: 7px; 
+    background-color: pink;
+    border-radius: 7px;
 }
 .logout{
     position: absolute;

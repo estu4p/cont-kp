@@ -1,21 +1,25 @@
 <?php
 
-use function Laravel\Prompts\alert;
+use App\Models\Presensi;
 
-use App\Http\Controllers\AdminUnivAfterPaymentController;
+use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController 
 as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\SchoolController;
+use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
-use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\HomeMitraController;
+use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
 
 /*
@@ -42,10 +46,7 @@ Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_
 Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
 
 Route::middleware('user')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    });
-    Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
+
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
@@ -63,7 +64,11 @@ Route::get('/dashboard', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-
+Route::get('/register', function () {
+    return view('landing-page.daftar', [
+        'title' => "Landing Page - Register"
+    ]);
+});
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -204,11 +209,15 @@ Route::get('/pemagang/detail', function () {
 });
 
 
+//lihat profil contributor for univ
+// Route::get('/profil-siswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jumlahMahasiswa');
 
 
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
+//contributor for univ
+Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
+Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
+Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
+
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
@@ -216,18 +225,9 @@ Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
 
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
-Route::get('/laporandatapresensi', function () {
-    return view('presensi.laporandatapresensi');
-});
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
-
-Route::get('/presensi', function () {
+Route::get('/presensi-contributor-univ', function () {
     return view('presensi.presensiharian');
+    // return view('presensi.presensiharian')->name('presensi.con');
 });
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
@@ -238,6 +238,14 @@ Route::get('/presensiizin', function () {
 Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
+
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
+
 
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
@@ -400,9 +408,9 @@ Route::get('/AdminUniv-Login', function () {
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
 
-Route::get('/AdminUniv-ResetPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
-});
+
+Route::get('/AdminUniv-ResetPassword', [ResetPasswordController::class, 'indexAdminUniv'])->name('login.admin.reset');
+Route::post('/AdminUniv-ResetPassword', [ResetPasswordController::class, 'adminUnivResetPassword'])->name('adminUniv.reset');
 
 Route::get('/AdminUniv-InputOTP', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputOTP');
@@ -447,20 +455,51 @@ Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControll
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
-Route::get('/mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
-Route::get('/mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
-Route::get('/mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
-});
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
+Route::get('/AdminUniv-mitra-laporanpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'laporanDataPresensi']);
+Route::get('/AdminUniv-mitra-laporanpresensi-detaihadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailHadir'])->name('adminUniv.detailHadir');
+
+Route::get('/AdminUniv-mitra-laporanpresensi-detailizin/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailIzin'])->name('adminUniv.detailIzin');
+Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
     return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
 });
+Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
+
+Route::get('/Option-TeamAktif', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif');
+});
+Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
+});
+Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
+    return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
+});
+Route::get('/OptionTeamAktifKlikUiUx', function () {
+    return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
+});
+
+
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
+
+
+Route::get('/Option-TeamAktif-SeeAllTeams', function () {
+    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
+});
+Route::get('/profilSiswa', function () {
+    return view('adminUniv-afterPayment.mitra.profilSiswa');
+});
+
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
+});
+
+Route::get('/datasiswa', function () {
+    return view('adminUniv-afterPayment.dataSiswa');
+});
+Route::get('/profilsiswa', function () {
+    return view('adminUniv-afterPayment.profilSiswa');
 });
 
 
@@ -503,15 +542,15 @@ Route::get('/pemagang/home', function () {
 
 
 
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
-Route::get('/laporandatapresensi', function () {
-    return view('presensi.laporandatapresensi');
-});
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
+// Route::get('/profil-siswa', function () {
+//     return view('jumlah-mahasiswa.profil-siswa');
+// });
+// Route::get('/laporandatapresensi', function () {
+//     return view('presensi.laporandatapresensi');
+// });
+// Route::get('/datapresensisiswa', function () {
+//     return view('presensi.datapresensisiswa');
+// });
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
@@ -599,15 +638,15 @@ Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
 
-// Route::get('/mitra-laporanpresensi-detaihadir', function () {
-//     return view('adminUniv-afterPayment.mitra.laporandetailhadir');
-// });
-Route::get('/mitra-laporanpresensi-detailizin', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailizin');
+// CONTRIBUTOR FOR MITRA PRESENSI
+Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);
+Route::get('/mitra-laporanpresensi-detailhadir', function () {
+    return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
-Route::get('/mitra-laporanpresensi-detailtidakhadir', function () {
-    return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir');
-});
+
+Route::get('/mitra-laporanpresensi-detailhadir/{id}', [ContributorForMitra::class, 'laporanPresensiDetailHadir'])->name('cont.mitrapresensi');
+Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailIzin'])->name('cont.mitrapresensi.detailizin');
+Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
 Route::get('/AdminUniv-InputOTP', function () {
@@ -617,6 +656,60 @@ Route::get('/AdminUniv-InputOTP', function () {
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
+
+
+Route::get('/mitra-presensi-barcode/masuk', function () {
+    return view('User.ContributorForMitra.barcode_jam-masuk', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+    ]);
+});
+Route::get('/mitra-presensi-barcode/istirahat', function () {
+    return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+
+    ]);
+});
+Route::get('/mitra-presensi-barcode/selesai-istirahat', function () {
+    return view('User.ContributorForMitra.barcode_jam-selesai-istirahat', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+
+    ]);
+});
+Route::get('/mitra-presensi-barcode/pulang', function () {
+    $presensi = Presensi::all();
+
+    // Ambil data presensi terbaru
+    $latestPresensi = Presensi::latest()->first();
+    $pulang = strtotime($latestPresensi->jam_pulang);
+    $masuk = strtotime($latestPresensi->jam_masuk);
+
+    // Hitung selisih waktu
+    $diffInSeconds = $pulang - $masuk;
+
+    // Ubah selisih waktu ke dalam format jam:menit:detik
+    $totalHours = floor($diffInSeconds / 3600);
+    $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
+    $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
+
+    $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+
+    return view('User.ContributorForMitra.barcode_jam-pulang', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => $presensi,
+        'total' => $total
+    ]);
+});
+Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
+Route::post('/mitra-presensi-barcode/jam-mulai-istirahat', [ContributorForMitra::class, 'jam_mulai_istirahat'])->name('barcode.jam-mulai-istirahat');
+Route::post('/mitra-presensi-barcode/jam-selesai-istirahat', [ContributorForMitra::class, 'jam_selesai_istirahat'])->name('barcode.jam-selesai-istirahat');
+Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
 
 
 
@@ -678,18 +771,6 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
-Route::get('/TableGantiJam', function () {
-    return view('user.UserScanQR.TableGantiJam');
-});
-
-Route::get('/Scanqr', function () {
-    return view('user.UserScanQR.Scanqr');
-});
-
-
-
-
-
 
 Route::get('/superAdmin/langganan', function () {
     $members = [
@@ -735,9 +816,19 @@ Route::get('/admin/setting/user', function () {
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
     ];
+
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];
+
+
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
-        'users' => $users
+        'users' => $users,
     ]);
 });
 
@@ -763,6 +854,8 @@ Route::get('/superAdmin/langganan', function () {
         'members' => $members,
     ]);
 });
+
+
 
 Route::get('/admin/setting/quotes', function () {
     $quotes = [
@@ -797,4 +890,223 @@ Route::get('/admin/setting/user', function () {
 
 Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/AdminPaket', function () {
+    return view('user.AdminUnivAfterPayment.AdminPaket');
+});
+
+Route::get('/CheckoutBronze', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutBronze');
+});
+
+Route::get('/CheckoutSilver', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutSilver');
+});
+
+Route::get('/CheckoutGold', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutGold');
+});
+
+Route::get('/CheckoutPlatinum', function () {
+    return view('user.AdminUnivAfterPayment.CheckoutPlatinum');
+});
+
+Route::get('/RiwayatJangkaWaktu', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
+});
+
+Route::get('/RiwayatPembelian', function () {
+    return view('user.AdminUnivAfterPayment.RiwayatPembelian');
 });

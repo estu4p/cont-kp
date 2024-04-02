@@ -189,7 +189,15 @@
   margin-bottom: 5rem; /* Margin bottom 5x1 rem */
 }
 
+.dropdown-toggle::after {
+  display: none;
+}
 
+.dropdown-toggle i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px; /* Sesuaikan margin sesuai kebutuhan */
+}
 
 
   /* Gaya khusus untuk judul mitra */

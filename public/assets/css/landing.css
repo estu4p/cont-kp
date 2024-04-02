@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
 
 .nav-mobile,
 .list-mobile {
@@ -170,12 +170,12 @@
 .img-header {
     display: block;
 }
-.d-flex {
+#footer .d-flex {
     display: flex;
     align-items: center; /* Menyusun elemen secara vertikal di tengah */
 }
 
-.d-flex img {
+#footer .d-flex img {
     width: 70px; /* Lebar gambar */
     margin-right: 10px; /* Jarak antara gambar dan teks */
 }
@@ -188,6 +188,64 @@
     display: block; /* Anchor berjejer ke bawah */
     text-align: center;
     margin-bottom: 10px; /* Jarak antara setiap anchor */
+}
+.icon-labelinput {
+    height: 25px;
+    width: 10px;
+}
+.dalam {
+    /* Frame 2427 */
+
+    box-sizing: border-box;
+
+    width: 420px;
+    height: 216px;
+
+    background: #a61c1c;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+}
+.list-pembayaran {
+    box-sizing: border-box;
+    display: flex;
+    text-align: center;
+    font-size: 12px;
+    width: 200px;
+    height: 38px;
+    margin-top: 25px;
+    margin-left: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+}
+.list-pembayaran input[type="radio"] {
+    margin-left: 3%;
+    margin-right: 10px;
+    transform: scale(2);
+}
+.list-pembayaran {
+    display: flex;
+    align-items: center;
+}
+.list-pembayaran .ikon {
+    margin-right: auto;
+}
+.btn {
+    text-align: left;
+}
+.dalam2 {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    margin-left: 16%;
+    bottom: 2%;
+    background: #f2f4f8;
+    border: 1px solid #c1c7cd;
+    border-radius: 5px;
+}
+.btn-text {
+    padding: 15px;
+    border: 2px solid #e9e9e9;
+    border-radius: 0px 8px 8px 0px;
+    width: 100%;
 }
 
 @media (max-width: 992px) {
@@ -234,7 +292,7 @@
         max-width: none;
         margin-bottom: 20px; /* Menambahkan ruang antara kartu */
     }
-    
+
     .card img {
         width: 80px; /* Mengurangi lebar gambar */
     }
@@ -320,7 +378,7 @@
         text-align: center; /* Memastikan konten berada di tengah */
         margin-bottom: 20px; /* Menambahkan margin bawah antar kolom */
     }
-    
+
     #footer .col-4 p {
         font-size: 14px; /* Mengurangi ukuran font pada teks */
         margin-bottom: 8px; /* Menambahkan margin bawah pada paragraf */
@@ -337,12 +395,12 @@
         justify-content: center; /* Memusatkan elemen secara horizontal */
         align-items: center; /* Memusatkan elemen secara vertikal */
     }
-    
+
     #footer .d-flex img {
         width: 70px; /* Mengatur lebar gambar */
         margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
     }
-    
+
     #footer .d-flex h4 {
         font-size: 18px;
         margin: 0;
@@ -358,7 +416,7 @@
         text-align: center;
         margin-bottom: 20px; /* Menambahkan ruang antara tautan */
     }
-    .col-2 a {
+    #footer .col-2 a {
         display: block; /* Mengubah tautan menjadi blok, sehingga berjejer ke bawah */
         margin-bottom: 10px; /* Menambahkan jarak antara setiap tautan */
     }
@@ -391,15 +449,92 @@
         justify-content: center; /* Memusatkan elemen secara horizontal */
         align-items: center; /* Memusatkan elemen secara vertikal */
     }
-    
+
     #footer .d-flex img {
         width: 70px; /* Mengatur lebar gambar */
         margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
     }
-    
+
     #footer .d-flex h4 {
         font-size: 18px;
         margin: 0;
         margin-right: 33%;
-    }   
+    }
 }
+
+.icon-labelinput{
+height: 25px;
+width: 10px;
+}
+
+
+.dalam{
+/* Frame 2427 */
+
+box-sizing: border-box;
+
+
+width: 420px;
+height: 216px;
+
+
+background: #A61C1C;
+border: 1px solid #DCDCDC;
+border-radius: 5px;
+
+}
+
+.list-pembayaran{
+
+box-sizing: border-box;
+display: flex;
+text-align: center;
+font-size: 12px;
+width: 200px;
+height: 38px;
+margin-top: 25px;
+margin-left: 5px;
+background: #FFFFFF;
+border-radius: 5px;
+}
+
+
+
+.list-pembayaran input[type="radio"] {
+    margin-left: 3%;
+    margin-right: 10px;
+    transform: scale(2);
+}
+
+
+.list-pembayaran {
+    display: flex;
+    align-items: center;
+}
+
+.list-pembayaran .ikon {
+    margin-right: auto;
+}
+.btn{
+    text-align: left;
+}
+
+.dalam2{
+overflow-y: scroll;
+box-sizing: border-box;
+margin-left: 16%;
+bottom: 2%;
+background: #F2F4F8;
+border: 1px solid #C1C7CD;
+border-radius: 5px;
+}
+
+.btn-text {
+    padding: 15px;
+    border: 2px solid #E9E9E9;
+    border-radius: 0px 8px 8px 0px;
+    width: 100%;
+}
+
+
+

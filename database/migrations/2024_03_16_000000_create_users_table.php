@@ -28,10 +28,11 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('os')->nullable();
             $table->enum('status_akun', ['aktif', 'alumni'])->nullable();
-            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->time('jam_default_masuk');
+            $table->time('jam_default_pulang');
             // $table->bigInteger('subscription')->nullable();
             $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum')->nullable();
             $table->timestamp('email_verified_at')->nullable();

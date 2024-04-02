@@ -2,15 +2,14 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <div class="wadah">
 
     <div class="propil">
         <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
         <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com </div>
+        <div class="email">atunkhosriatun@gmail.com</div>
         <div class="about">About</div>
-        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi datat</div>
+        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
     </div>
 
     <div id="preview" class="preview"></div>
@@ -110,72 +109,46 @@
 
     // Call the setDefaultImage function when the page is loaded
     // Menetapkan gambar default saat dokumen dimuat
-    window.addEventListener('DOMContentLoaded', setDefaultImage);
+window.addEventListener('DOMContentLoaded', setDefaultImage);
 
-    function setDefaultImage() {
-        const defaultImageSrc = 'assets/images/atun.png';
+function setDefaultImage() {
+    const defaultImageSrc = 'assets/images/atun.png';
 
-        const previewImage = document.querySelector('.gambarkiri');
-        previewImage.src = defaultImageSrc;
+    const previewImage = document.querySelector('.gambarkiri');
+    previewImage.src = defaultImageSrc;
 
-        const previewImage2 = document.querySelector('.gambarkanan');
-        previewImage2.src = defaultImageSrc;
+    const previewImage2 = document.querySelector('.gambarkanan');
+    previewImage2.src = defaultImageSrc;
+}
+
+function handleImageChange(event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const previewImage = document.querySelector('.gambarkiri');
+            previewImage.src = e.target.result;
+
+            const previewImage2 = document.querySelector('.gambarkanan');
+            previewImage2.src = e.target.result; // Mengubah gambar kanan juga
+        };
+
+        reader.readAsDataURL(file);
     }
+}
 
-    function handleImageChange(event) {
-        const file = event.target.files[0];
+// Menambahkan event listener pada elemen input gambar
+const imageInput = document.getElementById('imageInput');
+imageInput.addEventListener('change', handleImageChange);
 
-        if (file) {
-            const reader = new FileReader();
+// Menambahkan event listener pada elemen span dengan kelas "remove"
+const removeButton = document.querySelector('.remove');
+removeButton.addEventListener('click', function() {
+    setDefaultImage(); // Memanggil fungsi untuk menetapkan gambar default
+});
 
-            reader.onload = function(e) {
-                const previewImage = document.querySelector('.gambarkiri');
-                previewImage.src = e.target.result;
+</script>
 
-                const previewImage2 = document.querySelector('.gambarkanan');
-                previewImage2.src = e.target.result; // Mengubah gambar kanan juga
-            };
-
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // Menambahkan event listener pada elemen input gambar
-    const imageInput = document.getElementById('imageInput');
-    imageInput.addEventListener('change', handleImageChange);
-
-    // Menambahkan event listener pada elemen span dengan kelas "remove"
-    const removeButton = document.querySelector('.remove');
-    removeButton.addEventListener('click', function() {
-        setDefaultImage(); // Memanggil fungsi untuk menetapkan gambar default
-    });
-    function updateProfile() {
-        // Ambil nilai dari input
-        var nameValue = document.getElementById('name').value;
-        var emailValue = document.getElementById('email').value;
-        var aboutValue = document.getElementById('About').value;
-
-        // Ubah data yang ditampilkan
-        document.querySelector('.nama').textContent = nameValue;
-        document.querySelector('.email').textContent = emailValue;
-        document.querySelector('.keterangan').textContent = aboutValue;
-    }
-
-    function showSuccessModal() {
-        // Panggil fungsi updateProfile
-        updateProfile();
-
-        // Tampilkan modal sukses
-        // Misalnya, dengan SweetAlert atau modal lainnya
-        // Contoh menggunakan alert sederhana
-        $('#successModal').modal('show');
-
-        // Sembunyikan modal setelah beberapa detik (contoh: 1 detik)
-        setTimeout(function() {
-            $('#successModal').modal('hide');
-        }, 1000);
-    }
-</script
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
