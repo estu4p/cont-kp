@@ -653,7 +653,7 @@ Route::get('/admin/setting/user', function () {
         ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
         ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
     ];
-    
+
 
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",

@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="navbar-logo">
-                        <img src="assets/images/Rectangle 22 (3).png" alt="Profile Logo">
+                        <img src="{{ asset('/assets/images/Rectangle 22 (3).png') }}" alt="Profile Logo">
                     </div>
                 </a>
 

@@ -453,6 +453,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
+        // dd($nama_lengkap);
         // NIM
         $user = User::findOrFail($nama_lengkap);
         // menampilkan divisi
