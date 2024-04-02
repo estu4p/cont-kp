@@ -10,6 +10,7 @@ use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
+use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 
@@ -144,9 +145,9 @@ class ContributorForMitra extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -155,23 +156,23 @@ class ContributorForMitra extends Controller
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
-            'jml_jam_kerja'=> $request->input('jml_jam_kerja'),
-            'jam_masuk'=> $request->input('jam_masuk'),
-            'jam_pulang'=> $request->input('jam_pulang'),
+            'jml_jam_kerja' => $request->input('jml_jam_kerja'),
+            'jam_masuk' => $request->input('jam_masuk'),
+            'jam_pulang' => $request->input('jam_pulang'),
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true, 'message'=> 'Berhasil menambahkan data shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja'=> 'required',
-            'jam_masuk'=> 'required',
-            'jam_pulang'=> 'required',
+            'jml_jam_kerja' => 'required',
+            'jam_masuk' => 'required',
+            'jam_pulang' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -184,14 +185,14 @@ class ContributorForMitra extends Controller
 
         $data->fill([
             'nama_shift' => $request->input('nama_shift'),
-            'jml_jam_kerja'=> $request->input('jml_jam_kerja'),
-            'jam_masuk'=> $request->input('jam_masuk'),
-            'jam_pulang'=> $request->input('jam_pulang'),
+            'jml_jam_kerja' => $request->input('jml_jam_kerja'),
+            'jam_masuk' => $request->input('jam_masuk'),
+            'jam_pulang' => $request->input('jam_pulang'),
         ]);
 
         $data->save();
 
-        return response()->json(['success'=> true,'message'=> 'Berhasil update data shift'], 200);
+        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
     }
 
     public function destroyShift($id)
@@ -240,6 +241,7 @@ class ContributorForMitra extends Controller
     }
 
 
+
     public function laporanPresensiDetailHadir(Request $request,$nama_lengkap)
     {
         //validasi nama lengkap
@@ -266,6 +268,7 @@ class ContributorForMitra extends Controller
         $totalJamMasuk = $presensi->sum(function ($item) {
         // Ubah format jam masuk menjadi array jam, menit, dan detik
         $jam_masuk_parts = explode(':', $item->jam_masuk);
+
 
         // Pastikan format jam masuk sesuai (HH:MM:SS)
         if (count($jam_masuk_parts) == 3) {
@@ -409,8 +412,23 @@ class ContributorForMitra extends Controller
         // total jam masuk format integer
         $totalJamMasuk = $tjammasuk->total_jam_masuk;
 
-        // total masuk dalam detik
-        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+
+                return response()->json([
+                    'message' => 'Berhasil mendapat data',
+                    'Detail Izin' => $presensi,
+                    'kehadiran' => $kehadiranPerNama,
+                    'totalJamMasuk' => $totalJamMasukFormatted,
+                    'totalMasuk' => $totalMasukHari,
+                    'target' => $target,
+                    'sisa' => $sisa
+                ], 200);
+        } else {
+                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'user', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa']));
+
+        }
+    }
 
         // Hitung total masuk dalam jam
         $totalMasukJam = floor($jamMasukDetik / 3600);
@@ -424,6 +442,7 @@ class ContributorForMitra extends Controller
         $sisa = $target - $totalMasukJam;
         // Konversi sisa jam ke format jam:menit:detik
         $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+
 
         // Hitung total kehadiran, izin, dan ketidakhadiran pernama
         $kehadiranPerNama = Presensi::select('nama_lengkap')
@@ -554,9 +573,91 @@ class ContributorForMitra extends Controller
                     'target' => $target,
                     'sisa' => $sisa
                 ], 200);
+
         } else {
                 return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
         }
     }
-    
+
+    public function scan(Request $request)
+    {
+        // dd($request);
+        return view('User.ContributorForMitra.barcode', [
+            'title' => "Barcode Pemagang",
+            'nama' => "Syalita"
+        ]);
+    }
+
+    public function jam_masuk(Request $request)
+    {
+        $waktu_sekarang = date('Y-m-d H:i:s');
+        $jam_masuk = date('H:i:s', strtotime($waktu_sekarang));
+
+        Presensi::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'hari' => date('Y-m-d'),
+            'jam_masuk' => $jam_masuk
+        ]);
+
+        return redirect('mitra-presensi-barcode/istirahat')->with('success', 'silahkan masuk');
+    }
+    public function jam_mulai_istirahat(Request $request)
+    {
+        $presensi = Presensi::all()->first();
+        $waktu_sekarang = date('Y-m-d H:i:s');
+        $presensi_terakhir = Presensi::latest()->first();
+
+        // Menyimpan waktu masuk dari data Presensi terakhir
+        $waktu_masuk_terakhir = $presensi_terakhir->jam_masuk;
+
+        Presensi::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'hari' => date('Y-m-d'),
+            'jam_masuk' => $waktu_masuk_terakhir,
+            'jam_mulai_istirahat' => $waktu_sekarang
+        ]);
+
+        return redirect('mitra-presensi-barcode/selesai-istirahat')->with('success', 'silahkan masuk')->with('presensi', $presensi);
+    }
+
+    public function jam_selesai_istirahat(Request $request)
+    {
+        $waktu_sekarang = date('Y-m-d H:i:s');
+        $presensi_terakhir = Presensi::latest()->first();
+
+        // Menyimpan waktu masuk dan waktu mulai istirahat dari data Presensi terakhir
+        $waktu_masuk_terakhir = $presensi_terakhir->jam_masuk;
+        $waktu_istirahat_terakhir = $presensi_terakhir->jam_mulai_istirahat;
+
+        Presensi::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'hari' => date('Y-m-d'),
+            'jam_masuk' => $waktu_masuk_terakhir,
+            'jam_mulai_istirahat' => $waktu_istirahat_terakhir,
+            'jam_selesai_istirahat' => $waktu_sekarang
+        ]);
+
+
+        return redirect('mitra-presensi-barcode/pulang')->with('success', 'silahkan masuk');
+    }
+    public function jam_pulang(Request $request)
+    {
+        $waktu_sekarang = date('Y-m-d H:i:s');
+        $presensi_terakhir = Presensi::latest()->first();
+
+        // Menyimpan waktu masuk dan waktu mulai istirahat dari data Presensi terakhir
+        $waktu_masuk_terakhir = $presensi_terakhir->jam_masuk;
+        $waktu_istirahat_terakhir = $presensi_terakhir->jam_mulai_istirahat;
+        $waktu_selesai_istirahat = $presensi_terakhir->jam_selesai_istirahat;
+
+        Presensi::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'hari' => date('Y-m-d'),
+            'jam_masuk' => $waktu_masuk_terakhir,
+            'jam_mulai_istirahat' => $waktu_istirahat_terakhir,
+            'jam_selesai_istirahat' => $waktu_selesai_istirahat,
+            'jam_pulang' => $waktu_sekarang,
+        ]);
+        return redirect('mitra-presensi-barcode/pulang')->with('success', 'silahkan masuk');
+    }
 }
