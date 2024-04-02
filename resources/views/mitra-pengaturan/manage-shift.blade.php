@@ -21,9 +21,16 @@
         <h3 class="card-title">Pengaturan</h3>
 
     </div>
-    <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-devisi">Manage Divisi</a>
-    <a class="nav-link" style="font-size: 14px; width:max-content;" href="/manage-shift">Manage Shift</a>
-
+    <a class="" href="/manage-devisi">
+        <div class="nav-devisi">
+            <li>Manage Divisi</li>
+        </div>
+    </a>
+    <a class=" " href="/manage-shift">
+        <div class="nav-devisi" style="background-color:  #f9caca; font-weight: bold;">
+            <li>Manage Shift</li>
+        </div>
+    </a>
 </div>
 <div class="container-fluid  d-flex flex-row justify-content-start gap-0 p-0 wadah">
 
@@ -45,95 +52,91 @@
             <i class="fa-solid fa-circle-plus"></i>
             Tambah Shift
         </button>
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="#">
-                            <div class="form-group">
-                                <label for="nama_divisi"></label>
-                        </form>
-                    </div>
-                    <!-- <select name="page" class="page">
-                        <option value="page">page 1 of 1</option>
-                    </select>
-                    <select name="item" class="item">
-                        <option value="item">5 item per page</option>
-                    </select> -->
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="example">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Detail</th>
-                                <th scope="col">Jam</th>
-                                <th scope="col">Istirahat</th>
-                                <th scope="col">aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            <tr>
-                                <td>1</td>
-                                <td>Shift Full Time</td>
-                                <td>07:30:00 - 18:00:00</td>
-                                <td>13:30:00 - 15:00:00</td>
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Shift Pagi</td>
-                                <td>06:30:00 - 13:00:00</td>
-                                <td>-</td>
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Shift Middle</td>
-                                <td>09:00:00 - 17:00:00</td>
-                                <td>12:00:00 - 13:00:00</td>
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(2)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(2)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Shift Siang</td>
-                                <td>13:00:00 - 21:00:00</td>
-                                <td>18:00:00 - 19:00:00</td>
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(3)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(3)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Shift Malam</td>
-                                <td>16:00:00 - 23:00:00</td>
-                                <td>-</td>
-                                <td>
-                                    <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="edeleteDivisi(4)" type="button">Hapus</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="grupselect gap-3">
+            <div class="">
+                <select name="page" class="page">
+                    <option value="page">page 1 of 1</option>
+                </select>
             </div>
+            <div class="">
+                <select name="item" class="item">
+                    <option value="item">5 item per page</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table  table-striped" id="examplee">
+                <thead>
+                    <tr>
+                        <th scope="col"  class="ratatengah">No</th>
+                        <th scope="col">Detail</th>
+                        <th scope="col">Jam</th>
+                        <th scope="col">Istirahat</th>
+                        <th scope="col"  class="ratatengah">aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td  class="ratatengah">1</td>
+                        <td>Shift Full Time</td>
+                        <td>07:30:00 - 18:00:00</td>
+                        <td>13:30:00 - 15:00:00</td>
+                        <td  class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class="ratatengah">2</td>
+                        <td>Shift Pagi</td>
+                        <td>06:30:00 - 13:00:00</td>
+                        <td>-</td>
+                        <td  class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class="ratatengah">3</td>
+                        <td>Shift Middle</td>
+                        <td>09:00:00 - 17:00:00</td>
+                        <td>12:00:00 - 13:00:00</td>
+                        <td  class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(2)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(2)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class="ratatengah">4</td>
+                        <td>Shift Siang</td>
+                        <td>13:00:00 - 21:00:00</td>
+                        <td>18:00:00 - 19:00:00</td>
+                        <td  class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(3)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(3)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ratatengah">5</td>
+                        <td>Shift Malam</td>
+                        <td>16:00:00 - 23:00:00</td>
+                        <td>-</td>
+                        <td  class="ratatengah">
+                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="edeleteDivisi(4)" type="button">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
 <!-- Modal edit shif -->
 <div class="modal fade modal-sm" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Shift</h1>
@@ -154,8 +157,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
+                <div class="buttongrup gap-3">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -165,7 +170,7 @@
 <!-- Modal tambah shif -->
 
 <div class="modal fade modal-sm" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Shift</h1>
@@ -186,8 +191,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                <div class="button-grup gap-3">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -199,22 +206,22 @@
         var detail = document.querySelector('.inputdetail').value;
         var jam = document.querySelector('.inputjam').value;
         var istirahat = document.querySelector('.inputistirahat').value;
-        var lastNumber = $("#example tbody tr").length + 1;
+        var lastNumber = $("#examplee tbody tr").length + 1;
 
         // Membuat baris baru untuk tabel
         var newRow = "<tr>" +
-            "<td class = 'ratakanan'>" + (document.querySelectorAll('#example tbody tr').length + 1) + "</td>" + // Nomor dapat disesuaikan dengan jumlah baris yang sudah ada
+            "<td class = 'ratatengah'>" + (document.querySelectorAll('#examplee tbody tr').length + 1) + "</td>" + // Nomor dapat disesuaikan dengan jumlah baris yang sudah ada
             "<td>" + detail + "</td>" +
             "<td>" + jam + "</td>" +
             "<td>" + istirahat + "</td>" +
-            "<td>" +
+            "<td class = 'ratatengah'>" +
             "<button class='btn btn-edit btn-sm' data-bs-target='#editModal' data-bs-toggle='modal' onclick='editModal(5)' type='button'>Edit</button>" +
             "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='deleteDivisi(5)' type='button'>Hapus</button>" +
             "</td>" +
             "</tr>";
 
         // Menambahkan baris baru ke tabel
-        $("#example tbody").append(newRow);
+        $("#examplee tbody").append(newRow);
 
         // Tampilkan notifikasi sukses
         swal({
@@ -236,7 +243,7 @@
         editedIndex = index;
 
         // Dapatkan data shift dari tabel
-        const row = document.querySelectorAll('#example tbody tr')[index];
+        const row = document.querySelectorAll('#examplee tbody tr')[index];
         const detail = row.querySelectorAll('td')[1].innerText;
         const jam = row.querySelectorAll('td')[2].innerText;
         const istirahat = row.querySelectorAll('td')[3].innerText;
@@ -258,7 +265,7 @@
         const editedIstirahat = document.getElementById('editIstirahat').value;
 
         // Perbarui data shift pada tabel dengan nilai yang diedit
-        const row = document.querySelectorAll('#example tbody tr')[editedIndex];
+        const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
         row.querySelectorAll('td')[1].innerText = editedDetail;
         row.querySelectorAll('td')[2].innerText = editedJam;
         row.querySelectorAll('td')[3].innerText = editedIstirahat;
@@ -310,7 +317,7 @@
         }).then((willDelete) => {
             if (willDelete) {
                 // Hapus baris divisi dari tabel
-                document.querySelector('#example tbody').deleteRow(index);
+                document.querySelector('#examplee tbody').deleteRow(index);
 
                 // Tampilkan pesan sukses
                 swal("Berhasil!", "Divisi berhasil dihapus.", {
