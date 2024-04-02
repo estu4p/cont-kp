@@ -238,12 +238,13 @@ Route::get('/MitraPresensiDetailHadir', function () {
 
 
 Route::get('/manage-devisi', function () {
-    $title="pengaturan";
-    return view('mitra-pengaturan.manage-devisi', ['title' =>$title]);
+    $title = "Pengaturan";
+    return view('manage_devisi', compact('title'));
 });
 
 Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift',['title'=>'shift']);
+    $title = "Pengaturan";
+    return view('mitra-pengaturan.manage-shift', compact('title'));
 });
 
 Route::get('/Kategori-penilaian', function () {
@@ -265,9 +266,9 @@ Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
 });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+// Route::get('/manage-shift', function () {
+//     return view('mitra-pengaturan.manage-shift');
+// });
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -428,9 +429,9 @@ Route::get('/manage-devisi', function () {
     return view('mitra-pengaturan.manage-devisi');
 });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+// Route::get('/manage-shift', function () {
+//     return view('mitra-pengaturan.manage-shift');
+// });
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');

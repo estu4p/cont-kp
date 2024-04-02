@@ -62,23 +62,21 @@ th{
     background: #e1e1e1;
 }
 
-
-
-.active{
+.Active{
     width: 75px;
     background: #2B97C5;
     color: #F5F3F4;
     border-radius: 5px;
     text-align: center;
 }
-.inactive{
+.Inactive{
     width: 75px;
     background: #E5383B;
     color: #F5F3F4;
     border-radius: 5px;
     text-align: center;
 }
-.done{
+.Done{
     width: 75px;
     background: #1AA158;
     color: #F5F3F4;

@@ -57,7 +57,7 @@
             <table class="table table-striped" id="examplee">
                 <thead>
                     <tr>
-                        <th scope="col" class="ratatengah">No</th>
+                        <th scope="col" class="ratatengah notabel">No</th>
                         <th scope="col" class="namadiv">Nama Divisi</th>
                         <th scope="col" class="ratatengah">Penilaian</th>
                         <th scope="col" class="ratatengah">Aksi</th>
@@ -85,7 +85,7 @@
 
 <!-- Modal edit divisi -->
 <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
@@ -95,7 +95,7 @@
                 <div class="textdivisi">Edit Divisi</div>
                 <div class="tambahgambar gap-3">
                     <div class="gambar border d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-pen-nib"></i>
+                        <i class="fa-solid fa-pen-nib" style="transform: rotate(90deg);"></i>
                         <input type="file" id="fileInput" style="display: none;">
                     </div>
                     <div>
@@ -110,19 +110,17 @@
                     <input type="text" class="inputmodalll" id="editNamaDivisi" placeholder="Masukkan nama divisi">
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="buttongrup gap-3">
+            <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
                     <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal tambah divisi -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
+    <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
@@ -147,11 +145,9 @@
                     <input type="text" class="inputmodall" placeholder="Masukkan nama divisi">
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="buttongrup gap-3">
+            <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
                     <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
-                </div>
             </div>
         </div>
     </div>

@@ -136,7 +136,7 @@
 
 <!-- Modal edit shif -->
 <div class="modal fade modal-sm" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Shift</h1>
@@ -170,7 +170,7 @@
 <!-- Modal tambah shif -->
 
 <div class="modal fade modal-sm" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Shift</h1>
