@@ -47,7 +47,7 @@ Route::middleware('user')->group(function () {
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
-    Route::post('/loginpage', [LandingPageController::class, 'login']);
+    // Route::post('/loginpage', [LandingPageController::class, 'login']);
     Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
@@ -61,11 +61,10 @@ Route::get('/dashboard', function () {
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-Route::get('/register', function() {
-    return view('landing-page.daftar', [
-        'title' => "Landing Page - Register"
-    ]);
-});
+
+//Landing Page
+Route::post('/register', [LandingPageController::class, 'lpdaftar'])->name('register-landingpage');
+
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -608,7 +607,7 @@ Route::get('/admin/setting/user', function () {
         ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
         ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
         ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
-    ];    
+    ];
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
         'users' => $users,

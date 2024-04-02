@@ -21,28 +21,41 @@ class LandingPageController extends Controller
 
     public function lpdaftar(Request $request)
     {
-        $data= new Sekolah([
-            'nama_lengkap' => $request->input ('nama_lengkap'),
-            'sekolah' => $request->input ('sekolah'),
-            'no_hp' => $request->input ('no_hp'),
-            'email' => $request->input ('email'),
-            'password' =>$request->input ('password')
-            ]);
+
+        // if ($request->isMethod('post')) {
+
+        // $data= new Sekolah([
+        //     'nama_lengkap' => $request->input ('nama_lengkap'),
+        //     'nama_sekolah' => $request->input ('nama_sekolah'),
+        //     'no_hp' => $request->input ('no_hp'),
+        //     'email' => $request->input ('email'),
+        //     'password' =>$request->input ('password')
+        //     ]);
 
         $user= new Sekolah();
-        $user->nama_lengkap= $data['nama_lengkap'];
-        $user->sekolah= $data['sekolah'];
-        $user->no_hp=$data['no_hp'];
-        $user->email=$data['email'];
-        $user->password=Hash::make ($data['password']);
+        $user->nama_lengkap= $request->input('nama_lengkap');
+        $user->nama_sekolah= $request->input('nama_sekolah');
+        $user->no_hp=$request->input('no_hp');
+        $user->email=$request->input('email');
+        $user->password=Hash::make ($request->input('password'));
         $user->save();
 
+        if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+        } else {
+            return view('landing-page.daftar', [
+                'title' => "Landing Page - Register"] );
+            // return redirect()->route('home')->with('success', 'Registrasi berhasil! Silakan login.');
+            // } else {
+            //     return view('landing-page.daftar');
+            }
+
+
     }
-    public function index()
-    {
-        return view("landing-page.login");
-    }
+    // public function index()
+    // {
+    //     return view("landing-page.login");
+    // }
     public function login(Request $request)
     {
         $request->validate([

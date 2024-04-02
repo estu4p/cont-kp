@@ -4,7 +4,7 @@
     <div class="register text-capitalize">
         <h2 class="text-center fw-bold" style="color: #A61C1CE5;">daftarkan kampus/sekolah anda</h2>
         <div class="box-form mt-5">
-            <form class="fw-medium">
+            <form action="{{ route('register-landingpage') }}" method="POST" class="fw-medium">
                 <label for="nama">nama lengkap<span class="text-danger">*</span></label>
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 16px;" class="label-img"><img src="assets/images/icon/nama.png" /></div>
