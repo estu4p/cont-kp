@@ -47,7 +47,7 @@ class SchoolController extends Controller
             return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM]);
         }
     }
-    public function Lihatprofil(Request $request)
+    public function Lihatprofil(Request $request, $id)
     {
         //Data Mahasiswa- Lihat profile
         $lihat = User::where("role_id",3)->first();
