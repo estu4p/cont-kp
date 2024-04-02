@@ -38,7 +38,10 @@
             <p class="membuat">Membuat Divisi untuk anak magang</p>
         </div>
         <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fa-solid fa-circle-plus"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+            </svg>
             Tambah divisi
         </button>
         <div class="grupselect gap-3">
@@ -86,7 +89,7 @@
 <!-- Modal edit divisi -->
 <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content space">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -111,8 +114,8 @@
                 </div>
             </div>
             <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
+                <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
             </div>
         </div>
     </div>
@@ -121,7 +124,7 @@
 <!-- Modal tambah divisi -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
     <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
+        <div class="modal-content space">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -146,8 +149,8 @@
                 </div>
             </div>
             <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
             </div>
         </div>
     </div>

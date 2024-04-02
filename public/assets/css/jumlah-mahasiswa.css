@@ -35,14 +35,12 @@ form input{
 .wadah {
     margin-top: 20px;
     margin-left: 30px;
+    
 }
 
 table{
-
     border-collapse: collapse;
     width: 100%;
-
-
 }
 .wadah-tabel{
     height:max-content;
@@ -96,3 +94,6 @@ th{
     background:  #F2F4F8;
 }
 
+.judul{
+    margin-top: 100px;
+}

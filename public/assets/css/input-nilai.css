@@ -37,7 +37,8 @@
     border-radius: 10px;
     width:96%;
     margin-left: 0px;
-    
+    padding-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .judulmagang{
@@ -65,7 +66,7 @@
     width:96%;
 }
     
-}
+
 .grup{
     /* background: #b5b5b5; */
     width:45%;
