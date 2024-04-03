@@ -58,13 +58,15 @@ Route::get('/dashboard', function () {
 });
 
 
-Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
-Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 //Landing Page
+// -Daftar Sekolah-
+Route::get('/register', [LandingPageController::class, 'index'])->name('register-landingpage');
 Route::post('/register', [LandingPageController::class, 'lpdaftar'])->name('register-landingpage');
-
+// -Login-
+Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
+Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
+Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -105,7 +107,7 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
-Route::post('/loginpage', [LandingPageController::class, 'login']);
+// Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');

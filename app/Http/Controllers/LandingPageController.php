@@ -17,13 +17,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class LandingPageController extends Controller
 {
-
-
+    public function index()
+    {
+        return view('landing-page.daftar', [
+            'title' => "Landing Page - Register"] );
+    }
     public function lpdaftar(Request $request)
     {
-
-        // if ($request->isMethod('post')) {
-
         // $data= new Sekolah([
         //     'nama_lengkap' => $request->input ('nama_lengkap'),
         //     'nama_sekolah' => $request->input ('nama_sekolah'),
@@ -43,8 +43,9 @@ class LandingPageController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
         } else {
-            return view('landing-page.daftar', [
-                'title' => "Landing Page - Register"] );
+             return redirect('/loginpage');
+            // return view('landing-page.daftar', [
+            //     'title' => "Landing Page - Register"] );
             // return redirect()->route('home')->with('success', 'Registrasi berhasil! Silakan login.');
             // } else {
             //     return view('landing-page.daftar');
