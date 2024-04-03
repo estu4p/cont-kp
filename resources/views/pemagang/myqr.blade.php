@@ -35,7 +35,7 @@
     </div>
 
     <div class="button-container">
-        <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembal</a></button>
+        <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembali</a></button>
     </div>
 </body>
 
