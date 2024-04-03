@@ -48,7 +48,7 @@ Route::middleware('user')->group(function () {
     Route::get('/presensi', function () {
         return view('presensi.presensiharian');
     });
-    Route::post('/loginpage', [LandingPageController::class, 'login']);
+    // Route::post('/loginpage', [LandingPageController::class, 'login']);
     Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
@@ -59,14 +59,15 @@ Route::get('/dashboard', function () {
 });
 
 
+
+//Landing Page
+// -Daftar Sekolah-
+Route::get('/register', [LandingPageController::class, 'index'])->name('register-landingpage');
+Route::post('/register', [LandingPageController::class, 'lpdaftar'])->name('register-landingpage');
+// -Login-
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post("/loginpage", [AuthController::class, 'login'])->name('login');
+Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-Route::get('/register', function () {
-    return view('landing-page.daftar', [
-        'title' => "Landing Page - Register"
-    ]);
-});
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -107,7 +108,7 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
-Route::post('/loginpage', [LandingPageController::class, 'login']);
+// Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -813,6 +814,13 @@ Route::get('/admin/setting/user', function () {
         ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
         ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
+    ];
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
     ];
     return view('admin.setting.user', [
         'title' => "Admin - User & Organization",
