@@ -19,11 +19,12 @@
                             <p style="margin: 10;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
-                            <label for="search-input">Cari Mahasiswa</label>
-                            <div class="input-group mb-3">
-                                <input type="text" id="search-input" class="form-control" placeholder="     Cari Mahasiswa" aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
-                                <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:black"></i>
+                            <label for="search-input">Status Pencarian Mahasiswa</label>
+                            <div class="input-group mb-3" style="width: 400px;">
+                                <input type="text" id="search-input" class="form-control" placeholder="     pencarian" aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
+                                <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:rgb(10, 10, 10)"></i>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -303,49 +304,57 @@
         <div class="modal fade" id="statuskehadiran">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header" style="padding-left: 40%;" >
+                    <div class="modal-header" style="padding-left: 40%;">
                         <h1>Izin</h1>
                     </div>
                     <!-- Isi dari modal -->
-                    <div class="modal-body">
-
-                            <!-- Baris Ke-1 -->
-                            <div class="keterangan">
-                                “ Maaf saya tidak dapat mengikuti magang untuk
-                                hari ini dikarenakan saya sedang tidak enak
-                                badan dan tubuh saya gatal karena saya jarang
-                                mandi ”
-                            </div>
-                            <!-- Break Line -->
-                            <!-- Baris Ke-2 -->
-                            Link Foto Gdrive
-                            <div class="linkdrive"></div>
-
-                            <!-- Break Line -->
-                            <!-- Baris Ke-3 -->
-                            kategori izin
-                            <div class="keterangan2"></div>
-
-
-
-
-                            <!-- Break Line -->
-                            <!-- End -->
-                            <br>
-                            <div style="display: flex; justify-content: center;">
-                                <div style="background-color: #F2F2F2; padding: 5px;">ganti jam</div>
-                            </div>
-                            <br>
-                            <div style="text-align: center">
-                                <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                    <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
+    
+                        <!-- Baris Ke-1 -->
+                 
+                        <div class="keterangan">
+                            “ Maaf saya tidak dapat mengikuti magang untuk
+                            hari ini dikarenakan saya sedang tidak enak
+                            badan dan tubuh saya gatal karena saya jarang
+                            mandi ”
                         </div>
+                        <!-- Break Line -->
+                        <!-- Baris Ke-2 -->
+                        Link Foto Gdrive
+                        <textarea class="form-control" id="floatingTextarea" placeholder=" " style="padding: 1px;"></textarea>
+                        <label for="floatingTextarea"></label>
+                        
+    
+                        <!-- Break Line -->
+                        <!-- Baris Ke-3 -->
+                        kategori izin
+                      <select class="form-select" aria-label="Default select example">
+                              <option selected>Pilih kategori izin</option>
+                              <option value="1">Sakit dengan surat dokter </option>
+                              <option value="2">sakit tanpa surat dokter</option>
+                                <option value="3">keperluan sekolah/kampus</option>
+                                <option value="4">keperluan lainnya</option>
+                        </select>
                     </div>
-
-                    </div>
+    
+                     
+                        
+    
+                            <div class="d-grid gap-2 d-md-block">
+                                <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
+                                <button id="button2" class="btn btn-primary_tidak" type="button" onclick="handleButtonClick(2)">tidak ganti jam</button>
+                            </div>
+                        
+                        <div style="text-align: center">
+                            <button class="btnkembali" data-bs-dismiss="modal">simpan</button>
+                        </div>
+                   
+    
                 </div>
+            </div>
         </div>
-
-</div>
+    
+        </div>
                 </div>
 
 

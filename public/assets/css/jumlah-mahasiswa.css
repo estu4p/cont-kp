@@ -35,14 +35,12 @@ form input{
 .wadah {
     margin-top: 20px;
     margin-left: 30px;
+    
 }
 
 table{
-
     border-collapse: collapse;
     width: 100%;
-
-
 }
 .wadah-tabel{
     height:max-content;
@@ -62,23 +60,21 @@ th{
     background: #e1e1e1;
 }
 
-
-
-.active{
+.Active{
     width: 75px;
     background: #2B97C5;
     color: #F5F3F4;
     border-radius: 5px;
     text-align: center;
 }
-.inactive{
+.Inactive{
     width: 75px;
     background: #E5383B;
     color: #F5F3F4;
     border-radius: 5px;
     text-align: center;
 }
-.done{
+.Done{
     width: 75px;
     background: #1AA158;
     color: #F5F3F4;
@@ -98,3 +94,6 @@ th{
     background:  #F2F4F8;
 }
 
+.judul{
+    margin-top: 100px;
+}

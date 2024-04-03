@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
+                                <p style="margin: 10px;">NIP : MJ/{{$divisi->nama_divisi}}/POLINES/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
@@ -58,22 +58,22 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">47:30:50</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasuk }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
                                     <b class="fz7">total masuk</b>
-                                    <p class="total fz6 my-auto px-1 py-0">16 hari</p>
+                                    <p class="total fz6 my-auto px-1 py-0">{{ $totalMasukHari }} hari</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex  py-2  align-items-center  flex-row justify-content-between">
                                     <b class="fz7">target</b>
-                                    <p class="target fz6 my-auto px-1 py-01">1100 jam</p>
+                                    <p class="target fz6 my-auto px-1 py-01">{{ $target }} jam</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">152:30:10</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisaFormatted }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -163,33 +163,33 @@
                                         <th rowspan="2"><input type="checkbox"></th>
                                         <th rowspan="2">No</th>
                                         <th rowspan="2">Tanggal</th>
-                                        <th colspan="2">Jam Kerja</th>
-                                        <th colspan="2">Jam Istirahat</th>
-                                        <th colspan="2">Total Jam Kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
                                         <th rowspan="2">Status Kehadiran</th>
                                         <th rowspan="2">Status Ganti Jam</th>
 
                                     <tr>
                                         <th>Masuk</th>
-                                        <th>Pulang</th>
+                                        <th style="border-left: 0.5px solid black;">Pulang</th>
                                         <th>Mulai</th>
-                                        <th>Selesai</th>
-                                        <th style="white-space: nowrap">total jam</th>
-                                        <th>(+)(-)</th>
+                                        <th style="border-left: 0.5px solid black;">Selesai</th>
+                                        <th>total jam</th>
+                                        <th style="border-left: 0.5px solid black;">(+)(-)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($presensi as $item)
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>1</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{$item->hari}}</td>
-                                        <td>2022-12-19</td>
-                                        <td>02:39:53</td>
-                                        <td>04:04:37</td>
-                                        <td>07:50:28</td>
-                                        <td>10:03:25</td>
-                                        <td>00:00:07</td>
+                                        <td>{{$item->jam_masuk}}</td>
+                                        <td>{{$item->jam_pulang}}</td>
+                                        <td>{{$item->jam_mulai_istirahat}}</td>
+                                        <td>{{$item->jam_selesai_istirahat}}</td>
+                                        <td>{{ $item->total_jam_kerja }}</td>
+                                        <td>{{ $item->hutang_presensi }}</td>
                                         <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>
