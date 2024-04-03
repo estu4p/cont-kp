@@ -18,7 +18,6 @@ class SchoolController extends Controller
         $kehadiran_masuk= Presensi::where("status_kehadiran", 'hadir')->count();
         $kehadiran_izin= Presensi::where("status_kehadiran", 'izin')->count();
 
-
         if ($request->is('api/*') || $request->wantsJson()) {
            return response()->json([
             "Dashboard" => "Success get data",
@@ -27,16 +26,18 @@ class SchoolController extends Controller
             "jumlah izin" =>$kehadiran_izin
         ]);
         } else {
-            // return view('dashboard.dashboard',
-            // ["jumlah Mahasiswa"=> $jumlah_mahasiswa,
-            // "jumlah Masuk"=>$kehadiran_masuk,
-            // "jumlah Izin" =>$kehadiran_izin]);
             return view('dashboard.dashboard', compact('jumlah_mahasiswa','kehadiran_masuk','kehadiran_izin'));
         }
     }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
     public function jumlahMahasiswa(Request $request)
     {   //Menampilkan Data Mahasiswa
-        $JM = User::where('role_id', 3)->get();
+        $JM =User::with('divisi_id')->where('role_id', 3)->get();
+        // User::where('role_id', 3)->get();
+
         // $divisi = Divisi::where('id', $JM->divisi_id)->select("nama_divisi")->first();
        // dd($JM);
         if ($request->is('api/*') || $request->wantsJson()) {
