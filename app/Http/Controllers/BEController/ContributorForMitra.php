@@ -10,6 +10,7 @@ use App\Models\KategoriPenilaian;
 use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
+use App\Models\Sekolah;
 use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
@@ -240,8 +241,6 @@ class ContributorForMitra extends Controller
         }
     }
 
-
-
     public function laporanPresensiDetailHadir(Request $request,$nama_lengkap)
     {
         //validasi nama lengkap
@@ -251,9 +250,9 @@ class ContributorForMitra extends Controller
         $divisi_user = $user->divisi_id;
         $divisi = Divisi::find($divisi_user);
 
-        // // Menampilkan Sekolah
-        // $sekolah_user = $user->sekolah;
-        // $sekolah = Sekolah::find($sekolah_user);
+        // Menampilkan Sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
 
         // Mengambil data presensi dengan status Hadir
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
@@ -311,18 +310,22 @@ class ContributorForMitra extends Controller
         // total masuk dalam detik
         $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
 
-        // Hitung total masuk dalam jam
-        $totalMasukJam = floor($jamMasukDetik / 3600);
-
         // Hitung total masuk dalam hari
         $totalMasukHari = $presensi->count();
 
-        $target = 1100;
+        $target = 1092; //dalam jam
+        // Konversi target dari jam menjadi detik
+        $targetDetik = $target * 3600;
 
-        // sisa
-        $sisa = $target - $totalMasukJam;
-        // Konversi sisa jam ke format jam:menit:detik
-        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+        // Hitung sisa dalam detik
+        $sisaDetik = $targetDetik - $totalMasukJam;
+
+        // Konversi sisa dari detik ke format jam:menit:detik
+        $sisaJam = floor($sisaDetik / 3600); // Hitung jam sisa
+        $sisaMenit = floor(($sisaDetik % 3600) / 60); // Hitung menit sisa
+        $sisaDetik = $sisaDetik % 60; // Hitung detik sisa
+
+        $sisaFormatted = sprintf("%02d:%02d:%02d", $sisaJam, $sisaMenit, $sisaDetik);
 
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
@@ -340,7 +343,7 @@ class ContributorForMitra extends Controller
                 return $item;
             });
 
-        // Kirim data ke tampilan
+        //return ke tampilan
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
                 'message' => 'Berhasil mendapat data',
@@ -348,10 +351,10 @@ class ContributorForMitra extends Controller
                 'totalJamMasuk' => $totalJamMasuk,
                 'totalMasuk' => $totalMasukHari,
                 'target lulus' => $target,
-                'sisa' => $sisa
+                'sisa' => $sisaFormatted
             ], 200);
         } else {
-            return view('user.ContributorForMitra.MitraPresensiDetailHadir', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
+            return view('user.ContributorForMitra.MitraPresensiDetailHadir', compact(['presensi', 'sekolah', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
         }
     }
 
@@ -362,6 +365,10 @@ class ContributorForMitra extends Controller
         // Menampilkan Divisi
         $divisi_user = $user->divisi_id;
         $divisi = Divisi::find($divisi_user);
+
+        // Menampilkan Sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
 
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)
                         ->where(function ($query) {
@@ -412,23 +419,8 @@ class ContributorForMitra extends Controller
         // total jam masuk format integer
         $totalJamMasuk = $tjammasuk->total_jam_masuk;
 
-
-        if ($request->is('api/*') || $request->wantsJson()) {
-
-                return response()->json([
-                    'message' => 'Berhasil mendapat data',
-                    'Detail Izin' => $presensi,
-                    'kehadiran' => $kehadiranPerNama,
-                    'totalJamMasuk' => $totalJamMasukFormatted,
-                    'totalMasuk' => $totalMasukHari,
-                    'target' => $target,
-                    'sisa' => $sisa
-                ], 200);
-        } else {
-                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'user', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa']));
-
-        }
-    }
+        // total masuk dalam detik
+        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
 
         // Hitung total masuk dalam jam
         $totalMasukJam = floor($jamMasukDetik / 3600);
@@ -436,46 +428,52 @@ class ContributorForMitra extends Controller
         // Hitung total masuk dalam hari
         $totalMasukHari = $presensi->count();
 
-        $target = 1100;
+        $target = 1092; //dalam jam
+        // Konversi target dari jam menjadi detik
+        $targetDetik = $target * 3600;
 
-        // sisa
-        $sisa = $target - $totalMasukJam;
-        // Konversi sisa jam ke format jam:menit:detik
-        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+        // Hitung sisa dalam detik
+        $sisaDetik = $targetDetik - $totalMasukJam;
 
+        // Konversi sisa dari detik ke format jam:menit:detik
+        $sisaJam = floor($sisaDetik / 3600); // Hitung jam sisa
+        $sisaMenit = floor(($sisaDetik % 3600) / 60); // Hitung menit sisa
+        $sisaDetik = $sisaDetik % 60; // Hitung detik sisa
 
-        // Hitung total kehadiran, izin, dan ketidakhadiran pernama
+        $sisaFormatted = sprintf("%02d:%02d:%02d", $sisaJam, $sisaMenit, $sisaDetik);
+
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
             ->get()
-            ->map(function ($item) {
+            ->map(function ($item, $key) {
                 $item['total_kehadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'hadir')
                     ->count();
                 $item['total_izin'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
-                    ->whereIn('status_kehadiran', ['izin', 'sakit'])
+                    ->where('status_kehadiran', 'izin')
                     ->count();
                 $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'Tidak Hadir')
                     ->count();
-            return $item;
-        });
+                return $item;
+            });
 
+        //return ke tampilan
         if ($request->is('api/*') || $request->wantsJson()) {
-                return response()->json([
+
+            return response()->json([
                     'message' => 'Berhasil mendapat data',
                     'Detail Izin' => $presensi,
                     'kehadiran' => $kehadiranPerNama,
-                    'totalJamMasuk' => $totalJamMasuk,
+                    'totalJamMasuk' => $totalJamMasukFormatted,
                     'totalMasuk' => $totalMasukHari,
                     'target' => $target,
-                    'sisa' => $sisa
+                    'sisa' => $sisaFormatted
                 ], 200);
         } else {
-                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
+                return view('user.ContributorForMitra.MitraPresensiDetailIzin', compact(['presensi', 'sekolah', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
         }
     }
-
     public function laporanPresensiDetailTidakHadir($nama_lengkap, Request $request)
     {
         $user = User::findOrFail($nama_lengkap);
@@ -483,6 +481,10 @@ class ContributorForMitra extends Controller
         // Menampilkan Divisi
         $divisi_user = $user->divisi_id;
         $divisi = Divisi::find($divisi_user);
+
+        // Menampilkan Sekolah
+        $sekolah_user = $user->sekolah;
+        $sekolah = Sekolah::find($sekolah_user);
 
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'tidak hadir')->get();
 
@@ -538,12 +540,19 @@ class ContributorForMitra extends Controller
         // Hitung total masuk dalam hari
         $totalMasukHari = $presensi->count();
 
-        $target = 1100;
+        $target = 1092; //dalam jam
+        // Konversi target dari jam menjadi detik
+        $targetDetik = $target * 3600;
 
-        // sisa
-        $sisa = $target - $totalMasukJam;
-        // Konversi sisa jam ke format jam:menit:detik
-        $sisaFormatted = gmdate("H:i:s", $sisa * 3600);
+        // Hitung sisa dalam detik
+        $sisaDetik = $targetDetik - $totalMasukJam;
+
+        // Konversi sisa dari detik ke format jam:menit:detik
+        $sisaJam = floor($sisaDetik / 3600); // Hitung jam sisa
+        $sisaMenit = floor(($sisaDetik % 3600) / 60); // Hitung menit sisa
+        $sisaDetik = $sisaDetik % 60; // Hitung detik sisa
+
+        $sisaFormatted = sprintf("%02d:%02d:%02d", $sisaJam, $sisaMenit, $sisaDetik);
 
         // Hitung total kehadiran, izin, dan ketidakhadiran pernama
         $kehadiranPerNama = Presensi::select('nama_lengkap')
@@ -571,11 +580,11 @@ class ContributorForMitra extends Controller
                     'totalJamMasuk' => $totalJamMasuk,
                     'totalMasuk' => $totalMasukHari,
                     'target' => $target,
-                    'sisa' => $sisa
+                    'sisa' => $sisaFormatted
                 ], 200);
 
         } else {
-                return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir', compact(['presensi', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
+                return view('user.ContributorForMitra.MitraPresensiDetailTidakHadir', compact(['presensi', 'sekolah', 'divisi', 'user', 'totalJamMasuk', 'totalMasukHari', 'target', 'sisaFormatted']));
         }
     }
 

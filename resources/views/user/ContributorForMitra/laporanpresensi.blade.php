@@ -75,7 +75,7 @@
                             <td><input type="checkbox" id="#" name=""></td>
                             <td>{{ $no + 1 }}</td>
                             <td><a href="">{{ $item->user->nama_lengkap }}</a></td>
-                            <td>MJ/{{$item->user->divisi}}/{{ $item->user->sekolah }}/{{ $item->user->nomor_induk }}/AGST2023/06</td>
+                            <td>MJ/UIUX/{{ $item->user->sekolah }}/{{ $item->user->nomor_induk }}/AGST2023/06</td>
                             <td>{{ $item->total_kehadiran }} &nbsp; <a
                                     href="{{route('cont.mitrapresensi', $item->nama_lengkap)}}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>
