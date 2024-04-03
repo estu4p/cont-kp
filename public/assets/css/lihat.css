@@ -4,3 +4,16 @@
     width: 70px;
     border-radius: 35px;
 }
+
+.ta {
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    text-align: center;
+    padding-right: 85%;
+    padding-top: 2%;
+}
+
+.bawah-dua{
+    margin-top: -50px;
+}
