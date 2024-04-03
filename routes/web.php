@@ -175,10 +175,10 @@ Route::get('/user/barcode', function () {
 });
 
 
-    //user
-    Route::get('/pemagang/home', function () {
-        return view('pemagang.home', ['title' => "Home"]);
-    });
+//user
+Route::get('/pemagang/home', function () {
+    return view('pemagang.home', ['title' => "Home"]);
+});
 Route::get('/user', function () {
     return view('user.home', [
         'title' => "Home",
@@ -272,7 +272,7 @@ Route::get('/manage-shift', function () {
 });
 
 Route::get('/Kategori-penilaian', function () {
-    return view('mitra-pengaturan.Kategori-penilaian',['title'=>'penilaian']);
+    return view('mitra-pengaturan.Kategori-penilaian', ['title' => 'penilaian']);
 });
 
 
@@ -420,12 +420,12 @@ Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
 
-    Route::get('/AdminUniv-Dashboard', function () {
-        return view('adminUniv-afterPayment.AdminUniv-Dashboard');
-    });
-    Route::get('/AdminUniv-EditProfile', function () {
-        return view('adminUniv-afterPayment.AdminUniv-EditProfile');
-    });
+Route::get('/AdminUniv-Dashboard', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Dashboard');
+});
+Route::get('/AdminUniv-EditProfile', function () {
+    return view('adminUniv-afterPayment.AdminUniv-EditProfile');
+});
 // adminUniv-afterPayment
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
@@ -464,9 +464,8 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/Option-TeamAktif', function () {
-    return view('adminUniv-afterPayment.mitra.Option-TeamAktif');
-});
+Route::get('/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
+
 Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
 });
@@ -506,12 +505,12 @@ Route::get('/profilsiswa', function () {
 
 
 
-    Route::get('/pengaturan', function () {
-        return view('pengaturan.margepenilaiandivisi');
-    });
-    Route::get('/kategoripenilaian', function () {
-        return view('pengaturan.kategoripenilaian');
-    });
+Route::get('/pengaturan', function () {
+    return view('pengaturan.margepenilaiandivisi');
+});
+Route::get('/kategoripenilaian', function () {
+    return view('pengaturan.kategoripenilaian');
+});
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
 Route::get('/AdminSistem-Dashboard', function () {
     return view('SistemLokasi.AdminSistem-Dashboard');

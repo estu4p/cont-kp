@@ -228,11 +228,15 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif()
+    public function daftarMitraTeamAktif(Request $request)
     // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
-        return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisi'));
+        }
     }
 
     public function daftarMitraPengaturanDivisi(Request
