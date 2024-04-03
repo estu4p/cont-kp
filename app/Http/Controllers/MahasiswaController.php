@@ -93,20 +93,21 @@ class MahasiswaController extends Controller
 
     public function penilaian_siswa()
     {
+        $title = "Penilaian";
         $mahasiswa = [
         ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
         ['nama' => 'Fairuza Attar Aviciena', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Danni Hernando', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Febrian Adipurnowo', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
-        ['nama' => 'Yessa Khoirunissa', 'nip' => '2000018247', 'divisi' => 'PROGRAMMER', 'status' => 'done'],
+        ['nama' => 'Yessa Khoirunissa', 'nip' => '2000018247', 'divisi' => 'PROGRAMMER', 'status' => 'Done'],
         ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
         ['nama' => 'Fairuza Attar Aviciena', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
-        ['nama' => 'Danni Hernando', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'done'],
+        ['nama' => 'Danni Hernando', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Done'],
         ['nama' => 'Febrian Adipurnowo', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Inactive'],
-        ['nama' => 'Yessa Khoirunissa', 'nip' => '2000018247', 'divisi' => 'PROGRAMMER', 'status' => 'done'],
+        ['nama' => 'Yessa Khoirunissa', 'nip' => '2000018247', 'divisi' => 'PROGRAMMER', 'status' => 'Done'],
     ];
         // $mahasiswa = Mahasiswa::getDataMahasiswa();
-        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
+        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa', 'title'));
         // return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
     }
 }

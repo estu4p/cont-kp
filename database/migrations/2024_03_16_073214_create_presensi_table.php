@@ -16,8 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
             $table->date('hari')->nullable();
-            $table->time('jam_default_masuk');
-            $table->time('jam_default_pulang');
+
             $table->time('jam_masuk')->nullable();
             $table->string('keterangan_jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
@@ -34,7 +33,7 @@ return new class extends Migration
             $table->enum('status_ganti_jam', ['Ganti Jam', 'Tidak Ganti Jam']);
             $table->text('keterangan_status')->nullable();
             $table->text('bukti_foto_izin')->nullable();
-            $table->string('kebaikan');
+            $table->string('kebaikan')->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->time('hutang_presensi')->nullable();
             $table->bigInteger('target')->nullable();

@@ -39,6 +39,8 @@ class UserSeeder extends Seeder
                 'browser' => $faker->randomElement(['Chrome', 'Edge']),
                 'tgl_masuk' => $faker->dateTime,
                 'tgl_keluar' => $faker->dateTime,
+                'jam_default_masuk' => '06:30:00',
+                'jam_default_pulang' => '13:00:00',
                 'konfirmasi_email' => $faker->randomElement(['Sudah', 'Belum']),
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
                 'sekolah' => Sekolah::inRandomOrder()->first()->id,
