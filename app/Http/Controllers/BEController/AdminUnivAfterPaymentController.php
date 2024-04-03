@@ -356,19 +356,27 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
 
-    public function teamAktifKlik($id)
+    public function teamAktifKlik(Request $Request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $divisi = Divisi::with('anggotaDivisi')->find($id);
+
+        // $user = $anggota_divisi->nama_lengkap;
 
         if (!$divisi) {
             return response()->json(['message' => 'Divisi not found'], 404);
         }
 
-        return response()->json([
-            'message' => 'Success to get detail data divisi with mahasiswa',
-            'data' => $divisi
-        ]);
+        if ($Request->is('api/*') || $Request->wantsJson()) {
+            return response()->json([
+                'message' => 'Success to get detail data divisi with mahasiswa',
+                'data' => $divisi,
+
+                // 'user' => $user
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
+        }
     }
 
     public function teamAktifSeeAllTeam($id)

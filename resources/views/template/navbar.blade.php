@@ -13,7 +13,7 @@
                       <span class="profile-status">Status Profil</span>
                   </div>
                   <div class="navbar-logo">
-                      <img src="assets/images/Rectangle 22.png" alt="Profile Logo">
+                      <img src="assets/images/user.png" alt="Profile Logo">
                   </div>
               </div>
 

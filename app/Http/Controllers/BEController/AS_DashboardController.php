@@ -12,7 +12,7 @@ class AS_DashboardController extends Controller
     {
         // Menghitung total subscription
         $totalSubscription = MitraMahasiswa::count();
-        
+
         // Menghitung total aktif dan tidak aktif
         $totalAktif = MitraMahasiswa::where('jumlah_subcription', 'aktif')->count();
         $totalTidakAktif = MitraMahasiswa::where('jumlah_subcription', 'tidak aktif')->count();
