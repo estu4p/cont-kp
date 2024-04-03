@@ -63,7 +63,7 @@
          </a>
          <a href="#" class="list">
         <div class="col" style="display: flex" >
-            <img src="assets/images/presenter.png" class="icon" style="width:70px;height:70px; ">Host/Presenter<br>
+            <img src="assets/images/presenterr.png" class="icon" style="width:70px;height:70px; ">Host/Presenter<br>
                 20 Anggota
         </div>
          </a>
@@ -99,7 +99,7 @@
          </a>
          <a href="#" class="list">
         <div class="col" style="display: flex" >
-            <img src="assets/images/las.png" class="icon" style="width:70px;height:70px; ">las<br>
+            <img src="assets/images/lass.png" class="icon" style="width:70px;height:70px; ">las<br>
             20 Anggota
         </div>
          </a>
@@ -136,7 +136,6 @@
         <div>
         </div>
         <a href="/contributorformitra-devisi-Seeallteams" style="color: #A4161A">See all teams...</a>
-
     </div>
 
 

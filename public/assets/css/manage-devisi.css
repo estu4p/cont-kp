@@ -48,10 +48,12 @@
 /* Responsif untuk tabel */
 .table-responsive {
     overflow-x: auto;
+    width: 95%;
+    border-radius: 10px;
 }
 .wadah{
     top:0;
-    left:250px;
+    left:250px; 
     height: 100%;
     width:100%;
     padding-left:250px !important;
@@ -114,7 +116,8 @@
     border-radius: 5px;
     background: #ffffff;
     border: none;
-    margin-top: 5px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     text-align: center;
     height:40px;
     width:170px;
@@ -164,7 +167,7 @@
     width: 140px;
     height: 140px;
     border-radius: 70px;
-    font-size: 90px;
+    font-size: 50px;
     color: #555;
     border: 2px solid #ccc;
     display: flex;
@@ -207,10 +210,60 @@
     padding-bottom: 10px
 }
 
-.ratakanan {
-    text-align: right;
+.ratatengah {
+    text-align: center;
 }
 .tomboll{
     margin-left: 5px;
 }
 
+.grupselect{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nav-devisi{
+   font-size: 14px; 
+   width:max-content; 
+   border-radius: 10px;
+   width: 100%;
+   text-align: center;
+   font-size: 15px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   margin-top: 10px;
+   
+}
+a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: inherit; /* Mewarisi warna teks dari elemen induk */
+}
+
+/* .tangah{
+    text-align: center;
+} */
+.namadiv{
+    width: 50%;
+    
+}
+.buttongrup{
+    margin-right: 35%;
+}
+.button-grup{
+    margin-right: 25%;
+}
+.btn-batal{
+    background: transparent;
+}
+.notabel{
+    width: 10%;
+}
+
+.space{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}

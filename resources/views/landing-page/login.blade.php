@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="button-container fw-semibold">
-                    <button type="submit" class="border-0 mt-3"
+                    <button type="submit" class="border-0 mt-3 fw-semibold"
                         style="background-color: #A61C1CE5; color: white; padding: 8px 20px; border-radius: 8px;">Log
                         In</button>
                     <p class="mt-3" style="margin-bottom: -20px;">Belum punya akun? <a href="/register"
