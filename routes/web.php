@@ -465,16 +465,13 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
+Route::get('/AdminUniv/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
-Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
+Route::get('/AdminUniv/Option-TeamAktif-pengaturanDivisi', function () {
     return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
 });
-Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
-    return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
-});
 
-Route::get('/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif');
+Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif');
 
 
 
