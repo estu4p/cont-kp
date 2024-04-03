@@ -183,9 +183,7 @@ Route::get('/pemagang/home', function () {
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
-Route::get('/pemagang/detail', function () {
-    return view('pemagang.gantiJam', ['title' => "MyQR"]);
-});
+Route::get('/pemagang/detail/{nama_lengkap}', [HomeMitraController::class, 'ijin']);
 
 
 //lihat profil contributor for univ

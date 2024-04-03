@@ -9,7 +9,7 @@ class Presensi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_lengkap', 'hari', 'jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'aksi', 'status_kehadiran', 'kebaikan', 'barcode', 'hutan_presensi'];
+    protected $fillable = ['nama_lengkap', 'hari', 'jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'aksi', 'status_kehadiran', 'keterangan_status', 'bukti_foto_izin','kebaikan', 'barcode', 'hutang_presensi'];
 
     protected $table = "presensi";
 
