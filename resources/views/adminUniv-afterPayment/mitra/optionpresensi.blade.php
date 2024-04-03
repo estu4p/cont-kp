@@ -85,9 +85,9 @@
                             </thead>
                               <tbody>
                                 <tr>
-                                  <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
-                                  <td class="bates" href><a href="/mitra-detailprofil">simpay</a></td>
-                                  <td>06:25:00</td>
+                                    <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
+                <td class="bates" href><a href="/mitra-detailprofil">simpay</a></td>
+                <td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#modaljam" style="text-decoration: none">06:25:00</a></td>
                                   <td>13:05:14</td>
                                   <td>06:25:00 </td>
                                   <td>13:05:14</td>
@@ -207,60 +207,132 @@
                     </div>
 
             </div>
-            <div class="modal fade" id="jamkerja">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Isi dari modal -->
-                        <div class="modal-body">
 
-                                <!-- Baris Ke-1 -->
-                                <div class="keterangan">
-                                    “Maaf saya telat datang dan absen dikarenakan macet saat perjalanan berangkat sebab terjadi
-                                    sebuah perampokan dan saya berinisiatif untuk
-                                    menolong korban”
-                                </div>
-                                <div style="text-align: center">
-                                    <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
-                        </div>
-                    </div>
+{{-------modallllllllllllllllllllllllllll-----}}
+
+<div class="modal fade" id="jampulang">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Isi dari modal -->
+            <div class="modal-body">
+
+                <!-- Baris Ke-1 -->
+                <div class="keterangan">
+                    “Maaf saya lupa pencet tombol pulang jadi
+                    saya mencet di kost”
+                </div>
+                <div style="text-align: center">
+                    <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </div>
-                <div class="modal fade" id="jampulang">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Isi dari modal -->
-                            <div class="modal-body">
-
-                                    <!-- Baris Ke-1 -->
-                                    <div class="keterangan">
-                                        “Maaf saya lupa pencet tombol pulang jadi
-                                        saya mencet di kost”
-                                    </div>
-                                    <div style="text-align: center">
-                                        <button class="btnkembali" data-bs-dismiss="modal">Kembali</button>
-                            </div>
-                        </div>
-                </div>
-</div>
-</div>
-</div>
 </div>
 
+<div class="modal fade" id="modaljam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-jam">
+      <div class="modal-content modal-content-jam">
+        <div class="modal-header  justify-content-center">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Presensi</h1>
+        </div>
+
+        <div class="modal-body row p-5">
+          <div class="col-12 p-3 " style="background-color:pink; " >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum necessitatibus enim rem delectus eaque? Iure corporis earum commodi aliquam, quos, consequuntur rem, reiciendis quia in sit autem odio praesentium mollitia.</div>
+        </div>
+        <div style="float:left;">
+            <div style="position: relative;">
+                <i class
+                    style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
+                    <div class="tanggal">
+                <input type="date" name="date" id="date-input" class="search">
+                <p id="date-text"></p>
+                <P style="padding-left: 10px">keterangan</P>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">
+                        
+                    </label>
+                  </div>
+        <div class="modal-footer p-5">
+            <div class="keluar">
+          <button type="button" class="btn btn-secondary close " data-bs-dismiss="modal">Close</button>
+            </div>
+          <button type="button" class="btn btn-primary save" onclick="showsukses()">Save</button>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    </div>
+</div>
+<div class="modal fade " id="silang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-jam">
+        <div class="modal-content modal-content-jam">
+          <div class="modal-header  justify-content-center">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">log activity</h1>
+          </div>
+          <P style="padding-left: 10px">mengedit riwayat proses</P>
+          <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">
+                  
+              </label>
+            </div>
+
+          
+          
+                  <P style="padding-left: 10px">keterangan.......</P>
+                  <div class="form-floating">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                      <label for="floatingTextarea2">
+                          
+                      </label>
+                    </div>
+          <div class="modal-footer p-5">
+            
+            <button type="button" class="btn btn-primary p-1">Save</button>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      </div>
+  </div>
 <script>
     const checkButton = document.getElementById('check-button');
-const crossButton = document.getElementById('cross-button');
+    const crossButton = document.getElementById('cross-button');
 
-checkButton.addEventListener('click', function() {
-    checkButton.classList.add('active');
-    crossButton.classList.remove('active');
-});
+    checkButton.addEventListener('click', function() {
+        checkButton.classList.add('active');
+        crossButton.classList.remove('active');
+    });
 
-crossButton.addEventListener('click', function() {
-    crossButton.classList.add('active');
-    checkButton.classList.remove('active');
-});
+    crossButton.addEventListener('click', function() {
+        crossButton.classList.add('active');
+        checkButton.classList.remove('active');
+    });
+
+    function showsukses(){
+        swal("berhasil", "perubahan waktu berhasil disimpan", "success");
+    }
+
+
+    function handleButtonClick(buttonNumber) {
+    var buttonId = 'button' + buttonNumber;
+    var button = document.getElementById(buttonId);
+    if (!button.classList.contains('btn-with-checkmark')) {
+        button.classList.add('btn-with-checkmark');
+    } else {
+        button.classList.remove('btn-with-checkmark');
+    }
+    // Isi fungsi disini sesuai dengan aksi yang ingin dilakukan ketika tombol diklik
+}
+
 </script>
-
 @endsection

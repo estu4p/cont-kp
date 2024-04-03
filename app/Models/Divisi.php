@@ -23,6 +23,6 @@ class Divisi extends Model
 
     public function anggotaDivisi()
     {
-        return $this->hasMany(User::class, 'mitra_id')->where('role_id', 3);
+        return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
     }
 }

@@ -97,8 +97,7 @@
         <div class="card col-3">
             <div class="plan-title mt-2">Platinum</div>
             <div class="price" style="color: purple">Rp 10.000.000</div>
-            <div class="period">/tahun</div>
-
+             <div class="period">/tahun</div>
             <div class="features my-3">
                 <table>
                     <tr>
@@ -112,6 +111,9 @@
                     <tr>
                         <td><i class="fa-regular fa-square-check"></i></td>
                         <td>Pantau Siswa/Mahasiswa</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-regular fa-square-check"></i></td>
                         <td>Custom User Sesuai Kebutuhan</td>
                     </tr>
                 </table>
@@ -122,7 +124,6 @@
     </div>
 </body>
 </html>
-               </tr>
-                    <tr>
-                        <td><i class="fa-regular fa-square-check"></i></td>
-     
+               
+
+

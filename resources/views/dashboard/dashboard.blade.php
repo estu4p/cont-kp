@@ -38,7 +38,7 @@
         </div>
         <div class="card-body d-flex justify-content-between bawah">
             <p>View Detail</p>
-            <a href="/presensi-contributor-univ"><i class="fa-solid fa-circle-arrow-right icon"></i></a>
+            <a href="/presensi-contributor-univ"></a>
             <a href="#" ><i class="fa-solid fa-circle-arrow-right icon"></i></a>
         </div>
     </div>

@@ -29,13 +29,58 @@ border-radius: 20px;
 
 }
 
-.search{
-    padding-left: 30px;
-    box-sizing: border-box;
-    background: #E9E9E9;
 
+.tgl-filter{
+    box-sizing: border-box;
+    width: 500px;
+    height: 40px;
+    background: #E9E9E9;
+    border: 0.5px solid #000000;
+    padding: 1.5%;
+    position: relative;
 
 }
+
+.tgl-filter::after {
+    content: '';
+    position: absolute;
+    left: 74%;
+    top: 0;
+    width: 0;
+    height: 100%;
+    border-left: 0.5px solid #000000;
+    box-sizing: border-box;
+}
+
+.kaca-pembesar {
+    font-size: 20px;
+}
+
+.tgl {
+    padding-left: 2%;
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    outline: none;
+}
+
+.filter{
+    padding-left: 20px;
+}
+.down{
+    padding-left: 20px;
+}
+
+.collapsed {
+    display: none;
+}
+.collapse-btn{
+    border: none;
+    background-color: transparent;
+}
+
+
+
 
 .card-body {
     padding: 20px;
@@ -68,37 +113,6 @@ border-radius: 20px;
 }
 
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: 10px;
-    box-sizing: border-box;
-    border: none;
-    padding-right: 30px;
-}
-.dropbtn {
-    width: 90px;
-    border: 0.5px solid #000000;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 130px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 12px;
-    z-index: 1;
-}
-
-.dropdown:focus-within .dropdown-content {
-    display: block;
-}
-
-.checkbox-label {
-    display: block;
-    margin-bottom: 8px;
-}
 
 .btnpdf{
     background-color: red;
@@ -108,9 +122,7 @@ border-radius: 20px;
 
 }
 
-.checkbox-container {
-    margin-right: 10px;
-}
+
 
 .toggle-button {
     display: none;

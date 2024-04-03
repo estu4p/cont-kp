@@ -1,13 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <link rel="stylesheet" href="{{ asset('assets/css/presensi/presensiharian.css') }}">
-<script src="{{ asset('js/app.js') }}"></script>
 <div id="presentasi-harian">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 style="font-size: 50px;">Presensi Harian</h3>
@@ -19,46 +15,27 @@
                         <div class="row">
                             <div style=" display: flex; justify-content: space-between;">
                                 <a class="btn" href="/laporandatapresensi">
-                                  <i class="fa-regular fa-eye"></i>
+                                    <i class="fa-solid fa-eye"></i>
                                   Lihat Laporan Presensi
                                 </a>
                                 <div>
-                                <div style="float:left;">
-                                    <div style="position: relative;">
-                                        <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
-                                        <input type="date" name="date" id="date-input" class="search">
-                                        <p id="date-text"></p>
-                                    </div>
+                                    <div class="tgl-filter">
+                                        <i class="kaca-pembesar fa-solid fa-magnifying-glass"></i><input type="date" class="tgl">
+                                        <i class="filter fa-solid fa-filter"></i> Filter <i class="down fas fa-angle-down" class="collapse-btn" onclick="toggleCollapse()"></i>
+                                          <div class="collapsed" id="collapseContent">
+                                            asdasd
+                                          </div>
+
                                 </div>
-                                 <div class="dropdown">
-                                    <button class="dropbtn"><i class="fa-solid fa-filter"></i>Filter<i class="fa-solid fa-chevron-down"></i></button>
-                                    <div class="dropdown-content">
-                                        <div style="border-bottom: 1px solid #000;">
-                                            <label>Status</label><br>
-                                            <input type="checkbox" id="checkbox1">
-                                            <label for="checkbox1">Hadir</label><br>
-                                            <input type="checkbox" id="checkbox2">
-                                            <label for="checkbox2">Izin</label><br>
-                                            <input type="checkbox" id="checkbox3">
-                                            <label for="checkbox3">Izin</label><br>
-                                        </div>
-                                      <label for="checkbox1">Shift</label><br>
-                                      <input type="checkbox" id="checkbox2">
-                                      <label for="checkbox2">Shift pagi</label><br>
-                                      <input type="checkbox" id="checkbox3">
-                                      <label for="checkbox3">Shift Middle</label><br>
-                                      <input type="checkbox" id="checkbox3">
-                                      <label for="checkbox3">Shift Siang</label><br>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>
-                              </div>
-                            </div>
-                           <div class="col-md-6 text-right">
+                                </div>
+
+
+
+
                             </div>
                         </div>
                         <br>
+
                         <table class="table" style="font-size: 10px;">
                             <thead style="text-align: center;">
                                 <tr>
@@ -246,6 +223,13 @@
 </div>
 </div>
 </div>
+
+<script>
+    function toggleCollapse() {
+      var content = document.getElementById('collapseContent');
+      content.classList.toggle('collapsed');
+    }
+  </script>
 
 
 
