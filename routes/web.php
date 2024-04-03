@@ -472,9 +472,8 @@ Route::get('/Option-TeamAktif-pengaturanDivisi', function () {
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
-Route::get('/OptionTeamAktifKlikUiUx', function () {
-    return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
-});
+
+Route::get('/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif');
 
 
 

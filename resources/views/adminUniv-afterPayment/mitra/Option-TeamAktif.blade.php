@@ -61,7 +61,7 @@
                     <i class="icon fa-solid fa-user"></i>
                 @endif
 
-                <a href="OptionTeamAktifKlikUiUx" style="text-decoration: none">
+                <a href="{{ route('adminUniv.option.teamAktif', $item->id) }}" style="text-decoration: none">
                     {{ $item->nama_divisi }}<br>
                     {{ $item->mahasiswa_count }} Anggota
                 </a>
