@@ -5,7 +5,7 @@
         <h2 class="text-center fw-bold" style="color: #A61C1CE5;">log in</h2>
         <div class="box-form mt-5">
             <img src="assets/images/logo.png" class="img-container image-fluid mx-auto" />
-            <form action="{{ route('login') }}" method="POST" class="fw-medium">
+            <form action="/loginpage" method="POST" class="fw-medium">
                 @csrf
                 <label for="email" class="mt-4">Email<span class="text-danger">*</span></label>
                 <div class="d-flex">

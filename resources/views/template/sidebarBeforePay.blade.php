@@ -5,19 +5,19 @@
         <li class="nav-item">
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminUniv-Dashboard">Dashboard</a>
+            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/mitra-adminunivmitra">Mitra</a>
+            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Mitra</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Pengaturan</a>
+            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Pengaturan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminPaket">Paket</a>
+            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment">Paket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/RiwayatJangkaWaktu">Riwayat</a>
+            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Riwayat</a>
         </li>
         <li class="nav-item">
             <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">

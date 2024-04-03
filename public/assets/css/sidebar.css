@@ -30,12 +30,12 @@ body{
 }
 
 a.nav-link.active {
-  font-weight: bold; /* Menebalkan tautan aktif */
-  background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
-  color: #fff; /* Warna teks untuk tautan aktif */
-
+  font-weight: bold;
 }
 
+.nav-item {
+  align-items: center;
+}
 
 .sidebar {
   text-align: center;
