@@ -37,27 +37,28 @@ class SchoolController extends Controller
     public function jumlahMahasiswa(Request $request)
     {   //Menampilkan Data Mahasiswa
         $JM = User::where('role_id', 3)->get();
+        // $divisi = Divisi::where('id', $JM->divisi_id)->select("nama_divisi")->first();
        // dd($JM);
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "jumlah Mahasiswa" => "view data Mahasiswa ",
-            "data" => $JM
+            "data" => $JM,
+            // "divsi"=> $divisi
         ]);
         } else {
-            return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM]);
+            return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM, ]);
         }
     }
     public function Lihatprofil(Request $request, $id)
     {
-        //Data Mahasiswa- Lihat profile detail 
+        //Data Mahasiswa- Lihat profile
         $lihat = User::findOrFail($id);
 
-        // Logika untuk mendapatkan data profil sesuai dengan data user
         $presensi = Presensi::where('id', $lihat->id)->select("hutang_presensi")->first();
         $divisi = Divisi::where('id', $lihat->divisi_id)->select("nama_divisi")->first();
-        $project = Project::where('id', $lihat->project_id)->select("nama_project")->first();
-        $Shift = Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
-    
+        $project = Project :: where ('id', $lihat->project_id)->select("nama_project")->first();
+        $Shift= Shift::where('id', $lihat->shift_id)->select('nama_shift', 'jml_jam_kerja', 'jam_masuk', 'jam_pulang')->first();
+
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             "massage" => "Lihat profil Mahasiswa ",

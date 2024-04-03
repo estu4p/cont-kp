@@ -1,0 +1,279 @@
+html,
+body 
+
+
+
+{
+  overflow-x: hidden;
+}
+
+#presentasi-harian {
+    padding: 20px;
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    color: white;
+    background-image: url(/assets/images/backroundheaderpresensi.png);
+    border-bottom: 1px solid #ddd;
+}
+.btn {
+width: 228px;
+height: 36px;
+left: 404px;
+top: 494px;
+color: #007bff;
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 20px;
+
+}
+
+.search{
+    padding-left: 30px;
+    box-sizing: border-box;
+    background: #E9E9E9;
+    border: 0.5px solid #000000;
+
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #EEEEEE;
+    border: none;
+}
+
+
+.table-bordered {
+    border-color: #ddd;
+}
+
+
+
+.table th {
+    text-align: center;
+    background-color: #DCDCDC;
+}
+
+.table tr td {
+    background-color: white !important;
+}
+.table tr{
+    background-color: white !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    padding-right: 30px;
+}
+.dropbtn {
+    width: 90px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 130px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 12px;
+    z-index: 1;
+}
+
+.dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+.checkbox-label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.btnpdf{
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    border-color: #ddd;
+
+}
+
+.checkbox-container {
+    margin-right: 10px;
+}
+
+.toggle-button {
+    display: none;
+}
+
+
+.round-button-check {
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: #E9E9E9;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+
+}
+.round-button-cross {
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    color: white;
+    background-color: #E9E9E9;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.round-button-check {
+    background-color: #00C113;
+}
+
+.round-button-cross {
+    background-color: red;
+}
+.bates{
+    max-width:200px !important;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+
+.keterangan{
+
+width: 471px;
+height: 311px;
+left: 53px;
+top: 116px;
+background: #F2F2F2;
+border-radius: 5px;
+padding: 30px;
+}
+
+.linkdrive{
+
+width: 471px;
+height: 51px;
+left: 53px;
+top: 475px;
+
+background: #F2F2F2;
+border-radius: 3px;
+
+}
+.keterangan2{
+    width: 471px;
+    height: 51px;
+    left: 53px;
+    top: 475px;
+    background: #F2F2F2;
+    border-radius: 3px;
+    padding: 30px;
+}
+
+.btnkembali {
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.07em;
+    color: #858585;
+    background-color: transparent;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.btnkembali:hover {
+    color: #000000;
+}
+
+i .fs-1 {
+    font-size: 90px;
+}
+
+#presentasi-harian{
+    display: flex;
+    justify-content: center;
+}
+.date{
+    border-radius: 1px;
+    background-color: #007bff;
+}
+
+.cari{
+    padding-left: 700px;
+}
+
+
+
+.p-1{
+    border-radius: 1%;
+}
+.btn {
+    border-radius: 1px; /* Menambahkan radius 10px ke semua tombol */
+    color: #000000;
+    background: none;
+}
+
+.dropdown-menu {
+    border-radius: 10px; /* Menambahkan radius 10px ke dropdown menu */
+}
+
+.dropdown-item:hover {
+    background-color: #e9ecef; /* Ganti warna latar belakang saat hover */
+}
+.btn-primary {
+    background-color: #28a745; /* Warna hijau */
+    
+    padding: 10px 20px; /* Atur padding tombol sesuai kebutuhan */
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Warna hijau yang sedikit lebih gelap saat hover */
+    border-color: #1e7e34; /* Warna border saat hover */
+}
+.tanggal {
+    padding-left: 20px; /* Atur padding kiri sesuai kebutuhan */
+}
+.save{
+    background-color: #ff000d;
+    border-radius: 10px;
+    width: 80px;
+}
+.close{
+    width: 80px;
+}
+
+.gantijam{
+    background-color: #a7284e; /* Warna hijau */
+    
+    padding: 10px 20px; 
+}
+.tidak{
+    background-color: #28a745; /* Warna hijau */
+    
+    padding: 10px 20px; 
+
+}

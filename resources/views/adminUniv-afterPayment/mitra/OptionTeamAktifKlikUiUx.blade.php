@@ -1,137 +1,41 @@
 @extends('layouts.masterAfterPay')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/OptionTeamAktifKlikUiUx.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/mitra/OptionTeamAktifKlikUiUx.css') }}">
 
-<div class="topcontent">
-    <div>
-        <a href="Option-TeamAktif"><i class="icon fa-solid fa-angle-left"></i></a>
+    <div class="topcontent">
+        <div>
+            <a href="/Option-TeamAktif"><i class="icon fa-solid fa-angle-left"></i></a>
+        </div>
     </div>
-</div>
 
-<div style="padding-left:70%">
+    <div style="padding-left:70%">
         <div class="input">
             <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
             <input type="search" class="inputsearch" placeholder="cari team/project">
         </div>
     </div>
     <br>
-    <div class="isi  row ">
-        <div class="col-3 my-5">
-            <div class="dropdown" style="color: blueviolet;">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
+    <div class="row isi">
+        @foreach ($divisi->anggotaDivisi as $anggota)
+            <div class="col-3 my-5">
+                <div class="dropdown" style="color: blueviolet;">
+                    <div class="atasan">
+                        <span>{{ $anggota->nomor_induk }}</span>
+                        <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
+                            aria-expanded="false"></i>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
+                        <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
+                    </div>
                 </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
+                <div class="bawahan">
+                    <p>{{ $anggota->nama_lengkap }}</p>
                 </div>
             </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-       
-
-
+        @endforeach
+    </div>
 
     <script>
         // JavaScript untuk menangani dropdown
@@ -160,6 +64,4 @@
             });
         });
     </script>
-
-
 @endsection

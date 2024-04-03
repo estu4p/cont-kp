@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
+                                <p style="margin: 10px;">NIP : MJ/{{ $divisi->nama_divisi }}/POLINES/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
@@ -57,7 +57,7 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasukFormatted }}</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasuk }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
@@ -72,7 +72,7 @@
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisaFormatted }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -163,19 +163,19 @@
                                         <th rowspan="2"><input type="checkbox"></th>
                                         <th rowspan="2">No</th>
                                         <th rowspan="2">tanggal</th>
-                                        <th colspan="2">jam kerja</th>
-                                        <th colspan="2">jam istirahat</th>
-                                        <th colspan="2">total jam kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">jam kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">jam istirahat</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">total jam kerja</th>
                                         <th rowspan="2">status kehadiran</th>
                                         <th rowspan="2">status ganti jam</th>
 
                                     <tr>
                                         <th>masuk</th>
-                                        <th>pulang</th>
+                                        <th style="border-left: 0.5px solid black;">pulang</th>
                                         <th>mulai</th>
-                                        <th>selesai</th>
+                                        <th style="border-left: 0.5px solid black;">selesai</th>
                                         <th>total jam</th>
-                                        <th>(+)(-)</th>
+                                        <th style="border-left: 0.5px solid black;">(+)(-)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -189,7 +189,7 @@
                                         <td>{{$item->jam_mulai_istirahat}}</td>
                                         <td>{{$item->jam_selesai_istirahat}}</td>
                                         <td>{{$item->total_jam_kerja}}</td>
-                                        <td>00:00:00</td>
+                                        <td>{{ $item->hutang_presensi }}</td>
                                         <td style="color: #FF0000">Tidak hadir<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>

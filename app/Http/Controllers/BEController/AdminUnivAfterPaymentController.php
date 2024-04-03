@@ -228,11 +228,15 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif()
+    public function daftarMitraTeamAktif(Request $request)
     // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
-        return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisi'));
+        }
     }
 
     public function daftarMitraPengaturanDivisi(Request
@@ -352,19 +356,27 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
 
-    public function teamAktifKlik($id)
+    public function teamAktifKlik(Request $Request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $divisi = Divisi::with('anggotaDivisi')->find($id);
+
+        // $user = $anggota_divisi->nama_lengkap;
 
         if (!$divisi) {
             return response()->json(['message' => 'Divisi not found'], 404);
         }
 
-        return response()->json([
-            'message' => 'Success to get detail data divisi with mahasiswa',
-            'data' => $divisi
-        ]);
+        if ($Request->is('api/*') || $Request->wantsJson()) {
+            return response()->json([
+                'message' => 'Success to get detail data divisi with mahasiswa',
+                'data' => $divisi,
+
+                // 'user' => $user
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
+        }
     }
 
     public function teamAktifSeeAllTeam($id)
@@ -453,6 +465,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
+        // dd($nama_lengkap);
         // NIM
         $user = User::findOrFail($nama_lengkap);
         // menampilkan divisi
