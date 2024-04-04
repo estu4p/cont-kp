@@ -460,9 +460,8 @@ Route::get('/pengaturan', function () {
 });
 
 
-Route::get('/Option-TeamAktif-SeeAllTeams', function () {
-    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams');
-});
+Route::get('/Option-TeamAktif-SeeAllTeams', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam'])->name('adminUniv.option.seeAllTeams');
+
 Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
 });
