@@ -459,6 +459,7 @@ Route::get('/datasiswa', function () {
 Route::get('/profilsiswa', function () {
     return view('adminUniv-afterPayment.profilSiswa');
 });
+Route::get('/profilsiswa/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam'])->name('adminUniv.profilSiswa');
 
 
 

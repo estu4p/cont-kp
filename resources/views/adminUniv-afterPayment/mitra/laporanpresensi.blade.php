@@ -75,7 +75,9 @@
                             <td><input type="checkbox" id="#" name=""></td>
                             <td>{{ $no + 1 }}</td>
                             <td><a href="">{{ $item->user->nama_lengkap }}</a></td>
-                            <td>MJ/UIUX/{{ $item->user->sekolah }}/{{ $item->user->nomor_induk }}/AGST2023/06</td>
+                            <td>MJ/ {{ $item->nama_divisi->nama_divisi }}
+                                /{{ $item->nama_sekolah->nama_sekolah }}/{{ $item->user->nomor_induk }}/{{ $item->bulan }}{{ $item->tahun_masuk }}/{{ $item->user->id }}
+                            </td>
                             <td>{{ $item->total_kehadiran }} &nbsp; <a
                                     href="{{ route('adminUniv.detailHadir', $item->nama_lengkap) }}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>
