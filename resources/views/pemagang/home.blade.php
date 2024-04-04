@@ -286,10 +286,7 @@
     </div>
 
 
-    <script>
-        function showmodal() {
-            $('#exampleModal').modal('show');
-        }
+ 
 
 
 <!-- modal log Activity -->
@@ -307,7 +304,13 @@
         </div>
     </div>
     <script>
-        
+       
+    </script>
+    <script>
+         function showmodal() {
+            $('#exampleModal').modal('show');
+        }
+
         function shift() {
             var now = new Date();
             var hours = now.getHours().toString().padStart(2, '0');
