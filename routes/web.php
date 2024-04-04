@@ -208,10 +208,6 @@ Route::get('/pemagang/detail', function () {
 });
 
 
-//lihat profil contributor for univ
-// Route::get('/profil-siswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jumlahMahasiswa');
-
-
 //contributor for univ
 Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
@@ -309,22 +305,6 @@ Route::get('/pemagang/detail', function () {
     return view('pemagang.gantiJam', ['title' => "MyQR"]);
 });
 
-
-
-
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
-Route::get('/laporandatapresensi', function () {
-    return view('presensi.laporandatapresensi');
-});
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
-
-Route::get('/profil-siswa', function () {
-    return view('jumlah-mahasiswa.profil-siswa');
-});
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
@@ -538,19 +518,6 @@ Route::get('/pemagang/home', function () {
     return view('pemagang.home', ['title' => "Home"]);
 });
 
-
-
-
-
-// Route::get('/profil-siswa', function () {
-//     return view('jumlah-mahasiswa.profil-siswa');
-// });
-// Route::get('/laporandatapresensi', function () {
-//     return view('presensi.laporandatapresensi');
-// });
-// Route::get('/datapresensisiswa', function () {
-//     return view('presensi.datapresensisiswa');
-// });
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');

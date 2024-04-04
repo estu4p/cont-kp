@@ -29,26 +29,19 @@ class SchoolController extends Controller
             return view('dashboard.dashboard', compact('jumlah_mahasiswa','kehadiran_masuk','kehadiran_izin'));
         }
     }
-    public function divisi()
-    {
-        return $this->belongsTo(Divisi::class, 'divisi_id');
-    }
+
     public function jumlahMahasiswa(Request $request)
     {   //Menampilkan Data Mahasiswa
-        $JM =User::with('divisi_id')->where('role_id', 3)->get();
-        // User::where('role_id', 3)->get();
+            $mahasiswa=User::where('role_id', 3)->get();
 
-        // $divisi = Divisi::where('id', $JM->divisi_id)->select("nama_divisi")->first();
-       // dd($JM);
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json([
-            "jumlah Mahasiswa" => "view data Mahasiswa ",
-            "data" => $JM,
-            // "divsi"=> $divisi
-        ]);
-        } else {
-            return view('jumlah-mahasiswa.jumlah-mahasiswa',["data" => $JM, ]);
-        }
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return response()->json([
+                "jumlah Mahasiswa" => "view data Mahasiswa ",
+                "data" => $mahasiswa,
+            ]);
+            } else {
+                return view('jumlah-mahasiswa.jumlah-mahasiswa', compact('mahasiswa'));
+            }
     }
     public function Lihatprofil(Request $request, $id)
     {
