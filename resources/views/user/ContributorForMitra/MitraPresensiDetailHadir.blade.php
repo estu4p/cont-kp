@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{ $user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/{{ $divisi->nama_divisi }}/POLINES/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
+                                <p style="margin: 10px;">NIP : MJ/{{ $divisi->nama_divisi }}/{{$sekolah->sekolah}}/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
