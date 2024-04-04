@@ -77,7 +77,7 @@
                                 <div class="mt-3 d-flex flex-column w-50">
                                     <label for="konfirm" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
                                         password</label>
-                                    <input type="text" name="konfirm" placeholder="Ulangi Password"
+                                    <input type="password" name="konfirm" placeholder="Ulangi Password"
                                         class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
                                         id="">
                                 </div>

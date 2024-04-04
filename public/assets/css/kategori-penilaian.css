@@ -8,21 +8,17 @@
     margin-bottom: 20px;
 }
 
-.card-header {
-    background: linear-gradient(180deg, #000000 -12.55%, rgba(64, 64, 64, 0) 256.82%);
 
-    
-}
 
 .card-header h3,
 .card-header p {
     color: white;
-    
+
 }
 
 .form-group {
     margin-bottom: 20px;
-    
+
 }
 
 .form-control {
@@ -47,7 +43,7 @@
 
 .container {
     width: 100%;
-    
+
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -85,7 +81,7 @@
     width:auto;
     display:inline-block;
     padding-top:10% !important;
-    
+
     box-sizing: border-box;
 }
 .logo {
@@ -112,7 +108,7 @@
     display: flex; /* Menggunakan display flex untuk mengatur posisi teks */
     flex-direction: column; /* Mengatur tata letak menjadi kolom */
     margin-bottom: 150px;
-    padding: 50px 60px; 
+    padding: 50px 60px;
 }
 
 

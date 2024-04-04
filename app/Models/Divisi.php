@@ -11,6 +11,11 @@ class Divisi extends Model
     protected $table = "divisi";
     protected $fillable = ['nama_divisi', 'deskripsi_divisi'];
 
+    // Tetapkan nilai default untuk deskripsi_divisi
+    protected $attributes = [
+        'deskripsi_divisi' => ''
+    ];
+
     public function mahasiswa()
     {
         return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
@@ -18,6 +23,6 @@ class Divisi extends Model
 
     public function anggotaDivisi()
     {
-        return $this->hasMany(User::class, 'mitra_id')->where('role_id', 3);
+        return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
     }
 }

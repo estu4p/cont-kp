@@ -31,6 +31,9 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->role == 1) {
+                return redirect()->to('/pemagang/home');
+            } else if ($user->role == 2) {
+                return redirect()->to('/pemagang/home');
                 return response()->json([
                     'message' => 'Login berhasil sebagai Super Admin',
                     'redirect' => 'SuperAdmin/dashboard'
@@ -41,17 +44,13 @@ class LoginController extends Controller
                     'redirect' => 'Admin/dashboard'
                 ], 200);
             } else if ($user->role == 3) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Mahasiswa  Siswa',
-                    'redirect' => 'pemagang/home'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else if ($user->role == 4) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Dosen',
-                    'redirect' => 'Dosen/dashboard'
-                ], 200);
+                return redirect()->to('/pemagang/home');
             } else {
-                return redirect('/AdminUniv-Dashboard');
+                return redirect()->to('/AdminUniv-Dashboard');
+
+                // return redirect('/AdminUniv-Dashboard');
             }
         } else {
             return response()->json([

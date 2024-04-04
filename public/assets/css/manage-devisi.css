@@ -1,4 +1,4 @@
-/* assets/Css/margepenilaiandivisi.css */
+.swic/* assets/Css/margepenilaiandivisi.css */
 
 /* Gaya untuk judul card */
 .card .card-header h3 {
@@ -48,31 +48,51 @@
 /* Responsif untuk tabel */
 .table-responsive {
     overflow-x: auto;
+    width: 100%; /* Ubah width menjadi 100% */
+    border-radius: 10px;
+}
+.table-responsive table {
+    min-width: 700px; /* Atur lebar minimal sesuai kebutuhan */
+}
+.table-responsive th, .table-responsive td {
+    min-width: 150px; /* Atur lebar minimal untuk setiap sel */
+}
+
+.table-responsive .namadiv {
+    width: 30%; /* Atur lebar kolom "Nama Divisi" */
+}
+
+.table-responsive .ratatengah {
+    width: 20%; /* Atur lebar kolom "Penilaian" dan "Aksi" */
 }
 .wadah{
-    position:fixed;
     top:0;
-    left:250px;
+    left:250px; 
     height: 100%;
-    bottom:0;
-    right:0;
     width:100%;
-    z-index:-9;
-    padding-right:250px !important;
-    
+    padding-left:250px !important;
+}
+.wadahh{
+    top:0;
+    left:0px;
+    height: 100%;
+    width:70%;
+    padding-left:0px !important;
+    padding-right: 100px;
 }
 .kiri-putih{
     height:100%;
     width:250px;
-   
-    padding-top:5% !important;
+    position:fixed;
+   top:0;
     background-color: white;
     display: inline-block;
+ 
 }
 .kanan-tabel{
     width:auto;
     display:inline-block;
-    padding-top:7% !important;
+    padding-top:2% !important;
     box-sizing: border-box;
 }
 .nav-item a {
@@ -110,7 +130,8 @@
     border-radius: 5px;
     background: #ffffff;
     border: none;
-    margin-top: 5px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     text-align: center;
     height:40px;
     width:170px;
@@ -127,6 +148,136 @@
     width:170px;
     border-radius: 10px;
     text-align: center;
+}
+.labelmodal{
+    font-weight: bold;
+}
+.inputmodal{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+ 
+    padding-left: 10px;
+}
+.judulmodal{
+    font-weight: bold;
+}
+.grupinput{
     margin-top: 20px;
-    padding-left: 20px; 
+}
+.textdivisi{
+    font-weight: bold;
+    font-size: 20px;
+}
+.tambahgambar{
+    display: flex;
+    margin-top: 20px;
+    
+}
+.gambar{
+    background-color: transparent;
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    font-size: 50px;
+    color: #555;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+      
+}
+.addgambar{
+    background-color: transparent;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    margin-top: 50px;
+}
+.remove{
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    height: 40px;
+    margin-top: 50px;
+    color: #dc3545;
+}
+.NamaDivisi{
+    color: #000000;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.inputmodall, .inputmodalll{
+    width: 100%;
+    background-color: #F2F4F8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.ratatengah {
+    text-align: center;
+}
+.tomboll{
+    margin-left: 5px;
+}
+
+.grupselect{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nav-devisi{
+   font-size: 14px; 
+   width:max-content; 
+   border-radius: 10px;
+   width: 100%;
+   text-align: center;
+   font-size: 15px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   margin-top: 10px;
+   
+}
+a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: inherit; /* Mewarisi warna teks dari elemen induk */
+}
+
+/* .tangah{
+    text-align: center;
+} */
+.namadiv{
+    width: 50%;
+    
+}
+.buttongrup{
+    margin-right: 35%;
+}
+.button-grup{
+    margin-right: 25%;
+}
+.btn-batal{
+    background: transparent;
+}
+.notabel{
+    width: 10%;
+}
+
+.space{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }

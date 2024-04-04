@@ -6,6 +6,7 @@
     height: 150px;
     width:96%;
 }
+
 .tengah-judul{
     padding-left:50px;
 }
@@ -24,22 +25,27 @@
     margin-top: 50px;
     padding-left:50px;
 }
+.opsion{
+    width: 99%;
+}
 
 
 .abu{
     background: #dcdcdc;
-    width: 240px;
-    height: 35px;
+    width: 99%;
+    height: auto;
     border-radius: 5px;
     padding-left: 15px;
     padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .input{
-    width: 240px;
-    height: 35px;
+    width: 99%;
+    height: auto;
     padding-left: 12px;
     border-radius: 5px;
+    
 }
 
 label{
@@ -53,7 +59,7 @@ select{
     padding-left: 12px;
 }
 .form-group{
-    margin-top: 7px;
+    margin-top: 10px;
 }
 
 .peringatan{

@@ -17,12 +17,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+        $email = $request->input('email');
+        $pass = $request->input('password');
+        
         $validation = ['email' => $request->email, 'password' => $request->password];
         if (Auth::attempt($validation)) {
             return redirect('/dashboard-admin')->with('success', 'login success');
         }
 
-        return redirect()->route('login')->with('error', 'Email or password is incorrect.');
+        return redirect()->to('/loginpage')->with('error', 'Email or password is incorrect.');
     }
     public function reset($id)
     {

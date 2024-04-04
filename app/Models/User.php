@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -24,9 +25,11 @@ class User extends Authenticatable
         'kota',
         'alamat',
         'tgl_lahir',
+        'konfirmasi_email',
         'about',
         'os',
         'status_akun',
+        'status_absensi',
         'browser',
         'tgl_masuk',
         'tgl_keluar',
@@ -54,5 +57,9 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+    public function sekolah()
+    {
+        return $this->belongsTo(Sekolah::class);
     }
 }

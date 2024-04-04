@@ -36,7 +36,7 @@
 }
 
 .card-body {
-    padding: 20px;
+    padding:0 20px;
 }
 
 .table {
@@ -46,35 +46,31 @@
 
 /* Responsif untuk tabel */
 .table-responsive {
-    overflow-x: auto;
+
 }
 .wadah{
-    position:fixed;
     top:0;
     left:250px;
     height: 100%;
-    bottom:0;
-    right:0;
     width:100%;
-    z-index:-9;
-    padding-right:250px !important;
-    
+    padding-left:250px !important;
 }
 .kiri-putih{
     height:100%;
     width:250px;
-   
-    padding-top:5% !important;
+    position:fixed;
+   top:0;
     background-color: white;
     display: inline-block;
+
 }
 .kanan-tabel{
     width:auto;
     display:inline-block;
-    padding-top:10% !important;
-    
+    padding-top:7% !important;
     box-sizing: border-box;
 }
+
 .nav-item a {
     color: black; /* Mengatur warna teks menjadi hitam */
 
@@ -83,13 +79,13 @@
 .page, .item{
     background: #c6c6c6;
     border-radius:5px;
-    
+
 }
 
 .manageP {
     text-decoration: none;
-    background-color: pink; 
-    border-radius: 7px; 
+    background-color: pink;
+    border-radius: 7px;
 }
 .logout{
     position: absolute;
@@ -168,4 +164,8 @@ border-radius: 9px;
 }
 .putih{
     color: #FFFFFF;
+}
+#example{
+    overflow: scroll  !important;
+    height: max-content;
 }

@@ -13,10 +13,10 @@ class ShiftSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create('id_ID');
+        $shift = ['Pagi', 'Middle', 'Siang'];
         for ($i = 0; $i < 3; $i++) {
             Shift::create([
-                'nama_shift' => $faker->randomElement(['Pagi', 'Middle', 'Siang']),
+                'nama_shift' => $shift[$i],
                 'jml_jam_kerja' => '7 jam',
                 'jam_masuk' => '06.30',
                 'jam_pulang' => '13.00'

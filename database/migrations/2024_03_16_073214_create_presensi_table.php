@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
             $table->date('hari')->nullable();
+
             $table->time('jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
             $table->time('jam_mulai_istirahat')->nullable();
@@ -24,11 +25,12 @@ return new class extends Migration
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tidak Hadir', 'Ganti Jam']);
+            $table->enum('status_ganti_jam', ['Ganti Jam', 'Tidak Ganti Jam']);
             $table->text('keterangan_status')->nullable();
-            $table->string('kebaikan');
-            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
+            $table->string('kebaikan')->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->time('hutang_presensi')->nullable();
+            $table->bigInteger('target')->nullable();
             $table->timestamps();
 
             $table->foreign('nama_lengkap')
