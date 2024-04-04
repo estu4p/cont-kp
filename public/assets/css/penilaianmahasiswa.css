@@ -1,51 +1,141 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
-}
-
 h1 {
-    text-align: center;
+    color: #26577C;
+    font-weight: bold;
+    font-size: 40px;
+
+}
+input{
+    width: 400px;
+    background: #e8e8e8;
+    border: 1px solid black;
+    border-radius: 7px;
+    margin-top: 25px;
+    padding-left: 10px;
+}
+form{
+    position: relative;
+    float: right;
+}
+form i{
+    position: absolute;
+    top: 60%;
+    left: 10px;
+    color: #828181;
+}
+form input{
+    padding-left: 30px;
 }
 
-.table-responsive {
-    overflow-x: auto;
+.page, .item{
+
+    margin-top: 20px;
+    background: #c6c6c6;
+    margin-bottom: 10;
+    margin-bottom: -20px;
 }
 
-table {
-    width: 100%;
+.wadah {
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+table{
+
     border-collapse: collapse;
+    width: 100%;
+
+
+}
+.wadah-tabel{
+    height:max-content;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 7px !important;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgb(161, 161, 161) !important;
 }
 
-th, td {
-    padding: 8px 15px;
-    border: 1px solid #ddd;
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th{
+    background: #e1e1e1;
 }
 
-th {
+
+
+.active{
+    width: 75px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #26577C;
+    color: #F5F3F4;
+    border-radius: 5px;
+    text-align: center;
+}
+.inactive{
+    width: 75px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #E5383B;
+    color: #F5F3F4;
+    border-radius: 5px;
+    text-align: center;
+}
+.done{
+    width: 75px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #1AA158;
+    color: #F5F3F4;
+    border-radius: 5px;
     text-align: center;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
 
-.table-bordered {
-    border-color: #ddd;
-}
-.tengahin{
-    position:absolute;
-    top:0;left:0;right: 0;bottom: 0;
-
-}
-.tittle{
+.icon{
     color: #26577C;
 }
-.page, .item{
-    background: #c6c6c6;
-    border-radius:5px;
+
+.abu{
+    background: #D8DADF;
+}
+.putih {
+    background:  #F2F4F8;
+}
+
+.item {
+    width: 50%;
+    border-radius: 5px;
+
+}
+
+.page {
+    width: 33%;
+    border-radius: 5px;
+}
+
+.gruppage{
+    width: 30%;
+    display: flex;
+
     margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left:45px;
+
 }
-.pagenavigationexample{
-    position: center;
-    border-radius: 0px;
+.pagination-button{
+    border: none !important;
+    border-bottom: none !important;
+    background: transparent !important;
 }
+.pagination-container {
+    border: none !important;
+    border-bottom: none !important;
+    background:transparent !important;
+    padding-top: 20px;
+
+}
+

@@ -64,7 +64,7 @@
                     </button>
                 </div>
             </div>
-            <div class="kanan">
+            <div class="kanan" >
                 <div class="kananatas  justify-content-between">
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
@@ -113,9 +113,9 @@
                     </div>
                 </div>
                 <div class="kananbawah">
-                    <div class="kebaikan border border-secondary mx-3">
+                    <div class="kebaikan border border-secondary ">
                         <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-                        <textarea id="pesan" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
+                        <textarea id="pesan" class="textarea" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
                         <div class="grubbuton">
                             <button class="batal">Batal</button>
                             <button class="tambahkan">Tambahkan</button>
@@ -126,7 +126,7 @@
                             <div class="judulperhatian">Attention !</div>
                         </div>
                         <div class="kontenperhatian">
-                            <div class="keterangan border border-danger">Kemarin anda absen pulang di kost jangan diulang!</div>
+                            <div class="keterangan border border-danger m">Kemarin anda absen pulang di kost jangan diulang!</div>
                             <div class="kurangjam  bordermerah d-flex flex-column justify-content-center">
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>
