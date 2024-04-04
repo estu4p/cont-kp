@@ -23,8 +23,18 @@
 </head>
 
 <body>
-    <div class="wadah">
+    <form action="{{ route('scan-barcode', ['id' => Auth::id()]) }}" method="POST">
+        @csrf
+        <div class="wadah">
+            <div class="text-container">
+                 <?php
+                    use App\Models\Presensi;
+                    use App\Models\User;
+                    use Illuminate\Support\Facades\Auth;
 
+
+                    $id = Auth::user()->id;
+                ?>
     <div class="text-container">
             <h3>Iqra's QR Code</h3 >
         </div>
@@ -34,9 +44,35 @@
         
     </div>
 
+
+                    $presensi = Presensi::join('users', 'presensi.nama_lengkap', '=', 'users.id')
+                                        ->select('users.nama_lengkap as nama')
+                                        ->where('presensi.id', $id)
+                                        ->first(); 
+
+                    if ($presensi) {
+                        $nama = $presensi->nama; 
+                    } else {
+                        $nama = "Nama Pengguna";
+                    }
+                ?>
+                 <h3>{{ $nama }}'s QR Code</h3 >
+                {{-- <h3>Iqra's QR Code</h3 > --}}
+            </div>
+            <div class="qr-container">
+                {{-- <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="" class="qr-image"> --}}
+                <img src="{{ asset('barcodes/qrcode_' . Auth::id() . '.svg') }}" alt="QR Code">
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembal</a></button>
+        </div>
+    </form>
+
     <div class="button-container">
         <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembali</a></button>
     </div>
+
 </body>
 
 </html>

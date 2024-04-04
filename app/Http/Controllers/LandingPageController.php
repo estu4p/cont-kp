@@ -24,14 +24,6 @@ class LandingPageController extends Controller
     }
     public function lpdaftar(Request $request)
     {
-        // $data= new Sekolah([
-        //     'nama_lengkap' => $request->input ('nama_lengkap'),
-        //     'nama_sekolah' => $request->input ('nama_sekolah'),
-        //     'no_hp' => $request->input ('no_hp'),
-        //     'email' => $request->input ('email'),
-        //     'password' =>$request->input ('password')
-        //     ]);
-
         $user= new Sekolah();
         $user->nama_lengkap= $request->input('nama_lengkap');
         $user->nama_sekolah= $request->input('nama_sekolah');
@@ -44,11 +36,6 @@ class LandingPageController extends Controller
             return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
         } else {
              return redirect('/loginpage');
-            // return view('landing-page.daftar', [
-            //     'title' => "Landing Page - Register"] );
-            // return redirect()->route('home')->with('success', 'Registrasi berhasil! Silakan login.');
-            // } else {
-            //     return view('landing-page.daftar');
             }
 
 
