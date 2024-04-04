@@ -82,7 +82,7 @@
                     </button>
                 </div>
             </div>
-            <div class="kanan" >
+            <div class="kanan">
                 <div class="kananatas  justify-content-between">
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
@@ -165,7 +165,7 @@
                         <textarea id="pesan" class="textarea" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
                         <div class="grubbuton">
                             <button class="batal">Batal</button>
-                            <button class="tambahkan">Tambahkan</button>
+                            <button class="tambahkan" >Tambahkan</button>
                         </div>
 
                     </div>
@@ -193,8 +193,11 @@
         </div>
     </div>
 
+
+
+     <!-- modal izin -->
     <div class="modal" tabindex="-1" id="izin" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="  d-flex justify-content-between align-items-center p-3">
                     <div></div>
@@ -228,9 +231,12 @@
         </div>
     </div>
 
+
+<!-- modal masuk -->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content " style="text-align: center;">
                 <form action="{{ $route ?? null }}" method="POST">
                     <div class="modal-body">
@@ -279,19 +285,150 @@
         </div>
     </div>
 
+
     <script>
         function showmodal() {
             $('#exampleModal').modal('show');
         }
 
-        function showmodalizin() {
-            $('#izin').modal('show');
+
+<!-- modal log Activity -->
+<div class="modal fade" id="modalLogActivity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content " style="text-align: center;">
+                <div class="modal-body">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Log Activity</h1>
+                    <textarea class="textareamodal" id="pesan" name="pesan" rows="6" cols="60" placeholder="Apa yang telah anda kerjakan hari ini" style="background-color: #E9ECEF" ;></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger"onclick="shift()" aria-label="Close" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        function shift() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var timeString = hours + ":" + minutes + ":" + seconds;
+
+            var middle = new Date();
+            middle.setHours(9, 0, 0, 0); // Set jam mulai
+            var selisihMillis = middle - now; // Selisih waktu dalam milidetik
+
+            // Menentukan apakah selisih waktunya negatif
+            var isNegatif = selisihMillis < 0;
+            if (isNegatif) {
+                selisihMillis *= -1; // Mengonversi menjadi positif untuk perhitungan selanjutnya
+            }
+
+            var selisihJam = Math.floor(selisihMillis / (1000 * 60 * 60)); // Konversi ke jam
+            var selisihMenit = Math.floor((selisihMillis % (1000 * 60 * 60)) / (1000 * 60)); // Konversi ke menit
+            var selisihDetik = Math.floor((selisihMillis % (1000 * 60)) / 1000); // Konversi ke detik
+
+            var minus = (isNegatif ? "-" : "") +
+                selisihJam.toString().padStart(2, '0') + ":" +
+                selisihMenit.toString().padStart(2, '0') + ":" +
+                selisihDetik.toString().padStart(2, '0');
+
+            const masukButton = document.querySelector("#masuk");
+            if (masukButton.innerHTML === "Masuk") {
+                document.querySelector('.jammasuk').innerText = timeString;
+                document.querySelector(".toggle-muncul").innerText = minus;
+                document.querySelector(".toggle-muncul").classList.remove("hilang"); // Menghapus kelas 'hilang' untuk menampilkan elemen
+                document.querySelector(".bundar-status1").classList.add("merah-aktif");
+                document.querySelector(".bundar-status1").classList.remove("ori-aktif");
+                document.querySelector(".kurangjam").classList.add("borderijo");
+                document.querySelector(".kurangjam").classList.remove("bordermerah");
+                masukButton.innerHTML = "Istirahat";
+                masukButton.classList.remove("Masuk");
+                masukButton.classList.add("Istirahat");
+            } else if (masukButton.innerHTML === "Istirahat") {
+                document.querySelector('.jammasuk2').innerText = timeString;
+                document.querySelector(".bundar-status2").classList.add("merah-aktif");
+                document.querySelector(".bundar-status2").classList.remove("ori-aktif");
+                masukButton.innerHTML = "Kembali";
+                masukButton.classList.remove("Istirahat");
+                masukButton.classList.add("Kembali");
+            } else if (masukButton.innerHTML === "Kembali") {
+                document.querySelector('.jammasuk3').innerText = timeString;
+                document.querySelector(".bundar-status3").classList.add("merah-aktif");
+                document.querySelector(".bundar-status3").classList.remove("ori-aktif");
+                masukButton.innerHTML = "Pulang";
+                masukButton.classList.remove("Kembali");
+                masukButton.classList.add("Pulang");
+            } else if (masukButton.innerHTML === "Pulang") {
+                document.querySelector('.jammasuk4').innerText = timeString;
+                document.querySelector(".bundar-status4").classList.add("merah-aktif");
+                document.querySelector(".bundar-status4").classList.remove("ori-aktif");
+                masukButton.innerHTML = "Log Activity";
+                masukButton.classList.remove("Pulang");
+                masukButton.classList.remove("btn-istirahat");
+                masukButton.classList.add("Log");
+                document.querySelector(".izin").classList.add("izin-hilang");
+                masukButton.setAttribute("data-bs-target", "#modalLogActivity");
+            } else if (masukButton.innerHTML === "Log Activity") {
+                masukButton.style.background = "#CBD3D6";
+                masukButton.style.color = "#a4a4a4";
+                masukButton.disabled = true;
+            }
+        }
+        function izin() {
+            const izinButton = document.querySelector(".btn.izin");
+            if (izinButton) {
+
+                izinButton.innerHTML = "Telah Izin";
+                izinButton.disabled = true;
+            } else {
+
+            }
+            ubahTombolMasuk();
+        }
+        function ubahTombolMasuk() {
+            const masukButton = document.querySelector("#masuk");
+            if (masukButton) {
+                masukButton.innerHTML = "Izin";
+                masukButton.style.backgroundColor = "#CBD3D6";
+                masukButton.style.color = "#2d2d2d";
+                masukButton.disabled = true;
+            }
         }
 
-        function showmodalLogActivity() {
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var timeString = hours + ":" + minutes + ":" + seconds;
+            document.getElementById('jam').innerText = timeString;
+
+            var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            var day = days[now.getDay()];
+            var date = now.getDate();
+            var month = months[now.getMonth()];
+            var year = now.getFullYear();
+            var dateString = day + ', ' + date + ' ' + month + ' ' + year;
+            document.getElementById('kalender').innerText = dateString;
+        }
+
+        // Panggil updateTime setiap detik
+        setInterval(updateTime, 1000);
+
+        // Panggil updateTime sekali untuk menetapkan waktu awal
+        updateTime()
+        
+         function showmodalLogActivity() {
             $('#logactivity').modal('show');
         }
         
-        </script>
-    </body>
+    </script>
+
+</body>
+
+
 </html>
+
