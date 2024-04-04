@@ -457,13 +457,14 @@ class AdminUnivAfterPaymentController extends Controller
                 $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'Tidak Hadir')
                     ->count();
+                $item['nama_divisi'] = Divisi::where('id', $item->nama_lengkap)->first();
                 return $item;
             });
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
-            return view('adminUniv-afterPayment.mitra.laporanpresensi')
+            return view('adminUniv-afterPayment.mitra.laporanpresensi',)
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }

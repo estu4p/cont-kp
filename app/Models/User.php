@@ -64,6 +64,6 @@ class User extends Authenticatable
     }
     public function namaDivisi()
     {
-        return $this->BelongsTo(Divisi::class);
+        return $this->BelongsTo(Divisi::class, 'divisi_id');
     }
 }
