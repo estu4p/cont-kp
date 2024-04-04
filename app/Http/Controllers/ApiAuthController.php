@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Hash;
 
 class ApiAuthController extends Controller
 {
@@ -15,13 +14,13 @@ class ApiAuthController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $users = User::where('email', $email)->first();
+        $user = User::where('email', $email)->first();
 
-        if ($users && password_verify($password, $users->password)) {
+        if ($user && password_verify($password, $user->password)) {
             // Login berhasil
             // $users->last_login_at = now(); // Tambahkan logika lain yang diperlukan di sini
             // $users->save();
-            return response()->json(['message' => 'Login success', 'user' => $users]);
+            return response()->json(['message' => 'Login success', 'user' => $user]);
         } else {
             // Invalid credentials
             Log::error('Invalid credentials. Input: ' . json_encode($request->all()));
