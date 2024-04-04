@@ -46,7 +46,8 @@ Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
 Route::middleware('user')->group(function () {
 
     Route::get('/presensi', function () {
-        return view('presensi.presensiharian');
+        $title = "Presensi";
+        return view('presensi.presensiharian', compact('title'));
     });
     // Route::post('/loginpage', [LandingPageController::class, 'login']);
     Route::get('/adminbeforepayment', function () {
@@ -862,6 +863,33 @@ Route::get('/', function () {
 });
 
 
+Route::get('/', function () {
+    return view('landing-page.index', ['title' => 'Controlling Magang']);
+});
+
+
+Route::get('/contributorformitra-dashboard', function () {
+    return view('contributorformitra.dashboard');
+});
+Route::get('/contributorformitra-editprofile', function () {
+    return view('contributorformitra.editprofile');
+});
+Route::get('/contributorformitra-devisi', function () {
+    return view('contributorformitra.devisi');
+});
+Route::get('/contributorformitra-devisi-Seeallteams', function () {
+    return view('contributorformitra.devisi-Seeallteams');
+});
+
+Route::get('/contributorformitra-devisi-LihatProfil', function () {
+    return view('contributorformitra.Lihat-Profil-Mahasiswa');
+});
+
+Route::get('/contributorformitra-devisi-teamaktif', function () {
+    return view('contributorformitra.teamaktifanggota');
+});
+
+
 
 
 
@@ -1079,3 +1107,8 @@ Route::get('/RiwayatJangkaWaktu', function () {
 Route::get('/RiwayatPembelian', function () {
     return view('user.AdminUnivAfterPayment.RiwayatPembelian');
 });
+
+
+
+
+

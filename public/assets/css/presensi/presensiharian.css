@@ -72,8 +72,28 @@ border-radius: 20px;
 }
 
 .collapsed {
-    display: none;
+display: none;
 }
+
+.status-shift{
+box-sizing: border-box;
+position: relative;
+width: 135px;
+height: 250px;
+left: 360px;
+top: 10px;
+background: #FFFFFF;
+border: 0.5px solid rgba(0, 0, 0, 0.3);
+border-radius: 0px 0px 8px 8px;
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+}
+.isistatus-shift{
+    margin: 10px;
+}
+
 .collapse-btn{
     border: none;
     background-color: transparent;
@@ -98,6 +118,8 @@ border-radius: 20px;
 .table th {
     text-align: center;
     background-color: #DCDCDC;
+    vertical-align: middle;
+
 }
 
 .table tr td {

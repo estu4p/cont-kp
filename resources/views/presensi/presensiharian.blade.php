@@ -21,17 +21,31 @@
                                 <div>
                                     <div class="tgl-filter">
                                         <i class="kaca-pembesar fa-solid fa-magnifying-glass"></i><input type="date" class="tgl">
-                                        <i class="filter fa-solid fa-filter"></i> Filter <i class="down fas fa-angle-down" class="collapse-btn" onclick="toggleCollapse()"></i>
-                                          <div class="collapsed" id="collapseContent">
-                                            asdasd
+                                        <i class="filter fa-solid fa-filter"></i> Filter <i class="down fas fa-angle-down collapse-btn" onclick="toggleCollapse(this)"></i>
+                                        <div class="collapsed" id="collapseContent">
+                                           <div class="status-shift">
+                                            <div class="isistatus-shift">
+                                                <label>Status</label>
+                                                <br>
+                                                <input type="checkbox"> Hadir
+                                                <br>
+                                                <input type="checkbox"> Izin
+                                                <br>
+                                                <input type="checkbox"> Tidak Hadir
+                                                <br>
+                                                <hr>
+                                                <label>Shift</label>
+                                                <br>
+                                                <input type="checkbox"> Shift Pagi
+                                                <br>
+                                                <input type="checkbox"> Shift Middle
+                                                <br>
+                                                <input type="checkbox"> Shift Siang
+                                            </div>
+                                            </div>
                                           </div>
-
+                                    </div>
                                 </div>
-                                </div>
-
-
-
-
                             </div>
                         </div>
                         <br>
@@ -39,24 +53,24 @@
                         <table class="table" style="font-size: 10px;">
                             <thead style="text-align: center;">
                                 <tr>
-                                    <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" id="#" name="">&nbsp;No</th>
-                                    <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Log Aktivitas</th>
+                                    <th rowspan="2"><input type="checkbox" id="#" name="">&nbsp;No</th>
+                                    <th rowspan="2">Nama</th>
+                                    <th colspan="2">Jam Kerja</th>
+                                    <th colspan="2">Jam Istirahat</th>
+                                    <th colspan="2">Total Jam Kerja</th>
+                                    <th colspan="2">Log Aktivitas</th>
                                     <th rowspan="2" >Status <br>Kehadiran</th>
-                                    <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
+                                    <th rowspan="2">Kebaikan</th>
                                 </tr>
                                 <tr>
                                     <th>Masuk</th>
-                                    <th style="border-left: 1px solid black;">Pulang</th>
+                                    <th>Pulang</th>
                                     <th>Mulai</th>
-                                    <th style="border-left: 1px solid black;">Selesai</th>
+                                    <th>Selesai</th>
                                     <th>Total Jam</th>
-                                    <th style="border-left: 1px solid black;">(-)(+)</th>
+                                    <th>(-)(+)</th>
                                     <th class="bates">Log Aktivitas</th>
-                                    <th style="border-left: 1px solid black;">Aksi</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                               <tbody>
@@ -225,11 +239,20 @@
 </div>
 
 <script>
-    function toggleCollapse() {
-      var content = document.getElementById('collapseContent');
-      content.classList.toggle('collapsed');
+    function toggleCollapse(icon) {
+        var content = document.getElementById('collapseContent');
+        content.classList.toggle('collapsed');
+
+        // Mengubah ikon
+        if (content.classList.contains('collapsed')) {
+            icon.classList.remove('fa-angle-up');
+            icon.classList.add('fa-angle-down');
+        } else {
+            icon.classList.remove('fa-angle-down');
+            icon.classList.add('fa-angle-up');
+        }
     }
-  </script>
+</script>
 
 
 
