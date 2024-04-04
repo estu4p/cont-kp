@@ -57,8 +57,9 @@ body {
     align-items: center;
     background: #404040;
     color: white;
-    height: 100%;
+    height: 80%;
     padding: 0 10px;
+    font-size: 14px;
 
 
 }
@@ -74,15 +75,15 @@ body {
 }
 .ikon{
     color: white;
-    font-size: 30px;
+    font-size: 16px;
 }
 
 .bawahan {
     padding-left: 10%;
-    height: 120%;
+    height: 100%;
     box-sizing: border-box;
     border: 1px solid #000000;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
     display: flex;
     justify-content: left;
     align-items: center;

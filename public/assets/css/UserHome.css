@@ -136,7 +136,7 @@
     font-weight: bold;
 }
 .kebaikan{
-    width: 47%;
+    width: 49%;
     height: 90%;
     /* border-color: #626F78; */
     padding-left: 30px;
@@ -144,7 +144,7 @@
     margin-top: 20px;
 }
 .perhatian{
-    width: 47%;
+    width: 48%;
     height: 100%;
 }
 .sudah{
@@ -280,4 +280,8 @@
 .textarea{
     height: 40%;
     font-size: 15px;
+}
+.textareamodal{
+    height: 300px;
+    margin-top: 20px;
 }

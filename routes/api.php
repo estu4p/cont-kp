@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Http\Request;
+use BaconQrCode\Encoder\QrCode;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BEController\MhsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\BEController\SchoolControlller;
@@ -35,7 +37,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
+    Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
+Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
+Route::get('data-mitra', [DataMitraController::class, 'index']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard']);
+});
 Route::post('/loginn', [ApiAuthController::class, 'login']);
 
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
@@ -58,7 +71,7 @@ Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesa
 Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas/{id}', [HomeMitraController::class, 'catatLogAktivitas']);
 Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin']);
-Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'generateQRCode']);
 Route::get('/detailGantiJam/{id}', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
@@ -121,12 +134,3 @@ Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
 Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
 Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
 Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
-Route::get('/laporan-presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
-
-
-Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
-Route::get('/laporan-presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
-Route::get('/laporan-presensi-detail/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);

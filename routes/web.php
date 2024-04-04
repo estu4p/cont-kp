@@ -40,8 +40,7 @@ Route::post('/user/register', [RegisterController::class, 'register'])->name('re
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
-Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+
 
 Route::middleware('user')->group(function () {
 
@@ -171,7 +170,9 @@ Route::get('/user/barcode', function () {
 
 //user
 Route::get('/pemagang/home', function () {
-    return view('pemagang.home', ['title' => "Home"]);
+    return view('pemagang.home', [
+        'title' => "Home"
+    ]);
 });
 Route::get('/user', function () {
     return view('user.home', [
@@ -196,9 +197,7 @@ Route::get('/pemagang/home', function () {
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
-Route::get('/pemagang/detail', function () {
-    return view('pemagang.gantiJam', ['title' => "MyQR"]);
-});
+Route::get('/pemagang/detail/{nama_lengkap}', [HomeMitraController::class, 'ijin']);
 
 
 //contributor for univ
@@ -453,6 +452,7 @@ Route::get('/datasiswa', function () {
 Route::get('/profilsiswa', function () {
     return view('adminUniv-afterPayment.profilSiswa');
 });
+Route::get('/profilsiswa/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam'])->name('adminUniv.profilSiswa');
 
 
 
@@ -487,9 +487,22 @@ Route::get('/user/barcode', function () {
 
 //user
 Route::get('/pemagang/home', function () {
-    return view('pemagang.home', ['title' => "Home"]);
+    return view('pemagang.home', [
+        'title' => "Home",
+        'button' => "Masuk",
+        'route' => '/jamMasuk'
+    ]);
 });
-
+// Home Mitra User
+Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
+Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
+Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
+Route::post('/kebaikan', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
+Route::post('/catatLogAktivity', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
