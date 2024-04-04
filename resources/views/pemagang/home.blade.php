@@ -56,15 +56,15 @@
             <div class="shif">
                 <div class="judulshif toggle-shift">Shift Middle</div>
                 <div style="padding-bottom: 10px">
-                    <button class="masuk" id="masuk" type="button" onclick="showmodal()" data-bs-toggle="modal" data-bs-target="#exampleModal">Masuk</button>
+                    <button class="masuk" id="masuk" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Masuk</button>
                 </div>
                 <div>
-                    <button type="button" class="btn izin" data-bs-toggle="modal" data-bs-target="#izin" onclick="showmodalizin()">
+                    <button type="button" class="btn izin" data-bs-toggle="modal" data-bs-target="#izin" >
                         Izin
                     </button>
                 </div>
             </div>
-            <div class="kanan" >
+            <div class="kanan">
                 <div class="kananatas  justify-content-between">
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
@@ -109,7 +109,7 @@
                                 <!-- <p class="text-danger hilang toggle-muncul4 m-0" style="font-size:60%;">-00.30.01</p> -->
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="kananbawah">
@@ -118,7 +118,7 @@
                         <textarea id="pesan" class="textarea" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
                         <div class="grubbuton">
                             <button class="batal">Batal</button>
-                            <button class="tambahkan">Tambahkan</button>
+                            <button class="tambahkan" >Tambahkan</button>
                         </div>
                     </div>
                     <div class="perhatian">
@@ -141,8 +141,11 @@
         </div>
     </div>
 
+
+
+     <!-- modal izin -->
     <div class="modal" tabindex="-1" id="izin" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="  d-flex justify-content-between align-items-center p-3">
@@ -172,37 +175,45 @@
     </div>
 
 
-
+<!-- modal masuk -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content " style="text-align: center;">
                 <div class="modal-body">
                     <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Keterangan</h1>
-                    <textarea id="pesan" name="pesan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)" style="background-color: #E9ECEF" ;></textarea>
-                    <div class="bawahmodal">
-                        <button type="button" class="btn btn-danger submitmodal" data-bs-dismiss="modal" onclick="shift()" aria-label="Close">Submit</button>
+                    <textarea class="textareamodal" id="pesan" name="pesan" rows="6" cols="60" placeholder="Tuliskan keterengan (opsional)" style="background-color: #E9ECEF" ;></textarea>
+                    <div class="modal-footer">
+                       
+                        <button type="button" class="btn btn-danger"onclick="shift()" aria-label="Close" data-bs-dismiss="modal">Submit</button>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+<!-- modal log Activity -->
+<div class="modal fade" id="modalLogActivity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content " style="text-align: center;">
+                <div class="modal-body">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Log Activity</h1>
+                    <textarea class="textareamodal" id="pesan" name="pesan" rows="6" cols="60" placeholder="Apa yang telah anda kerjakan hari ini" style="background-color: #E9ECEF" ;></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger"onclick="shift()" aria-label="Close" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function showmodal() {
-            $('#exampleModal').modal('show');
-        }
-
-        function showmodalizin() {
-            $('#izin').modal('show');
-        }
-
+        
         function shift() {
             var now = new Date();
             var hours = now.getHours().toString().padStart(2, '0');
             var minutes = now.getMinutes().toString().padStart(2, '0');
             var seconds = now.getSeconds().toString().padStart(2, '0');
             var timeString = hours + ":" + minutes + ":" + seconds;
-
 
             var middle = new Date();
             middle.setHours(9, 0, 0, 0); // Set jam mulai
@@ -258,29 +269,24 @@
                 masukButton.classList.remove("btn-istirahat");
                 masukButton.classList.add("Log");
                 document.querySelector(".izin").classList.add("izin-hilang");
+                masukButton.setAttribute("data-bs-target", "#modalLogActivity");
             } else if (masukButton.innerHTML === "Log Activity") {
                 masukButton.style.background = "#CBD3D6";
                 masukButton.style.color = "#a4a4a4";
                 masukButton.disabled = true;
-
-
             }
         }
-
         function izin() {
             const izinButton = document.querySelector(".btn.izin");
             if (izinButton) {
 
                 izinButton.innerHTML = "Telah Izin";
                 izinButton.disabled = true;
-                
-
-            } else{
+            } else {
 
             }
             ubahTombolMasuk();
         }
-
         function ubahTombolMasuk() {
             const masukButton = document.querySelector("#masuk");
             if (masukButton) {
@@ -290,8 +296,6 @@
                 masukButton.disabled = true;
             }
         }
-
-
 
         function updateTime() {
             var now = new Date();

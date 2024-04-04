@@ -47,7 +47,7 @@
     </div>
     <div class="wadah">
         <div style="display: flex; align-items: center; justify-content: space-between;  ">
-            <a href="/pemagang/home" style="color: black;" >
+            <a href="/pemagang/home" style="color: black;">
                 <i class="fa-solid fa-chevron-left" style="font-size: 30px;"></i>
             </a>
             <div class="tittle-container">
@@ -55,55 +55,57 @@
             </div>
             <div class=""></div>
         </div>
-        <table class="table table-striped tabel1">
-            <thead>
-                <tr class="tangah">
-                    <th scope="col">No</th>
-                    <th scope="col">Hari</th>
-                    <th scope="col">Keterangan Izin</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table align-middle">
-                    <th  class="tangah" class="tangah">1</th>
-                    <td class="tes">Selasa 31-10-2023</td>
-                    <td class="fixed-width">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde consectetur eaque quo eius expedita, labore accusamus voluptatibus iste, non, dolor optio qui pariatur voluptates natus earum debitis dolorum alias totam.</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="tangah">2</th>
-                    <td>Senin 30-10-2023</td>
-                    <td class="fixed-width">Push Rank sampai Mythical Immortal</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="tangah">3</th>
-                    <td>Senin 5-10-2023</td>
-                    <td class="fixed-width">Nolongin nenek nenek nyebrang biar mak bangga</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="tangah">4</th>
-                    <td>Senin 17-10-2023</td>
-                    <td class="fixed-width">Begadang</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="tangah">4</th>
-                    <td>Senin 30-10-2023</td>
-                    <td class="fixed-width">Gak Dibangunin Temen Kos</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped tabel1">
+                <thead>
+                    <tr class="tangah">
+                        <th scope="col">No</th>
+                        <th scope="col">Hari</th>
+                        <th scope="col">Keterangan Izin</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table align-middle">
+                        <th class="tangah" class="tangah">1</th>
+                        <td class="tes">Selasa 31-10-2023</td>
+                        <td class="fixed-width">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde consectetur eaque quo eius expedita, labore accusamus voluptatibus iste, non, dolor optio qui pariatur voluptates natus earum debitis dolorum alias totam.</td>
+                        <td style="color :red;" class="tangah">Ganti jam</td>
+                        <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="tangah">2</th>
+                        <td>Senin 30-10-2023</td>
+                        <td class="fixed-width">Push Rank sampai Mythical Immortal</td>
+                        <td style="color :red;" class="tangah">Ganti jam</td>
+                        <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="tangah">3</th>
+                        <td>Senin 5-10-2023</td>
+                        <td class="fixed-width">Nolongin nenek nenek nyebrang biar mak bangga</td>
+                        <td style="color :red;" class="tangah">Ganti jam</td>
+                        <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="tangah">4</th>
+                        <td>Senin 17-10-2023</td>
+                        <td class="fixed-width">Begadang</td>
+                        <td style="color :red;" class="tangah">Ganti jam</td>
+                        <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="tangah">4</th>
+                        <td>Senin 30-10-2023</td>
+                        <td class="fixed-width">Gak Dibangunin Temen Kos</td>
+                        <td style="color :red;" class="tangah">Ganti jam</td>
+                        <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
