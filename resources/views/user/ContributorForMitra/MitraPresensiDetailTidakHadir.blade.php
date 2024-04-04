@@ -72,7 +72,7 @@
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisaFormatted }}</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
