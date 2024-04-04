@@ -71,7 +71,7 @@ Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesa
 Route::post('/totalJamKerja/{id}', [HomeMitraController::class, 'totalJamKerja']);
 Route::post('/catatLogAktivitas/{id}', [HomeMitraController::class, 'catatLogAktivitas']);
 Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin']);
-Route::post('/barcode/{id}', [HomeMitraController::class, 'barcode']);
+Route::post('/barcode/{id}', [HomeMitraController::class, 'generateQRCode']);
 Route::get('/detailGantiJam/{id}', [HomeMitraController::class, 'detailGantiJam']);
 
 // admin univ after payment
