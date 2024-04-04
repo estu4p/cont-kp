@@ -49,7 +49,6 @@ Route::middleware('user')->group(function () {
         $title = "Presensi";
         return view('presensi.presensiharian', compact('title'));
     });
-    // Route::post('/loginpage', [LandingPageController::class, 'login']);
     Route::get('/adminbeforepayment', function () {
         return view('adminbeforepayment');
     });
@@ -65,20 +64,19 @@ Route::get('/dashboard', function () {
 // -Daftar Sekolah-
 Route::get('/register', [LandingPageController::class, 'index'])->name('register-landingpage');
 Route::post('/register', [LandingPageController::class, 'lpdaftar'])->name('register-landingpage');
+
 // -Login-
 Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
-Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
-
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
 });
 
+Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
 
-Route::get('/jumlah-mahasiswa', [MahasiswaController::class, 'index']);
 
 Route::get('/dashboard-admin', function () {
     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
@@ -109,7 +107,6 @@ Route::get('/invoice', function () {
 Route::get('/slip', function () {
     return view('checkout.slip-pembayaran', ['title' => "Slip Pembayaran"]);
 });
-// Route::post('/loginpage', [LandingPageController::class, 'login']);
 
 Route::get('/adminbeforepayment', function () {
     return view('adminbeforepayment');
@@ -128,11 +125,6 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 // Route::get('/contributingforuniv', function () {
 //     return view('template.contributingforunivschool.penilaianmahasiswa');
 // });
-
-Route::get('/contributingforunivlihat', function () {
-    return view('template.contributingforunivschool.lihat');
-});
-
 
 //user
 Route::get('/user/login', function () {
