@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sekolah extends Model
 {
-    use HasFactory;
-    protected $fillable = ['nama_sekolah', 'nama_lengkap',  'email', 'no_hp', 'password'];
-    protected $table = 'sekolah';
+    use HasApiTokens, HasFactory, Notifiable;
 
-    public function namaSekolah()
-    {
-        return $this->belongsTo(User::class, 'nama_sekolah');
-    }
+    protected $fillable = ['nama_lengkap', 'sekolah', 'email', 'no_hp', 'password'];
+    protected $table = 'sekolah';
+    protected $hidden = [
+        'password'
+    ];
+
+    protected $casts = [
+        'password' => 'hashed',
+    ];
 }
