@@ -41,6 +41,7 @@ Route::post('/loginn', [ApiAuthController::class, 'login']);
 Route::post('/daftar', [LandingPageController::class, 'lpdaftar']);
 Route::post('/loginpage', [LandingPageController::class, 'login'])->name('login');
 Route::post('/ChekoutPaket', [LandingPageController::class, 'ChekoutPaket'])->name('paket');
+
 Route::post('/user/login', [LoginController::class, 'validateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/register/showRegisterForm', [RegisterController::class, 'showRegisterForm']);
