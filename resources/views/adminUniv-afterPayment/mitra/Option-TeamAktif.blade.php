@@ -50,18 +50,19 @@
                 @elseif ($item->id == 14)
                     <i class="icon fa-regular fa-thumbs-up"></i>
                 @elseif ($item->id == 15)
-                    <img src="assets/images/emojione-monotone_selfie.png" class="icon" style="width:70px;height:70px; ">
+                    <img src="{{ asset('assets/images/emojione-monotone_selfie.png') }}" class="icon"
+                        style="width:70px;height:70px; ">
                 @elseif ($item->id == 16)
                     <i class="icon fa-regular fa-pen-to-square"></i>
                 @elseif ($item->id == 17)
-                    <img src="assets/images/presenter.png" class="icon" style="width:70px;height:70px; ">
+                    <img src="{{ asset('assets/images/presenter.png') }} " class="icon" style="width:70px;height:70px; ">
                 @elseif ($item->id == 18)
-                    <img src="assets/images/las.png" class="icon" style="width:70px;height:70px; ">
+                    <img src="{{ asset('assets/images/las.png') }} " class="icon" style="width:70px;height:70px; ">
                 @else
                     <i class="icon fa-solid fa-user"></i>
                 @endif
 
-                <a href="OptionTeamAktifKlikUiUx" style="text-decoration: none">
+                <a href="{{ route('adminUniv.option.teamAktif', $item->id) }}" style="text-decoration: none">
                     {{ $item->nama_divisi }}<br>
                     {{ $item->mahasiswa_count }} Anggota
                 </a>
