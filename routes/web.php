@@ -133,7 +133,6 @@ Route::get('/contributingforunivlihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
 
-
 //user
 Route::get('/user/login', function () {
     return view('user.login', [
