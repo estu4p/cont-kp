@@ -20,20 +20,21 @@ class LandingPageController extends Controller
     public function index()
     {
         return view('landing-page.daftar', [
-            'title' => "Landing Page - Register"] );
+            'title' => "Landing Page - Register"
+        ]);
     }
     public function lpdaftar(Request $request)
     {
-        $user= new Sekolah();
-        $user->nama_lengkap= $request->input('nama_lengkap');
-        $user->nama_sekolah= $request->input('nama_sekolah');
-        $user->no_hp=$request->input('no_hp');
-        $user->email=$request->input('email');
-        $user->password=Hash::make ($request->input('password'));
+        $user = new Sekolah();
+        $user->nama_lengkap = $request->input('nama_lengkap');
+        $user->nama_sekolah = $request->input('nama_sekolah');
+        $user->no_hp = $request->input('no_hp');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json([ 'pesan'=>'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
+            return response()->json(['pesan' => 'Anda Berhasil Melakukan Pendaftaran', 'data' => $user]);
         } else {
              return redirect('/loginpage');
             }
@@ -67,9 +68,9 @@ class LandingPageController extends Controller
     public function ChekoutPaket(Request $request)
     {
         $request->validate([
-            'paket'=> 'required|in:Bronze,Silver,Gold,Premium',
+            'paket' => 'required|in:Bronze,Silver,Gold,Premium',
             'metode_bayar' => 'required|string',
-            'kota'=> 'required|string'
+            'kota' => 'required|string'
         ]);
 
         $transaksi = new paket([
@@ -79,10 +80,11 @@ class LandingPageController extends Controller
         ]);
 
         $transaksi->save();
-            return response()->json(['message' => 'Checkout berhasil',
-                'Jenis Paket' => $request->paket,
-                'Metode Bayar' => $request->metode_bayar,
-                'Kota' => $request->kota,
-            ]);
+        return response()->json([
+            'message' => 'Checkout berhasil',
+            'Jenis Paket' => $request->paket,
+            'Metode Bayar' => $request->metode_bayar,
+            'Kota' => $request->kota,
+        ]);
     }
 }
