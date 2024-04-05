@@ -658,7 +658,7 @@ class ContributorForMitra extends Controller
     }
 
     public function show_mhs() {
-        $mahasiswa = User::with('divisi')->get();
+        $mahasiswa = User::with('divisi')->where('role_id', 3)->get();
         return view('contributorformitra.penilaian-mahasiswa', compact('mahasiswa'));
     }
 }
