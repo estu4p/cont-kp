@@ -562,9 +562,7 @@ Route::get('/laporanpresensi', function () {
 });
 
 
-Route::get('/cont-penilaian', function () {
-    return view('user.ContributorForMitra.laporanpresensi');
-});
+Route::get('/cont/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 
 
