@@ -588,7 +588,6 @@ Route::get('/laporanpresensi', function () {
 });
 
 
-Route::get('/cont/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 
 
@@ -853,3 +852,8 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
+Route::get('/contributorformitra-penilaian', function () {
+    return view('contributorformitra.teamaktifanggota');
+});
+
+Route::get('/contributorformitra-penilaian-mahasiswa', [ContributorForMitra::class, 'show_mhs']);
