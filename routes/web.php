@@ -446,15 +446,15 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControll
 
 Route::get('/AdminUniv/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
-Route::get('/AdminUniv/Option-TeamAktif-pengaturanDivisi', function () {
-    return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi');
-});
+Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
+Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
+// Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
+Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'destroyDivisi'])->name('adminUniv.destroyDivisi');
+
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
-Route::get('/OptionTeamAktifKlikUiUx', function () {
-    return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx');
-});
+Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
 
 
 
@@ -588,7 +588,7 @@ Route::get('/laporanpresensi', function () {
 });
 
 
-
+Route::get('/cont/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 
 
@@ -747,7 +747,7 @@ Route::get('/admin/setting/user', function () {
         ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
     ];
 
-      $mhs = [
+    $mhs = [
         ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
         ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
         ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
@@ -853,7 +853,3 @@ Route::get('/contributorformitra-devisi-LihatProfil', function () {
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
 });
-
-
-
-
