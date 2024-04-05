@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jurusan')->nullable();
             $table->string('email')->nullable();
             $table->string('username')->unique()->nullable();
-            $table->string('no_hp');
+            $table->string('no_hp')->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
             $table->string('alamat')->nullable();

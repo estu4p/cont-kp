@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/{{ $divisi->nama_divisi }}/POLINES/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
+                                <p style="margin: 10px;">NIP : MJ/{{ $divisi->nama_divisi }}/{{$sekolah->sekolah}}/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
@@ -72,7 +72,7 @@
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisaFormatted }}</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
                                 </div>
                             </div>
                             <div class="masa col-3">

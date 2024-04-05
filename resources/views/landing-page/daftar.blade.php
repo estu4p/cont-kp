@@ -4,11 +4,12 @@
     <div class="register text-capitalize">
         <h2 class="text-center fw-bold" style="color: #A61C1CE5;">daftarkan kampus/sekolah anda</h2>
         <div class="box-form mt-5">
-            <form class="fw-medium">
+            <form action="{{ route('register-landingpage') }}" method="POST" class="fw-medium">
+                @csrf
                 <label for="nama">nama lengkap<span class="text-danger">*</span></label>
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 16px;" class="label-img"><img src="assets/images/icon/nama.png" /></div>
-                    <input type="text" name="nama"
+                    <input type="text" name="nama_lengkap"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
                         placeholder="Masukkan Nama">
                 </div>
@@ -17,7 +18,7 @@
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 16px 12px 16px 12px;" class="label-img"><img
                             src="assets/images/icon/sekolah.png" /></div>
-                    <input type="text" name="sekolah"
+                    <input type="text" name="nama_sekolah"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
                         placeholder="Masukkan Sekolah/Perguruan Tinggi">
                 </div>
@@ -35,7 +36,7 @@
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 16px 18px 16px 18px;" class="label-img"><img
                             src="assets/images/icon/telp.png" /></div>
-                    <input type="number" name="telepon"
+                    <input type="number" name="no_hp"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
                         placeholder="Masukkan No Handphone">
                 </div>
