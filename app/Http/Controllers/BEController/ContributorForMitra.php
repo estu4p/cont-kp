@@ -656,4 +656,9 @@ class ContributorForMitra extends Controller
         ]);
         return redirect('mitra-presensi-barcode/pulang')->with('success', 'silahkan masuk');
     }
+
+    public function show_mhs() {
+        $mahasiswa = User::with('divisi')->get();
+        return view('contributorformitra.penilaian-mahasiswa', compact('mahasiswa'));
+    }
 }
