@@ -94,14 +94,31 @@ Route::post('/loginpage', [LandingPageController::class, 'loginpage'])->name('lo
 // Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 // Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 
-//as contributor
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+//login as contributor univ 
+Route::get('/logincontributor', [AuthController::class, 'index'])->name('login');
+Route::post('/logincontributor', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
 });
+
+//login contributor mitra
 Route::get('/login', function () {
     return view('login');
 });
+//login user
+Route::get('/user/login', function () {
+    return view('user.login', [
+        'title' => "Login",
+        'email' => "raihan@gmail.com"
+    ]);
+});
+//login afterpayment
+Route::get('/AdminUniv-Login', function () {
+    return view('adminUniv-afterPayment.AdminUniv-Login');
+})->name('login.admin');
+Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+
+
 
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
 
@@ -154,12 +171,7 @@ Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 // });
 
 //user
-Route::get('/user/login', function () {
-    return view('user.login', [
-        'title' => "Login",
-        'email' => "raihan@gmail.com"
-    ]);
-});
+
 Route::get('/user/register', function () {
     return view('user.register', ['title' => "Register"]);
 });
@@ -409,10 +421,6 @@ Route::get('/AdminUniv-dashboardBeforePayment', function () {
 });
 
 // adminUniv-afterPayment
-Route::get('/AdminUniv-Login', function () {
-    return view('adminUniv-afterPayment.AdminUniv-Login');
-})->name('login.admin');
-Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
 
 Route::get('/AdminUniv-ResetPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-ResetPassword');
