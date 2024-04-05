@@ -37,14 +37,13 @@ class LandingPageController extends Controller
         } else {
              return redirect('/loginpage');
             }
-
-
     }
-    // public function index()
-    // {
-    //     return view("landing-page.login");
-    // }
-    public function login(Request $request)
+    public function viewlogin()
+    {
+        $title = 'login';
+        return view("landing-page.login")->with('title', $title);
+    }
+    public function loginpage(Request $request)
     {
         $request->validate([
             'email' => 'email|required',
@@ -54,19 +53,16 @@ class LandingPageController extends Controller
         $pass = $request->input('password');
 
         $useremail = Sekolah::where('email', $email)->first();
-        // dd(Hash::make($pass));
-        // $userpass = Daftar::where('password', $pass)->first();
         if (!$useremail && Hash::check( $pass, $useremail->password)) {
              return back()->withErrors(['email' => 'Email atau password salah']);
         }
         auth()->login($useremail);
+        // return response()->json([
+        //     'pesan' => 'Anda Berhasil login',
+        //     'data' => $useremail
+        // ]);
+            return redirect('/AdminUniv-dashboardBeforePayment')->with('success', 'login success');
 
-        // Redirect ke halaman yang sesuai
-        // return redirect()->intended('/dashboard');
-        return response()->json([
-            'pesan' => 'Anda Berhasil login',
-            'data' => $useremail
-        ]);
     }
     public function ChekoutPaket(Request $request)
     {
