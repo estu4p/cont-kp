@@ -479,7 +479,7 @@ body {
         justify-content: space-between;
         flex-direction: row-reverse; /* Reverse the order of buttons */
         z-index: 999;
-    }    
+    }
     .modal-content {
         width: 90%;
     }
