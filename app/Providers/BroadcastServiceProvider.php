@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
+use SimpleSoftwareIO\QrCode\QrCodeServiceProvider;
 
 class BroadcastServiceProvider extends ServiceProvider
 {

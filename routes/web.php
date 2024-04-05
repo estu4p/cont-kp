@@ -88,8 +88,11 @@ Route::get('/register', [LandingPageController::class, 'index'])->name('register
 Route::post('/register', [LandingPageController::class, 'lpdaftar'])->name('register-landingpage');
 
 // -Login-
-Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
-Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
+Route::get('/loginpage', [LandingPageController::class, 'viewlogin'])->name('login');
+Route::post('/loginpage', [LandingPageController::class, 'loginpage'])->name('login');
+
+// Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
+// Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {

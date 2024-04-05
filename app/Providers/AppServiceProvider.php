@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use SimpleSoftwareIO\QrCode\QrCodeServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
         $validation = ['email' => $request->email, 'password' => $request->password];
         if (Auth::attempt($validation)) {
             return redirect('/AdminUniv-dashboardBeforePayment')->with('success', 'login success');
