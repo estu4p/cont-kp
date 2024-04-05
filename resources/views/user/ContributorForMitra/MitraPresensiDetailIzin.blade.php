@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/{{$divisi->nama_divisi}}/{{$sekolah->sekolah}}/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
+                                <p style="margin: 10px;">NIP : MJ/{{$divisi->nama_divisi}}/{{$sekolah->sekolah}}/{{ $namaBulan['bulan_tahun_masuk'] }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
@@ -44,14 +44,14 @@
                                 <hr class="m-0 mb-2">
                                 <div class="row m-0 d-flex flex-row justify-content-between">
                                     <b class="fz8 col-7 p-0" style="white-space: nowrap;"> Jam Default Masuk</b>
-                                    <p class="fz7 col-5 d-flex justify-content-end p-0">06:30:00</p>
+                                    <p class="fz7 col-5 d-flex justify-content-end p-0">{{ $jam_default_masuk }}</p>
 
                                 </div>
                                 <hr class="m-0 mb-2
                                 ">
                                 <div class="row m-0 d-flex  flex-row justify-content-between">
                                     <b class="fz8 col-8  p-0" style="white-space: nowrap">Jam Default Pulang</b>
-                                    <p class="fz7 col-4 d-flex justify-content-end p-0">21:00:00</p>
+                                    <p class="fz7 col-4 d-flex justify-content-end p-0">{{ $jam_default_pulang }}</p>
 
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2  align-items-center flex-row justify-content-between">
                                     <b class="fz7">sisa</b>
-                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }}</p>
+                                    <p class="sisa fz6 my-auto  px-1 py-0">{{ $sisa }} jam</p>
                                 </div>
                             </div>
                             <div class="masa col-3">
@@ -86,15 +86,14 @@
                                         <div class="d-flex flex-row p-0 col-6 justify-content-between">
                                             <b class="tg-0pky mx-0 fz6 ">Masuk</b>
                                             <span class=" py-0 px-1 fz6 mx-1"
-                                                style="color:#FFF;background-color:#000 ; border-radius: 8px;">0 x</span>
+                                                style="color:#FFF;background-color:#000 ; border-radius: 8px;">{{ $total_terlambat_masuk }} x</span>
 
                                         </div>
                                         <div
                                             class="d-flex col-6 flex-row flex-row justify-content-between p-0 align-items-center">
                                             <b class="tg-0lax fz6">pulang</b>
                                             <span class=" py-0 px-1 fz6 "
-                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">0
-                                                x</span>
+                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">{{ $total_terlambat_pulang }} x</span>
                                         </div>
 
                                     </div>
@@ -104,15 +103,13 @@
                                         <div class="d-flex flex-row p-0 col-6 justify-content-between">
                                             <b class="tg-0lax mx-0 fz6 mx-0">Istirahat keluar</b>
                                             <span class=" py-0 px-1 fz6 mx-1"
-                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">0
-                                                x</span>
+                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">{{ $total_terlambat_istirahat_keluar }} x</span>
                                         </div>
                                         <div
                                             class="d-flex col-6 flex-row flex-row justify-content-between p-0 \align-items-center">
                                             <b class="tg-0lax mx-0 fz6 mx-0">istirahat kembali</b>
                                             <span class=" py-0 px-1 fz6 "
-                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">0
-                                                x</span>
+                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">{{ $total_terlambat_istirahat_kembali }} x</span>
                                         </div>
                                     </div>
                                     <hr class="m-0">
@@ -122,15 +119,13 @@
                                         <div class="d-flex flex-row p-0 col-6 justify-content-between"><b
                                                 class="tg-0lax mx-0 fz6 mx-0">Ijin keluar</b>
                                             <span class=" py-0 px-1 fz6 mx-1"
-                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">0
-                                                x</span>
+                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">{{ $total_terlambat_ijin_keluar }} x</span>
                                         </div>
                                         <div
                                             class="d-flex col-6 flex-row flex-row justify-content-between p-0 align-items-center">
                                             <b class="tg-0lax mx-0 fz6 mx-0">ijin kembali</b>
                                             <span class=" py-0 px-1 fz6 "
-                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">0
-                                                x</span>
+                                                style="color:#FFF;background-color:#333 ; border-radius: 8px;">{{ $total_terlambat_ijin_kembali }} x</span>
                                         </div>
                                     </div>
 
