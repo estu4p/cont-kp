@@ -28,8 +28,12 @@
             <div class="d-flex flex-column" style="background-color: #E9E9E9; border-radius: 12px; padding: 40px;">
                 @foreach ($quotes as $quote)
                     <div class="d-flex justify-content-between border-0 border-black border-bottom p-3">
-                        <p class="m-0" style="font-size: 18px;">{{ $quote['quotes'] }}</p>
-                        <button class="border-0 bg-transparent" onclick="showAlert()">
+                        <p class="m-0" style="font-size: 18px;">{{ $quote->quote }}</p>
+                        <form id="formDelete" action="" method="POST" style="display: none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        <button class="border-0 bg-transparent" onclick="showAlert('{{ $quote->id }}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-x-lg" viewBox="0 0 16 16">
                                 <path
@@ -40,12 +44,13 @@
                 @endforeach
             </div>
             <div class="my-4">
-                <form>
+                <form action="{{ route('admin-setting.quotes-store') }}" method="POST">
+                    @csrf
                     <input type="text" name="quotes" id="addQuotes" placeholder="Tambahkan Quotes" class="w-100 p-3 rounded"
                         style="background-color: #E9E9E9; border: 0.5px solid #00000050;">
                     <div class="d-flex w-50 mt-3 float-end mb-5">
-                        <button class="border-0 bg-transparent w-50" style="margin-left: auto; padding: 8px;">Batal</button>
-                        <button class="w-50 btn btn-danger" onclick="successAlert()">Tambahkan</button>
+                        <button type="reset" class="border-0 bg-transparent w-50" style="margin-left: auto; padding: 8px;">Batal</button>
+                        <button type="submit" class="w-50 btn btn-danger">Tambahkan</button>
                     </div>
                 </form>
             </div>
@@ -64,12 +69,31 @@
         </div>
     </div>
 
+    @if (session('success'))
+        <script>
+            successMessage = "{{ session('success') }}";
+            swal(successMessage, {
+                icon: "success",
+            });
+        </script>
+    @elseif (session('error'))
+        <script>
+            errorMessage = "{{ session('error') }}";
+            swal({
+                title: "Data Gagal Diperbaharui!",
+                text: errorMessage,
+                icon: "error",
+                button: "OK!",
+                });
+        </script>
+    @endif
+
     <script>
         function clearInput() {
             document.getElementById('addQuotes').value = '';
         }
 
-        function showAlert() {
+        function showAlert(id) {
             swal({
                     title: "Apakah Anda yakin ingin menghapus quotes?",
                     text: "Data yang dihapus tidak dapat dikembalikan!",
@@ -79,9 +103,9 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Data berhasil dihapus!", {
-                            icon: "success",
-                        });
+                        var formDelete = document.getElementById('formDelete');
+                        formDelete.setAttribute('action', '/admin/setting/quotes/delete/' + id);
+                        formDelete.submit();
                     } else {
                         swal("Data tidak jadi dihapus.");
                     }
