@@ -5,12 +5,26 @@
     display: none;
 }
 .menu-navbar,
+.nav-mobile,
+.list-mobile {
+    display: none;
+}
+.menu-navbar,
 .menu-reg {
+    padding: 10px 20px;
+    display: inline-block;
+    position: relative;
     padding: 10px 20px;
     display: inline-block;
     position: relative;
     text-decoration: none;
 }
+
+.menu-navbar {
+    color: #000;
+}
+
+.menu-reg {
 
 .menu-navbar {
     color: #000;
@@ -32,11 +46,31 @@
     transition: background-color 0.3s;
     z-index: -1;
 }
+
+.menu-navbar:before,
+.menu-reg:before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    z-index: -1;
+}
+.menu-navbar:hover:before {
+    background-color: #a61c1c;
 .menu-navbar:hover:before {
     background-color: #a61c1c;
 }
 .menu-navbar:hover {
     color: #ffffff;
+}
+.menu-reg:hover {
+    color: #a61c1c;
+    border: 2px solid #a61c1c;
+    border-radius: 8px;
 }
 .menu-reg:hover {
     color: #a61c1c;
@@ -73,9 +107,18 @@
     color: white;
     width: 100%;
     max-width: 584px;
+    width: 100%;
+    max-width: 584px;
     height: 128px;
     text-align: center;
     padding: 24px;
+    display: flex; /* Menjadikan konten menjadi flexbox */
+    justify-content: center; /* Memusatkan konten secara horizontal */
+}
+.card {
+    border-radius: 16px;
+    width: 22rem;
+    margin: 0 auto; /* Untuk membuat card berada di tengah */
     display: flex; /* Menjadikan konten menjadi flexbox */
     justify-content: center; /* Memusatkan konten secara horizontal */
 }
@@ -151,6 +194,9 @@
     transform: translateX(-50%);
 }
 .invoice {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 30%;
+    margin: auto;
     font-family: Arial, Helvetica, sans-serif;
     width: 30%;
     margin: auto;
@@ -343,8 +389,10 @@
         padding: 0px;
     }
     .label-img {
+    .label-img {
         display: none;
     }
+    .img-checkout {
     .img-checkout {
         display: none;
     }
@@ -357,9 +405,12 @@
         align-items: center;
         padding: 0px;
         background-color: #f2f4f7;
+        background-color: #f2f4f7;
     }
     .after-checkout {
         border-radius: 36px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+            0 4px 16px 0 rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1),
             0 4px 16px 0 rgba(0, 0, 0, 0.1);
         max-width: 540px;

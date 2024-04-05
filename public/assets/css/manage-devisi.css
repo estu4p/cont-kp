@@ -1,4 +1,5 @@
 .swic/* assets/Css/margepenilaiandivisi.css */
+.swic/* assets/Css/margepenilaiandivisi.css */
 
 /* Gaya untuk judul card */
 .card .card-header h3 {
@@ -25,12 +26,10 @@
     color: #fff; /* Warna teks tombol edit */
 }
 
-
 /* Mengatur margin dan padding */
 .container {
     margin-top: 20px;
 }
-
 
 .card {
     margin-bottom: 20px;
@@ -54,7 +53,8 @@
 .table-responsive table {
     min-width: 700px; /* Atur lebar minimal sesuai kebutuhan */
 }
-.table-responsive th, .table-responsive td {
+.table-responsive th,
+.table-responsive td {
     min-width: 150px; /* Atur lebar minimal untuk setiap sel */
 }
 
@@ -65,118 +65,118 @@
 .table-responsive .ratatengah {
     width: 20%; /* Atur lebar kolom "Penilaian" dan "Aksi" */
 }
-.wadah{
-    top:0;
-    left:250px; 
+.wadah {
+    top: 0;
+    left: 250px;
     height: 100%;
-    width:100%;
-    padding-left:250px !important;
+    width: 100%;
+    padding-left: 250px !important;
 }
-.wadahh{
-    top:0;
-    left:0px;
+.wadahh {
+    top: 0;
+    left: 0px;
     height: 100%;
-    width:70%;
-    padding-left:0px !important;
+    width: 70%;
+    padding-left: 0px !important;
     padding-right: 100px;
 }
-.kiri-putih{
-    height:100%;
-    width:250px;
-    position:fixed;
-   top:0;
+.kiri-putih {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    position: fixed;
+    top: 0;
     background-color: white;
     display: inline-block;
- 
 }
-.kanan-tabel{
-    width:auto;
-    display:inline-block;
-    padding-top:2% !important;
+.kanan-tabel {
+    width: auto;
+    display: inline-block;
+    padding-top: 2% !important;
+    padding-top: 2% !important;
     box-sizing: border-box;
 }
 .nav-item a {
     color: black; /* Mengatur warna teks menjadi hitam */
 }
 
-.page, .item{
+.page,
+.item {
     background: #c6c6c6;
-    border-radius:5px;
+    border-radius: 5px;
 }
 
 .manageP {
     text-decoration: none; /* Menghapus garis link */
     background-color: pink; /* Warna latar belakang */
     border-radius: 7px; /* Radius border */
-    
 }
-.logout{
+.logout {
     position: absolute;
     bottom: 10px;
 }
 
-.col-md-auto .me-auto{
+.col-md-auto .me-auto {
     display: flex;
     flex-direction: row;
 }
-.konfirmasiBackdrop{
+.konfirmasiBackdrop {
     background-color: transparent !important;
     z-index: -10 !important;
 }
-.modal-frame-4{
-    z-index:1000 !important;
+.modal-frame-4 {
+    z-index: 1000 !important;
 }
-.tambah{
+.tambah {
     border-radius: 5px;
     background: #ffffff;
     border: none;
     margin-top: 40px;
     margin-bottom: 20px;
     text-align: center;
-    height:40px;
-    width:170px;
+    height: 40px;
+    width: 170px;
     border-radius: 10px;
 }
-.ic{
+.ic {
     color: #228300;
 }
 
-
-.btn-jam{
+.btn-jam {
     background: #ffffff;
-    height:40px;
-    width:170px;
+    height: 40px;
+    width: 170px;
     border-radius: 10px;
     text-align: center;
 }
-.labelmodal{
+.labelmodal {
     font-weight: bold;
 }
-.inputmodal{
+.inputmodal {
     width: 100%;
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
     border-top: none;
     border-left: none;
     border-right: none;
- 
+
     padding-left: 10px;
 }
-.judulmodal{
+.judulmodal {
     font-weight: bold;
 }
-.grupinput{
+.grupinput {
     margin-top: 20px;
 }
-.textdivisi{
+.textdivisi {
     font-weight: bold;
     font-size: 20px;
 }
-.tambahgambar{
+.tambahgambar {
     display: flex;
     margin-top: 20px;
-    
 }
-.gambar{
+.gambar {
     background-color: transparent;
     width: 140px;
     height: 140px;
@@ -188,16 +188,15 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-      
 }
-.addgambar{
+.addgambar {
     background-color: transparent;
     border-radius: 5px;
     width: 130px;
     height: 40px;
     margin-top: 50px;
 }
-.remove{
+.remove {
     background: none;
     border: none;
     border-radius: 5px;
@@ -206,49 +205,49 @@
     margin-top: 50px;
     color: #dc3545;
 }
-.NamaDivisi{
+.NamaDivisi {
     color: #000000;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 10px;
 }
-.inputmodall, .inputmodalll{
+.inputmodall,
+.inputmodalll {
     width: 100%;
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
     border-top: none;
     border-left: none;
     border-right: none;
     height: auto;
     padding-left: 10px;
     padding-top: 10px;
-    padding-bottom: 10px
+    padding-bottom: 10px;
 }
 
 .ratatengah {
     text-align: center;
 }
-.tomboll{
+.tomboll {
     margin-left: 5px;
 }
 
-.grupselect{
+.grupselect {
     width: 20%;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.nav-devisi{
-   font-size: 14px; 
-   width:max-content; 
-   border-radius: 10px;
-   width: 100%;
-   text-align: center;
-   font-size: 15px;
-   padding-top: 5px;
-   padding-bottom: 5px;
-   margin-top: 10px;
-   
+.nav-devisi {
+    font-size: 14px;
+    width: max-content;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
 }
 a {
     text-decoration: none; /* Menghilangkan garis bawah */
@@ -258,26 +257,40 @@ a {
 /* .tangah{
     text-align: center;
 } */
-.namadiv{
+.namadiv {
     width: 50%;
-    
 }
-.buttongrup{
+.buttongrup {
     margin-right: 35%;
 }
-.button-grup{
+.button-grup {
     margin-right: 25%;
 }
-.btn-batal{
+.btn-batal {
     background: transparent;
 }
-.notabel{
+.notabel {
     width: 10%;
 }
 
-.space{
+.space {
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 5%;
     padding-bottom: 5%;
+}
+.inputmodall,
+.inputmodalll {
+    width: 100%;
+    background-color: #f2f4f8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.ratakanan {
+    text-align: right;
 }

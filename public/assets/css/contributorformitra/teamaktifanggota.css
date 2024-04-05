@@ -102,7 +102,6 @@ body {
     padding-left: 50%;
     text-decoration: underline;
     color: black;
-
 }
 
 .active {
@@ -116,16 +115,13 @@ body {
     color: white;
     width: 80px;
     display: inline-block;
-    background: #E5383B;
+    background: #e5383b;
     border-radius: 7px;
 }
 .done {
     color: white;
     width: 80px;
     display: inline-block;
-    background: #1AA158;
+    background: #1aa158;
     border-radius: 7px;
-
 }
-
-
