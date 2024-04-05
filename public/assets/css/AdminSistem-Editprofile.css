@@ -5,7 +5,7 @@
 }
 
 .propil {
-  .propil{
+
     height: 650px;
     width: 250px;
     padding-top: 20px;
@@ -15,10 +15,11 @@
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-right: 20px;
+  }
 
    
 
-}
+
 .gambarkiri {
     padding-top: 30px;
     transform: scale(1.7);
@@ -69,9 +70,9 @@ border: 2px solid rgba(0, 0, 0, 0.5);
 border-radius: 5px;
   }
 
-/* .gambarkanan{
+.gambarkanan{
     transform: scale(1.2);
-} */
+}
 
 
 .remove {

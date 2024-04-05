@@ -66,9 +66,15 @@
                                                 <button class="btn btn-edit btn-sm" data-bs-target="#editModal"
                                                     data-bs-toggle="modal" onclick="editModal(0)"
                                                     type="button">Edit</button>
-                                                <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal"
-                                                    data-bs-toggle="modal" onclick="deleteDivisi(0)"
-                                                    type="button">Hapus</button>
+                                                <form action="{{ route('adminUniv.destroyDivisi', $item->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal"
+                                                        data-bs-toggle="modal" onclick="deleteDivisi(0)"
+                                                        type="submit">Hapus</button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -88,6 +94,8 @@
         <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
@@ -110,18 +118,17 @@
                             <div class="grupinputt">
                                 <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
                                 <input type="text" class="inputmodalll" id="editNamaDivisi"
-                                    placeholder="Masukkan nama divisi">
+                                    placeholder="Masukkan nama divisi" name="nama_divisi">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 aria-label="Close">Batal</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"
                                 onclick="updateDivisi()">Simpan</button>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
 
