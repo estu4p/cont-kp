@@ -94,9 +94,13 @@ Route::post('/loginpage', [LandingPageController::class, 'loginpage'])->name('lo
 // Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 // Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 
+//as contributor
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
+});
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('reset');
@@ -108,9 +112,7 @@ Route::get('/dashboard-admin', function () {
 });
 Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
-Route::get('/login', function () {
-    return view('login');
-});
+
 Route::get('/checkout/bronze', function () {
     return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
 });
