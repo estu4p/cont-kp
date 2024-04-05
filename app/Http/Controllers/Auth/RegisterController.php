@@ -38,6 +38,8 @@ class RegisterController extends Controller
         $user->password = $password;
 
         $user->save();
+
+
         if ($user) {
             return response([
                 'pesan' => 'user berhasil',
@@ -64,7 +66,7 @@ class RegisterController extends Controller
     {
         $userData = "data pengguna";
         $qrCode = $this->generateQRCode($userData);
-        
+
         $register = $this->register($request);
 
         return view('user.register', ['QRcode' => $qrCode, 'register' => $register]);

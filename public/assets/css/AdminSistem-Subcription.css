@@ -31,21 +31,28 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    width: 400px; /* Ukuran lebar */
-    height: 40px; /* Ukuran tinggi */
-    margin-left: auto; /* Menggeser ke kanan */
+    width: 400px;
+    margin-left: auto; 
+  
+   
 }
-.page, .item{
+.page{
     background: #c6c6c6;
     border-radius:5px;
-    
 }
+
+.bodi{
+    transform: translateX(-3px);
+    background: #c6c6c6;
+    border-radius:5px;
+  }
+  
 
 .search-bar input {
     padding: 10px;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
-    width: 100%; /* Lebar input mengikuti parentnya */
+    width: 100%;
     
 }
 
@@ -58,24 +65,46 @@ header {
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    
+    margin-top: 15px;
 }
-
+.tabel{
+    margin-top: 15px;
+    border-radius: 8%;
+    overflow-x: auto;
+}
 th, td {
     padding: 8px;
     text-align: left;
-    border: 1px solid #F2F4F8;
 }
 
-.pagination {
-    display: flex;
+th {
+    border-bottom: 2px solid #000000; /* Warna dan ketebalan garis dapat disesuaikan */
+    border-bottom-width: 10px; /* Ketebalan border bottom */
+}
+
+
+.paging.pagination {
     justify-content: center;
-    margin-top: 20px;
+    box-shadow: none;
+   
 }
 
+.page-link {
+    color: black;
+    background-color: transparent;
+    
+    
+}
+.paging .page-item a {
+    border: none;
+   
+}
+
+.page-link:hover {
+    background-color: #f0f0f0; 
+    outline: none;
+}
 .pagination a {
     padding: 8px 12px;
     text-decoration: none;
@@ -129,11 +158,14 @@ th, td {
 .search-wadah{
 border-radius: 10px;
 box-sizing: border-box;
+background-color: white;
 }
 .inputsearch{
-    background-color: transparent;
+    background-color:transparent;
     border: none !important;
     outline: none !important;
+
+
     
 }
 .swal-button--cancel {
@@ -205,7 +237,6 @@ input, select {
     
 }
 .inputt2{
-    width: 150px;
     background-color: #E1E2E5;
     
 }
@@ -302,6 +333,8 @@ input, select {
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  
 
 
 
