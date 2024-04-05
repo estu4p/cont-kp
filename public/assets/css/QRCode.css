@@ -1,0 +1,26 @@
+/* Styling for the video element */
+#preview {
+    width: 100%; /* Sesuaikan lebar sesuai kebutuhan */
+    height: auto; /* Sesuaikan tinggi sesuai kebutuhan */
+    border: 2px solid #ccc; /* Garis pinggir */
+    border-radius: 5px; /* Sudut elemen video */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Bayangan */
+    margin-bottom: 20px; /* Jarak antara video dan elemen lain */
+  }
+  
+  /* Optional: Styling for container */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Optional: Styling for card element */
+  .card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

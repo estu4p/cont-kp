@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'school' => [ // custom guard untuk sekolah
+            'driver' => 'session',
+            'provider' => 'schools', // provider untuk model Sekolah
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'schools' => [ // custom provider untuk model Sekolah
+            'driver' => 'eloquent',
+            'model' => App\Models\Sekolah::class,
         ],
 
         // 'users' => [
@@ -97,6 +105,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'schools' => [
+            'provider' => 'schools',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
     ],
 
     /*

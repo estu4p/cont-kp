@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Sekolah::class, 'sekolah');
     }
+
+    public function namaDivisi()
+    {
+        return $this->BelongsTo(Divisi::class, 'divisi_id');
+    }
 }

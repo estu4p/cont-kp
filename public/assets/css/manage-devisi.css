@@ -47,8 +47,23 @@
 /* Responsif untuk tabel */
 .table-responsive {
     overflow-x: auto;
-    width: 95%;
+    width: 100%; /* Ubah width menjadi 100% */
     border-radius: 10px;
+}
+.table-responsive table {
+    min-width: 700px; /* Atur lebar minimal sesuai kebutuhan */
+}
+.table-responsive th,
+.table-responsive td {
+    min-width: 150px; /* Atur lebar minimal untuk setiap sel */
+}
+
+.table-responsive .namadiv {
+    width: 30%; /* Atur lebar kolom "Nama Divisi" */
+}
+
+.table-responsive .ratatengah {
+    width: 20%; /* Atur lebar kolom "Penilaian" dan "Aksi" */
 }
 .wadah {
     top: 0;
