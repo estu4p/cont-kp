@@ -25,9 +25,7 @@ body {
 
 }
 
-#date-input {
-    margin-left: 10px;
-}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -74,3 +72,78 @@ table {
 .search{
     padding-right: 10px;
 }
+
+.date-filter{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.date1, .date2 {
+margin: 1%;
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 3px;
+background-color: #E9E9E9;
+width: 135px;
+height: 40px;
+left: 1650px;
+top: 354px;
+border: 0.5px solid #000000;
+}
+
+.tombolfilter{
+margin-top: 1%;
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 3px;
+background-color: #E9E9E9;
+width: 100px;
+height: 40px;
+left: 1650px;
+top: 354px;
+border: 0.5px solid #000000;
+}
+
+.collapsed {
+    display: none;
+}
+.status-shift{
+box-sizing: border-box;
+position: absolute;
+width: 135px;
+height: 250px;
+left: 1080px;
+top: 170px;
+background: #FFFFFF;
+border: 0.5px solid rgba(0, 0, 0, 0.3);
+border-radius: 0px 0px 8px 8px;
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+}
+.isistatus-shift{
+    margin: 10px;
+}
+.tombolsearch{
+    margin-left: 1%;
+    margin-top: 1%;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #E9E9E9;
+    width: 40px;
+    height: 40px;
+    border: 0.5px solid #000000;
+    font-size: 21px;
+}
+

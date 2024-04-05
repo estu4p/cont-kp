@@ -1,34 +1,30 @@
 <?php
-
 namespace App\Http\Controllers\BEController;
 
 use App\Http\Controllers\Controller;
-use App\Models\NilaiMahasiswa; // Menggunakan model NilaiMahasiswa yang benar
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class NilaiMhsController extends Controller
 {
     public function store(Request $request)
     {
-        // Validasi input jika diperlukan
-        $request->validate([
-            'nama' => 'required',
-            'nip' => 'required',
-            'divisi' => 'required',
-            'status' => 'required|in:active,inactive,done', // Memastikan status hanya salah satu dari pilihan yang diperbolehkan
+        // Validasi data yang diterima dari request
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string',
+            'nomor_induk' => 'nullable|integer',
+            'divisi_id' => 'nullable|exists:divisi,id',
+            'status_akun' => 'nullable|in:aktif,alumni',
         ]);
 
-        // Buat objek NilaiMahasiswa dari request data
-        $mahasiswa = new NilaiMahasiswa(); // Instansiasi objek NilaiMahasiswa
-        $mahasiswa->nama = $request->input('nama');
-        $mahasiswa->nip = $request->input('nip');
-        $mahasiswa->divisi = $request->input('divisi');
-        $mahasiswa->status = $request->input('status');
+        // Buat objek User baru dan isi dengan data yang divalidasi
+        $user = new User;
+        $user->fill($validatedData);
 
-        // Simpan objek NilaiMahasiswa ke dalam database
-        $mahasiswa->save();
+        // Simpan data user ke dalam database
+        $user->save();
 
-        // Berikan respons yang sesuai
-        return response()->json(['message' => 'Data mahasiswa berhasil disimpan'], 201);
+        // Beri respons dengan pesan berhasil dan data user yang baru ditambahkan
+        return response()->json(['message' => 'Data user berhasil disimpan', 'data' => $user], 201);
     }
 }
