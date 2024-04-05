@@ -336,7 +336,6 @@ Route::get('/OptionTeamAktifKlikUiUx', function () {
 });
 
 
-});
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });

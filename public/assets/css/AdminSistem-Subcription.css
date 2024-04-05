@@ -36,11 +36,17 @@ header {
   
    
 }
-.page, .item{
+.page{
     background: #c6c6c6;
     border-radius:5px;
-    
 }
+
+.bodi{
+    transform: translateX(-3px);
+    background: #c6c6c6;
+    border-radius:5px;
+  }
+  
 
 .search-bar input {
     padding: 10px;
@@ -60,29 +66,45 @@ header {
 
 table {
     border-collapse: collapse;
-    /* border-radius: 40px; */
     margin-top: 15px;
 }
 .tabel{
     margin-top: 15px;
-    /* background-color: red; */
-    /* width: 100%; */
     border-radius: 8%;
     overflow-x: auto;
-    /* border: ridge; */
 }
 th, td {
     padding: 8px;
     text-align: left;
-    /* border: ridge; */
 }
 
-.pagination {
-    display: flex;
+th {
+    border-bottom: 2px solid #000000; /* Warna dan ketebalan garis dapat disesuaikan */
+    border-bottom-width: 10px; /* Ketebalan border bottom */
+}
+
+
+.paging.pagination {
     justify-content: center;
-    margin-top: 20px;
+    box-shadow: none;
+   
 }
 
+.page-link {
+    color: black;
+    background-color: transparent;
+    
+    
+}
+.paging .page-item a {
+    border: none;
+   
+}
+
+.page-link:hover {
+    background-color: #f0f0f0; 
+    outline: none;
+}
 .pagination a {
     padding: 8px 12px;
     text-decoration: none;
@@ -311,6 +333,8 @@ input, select {
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  
 
 
 
