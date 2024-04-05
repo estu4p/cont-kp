@@ -19,15 +19,16 @@ return new class extends Migration
             $table->string('jurusan')->nullable();
             $table->string('email')->nullable();
             $table->string('username')->unique()->nullable();
-            $table->string('no_hp');
+            $table->string('no_hp')->nullable();
             $table->string('barcode')->nullable()->unique();
             $table->string('password');
             $table->string('alamat')->nullable();
-            $table->string('kota');
+            $table->enum('kota', ['Kota Surabaya', 'Kota Semarang'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('about')->nullable();
             $table->string('os')->nullable();
             $table->enum('status_akun', ['aktif', 'alumni'])->nullable();
+            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();

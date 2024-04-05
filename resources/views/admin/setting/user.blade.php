@@ -26,11 +26,11 @@
     <div style="margin-left: 18rem; margin-top: 5%;">
         <h5 class="text-capitalize">user & organization</h5>
         <p class="mt-4 text-left mb-5">Informasi tentang user guru atau dosen pembimbing dan mitra</p>
-        <button data-bs-toggle="modal" data-bs-target="#addGuruModal" data-role="Guru"
+        <button data-bs-toggle="modal" data-bs-target="#userModal" data-role="Guru" onclick="populateModal('add', 'Guru')"
             class="mt-4 rounded border-0 add-user-button guru-button"
             style="display: none; background-color: #A4161A; color: white; padding: 8px;">Add User</button>
 
-        <button data-bs-toggle="modal" data-bs-target="#addMitraModal" data-role="Mitra"
+        <button data-bs-toggle="modal" data-bs-target="#userModal" data-role="Mitra" onclick="populateModal('add', 'Mitra')"
             class="mt-4 rounded border-0 add-user-button mitra-button"
             style="display: none; background-color: #A4161A; color: white; padding: 8px;">Add User</button>
 
@@ -55,11 +55,7 @@
                             </div>
                         </div>
                         <div class="ms-auto">
-                            @php
-                                $modalTarget = $user['role'] === 'Guru' ? '#editGuruModal' : '#editMitraModal';
-                            @endphp
-                            <button class="btn btn-info me-2" data-bs-toggle="modal"
-                                data-bs-target="{{ $modalTarget }}">Edit</button>
+                            <button data-bs-toggle="modal" data-bs-target="#userModal" data-role="{{ $user['role'] }}" onclick="populateModal('edit', '{{ $user['role'] }}')" class="btn btn-info me-2">Edit</button>
                             <button class="btn btn-danger" onclick="showAlert()">Hapus</button>
                         </div>
                     </div>
@@ -68,99 +64,11 @@
         </div>
     </div>
 
-    {{-- Add Guru Modal --}}
-    <div class="modal fade" id="addGuruModal" tabindex="-1" aria-labelledby="addGuruModalLabel" aria-hidden="true">
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addGuruModalLabel">Add Guru</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="text-capitalize">
-                        <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
-                            <h6>profile photo</h6>
-                            <div class="d-flex gap-4">
-                                <img id="previewImage" src="{{ asset('assets/images/userAfter.png') }}" width="80"
-                                    class="mt-2" alt="Preview Image">
-                                <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                                    <label for="photoInput"
-                                        style="border: 2px solid #A4161A; border-radius: 6px; background-color: white; color: #000000; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
-                                        Add Photo
-                                        <input type="file" id="photoInput" accept="image/*" style="display:none;">
-                                    </label>
-                                    <button
-                                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;"
-                                        onclick="removePhoto()">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama</label>
-                            <input type="text" name="nama" placeholder="Guru"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="username"
-                                style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">username</label>
-                            <input type="text" name="username" placeholder="Pembimbing"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email
-                                address</label>
-                            <input type="email" name="email" placeholder="guru123@gmail.com"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No
-                                HP</label>
-                            <input type="number" name="hp" placeholder="08328732777"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="d-flex gap-4">
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="password"
-                                    style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">password</label>
-                                <input type="password" name="password" placeholder="Masukkan Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="konfirm" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
-                                    password</label>
-                                <input type="password" name="konfirm" placeholder="Ulangi Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="siswa" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">siswa</label>
-                            <select name="siswa" id="siswa" class="form-select"
-                                style="background-color: #F2F4F8;">
-                                <option value="">Tambah mahasiswa</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button onclick="alert()" type="button"
-                                style="background-color: #A4161A; border: 0; border-radius: 8px; color: white; padding: 6px 10px;">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Edit Guru Modal --}}
-    <div class="modal fade" id="editGuruModal" tabindex="-1" aria-labelledby="editGuruModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editGuruModalLabel">Edit Guru</h5>
+                    <h5 class="modal-title" id="userModalLabel">Edit Guru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -289,181 +197,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button onclick="alert()" type="button"
-                                style="background-color: #A4161A; border: 0; border-radius: 8px; color: white; padding: 6px 10px;">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Add Mitra Modal --}}
-    <div class="modal fade" id="addMitraModal" tabindex="-1" aria-labelledby="addMitraModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addMitraModalLabel"> Add Mitra</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="text-capitalize">
-                        <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
-                            <h6>profile photo</h6>
-                            <div class="d-flex gap-4">
-                                <img id="previewImage" src="{{ asset('assets/images/userAfter.png') }}" width="80"
-                                    class="mt-2" alt="Preview Image">
-                                <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                                    <label for="photoInput"
-                                        style="border: 2px solid #A4161A; border-radius: 6px; background-color: white; color: #000000; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
-                                        Add Photo
-                                        <input type="file" id="photoInput" accept="image/*" style="display:none;">
-                                    </label>
-                                    <button
-                                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;"
-                                        onclick="removePhoto()">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama</label>
-                            <input type="text" name="nama" placeholder="Mentor"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="username"
-                                style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">username</label>
-                            <input type="text" name="username" placeholder="Mentor Mitra"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email
-                                address</label>
-                            <input type="email" name="email" placeholder="mentor123@gmail.com"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No
-                                HP</label>
-                            <input type="number" name="hp" placeholder="08328732777"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="d-flex gap-4">
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="password"
-                                    style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">password</label>
-                                <input type="password" name="password" placeholder="Masukkan Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="konfirm" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
-                                    password</label>
-                                <input type="password" name="konfirm" placeholder="Ulangi Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="siswa" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">siswa</label>
-                            <select name="siswa" id="siswa" class="form-select"
-                                style="background-color: #F2F4F8;">
-                                <option value="">Tambah mahasiswa</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button onclick="alert()" type="button"
-                                style="background-color: #A4161A; border: 0; border-radius: 8px; color: white; padding: 6px 10px;">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Edit Mitra Modal --}}
-    <div class="modal fade" id="editMitraModal" tabindex="-1" aria-labelledby="editMitraModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editMitraModalLabel">Edit Mitra</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="text-capitalize">
-                        <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
-                            <h6>profile photo</h6>
-                            <div class="d-flex gap-4">
-                                <img id="previewImage" src="{{ asset('assets/images/userAfter.png') }}" width="80"
-                                    class="mt-2" alt="Preview Image">
-                                <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                                    <label for="photoInput"
-                                        style="border: 2px solid #A4161A; border-radius: 6px; background-color: white; color: #000000; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
-                                        Add Photo
-                                        <input type="file" id="photoInput" accept="image/*" style="display:none;">
-                                    </label>
-                                    <button
-                                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;"
-                                        onclick="removePhoto()">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama</label>
-                            <input type="text" name="nama" placeholder="Mentor"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="username"
-                                style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">username</label>
-                            <input type="text" name="username" placeholder="Mentor Mitra"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email
-                                address</label>
-                            <input type="email" name="email" placeholder="mentor123@gmail.com"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No
-                                HP</label>
-                            <input type="number" name="hp" placeholder="08328732777"
-                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                id="">
-                        </div>
-                        <div class="d-flex gap-4">
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="password"
-                                    style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">password</label>
-                                <input type="password" name="password" placeholder="Masukkan Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                            <div class="mt-3 d-flex flex-column w-50">
-                                <label for="konfirm" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
-                                    password</label>
-                                <input type="password" name="konfirm" placeholder="Ulangi Password"
-                                    class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
-                                    id="">
-                            </div>
-                        </div>
-                        <div class="mt-3 d-flex flex-column">
-                            <label for="siswa" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">siswa</label>
-                            <select name="siswa" id="siswa" class="form-select"
-                                style="background-color: #F2F4F8;">
-                                <option value="">Tambah mahasiswa</option>
-                            </select>
                         </div>
                         <div class="modal-footer">
                             <button onclick="alert()" type="button"
@@ -644,5 +377,21 @@
                 }
             });
         });
+
+        function populateModal(action, role) {
+        var modal = $('#userModal');
+        var modalTitle = modal.find('.modal-title');
+        var submitButton = modal.find('.modal-footer button');
+        
+        // Dynamically set title and submit button text based on action
+        if (action === 'add') {
+            modalTitle.text('Add ' + role);
+            submitButton.text('Add');
+        } else if (action === 'edit') {
+            modalTitle.text('Edit ' + role);
+            submitButton.text('Save Changes');
+        }
+        modal.modal('show');
+    }
     </script>
 @endsection

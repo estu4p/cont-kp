@@ -111,9 +111,6 @@
                     <tr>
                         <td><i class="fa-regular fa-square-check"></i></td>
                         <td>Pantau Siswa/Mahasiswa</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-regular fa-square-check"></i></td>
                         <td>Custom User Sesuai Kebutuhan</td>
                     </tr>
                 </table>

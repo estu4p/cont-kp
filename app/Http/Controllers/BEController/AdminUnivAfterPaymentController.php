@@ -14,6 +14,7 @@ use App\Models\KategoriPenilaian;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
+use DateTime;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -228,11 +229,15 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif()
+    public function daftarMitraTeamAktif(Request $request)
     // daftarMitra-teamAktif
     {
         $divisi = Divisi::withCount('mahasiswa')->get();
-        return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisi'));
+        }
     }
 
     public function daftarMitraPengaturanDivisi(Request
@@ -244,7 +249,7 @@ class AdminUnivAfterPaymentController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
         } else {
-            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
         }
     }
 
@@ -265,8 +270,11 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
 
         $data->save();
-
-        return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+        } else {
+            return redirect()->route('adminUniv.addDivisi');
+        }
     }
     public function updateDivisi(Request $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
@@ -352,25 +360,37 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
 
-    public function teamAktifKlik($id)
+    public function teamAktifKlik(Request $Request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $divisi = Divisi::with('anggotaDivisi')->find($id);
+
+        // $user = $anggota_divisi->nama_lengkap;
 
         if (!$divisi) {
             return response()->json(['message' => 'Divisi not found'], 404);
         }
 
-        return response()->json([
-            'message' => 'Success to get detail data divisi with mahasiswa',
-            'data' => $divisi
-        ]);
+        if ($Request->is('api/*') || $Request->wantsJson()) {
+            return response()->json([
+                'message' => 'Success to get detail data divisi with mahasiswa',
+                'data' => $divisi,
+
+                // 'user' => $user
+            ]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
+        }
     }
 
-    public function teamAktifSeeAllTeam($id)
+    public function teamAktifSeeAllTeam(Request $request) // menggunakan $id mitra jika berdasarkan mitra yang diikuti
     {
-        $user = User::where('role_id', 3)->where('mitra_id', $id)->get();
-        return response()->json($user);
+        $user = User::where('role_id', 3)->get();
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json($user);
+        } else {
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user'));
+        }
     }
 
     public function teamAktifSuntingTeam(Request $request, $id)
@@ -428,6 +448,20 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $presensi = User::where('role_id', 3)->get();
 
+        $namaBulan = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        ];
         $kehadiranPerNama = Presensi::select('nama_lengkap')
             ->groupBy('nama_lengkap')->with('user')
             ->get()
@@ -441,18 +475,28 @@ class AdminUnivAfterPaymentController extends Controller
                 $item['total_ketidakhadiran'] = Presensi::where('nama_lengkap', $item->nama_lengkap)
                     ->where('status_kehadiran', 'Tidak Hadir')
                     ->count();
+                $item['nama_divisi'] = Divisi::where('id', $item->user->divisi_id)->first();
+                $item['nama_sekolah'] = Sekolah::where('id', $item->user->sekolah)->first();
+                // tanggal masuk
+                $item['tanggal_masuk'] = $item->user->tgl_masuk;
+                $item['tahun_masuk'] = Carbon::createFromFormat('Y-m-d', $item->tanggal_masuk)->format('Y');
+                $item['bulan_masuk'] = Carbon::createFromFormat('Y-m-d', $item->tanggal_masuk)->format('m');
+                $item['hari_masuk'] = Carbon::createFromFormat('Y-m-d', $item->tanggal_masuk)->format('d');
+
+                $item['bulan'] = DateTime::createFromFormat('!m', $item->bulan_masuk)->format('F');
                 return $item;
             });
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
-            return view('adminUniv-afterPayment.mitra.laporanpresensi')
+            return view('adminUniv-afterPayment.mitra.laporanpresensi',)
                 ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
         }
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
     {
+        // dd($nama_lengkap);
         // NIM
         $user = User::findOrFail($nama_lengkap);
         // menampilkan divisi
@@ -463,7 +507,7 @@ class AdminUnivAfterPaymentController extends Controller
         $sekolah = Sekolah::find($sekolah_user);
 
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)->where('status_kehadiran', 'Hadir')->get();
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
@@ -544,7 +588,7 @@ class AdminUnivAfterPaymentController extends Controller
         $dayName = $date->format('l');
 
         // jam default
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')
@@ -611,7 +655,7 @@ class AdminUnivAfterPaymentController extends Controller
         $dayName = $date->format('l');
 
         // jam default
-        $jam_default = Presensi::where('nama_lengkap', $nama_lengkap)
+        $jam_default = User::where('id', $nama_lengkap)
             ->whereNotNull('jam_default_masuk')
             ->whereNotNull('jam_default_pulang')
             ->select('jam_default_masuk', 'jam_default_pulang')

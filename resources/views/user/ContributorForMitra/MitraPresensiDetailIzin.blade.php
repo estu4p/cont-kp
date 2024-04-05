@@ -16,7 +16,7 @@
                             </div>
                             <div>
                                 <h3 style="font-size: 40px; margin: 0;">{{$user->nama_lengkap}}</h3>
-                                <p style="margin: 10px;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
+                                <p style="margin: 10px;">NIP : MJ/{{$divisi->nama_divisi}}/{{$sekolah->sekolah}}/{{ $user->tgl_masuk }}/{{ $user->id }}</p>
                             </div>
                             <div style="align-self: center;">
                                 <label for="search-input">Cari Mahasiswa</label>
@@ -58,7 +58,7 @@
                             <div class="masa col-2">
                                 <div class=" m-0 py-2 d-flex align-items-center flex-row justify-content-between">
                                     <b class="fz7">Total jam masuk</b>
-                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasukFormatted }}</p>
+                                    <p class="masuk fz6 my-auto px-1 py-0">{{ $totalJamMasuk }}</p>
                                 </div>
                                 <hr class="m-0">
                                 <div class=" m-0 d-flex   py-2 align-items-center  flex-row justify-content-between">
@@ -163,19 +163,19 @@
                                         <th rowspan="2"><input type="checkbox"></th>
                                         <th rowspan="2">No</th>
                                         <th rowspan="2">Tanggal</th>
-                                        <th colspan="2">Jam Kerja</th>
-                                        <th colspan="2">Jam Istirahat</th>
-                                        <th colspan="2">Total Jam Kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
+                                        <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
                                         <th rowspan="2">Status Kehadiran</th>
                                         <th rowspan="2">Status Ganti Jam</th>
 
                                     <tr>
                                         <th>Masuk</th>
-                                        <th>Pulang</th>
+                                        <th style="border-left: 0.5px solid black;">Pulang</th>
                                         <th>Mulai</th>
-                                        <th>Selesai</th>
-                                        <th style="white-space: nowrap">total jam</th>
-                                        <th>(+)(-)</th>
+                                        <th style="border-left: 0.5px solid black;">Selesai</th>
+                                        <th>total jam</th>
+                                        <th style="border-left: 0.5px solid black;">(+)(-)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -188,8 +188,8 @@
                                         <td>{{$item->jam_pulang}}</td>
                                         <td>{{$item->jam_mulai_istirahat}}</td>
                                         <td>{{$item->jam_selesai_istirahat}}</td>
-                                        <td>07:00:53 </td>
-                                        <td>00:00:04</td>
+                                        <td>{{ $item->total_jam_kerja }}</td>
+                                        <td>{{ $item->hutang_presensi }}</td>
                                         <td style="color: #E2BE00">Izin<i class="fas fa-info-circle"
                                                 data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: #000">
                                         </td>
