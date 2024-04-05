@@ -249,7 +249,7 @@ class AdminUnivAfterPaymentController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
         } else {
-            return view('pengaturan.margepenilaiandivisi', ['divisi' => $divisi]);
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
         }
     }
 
@@ -270,8 +270,11 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
 
         $data->save();
-
-        return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+        } else {
+            return redirect()->route('adminUniv.addDivisi');
+        }
     }
     public function updateDivisi(Request $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
