@@ -14,7 +14,7 @@
             <a class="nav-link" href="#">Presensi</a>
         </li>
         <li class="nav-item">
-                <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}" href="/penilaian-mahasiswa">Penilaian</a>
+                <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}" href="contributorformitra-penilaian-mahasiswa">Penilaian</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}" href="/manage-devisi">Pengaturan</a>

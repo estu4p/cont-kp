@@ -25,6 +25,7 @@ class Divisi extends Model
     {
         return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
     }
+
     public function namaDivisi()
     {
         return $this->belongsTo(User::class, 'nama_lengkap');
