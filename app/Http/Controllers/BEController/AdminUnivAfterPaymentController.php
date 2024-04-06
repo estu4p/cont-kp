@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\BEController;
 
+use DateTime;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Mitra;
+use App\Models\Paket;
 use App\Models\Divisi;
 use App\Mail\SendEmail;
 use App\Models\Sekolah;
@@ -14,10 +16,9 @@ use App\Models\KategoriPenilaian;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
-use DateTime;
+
+
 use Illuminate\Support\Facades\Hash;
-
-
 use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Support\Facades\Session;
@@ -704,4 +705,24 @@ class AdminUnivAfterPaymentController extends Controller
             return view('adminUniv-afterPayment.mitra.laporandetailtidakhadir', compact('user', 'divisi', 'sekolah', 'presensi', 'jam_default', 'total_masuk', 'total_jam_masuk', 'target', 'sisa'));
         }
     }
+
+    //riwayatpembelian
+
+    public function RiwayatPembelian()
+    {
+        $paket = Paket::all();
+        return response()->json(['data' => $paket], 200);
+    }
+
+
+
+    //jangka waktu
+
+    public function JangkaWaktu()
+    {
+        $paket = Paket::where('status', 'Aktif')->get();
+        return response()->json(['data' => $paket], 200);
+    }
+    
+
 }
