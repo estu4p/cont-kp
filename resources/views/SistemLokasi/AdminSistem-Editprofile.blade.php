@@ -14,7 +14,7 @@
 
     <div id="preview" class="preview"></div>
     <div class="wadahedit d-flex">
-        <div class="editprofil p-5">
+        <div class=" p-5">
             <div class="atas d-flex flex-row  col-5">
                 <div id="previewZone">
                     <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
