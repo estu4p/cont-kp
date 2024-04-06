@@ -12,7 +12,7 @@ class AdminSistemDashboardController extends Controller
     {
         // Menghitung total subscription
         $totalSubscription = User::count();
-        
+
         // Menghitung total aktif dan tidak aktif
         $totalAktif = User::where('status_akun', 'aktif')->count();
         $totalTidakAktif = User::where('status_akun', 'alumni')->count(); // Ubah sesuai dengan nilai yang menunjukkan status tidak aktif
