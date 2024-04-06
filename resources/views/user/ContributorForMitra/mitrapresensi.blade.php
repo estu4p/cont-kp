@@ -108,13 +108,13 @@
             @foreach($presensi as $key => $data)
                 <tr>
                     <td><input type="checkbox" id="checkbox-{{ $key }}" name="">&nbsp;{{ $key + 1 }}</td>
-                    <td class="bates" href><a href="{{ route('presensi-by-name', ['nama_lengkap' => urlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a></td>
+                    <td class="bates" href><a href="{{ route('presensi-by-name', ['nama_lengkap' => rawurlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a></td>
                     <td>{{ $data->jam_masuk }}</td>
                     <td>{{ $data->jam_pulang }}</td>
                     <td>{{ $data->jam_mulai_istirahat }}</td>
                     <td>{{ $data->jam_selesai_istirahat }}</td>
                     <td>{{ $data->total_jam_kerja }}</td>
-                    <td>{{ $data->selisih_jam }}</td>
+                    <td>{{ $data->hutang_presensi }}</td>
                     <td>{{ $data->log_aktivitas }}</td>
                     <td>
                         <div class="toggle-set">
