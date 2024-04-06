@@ -266,7 +266,7 @@ Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
 
-Route::get('/pengaturan', function () {
+Route::get('/pengaturan-contri', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
 Route::get('/kategoripenilaian', function () {
