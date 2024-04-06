@@ -846,4 +846,18 @@ class ContributorForMitra extends Controller
         $mahasiswa = User::with('divisi')->where('role_id', 3)->get();
         return view('contributorformitra.penilaian-mahasiswa', compact('mahasiswa'));
     }
+
+    public function filterMahasiswa()
+    {
+        $totalMahasiswa = Presensi::count();
+        $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
+        $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
+
+        return response()->json([
+            'total_mahasiswa' => $totalMahasiswa,
+            'total_hadir' => $totalHadir,
+            'total_izin' => $totalIzin,
+        ]);
+    }
+
 }

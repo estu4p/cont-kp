@@ -101,6 +101,9 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
 Route::get('admin/daftar-mitra/detail-izin/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailIzin']);
 Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir']);
+Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
+Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
+Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);

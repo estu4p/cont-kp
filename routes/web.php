@@ -842,9 +842,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/contributorformitra-dashboard', function () {
-    return view('contributorformitra.dashboard');
-});
+Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
+
 Route::get('/contributorformitra-editprofile', function () {
     return view('contributorformitra.editprofile');
 });
