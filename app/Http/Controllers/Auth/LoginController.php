@@ -49,11 +49,11 @@ class LoginController extends Controller
                 return redirect()->to('/user');
             } else if ($user->role == 4) {
                 return redirect()->to('/pemagang/home');
-            } else {
+            } else if ($user->role == 1) {
                 return redirect()->to('/AdminUniv-Dashboard');
-            } else if ( $role_id == 3) {
+            } else if ( $user->role_id == 3) {
                 return redirect()->to('/user');
-            } else if ( $role_id == 4) {
+            } else if ( $user->role_id == 4) {
                 return redirect()->to('/dashboard');
             } else {
                 return redirect()->to('/');
