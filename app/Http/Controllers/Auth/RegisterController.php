@@ -23,12 +23,18 @@ class RegisterController extends Controller
         $email = $request->input('email');
         $username = $request->input('username');
         $no_hp = $request->input('no_hp');
-
         $barcode = $request->input('barcode');
         $password = $request->input('password');
 
         $user = new User();
-
+        $user->nama_lengkap = $request->input('nama_lengkap');
+        $user->nomor_induk = $request->input('nomor_induk');
+        $user->jurusan = $request->input('jurusan');
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->no_hp = $request->input('no_hp');
+        $user->barcode = $request->input('barcode');
+        $user->password =$request->input('password');
         $user->nama_lengkap = $nama_lengkap;
         $user->nomor_induk = $nomor_induk;
         $user->jurusan = $jurusan;
@@ -38,8 +44,8 @@ class RegisterController extends Controller
         $user->role_id = 3;
         $user->barcode = $barcode;
         $user->password = $password;
-
         $user->save();
+
         if ($user) {
             //  return redirect()->to('/pemagang/home');
              return redirect()->route('user.login')->with('success', 'User registered successfully!');
@@ -63,7 +69,7 @@ class RegisterController extends Controller
     {
         $userData = "data pengguna";
         $qrCode = $this->generateQRCode($userData);
-        
+
         $register = $this->register($request);
 
         return view('user.register', ['QRcode' => $qrCode, 'register' => $register]);

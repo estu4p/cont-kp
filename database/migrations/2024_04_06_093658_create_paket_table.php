@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->enum('status', ['Aktif', 'Tidak Aktif']);
             $table->string('no_pesanan');
-            $table->int('harga');
+            $table->string('harga');
             $table->enum('paket',['Bronze', 'Silver', 'Gold', 'Platinum']);
             $table->enum('metode_bayar', ['BNI', 'Dana'])->default('BNI');
             $table->timestamps();

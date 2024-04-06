@@ -73,7 +73,7 @@
 
     <div class="bawah">
         <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
-        <a href="/Option-TeamAktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i
+        <a href="/AdminUniv/Option-TeamAktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i
                 class="fa-solid fa-gear"></i></a>
 
     </div>
