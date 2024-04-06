@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <link rel="stylesheet" href="{{ asset('assets/css/presensi/laporandatapresensi.css') }}">
 <div id="laporan-hasil-presensi">
     <div class="container-fluid p-5 ml-2">
@@ -23,38 +23,39 @@
                           </div>
                         </div>
                 </div>
-                        <div style="display: flex; justify-content: flex-end ; align-items: center; margin: 10px;">
-                            <input type="date" name="date" id="date-input">
-                            <input type="date" name="date" id="date-input">
-                            <div style="margin: 0 10px;">
-                                <div class="dropdown">
-                                    <button class="dropbtn"><i class="fa-solid fa-filter"></i>Filter<i class="fa-solid fa-chevron-down"></i></button>
-                                    <div class="dropdown-content">
-                                        <div style="border-bottom: 1px solid #000;">
-                                            <label for="checkbox1">Shift</label><br>
-                                            <input type="checkbox" id="checkbox2">
-                                            <label for="checkbox2">Shift pagi</label><br>
-                                            <input type="checkbox" id="checkbox3">
-                                            <label for="checkbox3">Shift Middle</label><br>
-                                            <input type="checkbox" id="checkbox3">
-                                            <label for="checkbox3">Shift Siang</label><br>
-                                        </div>
-                                        <div style="border-bottom: 1px solid #000;">
-                                        <label for="checkbox1">Kantor</label><br>
-                                        <input type="checkbox" id="checkbox2">
-                                        <label for="checkbox2">Kantor1</label><br>
-                                        <input type="checkbox" id="checkbox3">
-                                        <label for="checkbox3">Kantor2</label><br>
-                                        <input type="checkbox" id="checkbox3">
-                                        <label for="checkbox3">Kantor3</label><br>
-                                    </div>
-                                </div>
-                                <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
+                <div class="date-filter">
 
+                        <input type="date" class="date1">
+                        <input type="date" class="date2">
+                        <div class="tombolfilter">
+                            <i class="filter fa-solid fa-filter"></i> Filter <i class="down fas fa-angle-down collapse-btn" onclick="toggleCollapse(this)"></i>
+                        </div>
+                        <button class="tombolsearch"><i class="fa-solid fa-search"></i></button>
                 </div>
-                <br>
+
+                <div class="collapsed" id="collapseContent">
+                    <div class="status-shift">
+                     <div class="isistatus-shift">
+                         <label>Status</label>
+                         <br>
+                         <input type="checkbox"> Hadir
+                         <br>
+                         <input type="checkbox"> Izin
+                         <br>
+                         <input type="checkbox"> Tidak Hadir
+                         <br>
+                         <hr>
+                         <label>Shift</label>
+                         <br>
+                         <input type="checkbox"> Shift Pagi
+                         <br>
+                         <input type="checkbox"> Shift Middle
+                         <br>
+                         <input type="checkbox"> Shift Siang
+                     </div>
+                     </div>
+
+                   </div>
                     <table class="table" style="font-size: 15px;">
                             <thead>
                               <tr>
@@ -109,5 +110,21 @@
                             </tbody>
                             </table>
                     </div>
+
+                    <script>
+                        function toggleCollapse(icon) {
+                            var content = document.getElementById('collapseContent');
+                            content.classList.toggle('collapsed');
+
+                            // Mengubah ikon
+                            if (content.classList.contains('collapsed')) {
+                                icon.classList.remove('fa-angle-up');
+                                icon.classList.add('fa-angle-down');
+                            } else {
+                                icon.classList.remove('fa-angle-down');
+                                icon.classList.add('fa-angle-up');
+                            }
+                        }
+                    </script>
 
             @endsection

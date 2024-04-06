@@ -62,4 +62,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Sekolah::class);
     }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
 }

@@ -90,7 +90,7 @@
                     </button>
                 </div>
             </div>
-            <div class="kanan">
+            <div class="kanan" >
                 <div class="kananatas  justify-content-between">
                     <div class="cardatas d-flex flex-row ">
                         <div style="padding:10px 5px;"><i class="fa-solid fa-circle bundar-status1 ori-aktif"></i></div>
@@ -154,6 +154,7 @@
                 </div>
 
                 <div class="kananbawah">
+
                     <div class="kebaikan border border-secondary mx-3">
                         
                             <form action="{{ route('kebaikan', ['id' => Auth::id()]) }}" method="POST">
@@ -174,8 +175,11 @@
                             <div class="judulperhatian">Attention !</div>
                         </div>
                         <div class="kontenperhatian">
+
                             <div class="keterangan border border-danger">Kemarin anda absen pulang di kost jangan
                                 diulang!</div>
+
+                            <div class="keterangan border border-danger m">Kemarin anda absen pulang di kost jangan diulang!</div>
                             <div class="kurangjam  bordermerah d-flex flex-column justify-content-center">
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>
                                 <div class="angkakurang m-auto">-14:01:53</div>

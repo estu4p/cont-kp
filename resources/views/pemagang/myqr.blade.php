@@ -44,6 +44,7 @@
         
     </div>
 
+
                     $presensi = Presensi::join('users', 'presensi.nama_lengkap', '=', 'users.id')
                                         ->select('users.nama_lengkap as nama')
                                         ->where('presensi.id', $id)
@@ -67,6 +68,11 @@
             <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembal</a></button>
         </div>
     </form>
+
+    <div class="button-container">
+        <button class="btnqr"><a href="/pemagang/home" style="text-decoration: none;" class="kembali"> <i class="fa-solid fa-angle-left"></i>Kembali</a></button>
+    </div>
+
 </body>
 
 </html>
