@@ -71,7 +71,8 @@
 
                 <div class="button-container text-center mt-4">
                     {{-- <button id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
-                    <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
+                    <button type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton">Daftar</button>
+                    {{-- <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a> --}}
                 </div>
             </form>
         </div>

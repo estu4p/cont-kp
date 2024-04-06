@@ -46,7 +46,7 @@ Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassw
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
 
-Route::post('/pilihmitra', [HomeMitraController::class, 'pilihMitra']);
+Route::post('/pilihMitra/{id}', [HomeMitraController::class, 'pilihMitra']);
 Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk']);
 Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang']);
 Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat']);

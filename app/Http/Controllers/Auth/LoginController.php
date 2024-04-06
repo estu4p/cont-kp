@@ -43,8 +43,8 @@ class LoginController extends Controller
                     'message' => 'Login berhasil sebagai Admin',
                     'redirect' => 'Admin/dashboard'
                 ], 200);
-            } else if ($user->role == 3) {
-                return redirect()->to('/pemagang/home');
+            } else if ($user->role_id == 3) {
+                return redirect()->to('/user');
             } else if ($user->role == 4) {
                 return redirect()->to('/pemagang/home');
             } else {

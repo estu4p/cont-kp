@@ -23,6 +23,7 @@ class RegisterController extends Controller
         $email = $request->input('email');
         $username = $request->input('username');
         $no_hp = $request->input('no_hp');
+
         $barcode = $request->input('barcode');
         $password = $request->input('password');
 
@@ -34,22 +35,20 @@ class RegisterController extends Controller
         $user->email = $email;
         $user->username = $username;
         $user->no_hp = $no_hp;
+        $user->role_id = 3;
         $user->barcode = $barcode;
         $user->password = $password;
 
         $user->save();
         if ($user) {
-            return response([
-                'pesan' => 'user berhasil',
-                'user$user' => $user,
-            ], 200);
+            //  return redirect()->to('/pemagang/home');
+             return redirect()->route('user.login')->with('success', 'User registered successfully!');
         } else {
             return response([
                 'pesan' => 'Gagal',
             ], 404);
         }
 
-        return redirect()->route('user.login')->with('success', 'User registered successfully!');
         // return view('user.login', ['title' => "Login"]);
     }
 

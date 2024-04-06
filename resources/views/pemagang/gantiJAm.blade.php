@@ -31,9 +31,9 @@
         <div class="atas">
             <div class="kalender">
                 <i class="fa-solid fa-calendar-days"></i>
-                <span class="kalender" id="kalender">Rabu, 23 Agustus 2023</span>
+                <span class="kalender" id="kalender">{{ now()->isoFormat('dddd, D MMMM YYYY') }}</span>
             </div>
-            <div class="jam" id="jam"></div>
+            <div class="jam" id="jam"><?php echo date('H:i:s'); ?></div>
         </div>
         <div class="tengah">
             <h3>"Change your life now for better future"</h3>
@@ -44,8 +44,16 @@
                     <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user"
                             style="color: #ffffff; font-size:20px;"></i></div>
                     <div class="kekanan  d-flex  flex-column gap-0 justify-content-start">
-                        <p class="name fz9 m-0"><b>Yu Zhong</b></p>
-                        <p class="nip fz9 m-0">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
+                        {{-- <p class="name fz9 m-0"><b>Yu Zhong</b></p>
+                        <p class="nip fz9 m-0">NIP: MJ/UIUX/POLINES/AGST2023/06</p> --}}
+                        {{-- <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
+                            @csrf
+                            <p class="name fz9 m-0"><b>{{ $user->nama_lengkap }}</b></p>
+                            <p class="nip fz9 m-0">NIP: MJ/{{ $nama_divisi->nama_divisi }}/
+                                {{ $nama_sekolah->nama_sekolah}}/
+                                {{$today}}
+                            </p>
+                        </form> --}}
                     </div>
                 </div>
             </div>
@@ -57,7 +65,7 @@
     </div>
     <div class="wadah">
         <div style="display: flex; align-items: center; justify-content: space-between;  ">
-            <a href="/pemagang/home" style="color: black;">
+            <a href="/pemagang/home/{{Auth::id()}}" style="color: black;">
                 <i class="fa-solid fa-chevron-left" style="font-size: 30px;"></i>
             </a>
             <div class="tittle-container">
@@ -77,11 +85,11 @@
                 </tr>
             </thead>
             <tbody>
-                @if (isset($data))
+                @if (isset($dataPresensi))
                     @php
                         $totalData = 1;
                     @endphp
-                    @foreach ($data as $i => $item)
+                    @foreach ($dataPresensi as $item)
                         @if (is_object($item))
                             <tr>
                                 <th scope="row" class="tangah">{{ $totalData++ }}</th>
@@ -96,22 +104,21 @@
                         @endif
                     @endforeach
                 @endif
-                <tr>
-                    <th scope="row" class="tangah">4</th>
-                    <td>Senin 30-10-2023</td>
-                    <td class="fixed-width">Gak Dibangunin Temen Kos</td>
-                    <td style="color :red;" class="tangah">Ganti jam</td>
-                    <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat
-                            Bukti</button></td>
-                </tr>
             </tbody>
         </table>
     </div>
-
-
-
     <script>
-        
+        setInterval(function() {
+            var now = new Date();
+            var jam = now.getHours();
+            var menit = now.getMinutes();
+            var detik = now.getSeconds();
+            jam = jam < 10 ? "0" + jam : jam;
+            menit = menit < 10 ? "0" + menit : menit;
+            detik = detik < 10 ? "0" + detik : detik;
+            var waktu = jam + ":" + menit + ":" + detik;
+            document.getElementById('jam').innerText = waktu;
+        }, 1000);
     </script>
 </body>
 
