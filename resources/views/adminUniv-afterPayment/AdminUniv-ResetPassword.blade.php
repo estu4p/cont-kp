@@ -18,9 +18,10 @@
             <div class="">Masukkan email yang ditautkan ke akun Anda.</div>
             <div class="">Kami akan mengirimkan email konfirmasi untuk mengubah kata sandi Anda.</div>
         </div>
-        <form action="{{ route('login.admin.reset') }}" method="POST">
+        {{-- <form action="{{ route('login.admin.reset') }}" method="POST"> --}}
+        <form action="" method="POST">
             @csrf
-            <input type="text" name="email" id="email" placeholder="masukkan email" oninput="validateEmail()">
+            <input type="text" name="email" id="email" placeholder="Masukkan email" oninput="validateEmail()">
             <div class="bawah">
                 <a href="/AdminUniv-InputOTP" style="text-decoration: none;" id="kirim-otp" type="submit"><button class="continue">Continue</button></a>
             </div>
