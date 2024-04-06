@@ -557,7 +557,7 @@ Route::get('/laporanpresensi', function () {
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class,'getAllPresensi'])->name('daftar-presensi');
-Route::get('/datapresensi', [PresensiMitraController::class, 'getPresensiByNama'])->name('presensi-by-name');
+Route::get('/datapresensi/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiByNama'])->name('presensi-by-name');
 Route::post('/presensi/accept', [PresensiMitraController::class, 'presensiAccept'])->name('presensi-accept');
 Route::put('/presensi/reject', [PresensiMitraController::class, 'presensiReject'])->name('presensi-reject');
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll'])->name('presensi-accept-all');

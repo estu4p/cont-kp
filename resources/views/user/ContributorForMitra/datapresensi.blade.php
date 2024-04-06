@@ -14,7 +14,7 @@
                             <img src="assets/images/user.png" class="user">
                         </div>
                         <div style="padding-left: 25px;">
-                            
+
                             <h3 style="font-size: 20px; margin: 0;">Simpay</h3>
                             <p style="margin: 10;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
@@ -100,8 +100,8 @@
                     </div>
                     <div class="masa">
                         <table class="tg">
-                         
-                            
+
+
                             <tbody>
                               <tr>
                                 <div class="form-floating">
@@ -148,6 +148,26 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($presensi as $item)
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$item->hari}}</td>
+                                        <td>{{$item->jam_masuk}}</td>
+                                        <td>{{$item->jam_pulang}}</td>
+                                        <td>{{$item->jam_mulai_istirahat}}</td>
+                                        <td>{{$item->jam_selesai_istirahat}}</td>
+                                        <td>{{ $item->total_jam_kerja }}</td>
+                                        <td>{{ $item->selisih_jam }}</td>
+                                        <td>{{$item->log_aktivitas}}</td>
+                                        <td>{{$item->status_kehadiran}}</td>
+                                        <td>{{$item->kebaikan}}</td>
+                                        <td>{{$item->catatan}}</td>
+                                        <td>
+                                            <i class="fa-regular fa-pen-to-square"></i>                                        </td>
+                                    </tr>
+                        @endforeach
+
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
@@ -303,19 +323,19 @@
 
 
                       {{-----------modallllllllllllllllllllllllllll-----}}
-                    
+
                       <div class="modal fade" id="statuskehadiran">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header" style="padding-left: 40%;">
                                     <h1>Izin</h1>
                                 </div>
-                                
+
                                 <!-- Isi dari modal -->
                                 <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
-                
+
                                     <!-- Baris Ke-1 -->
-                             
+
                                     <div class="keterangan">
                                         “ Maaf saya tidak dapat mengikuti magang untuk
                                         hari ini dikarenakan saya sedang tidak enak
@@ -327,7 +347,7 @@
                                     Link Foto Gdrive
                                     <textarea class="form-control" placeholder id="floatingTextarea"></textarea>
                                     <label for="floatingTextarea"></label>
-                
+
                                     <!-- Break Line -->
                                     <!-- Baris Ke-3 -->
                                     kategori izin
@@ -338,12 +358,12 @@
                                             <option value="3">keperluan sekolah/kampus</option>
                                             <option value="4">keperluan lainnya</option>
                                     </select>
-                
-                                    </div>   
+
+                                    </div>
                                     <!-- Break Line -->
                                     <!-- End -->
                                     <div>
-                
+
                                       <div class="d-grid gap-2 d-md-block">
                                         <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
                                         <div class="d">
@@ -355,12 +375,12 @@
                                         <button class="btn btn-primary save" data-bs-dismiss="modal">simpan</button>
                                         </div>
                                     </div>
-                                 
+
                                 </div>
-                
+
                             </div>
-                        </div>    
-                      
+                        </div>
+
                         </div>
 
 </div>
@@ -373,3 +393,4 @@
 
 
 @endsection
+

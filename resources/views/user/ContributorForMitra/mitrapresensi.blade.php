@@ -108,7 +108,7 @@
             @foreach($presensi as $key => $data)
                 <tr>
                     <td><input type="checkbox" id="checkbox-{{ $key }}" name="">&nbsp;{{ $key + 1 }}</td>
-                    <td class="bates" href><a href="datapresensi">{{ $data->user->nama_lengkap }}</a></td>
+                    <td class="bates" href><a href="{{ route('presensi-by-name', ['nama_lengkap' => urlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a></td>
                     <td>{{ $data->jam_masuk }}</td>
                     <td>{{ $data->jam_pulang }}</td>
                     <td>{{ $data->jam_mulai_istirahat }}</td>
@@ -121,15 +121,15 @@
                             <form id="form-accept-{{ $key }}" action="{{ route('presensi-accept', ['id' => $data->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $data->id }}">
-                                <input type="radio" id="check{{ $key }}" name="button-toggle" class="toggle-button" />
-                                <label for="check{{ $key }}" class="round-button-check" tabindex="2">
+                                <input type="radio" id="check-button-{{ $key }}" name="button-toggle" class="toggle-button" onclick="handleButtonClick('{{ $key }}')" />
+                                <label for="check-button-{{ $key }}" class="round-button-check" tabindex="2">
                                     <i class="fa-solid fa-check"></i>
                                 </label>
-                                <button type="submit" class="toggle-button" value="1" disabled>Terima</button>
-                                <a href="{{ route('daftar-presensi') }}" class="toggle-button">Kembali ke Daftar Presensi</a>
+                                <button type="submit" class="toggle-button" value="1">Accept</button>
                             </form>
-                            <input type="radio" id="cross{{ $key }}" name="button-toggle" class="toggle-button" />
-                            <a class="round-button-cross text-light" data-bs-toggle="modal" data-bs-target="#silang{{$data->id}} ">
+
+                            <input type="radio" id="cross-button-{{ $key }}" name="button-toggle" class="toggle-button" />
+                            <a class="round-button-cross" data-bs-toggle="modal" data-bs-target="#silang{{$data->id}} ">
                                 <i class="fa-solid fa-xmark"></i>
                              </a>
 
@@ -156,7 +156,7 @@
                 <td class="bates">Membuat ributt anak gang sebelah</td>
                 <td>
                     <div class="toggle-set">
-                        <input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                        <input type="radio" id="check-button" name="button-toggle" class="toggle-button" />
                         <label for="check" class="round-button-check" tabindex="2">
                             <i class="fa-solid fa-check"></i>
                         </label>
@@ -359,17 +359,20 @@
     </div>
     </div>
     <script>
-        const checkButton = document.getElementById('check-button');
-        const crossButton = document.getElementById('cross-button');
+        const checkButton = document.getElementById('check-button-{{ $key }}');
+        const crossButton = document.getElementById('cross-button-{{ $key }}');
 
         checkButton.addEventListener('click', function() {
             checkButton.classList.add('active');
             crossButton.classList.remove('active');
+            console.log('sukses'); // Pastikan konsol.log ini berjalan
+            showsukses();
         });
 
         crossButton.addEventListener('click', function() {
             crossButton.classList.add('active');
             checkButton.classList.remove('active');
+            showsukses();
         });
 
 
@@ -380,14 +383,25 @@
 
         function handleButtonClick(buttonNumber) {
             var buttonId = 'button' + buttonNumber;
-            var button = document.getElementById(buttonId);
+            var button = document.getElementById('check-button-' + buttonNumber);
             if (!button.classList.contains('btn-with-checkmark')) {
                 button.classList.add('btn-with-checkmark');
             } else {
                 button.classList.remove('btn-with-checkmark');
             }
+
+            // Tambahkan atau hapus kelas 'active' untuk mengubah warna tombol
+            if (!button.classList.contains('active')) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
             // Isi fungsi disini sesuai dengan aksi yang ingin dilakukan ketika tombol diklik
+            var formId = 'form-accept-' + buttonNumber;
+            var form = document.getElementById(formId);
+            form.submit();
         }
+
 
         function checkAll(ele) {
             var checkboxes = document.getElementsByTagName('input');
