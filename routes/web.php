@@ -94,7 +94,7 @@ Route::post('/loginpage', [LandingPageController::class, 'loginpage'])->name('lo
 // Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 // Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 
-//login as contributor univ 
+//login as contributor univ
 Route::get('/logincontributor', [AuthController::class, 'index'])->name('login');
 Route::post('/logincontributor', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
@@ -466,7 +466,44 @@ Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
 
+Route::get('/AdminUniv/setting/quotes', function () {
+    $quotes = [
+        ['id' => 1, 'quotes' => "Change your life now for better future"],
+        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+    ];
+    return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+        'title' => "Admin - Setting Jam & Quotes",
+        'quotes' => $quotes
+    ]);
+});
+Route::get('/AdminUniv/setting/user', function () {
+    $users = [
+        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
+        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
+        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
+        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
+    ];
 
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];
+    return view('AdminUniv-afterPayment.AdminUniv-User', [
+        'title' => "Admin - User & Organization",
+        'users' => $users,
+    ]);
+});
 
 
 Route::get('/pengaturan', function () {
@@ -730,22 +767,7 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
-Route::get('/admin/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('admin.setting.quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
+
 Route::get('/admin/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
