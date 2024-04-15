@@ -293,7 +293,7 @@ class AdminUnivAfterPaymentController extends Controller
             'nama_divisi' => $request->nama_divisi
         ]);
         $data->save();
-        return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', compact('data', 'divisi'));
+        return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
     }
     public function destroyDivisi($id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
@@ -302,7 +302,7 @@ class AdminUnivAfterPaymentController extends Controller
         if ($data) {
             $data->delete();
 
-            return redirect('/Option-TeamAktif-pengaturanDivisi');
+            return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
@@ -725,6 +725,4 @@ class AdminUnivAfterPaymentController extends Controller
         $paket = Paket::where('status', 'Aktif')->get();
         return response()->json(['data' => $paket], 200);
     }
-    
-
 }
