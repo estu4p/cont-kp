@@ -16,8 +16,7 @@
                 <hr class="line" />
                 <h6 class="text-uppercase fw-normal mt-4" style="font-size: 14px;">panel administrator</h6>
                 <ul class="text-capitalize fw-normal sub-menu" style="font-size: 14px;">
-                    <li style="margin-left: 2rem;"><a href="/AdminUniv/setting/user"
-                            class="text-black text-decoration-none">user & organization</a></li>
+                    <li style="margin-left: 2rem;"><a href="/AdminUniv/setting/user" class="text-black text-decoration-none">user & organization</a></li>
                 </ul>
             </div>
         </div>
