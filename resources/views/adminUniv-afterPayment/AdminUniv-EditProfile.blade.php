@@ -29,7 +29,7 @@
                 <img src="assets/images/Rectangle 22 (3).png" alt="Profile Logo" class="gambarkanan mx-0" style="width:80px;">
                 <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
                     <button class="change m-0 py-1 px-2">Change Photo</button>
-                    <button class="remove m-0">remove</button>
+                    <button class="remove m-0">Remove</button>
                 </div>
             </div>
             <div class="tengah row ">

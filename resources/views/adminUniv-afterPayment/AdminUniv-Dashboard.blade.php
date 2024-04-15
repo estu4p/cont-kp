@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/AdminUniv-Dashboard.css') }}">
 <div class="wadah flex-md-column ">
-    <div class="dashboard gap-5  p-5 d-flex  flex-lg-row flex-md-column flex-sm-column ">
+    <div class="dashboard gap-5  p-5 d-flex  flex-lg-row flex-md-column flex-sm-column  flex-column">
         <div class="kartu1 m-lg-0 m-md-auto m-sm-auto my-md-3">
             <h2 class="kartu-judul">Jumlah Mitra</h2>
             <tr>
