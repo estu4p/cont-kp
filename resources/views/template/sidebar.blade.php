@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="assets/Css/sidebar.css">
+<link rel="stylesheet" href="{{ asset('assets/Css/sidebar.css') }}">
 <div class="sidebar">
-    <img src="assets/images/logo.png" class="logo">
+    <img src="{{ asset('assets/images/logo.png') }}" class="logo">
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
@@ -9,13 +9,14 @@
             <a class="nav-link" href="/jumlah-mahasiswa">Mahasiswa</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('presensi', 'laporandatapresensi','datapresensisiswa','presensihadir','presensiizin','presensitidakhadir') ? 'active' : '' }}" href="/presensi">Presensi</a>
+            <a class="nav-link {{ Request::is('presensi', 'laporandatapresensi', 'datapresensisiswa', 'presensihadir', 'presensiizin', 'presensitidakhadir') ? 'active' : '' }}"
+                href="/presensi">Presensi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Penilaian</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/pengaturan">Pengaturan</a>
+            <a class="nav-link" href="/pengaturan-contri">Pengaturan</a>
         </li>
     </ul>
     <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">

@@ -17,27 +17,36 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $nama_lengkap = $request->input('nama_lengkap');
-        $nomor_induk = $request->input('nomor_induk');
-        $jurusan = $request->input('jurusan');
-        $email = $request->input('email');
-        $username = $request->input('username');
-        $no_hp = $request->input('no_hp');
-        $barcode = $request->input('barcode');
-        $password = $request->input('password');
+        // $nama_lengkap = $request->input('nama_lengkap');
+        // $nomor_induk = $request->input('nomor_induk');
+        // $jurusan = $request->input('jurusan');
+        // $email = $request->input('email');
+        // $username = $request->input('username');
+        // $no_hp = $request->input('no_hp');
+        // $barcode = $request->input('barcode');
+        // $password = $request->input('password');
 
         $user = new User();
+        $user->nama_lengkap = $request->input('nama_lengkap');
+        $user->nomor_induk = $request->input('nomor_induk');
+        $user->jurusan = $request->input('jurusan');
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->no_hp = $request->input('no_hp');
+        $user->barcode = $request->input('barcode');
+        $user->password =$request->input('password');
 
-        $user->nama_lengkap = $nama_lengkap;
-        $user->nomor_induk = $nomor_induk;
-        $user->jurusan = $jurusan;
-        $user->email = $email;
-        $user->username = $username;
-        $user->no_hp = $no_hp;
-        $user->barcode = $barcode;
-        $user->password = $password;
+        // $user->nama_lengkap = $nama_lengkap;
+        // $user->nomor_induk = $nomor_induk;
+        // $user->jurusan = $jurusan;
+        // $user->email = $email;
+        // $user->username = $username;
+        // $user->no_hp = $no_hp;
+        // $user->barcode = $barcode;
+        // $user->password = $password;
 
         $user->save();
+
         if ($user) {
             return response([
                 'pesan' => 'user berhasil',
@@ -64,7 +73,7 @@ class RegisterController extends Controller
     {
         $userData = "data pengguna";
         $qrCode = $this->generateQRCode($userData);
-        
+
         $register = $this->register($request);
 
         return view('user.register', ['QRcode' => $qrCode, 'register' => $register]);

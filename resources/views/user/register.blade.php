@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="button-container text-center mt-4">
-                    {{-- <button id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
+                    {{-- <button type="submit" id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
                     <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
                 </div>
             </form>
@@ -82,7 +82,7 @@
             const passwordInput = document.querySelector('input[name="password"]');
             const confirmPasswordInput = document.querySelector('input[name="password_confirmation"]');
             const confirmPasswordWarning = document.getElementById('passwordMatchError');
-    
+
             // Mengatur peringatan
             if (confirmPasswordInput.value.length === passwordInput.value.length) {
                 if (confirmPasswordInput.value !== passwordInput.value) {
@@ -93,7 +93,7 @@
             } else {
                 confirmPasswordWarning.classList.add('d-none');
             }
-    
+
             // Mengatur status tombol daftar
             const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             let allFilled = true;
@@ -102,18 +102,18 @@
                     allFilled = false;
                 }
             });
-    
+
             const registerButton = document.getElementById('registerButton');
             registerButton.disabled = !(allFilled && passwordInput.value.length >= 8 && confirmPasswordInput.value === passwordInput.value);
         }
-    
+
         document.addEventListener('DOMContentLoaded', function() {
             checkInputs();
-    
+
             const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             inputs.forEach(input => {
                 input.addEventListener('input', checkInputs);
             });
         });
-    </script>   
+    </script>
 @endsection
