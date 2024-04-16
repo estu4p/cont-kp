@@ -21,6 +21,7 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\PresensiCobaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -454,7 +455,7 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/AdminUniv/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
+Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
 Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
@@ -886,3 +887,8 @@ Route::get('/contributorformitra-penilaian', function () {
 });
 
 Route::get('/contributorformitra-penilaian-mahasiswa', [ContributorForMitra::class, 'show_mhs']);
+
+Route::get('/presensiCoba', [PresensiCobaController::class, 'index']);
+Route::post('/presensi/masuk', [PresensiCobaController::class, 'jamMasuk'])->name('presensi.jamMasuk');
+Route::get('/presensi/keluar', [PresensiCobaController::class, 'keluar'])->name('presensi.keluar');
+Route::post('/presensi/keluar', [PresensiCobaController::class, 'jamKeluar'])->name('presensi.keluar');

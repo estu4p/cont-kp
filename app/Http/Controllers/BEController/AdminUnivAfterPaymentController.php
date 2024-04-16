@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
 
 
@@ -179,6 +180,18 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
+    public function adminUnivDivisiMitra($id)
+    {
+        $mitra = Mitra::with('divisiMitra')->findOrFail($id);
+
+        if (!$mitra) {
+            return response()->json('message', 'Data tidak ditemukan');
+        } else {
+            return response()->json([
+                'mitra' => $mitra
+            ]);
+        }
+    }
     public function adminUnivPresensi()
     // Univ - Mitra - Daftar Mitra -  Option - Presensi
     {
@@ -230,14 +243,18 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif(Request $request)
+    public function daftarMitraTeamAktif(Request $request, $id)
     // daftarMitra-teamAktif
     {
-        $divisi = Divisi::withCount('mahasiswa')->get();
+
+        $divisi = Mitra::with('divisiMitra')->findOrFail($id);
+        // $divisiMitra = $divisi->divisi_mitra;
+        $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+        $jml_anggota = User::where('role_id', 3)->where('mitra_id', $id)->count();
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'team aktif', 'divisi' => $divisi]);
+            return response()->json(['message' => 'team aktif', 'divisi' => $divisi, 'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisi'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisi', 'divisiMitra', 'jml_anggota'));
         }
     }
 
@@ -259,7 +276,7 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => '',
         ]);
 
         if ($validator->fails()) {
@@ -270,6 +287,11 @@ class AdminUnivAfterPaymentController extends Controller
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan nama yang benar dari permintaan
         ]);
 
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $data->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+            $data->save();
+        }
         $data->save();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
@@ -712,15 +734,15 @@ class AdminUnivAfterPaymentController extends Controller
     public function RiwayatPembelian()
     {
         $paket = Paket::all();
-    // Anda dapat menentukan variabel status, no_pesanan, harga, tanggal, dan metode_pembayaran
-    // jika Anda ingin menggunakannya dalam view
-    $status = 'nilai_status';
-    $no_pesanan = 'nilai_no_pesanan';
-    $harga = 'nilai_harga';
-    $tanggal = 'nilai_tanggal';
-    $metode_pembayaran = 'nilai_metode_pembayaran';
+        // Anda dapat menentukan variabel status, no_pesanan, harga, tanggal, dan metode_pembayaran
+        // jika Anda ingin menggunakannya dalam view
+        $status = 'nilai_status';
+        $no_pesanan = 'nilai_no_pesanan';
+        $harga = 'nilai_harga';
+        $tanggal = 'nilai_tanggal';
+        $metode_pembayaran = 'nilai_metode_pembayaran';
 
-    return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('status','no_pesanan','harga','paket','tanggal','metode_pembayaran'));
+        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('status', 'no_pesanan', 'harga', 'paket', 'tanggal', 'metode_pembayaran'));
     }
 
 
@@ -730,8 +752,5 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $paket = Paket::where('status', 'Aktif')->get();
         return response()->json(['data' => $paket], 200);
- 
     }
-
 }
-

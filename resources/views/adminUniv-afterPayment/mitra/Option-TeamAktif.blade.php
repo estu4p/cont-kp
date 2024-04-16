@@ -19,9 +19,9 @@
         </div>
     </div>
     <div class="isi row row-cols-3">
-        @foreach ($divisi as $item)
+        @foreach ($divisiMitra as $item)
             <div class="col" style="display: flex">
-                @if ($item->id == 1)
+                @if ($item->divisi_mitra == 1)
                     <i class="icon fa-solid fa-pen-nib"></i>
                 @elseif ($item->id == 2)
                     <i class="icon fa-solid fa-code"></i>
@@ -63,8 +63,8 @@
                 @endif
 
                 <a href="{{ route('adminUniv.option.teamAktif', $item->id) }}" style="text-decoration: none">
-                    {{ $item->nama_divisi }}<br>
-                    {{ $item->mahasiswa_count }} Anggota
+                    {{ $item->divisi->nama_divisi }}<br>
+                    {{ $item->jml_anggota }} Anggota
                 </a>
             </div>
         @endforeach
