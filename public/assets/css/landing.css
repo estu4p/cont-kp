@@ -25,7 +25,7 @@
 }
 
 .menu-reg {
-
+}
 .menu-navbar {
     color: #000;
 }
@@ -61,6 +61,7 @@
 }
 .menu-navbar:hover:before {
     background-color: #a61c1c;
+}
 .menu-navbar:hover:before {
     background-color: #a61c1c;
 }
@@ -388,7 +389,7 @@
         align-items: center;
         padding: 0px;
     }
-    .label-img {
+    .label-img
     .label-img {
         display: none;
     }
@@ -472,7 +473,7 @@
         margin-bottom: 10px; /* Menambahkan jarak antara setiap tautan */
     }
 }
-
+}
 @media (max-width: 576px) {
     .box-form input[type="text"],
     .box-form input[type="email"],
