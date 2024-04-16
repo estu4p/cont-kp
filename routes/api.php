@@ -104,6 +104,7 @@ Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentC
 Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
+Route::post('paket/perpanjang', [AdminUnivAfterPaymentController::class, 'Perpanjang']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
