@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
-    Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
 Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
@@ -80,11 +80,12 @@ Route::get('dashboard/admin/{id}', [AdminUnivAfterPaymentController::class, 'det
 Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profileAdmin']);
 Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
 Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
+Route::get('admin/data-mitra/divisi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivDivisiMitra']);
 Route::get('admin/data-mitra/presensi', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
 Route::get('admin/daftar-mitra/presensi/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPengaturanPresensi']);
 Route::post('admin/daftar-mitra/presensi/update/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminUnivPengaturanPresensi']);
 Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);
-Route::get('admin/daftar-mitra/team-aktif', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
+Route::get('admin/daftar-mitra/team-aktif/{id}', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
 
 Route::get('admin/daftar-mitra/pengaturan-divisi', [AdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi']); //daftar divisi
 Route::get('admin/daftar-mitra/showPenilaian', [AdminUnivAfterPaymentController::class, 'showKategoriPenilaian']);
@@ -127,14 +128,14 @@ Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
 //Contributor for Mitra - Presensi
-Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
+Route::get('daftar-presensi', [PresensiMitraController::class, 'getAllPresensi']);
 Route::get('presensi/by-name', [PresensiMitraController::class, 'getPresensiByNama']);
 Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiAccept']);
 Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
 
 
-Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
-Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
-Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
-Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
+Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
+Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
+Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
