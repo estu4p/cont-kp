@@ -246,7 +246,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function daftarMitraTeamAktif(Request $request, $id)
     // daftarMitra-teamAktif
     {
-        // $divisi = Divisi::withCount('mahasiswa')->get();
+
         $divisi = Mitra::with('divisiMitra')->findOrFail($id);
         // $divisiMitra = $divisi->divisi_mitra;
         $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
