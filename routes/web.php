@@ -455,7 +455,7 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/AdminUniv/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
+Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
 Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');

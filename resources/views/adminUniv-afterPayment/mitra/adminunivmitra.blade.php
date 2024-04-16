@@ -44,7 +44,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
-                                <li><a class="dropdown-item" href="AdminUniv/Option-TeamAktif">Data Divisi
+                                <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
                                         siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="#">Laporan Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
