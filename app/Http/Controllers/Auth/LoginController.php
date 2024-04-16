@@ -31,13 +31,15 @@ class LoginController extends Controller
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
 
-            if ($user->role == 1) {
+            $role_id = $user->role->id;
+
+            if ( $role_id == 1) {
                 return redirect()->to('/superAdmin');
-            } else if ($user->role_id == 2) {
+            } else if ( $role_id == 2) {
                 return redirect()->to('/AdminUniv-Dashboard');
-            } else if ($user->role_id == 3) {
+            } else if ( $role_id == 3) {
                 return redirect()->to('/user');
-            } else if ($user->role_id == 4) {
+            } else if ( $role_id == 4) {
                 return redirect()->to('/dashboard');
             } else {
                 return redirect()->to('/');

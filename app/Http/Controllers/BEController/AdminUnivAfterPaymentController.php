@@ -280,6 +280,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function updateDivisi(Request $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
+        $divisi = Divisi::all();
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
             'deskripsi_divisi' => '',
@@ -292,7 +293,7 @@ class AdminUnivAfterPaymentController extends Controller
             'nama_divisi' => $request->nama_divisi
         ]);
         $data->save();
-        return response()->json(['success' => true, 'message' => 'succes to update divisi', 'data' => $data], 200);
+        return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
     }
     public function destroyDivisi($id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
@@ -300,7 +301,8 @@ class AdminUnivAfterPaymentController extends Controller
         $data = Divisi::find($id);
         if ($data) {
             $data->delete();
-            return response()->json(['success' => true, 'message' => 'Succes to delete divisi'], 200);
+
+            return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
@@ -730,6 +732,6 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['data' => $paket], 200);
  
     }
-    
+
 }
 
