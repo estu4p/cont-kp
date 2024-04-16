@@ -822,9 +822,7 @@ Route::get('/RiwayatJangkaWaktu', function () {
     return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
 });
 
-Route::get('/RiwayatPembelian', function () {
-    return view('user.AdminUnivAfterPayment.RiwayatPembelian');
-});
+Route::get('/RiwayatPembelian', [BEControllerAdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 
 
 Route::get('/', function () {
