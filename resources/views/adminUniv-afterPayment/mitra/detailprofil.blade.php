@@ -10,7 +10,7 @@
                 <a href="/mitra-optionpresensi" class="kekiri" style="color:#000"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                 <div class="card">
                     <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
-                        <div style="overflow: hidden;">
+                        <div style="overflow: ;">
                             <img src="assets/images/user.png" class="user">
                         </div>
                         <div style="padding-left: 25px;">
@@ -20,7 +20,8 @@
                         </div>
                         <div style="align-self: center;">
                             <label for="search-input">Status Pencarian Mahasiswa</label>
-                            <div class="input-group mb-3" style="width: 400px;">
+                            <div class="input-group mb-3"style="padding-right: 10%; width: 110%;"
+                            >
                                 <input type="text" id="search-input" class="form-control" placeholder="     pencarian" aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
                                 <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:rgb(10, 10, 10)"></i>
                             </div>
