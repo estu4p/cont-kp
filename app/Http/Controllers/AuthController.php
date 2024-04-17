@@ -12,7 +12,7 @@ class AuthController extends Controller
     //Login Contributor for Univ/Schoool
     public function index()
     {
-        $title = 'login';
+        $title = 'logincontributor';
         return view("login")->with('title', $title);
     }
 
