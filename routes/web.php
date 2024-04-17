@@ -892,3 +892,12 @@ Route::get('/presensiCoba', [PresensiCobaController::class, 'index']);
 Route::post('/presensi/masuk', [PresensiCobaController::class, 'jamMasuk'])->name('presensi.jamMasuk');
 Route::get('/presensi/keluar', [PresensiCobaController::class, 'keluar'])->name('presensi.keluar');
 Route::post('/presensi/keluar', [PresensiCobaController::class, 'jamKeluar'])->name('presensi.keluar');
+
+
+Route::get('/UserPresensi', function () {
+    return view('mitra_presensi.scanpresensiharian');
+});
+
+Route::get('/UserScanBarcode', function () {
+    return view('mitra_presensi.scanbarcode');
+});
