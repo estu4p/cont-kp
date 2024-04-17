@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="carimahasiswa">
-                    <input type="text" id="search-input" class="form-control" placeholder="     Cari Mahasiswa"
-                        aria-label="Cari mitra" aria-describedby="basic-addon2">
+                    <input type="text" id="search-input" class="form-control" placeholder="     CariMahasiswa"
+                        aria-label="    Cari mitra" aria-describedby="basic-addon2">
                     <i class="fa-solid fa-search"
                         style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color:black"></i>
                 </div>

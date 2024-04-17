@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
     <div class="wadah  p-5">
         <h1>SELAMAT DATANG</h1>
-        <h2>DI PANEL CONTRIBUTOR</h2>
+        <h2>DI PANEL MITRA</h2>
         <p class="pantau">Pantau Mahasiswa/Siswa/i Anda Disini</p>
 
         <div class="card-group  gap-5 p-5 row d-flex flex-row justify-content-around">
