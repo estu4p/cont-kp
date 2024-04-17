@@ -105,7 +105,7 @@
                 <br>
                 <div class="container-card2">
                     <button class="butongeser">
-                        <<<<< /button>
+                        <<<<</button>
                             <button class="butongeser">>>>></button>
                 </div>
                 <br>
