@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->string('quote');
+            $table->enum('type', ['quotes_harian', 'quotes_ulangtahun']);
             $table->timestamps();
         });
     }

@@ -12,10 +12,12 @@ class AdminSettingJamQuotesController extends Controller
 {
     public function quotes()
     {
-        $quotes = Quotes::all();
+        $quotes = Quotes::where('type', 'quotes_harian')->get();
+        $quotes_ulangtahun = Quotes::where('type', 'quotes_ulangtahun')->first();
         return view('admin.setting.quotes', [
             'title' => "Admin - Setting Jam & Quotes",
             'quotes' => $quotes,
+            'quotes_ulangtahun' => $quotes_ulangtahun,
         ]);
     }
 
@@ -36,6 +38,7 @@ class AdminSettingJamQuotesController extends Controller
         try {
             Quotes::create([
                 'quote' => $data['quotes'],
+                'type' => 'quotes_harian',
             ]);
             return redirect()->route('admin-setting.quotes')->with('success', 'Quotes Berhasil diTambahkan');
         } catch (\Exception $e) {
@@ -50,6 +53,22 @@ class AdminSettingJamQuotesController extends Controller
         try {
             $quotes->delete();
             return redirect()->route('admin-setting.quotes')->with('success', 'Berhasil Menghapus Quotes');
+        } catch (\Exception $e) {
+            $errorMessage = strip_tags($e->getMessage());
+            return redirect()->route('admin-setting.quotes')->with('error', $errorMessage);
+        }
+    }
+
+    public function quotes_ulangtahun_update(Request $request ,$id)
+    {
+        $data = $request->all();
+
+        try {
+            $quotes = Quotes::findOrFail($id);
+            $quotes->update([
+                'quote' => $data['quotes'],
+            ]);
+            return redirect()->route('admin-setting.quotes')->with('success', 'Quotes Ulang Tahun Berhasil di Update');
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
             return redirect()->route('admin-setting.quotes')->with('error', $errorMessage);

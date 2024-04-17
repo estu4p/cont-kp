@@ -14,14 +14,15 @@ class QuotesSeeder extends Seeder
     public function run(): void
     {
         DB::table('quotes')->insert([
-            ['quote' => "Change your life now for better future"],
-            ['quote' => "Jujur terlalu tertanam di dalam hati"],
-            ['quote' => "Aku jujur dan disiplin"],
-            ['quote' => "Aku selalu mengembangkan potensiku"],
-            ['quote' => "Aku selalu melakukan yang terbaik"],
-            ['quote' => "Rasa malas adalah musuhku"],
-            ['quote' => "Hari ini harus lebih baik dari kemarin"],
-            ['quote' => "Tidak ada kata menyerah dalam hidupku"]
+            ['quote' => "Change your life now for better future", 'type' => 'quotes_harian'],
+            ['quote' => "Jujur terlalu tertanam di dalam hati", 'type' => 'quotes_harian'],
+            ['quote' => "Aku jujur dan disiplin", 'type' => 'quotes_harian'],
+            ['quote' => "Aku selalu mengembangkan potensiku", 'type' => 'quotes_harian'],
+            ['quote' => "Aku selalu melakukan yang terbaik", 'type' => 'quotes_harian'],
+            ['quote' => "Rasa malas adalah musuhku", 'type' => 'quotes_harian'],
+            ['quote' => "Hari ini harus lebih baik dari kemarin", 'type' => 'quotes_harian'],
+            ['quote' => "Tidak ada kata menyerah dalam hidupku", 'type' => 'quotes_harian'],
+            ['quote' => "Selamat Ulang Tahun", 'type' => 'quotes_ulangtahun'],
         ]);
     }
 }

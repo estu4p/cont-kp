@@ -769,27 +769,10 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
-// Route::get('/admin/setting/quotes', function () {
-//     $quotes = [
-//         ['id' => 1, 'quotes' => "Change your life now for better future"],
-//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-//     ];
-//     return view('admin.setting.quotes', [
-//         'title' => "Admin - Setting Jam & Quotes",
-//         'quotes' => $quotes
-//     ]);
-// });
-
-// Admin Jam & Quotes
 Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
 Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
 Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
 
 Route::get('/admin/setting/user', function () {
     $users = [

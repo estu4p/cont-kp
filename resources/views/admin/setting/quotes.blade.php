@@ -58,12 +58,14 @@
 
         <div class="d-flex flex-column shadow-lg" style="background-color: #E9E9E9; border-radius: 12px; padding: 40px; width: 40%; height: fit-content; margin-right: 32px;">
             <h6 class="text-uppercase text-center">quotes ulang tahun</h6>
-            <div class="text-capitalize bg-white w-100 rounded text-center p-1 mt-5 fw-semibold ">selamat ulang tahun</div>
-            <form class="mt-4">
-                <label for="birthdayQuotes" class="text-capitalize fw-semibold">edit quotes</label>
-                <textarea name="birthdayQuotes" id="birthdayQuotes" rows="4" placeholder="Masukkan quotes...." class="bg-white w-100 border-0 rounded p-2 px-3 mt-2"></textarea>
+            <div class="text-capitalize bg-white w-100 rounded text-center p-1 mt-5 fw-semibold ">{{$quotes_ulangtahun->quote}}</div>
+            <form class="mt-4" method="post" action="{{ route('admin-setting.quotes-ulangtahun-update', $quotes_ulangtahun->id) }}">
+                @csrf
+                @method('PATCH')
+                <label for="quotes_ulangtahun" class="text-capitalize fw-semibold">edit quotes</label>
+                <textarea name="quotes" id="quotes_ulangtahun" rows="4" placeholder="Masukkan quotes...." class="bg-white w-100 border-0 rounded p-2 px-3 mt-2" required></textarea>
                 <div class="text-center">
-                    <button class="btn bg-danger bg-gradient text-white mt-3 w-50" onclick="successAlert()">Simpan</button>
+                    <button type="submit" class="btn bg-danger bg-gradient text-white mt-3 w-50">Simpan</button>
                 </div>
             </form>
         </div>
