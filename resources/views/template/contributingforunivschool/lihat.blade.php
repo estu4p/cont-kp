@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/lihat.css') }}">
-
+<div class="wadah">
     <div class="container-fluid border row justify-content-center mt-5">
         <div class="card border col-11 d-flex flex-column p-0">
             <div class="atas border w-100 row justify-content-start align-items-center p-2 m-0 bg-black">
@@ -70,10 +70,10 @@
                             <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">10</p>
                         </div>
                     </div>
-                    <div class="bawah-dua w-100 p-5 gap-3" style="margin-left: -20px ">
+                    <div class="bawah-dua w-100 p-5 gap-3" style="margin-left: -20px">
                         <h5 class="my-3">Kritik Saran</h5>
                         <div class="form-floating col-12" style="text-align: left;">
-                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="height: 200px; background-color:#DCDCDC; width:930px"></textarea>
+                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="height: 200px; background-color:#DCDCDC; "></textarea>
                         </div>
                         <br>
                         <button type="button" class="btn btn-primary">Download</button>
@@ -83,3 +83,4 @@
         </div>
     </div>
 @endsection
+</div>

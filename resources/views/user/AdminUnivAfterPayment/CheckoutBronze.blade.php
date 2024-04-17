@@ -12,7 +12,8 @@
 </head>
 
 <body>
-
+    
+<div class="wadah">
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
@@ -165,7 +166,8 @@
             });
         });
     </script>
-
+</div>
 </body>
+
 
 </html>

@@ -1,13 +1,19 @@
+.wadah {
+    overflow-x: scroll;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 .tittle-container {
     text-align: center;
     margin-top: 50px;
 }
+
 .tittle-container h1 {
     color: #333;
     margin-top: 10px;
@@ -15,13 +21,15 @@ body {
 
 .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     height: 58vh;
     background-color: #f0f0f0;
+    flex-wrap: nowrap;
+    overflow-x: auto; 
 }
 
-.mb-5{
+.mb-5 {
     margin-bottom: 3rem !important;
 }
 
@@ -34,22 +42,24 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
-    width:100px;
-    height: 20px;
-    margin:5px;
-
-
+    width: 400px;
+    height: auto;
+    margin: 10px;
 }
-.card div table tr td{
-    padding:5px 10px;
-    font-size:70%;
+
+.card div table tr td {
+    padding: 5px 10px;
+    font-size: 70%;
 }
-.card div ul li{
+
+.card div ul li {
     list-style: none;
 }
-.merah div ul li{
-    color:red;
+
+.merah div ul li {
+    color: red;
 }
+
 .plan-title {
     font-weight: bold;
     font-size: 20px;
@@ -68,4 +78,31 @@ body {
 
 .btn {
     margin-top: 10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        flex: 0 0 calc(33.333% - 20px);
+        max-width: calc(33.333% - 20px);
+        margin: 10px;
+    }
+}
+
+
+@media screen and (min-width: 1025px) {
+    .container {
+        justify-content: space-around;
+    }
+
+    .card {
+        flex: 0 0 calc(20% - 20px);
+        max-width: calc(20% - 20px);
+        margin: 10px;
+    }
 }
