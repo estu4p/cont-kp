@@ -3,7 +3,7 @@
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="/assets/css//presensiaccept.css" rel="stylesheet">
+    <link href="/assets/css//mitrapresensi.css" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <div id="presentasi-harian">
@@ -70,12 +70,12 @@
             </div>
         </div>
     </div>
-    </div>
-    <div class="col-md-6 text-right">
-    </div>
-    </div>
-    <br>
-    <table class="table" style="font-size: 10px;">
+      </div>
+     <div class="col-md-6 text-right">
+     </div>
+     </div>
+     <br>
+      <table class="table" style="font-size: 10px;">
         <thead style="text-align: center;">
             <tr>
                 <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" onchange="checkAll(this)"
@@ -136,7 +136,9 @@
          
         </tbody>
     </table>
-    <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+        <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+
+   
     </div>
 
 

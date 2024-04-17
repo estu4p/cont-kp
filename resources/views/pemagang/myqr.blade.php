@@ -56,7 +56,8 @@
                         $nama = "Nama Pengguna";
                     }
                 ?>
-                 <h3>{{ $nama }}'s QR Code</h3 >
+                 <h3>{{ $nama }}'s QR Code</h3 > 
+                <!-- <h3>iqra's QR Code</h3 > -->
                 {{-- <h3>Iqra's QR Code</h3 > --}}
             </div>
             <div class="qr-container">

@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\project;
-use App\Models\Project as ModelsProject;
+use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +17,7 @@ class ProjectSeeder extends Seeder
         $tim = ['Tim A', 'Tim B', 'Tim C'];
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 3; $i++) {
-            ModelsProject::create([
+            Project::create([
                 'nama_project' => $project[$i],
                 'deskripsi_project' => $faker->sentence(10),
                 'nama_tim' => $tim[$i],

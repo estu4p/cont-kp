@@ -27,7 +27,7 @@
         </div>
 
         <aside class="main-sidebar">
-            @include('template.sidebarMitra')
+            @include('template.sidebarcontributorformitra')
         </aside>
 
         <aside class="control-sidebar control-sidebar-dark">

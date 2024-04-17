@@ -38,7 +38,13 @@ use App\Http\Controllers\PresensiCobaController;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
+//login user
+Route::get('/user/login', function () {
+    return view('user.login', [
+        'title' => "Login",
+        'email' => "raihan@gmail.com"
+    ]);
+});
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
@@ -104,16 +110,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //login contributor mitra
-Route::get('/login', function () {
-    return view('login');
-});
-//login user
-Route::get('/user/login', function () {
-    return view('user.login', [
-        'title' => "Login",
-        'email' => "raihan@gmail.com"
-    ]);
-});
+Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
+Route::post('/loginmitra', [LoginController::class, 'loginmitra']);
+Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
+
+
 //login afterpayment
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
@@ -164,9 +165,6 @@ Route::get('/adminafterpayment', function () {
 
 
 Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-
-
 
 // Route::get('/contributingforuniv', function () {
 //     return view('template.contributingforunivschool.penilaianmahasiswa');
@@ -833,7 +831,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
 
 Route::get('/contributorformitra-editprofile', function () {
     return view('contributorformitra.editprofile');
@@ -862,3 +859,12 @@ Route::get('/presensiCoba', [PresensiCobaController::class, 'index']);
 Route::post('/presensi/masuk', [PresensiCobaController::class, 'jamMasuk'])->name('presensi.jamMasuk');
 Route::get('/presensi/keluar', [PresensiCobaController::class, 'keluar'])->name('presensi.keluar');
 Route::post('/presensi/keluar', [PresensiCobaController::class, 'jamKeluar'])->name('presensi.keluar');
+
+
+Route::get('/UserPresensi', function () {
+    return view('mitra_presensi.scanpresensiharian');
+});
+
+Route::get('/UserScanBarcode', function () {
+    return view('mitra_presensi.scanbarcode');
+});
