@@ -14,8 +14,8 @@
                             <img src="assets/images/user.png" class="user">
                         </div>
                         <div style="padding-left: 25px;">
-                            
-                            <h3 style="font-size: 20px; margin: 0;">Simpay</h3>
+
+                            <h3 style="font-size: 20px; margin: 0;">Syalita Widyandini</h3>
                             <p style="margin: 10;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
                         </div>
                         <div style="align-self: center;">
@@ -25,7 +25,7 @@
                                 <input type="text" id="search-input" class="form-control" placeholder="     pencarian" aria-label="Cari Mahasiswa" aria-describedby="basic-addon2">
                                 <i class="fa-solid fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color:rgb(10, 10, 10)"></i>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                       </tbody>
                       </table>
                       <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
-                    
+
                       <div class="modal fade" id="jamkerja">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -310,9 +310,9 @@
                     </div>
                     <!-- Isi dari modal -->
                     <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
-    
+
                         <!-- Baris Ke-1 -->
-                 
+
                         <div class="keterangan">
                             “ Maaf saya tidak dapat mengikuti magang untuk
                             hari ini dikarenakan saya sedang tidak enak
@@ -324,8 +324,8 @@
                         Link Foto Gdrive
                         <textarea class="form-control" id="floatingTextarea" placeholder=" " style="padding: 1px;"></textarea>
                         <label for="floatingTextarea"></label>
-                        
-    
+
+
                         <!-- Break Line -->
                         <!-- Baris Ke-3 -->
                         kategori izin
@@ -337,24 +337,24 @@
                                 <option value="4">keperluan lainnya</option>
                         </select>
                     </div>
-    
-                     
-                        
-    
+
+
+
+
                             <div class="d-grid gap-2 d-md-block">
                                 <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
                                 <button id="button2" class="btn btn-primary_tidak" type="button" onclick="handleButtonClick(2)">tidak ganti jam</button>
                             </div>
-                        
+
                         <div style="text-align: center">
                             <button class="btnkembali" data-bs-dismiss="modal">simpan</button>
                         </div>
-                   
-    
+
+
                 </div>
             </div>
         </div>
-    
+
         </div>
                 </div>
 
