@@ -44,6 +44,7 @@ Route::get('/user/login', function () {
         'email' => "raihan@gmail.com"
     ]);
 });
+
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
@@ -110,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
 
 //login contributor mitra
 Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
-Route::post('/loginmitra', [LoginController::class, 'loginmitra']);
+Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
 Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
 
 
