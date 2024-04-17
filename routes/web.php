@@ -14,13 +14,15 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\DataPresensiSiswaController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorUnivController;
 
 /*
 |--------------------------------------------------------------------------
@@ -245,17 +247,15 @@ Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.ma
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
-Route::get('/laporandatapresensi', function () {
+Route::get('/laporandatapresensi', function (){
     return view('presensi.laporandatapresensi');
 });
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
 
-Route::get('/presensi-contributor-univ', function () {
-    return view('presensi.presensiharian');
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+
+Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
     // return view('presensi.presensiharian')->name('presensi.con');
-});
+
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
 });

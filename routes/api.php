@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BEController\MhsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
-use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
@@ -104,12 +103,14 @@ Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentC
 Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
-Route::post('paket/perpanjang', [AdminUnivAfterPaymentController::class, 'Perpanjang']);
+Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
 Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
+Route::get('datapresensi', [ContributorUnivController::class, 'DataPresensi']);
+Route::get('datapresensisiswa/{id}', [ContributorUnivController::class,'DataPresensiSiswa']);
 
 //Contributor for Mitra
 Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
