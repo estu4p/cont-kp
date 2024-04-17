@@ -18,6 +18,7 @@
     display: inline-block;
     position: relative;
     text-decoration: none;
+    
 }
 
 .menu-navbar {
@@ -32,6 +33,7 @@
 
 .menu-reg {
     color: #a61c1c;
+
 }
 
 .menu-navbar:before,
@@ -72,6 +74,7 @@
     color: #a61c1c;
     border: 2px solid #a61c1c;
     border-radius: 8px;
+    
 }
 .menu-reg:hover {
     color: #a61c1c;
@@ -92,6 +95,7 @@
     border-radius: 12px;
     padding: 16px 28px;
     text-decoration: none;
+    
 }
 .btn-header:hover {
     color: #a61c1c;
@@ -131,6 +135,7 @@
 .card-paket:hover {
     border: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 .register {
     padding: 80px;
@@ -587,6 +592,3 @@ border-radius: 5px;
     border-radius: 0px 8px 8px 0px;
     width: 100%;
 }
-
-
-
