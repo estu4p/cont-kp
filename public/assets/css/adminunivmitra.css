@@ -190,6 +190,14 @@
     margin-left: 5px; /* Sesuaikan margin sesuai kebutuhan */
 }
 
-/* Gaya khusus untuk judul mitra */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 
-/* Penyesuaian tambahan sesuai kebutuhan */
+    .card-header {
+        width:10%;
+      }
+    .fzt5{font-size: 50% !important;}
+    .fzt6{font-size: 60% !important;}
+    .fzt7{font-size: 70% !important;}
+    .fzt8{font-size: 80% !important;}
+  } 
+ 
