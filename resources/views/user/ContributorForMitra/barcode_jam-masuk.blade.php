@@ -77,10 +77,11 @@
             @endif
             {{-- scanner --}}
             <div class="card bg-white shadow rounded-3 p-3 border-0">
-                <video id="preview"></video>
+                <div><video id="preview"></video></div>
+
                 <form action="{{ route('barcode.store') }}" method="POST" id="form">
                     @csrf
-                    <input type="" id="nama_lengkap" name="nama_lengkap">
+                    <input type="hidden" id="nama_lengkap" name="nama_lengkap">
                 </form>
             </div>
             <h3>Jam Masuk</h3>

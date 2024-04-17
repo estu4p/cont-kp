@@ -64,8 +64,7 @@
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR
-                    Code Saya</a></button>
+            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
         </div>
         <div class="konten">
             <div class="shif">
@@ -146,12 +145,11 @@
                 </div>
 
                 <div class="kananbawah">
-
-                    <div class="kebaikan border border-secondary mx-3">
+                    <div class="kebaikan border border-secondary mx-0">
                         <form action="{{ route('kebaikan') }}" method="POST">
                             @csrf
                             <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-                            <textarea id="pesan" name="kebaikan" rows="6"
+                            <textarea class="textarea1" id="pesan" name="kebaikan" rows="6"
                                 placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan"
                                 style="background-color: #E9ECEF; width: 95%;"></textarea>
                             <div class="grubbuton">
@@ -159,25 +157,12 @@
                                 <button class="tambahkan" type="submit">Tambahkan</button>
                             </div>
                         </form>
-
-                    <div class="kebaikan border border-secondary ">
-                        <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-                        <textarea id="pesan" class="textarea" name="pesan" rows="6" placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan" style="background-color: #E9ECEF; width: 95%;"></textarea>
-                        <div class="grubbuton">
-                            <button class="batal">Batal</button>
-                            <button class="tambahkan" >Tambahkan</button>
-                        </div>
-
                     </div>
                     <div class="perhatian">
                         <div>
                             <div class="judulperhatian">Attention !</div>
                         </div>
                         <div class="kontenperhatian">
-
-                            <div class="keterangan border border-danger">Kemarin anda absen pulang di kost jangan
-                                diulang!</div>
-
                             <div class="keterangan border border-danger m">Kemarin anda absen pulang di kost jangan diulang!</div>
                             <div class="kurangjam  bordermerah d-flex flex-column justify-content-center">
                                 <div class="milik">Anda memiliki kekurangan jam kerja</div>

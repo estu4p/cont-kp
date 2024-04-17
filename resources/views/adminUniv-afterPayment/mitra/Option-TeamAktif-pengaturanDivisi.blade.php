@@ -163,7 +163,7 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
-                <form action="{{ route('adminUniv.addDivisi') }}" method="POST">
+                <form action="{{ route('adminUniv.addDivisi') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -179,7 +179,8 @@
                                     <input type="file" id="fileInput" style="display: none;">
                                 </div>
                                 <div>
-                                    <button class="addgambar">Add Photo</button>
+                                    <input class="addgambar form-control" type="file" id="formFile"
+                                        name="foto_divisi" id="foto_divisi">
                                 </div>
                                 <div>
                                     <button class="remove">Remove</button>
