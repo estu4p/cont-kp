@@ -745,8 +745,6 @@ class AdminUnivAfterPaymentController extends Controller
         return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('status', 'no_pesanan', 'harga', 'paket', 'tanggal', 'metode_pembayaran'));
     }
 
-
-
     //jangka waktu
     public function JangkaWaktu()
     {
@@ -754,3 +752,4 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['data' => $paket], 200);
     }
 }
+
