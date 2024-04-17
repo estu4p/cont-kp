@@ -4,7 +4,7 @@ body
 
 
 {
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 #presentasi-harian {
@@ -17,9 +17,13 @@ body
 }
 
 .card-header {
-    color: white;
-    background-image: url(/assets/images/backroundheaderpresensi.png);
-    border-bottom: 1px solid #ddd;
+    
+        width:100%;
+        height: 50%; 
+        background: #404040;
+        color: white;
+   
+      
 }
 .btn {
 width: 228px;
@@ -48,27 +52,28 @@ border-radius: 20px;
 }
 
 
-.table-bordered {
-    border-color: #ddd;
+.table {
+    padding: 5px; /* Ubah nilai sesuai kebutuhan */
 }
 
-
-
-.table th {
-    text-align: center;
-    background-color: #DCDCDC;
+/* Mengurangi padding pada sel header dan sel data */
+th, td {
+    padding: 60%; /* Ubah nilai sesuai kebutuhan */
 }
 
-.table tr td {
-    background-color: white !important;
-}
-.table tr{
-    background-color: white !important;
+/* Mengurangi ukuran font pada teks dalam tabel */
+.table {
+    font-size: 12px; /* Ubah nilai sesuai kebutuhan */
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+/* Mengurangi lebar tabel */
+.table {
+    width: 100%; /* Ubah nilai sesuai kebutuhan */
+}
+
+/* Mengurangi tinggi tabel */
+.table {
+    height: 100px; /* Ubah nilai sesuai kebutuhan */
 }
 
 
@@ -112,7 +117,7 @@ border-radius: 20px;
 }
 
 .checkbox-container {
-    margin-right: 10px;
+    margin-right: 10%;
 }
 
 .toggle-button {
@@ -218,5 +223,12 @@ i .fs-1 {
     justify-content: center;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 
-
+    
+    .fzt5{font-size: 50% !important;}
+    .fzt6{font-size: 60% !important;}
+    .fzt7{font-size: 70% !important;}
+    .fzt8{font-size: 80% !important;}
+  } 
+ 
