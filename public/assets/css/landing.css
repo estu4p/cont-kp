@@ -24,8 +24,7 @@
     color: #000;
 }
 
-.menu-reg {
-}
+
 .menu-navbar {
     color: #000;
 }
@@ -118,14 +117,14 @@
 }
 .card {
     border-radius: 16px;
-    width: 22rem;
+    /* width: 22rem; */
     margin: 0 auto; /* Untuk membuat card berada di tengah */
     display: flex; /* Menjadikan konten menjadi flexbox */
     justify-content: center; /* Memusatkan konten secara horizontal */
 }
 .card {
     border-radius: 16px;
-    width: 22rem;
+    /* width: 22rem; */
     margin: 0 auto; /* Untuk membuat card berada di tengah */
 }
 .card-paket:hover {
@@ -297,8 +296,8 @@
 
 @media (max-width: 992px) {
     #paket .col-3 {
-        flex: 0 0 50%;
-        max-width: 50%;
+        /* flex: 0 0 50%; */
+        /* max-width: 50%; */
     }
     .fw-semibold.fs-5 p {
         font-size: 16px;
@@ -306,9 +305,9 @@
     .fw-semibold.fs-5 p.mb-5 {
         font-size: 16px;
     }
-    .box-form {
+    /* .box-form {
         width: 80%;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -335,7 +334,7 @@
         padding: 20px;
     }
     .card {
-        width: 100%;
+        /* width: 100%; */
         max-width: none;
         margin-bottom: 20px; /* Menambahkan ruang antara kartu */
     }
@@ -485,7 +484,7 @@
         flex-direction: column;
     }
     .card {
-        width: 100%;
+        /* width: 100%; */
     }
     .col-last {
         display: none;
@@ -588,5 +587,54 @@ border-radius: 5px;
     width: 100%;
 }
 
+
+.untukmobilelogo div{
+ display: flex;
+ flex-direction: row;       
+}
+@media only screen and (min-width: 1024px) {
+    .fzt170{
+        font-size:170% !important;
+    }
+    
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .fzt992{
+        font-size:140% !important;
+    }
+    
+}
+@media only screen and (min-width: 576px) {
+    .sosmed576{
+        justify-content: center;
+        display: flex;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .untukmobile{
+        width:100%;
+    }
+        .untukmobiletext {
+            padding:0 25%;
+            border: 1px solid white;
+          }
+    .untukmobilelogo{
+        justify-content: center;
+        border: 1px solid white;
+    }
+    .untukmobilelogo div h4{
+        padding-top: 20px;
+        
+    }
+    .untukmobilelogo div img{
+       margin: auto;
+    }
+    
+    .untukmobilelogo div{
+        display: flex;
+        flex-direction: column;       
+      
+       }
+}
 
 

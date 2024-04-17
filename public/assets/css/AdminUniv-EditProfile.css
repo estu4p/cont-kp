@@ -17,6 +17,9 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
+.tombol{
+    margin-top: 15px;
+}
 
    
 
@@ -108,17 +111,22 @@ border-radius: 5px;
     width: 300px;
     background-color: #f2f4f8;
 }
-.Cancel {
+.cancel{
     border-radius: 7px;
-    color: #ffffff;
-    background-color: #7a7a7a;
+    height: 40px;
+    width: 90px;
+    border: none;
+    background-color: transparent;
+   
 }
 .Update {
     border-radius: 7px;
+    height: 40px;
+    width: 90px;
     color: #ffffff;
     background-color: #A4161A;
     border: none;
-    color: #ffffff;
+    
 }
 .atas{
     justify-content: space-between;
