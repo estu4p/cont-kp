@@ -223,7 +223,7 @@
                             </a>
 
                         </div>
-                    </div>                                                                                                                                                           
+                    </div>                                                                                                                                                       
                 </div>
                 <div class="col-3">
                     <div class="card-paket card p-2 pb-4" style="width: 19rem; border-radius: 16px;">
