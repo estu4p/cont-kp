@@ -49,6 +49,7 @@ Route::get('/user/login', function () {
 });
 
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
+Route::get('/user/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');

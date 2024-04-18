@@ -14,39 +14,37 @@ class RegisterController extends Controller
     {
         return view('user.register');
     }
-
     public function register(Request $request)
     {
-        // $nama_lengkap = $request->input('nama_lengkap');
-        // $nomor_induk = $request->input('nomor_induk');
-        // $jurusan = $request->input('jurusan');
-        // $email = $request->input('email');
-        // $username = $request->input('username');
-        // $no_hp = $request->input('no_hp');
-        // $barcode = $request->input('barcode');
-        // $password = $request->input('password');
+        $nama_lengkap = $request->input('nama_lengkap');
+        $nomor_induk = $request->input('nomor_induk');
+        $jurusan = $request->input('jurusan');
+        $email = $request->input('email');
+        $username = $request->input('username');
+        $no_hp = $request->input('no_hp');
+        $barcode = $request->input('barcode');
+        $password = $request->input('password');
+
+        if (!$nama_lengkap || !$nomor_induk || !$jurusan || !$email || !$username || !$no_hp || !$barcode || !$password) {
+            return response()->json(['pesan' => 'Semua field harus diisi'], 400);
+        }
 
         $user = new User();
-        $user->nama_lengkap = $request->input('nama_lengkap');
-        $user->nomor_induk = $request->input('nomor_induk');
-        $user->jurusan = $request->input('jurusan');
-        $user->email = $request->input('email');
-        $user->username = $request->input('username');
-        $user->no_hp = $request->input('no_hp');
-        $user->barcode = $request->input('barcode');
-        $user->password =$request->input('password');
-
-        // $user->nama_lengkap = $nama_lengkap;
-        // $user->nomor_induk = $nomor_induk;
-        // $user->jurusan = $jurusan;
-        // $user->email = $email;
-        // $user->username = $username;
-        // $user->no_hp = $no_hp;
-        // $user->barcode = $barcode;
-        // $user->password = $password;
-
-        $user->save();
-
+        $user->nama_lengkap = $nama_lengkap;
+        $user->nomor_induk = $nomor_induk;
+        $user->jurusan = $jurusan;
+        $user->email = $email;
+        $user->username = $username;
+        $user->no_hp = $no_hp;
+        $user->barcode = $barcode;
+        $user->password = $password;
+        // $user->save();
+        try {
+            $user->save();
+            return response()->json(['pesan' => 'User berhasil disimpan', 'user' => $user], 200);
+        } catch (\Exception $e) {
+            return response()->json(['pesan' => 'Gagal menyimpan user', 'error' => $e->getMessage()], 500);
+        }
         // if ($user) {
         //     return response([
         //         'pesan' => 'user berhasil',
@@ -58,7 +56,8 @@ class RegisterController extends Controller
         //     ], 404);
         // }
 
-        return redirect()->route('user.login')->with('success', 'User registered successfully!');
+        // // return redirect('/user.login')->with('success', 'User registered successfully!');
+        // return redirect()->route('user.login')->with('success', 'User registered successfully!');
         // return view('user.login', ['title' => "Login"]);
     }
 
