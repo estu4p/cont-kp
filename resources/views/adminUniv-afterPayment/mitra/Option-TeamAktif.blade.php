@@ -70,11 +70,12 @@
         @endforeach
 
     </div>
-
+    {{-- @foreach ($divisiMitra as $item) --}}
     <div class="bawah">
         <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
-        <a href="/AdminUniv/Option-TeamAktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i
-                class="fa-solid fa-gear"></i></a>
+        <a href="{{ route('adminUniv.pengaturanDivisi', $divisiMitraId->mitra_id) }}" style="color: #A4161A">Pengaturan
+            Divisi...<i class="fa-solid fa-gear"></i></a>
 
     </div>
+    {{-- @endforeach --}}
 @endsection

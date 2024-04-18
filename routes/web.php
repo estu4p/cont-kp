@@ -265,14 +265,14 @@ Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.ma
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
-Route::get('/laporandatapresensi', function (){
+Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
 
 Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
 
 Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
-    // return view('presensi.presensiharian')->name('presensi.con');
+// return view('presensi.presensiharian')->name('presensi.con');
 
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
@@ -474,7 +474,7 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControll
 
 Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
-Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
+Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
 Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'destroyDivisi'])->name('adminUniv.destroyDivisi');
