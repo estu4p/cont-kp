@@ -17,7 +17,7 @@
     </div>
     <br>
     <div class="row isi">
-        @foreach ($divisi->anggotaDivisi as $anggota)
+        @foreach ($divisi as $anggota)
             <div class="col-3 my-5">
                 <div class="dropdown" style="color: blueviolet;">
                     <div class="atasan">

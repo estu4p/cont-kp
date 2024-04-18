@@ -14,14 +14,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
+use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -245,17 +248,15 @@ Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.ma
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
-Route::get('/laporandatapresensi', function () {
+Route::get('/laporandatapresensi', function (){
     return view('presensi.laporandatapresensi');
 });
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
 
-Route::get('/presensi-contributor-univ', function () {
-    return view('presensi.presensiharian');
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+
+Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
     // return view('presensi.presensiharian')->name('presensi.con');
-});
+
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
 });
@@ -680,15 +681,6 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
-
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
-
-
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -696,51 +688,45 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
-Route::get('/mitra-presensi-barcode/istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/selesai-istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-selesai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/pulang', function () {
-    $presensi = Presensi::all();
-
-    // Ambil data presensi terbaru
-    $latestPresensi = Presensi::latest()->first();
-    $pulang = strtotime($latestPresensi->jam_pulang);
-    $masuk = strtotime($latestPresensi->jam_masuk);
-
-    // Hitung selisih waktu
-    $diffInSeconds = $pulang - $masuk;
-
-    // Ubah selisih waktu ke dalam format jam:menit:detik
-    $totalHours = floor($diffInSeconds / 3600);
-    $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
-    $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
-
-    $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-
-    return view('User.ContributorForMitra.barcode_jam-pulang', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => $presensi,
-        'total' => $total
-    ]);
-});
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
+
+Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
 Route::post('/mitra-presensi-barcode/jam-mulai-istirahat', [ContributorForMitra::class, 'jam_mulai_istirahat'])->name('barcode.jam-mulai-istirahat');
+Route::get('/mitra-presensi-barcode/selesai-istirahat', [ContributorForMitra::class, 'view_jam_selesai_istirahat']);
 Route::post('/mitra-presensi-barcode/jam-selesai-istirahat', [ContributorForMitra::class, 'jam_selesai_istirahat'])->name('barcode.jam-selesai-istirahat');
+
+Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_jam_pulang'])->name('barcode.jam-pulang');
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
+Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
+
+// Route::get('/mitra-presensi-barcode/pulang', function () {
+//     $presensi = Presensi::all();
+
+//     // Ambil data presensi terbaru
+//     $latestPresensi = Presensi::latest()->first();
+//     $pulang = strtotime($latestPresensi->jam_pulang);
+//     $masuk = strtotime($latestPresensi->jam_masuk);
+
+//     // Hitung selisih waktu
+//     $diffInSeconds = $pulang - $masuk;
+
+//     // Ubah selisih waktu ke dalam format jam:menit:detik
+//     $totalHours = floor($diffInSeconds / 3600);
+//     $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
+//     $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
+
+//     $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+
+//     return view('User.ContributorForMitra.barcode_jam-pulang', [
+//         'title' => "Barcode Pemagang",
+//         'nama' => "Naufal",
+//         'presensi' => $presensi,
+//         'total' => $total
+//     ]);
+// });
+
+
+
 
 
 
@@ -767,6 +753,10 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
+Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
+Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
+Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
 
 Route::get('/admin/setting/user', function () {
     $users = [
@@ -795,41 +785,6 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
-
-Route::get('/admin/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('admin.setting.quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
-Route::get('/admin/setting/user', function () {
-    $users = [
-        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
-        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
-        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
-        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
-        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
-        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
-    ];
-    return view('admin.setting.user', [
-        'title' => "Admin - User & Organization",
-        'users' => $users
-    ]);
-});
-
-Route::get('/', function () {
-    return view('landing-page.index', ['title' => 'Controlling Magang']);
-});
 Route::get('/AdminPaket', function () {
     return view('user.AdminUnivAfterPayment.AdminPaket');
 });

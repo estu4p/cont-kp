@@ -59,106 +59,68 @@
                            <div class="col-md-6 text-right">
                             </div>
                         </div>
-                        <br>
+                        
                         <table class="table" style="font-size: 10px;">
-                            <thead style="text-align: center;">
-                                <tr>
-                                    <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" id="#" name="">&nbsp;No</th>
-                                    <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
-                                    <th colspan="2" style="border-bottom: 1px solid black;">Log Aktivitas</th>
-                                    <th rowspan="2" >Status <br>Kehadiran</th>
-                                    <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
-                                </tr>
-                                <tr>
-                                    <th>Masuk</th>
-                                    <th style="border-left: 1px solid black;">Pulang</th>
-                                    <th>Mulai</th>
-                                    <th style="border-left: 1px solid black;">Selesai</th>
-                                    <th>Total Jam</th>
-                                    <th style="border-left: 1px solid black;">(-)(+)</th>
-                                    <th class="bates">Log Aktivitas</th>
-                                    <th style="border-left: 1px solid black;">Aksi</th>
-                                </tr>
-                            </thead>
-                              <tbody>
-                                <tr>
-                                    <td><input type="checkbox" id="#" name=""> &nbsp; 1</td>
-                <td class="bates" href><a href="/mitra-detailprofil">simpay</a></td>
-                <td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#modaljam" style="text-decoration: none">06:25:00</a></td>
-                                  <td>13:05:14</td>
+                          <thead style="text-align: center;">
+                              <tr>
+                                  <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" onchange="checkAll(this)"
+                                          name="chk[]"id="#" name="">&nbsp;No</th>
+                                  <th rowspan="2" style="vertical-align: middle;">Nama</th>
+                                  <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
+                                  <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
+                                  <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
+                                  <th colspan="2" style="border-bottom: 1px solid black;">Log Aktivitas</th>
+                                  <th rowspan="2">Status <br>Kehadiran</th>
+                                  <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
+                              </tr>
+                              <tr>
+                                  <th>Masuk</th>
+                                  <th style="border-left: 1px solid black;">Pulang</th>
+                                  <th>Mulai</th>
+                                  <th style="border-left: 1px solid black;">Selesai</th>
+                                  <th>Total Jam</th>
+                                  <th style="border-left: 1px solid black;">(-)(+)</th>
+                                  <th class="bates">Log Aktivitas</th>
+                                  <th style="border-left: 1px solid black;">
+                                      <div class="">Aksi</div>
+                                      
+                  
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td><input type="checkbox" name="chkbox[]" id="#" name=""> &nbsp; 1</td>
+                                  <td class="bates" href><a href="/ContributorForMitra-datapresensi">simpay</a></td>
+                                  <td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#modaljam"
+                                          style="text-decoration: none">06:25:00</a></td>
+                                  <td>13:05:14<i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja"
+                                      style="color: red"></i></td>
                                   <td>06:25:00 </td>
                                   <td>13:05:14</td>
                                   <td>06:25:00 </td>
                                   <td>13:05:14</td>
-                                  <td  class="bates">Membuat ributt anak gang sebelah</td>
-                                  <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
-                                    <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
-
-                                    <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
-                                    <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
-                                  <td>hadir</td>
+                                  <td class="bates">Membuat ributt anak gang sebelah</td>
+                                  <td>
+                                      <div class="toggle-set">
+                                          <input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                                          <label for="check" class="round-button-check" tabindex="2">
+                                              <i class="fa-solid fa-check"></i>
+                                          </label>
+                      
+                                          <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
+                                          <label for="cross" class="round-button-cross" tabindex="1"> <a class='text-light'
+                                                  data-bs-toggle="modal" data-bs-target="#silang" href="#"><i
+                                                      class="fa-solid fa-xmark"></i></a></label>
+                                      </div>
+                                  </td>
+                                  <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal"
+                                      data-bs-target="#statuskehadiran"></i></td>
                                   <td>merapikan parkiran motor</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="#" name=""> &nbsp; 2</td>
-                                    <td  class="bates" >bono</td>
-                                    <td>06:25:00</td>
-                                    <td>13:05:14</td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td  class="bates">Membuat onar di kantor</td>
-                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
-                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
-
-                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
-                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
-                                    <td>hadir</td>
-                                    <td>merapikan parkiran motor</td>
-                                  </tr>
-                                  <tr>
-                                    <td><input type="checkbox" id="#" name=""> &nbsp; 3</td>
-                                    <td>udin nganga</td>
-                                    <td>--</td>
-                                    <td>--</td>
-                                    <td>-- </td>
-                                    <td>--</td>
-                                    <td>--</td>
-                                    <td>--</td>
-                                    <td  class="bates"></td>
-                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
-                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
-
-                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
-                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label>
-                                    </td>
-                                    <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#statuskehadiran"></i></td>
-                                    <td>--</td>
-                                  </tr>
-                                  <tr>
-                                    <td><input type="checkbox" id="#" name=""> &nbsp; 4</td>
-                                    <td>bodat</td>
-                                    <td>07:25:00 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jamkerja" style="color: red"></i></td>
-                                    <td>14:05:14 <i class="fas fa-info-circle" data-bs-toggle="modal" data-bs-target="#jampulang" style="color: red"></i></td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td>06:25:00 </td>
-                                    <td>13:05:14</td>
-                                    <td  class="bates">Membuat ributt anak gang </td>
-                                    <td><input type="radio" id="check" name="button-toggle" class="toggle-button" />
-                                        <label for="check" class="round-button-check" tabindex="1"><i class="fa-solid fa-check"></i></label>
-
-                                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
-                                        <label for="cross" class="round-button-cross" tabindex="1"><i class="fa-solid fa-xmark"></i></label></td>
-                                    <td>hadir</td>
-                                    <td>merapikan parkiran motor</td>
-                                  </tr>
-                              </tbody>
-                         </table>
+                              </tr>
+                           
+                          </tbody>
+                      </table>
                          <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
                     </div>
                     <div class="modal fade" id="statuskehadiran">

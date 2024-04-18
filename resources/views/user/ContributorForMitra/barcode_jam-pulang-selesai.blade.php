@@ -59,7 +59,7 @@
                 <div>
                     <video style="width: 100%" id="preview"></video>
                 </div>
-                <form action="{{ route('barcode.jam-mulai-istirahat') }}" method="POST" id="form">
+                <form action="{{ route('barcode.store') }}" method="POST" id="form">
                     @csrf
                     <input type="hidden" id="nama_lengkap" name="nama_lengkap">
                 </form>
@@ -86,15 +86,15 @@
                     </tr>
                     <tr>
                         <td class="keterangan"><i class="bi bi-clock"></i> Jam Istirahat</td>
-                        <td class="isi"></td>
+                        <td class="isi">{{ $presensi->jam_mulai_istirahat }}</td>
                     </tr>
                     <tr>
                         <td class="keterangan"><i class="bi bi-clock"></i> Jam Kembali</td>
-                        <td class="isi"></td>
+                        <td class="isi">{{ $presensi->jam_selesai_istirahat }}</td>
                     </tr>
                     <tr>
                         <td class="keterangan"><i class="bi bi-clock"></i> Jam Pulang</td>
-                        <td class="isi"></td>
+                        <td class="isi">{{ $presensi->jam_pulang }}</td>
                     </tr>
                 </tbody>
             </table>
