@@ -7,7 +7,7 @@
   <div class="dashboard">
     <div class="kartu1 d-flex flex-column">
       <h3 class="kartu-judul">Jumlah Subcription</h3>
-       <td class=>300</td>
+       <td class=>{{ $totalSubscription }}</td>
       
   
 
