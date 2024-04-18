@@ -19,7 +19,7 @@ use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
-use App\Http\Controllers\BEController\SubscriptionController;
+use App\Http\Controllers\BEController\UserAdminSistemController;
 
 
 
@@ -145,6 +145,8 @@ Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra:
 //Admin sistem dashboard
 Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
 //Subscription
-Route::post('/subscriptions', [SubscriptionController::class, 'store']);
-Route::delete('/subscriptions/{id}', [SubscriptionController::class, 'destroy']);
-Route::put('/subscriptions/{id}', [SubscriptionController::class, 'update']);
+Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+Route::get('/subscriptions/{id}', [UserAdminSistemController::class, 'show'])->name('subscriptions.show');
+Route::post('/subscriptions', [UserAdminSistemController::class, 'store'])->name('subscriptions.store');
+Route::put('/subscriptions/{id}', [UserAdminSistemController::class, 'update'])->name('subscriptions.update');
+Route::delete('/subscriptions/{id}', [UserAdminSistemController::class, 'destroy'])->name('subscriptions.destroy');
