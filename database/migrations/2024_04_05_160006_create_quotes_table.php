@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_paket');
-            $table->enum('metode_bayar', ['BNI', 'Dana'])->default('BNI');
+            $table->string('quote');
+            $table->enum('type', ['quotes_harian', 'quotes_ulangtahun']);
             $table->timestamps();
-            // kota ambil dari users ya
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket');
+        Schema::dropIfExists('quotes');
     }
 };

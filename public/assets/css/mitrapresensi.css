@@ -8,7 +8,7 @@ body
 }
 
 #presentasi-harian {
-    padding: 20px;
+    padding: 5px;
 }
 
 .card {
@@ -48,22 +48,28 @@ border-radius: 20px;
 }
 
 
-.table-bordered {
-    border-color: #ddd;
+.table {
+    padding: 5px; /* Ubah nilai sesuai kebutuhan */
 }
 
-
-
-.table th {
-    text-align: center;
-    background-color: #DCDCDC;
+/* Mengurangi padding pada sel header dan sel data */
+th, td {
+    padding: 60%; /* Ubah nilai sesuai kebutuhan */
 }
 
-.table tr td {
-    background-color: white !important;
+/* Mengurangi ukuran font pada teks dalam tabel */
+.table {
+    font-size: 12px; /* Ubah nilai sesuai kebutuhan */
 }
-.table tr{
-    background-color: white !important;
+
+/* Mengurangi lebar tabel */
+.table {
+    width: 91%; /* Ubah nilai sesuai kebutuhan */
+}
+
+/* Mengurangi tinggi tabel */
+.table {
+    height: 100px; /* Ubah nilai sesuai kebutuhan */
 }
 
 .btn-primary {
@@ -108,8 +114,13 @@ border-radius: 20px;
     color: white;
     border-radius: 6px;
     border-color: #ddd;
+    
+    padding: 5px 10px; /* Ubah nilai sesuai kebutuhan */
 
 }
+.button-container {
+    text-align: vertical;
+  }
 
 .checkbox-container {
     margin-right: 10px;
@@ -149,19 +160,19 @@ border-radius: 20px;
 #cross:checked + .round-button-cross {
     background-color: red;
 }
-/* .bates{ 
+.bates{
     max-width:200px !important;
     box-sizing: border-box;
     word-wrap: break-word;
-/* } */
+}
 
 
 .keterangan{
 
 width: 471px;
-height: 300px;
+height: 311px;
 left: 53px;
-top: 336px;
+top: 116px;
 background: #F2F2F2;
 border-radius: 5px;
 padding: 30px;
@@ -182,7 +193,7 @@ border-radius: 3px;
     width: 471px;
     height: 51px;
     left: 53px;
-    top: 375px;
+    top: 475px;
     background: #F2F2F2;
     border-radius: 3px;
     padding: 30px;
@@ -219,12 +230,14 @@ i .fs-1 {
 }
 .date{
     border-radius: 1px;
+    background-color: #007bff;
 }
-
 
 .cari{
-    padding-left: 700px;
-}
+    padding-left: 70%;
+    width: 50%;
+}  
+
 
 
 
@@ -258,17 +271,16 @@ i .fs-1 {
     padding-left: 20px; /* Atur padding kiri sesuai kebutuhan */
 }
 .save{
-    background-color: #250792;
+    background-color: #ff000d;
     border-radius: 10px;
     width: 80px;
 }
 .close{
     width: 80px;
-    background-color: #007bff;
 }
 
 .gantijam{
-    background-color: #2a28a7; /* Warna hijau */
+    background-color: #a7284e; /* Warna hijau */
     
     padding: 10px 20px; 
 }
@@ -278,15 +290,19 @@ i .fs-1 {
     padding: 10px 20px; 
 
 }
-
-#scrollable {
-    width: 300px;
-    height: 200px;
-    overflow: auto;
-    border: 1px solid #ccc;
-}
-
-.keluar {
-    background-color: transparent !important;
-    border: none;
-}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .cari{
+        padding-left: 55%;
+    }
+    .fzt5{font-size: 50% !important;}
+    .fzt6{font-size: 60% !important;}
+    .fzt7{font-size: 70% !important;}
+    .fzt8{font-size: 80% !important;}
+  }
+  .table {
+    
+    margin-left: auto; /* Menggeser tabel ke tengah */
+    margin-right: auto; /* Menggeser tabel ke tengah */
+    display: table; /* Menggunakan display table agar margin otomatis */
+    padding: 20px;
+}  

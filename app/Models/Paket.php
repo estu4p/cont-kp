@@ -11,8 +11,22 @@ class Paket extends Model
     protected $table = 'paket';
 
     protected $fillable = [
+        'nama_paket',
+        'tanggal',
+        'status',
+        'no_pesanan',
+        'harga',
         'paket',
         'metode_bayar',
-        'kota',
     ];
+
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
+    // Relasi dengan model User jika Anda ingin mengaitkan kota dengan user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

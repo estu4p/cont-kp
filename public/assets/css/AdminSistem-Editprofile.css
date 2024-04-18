@@ -2,21 +2,21 @@
     display: flex;
     padding-top: 10px;
     padding-left: 50px;
+    flex-wrap: wrap;
 }
 
 .propil {
-
     height: 650px;
-    width: 250px;
+    width: calc(25% - 20px); /* Setengah dari lebar kontainer dengan margin */
+    margin-right: 40px;
     padding-top: 20px;
     padding-left: 20px;
     text-align: center;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-right: 20px;
-  }
-
+    margin-bottom: 20px;
+}
    
 
 
@@ -44,8 +44,18 @@
     padding-left: 35px;
 }
 .wadahedit {
-    padding-left: 30px;
+    height: 650px;
+    width: calc(72% - 20px); /* Setengah dari lebar kontainer dengan margin */
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
 }
+
+
 .editprofil {
     height: 650px;
     width:800px;
@@ -106,4 +116,17 @@ border-radius: 5px;
     background-color: #A4161A;
     border: none;
     color: #ffffff;
+}
+
+
+/* Media query untuk tata letak responsif */
+@media (max-width: 1250px) {
+    .wadah {
+        padding-left: 10px;
+    }
+    .propil,
+    .wadahedit {
+        width: 100%; /* Penuhi lebar saat layar kecil */
+        margin-right: 0; /* Hapus margin saat satu kolom */
+    }
 }
