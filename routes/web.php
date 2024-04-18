@@ -70,6 +70,19 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
+Route::get('/superAdmin/login', function () {
+    return view('superAdmin.Login');
+});
+Route::get('/superAdmin/login/reset', function () {
+    return view('superAdmin.ResetPassword');
+});
+Route::get('/superAdmin/login/OTP', function () {
+    return view('superAdmin.InputOTP');
+});
+Route::get('/superAdmin/login/newPass', function () {
+    return view('superAdmin.NewPassword');
+});
+
 Route::get('/superAdmin', [SuperadminSistemController::class, 'dashboard'])->name('superAdmin.dashboard');
 Route::get('/superAdmin/editProfil', [SuperadminSistemController::class, 'editProfile'])->name('superAdmin.editProfile');
 Route::patch('/superAdmin/editProfil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('superAdmin.updateProfile');
