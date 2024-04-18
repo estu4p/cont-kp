@@ -25,6 +25,7 @@ use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
+use App\Http\Controllers\BEController\UserAdminSistemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -552,9 +553,7 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'fi
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
-Route::get('/AdminSistem-Subcription', function () {
-    return view('SistemLokasi.AdminSistem-Subcription');
-});
+Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
 
 Route::get('/user/barcode', function () {
