@@ -18,7 +18,7 @@
                 <p class=" text-center login">Log In</p>
                 <div class="card   col-7 p-0" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="logo">
-                        <img src="assets/images/logo.png" alt="Logo" class="logo">
+                        <img src="/assets/images/logo.png" alt="Logo" class="logo">
                     </div>
 
                     <div class="card-body row w-100 px-md-4 py-md-0 px-lg-4 py-lg-4  justify-content-center ">
@@ -49,7 +49,7 @@
                                 <div class="form-group text-center">
                                     <a href="/superAdmin">
                                         <button type="submit" class="btn btn-secondary">
-                                            Log In
+                                        Login as Super Admin
                                         </button>
                                     </a>
                                     <div class="d">
