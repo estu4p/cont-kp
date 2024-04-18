@@ -1,116 +1,114 @@
-
-body{
-    background-color: #EEEEEE;
-    padding-left:250px;
-    padding-top:50px;
-  }
-  .sidebar {
+body {
+    background-color: #eeeeee;
+    padding-left: 250px;
+    padding-top: 50px;
+}
+.sidebar {
     position: fixed; /* Tetap pada posisi */
     top: 0; /* Menempatkan sidebar di bagian atas */
     left: 0; /* Menempatkan sidebar di bagian kiri */
     height: 100%; /* Mengisi tinggi layar penuh */
     width: 250px; /* Lebar sidebar */
-    background-color: #DCDCDC; /* Ubah warna latar belakang sidebar */
+    background-color: #dcdcdc; /* Ubah warna latar belakang sidebar */
     color: #000; /* Ubah warna teks tautan */
     padding-top: 50px; /* Ruang atas sidebar */
-    z-index:10;
+    z-index: 10;
     box-shadow: 0 0 20px rgb(146, 146, 146);
-  }
-  .nav {
+}
+.nav {
     text-align: left;
     margin-left: 60px;
-  }
-  .log-out {
+}
+.log-out {
     margin-left: -60px;
-  }
-  .nav-link {
+}
+.nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
     display: block; /* Tautan menjadi blok */
     color: #000; /* Ubah warna teks tautan */
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
-  }
-  
-  .nav-link:hover {
+}
+
+.nav-link:hover {
     background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
-  }
-  
-  a.nav-link.activee {
+}
+
+a.nav-link.activee {
     font-weight: bold; /* Menebalkan tautan aktif */
     background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
     color: #fff; /* Warna teks untuk tautan aktif */
-  
-  }
-  
-  .sidebar {
+}
+
+.sidebar {
     text-align: center;
-  }
-  
-  .logo {
+}
+
+.logo {
     margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
-  }
-  
-  .logout{
-    position:absolute;
-   bottom:10%;
-   color: #302f2f;
-   opacity: 0.6;
-  }
-  
+}
+
+.logout {
+    position: absolute;
+    bottom: 10%;
+    color: #302f2f;
+    opacity: 0.6;
+}
+
 .navbar {
-  padding: 20px;
-  background-color: transparent;
-  display: flex;
-  /* justify-content: flex-end; */
-  align-items: center;
-  position: fixed;
-  left:0;
-  right:0;
-  top:0;
-  width:100%;/* Navbar tetap di posisi */
-  z-index: 10; /* Menetapkan z-index untuk memastikan navbar tetap di depan konten */
+    padding: 20px;
+    background-color: transparent;
+    display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%; /* Navbar tetap di posisi */
+    z-index: 10; /* Menetapkan z-index untuk memastikan navbar tetap di depan konten */
 }
 
 .navbar-brand {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .nav-link {
-  margin-right: 15px;
+    margin-right: 15px;
 }
 
 .dropdown-menu {
-  min-width: 100px;
+    min-width: 100px;
 }
 
 .form-control {
-  width: 200px;
+    width: 200px;
 }
 
 .btn-outline-success {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .navbar {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .navbar-profile {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .profile-name,
 .profile-status {
-  display: block;
+    display: block;
 }
 .navbar-logo {
-  width: 40px; /* Ubah ukuran lebar gambar profil */
-  height: 40px; /* Ubah ukuran tinggi gambar profil */
+    width: 40px; /* Ubah ukuran lebar gambar profil */
+    height: 40px; /* Ubah ukuran tinggi gambar profil */
 }
-.navbar-logo img{
-    width:100%;
+.navbar-logo img {
+    width: 100%;
 }
 
 /* navbar.css */
@@ -118,6 +116,13 @@ body{
 .nav.flex-column li {
     list-style-type: none; /* Menghilangkan bullets pada daftar menu */
 }
-.kanan{
+.kanan {
     justify-content: space-between !important;
+}
+
+.foto-profil {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
 }
