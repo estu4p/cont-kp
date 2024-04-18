@@ -21,10 +21,10 @@ use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -545,10 +545,10 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
-Route::get('/AdminSistem-Dashboard', function () {
-    return view('SistemLokasi.AdminSistem-Dashboard');
-});
+Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
