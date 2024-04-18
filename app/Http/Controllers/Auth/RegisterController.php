@@ -47,16 +47,16 @@ class RegisterController extends Controller
 
         $user->save();
 
-        if ($user) {
-            return response([
-                'pesan' => 'user berhasil',
-                'user$user' => $user,
-            ], 200);
-        } else {
-            return response([
-                'pesan' => 'Gagal',
-            ], 404);
-        }
+        // if ($user) {
+        //     return response([
+        //         'pesan' => 'user berhasil',
+        //         'user$user' => $user,
+        //     ], 200);
+        // } else {
+        //     return response([
+        //         'pesan' => 'Gagal',
+        //     ], 404);
+        // }
 
         return redirect()->route('user.login')->with('success', 'User registered successfully!');
         // return view('user.login', ['title' => "Login"]);
