@@ -132,14 +132,10 @@ class SuperadminSistemController extends Controller
 
     public function dataAdmin()
     {
+        $title = 'Data Admin';
         $superAdmin = User::where('role_id', 1)->first();
-        // $admins = User::where('role_id', 2)->paginate(10);
         $admins = User::where('role_id', 2)->get();
-        return view('superAdmin.dataAdmin', [
-            'title' => "Data Admin",
-            'admins' => $admins,
-            'superAdmin' => $superAdmin
-        ]);
+        return view('superAdmin.dataAdmin', compact('admins', 'superAdmin', 'title'));
     }
 
     public function showAlertEditAdmin($adminId)

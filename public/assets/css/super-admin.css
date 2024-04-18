@@ -34,10 +34,10 @@ body {
     background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
 }
 
-a.nav-link.activee {
+a.nav-link.active {
     font-weight: bold; /* Menebalkan tautan aktif */
-    background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
-    color: #fff; /* Warna teks untuk tautan aktif */
+    /* background-color: #000; Warna latar belakang untuk tautan aktif */
+    /* color: #fff; Warna teks untuk tautan aktif */
 }
 
 .sidebar {
@@ -76,10 +76,14 @@ a.nav-link.activee {
 
 .nav-link {
     margin-right: 15px;
+    
+    
 }
 
 .dropdown-menu {
     min-width: 100px;
+    font-weight: bold;
+
 }
 
 .form-control {
@@ -126,3 +130,5 @@ a.nav-link.activee {
     width: 80px;
     height: 80px;
 }
+
+  
