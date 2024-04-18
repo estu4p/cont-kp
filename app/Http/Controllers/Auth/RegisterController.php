@@ -25,10 +25,6 @@ class RegisterController extends Controller
         $barcode = $request->input('barcode');
         $password = $request->input('password');
 
-        if (!$nama_lengkap || !$nomor_induk || !$jurusan || !$email || !$username || !$no_hp || !$barcode || !$password) {
-            return response()->json(['pesan' => 'Semua field harus diisi'], 400);
-        }
-
         $user = new User();
         $user->nama_lengkap = $nama_lengkap;
         $user->nomor_induk = $nomor_induk;
@@ -39,12 +35,12 @@ class RegisterController extends Controller
         $user->barcode = $barcode;
         $user->password = $password;
         // $user->save();
-        try {
-            $user->save();
-            return response()->json(['pesan' => 'User berhasil disimpan', 'user' => $user], 200);
-        } catch (\Exception $e) {
-            return response()->json(['pesan' => 'Gagal menyimpan user', 'error' => $e->getMessage()], 500);
+        if ($user->save()) {
+            return redirect()->route('user')->with('success', 'User berhasil disimpan');
+        } else {
+            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan user');
         }
+
         // if ($user) {
         //     return response([
         //         'pesan' => 'user berhasil',
@@ -56,7 +52,7 @@ class RegisterController extends Controller
         //     ], 404);
         // }
 
-        // // return redirect('/user.login')->with('success', 'User registered successfully!');
+        // return redirect('/user.login')->with('success', 'User registered successfully!');
         // return redirect()->route('user.login')->with('success', 'User registered successfully!');
         // return view('user.login', ['title' => "Login"]);
     }

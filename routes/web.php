@@ -72,9 +72,12 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
-Route::get('/superAdmin/login', function () {
-    return view('superAdmin.Login');
-});
+Route::get('/superAdmin/login',[LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+// function () {
+//     return view('superAdmin.Login');
+// })->name('login.superadmin');
+Route::post('/superAdmin/login', [LoginController::class, 'ValidateLogin'])->name('login.superadmin');
+
 Route::get('/superAdmin/login/reset', function () {
     return view('superAdmin.ResetPassword');
 });
@@ -130,7 +133,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
 Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
 Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
-
 
 //login afterpayment
 Route::get('/AdminUniv-Login', function () {
