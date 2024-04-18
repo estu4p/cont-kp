@@ -13,7 +13,7 @@ class Sekolah extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['nama_lengkap', 'sekolah', 'email', 'no_hp', 'password'];
+    protected $fillable = ['nama_lengkap', 'nama_sekolah', 'email', 'no_hp', 'password'];
     protected $table = 'sekolah';
 
     public function passwordchek($password)

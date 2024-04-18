@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             KategoriPenilaian::class,
             SubKategoriPenilaian::class,
             PenilaianSeeder::class,
+            SubscriptionSeeder::class,
             QuotesSeeder::class,
         ]);
     }
