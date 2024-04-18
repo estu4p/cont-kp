@@ -14,14 +14,16 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
 
 /*
@@ -45,6 +47,7 @@ Route::get('/user/login', function () {
         'email' => "raihan@gmail.com"
     ]);
 });
+
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
@@ -112,7 +115,7 @@ Route::middleware(['auth'])->group(function () {
 
 //login contributor mitra
 Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
-Route::post('/loginmitra', [LoginController::class, 'loginmitra']);
+Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
 Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
 
 
@@ -246,17 +249,15 @@ Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.ma
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 
-Route::get('/laporandatapresensi', function () {
+Route::get('/laporandatapresensi', function (){
     return view('presensi.laporandatapresensi');
 });
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
 
-Route::get('/presensi-contributor-univ', function () {
-    return view('presensi.presensiharian');
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+
+Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
     // return view('presensi.presensiharian')->name('presensi.con');
-});
+
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
 });
@@ -545,10 +546,10 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
-Route::get('/AdminSistem-Dashboard', function () {
-    return view('SistemLokasi.AdminSistem-Dashboard');
-});
+Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
@@ -681,15 +682,6 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
-
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
-
-
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -697,51 +689,45 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
-Route::get('/mitra-presensi-barcode/istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/selesai-istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-selesai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/pulang', function () {
-    $presensi = Presensi::all();
-
-    // Ambil data presensi terbaru
-    $latestPresensi = Presensi::latest()->first();
-    $pulang = strtotime($latestPresensi->jam_pulang);
-    $masuk = strtotime($latestPresensi->jam_masuk);
-
-    // Hitung selisih waktu
-    $diffInSeconds = $pulang - $masuk;
-
-    // Ubah selisih waktu ke dalam format jam:menit:detik
-    $totalHours = floor($diffInSeconds / 3600);
-    $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
-    $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
-
-    $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-
-    return view('User.ContributorForMitra.barcode_jam-pulang', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => $presensi,
-        'total' => $total
-    ]);
-});
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
+
+Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
 Route::post('/mitra-presensi-barcode/jam-mulai-istirahat', [ContributorForMitra::class, 'jam_mulai_istirahat'])->name('barcode.jam-mulai-istirahat');
+Route::get('/mitra-presensi-barcode/selesai-istirahat', [ContributorForMitra::class, 'view_jam_selesai_istirahat']);
 Route::post('/mitra-presensi-barcode/jam-selesai-istirahat', [ContributorForMitra::class, 'jam_selesai_istirahat'])->name('barcode.jam-selesai-istirahat');
+
+Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_jam_pulang'])->name('barcode.jam-pulang');
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
+Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
+
+// Route::get('/mitra-presensi-barcode/pulang', function () {
+//     $presensi = Presensi::all();
+
+//     // Ambil data presensi terbaru
+//     $latestPresensi = Presensi::latest()->first();
+//     $pulang = strtotime($latestPresensi->jam_pulang);
+//     $masuk = strtotime($latestPresensi->jam_masuk);
+
+//     // Hitung selisih waktu
+//     $diffInSeconds = $pulang - $masuk;
+
+//     // Ubah selisih waktu ke dalam format jam:menit:detik
+//     $totalHours = floor($diffInSeconds / 3600);
+//     $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
+//     $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
+
+//     $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+
+//     return view('User.ContributorForMitra.barcode_jam-pulang', [
+//         'title' => "Barcode Pemagang",
+//         'nama' => "Naufal",
+//         'presensi' => $presensi,
+//         'total' => $total
+//     ]);
+// });
+
+
+
 
 
 

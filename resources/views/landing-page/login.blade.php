@@ -13,7 +13,7 @@
                             src="assets/images/icon/mail.png" /></div>
                     <input type="email" name="email"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        placeholder="Masukkan Email" required>
+                        placeholder="Masukkan Email" >
                 </div>
 
                 <label for="password" class="mt-4">password<span class="text-danger">*</span></label>
@@ -22,7 +22,7 @@
                             src="assets/images/icon/pass.png" /></div>
                     <input type="password"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        placeholder="Masukkan Password" name="password" required>
+                        placeholder="Masukkan Password" name="password" >
                 </div>
 
                 <div class="remember d-flex mt-4 fs-6 fw-medium align-items-center">

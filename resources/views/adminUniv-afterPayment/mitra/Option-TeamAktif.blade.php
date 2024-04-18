@@ -5,7 +5,7 @@
     <div class="topcontent">
         <div style="display: flex;">
             <div class="">
-                <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
+                <a href="/mitra-adminunivmitra"><i class="iconn fa-solid fa-angle-left"></i></a>
             </div>
             <div class="kembali">
                 <p style="font-size: 24px"><u>Data Divisi</p>
@@ -62,9 +62,9 @@
                     <i class="icon fa-solid fa-user"></i>
                 @endif
 
-                <a href="{{ route('adminUniv.option.teamAktif', $item->id) }}" style="text-decoration: none">
+                <a href="{{ route('adminUniv.option.teamAktif', $item->divisi_id) }}" style="text-decoration: none">
                     {{ $item->divisi->nama_divisi }}<br>
-                    {{ $item->jml_anggota }} Anggota
+                    Anggota
                 </a>
             </div>
         @endforeach

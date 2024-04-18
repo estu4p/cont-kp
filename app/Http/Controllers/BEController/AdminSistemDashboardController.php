@@ -8,7 +8,7 @@ use App\Models\User;
 
 class AdminSistemDashboardController extends Controller
 {
-    public function filterDashboard()
+    public function filterDashboard(Request $request)
     {
         // Menghitung total subscription
         $totalSubscription = User::count();
@@ -17,10 +17,15 @@ class AdminSistemDashboardController extends Controller
         $totalAktif = User::where('status_akun', 'aktif')->count();
         $totalTidakAktif = User::where('status_akun', 'alumni')->count(); // Ubah sesuai dengan nilai yang menunjukkan status tidak aktif
 
-        return response()->json([
-            'total_subscription' => $totalSubscription,
-            'total_aktif' => $totalAktif,
-            'total_alumni' => $totalTidakAktif,
-        ]);
+        //return ke tampilan
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'total_subscription' => $totalSubscription,
+                'total_aktif' => $totalAktif,
+                'total_alumni' => $totalTidakAktif,
+            ], 200);
+        } else {
+            return view('SistemLokasi.AdminSistem-Dashboard', compact(['totalSubscription', 'totalAktif', 'totalTidakAktif']));
+        }
     }
 }

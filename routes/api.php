@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BEController\MhsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
-use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
@@ -19,6 +18,8 @@ use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\PresensiMitraController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\SubscriptionController;
 
 
 
@@ -105,12 +106,14 @@ Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentC
 Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
-Route::post('paket/perpanjang', [AdminUnivAfterPaymentController::class, 'Perpanjang']);
+Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
 Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
+Route::get('datapresensi', [ContributorUnivController::class, 'DataPresensi']);
+Route::get('datapresensisiswa/{id}', [ContributorUnivController::class,'DataPresensiSiswa']);
 
 //Contributor for Mitra
 Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
@@ -134,8 +137,14 @@ Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiA
 Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
 
-
 Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
 Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
 Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
 Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
+
+//Admin sistem dashboard
+Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+//Subscription
+Route::post('/subscriptions', [SubscriptionController::class, 'store']);
+Route::delete('/subscriptions/{id}', [SubscriptionController::class, 'destroy']);
+Route::put('/subscriptions/{id}', [SubscriptionController::class, 'update']);
