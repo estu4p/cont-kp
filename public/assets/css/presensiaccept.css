@@ -223,8 +223,10 @@ i .fs-1 {
 }
 
 .cari{
-    padding-left: 700px;
-}
+    padding-left: 10%;
+    width: 50%;
+}  
+
 
 
 
@@ -277,3 +279,12 @@ i .fs-1 {
     padding: 10px 20px; 
 
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .cari{
+        padding-left: 60%;
+    }
+    .fzt5{font-size: 50% !important;}
+    .fzt6{font-size: 60% !important;}
+    .fzt7{font-size: 70% !important;}
+    .fzt8{font-size: 80% !important;}
+  }

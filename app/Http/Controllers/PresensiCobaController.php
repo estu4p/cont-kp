@@ -28,7 +28,7 @@ class PresensiCobaController extends Controller
     }
     public function jamKeluar(Request $request)
     {
-        $lastPresensi = Presensi::where('nama_lengkap', $request->user()->id)
+        $lastPresensi = Presensi::where('nama_lengkap', $request->nama_lengkap)
             ->whereDate('hari', date('Y-m-d')) // Ambil data presensi untuk hari ini
             ->latest()
             ->first();
