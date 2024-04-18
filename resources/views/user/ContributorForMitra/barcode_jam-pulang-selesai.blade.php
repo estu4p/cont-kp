@@ -59,7 +59,7 @@
                 <div>
                     <video style="width: 100%" id="preview"></video>
                 </div>
-                <form action="{{ route('barcode.store') }}" method="POST" id="form">
+                <form action="" method="POST" id="form">
                     @csrf
                     <input type="hidden" id="nama_lengkap" name="nama_lengkap">
                 </form>

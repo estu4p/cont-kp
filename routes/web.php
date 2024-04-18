@@ -21,10 +21,10 @@ use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +72,19 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
+Route::get('/superAdmin/login', function () {
+    return view('superAdmin.Login');
+});
+Route::get('/superAdmin/login/reset', function () {
+    return view('superAdmin.ResetPassword');
+});
+Route::get('/superAdmin/login/OTP', function () {
+    return view('superAdmin.InputOTP');
+});
+Route::get('/superAdmin/login/newPass', function () {
+    return view('superAdmin.NewPassword');
+});
+
 Route::get('/superAdmin', [SuperadminSistemController::class, 'dashboard'])->name('superAdmin.dashboard');
 Route::get('/superAdmin/editProfil', [SuperadminSistemController::class, 'editProfile'])->name('superAdmin.editProfile');
 Route::patch('/superAdmin/editProfil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('superAdmin.updateProfile');
@@ -546,10 +559,10 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
-Route::get('/AdminSistem-Dashboard', function () {
-    return view('SistemLokasi.AdminSistem-Dashboard');
-});
+Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
