@@ -70,10 +70,10 @@
                             <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">10</p>
                         </div>
                     </div>
-                    <div class="bawah-dua w-100 p-5 gap-3" style="margin-left: -20px">
+                    <div class="bawah-dua w-100 p-5 gap-3" style="margin-left: -30px">
                         <h5 class="my-3">Kritik Saran</h5>
                         <div class="form-floating col-12" style="text-align: left;">
-                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="height: 200px; background-color:#DCDCDC; "></textarea>
+                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="   background-color:#DCDCDC; resize: none;" rows="7" cols="116"></textarea>
                         </div>
                         <br>
                         <button type="button" class="btn btn-primary">Download</button>

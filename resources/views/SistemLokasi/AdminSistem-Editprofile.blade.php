@@ -14,7 +14,7 @@
 
     <div id="preview" class="preview"></div>
     <div class="wadahedit d-flex">
-        <div class="editprofil p-5">
+        <div class=" p-5">
             <div class="atas d-flex flex-row  col-5">
                 <div id="previewZone">
                     <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
@@ -27,9 +27,6 @@
                     <span class="remove m-0">remove</span>
                 </div>
             </div>
-
-
-
 
             <div class="tengah row ">
                 <div class="judulkanan">Personal Details</div>
@@ -66,7 +63,8 @@
                     <!-- <label for="alamat">About</label> -->
                     <div class="col-12  ">
                         <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="text
-..."></textarea>
+... "></textarea>
+
                     </div>
                 </div>
             </div>
@@ -96,6 +94,7 @@
         $('#successModal').modal('show');
         setTimeout(function() {
             $('#successModal').modal('hide');
+            window.location.href = '/AdminSistem-Dashboard';
         }, 1000);
     }
 
@@ -109,46 +108,52 @@
 
     // Call the setDefaultImage function when the page is loaded
     // Menetapkan gambar default saat dokumen dimuat
-window.addEventListener('DOMContentLoaded', setDefaultImage);
+    window.addEventListener('DOMContentLoaded', setDefaultImage);
 
-function setDefaultImage() {
-    const defaultImageSrc = 'assets/images/atun.png';
+    function setDefaultImage() {
+        const defaultImageSrc = 'assets/images/atun.png';
 
-    const previewImage = document.querySelector('.gambarkiri');
-    previewImage.src = defaultImageSrc;
+        const previewImage = document.querySelector('.gambarkiri');
+        previewImage.src = defaultImageSrc;
 
-    const previewImage2 = document.querySelector('.gambarkanan');
-    previewImage2.src = defaultImageSrc;
-}
-
-function handleImageChange(event) {
-    const file = event.target.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const previewImage = document.querySelector('.gambarkiri');
-            previewImage.src = e.target.result;
-
-            const previewImage2 = document.querySelector('.gambarkanan');
-            previewImage2.src = e.target.result; // Mengubah gambar kanan juga
-        };
-
-        reader.readAsDataURL(file);
+        const previewImage2 = document.querySelector('.gambarkanan');
+        previewImage2.src = defaultImageSrc;
     }
-}
 
-// Menambahkan event listener pada elemen input gambar
-const imageInput = document.getElementById('imageInput');
-imageInput.addEventListener('change', handleImageChange);
+    function handleImageChange(event) {
+        const file = event.target.files[0];
 
-// Menambahkan event listener pada elemen span dengan kelas "remove"
-const removeButton = document.querySelector('.remove');
-removeButton.addEventListener('click', function() {
-    setDefaultImage(); // Memanggil fungsi untuk menetapkan gambar default
-});
+        if (file) {
+            const reader = new FileReader();
 
+            reader.onload = function(e) {
+                const previewImage = document.querySelector('.gambarkiri');
+                previewImage.src = e.target.result;
+
+                const previewImage2 = document.querySelector('.gambarkanan');
+                previewImage2.src = e.target.result; 
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    const imageInput = document.getElementById('imageInput');
+    imageInput.addEventListener('change', handleImageChange);
+
+    const removeButton = document.querySelector('.remove');
+    removeButton.addEventListener('click', function() {
+        setDefaultImage(); 
+    });
+
+
+    function redirectToSubscriptionPage() {
+        setTimeout(function() {
+            window.location.href = 'AdminSistem-Subcription'; 
+        }, 5000); 
+    }
+
+    document.querySelector('.Update').addEventListener('click', redirectToSubscriptionPage);
 </script>
 
 @endsection

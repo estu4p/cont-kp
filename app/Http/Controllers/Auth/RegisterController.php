@@ -5,15 +5,11 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Picqer\Barcode\BarcodeGeneratorPNG;
-use Illuminate\Support\Facades\Hash;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class RegisterController extends Controller
 {
-    protected $barcodeGenerator;
-    protected $userModel;
-
     public function index()
     {
         return view('user.register');
@@ -21,27 +17,36 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $nama_lengkap = $request->input('nama_lengkap');
-        $nomor_induk = $request->input('nomor_induk');
-        $jurusan = $request->input('jurusan');
-        $email = $request->input('email');
-        $username = $request->input('username');
-        $no_hp = $request->input('no_hp');
-        $barcode = $request->input('barcode');
-        $password = $request->input('password');
+        // $nama_lengkap = $request->input('nama_lengkap');
+        // $nomor_induk = $request->input('nomor_induk');
+        // $jurusan = $request->input('jurusan');
+        // $email = $request->input('email');
+        // $username = $request->input('username');
+        // $no_hp = $request->input('no_hp');
+        // $barcode = $request->input('barcode');
+        // $password = $request->input('password');
 
         $user = new User();
+        $user->nama_lengkap = $request->input('nama_lengkap');
+        $user->nomor_induk = $request->input('nomor_induk');
+        $user->jurusan = $request->input('jurusan');
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->no_hp = $request->input('no_hp');
+        $user->barcode = $request->input('barcode');
+        $user->password =$request->input('password');
 
-        $user->nama_lengkap = $nama_lengkap;
-        $user->nomor_induk = $nomor_induk;
-        $user->jurusan = $jurusan;
-        $user->email = $email;
-        $user->username = $username;
-        $user->no_hp = $no_hp;
-        $user->barcode = $barcode;
-        $user->password = $password;
+        // $user->nama_lengkap = $nama_lengkap;
+        // $user->nomor_induk = $nomor_induk;
+        // $user->jurusan = $jurusan;
+        // $user->email = $email;
+        // $user->username = $username;
+        // $user->no_hp = $no_hp;
+        // $user->barcode = $barcode;
+        // $user->password = $password;
 
         $user->save();
+
         if ($user) {
             return response([
                 'pesan' => 'user berhasil',
@@ -53,30 +58,24 @@ class RegisterController extends Controller
             ], 404);
         }
 
-        // return redirect()->route('user.login')->with('success', 'User registered successfully!');
-        return view('user.login', ['title' => "Login"]);
+        return redirect()->route('user.login')->with('success', 'User registered successfully!');
+        // return view('user.login', ['title' => "Login"]);
     }
 
-    public function __construct(BarcodeGeneratorPNG $barcodeGenerator, User $userModel)
+    public function generateQRCode($userData)
     {
-        $this->barcodeGenerator = $barcodeGenerator;
-        $this->userModel = $userModel;
-    }
-
-    public function generateBarcode($userData)
-    {
-        $generator = new BarcodeGeneratorPNG();
-        $barcode = 'data:image/png;base64,' . base64_encode($generator->getBarcode($userData, $generator::TYPE_CODE_128));
-        return $barcode;
+        $qrCodeString = QrCode::size(300)->generate($userData);
+        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCodeString);
+        return $qrCodeDataUri;
     }
 
     public function showRegisterForm(Request $request)
     {
         $userData = "data pengguna";
-        $barcode = $this->generateBarcode($userData);
-        
+        $qrCode = $this->generateQRCode($userData);
+
         $register = $this->register($request);
 
-        return view('user.register', ['barcode' => $barcode, 'register' => $register]);
+        return view('user.register', ['QRcode' => $qrCode, 'register' => $register]);
     }
 }

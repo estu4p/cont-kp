@@ -1,4 +1,4 @@
-@include('template.navbar-super')
+@include('template.navbar-super', ['superAdmin', $superAdmin])
 @extends('layouts.superadmin')
 
 @section('content')
@@ -13,72 +13,83 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="text-capitalize">
+                    <form class="text-capitalize" id="form-edit" method="POST" action="">
+                        @csrf
+                        @method('PATCH')
                         <div class="row mb-3">
                             <div class="col d-flex flex-column">
                                 <label for="id" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ID</label>
-                                <input type="number" name="id" placeholder="ID" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <input type="number" name="id" placeholder="ID" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="id" disabled >
                             </div>
                             <div class="col d-flex flex-column">
                                 <label for="paket" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Paket</label>
-                                <select name="paket" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
-                                    <option value="Bronze">Bronze</option>
+                                <select name="nama_paket" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="paket">
+                                    @foreach ($paket as $item)
+                                        <option value="{{ $item->nama_paket }}">{{ $item->nama_paket }} - {{ $item->metode_bayar }}</option>
+                                    @endforeach
+                                    {{-- <option value="Bronze">Bronze</option>
                                     <option value="Silver">Silver</option>
                                     <option value="Gold">Gold</option>
-                                    <option value="Platinum">Platinum</option>
+                                    <option value="Platinum">Platinum</option> --}}
                                 </select>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col d-flex flex-column w-50">
                                 <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Nama</label>
-                                <input type="text" name="nama" placeholder="Nama" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <input type="text" name="nama_lengkap" placeholder="Nama" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="nama">
                             </div>
                             <div class="d-flex gap-2 w-50">
                                 <div class="col d-flex flex-column w-50">
                                     <label for="start" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Start Date</label>
-                                    <input type="date" name="start" placeholder="Start Date" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                    <input type="date" name="tgl_masuk" placeholder="Start Date" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="start">
                                 </div>
                                 <div class="col d-flex flex-column w-50">
                                     <label for="end" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">End Date</label>
-                                    <input type="date" name="end" placeholder="End Date" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                    <input type="date" name="tgl_keluar" placeholder="End Date" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="end">
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col d-flex flex-column">
                                 <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Email</label>
-                                <input type="email" name="email" placeholder="Email" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <input type="email" name="email" placeholder="Email" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="email">
                             </div>
                             <div class="col d-flex flex-column">
                                 <label for="harga" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Harga</label>
-                                <input type="number" name="harga" placeholder="Harga" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <input type="number" name="harga" placeholder="Harga" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="harga">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col d-flex flex-column">
                                 <label for="telepon" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Telepon</label>
-                                <input type="number" name="telepon" placeholder="Telepon" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <input type="text" name="no_hp" placeholder="Telepon" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="telepon">
                             </div>
                             <div class="col d-flex flex-column">
-                                <label for="status" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Status Berlangganan</label>
-                                <select name="status" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
-                                    <option value="">Pilih status</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                <label for="pilihStatus" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Status Berlangganan</label>
+                                <select name="status_akun" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="pilihStatus">
+                                    <option disabled>Pilih status</option>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="alumni">Alumni</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col w-50 d-flex flex-column">
-                                <label for="pt" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Sekolah/Perguruan Tinggi</label>
-                                <input type="text" name="pt" placeholder="Sekolah/Perguruan Tinggi" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                                <label for="sekolah" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Sekolah/Perguruan Tinggi</label>
+                                {{-- <input type="text" name="sekolah" placeholder="Sekolah/Perguruan Tinggi" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="sekolah"> --}}
+                                <select name="sekolah" id="sekolah" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;">
+                                    <option selected disabled>Pilih Sekolah</option>
+                                    @foreach ($sekolah as $item)
+                                    <option value="{{ $item->sekolah }}">{{ $item->sekolah }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col w-50"></div>
                         </div>
                         <div class="modal-footer" style="background-color: #F2F4F8; border-radius: 0 0 15px 15px;">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button onclick="alert()" type="button" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Simpan</button>
+                            <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -109,8 +120,8 @@
                 </select>
                 <select name="status" id="status" class="form-control">
                     <option value="">Status berlangganan</option>
-                    <option value="Aktif">Aktif</option>
-                    <option value="Tidak Aktif">Tidak Aktif</option>
+                    <option value="aktif">Aktif</option>
+                    <option value="alumni">Alumni</option>
                 </select>
             </div>
             <table class="mt-4 table table-striped">
@@ -127,41 +138,41 @@
                     </tr>
                 </thead>
                 <tbody class="text-center" style="font-size: 13px;">
-                    @foreach ($members as $member)
+                    @foreach ($subscriptions as $subscription)
                         <tr>
-                            <td class="align-middle">{{ $member['id'] }}</td>
-                            <td class="align-middle">{{ $member['nama'] }}</td>
-                            <td class="align-middle text-lowercase">{{ $member['email'] }}</td>
-                            <td class="align-middle">{{ $member['pt'] }}</td>
-                            @if ($member['paket'] === 'Bronze')
+                            <td class="align-middle">{{ $subscription['id'] }}</td>
+                            <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
+                            <td class="align-middle text-lowercase">{{ $subscription->user->email }}</td>
+                            <td class="align-middle">{{ $subscription->user->perguruanTinggi->sekolah }}</td>
+                            @if ($subscription->paket->nama_paket === 'Bronze')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $member['paket'] }}</p>
+                                        {{ $subscription->paket->nama_paket }}</p>
                                 </td>
-                            @elseif ($member['paket'] === 'Silver')
+                            @elseif ($subscription->paket->nama_paket === 'Silver')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $member['paket'] }}</p>
+                                        {{ $subscription->paket->nama_paket }}</p>
                                 </td>
-                            @elseif ($member['paket'] === 'Gold')
+                            @elseif ($subscription->paket->nama_paket === 'Gold')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $member['paket'] }}</p>
+                                        {{ $subscription->paket->nama_paket }}</p>
                                 </td>
                             @else
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $member['paket'] }}</p>
+                                        {{ $subscription->paket->nama_paket }}</p>
                                 </td>
                             @endif
-                            <td class="align-middle">{{ $member['lokasi'] }}</td>
-                            <td class="align-middle">{{ $member['status'] }}</td>
+                            <td class="align-middle">{{ $subscription->user->kota }}</td>
+                            <td class="align-middle">{{ $subscription->user->status_akun }}</td>
                             <td class="align-middle">
-                                <button data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-primary"><svg
+                                <button class="btn btn-sm btn-primary edit-button" data-id="{{ $subscription->id }}"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -169,7 +180,11 @@
                                         <path fill-rule="evenodd"
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                     </svg></button>
-                                <button onclick="showAlert()" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg"
+                                    <form id="formDeleteAdmin" action="" method="POST" style="display: none">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                <button onclick="showAlert('{{ $subscription->id }}', '{{ $subscription->user->nama_lengkap }}')" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="16" height="16" fill="currentColor" class="bi bi-trash"
                                         viewBox="0 0 16 16">
                                         <path
@@ -184,27 +199,42 @@
             </table>
         </div>
     </div>
-    <script>
-        function alert() {
-            swal("Data berhasil diubah!", {
+
+    @if (session('success'))
+        <script>
+            successMessage = "{{ session('success') }}";
+            swal(successMessage, {
                 icon: "success",
             });
-        }
-        function showAlert() {
+        </script>
+    @elseif (session('error'))
+        <script>
+            errorMessage = "{{ session('error') }}";
+            swal({
+                title: "Data Gagal Diperbaharui!",
+                text: errorMessage,
+                icon: "error",
+                button: "OK!",
+                });
+        </script>
+    @endif
+
+    <script>
+        function showAlert($id, $name) {
             swal({
                     title: "Apakah Anda yakin ingin menghapus?",
-                    text: "Data yang dihapus tidak dapat dikembalikan!",
+                    text: "Data subscription " + $name + " yang dihapus tidak dapat dikembalikan!",
                     icon: "warning",
                     buttons: ["Batal", "Hapus"],
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Data berhasil dihapus!", {
-                            icon: "success",
-                        });
+                        var formDelete = document.getElementById('formDeleteAdmin');
+                        formDelete.setAttribute('action', '/superAdmin/langganan/delete/' + $id);
+                        formDelete.submit();
                     } else {
-                        swal("Data tidak jadi dihapus.");
+                        swal("Data subscription tidak jadi dihapus.");
                     }
                 });
         }
@@ -306,6 +336,30 @@
                     row.style.display = 'table-row';
                 } else {
                     row.style.display = 'none';
+                }
+            });
+        });
+
+        // menampilkan modal edit
+        $('.edit-button').click(function() {
+            let subsId = $(this).data('id');
+
+            $.ajax({
+                url: '/superAdmin/langganan/showAlertEdit/' + subsId,
+                type: 'GET',
+                success: function(response) {
+                    $('#id').val(response.subscription.id);
+                    $('#nama').val(response.subscription.user.nama_lengkap);
+                    $('#email').val(response.subscription.user.email);
+                    $('#telepon').val(response.subscription.user.no_hp);
+                    $('#sekolah').val(response.subscription.user.perguruan_tinggi.sekolah);
+                    $('#paket').val(response.subscription.paket.nama_paket);
+                    $('#start').val(response.subscription.user.tgl_masuk);
+                    $('#end').val(response.subscription.user.tgl_keluar);
+                    $('#harga').val(response.subscription.harga);
+                    $('#pilihStatus').val(response.subscription.user.status_akun);
+                    $('#form-edit').attr('action', '/superAdmin/langganan/update/' + response.subscription.id);
+                    $('#edit').modal('show');
                 }
             });
         });

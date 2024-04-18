@@ -25,7 +25,6 @@
     color: #fff; /* Warna teks tombol edit */
 }
 
-
 /* Mengatur margin dan padding */
 .container {
     margin-top: 20px;
@@ -36,7 +35,7 @@
 }
 
 .card-body {
-    padding:0 20px;
+    padding: 0 20px;
 }
 
 .table {
@@ -46,40 +45,37 @@
 
 /* Responsif untuk tabel */
 .table-responsive {
-
 }
-.wadah{
-    top:0;
-    left:250px;
+.wadah {
+    top: 0;
+    left: 250px;
     height: 100%;
-    width:100%;
-    padding-left:250px !important;
+    width: 100%;
+    padding-left: 250px !important;
 }
-.kiri-putih{
-    height:100%;
-    width:250px;
-    position:fixed;
-   top:0;
+.kiri-putih {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
     background-color: white;
     display: inline-block;
-
 }
-.kanan-tabel{
-    width:auto;
-    display:inline-block;
-    padding-top:7% !important;
+.kanan-tabel {
+    width: auto;
+    display: inline-block;
+    padding-top: 7% !important;
     box-sizing: border-box;
 }
 
 .nav-item a {
     color: black; /* Mengatur warna teks menjadi hitam */
-
 }
 
-.page, .item{
+.page,
+.item {
     background: #c6c6c6;
-    border-radius:5px;
-
+    border-radius: 5px;
 }
 
 .manageP {
@@ -87,85 +83,78 @@
     background-color: pink;
     border-radius: 7px;
 }
-.logout{
+.logout {
     position: absolute;
     bottom: 10px;
 }
 
-.col-md-auto .me-auto{
+.col-md-auto .me-auto {
     display: flex;
     flex-direction: row;
 }
-.konfirmasiBackdrop{
+.konfirmasiBackdrop {
     background-color: transparent !important;
     z-index: -10 !important;
 }
-.modal-frame-4{
-    z-index:1000 !important;
+.modal-frame-4 {
+    z-index: 1000 !important;
 }
 
-.modal-dialog{
-top: 30%;
-background: #FFFFFF;
-border-radius: 10px;
-
+.modal-dialog {
+    top: 30%;
+    background: #ffffff;
+    border-radius: 10px;
 }
-.modal-body{
+.modal-body {
+    left: 0%;
+    right: 0%;
+    top: 42.39%;
+    bottom: 51.46%;
 
-left: 0%;
-right: 0%;
-top: 42.39%;
-bottom: 51.46%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
 
-font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-text-align: center;
-
-color: #000000;
-
-
+    color: #000000;
 }
-.modal-title{
+.modal-title {
+    left: 40.73%;
+    right: 44.69%;
+    top: 9.71%;
+    bottom: 78.96%;
+    width: 100%;
 
-left: 40.73%;
-right: 44.69%;
-top: 9.71%;
-bottom: 78.96%;
-width: 100%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 29px;
+    line-height: 35px;
 
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 29px;
-line-height: 35px;
-
-
-color: #000000;
+    color: #000000;
 }
 
-.btnbatal{
-color: white;
-border: none;
-background: #E5383B;
-border-radius: 9px;
-
+.btnbatal {
+    color: white;
+    border: none;
+    background: #e5383b;
+    border-radius: 9px;
 }
-.btnya{
+.btnya {
     color: black;
 
-background: white;
-border-radius: 9px;
+    background: white;
+    border-radius: 9px;
 }
-.abu{
+.abu {
     color: #555;
 }
-.putih{
-    color: #FFFFFF;
+.putih {
+    color: #ffffff;
 }
-#example{
-    overflow: scroll  !important;
+#example {
+    overflow: scroll !important;
     height: max-content;
 }

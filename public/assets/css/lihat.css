@@ -1,6 +1,6 @@
 .wadah{
 overflow-x: scroll;
-width: 1000px;
+width: 1200px;
 
 }
 
@@ -16,8 +16,10 @@ width: 1000px;
     border-radius: 10px;
     border: none;
     outline: none;
-    text-align: center;
-    padding-right: 95%;
+    padding-left: 25px;
+    padding-right: 25px;
+    /* text-align: center; */
+    /* margin-right: 82%; */
     padding-top: 2%;
 }
 
