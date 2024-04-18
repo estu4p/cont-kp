@@ -21,6 +21,7 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -499,10 +500,10 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
-Route::get('/AdminSistem-Dashboard', function () {
-    return view('SistemLokasi.AdminSistem-Dashboard');
-});
+Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
