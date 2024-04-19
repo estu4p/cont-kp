@@ -113,5 +113,10 @@
                 input.addEventListener('input', checkInputs);
             });
         });
+    
+        @if(session('error'))
+            alert("{{ session('error') }}");
+        @endif
+
     </script>
 @endsection
