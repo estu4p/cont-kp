@@ -12,12 +12,12 @@
 </head>
 
 <body>
-
+<div class="wadah">
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-header border-0">
-                    <!-- Gambar di dalam header -->
+
                     <img src="assets/images/Frame 2447.png" alt="Gambar Header" class="img-fluid">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -28,7 +28,7 @@
                     <br>Batas Tanggal : 30/10/2024
                     <br><b>Silahkan Cek E-mail Untuk Invoice</b>
                 </div>
-                <div class="modal-footer border-0 d-grid justify-content-center"> <!-- Menambahkan kelas d-grid dan properti CSS justify-content -->
+                <div class="modal-footer border-0 d-grid justify-content-center">
                     <a href="/AdminPaket"><button type="button" class="btn btn-success"><b>Selesai</b></button></a>
                 </div>
             </div>
@@ -44,11 +44,7 @@
                         <div style="background-color: #E9E9E9; padding: 12px 15px 12px 15px;" class="label-img">
                             <img src="{{ asset('assets/images/icon/paket.png') }}" style="width: 25px" class="icon-labelinput">
                         </div>
-                        {{-- <script>
-                            var currentUrl = window.location.pathname;
-                            var urlParts = currentUrl.split('/');
-                            var packageName = urlParts[urlParts.length - 1];
-                        </script> --}}
+                      
                         <input type="text" name="paket"
                             style="border: 2px solid #E9E9E9; color:#5e5e5e; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
                             value="Platinum" disabled>
