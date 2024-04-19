@@ -759,51 +759,53 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function editUsermitra()
     {
-       $user = auth()->user();
+    //    $user = auth()->user();
+       $user = Auth::user();
        return response()->json(['data'=> $user]);
     }
     public function editUsermitraupdate(Request $request)
     {
         $user = auth()->user();
-        // Validasi data
         $request->validate([
-            'name' => 'nullable|string|max:255',
+            'nama_lengkap' => 'nullable|string|max:255',
+            'username'=>'nullable|string',
             'email' => 'nullable|string|email|max:255|unique:users,email,'.$user->id,
-            'phone' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|string|max:20',
             'password' => 'nullable|string|min:8|confirmed',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //ukuran file 2MB
-            'mahasiswa' => 'nullable|string', // penambahan mahasiswa
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //ukuran file 2MB
         ]);
 
-        // Update data profil pengguna
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
+        // Update data profil mitra
+        $data=[
+            'nama_lengkap'=>$request->input('nama_lengkap'),
+            'email'=>$request->input('email'),
+            'username'=>$request->input('username'),
+            'no_hp'=>$request->input('no_hp')
+        ];
 
-        // memeriksa jika ada perubahan password
         if ($request->filled('password')) {
-            $user->password = bcrypt($request->password);
+            $data['password'] = bcrypt($request->password);
         }
 
         // memeriksa jika ada foto yang diunggah
-        if ($request->hasFile('photo')) {
+        if ($request->hasFile('foto_profil')) {
             // Hapus foto lama jika ada
-            if ($user->photo) {
-                Storage::delete($user->photo);
+            if ($user->foto_profil) {
+                Storage::delete($user->foto_profil);
             }
-
             // menyimpan foto baru
-            $photoPath = $request->file('photo')->store('public/photos');
-            $user->photo = $photoPath;
+            $photoPath = $request->file('foto_profil')->store('public/photos');
+            $data['foto_profil'] = $photoPath;
         }
 
-        $user->save();
+        $user->update($data);
 
         // penambahan data mahasiswa
+        $mahasiswa = [];
         if ($request->filled('mahasiswa')) {
-            $mahasiswa=User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+            $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
         }
 
-        // return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
-        }
+        return response()->json(['message' => 'Profile updated successfully', 'user' => $user, 'tambah_siswa' => $mahasiswa]);
+    }
 }
