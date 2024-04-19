@@ -251,7 +251,7 @@ Route::get('/laporandatapresensi', function (){
     return view('presensi.laporandatapresensi');
 });
 
-Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa'])->name('contributor.datapresensi');
 
 Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
     // return view('presensi.presensiharian')->name('presensi.con');
