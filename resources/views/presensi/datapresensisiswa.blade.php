@@ -149,10 +149,6 @@
                             <td><i class="fa-regular fa-pen-to-square"></i></td>
                         </tr>
                         @endforeach
-                      
-    <!-- Tampilkan pesan bahwa tidak ada data presensi -->
-    <p>Tidak ada data presensi untuk siswa ini.</p>
-
                     </tbody>
                 </table>
                 <!-- End Tabel Data Presensi Siswa -->
