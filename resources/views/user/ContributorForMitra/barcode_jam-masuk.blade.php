@@ -4,130 +4,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title }}</title>
+    <title>mitra presensi scanbarcode</title>
+    <link href="/assets/css/scanbarcode.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/user.css') }}"> --}}
-    <style>
-        html,
-        body {
-            background-color: #212529;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .barcode-box {
-            background-color: #FFFFFF;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: transparent;
-            color: white;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: capitalize;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-    </style>
+    <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <a href="/user/" class="back-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-            class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
-        </svg>
-    </a>
-    <div class="container">
-        {{-- scanner --}}
-        <div class="barcode-box">
-            <h6 class="text-uppercase">{{ $nama }}'s qr code</h6>
-            {{-- pesan --}}
-            @if (session()->has('error'))
-                <p>Gagal Masuk</p>
-                <div class="alert alert-danger" role="alert">
-                    {{ session()->get('error') }}
+    <div class="header d-flex flex-column py-3">
+        <div class="atas">
+            <div class="kalender">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="kalender" id="kalender">Rabu, 23 Agustus 2023</span>
+            </div>
+            <div class="jam" id="jam"></div>
+        </div>
+        <div class="tengah">
+            <h3>"Change your life now for better future"</h3>
+        </div>
+    </div>
+    <div class="bawah mx-auto">
+        <div class="judul d-flex flex-row justify-content-start">
+            <div class="  tengah-judul d-flex flex-row align-items-center gap-3 ">
+
+                <div class="kekanan  d-flex  flex-column gap-0 justify-content-start">
                 </div>
-            @endif
-            @if (session()->has('success'))
-                <p>Sukses Masuk</p>
-            @endif
-            {{-- scanner --}}
-            <div class="card bg-white shadow rounded-3 p-3 border-0">
-                <video id="preview"></video>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div class=" px-5 col-12 row justify-content-between">
+        <div class="kiri col-4 overflow-hidden">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a style="font-size: 80%;" class="nav-link bg-secondary-subtle text-dark"
+                            href="/UserScanBarcode"><b>Scan Presensi Harian</b></a></li>
+                    <li class="nav-item active"><a style="font-size: 80%;" class="nav-link active"
+                            href="/UserPresensi"><b>Scan Ganti Jam</b></a></li>
+                </ul>
+            </div>
+            <div class=" border border-top-0 ">
+                <br>
+                <p style="text-align: center;">Scan Barcode Anda</p>
+                <div>
+                    <video style="width: 100%" id="preview"></video>
+                </div>
                 <form action="{{ route('barcode.store') }}" method="POST" id="form">
                     @csrf
-                    <input type="" id="nama_lengkap" name="nama_lengkap">
+                    <input type="hidden" id="nama_lengkap" name="nama_lengkap">
                 </form>
+                <p style="text-align: center;" class="p1"><i class="ikon bi bi-exclamation-triangle-fill"></i>
+                    arahkan Barcode pada kamera</p>
             </div>
-            <h3>Jam Masuk</h3>
-
-            {{-- scanner --}}
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Tanggal</th>
-                            <th>jam masuk</th>
-                            <th>istirahat</th>
-                            <th>kembali</th>
-                            <th>pulang</th>
-                        </tr>
-                    </thead>
-                    @foreach ($presensi as $item)
-                        <tr>
-                            <td>{{ $item->user->nama_lengkap }}</td>
-                            <td>{{ $item->hari }}</td>
-                            <td>{{ $item->jam_masuk }}</td>
-                        </tr>
-                    @endforeach
-
-                </table>
-            </div>
-
-            {{-- <div id="reader" width="600px"></div> --}}
-            {{-- {!! QrCode::size(200)->generate($nama) !!} --}}
-            <img src="/assets/images/Barcode.png" width="180px" alt="">
         </div>
+        <div class=" d-flex py-0 flex-column col-4">
+            <h3 class="my-0 text-center" style="text-align: center;">Shift Middle</h3>
 
-
-
-
-        <button
-            style="border: none; background-color: transparent; color: white; text-transform: capitalize; font-size: 18px; font-weight: 600;"><svg
-                xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                class="bi bi-download me-2" viewBox="0 0 16 16">
-                <path
-                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                <path
-                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
-            </svg>simpan</button>
+            <table class="tabel">
+                <tbody>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-person-fill"></i> Nama</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-person-fill"></i> Nim</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-clock"></i> Jam Masuk</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-clock"></i> Jam Isterahat</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-clock"></i> Jam Kembali</td>
+                        <td class="isi"></td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-clock"></i> Jam Pulang</td>
+                        <td class="isi"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="kanan col-3">
+            <h3>Aktifitas Terbaru</h3>
+            <br>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Fairuza istirahat <span>10 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Indah mendaftarkan diri <span>11 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Febrian log out <span>15 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Gio log out <span>15 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Nandi log in <span>20 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Jesika log out <span> 20 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Nanda isterahat <span> 21 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Lala mendaftarkan diri<span> 31 menit yang lalu</span>
+            </div>
+            <div class="status">
+                <i class="ikon bi bi-person-fill"></i> Attar login <span> 40 menit yang lalu</span>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </body>
+<script>
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var timeString = hours + ":" + minutes + ":" + seconds;
+        document.getElementById('jam').innerText = timeString;
+
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+            'November', 'Desember'
+        ];
+        var day = days[now.getDay()];
+        var date = now.getDate();
+        var month = months[now.getMonth()];
+        var year = now.getFullYear();
+        var dateString = day + ', ' + date + ' ' + month + ' ' + year;
+        document.getElementById('kalender').innerText = dateString;
+    }
+
+    // Panggil updateTime setiap detik
+    setInterval(updateTime, 1000);
+
+    // Panggil updateTime sekali untuk menetapkan waktu awal
+    updateTime()
+</script>
+
+</html>
+<script>
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var timeString = hours + ":" + minutes + ":" + seconds;
+        document.getElementById('jam').innerText = timeString;
+
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+            'November', 'Desember'
+        ];
+        var day = days[now.getDay()];
+        var date = now.getDate();
+        var month = months[now.getMonth()];
+        var year = now.getFullYear();
+        var dateString = day + ', ' + date + ' ' + month + ' ' + year;
+        document.getElementById('kalender').innerText = dateString;
+    }
+
+    // Panggil updateTime setiap detik
+    setInterval(updateTime, 1000);
+
+    // Panggil updateTime sekali untuk menetapkan waktu awal
+    updateTime()
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var isis = document.querySelectorAll('.isi');
+        for (var i = 0; i < isis.length; i++) {
+            if (isis[i].textContent.trim() !== '') {
+                isis[i].classList.add('non-empty');
+            }
+        }
+    });
+</script>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -156,6 +236,5 @@
         document.getElementById('form').submit();
     })
 </script>
-
 
 </html>

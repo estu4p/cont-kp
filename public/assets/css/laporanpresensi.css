@@ -1,46 +1,54 @@
 html,
 body {
   overflow-x: hidden;
+
 }
-.card {
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+.fa-chevron-left {
+    position: relative;
+    font-size: 40px;
+    color: black;
+    top: -40px ;
+    margin-right: 20px;
 }
 .card-header {
+    
+    width: 0%; 
+    height: 50%; 
+    background: #404040;
     color: white;
-    background-color: #404040;
-    border-bottom: 1px solid #ddd;
-    position: relative;
-}
-.parent-relatife{
-    position: relative;
-}
+  }
+  
 
-.kekiri{
-    position: absolute;
-    left:-2%;
-    z-index: 10;
-    top:10px;
-    color: black;
 
+#search-input {
+width: 400px;
+background: #E9E9E9;
+border-radius: 7px;
+right: 1%;
 }
+.search-input{
+    right: 100%;
+}
+.label {
+    margin-right: 10px; /* Atur jarak antara label dan input */
+    margin-top: 10px;
 
-#date-input {
-    margin-left: 10px;
+
 }
 .dropdown {
     position: relative;
     display: inline-block;
 }
 .dropbtn {
-    width: 90px;
+    width: 10px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 160%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
@@ -54,23 +62,34 @@ body {
     display: block;
     margin-bottom: 8px;
 }
-table {
-    width: 80%; /* Atur lebar tabel */
-    margin: auto; /* Tengahkan tabel */
-    border-collapse: collapse;
+.table-container {
+    overflow-x: auto; /* Membuat wadah tabel dapat digulir secara horizontal */
+    margin-left: 40px;
 }
-
 .table th {
-    text-align: center;
+    /* text-align: center; */
     background-color: #DCDCDC;
+    
 }
-
 .table tr td {
+    text-align: center;
     background-color: white !important;
+    width: 1%;
 }
-.table tr{
-    background-color: white !important;
-}
-.search{
-    padding-right: 10px;
-}
+.btn {
+    padding: 8% 16%; /* Mengurangi padding tombol */
+    font-size: 14px; /* Mengurangi ukuran font tombol */
+    min-width: 80px; /* Menentukan lebar minimum tombol */
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+
+    .card-header {
+        width:10%;
+      }
+    .fzt5{font-size: 50% !important;}
+    .fzt6{font-size: 60% !important;}
+    .fzt7{font-size: 70% !important;}
+    .fzt8{font-size: 80% !important;}
+  } 
+ 
+  

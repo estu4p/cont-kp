@@ -59,7 +59,6 @@
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan Password">
                 </div>
-
                 <label for="password-confirm" class="mt-2 fw-5 mb-2">konfirmasi password</label>
                 <div class="d-flex">
                     <input type="password" name="password-confirm" id="password-confirm"
@@ -68,11 +67,10 @@
                     <small id="passwordMatchError" class="text-danger d-none mt-1">Konfirmasi password harus cocok dengan
                         password.</small>
                 </div>
-
-                <div class="button-container text-center mt-4">
-                    {{-- <button type="submit" id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
-                    <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
-                </div>
+                    <div class="button-container text-center mt-4">
+                        {{-- <button type="submit" id="registerButton"  class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
+                        <a  href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
+                 </div>
             </form>
         </div>
     </div>

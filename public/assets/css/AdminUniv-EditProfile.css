@@ -1,89 +1,148 @@
-.wadah{
+.wadah {
     display: flex;
     padding-top: 10px;
     padding-left: 50px;
+    flex-wrap: wrap;
 }
-.propil{
-    height: 600px;
-    width: 300px;
+
+.propil {
+    height: 650px;
+    width: calc(25% - 20px); /* Setengah dari lebar kontainer dengan margin */
+    margin-right: 40px;
+    padding-top: 20px;
+    padding-left: 20px;
     text-align: center;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    
+    margin-bottom: 20px;
 }
-.gambarkiri{
+.tombol{
+    margin-top: 15px;
+}
+
+   
+
+
+.gambarkiri {
     padding-top: 30px;
-    transform: scale(1.8);
+    transform: scale(1.7);
 }
-.nama{
+.nama {
     padding-top: 70px;
     font-weight: bold;
     font-size: 20px;
-  
 }
-.email{
-   
+.email {
     padding-top: 15px;
-    
 }
-.about{
-    padding-top: 80px;
+.about {
+    padding-top: 100px;
     font-weight: bold;
     font-size: 20px;
 }
-.keterangan{
+.keterangan {
     padding-top: 30px;
-   
+
     width: 90%;
-  padding-left: 35px;
+    padding-left: 35px;
 }
-.wadahedit{
-    padding-left: 30px;
-}
-.editprofil{
-    height: 600px;
-    width: 850px;
+.wadahedit {
+    height: 650px;
+    width: calc(72% - 20px); /* Setengah dari lebar kontainer dengan margin */
+    margin-right: 10px;
     padding-top: 20px;
     padding-left: 20px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
 }
-/* .gambarkanan{
-    transform: scale(1.2);
-} */
-.change{
+
+
+.editprofil {
+    height: 650px;
+    width:800px;
+    padding-top: 20px;
+    padding-left: 20px;
     background: #ffffff;
     border-radius: 10px;
-    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  
 }
-.remove{
+
+.change{
+color: #000000;
+box-sizing: border-box;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 12px;
+width: 150px;
+height: 40px;
+border: 2px solid rgba(0, 0, 0, 0.5);
+border-radius: 5px;
+  }
+
+.gambarkanan{
+    transform: scale(1.2);
+}
+
+
+.remove {
     background: #ffffff;
-    color: #BA181BE8;
+    color: #ba181be8;
     border: none;
+    padding-left: 50px;
 }
-.judulkanan{
+.judulkanan {
     padding-top: 20px;
+    padding-bottom: 20px;
     font-weight: bold;
     font-size: 20px;
+    
 }
-.input{
+.input {
     width: 97%;
 
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
 }
-#About{
+#About {
     width: 300px;
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
 }
-.Cancel{
+.cancel{
     border-radius: 7px;
-    color: #ffffff;
-    background-color: #7a7a7a;
+    height: 40px;
+    width: 90px;
+    border: none;
+    background-color: transparent;
+   
 }
-.Update{
+.Update {
     border-radius: 7px;
+    height: 40px;
+    width: 90px;
     color: #ffffff;
     background-color: #A4161A;
+    border: none;
+    
+}
+.atas{
+    justify-content: space-between;
+    width: 25%;
+}
+
+
+/* Media query untuk tata letak responsif */
+@media (max-width: 1250px) {
+    .wadah {
+        padding: 40px;
+        
+    }
+    .propil,
+    .wadahedit {
+        width: 100%; /* Penuhi lebar saat layar kecil */
+        margin-right: 0; /* Hapus margin saat satu kolom */
+    }
 }

@@ -14,4 +14,8 @@ class Mitra extends Model
     {
         return $this->hasMany(User::class)->where('role_id', 3);
     }
+    public function divisiMitra()
+    {
+        return $this->hasMany(DivisiItem::class);
+    }
 }

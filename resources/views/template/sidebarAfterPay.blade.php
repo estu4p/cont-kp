@@ -11,7 +11,7 @@
             <a class="nav-link" href="/mitra-adminunivmitra">Mitra</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Pengaturan</a>
+            <a class="nav-link" href="/AdminUniv/setting/quotes">Pengaturan</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/AdminPaket">Paket</a>

@@ -6,7 +6,7 @@
 
 <!-- <div class="kanan-tabel p-5 container-fluid m-auto  w-100 justify-content-center" style="background-color:#EFAF18"> -->
     <div class="container p-5   w-100 justify-content-start" style="position:relative ;">
-        <a href="/pengaturan" class="kekiri" style="color:black"><i class="fa-solid fa-chevron-left" style="color: black;"></i></a>
+        <a href="/pengaturan-contri" class="kekiri" style="color:black"><i class="fa-solid fa-chevron-left" style="color: black;"></i></a>
         <h3 class="kategori">Kategori Penilaian Ui/Ux</h3>
         <div class="card">
             <div class="card-header">

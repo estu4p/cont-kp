@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BEController\MhsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
-use App\Http\Controllers\BEController\SchoolControlller;
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
@@ -19,6 +18,8 @@ use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\PresensiMitraController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\UserAdminSistemController;
 
 
 
@@ -38,7 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [LoginController::class, 'validateLogin'])->name('login');
-    Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
 Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/sentOTP', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/createPassword', [ResetPasswordController::class, 'newPassword'])->name('password.new');
@@ -80,11 +81,12 @@ Route::get('dashboard/admin/{id}', [AdminUnivAfterPaymentController::class, 'det
 Route::get('edit-profile-admin', [AdminUnivAfterPaymentController::class, 'profileAdmin']);
 Route::post('edit-profile-admin/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminProfile']);
 Route::get('admin/data-mitra', [AdminUnivAfterPaymentController::class, 'adminUnivMitra']);
+Route::get('admin/data-mitra/divisi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivDivisiMitra']);
 Route::get('admin/data-mitra/presensi', [AdminUnivAfterPaymentController::class, 'adminUnivPresensi']);
 Route::get('admin/daftar-mitra/presensi/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPengaturanPresensi']);
 Route::post('admin/daftar-mitra/presensi/update/pengaturan-presensi/{id}', [AdminUnivAfterPaymentController::class, 'updateAdminUnivPengaturanPresensi']);
 Route::get('admin/data-mitra/presensi/detail-profile/{id}', [AdminUnivAfterPaymentController::class, 'adminUnivPresensiDetailProfile']);
-Route::get('admin/daftar-mitra/team-aktif', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
+Route::get('admin/daftar-mitra/team-aktif/{id}', [AdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif']);
 
 Route::get('admin/daftar-mitra/pengaturan-divisi', [AdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi']); //daftar divisi
 Route::get('admin/daftar-mitra/showPenilaian', [AdminUnivAfterPaymentController::class, 'showKategoriPenilaian']);
@@ -101,11 +103,17 @@ Route::get('admin/daftar-mitra/laporan-data-presensi', [AdminUnivAfterPaymentCon
 Route::get('admin/daftar-mitra/detail-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailHadir']);
 Route::get('admin/daftar-mitra/detail-izin/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailIzin']);
 Route::get('admin/daftar-mitra/detail-tidak-hadir/{id}', [AdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir']);
+Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
+Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
+Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
+Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
 Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
+Route::get('datapresensi', [ContributorUnivController::class, 'DataPresensi']);
+Route::get('datapresensisiswa/{id}', [ContributorUnivController::class,'DataPresensiSiswa']);
 
 //Contributor for Mitra
 Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
@@ -123,14 +131,22 @@ Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
 //Contributor for Mitra - Presensi
-Route::get('daftar-presensi', [PresensiMitraController::class,'getAllPresensi']);
+Route::get('daftar-presensi', [PresensiMitraController::class, 'getAllPresensi']);
 Route::get('presensi/by-name', [PresensiMitraController::class, 'getPresensiByNama']);
 Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiAccept']);
 Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
 
+Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
+Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
+Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
+Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
 
-Route::get('laporan-presensi', [ContributorForMitra::class,'laporanPresensi']);
-Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class,'laporanPresensiDetailHadir']);
-Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,'laporanPresensiDetailIzin']);
-Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class,'laporanPresensiDetailTidakHadir']);
+//Admin sistem dashboard
+Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+//Subscription
+Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+Route::get('/subscriptions/{id}', [UserAdminSistemController::class, 'show'])->name('subscriptions.show');
+Route::post('/subscriptions', [UserAdminSistemController::class, 'store'])->name('subscriptions.store');
+Route::put('/subscriptions/{id}', [UserAdminSistemController::class, 'update'])->name('subscriptions.update');
+Route::delete('/subscriptions/{id}', [UserAdminSistemController::class, 'destroy'])->name('subscriptions.destroy');
