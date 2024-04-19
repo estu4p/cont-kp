@@ -24,14 +24,6 @@ class RegisterController extends Controller
         $no_hp = $request->input('no_hp');
         $barcode = $request->input('barcode');
         $password = $request->input('password');
-        $nama_lengkap = $request->input('nama_lengkap');
-        $nomor_induk = $request->input('nomor_induk');
-        $jurusan = $request->input('jurusan');
-        $email = $request->input('email');
-        $username = $request->input('username');
-        $no_hp = $request->input('no_hp');
-        $barcode = $request->input('barcode');
-        $password = $request->input('password');
 
         $user = new User();
         $user->nama_lengkap = $nama_lengkap;
