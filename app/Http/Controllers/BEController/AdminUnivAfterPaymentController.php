@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BEController;
 
+use App\Models\Riwayat;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\User;
@@ -736,23 +737,17 @@ class AdminUnivAfterPaymentController extends Controller
     //riwayatpembelian
     public function RiwayatPembelian()
     {
-        $paket = Paket::all();
-        // Anda dapat menentukan variabel status, no_pesanan, harga, tanggal, dan metode_pembayaran
-        // jika Anda ingin menggunakannya dalam view
-        $status = 'nilai_status';
-        $no_pesanan = 'nilai_no_pesanan';
-        $harga = 'nilai_harga';
-        $tanggal = 'nilai_tanggal';
-        $metode_pembayaran = 'nilai_metode_pembayaran';
+        $paket = Riwayat::all();
 
-        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('status', 'no_pesanan', 'harga', 'paket', 'tanggal', 'metode_pembayaran'));
+        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('paket'));
     }
 
     //jangka waktu
     public function JangkaWaktu()
     {
-        $paket = Paket::where('status', 'Aktif')->get();
-        return response()->json(['data' => $paket], 200);
+        // $paket = Paket::where('status', 'Aktif')->get();
+        $paket = Riwayat::all();
+        return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu', compact('paket'));
     }
     public function bagianMitra()
     {
