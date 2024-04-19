@@ -1,13 +1,19 @@
+.wadah {
+
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 .tittle-container {
     text-align: center;
     margin-top: 50px;
 }
+
 .tittle-container h1 {
     color: #333;
     margin-top: 10px;
@@ -15,13 +21,15 @@ body {
 
 .container {
     display: flex;
-    justify-content: space-around;
+    margin: auto;
     align-items: center;
-    height: 58vh;
+
     background-color: #f0f0f0;
+
+
 }
 
-.mb-5{
+.mb-5 {
     margin-bottom: 3rem !important;
 }
 
@@ -31,25 +39,39 @@ body {
     align-items: center;
     text-align: center;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    width:100px;
-    height: 20px;
-    margin:5px;
+    border: none !important;
 
+    background-color: transparent !important;
+    width: 19rem;
+    height: auto;
 
 }
-.card div table tr td{
-    padding:5px 10px;
-    font-size:70%;
+.child{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    transition: .3s;
+    padding-top: 1rem;
 }
-.card div ul li{
+.child:hover{
+    box-shadow: 0 0 10px rgb(125, 125, 125);
+    transition: .3s;
+}
+.card div table tr td {
+    padding: 5px 10px;
+    font-size: 70%;
+}
+
+.card div ul li {
     list-style: none;
 }
-.merah div ul li{
-    color:red;
+
+.merah div ul li {
+    color: red;
 }
+
 .plan-title {
     font-weight: bold;
     font-size: 20px;
@@ -69,3 +91,25 @@ body {
 .btn {
     margin-top: 10px;
 }
+
+
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-wrap: wrap;
+
+    }
+
+    .card {
+        flex: 0 0 calc(33.333% - 20px);
+        max-width: calc(33.333% - 20px);
+
+    }
+}
+
+
+@media screen and (min-width: 1025px) {
+
+}
+
+
+

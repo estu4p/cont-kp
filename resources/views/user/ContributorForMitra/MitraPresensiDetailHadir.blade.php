@@ -194,7 +194,7 @@
                                         <td>{{$item->keterangan_status}}</td>
                                     </tr>
                                     @endforeach
-                                     
+
                                 </tbody>
                             </table>
                         </div>
