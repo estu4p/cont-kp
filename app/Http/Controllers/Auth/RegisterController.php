@@ -24,6 +24,14 @@ class RegisterController extends Controller
         $no_hp = $request->input('no_hp');
         $barcode = $request->input('barcode');
         $password = $request->input('password');
+        $nama_lengkap = $request->input('nama_lengkap');
+        $nomor_induk = $request->input('nomor_induk');
+        $jurusan = $request->input('jurusan');
+        $email = $request->input('email');
+        $username = $request->input('username');
+        $no_hp = $request->input('no_hp');
+        $barcode = $request->input('barcode');
+        $password = $request->input('password');
 
         $user = new User();
         $user->nama_lengkap = $nama_lengkap;
@@ -32,28 +40,20 @@ class RegisterController extends Controller
         $user->email = $email;
         $user->username = $username;
         $user->no_hp = $no_hp;
+        $user->role_id = 3;
         $user->barcode = $barcode;
         $user->password = $password;
-        // $user->save();
-        if ($user->save()) {
-            return redirect()->route('user')->with('success', 'User berhasil disimpan');
+        $user->save();
+
+        if ($user) {
+            //  return redirect()->to('/pemagang/home');
+             return redirect()->route('user.login')->with('success', 'User registered successfully!');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan user');
+            return response([
+                'pesan' => 'Gagal',
+            ], 404);
         }
 
-        // if ($user) {
-        //     return response([
-        //         'pesan' => 'user berhasil',
-        //         'user$user' => $user,
-        //     ], 200);
-        // } else {
-        //     return response([
-        //         'pesan' => 'Gagal',
-        //     ], 404);
-        // }
-
-        // return redirect('/user.login')->with('success', 'User registered successfully!');
-        // return redirect()->route('user.login')->with('success', 'User registered successfully!');
         // return view('user.login', ['title' => "Login"]);
     }
 

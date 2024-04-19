@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\Presensi;
+use App\Models\Mitra;
 
+use App\Models\Divisi;
+use App\Models\Presensi;
 use function Laravel\Prompts\alert;
 
 use Illuminate\Support\Facades\Route;
@@ -26,6 +28,7 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -229,18 +232,12 @@ Route::get('/user/barcode', function () {
 
 
 //user
-Route::get('/pemagang/home', function () {
-    return view('pemagang.home', [
-        'title' => "Home"
-    ]);
-});
-Route::get('/user', function () {
-    return view('user.home', [
-        'title' => "Home",
-        'nama' => "Syalita Widyandini",
-        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
-    ]);
-});
+// Route::get('/pemagang/home', function () {
+//     return view('pemagang.home', [
+//         'title' => "Home"
+//     ]);
+// });
+
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
         'title' => "Barcode Pemagang",
@@ -257,7 +254,6 @@ Route::get('/pemagang/home', function () {
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
-Route::get('/pemagang/detail/{nama_lengkap}', [HomeMitraController::class, 'ijin']);
 
 
 //contributor for univ
@@ -582,23 +578,39 @@ Route::get('/user/barcode', function () {
 
 
 //user
-Route::get('/pemagang/home', function () {
-    return view('pemagang.home', [
-        'title' => "Home",
-        'button' => "Masuk",
-        'route' => '/jamMasuk'
-    ]);
+// Route::get('/pemagang/home', function () {
+//     return view('pemagang.home', [
+//         'title' => "Home",
+//         'button' => "Masuk",
+//         'route' => '/jamMasuk'
+//     ]);
+// });
+Route::middleware('auth')->group(function () {
+    Route::get('/user', function () {
+        $mitra = Mitra::pluck('nama_mitra', 'id');
+        $divisi = Divisi::pluck('nama_divisi', 'id');
+        return view('user.home', [
+            'title' => "Home",
+            'nama' => "Syalita Widyandini",
+            'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06",
+            'mitra' => $mitra,
+            'divisi' => $divisi,
+        ]);
+    });
+    Route::get('/pemagang/home/{id}', [HomeMitraController::class, 'profil']);
+    // Home Mitra User
+    Route::get('/profil/{id}', [HomeMitraController::class, 'profil'])->name('profil');
+    Route::post('/mitra/{id}', [HomeMitraController::class, 'pilihMitra'])->name('pilihMitra');
+    Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+    Route::post('/jamMasuk/{id}', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+    Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+    Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+    Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
+    Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
+    Route::get('/pemagang/detail/{id}', [HomeMitraController::class, 'ijin']);
+    Route::post('/kebaikan/{id}', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
+    Route::post('/catatLogAktivity/{id}', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 });
-// Home Mitra User
-Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
-Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
-Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
-Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
-Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
-Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
-Route::post('/kebaikan', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
-Route::post('/catatLogAktivity', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');

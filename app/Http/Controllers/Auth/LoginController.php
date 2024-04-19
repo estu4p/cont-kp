@@ -40,15 +40,29 @@ class LoginController extends Controller
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
 
-            $role_id = $user->role->id;
 
-            if ( $role_id == 1) { //super admin
-                return redirect()->to('/superAdmin');
-            } else if ( $role_id == 2) { //admin
-                return redirect()->to('/AdminUniv-Dashboard');
-            } else if ( $role_id == 3) { //mahasiawa /pemagang
+            if ($user->role == 1) {
+                return redirect()->to('/pemagang/home');
+            } else if ($user->role == 2) {
+                return redirect()->to('/pemagang/home');
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Super Admin',
+                    'redirect' => 'SuperAdmin/dashboard'
+                ], 200);
+            } else if ($user->role == 2) {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Admin',
+                    'redirect' => 'Admin/dashboard'
+                ], 200);
+            } else if ($user->role_id == 3) {
                 return redirect()->to('/user');
-            } else if ( $role_id == 4) { //dosen-contributoruniv
+            } else if ($user->role == 4) {
+                return redirect()->to('/pemagang/home');
+            } else if ($user->role == 1) {
+                return redirect()->to('/AdminUniv-Dashboard');
+            } else if ( $user->role_id == 3) {
+                return redirect()->to('/user');
+            } else if ( $user->role_id == 4) {
                 return redirect()->to('/dashboard');
             } else { // mitra
                 return redirect()->to('/contributorformitra-dashboard');
