@@ -1,33 +1,33 @@
 <?php
 
 use App\Models\Mitra;
-
 use App\Models\Divisi;
+use App\Models\Sekolah;
 use App\Models\Presensi;
 use function Laravel\Prompts\alert;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use  App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PresensiCobaController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorForMitra;
-use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
+use App\Http\Controllers\BEController\ContributorUnivController;
+use App\Http\Controllers\BEController\UserAdminSistemController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorUnivController;
-use App\Http\Controllers\PresensiCobaController;
-use App\Http\Controllers\BEController\UserAdminSistemController;
 
 
 /*
@@ -54,7 +54,7 @@ Route::get('/user/login', function () {
 
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
 Route::get('/user/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/register', [RegisterController::class, 'register_user'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
@@ -587,14 +587,23 @@ Route::get('/user/barcode', function () {
 // });
 Route::middleware('auth')->group(function () {
     Route::get('/user', function () {
+        $user = Auth::user();
         $mitra = Mitra::pluck('nama_mitra', 'id');
         $divisi = Divisi::pluck('nama_divisi', 'id');
+        $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
+        $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
+        $today = date('F Y/d');
+
         return view('user.home', [
             'title' => "Home",
-            'nama' => "Syalita Widyandini",
-            'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06",
             'mitra' => $mitra,
             'divisi' => $divisi,
+            'button' => "Masuk",
+            'route' => '/jamMasuk/{id}',
+            'nama_divisi' => $nama_divisi,
+            'nama_sekolah' => $nama_sekolah,
+            'today' => $today,
+            'user' => $user,
         ]);
     });
     Route::get('/pemagang/home/{id}', [HomeMitraController::class, 'profil']);
