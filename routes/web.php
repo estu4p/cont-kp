@@ -76,7 +76,7 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
-Route::get('/superAdmin/login',[LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
 // function () {
 //     return view('superAdmin.Login');
 // })->name('login.superadmin');
@@ -143,6 +143,7 @@ Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+Route::get('/AdminUniv-Logout', [LoginController::class, 'logoutAdminUniv'])->name('logout.admin');
 
 
 
