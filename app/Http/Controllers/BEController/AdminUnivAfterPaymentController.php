@@ -249,20 +249,21 @@ class AdminUnivAfterPaymentController extends Controller
 
         // $divisi = Mitra::with('divisiMitra')->findOrFail($id);
         // $divisiMitra = $divisi->divisi_mitra;
+        $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
         $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
         $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'team aktif',   'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota', 'divisiMitraId'));
         }
     }
 
     public function daftarMitraPengaturanDivisi(Request
-    $request)
+    $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        $divisi = Divisi::all();
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
@@ -754,4 +755,3 @@ class AdminUnivAfterPaymentController extends Controller
         return response()->json(['data' => $paket], 200);
     }
 }
-
