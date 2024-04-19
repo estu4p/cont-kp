@@ -564,11 +564,8 @@ Route::get('/kategoripenilaian', function () {
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
 
-Route::get('/AdminSistem-Editprofile', function () {
-    return view('SistemLokasi.AdminSistem-Editprofile');
-});
+Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
-
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
