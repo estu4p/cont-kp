@@ -40,18 +40,17 @@
                     <h3>Iqra's QR Code</h3>
                 </div>
                 <div class="qr-container">
-                    <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="Syalita's QR Code" class="qr-image">
-                    {{-- <img src="{{ asset('barcodes/qrcode_' . Auth::id() . '.svg') }}" alt="QR Code"> --}}
+                    {{-- <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="Syalita's QR Code" class="qr-image"> --}}
+                    <img src="{{ asset('barcodes/qrcode_' . Auth::id() . '.svg') }}" alt="QR Code">
                 </div>
 
             </div>
         </div>
         <div class="button-container">
             <button class="btnqr"><a href="/pemagang/home/{{ Auth::id() }}" style="text-decoration: none;" class="kembali"> <i
-                        class="fa-solid fa-angle-left"></i>Kembali</a></button>
+                class="fa-solid fa-angle-left"></i>Kembali</a></button>
         </div>
     </form>
-    
 </body>
 
 </html>

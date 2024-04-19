@@ -29,9 +29,7 @@ use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
-use App\Http\Controllers\BEController\ContributorUnivController;
-use App\Http\Controllers\PresensiCobaController;
-use App\Http\Controllers\BEController\UserAdminSistemController;
+
 
 
 
@@ -618,7 +616,7 @@ Route::middleware('auth')->group(function () {
     // Home Mitra User
     Route::get('/profil/{id}', [HomeMitraController::class, 'profil'])->name('profil');
     Route::post('/mitra/{id}', [HomeMitraController::class, 'pilihMitra'])->name('pilihMitra');
-    Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+    Route::get('/pemagang/MyQR/{id}', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
     Route::post('/jamMasuk/{id}', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
     Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
     Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');

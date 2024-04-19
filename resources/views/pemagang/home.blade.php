@@ -70,7 +70,7 @@
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
+            <button class="btnqr"><a href="/pemagang/MyQR/{{ Auth::id() }}" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
         </div>
         <div class="konten">
             <div class="shif">
