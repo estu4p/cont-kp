@@ -59,7 +59,6 @@
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan Password">
                 </div>
-
                 <label for="password-confirm" class="mt-2 fw-5 mb-2">konfirmasi password</label>
                 <div class="d-flex">
                     <input type="password" name="password-confirm" id="password-confirm"

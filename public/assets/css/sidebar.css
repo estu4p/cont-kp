@@ -15,6 +15,15 @@ body {
     z-index: 10;
     box-shadow: 0 0 20px rgb(146, 146, 146);
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .sidebar{
+    width: 150px;
+  }
+  body{
+    padding-left: 150px !important;
+  }
+}
+
 
 .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */

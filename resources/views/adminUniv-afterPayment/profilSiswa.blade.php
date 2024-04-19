@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="username">Nama lengkap</label>
                             <input class="input" type="text" class="form-control" id="name"
-                                value={{ $user->nama_lengkap }}">
+                                value="{{ $user->nama_lengkap }}">
                         </div>
                         <div class="form-group">
                             <label for="nim">Nomor induk mahasiswa</label>

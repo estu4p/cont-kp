@@ -16,13 +16,18 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BEController\SchoolController;
 use App\Http\Controllers\AdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorForMitra;
+use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
+use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\ContributorUnivController;
+use App\Http\Controllers\PresensiCobaController;
+use App\Http\Controllers\BEController\UserAdminSistemController;
 
 
 /*
@@ -39,8 +44,16 @@ use App\Http\Controllers\BEController\SuperadminSistemController;
 Route::get('/welcome', function () {
     return view('welcome');
 });
+//login user
+Route::get('/user/login', function () {
+    return view('user.login', [
+        'title' => "Login",
+        'email' => "raihan@gmail.com"
+    ]);
+});
 
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
+Route::get('/user/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
@@ -63,6 +76,22 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
+Route::get('/superAdmin/login',[LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+// function () {
+//     return view('superAdmin.Login');
+// })->name('login.superadmin');
+Route::post('/superAdmin/login', [LoginController::class, 'ValidateLogin'])->name('login.superadmin');
+
+Route::get('/superAdmin/login/reset', function () {
+    return view('superAdmin.ResetPassword');
+});
+Route::get('/superAdmin/login/OTP', function () {
+    return view('superAdmin.InputOTP');
+});
+Route::get('/superAdmin/login/newPass', function () {
+    return view('superAdmin.NewPassword');
+});
+
 Route::get('/superAdmin', [SuperadminSistemController::class, 'dashboard'])->name('superAdmin.dashboard');
 Route::get('/superAdmin/editProfil', [SuperadminSistemController::class, 'editProfile'])->name('superAdmin.editProfile');
 Route::patch('/superAdmin/editProfil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('superAdmin.updateProfile');
@@ -97,7 +126,7 @@ Route::post('/loginpage', [LandingPageController::class, 'loginpage'])->name('lo
 // Route::get('/loginpage', [AuthController::class, 'index'])->name('login');
 // Route::post('/loginpage', [AuthController::class, 'login'])->name('login');
 
-//login as contributor univ 
+//login as contributor univ
 Route::get('/logincontributor', [AuthController::class, 'index'])->name('login');
 Route::post('/logincontributor', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () {
@@ -105,16 +134,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //login contributor mitra
-Route::get('/login', function () {
-    return view('login');
-});
-//login user
-Route::get('/user/login', function () {
-    return view('user.login', [
-        'title' => "Login",
-        'email' => "raihan@gmail.com"
-    ]);
-});
+Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
+Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
+Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
+
 //login afterpayment
 Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
@@ -165,9 +188,6 @@ Route::get('/adminafterpayment', function () {
 
 
 Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-
-
 
 // Route::get('/contributingforuniv', function () {
 //     return view('template.contributingforunivschool.penilaianmahasiswa');
@@ -244,14 +264,12 @@ Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
-Route::get('/datapresensisiswa', function () {
-    return view('presensi.datapresensisiswa');
-});
 
-Route::get('/presensi-contributor-univ', function () {
-    return view('presensi.presensiharian');
-    // return view('presensi.presensiharian')->name('presensi.con');
-});
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa'])->name('contributor.datapresensi');
+
+Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
+// return view('presensi.presensiharian')->name('presensi.con');
+
 Route::get('/presensihadir', function () {
     return view('presensi.presensihadir');
 });
@@ -450,9 +468,9 @@ Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir', function () {
 });
 Route::get('/AdminUniv-mitra-laporanpresensi-detailtidakhadir/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifDetailTidakHadir'])->name('adminUniv.detailTidakHadir');
 
-Route::get('/AdminUniv/Option-TeamAktif', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
+Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraTeamAktif'])->name('adminUniv.Divisi');
 
-Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
+Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
 Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'destroyDivisi'])->name('adminUniv.destroyDivisi');
@@ -462,7 +480,44 @@ Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
 
+Route::get('/AdminUniv/setting/quotes', function () {
+    $quotes = [
+        ['id' => 1, 'quotes' => "Change your life now for better future"],
+        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+    ];
+    return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+        'title' => "Admin - Setting Jam & Quotes",
+        'quotes' => $quotes
+    ]);
+});
+Route::get('/AdminUniv/setting/user', function () {
+    $users = [
+        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
+        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
+        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
+        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
+    ];
 
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];
+    return view('AdminUniv-afterPayment.AdminUniv-User', [
+        'title' => "Admin - User & Organization",
+        'users' => $users,
+    ]);
+});
 
 
 Route::get('/pengaturan', function () {
@@ -503,16 +558,14 @@ Route::get('/pengaturan', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
+
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
-Route::get('/AdminSistem-Dashboard', function () {
-    return view('SistemLokasi.AdminSistem-Dashboard');
-});
+Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+
 Route::get('/AdminSistem-Editprofile', function () {
     return view('SistemLokasi.AdminSistem-Editprofile');
 });
-Route::get('/AdminSistem-Subcription', function () {
-    return view('SistemLokasi.AdminSistem-Subcription');
-});
+Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
 
 Route::get('/user/barcode', function () {
@@ -655,15 +708,6 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
-Route::get('/AdminUniv-InputOTP', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputOTP');
-});
-
-Route::get('/AdminUniv-InputNewPassword', function () {
-    return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
-});
-
-
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -671,51 +715,45 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
-Route::get('/mitra-presensi-barcode/istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/selesai-istirahat', function () {
-    return view('User.ContributorForMitra.barcode_jam-selesai-istirahat', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => Presensi::all(),
-
-    ]);
-});
-Route::get('/mitra-presensi-barcode/pulang', function () {
-    $presensi = Presensi::all();
-
-    // Ambil data presensi terbaru
-    $latestPresensi = Presensi::latest()->first();
-    $pulang = strtotime($latestPresensi->jam_pulang);
-    $masuk = strtotime($latestPresensi->jam_masuk);
-
-    // Hitung selisih waktu
-    $diffInSeconds = $pulang - $masuk;
-
-    // Ubah selisih waktu ke dalam format jam:menit:detik
-    $totalHours = floor($diffInSeconds / 3600);
-    $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
-    $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
-
-    $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-
-    return view('User.ContributorForMitra.barcode_jam-pulang', [
-        'title' => "Barcode Pemagang",
-        'nama' => "Naufal",
-        'presensi' => $presensi,
-        'total' => $total
-    ]);
-});
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
+
+Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
 Route::post('/mitra-presensi-barcode/jam-mulai-istirahat', [ContributorForMitra::class, 'jam_mulai_istirahat'])->name('barcode.jam-mulai-istirahat');
+Route::get('/mitra-presensi-barcode/selesai-istirahat', [ContributorForMitra::class, 'view_jam_selesai_istirahat']);
 Route::post('/mitra-presensi-barcode/jam-selesai-istirahat', [ContributorForMitra::class, 'jam_selesai_istirahat'])->name('barcode.jam-selesai-istirahat');
+
+Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_jam_pulang'])->name('barcode.jam-pulang');
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
+Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
+
+// Route::get('/mitra-presensi-barcode/pulang', function () {
+//     $presensi = Presensi::all();
+
+//     // Ambil data presensi terbaru
+//     $latestPresensi = Presensi::latest()->first();
+//     $pulang = strtotime($latestPresensi->jam_pulang);
+//     $masuk = strtotime($latestPresensi->jam_masuk);
+
+//     // Hitung selisih waktu
+//     $diffInSeconds = $pulang - $masuk;
+
+//     // Ubah selisih waktu ke dalam format jam:menit:detik
+//     $totalHours = floor($diffInSeconds / 3600);
+//     $totalMinutes = floor(($diffInSeconds - ($totalHours * 3600)) / 60);
+//     $totalSeconds = $diffInSeconds - ($totalHours * 3600) - ($totalMinutes * 60);
+
+//     $total = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+
+//     return view('User.ContributorForMitra.barcode_jam-pulang', [
+//         'title' => "Barcode Pemagang",
+//         'nama' => "Naufal",
+//         'presensi' => $presensi,
+//         'total' => $total
+//     ]);
+// });
+
+
+
 
 
 
@@ -742,22 +780,11 @@ Route::get('/UserScanQRDefault', function () {
 });
 
 
-Route::get('/admin/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('admin.setting.quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
+Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
+Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
+Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
+
 Route::get('/admin/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
@@ -785,41 +812,6 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
-
-Route::get('/admin/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('admin.setting.quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
-Route::get('/admin/setting/user', function () {
-    $users = [
-        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
-        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
-        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
-        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
-        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
-        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
-    ];
-    return view('admin.setting.user', [
-        'title' => "Admin - User & Organization",
-        'users' => $users
-    ]);
-});
-
-Route::get('/', function () {
-    return view('landing-page.index', ['title' => 'Controlling Magang']);
-});
 Route::get('/AdminPaket', function () {
     return view('user.AdminUnivAfterPayment.AdminPaket');
 });
@@ -844,9 +836,7 @@ Route::get('/RiwayatJangkaWaktu', function () {
     return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
 });
 
-Route::get('/RiwayatPembelian', function () {
-    return view('user.AdminUnivAfterPayment.RiwayatPembelian');
-});
+Route::get('/RiwayatPembelian', [BEControllerAdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 
 
 Route::get('/', function () {
@@ -854,7 +844,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
 
 Route::get('/contributorformitra-editprofile', function () {
     return view('contributorformitra.editprofile');
@@ -878,3 +867,17 @@ Route::get('/contributorformitra-penilaian', function () {
 });
 
 Route::get('/contributorformitra-penilaian-mahasiswa', [ContributorForMitra::class, 'show_mhs']);
+
+Route::get('/presensiCoba', [PresensiCobaController::class, 'index']);
+Route::post('/presensi/masuk', [PresensiCobaController::class, 'jamMasuk'])->name('presensi.jamMasuk');
+Route::get('/presensi/keluar', [PresensiCobaController::class, 'keluar'])->name('presensi.keluar');
+Route::post('/presensi/keluar', [PresensiCobaController::class, 'jamKeluar'])->name('presensi.keluar');
+
+
+Route::get('/UserPresensi', function () {
+    return view('mitra_presensi.scanpresensiharian');
+});
+
+Route::get('/UserScanBarcode', function () {
+    return view('mitra_presensi.scanbarcode');
+});

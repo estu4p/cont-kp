@@ -57,28 +57,21 @@
                                     @foreach ($divisi as $no => $item)
                                         <tr>
                                             <td class="ratakanan">{{ $no + 1 }}</td>
-                                            <td>{{ $item->nama_divisi }}</td>
+                                            <td>{{ $item->divisi->nama_divisi }}</td>
 
                                             <td class="ratakanan"><a href="/TeamAktif-kategoripenilaian-UiuX"><i
                                                         class="fa-regular fa-file-lines ic"></i></a></td>
 
-                                            <td>
-                                                <button class="btn btn-edit btn-sm" data-bs-target="#editModal"
-                                                    data-bs-toggle="modal" onclick="editModal(0)"
+                                            <td class="flex">
+                                                <button class="btn btn-edit btn-sm"
+                                                    data-bs-target="#editModal{{ $item->id }}" data-bs-toggle="modal"
                                                     type="button">Edit</button>
-                                                <form action="{{ route('adminUniv.destroyDivisi', $item->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal"
-                                                        data-bs-toggle="modal" onclick="deleteDivisi(0)"
-                                                        type="submit">Hapus</button>
-                                                </form>
-
+                                                <button class="btn btn-danger btn-sm"
+                                                    data-bs-target="#hapusModal{{ $item->id }}" data-bs-toggle="modal"
+                                                    type="button">Hapus</button>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    <!-- tambahkan baris data yang lain di sini -->
 
                                 </tbody>
 
@@ -91,51 +84,86 @@
         </div>
 
         <!-- Modal edit divisi -->
-        <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="textdivisi">Edit Divisi</div>
-                            <div class="tambahgambar gap-3">
-                                <div class="gambar border d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-pen-nib"></i>
-                                    <input type="file" id="fileInput" style="display: none;">
+        @foreach ($divisi as $no => $value)
+            <div class="modal fade" id="editModal{{ $value->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="{{ route('adminUniv.updateDivisi', $value->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="textdivisi">{{ $value->nama_divisi }}</div>
+                                <div class="tambahgambar gap-3">
+                                    <div class="gambar border d-flex align-items-center justify-content-center">
+                                        <i class="fa-solid fa-pen-nib"></i>
+                                        <input type="file" id="fileInput" style="display: none;">
+                                    </div>
+                                    <div>
+                                        <button class="addgambar">Add Photo</button>
+                                    </div>
+                                    <div>
+                                        <button class="remove">Remove</button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button class="addgambar">Add Photo</button>
-                                </div>
-                                <div>
-                                    <button class="remove">Remove</button>
+                                <div class="grupinputt">
+                                    <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
+                                    <input type="text" class="inputmodalll" id="editNamaDivisi"
+                                        placeholder="Masukkan nama divisi" value="{{ $value->nama_divisi }}"
+                                        name="nama_divisi">
                                 </div>
                             </div>
-                            <div class="grupinputt">
-                                <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                                <input type="text" class="inputmodalll" id="editNamaDivisi"
-                                    placeholder="Masukkan nama divisi" name="nama_divisi">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    aria-label="Close">Batal</button>
+                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                                    aria-label="Close">Simpan</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                aria-label="Close">Batal</button>
-                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"
-                                onclick="updateDivisi()">Simpan</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endforeach
+
+        {{-- hapus modal --}}
+        @foreach ($divisi as $no => $value)
+            <div class="modal fade" id="hapusModal{{ $value->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="{{ route('adminUniv.destroyDivisi', $value->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Hapus Divisi</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>Apa anda yakin ingin menghapus</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    aria-label="Close">Batal</button>
+                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                                    aria-label="Close">Hapus</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+
 
         <!-- Modal tambah divisi -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
-                <form action="{{ route('adminUniv.addDivisi') }}" method="POST">
+                <form action="{{ route('adminUniv.addDivisi') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -151,7 +179,8 @@
                                     <input type="file" id="fileInput" style="display: none;">
                                 </div>
                                 <div>
-                                    <button class="addgambar">Add Photo</button>
+                                    <input class="addgambar form-control" type="file" id="formFile"
+                                        name="foto_divisi" id="foto_divisi">
                                 </div>
                                 <div>
                                     <button class="remove">Remove</button>
@@ -171,8 +200,9 @@
                     </div>
                 </form>
             </div>
-
         </div>
+
+
 
         <script>
             // Variabel global untuk menyimpan indeks divisi yang akan diedit

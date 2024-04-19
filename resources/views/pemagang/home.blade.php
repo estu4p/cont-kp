@@ -70,8 +70,7 @@
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR
-                    Code Saya</a></button>
+            <button class="btnqr"><a href="/pemagang/MyQR" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
         </div>
         <div class="konten">
             <div class="shif">
@@ -158,7 +157,7 @@
                         <form action="{{ route('kebaikan', ['id' => Auth::id()]) }}" method="POST">
                             @csrf
                             <div class="sudah">Sudahkah Anda berbuat kebaikan hari ini? </div>
-                            <textarea id="pesan" name="kebaikan" rows="6"
+                            <textarea class="textarea1" id="pesan" name="kebaikan" rows="6"
                                 placeholder="Tambahkan kebaikan apa hari ini yang telah anda lakukan"
                                 style="background-color: #E9ECEF; width: 95%;"></textarea>
                             <div class="grubbuton">

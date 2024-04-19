@@ -6,7 +6,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <div class="container-fluid p-3 ml-2">
         <div class="d-flex align-items-center">
-            <a href="#" class="kekiri mr-2"><i class="fas fa-chevron-left"></i></a>
+            <a href="/mitra-adminunivmitra" class="kekiri mr-2"><i class="fas fa-chevron-left"></i></a>
             <div class="header" style="display: grid; grid-template-columns: 1fr auto;">
                 <div style="margin: 15px">
                     <h3 style="font-size: 50px; ">Laporan Data Presensi</h3>

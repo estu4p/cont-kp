@@ -15,10 +15,16 @@ class PaketSeeder extends Seeder
     {
         $paket = ['Gold', 'Silver', 'Bronze'];
         $metode = ['BNI', 'Dana'];
+        $status = ['Aktif', 'Tidak Aktif'];
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 3; $i++) {
             paket::create([
-                'nama_paket' => $paket[$i],
+                'nama_paket' => 'Nama riwayat',
+                'tanggal' => $faker->date,
+                'status' => $faker->randomElement($status),
+                'no_pesanan' => $faker->randomNumber,
+                'harga' => 'Rp. 50.000',
+                'paket' => $paket[$i],
                 'metode_bayar' => $faker->randomElement($metode),
             ]);
         }

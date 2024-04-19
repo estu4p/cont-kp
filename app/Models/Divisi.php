@@ -9,12 +9,8 @@ class Divisi extends Model
 {
     use HasFactory;
     protected $table = "divisi";
-    protected $fillable = ['nama_divisi', 'deskripsi_divisi'];
+    protected $fillable = ['nama_divisi', 'foto_divisi'];
 
-    // Tetapkan nilai default untuk deskripsi_divisi
-    protected $attributes = [
-        'deskripsi_divisi' => ''
-    ];
 
     public function mahasiswa()
     {
