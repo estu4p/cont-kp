@@ -907,3 +907,7 @@ Route::get('/UserScanBarcode', function () {
 Route::get('/lihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
+
+Route::get('/Scanqr', function () {
+    return view('user.UserScanQR.Scanqr');
+});
