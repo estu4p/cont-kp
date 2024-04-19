@@ -34,8 +34,6 @@ class User extends Authenticatable
         'browser',
         'tgl_masuk',
         'tgl_keluar',
-        'jam_default_masuk',
-        'jam_default_pulang',
         'email_verified_at',
         'mitra_id',
         'role_id',

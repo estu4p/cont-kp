@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/penilaianmahasiswa.css') }}">
-<div class="wadah">
+
     <div class="wadah p-5 row m-0 d-flex flex-column justify-content-center">
         <div class="search-container ml-auto mr-0 mb-3">
             <form action="" method="GET">
@@ -152,5 +152,3 @@
         });
     </script>
 @endsection
-
-</div>

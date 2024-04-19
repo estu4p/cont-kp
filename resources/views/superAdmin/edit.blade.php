@@ -9,7 +9,7 @@
                 @if ($superAdmin->foto_profil)
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil">
                 @else
-                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
                 @endif
                 <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap }}
                 </h4>
@@ -25,7 +25,7 @@
                 @if ($superAdmin->foto_profil)
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil">
                 @else
-                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
                 @endif
                 <div class="my-auto d-flex flex-column" style="flex-direction: row;">
                     <form action="{{ route('superAdmin.updateFoto', $superAdmin->username) }}" method="POST" enctype="multipart/form-data">
@@ -125,7 +125,7 @@
                         formDelete.setAttribute('action', '/superAdmin/langganan/fotoProfil/' + $username);
                         formDelete.submit();
                     } else {
-                        swal("Foto profil tidak jadi dihapus.");
+                        swal("Data subscription tidak jadi dihapus.");
                     }
                 });
         }

@@ -17,7 +17,7 @@
                     @if ($superAdmin->foto_profil)
                         <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Profile Logo">
                     @else
-                        <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Profile Logo">
+                        <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Profile Logo">
                     @endif
                 </div>
             </div>
