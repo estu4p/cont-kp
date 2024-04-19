@@ -25,6 +25,7 @@ use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
@@ -544,17 +545,12 @@ Route::get('/profilsiswa', function () {
 });
 Route::get('/profilsiswa/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam'])->name('adminUniv.profilSiswa');
 
-
-
-
-
-
-
-
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
 
+Route::get('/AdminUniv/CheckoutBronze', [CheckoutController::class, 'CheckoutBronze'])->name('checkout.bronze.adminUniv');
+Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost'])->name('checkout.bronze.adminUnivPost');
 
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
@@ -833,9 +829,8 @@ Route::get('/CheckoutPlatinum', function () {
     return view('user.AdminUnivAfterPayment.CheckoutPlatinum');
 });
 
-Route::get('/RiwayatJangkaWaktu', function () {
-    return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
-});
+
+Route::get('/RiwayatJangkaWaktu', [BEControllerAdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 
 Route::get('/RiwayatPembelian', [BEControllerAdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 
