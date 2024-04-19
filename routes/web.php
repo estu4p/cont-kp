@@ -23,7 +23,6 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
 
 /*

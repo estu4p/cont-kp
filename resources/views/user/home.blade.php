@@ -54,14 +54,14 @@
                     <img src="{{ asset('assets/images/profil.png') }}" class="img-profile" alt="">
                 </div>
                 <div>
-                    {{-- <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
+                    <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
                          @csrf
                         <p><b>{{ $user->nama_lengkap }}</b></p>
                         <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
                             {{ $nama_sekolah->nama_sekolah}}/
                             {{$today}}
                         </p>
-                    </form> --}}
+                    </form>
                 </div>
             </div>
             <button class="logout"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
