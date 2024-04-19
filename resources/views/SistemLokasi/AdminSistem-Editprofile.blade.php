@@ -6,10 +6,10 @@
 
     <div class="propil">
         <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com</div>
+        <div class="nama">{{ $userAdmin->nama_lengkap }}</div>
+        <div class="email">{{ $userAdmin->email }}</div>
         <div class="about">About</div>
-        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
+        <div class="keterangan">{{ $userAdmin->about }}</div>
     </div>
 
     <div id="preview" class="preview"></div>
@@ -34,25 +34,25 @@
                     <div class="form-group  col-6   p-2">
                         <label for="username">Nama lengkap</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="name" placeholder="Atun Khostriatun">
+                            <input class="input form-control" type="text" id="name" placeholder="{{ $userAdmin->nama_lengkap }}">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
                         <label for="NoHP">No HP</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="NoHP" placeholder="081326273187">
+                            <input class="input form-control" type="text" id="NoHP" placeholder="{{ $userAdmin->no_hp }}">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
                         <label for="email">Email</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="email" id="email" placeholder="wahyudiatkinson@gmail.com">
+                            <input class="input form-control" type="email" id="email" placeholder="{{ $userAdmin->email }}">
                         </div>
                     </div>
                     <div class="form-group  col-6   p-2">
                         <label for="alamat">Alamat</label>
                         <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="alamat" placeholder="Jateng">
+                            <input class="input form-control" type="text" id="alamat" placeholder="{{ $userAdmin->alamat }}">
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,7 @@
                 <div class="form-group form-floating">
                     <!-- <label for="alamat">About</label> -->
                     <div class="col-12  ">
-                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="text
-... "></textarea>
+                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
 
                     </div>
                 </div>

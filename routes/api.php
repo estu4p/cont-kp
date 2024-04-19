@@ -148,7 +148,8 @@ Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra:
 Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
 //Subscription
 Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
-Route::get('/subscriptions/{id}', [UserAdminSistemController::class, 'show'])->name('subscriptions.show');
-Route::post('/subscriptions', [UserAdminSistemController::class, 'store'])->name('subscriptions.store');
-Route::put('/subscriptions/{id}', [UserAdminSistemController::class, 'update'])->name('subscriptions.update');
-Route::delete('/subscriptions/{id}', [UserAdminSistemController::class, 'destroy'])->name('subscriptions.destroy');
+Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSubs'])->name('subscriptions.store');
+//// Route::put('/subscriptions/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.update');
+Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.destroy');
+//Edit Profile
+Route::get('/admin/profile/edit', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');

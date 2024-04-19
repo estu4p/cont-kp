@@ -28,16 +28,18 @@
         </div>
         <div>
             <select name="page" class="page">
-                <option value="page">page 1 of 1</option>
+                <option value="1">page 1 of 2</option>
+            <option   option value="2">page 2 of 2</option>
             </select>
             <select name="item" class="bodi">
-                <option value="item">5 item per page</option>
+            <option value="5" selected>5 item per page</option>
+            <option value="10">10 item per page</option>
             </select>
         </div>
 
         <div class="tabel">
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead class="text-center">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -49,30 +51,52 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                @foreach($subscriptions as $key => $subscription)
+            @foreach($subscriptions as $key => $subscription)
             <tr>
-                <td>{{ $key + 1 }}</td>
-                <td>{{ $subscription->user->nama_lengkap }}</td>
-                <td>{{ $subscription->user->email }}</td>
-                <td>{{ $subscription->user->perguruanTinggi->nama_perguruan_tinggi }}</td>
-                <td>
-                    <div class="{{ $subscription->paket->class }}">{{ $subscription->paket->nama_paket }}</di>
-                </td>
-                <td>{{ $subscription->user->sekolah }}</td>
-                <td>
-                    <div class="aksi d-flex flex-row justify-content-around ">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
+                        <td>{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
+                        <td class="align-middle">{{ $subscription->user->email }}</td>
+                        <td class="align-middle">{{ $sekolah[$subscription->user->sekolah] }}</td>
+                        @if ($subscription->paket->paket === 'Bronze')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Silver')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Gold')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @endif
+                        <td class="align-middle">{{ $subscription->user->kota }}</td>
+                        <td>
+                            <div class="aksi d-flex flex-row justify-content-around ">
+                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                                </button>
+                                <button style="border: none;" onclick="showdeletemodal()">
+                                    <i class="fa-solid fa-trash-can red-icon"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+
 
                 </tbody>
             </table>
