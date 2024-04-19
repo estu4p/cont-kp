@@ -598,7 +598,7 @@ Route::middleware('auth')->group(function () {
     // Home Mitra User
     Route::get('/profil/{id}', [HomeMitraController::class, 'profil'])->name('profil');
     Route::post('/mitra/{id}', [HomeMitraController::class, 'pilihMitra'])->name('pilihMitra');
-    Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+    Route::get('/pemagang/MyQR/{id}', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
     Route::post('/jamMasuk/{id}', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
     Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
     Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
@@ -876,4 +876,25 @@ Route::get('/UserPresensi', function () {
 
 Route::get('/UserScanBarcode', function () {
     return view('mitra_presensi.scanbarcode');
+});
+
+
+Route::get('/lihat', function () {
+    return view('template.contributingforunivschool.lihat');
+});
+
+Route::get('/Scanqr', function () {
+    return view('user.UserScanQR.Scanqr');
+});
+Route::get('/user-AdminSistem/login', function () {
+    return view('SistemLokasi.AdminSistem-login');
+});
+Route::get('/user-AdminSistem/resetpassword', function () {
+    return view('SistemLokasi.AdminSistem-resetpassword');
+});
+Route::get('/user-AdminSistem/InputOTP', function () {
+    return view('SistemLokasi.AdminSistem-InputOTP');
+});
+Route::get('/user-AdminSistem/InputnewPassword', function () {
+    return view('SistemLokasi.AdminSistem-InputnewPassword');
 });
