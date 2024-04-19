@@ -194,9 +194,11 @@ Route::get('/adminafterpayment', function () {
 
 Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
 
+
 // Route::get('/contributingforuniv', function () {
 //     return view('template.contributingforunivschool.penilaianmahasiswa');
 // });
+
 
 //user
 
@@ -887,6 +889,13 @@ Route::get('/UserScanBarcode', function () {
     return view('mitra_presensi.scanbarcode');
 });
 
+
+Route::get('/lihat', function () {
+    return view('template.contributingforunivschool.lihat');
+});
+
+Route::get('/Scanqr', function () {
+    return view('user.UserScanQR.Scanqr');
 
 Route::get('/user-AdminSistem/login', function () {
     return view('SistemLokasi.AdminSistem-login');
