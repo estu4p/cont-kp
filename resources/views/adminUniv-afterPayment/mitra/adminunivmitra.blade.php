@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="carimahasiswa">
-                    <input type="text" id="search-input" class="form-control" placeholder="     Cari Mahasiswa"
-                        aria-label="Cari mitra" aria-describedby="basic-addon2">
+                    <input type="text" id="search-input" class="form-control" placeholder="     CariMahasiswa"
+                        aria-label="    Cari mitra" aria-describedby="basic-addon2">
                     <i class="fa-solid fa-search"
                         style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color:black"></i>
                 </div>
@@ -46,7 +46,7 @@
                                 <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
                                         siswa/Mahasiswa</a></li>
-                                <li><a class="dropdown-item" href="#">Laporan Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
                             </ul>
                         </div>

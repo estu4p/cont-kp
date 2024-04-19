@@ -4,32 +4,30 @@
     <div id="myModal" class="modal">
         <div class="modal-content text-capitalize py-3">
             <h4 class="text-center fw-bold py-4" style="color: #A61C1CE5;">silahkan pilih tempat magang</h4>
-            <form action="" style="width: 90%; margin: auto;">
+            <form action="{{ route('pilihMitra', ['id' => Auth::id()]) }}" method="POST">
+                @csrf
                 <label for="mitra" class="fw-semibold">mitra</label>
-                <select name="mitra" id="mitra" class="form-select">
+                <select name="mitra_id" id="mitra" class="form-select">
                     <option value="">Pilih Mitra Anda</option>
-                    <option value="seven inc">Seven Inc</option>
-                    <option value="iconnect">Iconnect</option>
-                    <option value="can creative">CV. CAN Creative</option>
-                    <option value="kodingworks">KodingWorks Indonesia</option>
-                    <option value="tech area">Tech Area</option>
+                    @foreach ($mitra as $id => $namaMitra)
+                        <option value="{{ $id }}">{{ $namaMitra }}</option>
+                    @endforeach
                 </select>
                 <p style="font-size: 14px;">Mitra belum terdaftar? <a href="" class="text-danger">Hubungi admin</a>
                 </p>
 
                 <label for="divisi" class="fw-semibold mt-2">divisi</label>
-                <select name="divisi" id="divisi" class="form-select">
+                <select name="divisi_id" id="divisi" class="form-select">
                     <option value="">Pilih Divisi Anda</option>
-                    <option value="ui">UI/UX Designer</option>
-                    <option value="programmer">Programmer</option>
-                    <option value="desain">Desain Grafis</option>
-                    <option value="fotografer">Fotografer</option>
-                    <option value="videografer">Videografer</option>
+                    @foreach ($divisi as $id => $namaDivisi)
+                        <option value="{{ $id }}">{{ $namaDivisi }}</option>
+                    @endforeach
                 </select>
 
                 <div class="text-center mt-5 mb-5">
-                    <a href="/user/barcode" id="submit-button" class="reg-button border-0 shadow fw-semibold text-decoration-none"
-                        style="background-color: #A61C1CE5; padding: 10px 20px; pointer-events: none; opacity: 0.5;">Submit</a>
+                    <button type="submit" id="submit-button"
+                        class="reg-button border-0 shadow fw-semibold text-decoration-none"
+                        style="background-color: #A61C1CE5; padding: 10px 20px; pointer-events: none; opacity: 0.5;">Submit</button>
                 </div>
             </form>
         </div>
@@ -56,8 +54,14 @@
                     <img src="{{ asset('assets/images/profil.png') }}" class="img-profile" alt="">
                 </div>
                 <div>
-                    <p>{{ $nama }}</p>
-                    <span>{{ $divisi }}</span>
+                    <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
+                         @csrf
+                        <p><b>{{ $user->nama_lengkap }}</b></p>
+                        <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
+                            {{ $nama_sekolah->nama_sekolah}}/
+                            {{$today}}
+                        </p>
+                    </form>
                 </div>
             </div>
             <button class="logout"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"

@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bawah p-2 col-6">
+            <div class="bawah p-0 col-6">
                 <div class="judulkanan">Additional Info</div>
                 <div class="form-group form-floating">
                     <div class="col-12  ">
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
+                <button class="cancel">Cancel</button>
                 <button class="Update" onclick="showSuccessModal()">Update</button>
             </div>
         </div>

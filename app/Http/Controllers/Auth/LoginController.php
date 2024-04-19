@@ -17,7 +17,16 @@ class LoginController extends Controller
     {
         return view('adminUniv-afterPayment.AdminUniv-Login');
     }
-
+    public function loginsuperadmin()
+    {
+        $title = 'loginsuperadmin';
+        return view('superAdmin.Login')->with('title', $title);
+    }
+    public function loginmitra()
+    {
+        $title = 'loginmitra';
+        return view('loginmitra')->with('title', $title);
+    }
     public function ValidateLogin(Request $request)
     {
         $request->validate([
@@ -33,16 +42,16 @@ class LoginController extends Controller
 
             $role_id = $user->role->id;
 
-            if ( $role_id == 1) {
+            if ($role_id == 1) { //super admin
                 return redirect()->to('/superAdmin');
-            } else if ( $role_id == 2) {
+            } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
-            } else if ( $role_id == 3) {
+            } else if ($role_id == 3) { //mahasiawa /pemagang
                 return redirect()->to('/user');
-            } else if ( $role_id == 4) {
+            } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
-            } else {
-                return redirect()->to('/');
+            } else { // mitra
+                return redirect()->to('/contributorformitra-dashboard');
 
                 // return redirect('/AdminUniv-Dashboard');
             }
