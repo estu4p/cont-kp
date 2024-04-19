@@ -61,4 +61,12 @@ class LoginController extends Controller
             ], 422);
         }
     }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
+    }
 }
