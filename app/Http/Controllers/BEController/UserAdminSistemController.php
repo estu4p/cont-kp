@@ -35,7 +35,7 @@ class UserAdminSistemController extends Controller
         }
     }
 
-    public function showAlertEditSubs($id)
+    public function showAlertSubs($id)
     {
         $subscription = Subscription::with(['user.perguruanTinggi', 'paket'])->where('id', $id)->firstOrFail();
         return response()->json(['subscription' => $subscription], 200);
