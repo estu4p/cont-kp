@@ -887,6 +887,7 @@ Route::get('/UserScanBarcode', function () {
     return view('mitra_presensi.scanbarcode');
 });
 
+
 Route::get('/user-AdminSistem/login', function () {
     return view('SistemLokasi.AdminSistem-login');
 });
