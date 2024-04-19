@@ -49,9 +49,9 @@ class HomeMitraController extends Controller
 
     //     $view = 'pemagang.home';
 
-    //     if ($user->role_id === 3 ) {
+    //     if ($user->role_id === 3 && $user->izinSubmitted) {
     //         $view = 'pemagang.gantiJam';
-    //     } else if ($user->role_id === 3) {
+    //     } elseif ($user->role_id === 3) {
     //         $view = 'user.home';
     //     }
 
@@ -96,6 +96,7 @@ class HomeMitraController extends Controller
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
         $keterangan_jam_masuk = $request->input('keterangan');
+        $jam_default_masuk = '06:30';
         $status_ganti_jam = 'Tidak Ganti jam';
 
         $data = new Presensi;
@@ -105,6 +106,7 @@ class HomeMitraController extends Controller
         $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
+        $data->jam_default_masuk = $jam_default_masuk;
         $data->status_ganti_jam = $status_ganti_jam;
         $data->save();
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
@@ -302,7 +304,7 @@ class HomeMitraController extends Controller
     public function catatIzin(Request $request)
     {
         $user = Auth::user();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->get()->first();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->get()->reverse()->first();
         $keterangan_status = $request->input('keterangan_status');
         $bukti_foto_izin = $request->input('bukti_foto_izin');
 

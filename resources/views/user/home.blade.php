@@ -55,11 +55,11 @@
                 </div>
                 <div>
                     <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
-                        @csrf
-                        <p class="name fz9 m-0"><b>{{ $user->nama_lengkap }}</b></p>
-                        <p class="nip fz9 m-0">NIP: MJ/{{ $nama_divisi->nama_divisi }}/
-                            {{ $nama_sekolah->nama_sekolah }}/
-                            {{ $today }}
+                         @csrf
+                        <p><b>{{ $user->nama_lengkap }}</b></p>
+                        <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
+                            {{ $nama_sekolah->nama_sekolah}}/
+                            {{$today}}
                         </p>
                     </form>
                 </div>

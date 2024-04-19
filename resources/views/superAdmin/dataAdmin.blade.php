@@ -22,27 +22,21 @@
                         <h5 class="modal-title" id="addUserModalLabel"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    {{-- form delete foto profil --}}
-                    <form id="deleteFoto_update" action="" method="POST" style="display: none;">
-                        @csrf
-                        @method('DELETE')
-                    </form>
                     <div class="modal-body">
-                        <form id="form-addUser" class="text-capitalize" method="POST" action="{{ route('superAdmin.addAdmin') }}" enctype="multipart/form-data">
+                        <form id="form-addUser" class="text-capitalize" method="POST" action="{{ route('superAdmin.addAdmin') }}">
                             @csrf
                             <div style="border: 0.5px solid #00000030; padding: 12px; text-transform: capitalize;">
                                 <h6>profile photo</h6>
                                 <div class="d-flex gap-4">
-                                    <img id="previewImage" src="{{ asset('assets/images/User Thumb.png') }}" width="80" height="80"
-                                        class="mt-2 img-fluid object-fit-contain foto-profil" alt="Preview Image">
+                                    <img id="previewImage" src="{{ asset('assets/images/User Thumb.png') }}" width="80"
+                                        class="mt-2" alt="Preview Image">
                                     <div class="my-auto d-flex flex-column" style="flex-direction: row;">
                                         <label for="photoInput"
                                             style="border: 2px solid #A4161A; border-radius: 6px; background-color: white; color: #000000; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
                                             Add Photo
-                                            <input type="file" name="foto_profil" id="photoInput" accept="image/*" style="display:none;">
+                                            <input type="file" id="photoInput" accept="image/*" style="display:none;">
                                         </label>
                                         <button
-                                            id="buttonDeleteFoto" type="button"
                                             style="border: 0; color: red; background-color: transparent; text-transform: capitalize;"
                                             onclick="removePhoto()">Remove</button>
                                     </div>
@@ -87,7 +81,7 @@
                                 <div class="mt-3 d-flex flex-column w-50">
                                     <label for="password_confirmation" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">ulangi
                                         password</label>
-                                    <input type="password" name="password_confirmation" placeholder="Ulangi Password" required
+                                    <input type="text" name="password_confirmation" placeholder="Ulangi Password" required
                                         class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
                                         id="password_confirmation">
                                 </div>
@@ -114,11 +108,7 @@
             <div
                 style="background-color: white; border-radius: 10px; border: 0.2px solid #00000050; padding: 1.2rem; width: 75%; margin-bottom: 8px;">
                 <div class="d-flex gap-4">
-                @if ($admin->foto_profil)
-                    <img src="{{ asset('storage/' . $admin->foto_profil) }}" width="80" height="80" alt="Foto Profil" class="img-fluid object-fit-contain foto-profil">
-                @else
-                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" height="80" alt="Foto Profil" class="img-fluid object-fit-contain  foto-profil">
-                @endif
+                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" height="80" alt="">
                     <div class="d-flex flex-column text-capitalize text-left fw-semibold"
                         style="font-size: 12px; margin-top: 4px;">
                         <p style="line-height: 24px;">admin {{ $admin->id }} <br>nama: {{ $admin->nama_lengkap }} <br>lokasi:
@@ -225,13 +215,6 @@
                 url: '/superAdmin/dataAdmin/showAlertEdit/' + adminId,
                 type: 'GET',
                 success: function (response) {
-                    if (response.admin.foto_profil) {
-                        $('#previewImage').attr('src', `{{ asset('storage/${response.admin.foto_profil}') }}`);
-                        $('#buttonDeleteFoto').attr('onclick', `showAlertDeleteFoto('${response.admin.username}')`);
-                        // $('#photoInput').val(response.admin.foto_profil);
-                    } else {
-                        $('#previewImage').attr('src', `{{ asset('assets/images/User Thumb.png') }}`);
-                    }
                     $('#nama_lengkap').val(response.admin.nama_lengkap);
                     $('#username').val(response.admin.username);
                     $('#email').val(response.admin.email);
@@ -259,23 +242,6 @@
                 addPatchMethod('POST');
                 $('#addUserModal').modal('show');
             // });
-        }
-
-        function showAlertDeleteFoto($username) {
-            swal({
-                text: "Hapus Foto Profil?",
-                icon: "warning",
-                buttons: ["Batal", "Hapus"],
-                dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        var formDelete = document.getElementById('deleteFoto_update');
-                        formDelete.setAttribute('action', '/superAdmin/dataAdmin/deleteFoto/' + $username);
-                        formDelete.submit();
-                    } else {
-                        swal("Foto profil tidak jadi dihapus.");
-                    }
-                });
         }
     </script>
 @endsection

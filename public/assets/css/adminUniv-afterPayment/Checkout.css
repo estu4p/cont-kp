@@ -1,12 +1,5 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
 
-.wadah {
-    overflow-x: scroll;
-    height: 1500px;
-    
-}
-
-
 .nav-mobile,
 .list-mobile {
     display: none;
@@ -380,32 +373,32 @@
     }
 
     #footer .col-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        text-align: center;
-        margin-bottom: 20px;
+        flex: 0 0 100%; /* Mengubah lebar kolom menjadi 100% */
+        max-width: 100%; /* Mengubah lebar maksimum menjadi 100% */
+        text-align: center; /* Memastikan konten berada di tengah */
+        margin-bottom: 20px; /* Menambahkan margin bawah antar kolom */
     }
 
     #footer .col-4 p {
-        font-size: 14px;
-        margin-bottom: 8px;
+        font-size: 14px; /* Mengurangi ukuran font pada teks */
+        margin-bottom: 8px; /* Menambahkan margin bawah pada paragraf */
     }
 
     #footer .col-4 img {
-        display: block;
-        margin: 0 auto;
+        display: block; /* Agar gambar berada di tengah */
+        margin: 0 auto; /* Memusatkan gambar ke tengah */
     }
 
     #footer .d-flex {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; /* Memusatkan elemen secara horizontal */
+        align-items: center; /* Memusatkan elemen secara vertikal */
     }
 
     #footer .d-flex img {
-        width: 70px;
-        margin-right: 10px;
+        width: 70px; /* Mengatur lebar gambar */
+        margin-right: 10px; /* Menambahkan jarak kanan antara gambar dan teks */
     }
 
     #footer .d-flex h4 {
@@ -414,18 +407,18 @@
         margin-right: 33%;
     }
     #footer .col-4 .d-flex {
-        justify-content: center;
+        justify-content: center; /* Memusatkan tautan sosial media ke tengah */
     }
 
     #footer .col-2 {
         flex: 0 0 100%;
         max-width: 100%;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 20px; /* Menambahkan ruang antara tautan */
     }
     #footer .col-2 a {
-        display: block;
-        margin-bottom: 10px;
+        display: block; /* Mengubah tautan menjadi blok, sehingga berjejer ke bawah */
+        margin-bottom: 10px; /* Menambahkan jarak antara setiap tautan */
     }
 }
 
