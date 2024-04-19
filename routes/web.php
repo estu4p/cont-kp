@@ -905,7 +905,7 @@ Route::get('/lihat', function () {
 
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
-
+});
 Route::get('/user-AdminSistem/login', function () {
     return view('SistemLokasi.AdminSistem-login');
 });
