@@ -25,7 +25,7 @@
                                 <label for="paket" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Paket</label>
                                 <select name="nama_paket" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="paket">
                                     @foreach ($paket as $item)
-                                        <option value="{{ $item->nama_paket }}">{{ $item->nama_paket }} - {{ $item->metode_bayar }}</option>
+                                        <option value="{{ $item->paket }}">{{ $item->paket }} - {{ $item->metode_bayar }}</option>
                                     @endforeach
                                     {{-- <option value="Bronze">Bronze</option>
                                     <option value="Silver">Silver</option>
@@ -81,7 +81,7 @@
                                 <select name="sekolah" id="sekolah" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;">
                                     <option selected disabled>Pilih Sekolah</option>
                                     @foreach ($sekolah as $item)
-                                    <option value="{{ $item->sekolah }}">{{ $item->sekolah }}</option>
+                                    <option value="{{ $item->nama_sekolah }}">{{ $item->nama_sekolah }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -140,33 +140,33 @@
                 <tbody class="text-center" style="font-size: 13px;">
                     @foreach ($subscriptions as $subscription)
                         <tr>
-                            <td class="align-middle">{{ $subscription['id'] }}</td>
+                            <td class="align-middle">{{ $loop->iteration }}</td>
                             <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
                             <td class="align-middle text-lowercase">{{ $subscription->user->email }}</td>
-                            <td class="align-middle">{{ $subscription->user->perguruanTinggi->sekolah }}</td>
-                            @if ($subscription->paket->nama_paket === 'Bronze')
+                            <td class="align-middle">{{ $subscription->user->perguruanTinggi->nama_sekolah }}</td>
+                            @if ($subscription->paket->paket === 'Bronze')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $subscription->paket->nama_paket }}</p>
+                                        {{ $subscription->paket->paket }}</p>
                                 </td>
-                            @elseif ($subscription->paket->nama_paket === 'Silver')
+                            @elseif ($subscription->paket->paket === 'Silver')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $subscription->paket->nama_paket }}</p>
+                                        {{ $subscription->paket->paket }}</p>
                                 </td>
-                            @elseif ($subscription->paket->nama_paket === 'Gold')
+                            @elseif ($subscription->paket->paket === 'Gold')
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $subscription->paket->nama_paket }}</p>
+                                        {{ $subscription->paket->paket }}</p>
                                 </td>
                             @else
                                 <td class="align-middle">
                                     <p
                                         style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                        {{ $subscription->paket->nama_paket }}</p>
+                                        {{ $subscription->paket->paket }}</p>
                                 </td>
                             @endif
                             <td class="align-middle">{{ $subscription->user->kota }}</td>
@@ -352,8 +352,8 @@
                     $('#nama').val(response.subscription.user.nama_lengkap);
                     $('#email').val(response.subscription.user.email);
                     $('#telepon').val(response.subscription.user.no_hp);
-                    $('#sekolah').val(response.subscription.user.perguruan_tinggi.sekolah);
-                    $('#paket').val(response.subscription.paket.nama_paket);
+                    $('#sekolah').val(response.subscription.user.perguruan_tinggi.nama_sekolah);
+                    $('#paket').val(response.subscription.paket.paket);
                     $('#start').val(response.subscription.user.tgl_masuk);
                     $('#end').val(response.subscription.user.tgl_keluar);
                     $('#harga').val(response.subscription.harga);
