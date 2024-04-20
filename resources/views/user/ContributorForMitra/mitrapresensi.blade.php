@@ -142,7 +142,7 @@
                 </tr>
             @endforeach
 
-            <tr>
+            {{-- <tr>
                 <td><input type="checkbox" name="chkbox[]" id="#" name=""> &nbsp; 1</td>
                 <td class="bates" href><a href="/ContributorForMitra-datapresensi">simpay</a></td>
                 <td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#modaljam"
@@ -171,7 +171,7 @@
                 <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal"
                     data-bs-target="#statuskehadiran"></i></td>
                 <td>merapikan parkiran motor</td>
-            </tr>
+            </tr> --}}
 
         </tbody>
     </table>
