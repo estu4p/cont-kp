@@ -23,6 +23,8 @@ use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\BEController\PresensiMitraController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
@@ -657,6 +659,12 @@ Route::get('/laporanpresensi', function () {
 });
 
 
+// Contributor for Mitra - Presensi
+Route::get('/daftar-presensi', [PresensiMitraController::class,'getAllPresensi'])->name('daftar-presensi');
+Route::get('/datapresensi/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiByNama'])->name('presensi-by-name');
+Route::post('/presensi/accept', [PresensiMitraController::class, 'presensiAccept'])->name('presensi-accept');
+Route::put('/presensi/reject', [PresensiMitraController::class, 'presensiReject'])->name('presensi-reject');
+Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll'])->name('presensi-accept-all');
 
 
 
