@@ -108,8 +108,12 @@ Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'Riwayat
 Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
 Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
-
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
+
+Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
+Route::get('/editUsermitra',[AdminUnivAfterPaymentController::class, 'editUsermitra']);
+// Route::middleware('auth')->post('/editmitra', 'AdminUnivAfterPaymentController@editUsermitra')->name('editmit ra');
+
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
@@ -148,7 +152,8 @@ Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra:
 Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
 //Subscription
 Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
-Route::get('/subscriptions/{id}', [UserAdminSistemController::class, 'show'])->name('subscriptions.show');
-Route::post('/subscriptions', [UserAdminSistemController::class, 'store'])->name('subscriptions.store');
-Route::put('/subscriptions/{id}', [UserAdminSistemController::class, 'update'])->name('subscriptions.update');
-Route::delete('/subscriptions/{id}', [UserAdminSistemController::class, 'destroy'])->name('subscriptions.destroy');
+Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSubs'])->name('subscriptions.store');
+//// Route::put('/subscriptions/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.update');
+Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.destroy');
+//Edit Profile
+Route::get('/admin/profile/edit', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
