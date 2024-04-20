@@ -10,7 +10,7 @@
               </div>
               <div class="d-flex justify-content-evenly flex-row ">
                   <div class="navbar-profile">
-                      <span class="profile-name">Nama Profil</span>
+                      <span class="profile-name">Namaaa Profil</span>
                       <span class="profile-status">Status Profil</span>
                   </div>
                   <div class="navbar-logo">

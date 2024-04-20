@@ -149,7 +149,7 @@ Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class,
 Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
 
 //Admin sistem dashboard
-Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
+Route::get('/admin/dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 //Subscription
 Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSubs'])->name('subscriptions.store');
@@ -157,3 +157,5 @@ Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSub
 Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.destroy');
 //Edit Profile
 Route::get('/admin/profile/edit', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
+// Route::patch('/admin/profile/update', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+// Route::patch('/admin/foto/update', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
