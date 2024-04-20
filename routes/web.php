@@ -854,3 +854,5 @@ Route::get('/UserPresensi', function () {
 Route::get('/UserScanBarcode', function () {
     return view('mitra_presensi.scanbarcode');
 });
+
+

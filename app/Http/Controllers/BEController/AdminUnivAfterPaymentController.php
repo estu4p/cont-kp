@@ -250,6 +250,7 @@ class AdminUnivAfterPaymentController extends Controller
         // $divisi = Mitra::with('divisiMitra')->findOrFail($id);
         // $divisiMitra = $divisi->divisi_mitra;
         $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+        // dd($divisiMitra);
         $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'team aktif',   'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
