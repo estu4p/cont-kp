@@ -77,10 +77,10 @@
             @foreach($presensiharian as $index => $data)
             <tr>
                 <td><input type="checkbox" id="#" name=""> &nbsp; {{ $index + 1 }}</td>
-                <td class="bates" href><a href="/datapresensisiswa">{{ $data->user->nama_lengkap }}</a></td>
+                <td class="bates" href><a href="/datapresensisiswa/{{ $data->user->id }}">{{ $data->user->nama_lengkap }}</a></td>
                 <td>{{ $data->jam_masuk }}</td>
                 <td>{{ $data->jam_pulang }}</td>
-                <td>{{ $data->jam_masuk_istirahat }}</td>
+                <td>{{ $data->jam_mulai_istirahat }}</td>
                 <td>{{ $data->jam_selesai_istirahat }}</td>
                 <td>{{ $data->total_jam_kerja }}</td>
                 <td>{{ $data->log_aktivitas }}</td>

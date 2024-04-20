@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\Presensi;
+use App\Models\Mitra;
 
+use App\Models\Divisi;
+use App\Models\Presensi;
 use function Laravel\Prompts\alert;
 
 use Illuminate\Support\Facades\Route;
@@ -24,9 +26,11 @@ use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEContr
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
+use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\PresensiCobaController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +78,7 @@ Route::get('/dashboard', function () {
 });
 
 // Super Admin
-Route::get('/superAdmin/login',[LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
 // function () {
 //     return view('superAdmin.Login');
 // })->name('login.superadmin');
@@ -141,6 +145,7 @@ Route::get('/AdminUniv-Login', function () {
     return view('adminUniv-afterPayment.AdminUniv-Login');
 })->name('login.admin');
 Route::post('/AdminUniv-Login', [LoginController::class, 'ValidateLogin'])->name('login.admin');
+Route::get('/AdminUniv-Logout', [LoginController::class, 'logoutAdminUniv'])->name('logout.admin');
 
 
 
@@ -230,18 +235,12 @@ Route::get('/user/barcode', function () {
 
 
 //user
-Route::get('/pemagang/home', function () {
-    return view('pemagang.home', [
-        'title' => "Home"
-    ]);
-});
-Route::get('/user', function () {
-    return view('user.home', [
-        'title' => "Home",
-        'nama' => "Syalita Widyandini",
-        'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06"
-    ]);
-});
+// Route::get('/pemagang/home', function () {
+//     return view('pemagang.home', [
+//         'title' => "Home"
+//     ]);
+// });
+
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
         'title' => "Barcode Pemagang",
@@ -258,7 +257,6 @@ Route::get('/pemagang/home', function () {
 Route::get('/pemagang/MyQR', function () {
     return view('pemagang.myqr', ['title' => "MyQR"]);
 });
-Route::get('/pemagang/detail/{nama_lengkap}', [HomeMitraController::class, 'ijin']);
 
 
 //contributor for univ
@@ -270,7 +268,7 @@ Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
 });
 
-Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa'])->name('contributor.datapresensi');
 
 Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
 // return view('presensi.presensiharian')->name('presensi.con');
@@ -548,17 +546,12 @@ Route::get('/profilsiswa', function () {
 });
 Route::get('/profilsiswa/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSuntingTeam'])->name('adminUniv.profilSiswa');
 
-
-
-
-
-
-
-
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
 
+Route::get('/AdminUniv/CheckoutBronze', [CheckoutController::class, 'CheckoutBronze'])->name('checkout.bronze.adminUniv');
+Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost'])->name('checkout.bronze.adminUnivPost');
 
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
@@ -567,11 +560,8 @@ Route::get('/kategoripenilaian', function () {
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'filterDashboard']);
 
-Route::get('/AdminSistem-Editprofile', function () {
-    return view('SistemLokasi.AdminSistem-Editprofile');
-});
+Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
-
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -583,23 +573,39 @@ Route::get('/user/barcode', function () {
 
 
 //user
-Route::get('/pemagang/home', function () {
-    return view('pemagang.home', [
-        'title' => "Home",
-        'button' => "Masuk",
-        'route' => '/jamMasuk'
-    ]);
+// Route::get('/pemagang/home', function () {
+//     return view('pemagang.home', [
+//         'title' => "Home",
+//         'button' => "Masuk",
+//         'route' => '/jamMasuk'
+//     ]);
+// });
+Route::middleware('auth')->group(function () {
+    Route::get('/user', function () {
+        $mitra = Mitra::pluck('nama_mitra', 'id');
+        $divisi = Divisi::pluck('nama_divisi', 'id');
+        return view('user.home', [
+            'title' => "Home",
+            'nama' => "Syalita Widyandini",
+            'divisi' =>  "MJ/UIUX/POLINES/AGST 2023/06",
+            'mitra' => $mitra,
+            'divisi' => $divisi,
+        ]);
+    });
+    Route::get('/pemagang/home/{id}', [HomeMitraController::class, 'profil']);
+    // Home Mitra User
+    Route::get('/profil/{id}', [HomeMitraController::class, 'profil'])->name('profil');
+    Route::post('/mitra/{id}', [HomeMitraController::class, 'pilihMitra'])->name('pilihMitra');
+    Route::get('/pemagang/MyQR/{id}', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
+    Route::post('/jamMasuk/{id}', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
+    Route::post('/jamMulaiIstirahat/{id}', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
+    Route::post('/jamSelesaiIstirahat/{id}', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
+    Route::post('/jamPulang/{id}', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
+    Route::post('/catatIzin/{id}', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
+    Route::get('/pemagang/detail/{id}', [HomeMitraController::class, 'ijin']);
+    Route::post('/kebaikan/{id}', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
+    Route::post('/catatLogAktivity/{id}', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 });
-// Home Mitra User
-Route::post('/mitra', [HomeMitraController::class, 'pilihMitra'])->name('proses_pemilihan');
-Route::post('/pemagang/MyQR', [HomeMitraController::class, 'generateQRCode'])->name('scan-barcode');
-Route::post('/jamMasuk', [HomeMitraController::class, 'jamMasuk'])->name('jamMasuk');
-Route::post('/jamMulaiIstirahat', [HomeMitraController::class, 'jamMulaiIstirahat'])->name('jamMulaiIstirahat');
-Route::post('/jamSelesaiIstirahat', [HomeMitraController::class, 'jamSelesaiIstirahat'])->name('jamSelesaiIstirahat');
-Route::post('/jamPulang', [HomeMitraController::class, 'jamPulang'])->name('jamPulang');
-Route::post('/catatIzin', [HomeMitraController::class, 'catatIzin'])->name('catatIzin');
-Route::post('/kebaikan', [HomeMitraController::class, 'kebaikan'])->name('kebaikan');
-Route::post('/catatLogAktivity', [HomeMitraController::class, 'catatLogAktivity'])->name('catatLogAktivity');
 
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
@@ -827,9 +833,8 @@ Route::get('/CheckoutPlatinum', function () {
     return view('user.AdminUnivAfterPayment.CheckoutPlatinum');
 });
 
-Route::get('/RiwayatJangkaWaktu', function () {
-    return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu');
-});
+
+Route::get('/RiwayatJangkaWaktu', [BEControllerAdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 
 Route::get('/RiwayatPembelian', [BEControllerAdminUnivAfterPaymentController::class, 'RiwayatPembelian']);
 
@@ -875,4 +880,25 @@ Route::get('/UserPresensi', function () {
 
 Route::get('/UserScanBarcode', function () {
     return view('mitra_presensi.scanbarcode');
+});
+
+
+Route::get('/lihat', function () {
+    return view('template.contributingforunivschool.lihat');
+});
+
+Route::get('/Scanqr', function () {
+    return view('user.UserScanQR.Scanqr');
+});
+Route::get('/user-AdminSistem/login', function () {
+    return view('SistemLokasi.AdminSistem-login');
+});
+Route::get('/user-AdminSistem/resetpassword', function () {
+    return view('SistemLokasi.AdminSistem-resetpassword');
+});
+Route::get('/user-AdminSistem/InputOTP', function () {
+    return view('SistemLokasi.AdminSistem-InputOTP');
+});
+Route::get('/user-AdminSistem/InputnewPassword', function () {
+    return view('SistemLokasi.AdminSistem-InputnewPassword');
 });
