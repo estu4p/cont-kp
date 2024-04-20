@@ -17,6 +17,11 @@ class LoginController extends Controller
     {
         return view('adminUniv-afterPayment.AdminUniv-Login');
     }
+    public function loginsuperadmin()
+    {
+        $title = 'loginsuperadmin';
+        return view('superAdmin.Login')->with('title', $title);
+    }
     public function loginmitra()
     {
         $title = 'loginmitra';
@@ -37,13 +42,13 @@ class LoginController extends Controller
 
             $role_id = $user->role->id;
 
-            if ( $role_id == 1) { //super admin
+            if ($role_id == 1) { //super admin
                 return redirect()->to('/superAdmin');
-            } else if ( $role_id == 2) { //admin
+            } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
-            } else if ( $role_id == 3) { //mahasiawa /pemagang
+            } else if ($role_id == 3) { //mahasiawa /pemagang
                 return redirect()->to('/user');
-            } else if ( $role_id == 4) { //dosen-contributoruniv
+            } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
             } else { // mitra
                 return redirect()->to('/contributorformitra-dashboard');
@@ -55,5 +60,13 @@ class LoginController extends Controller
                 'error' => 'Email atau Password yang anda masukan salah'
             ], 422);
         }
+    }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
     }
 }

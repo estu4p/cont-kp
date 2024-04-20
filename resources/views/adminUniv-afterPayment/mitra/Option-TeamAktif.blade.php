@@ -5,7 +5,7 @@
     <div class="topcontent">
         <div style="display: flex;">
             <div class="">
-                <a href="OptionTeamAktifKlikUiUx"><i class="iconn fa-solid fa-angle-left"></i></a>
+                <a href="/mitra-adminunivmitra"><i class="iconn fa-solid fa-angle-left"></i></a>
             </div>
             <div class="kembali">
                 <p style="font-size: 24px"><u>Data Divisi</p>
@@ -62,19 +62,20 @@
                     <i class="icon fa-solid fa-user"></i>
                 @endif
 
-                <a href="{{ route('adminUniv.option.teamAktif', $item->id) }}" style="text-decoration: none">
+                <a href="{{ route('adminUniv.option.teamAktif', $item->divisi_id) }}" style="text-decoration: none">
                     {{ $item->divisi->nama_divisi }}<br>
-                    {{ $item->jml_anggota }} Anggota
+                    Anggota
                 </a>
             </div>
         @endforeach
 
     </div>
-
+    {{-- @foreach ($divisiMitra as $item) --}}
     <div class="bawah">
         <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
-        <a href="/AdminUniv/Option-TeamAktif-pengaturanDivisi" style="color: #A4161A">Pengaturan Divisi...<i
-                class="fa-solid fa-gear"></i></a>
+        <a href="{{ route('adminUniv.pengaturanDivisi', $divisiMitraId->mitra_id) }}" style="color: #A4161A">Pengaturan
+            Divisi...<i class="fa-solid fa-gear"></i></a>
 
     </div>
+    {{-- @endforeach --}}
 @endsection

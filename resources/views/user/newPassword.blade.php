@@ -17,9 +17,7 @@
             <small id="passwordMatchError" class="text-danger" style="display: none;">Password dan konfirmasi password harus sama!</small>
             <div class="button-container text-center">
                 <div class="my-5">
-                    {{-- <a href="/user/reset-password/confirm" id="change" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 60px; pointer-events: none; opacity: 0.5;">Reset Password</a> --}}
                     <button id="change" type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 60px; pointer-events: none; opacity: 0.5;">Reset Password</button>
-                    {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
                 </div>
             </div>  
         </form>
