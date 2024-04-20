@@ -54,8 +54,7 @@ Route::get('/user/login', function () {
 });
 
 Route::post('/user/login', [LoginController::class, 'ValidateLogin'])->name('user.login');
-Route::get('/user/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/user/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/user/register', [RegisterController::class, 'register_user'])->name('register');
 Route::post('/user/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
 Route::post('/user/reset-password/otp', [ResetPasswordController::class, 'verifyOTP'])->name('otp.verify');
 Route::post('/user/reset-password/new-password', [ResetPasswordController::class, 'newPassword'])->name('password.new');
@@ -207,9 +206,9 @@ Route::get('/user/reset-password/otp', function () {
     return view('user.otp', ['title' => "Reset Password - OTP"]);
 });
 Route::get('/user/reset-password/new-password', function () {
-    return view('user.new-password', ['title' => "Reset Password - New Password"]);
+    return view('user.newPassword', ['title' => "Reset Password - New Password"]);
 });
-Route::get('/user/resetPassword/confirm', function () {
+Route::get('/user/reset-password/confirm', function () {
     return view('user.confirm', ['title' => "Reset Password - Confirm"]);
 });
 
