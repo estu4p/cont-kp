@@ -32,7 +32,7 @@ use App\Http\Controllers\BEController\SuperadminSistemController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+
 
 
 /*
@@ -660,7 +660,7 @@ Route::get('/laporanpresensi', function () {
 
 
 // Contributor for Mitra - Presensi
-Route::get('/daftar-presensi', [PresensiMitraController::class,'getAllPresensi'])->name('daftar-presensi');
+Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');
 Route::get('/datapresensi/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiByNama'])->name('presensi-by-name');
 Route::post('/presensi/accept', [PresensiMitraController::class, 'presensiAccept'])->name('presensi-accept');
 Route::put('/presensi/reject', [PresensiMitraController::class, 'presensiReject'])->name('presensi-reject');
