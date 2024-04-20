@@ -14,7 +14,7 @@ class RegisterController extends Controller
     {
         return view('user.register');
     }
-    public function register(Request $request)
+    public function register_user(Request $request)
     {
         $nama_lengkap = $request->input('nama_lengkap');
         $nomor_induk = $request->input('nomor_induk');
@@ -38,15 +38,12 @@ class RegisterController extends Controller
         $user->save();
 
         if ($user) {
-            //  return redirect()->to('/pemagang/home');
              return redirect()->route('user.login')->with('success', 'User registered successfully!');
         } else {
             return response([
                 'pesan' => 'Gagal',
             ], 404);
         }
-
-        // return view('user.login', ['title' => "Login"]);
     }
 
     public function generateQRCode($userData)

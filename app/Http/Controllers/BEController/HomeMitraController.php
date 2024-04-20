@@ -38,35 +38,6 @@ class HomeMitraController extends Controller
         return redirect()->to('/pemagang/home/' . $id);
     }
 
-    //return ke 3 view
-    // public function profil($id)
-    // {
-    //     $user = Auth::user();
-    //     $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
-    //     $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
-    //     $today = date('F Y/d');
-    //     $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
-
-    //     $view = 'pemagang.home';
-
-    //     if ($user->role_id === 3 && $user->izinSubmitted) {
-    //         $view = 'pemagang.gantiJam';
-    //     } elseif ($user->role_id === 3) {
-    //         $view = 'user.home';
-    //     }
-
-    //     return view($view, [
-    //         'title' => "Home",
-    //         'button' => "Masuk",
-    //         'route' => '/jamMasuk/{id}',
-    //         'data' => $dataPresensi,
-    //         'nama_divisi' => $nama_divisi,
-    //         'nama_sekolah' => $nama_sekolah,
-    //         'today' => $today,
-    //         'user' => $user,
-    //     ]);
-    // }
-
     public function profil($id)
     {
         $user = Auth::user();
