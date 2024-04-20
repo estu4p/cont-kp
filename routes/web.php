@@ -632,7 +632,6 @@ Route::get('/input-nilai', function () {
 
 
 
-
 // contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');

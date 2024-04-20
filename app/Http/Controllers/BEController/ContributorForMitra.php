@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
+use App\Models\Penilaian;
 use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
@@ -868,10 +869,8 @@ class ContributorForMitra extends Controller
         $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
         $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
 
-        return response()->json([
-            'total_mahasiswa' => $totalMahasiswa,
-            'total_hadir' => $totalHadir,
-            'total_izin' => $totalIzin,
-        ]);
+        return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin'));
+        
     }
+
 }
