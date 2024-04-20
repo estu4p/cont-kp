@@ -101,9 +101,8 @@ class ResetPasswordController extends Controller
 
     public function newPassword(Request $request)
     {
-        // dd($request->session);
         $request->validate([
-            'password' => 'required|string|min:5|confirmed',
+            'password' => 'required|string|min:8|confirmed',
         ]);
         $reset = Session::get('reset_password');
         $user = User::where('email', $reset)->first();
@@ -117,8 +116,6 @@ class ResetPasswordController extends Controller
         $user->update(['password' => Hash::make($request->password)]);
         // Bersihkan session reset_email setelah pengguna berhasil mengubah kata sandi
         $request->session()->forget('reset_password');
-        // return redirect()->route('user.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
-        // return redirect()->to('user/login');
         return redirect()->to('/user/reset-password/confirm');
     }
 }

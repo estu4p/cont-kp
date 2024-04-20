@@ -108,8 +108,12 @@ Route::get('riwayatpembelian', [AdminUnivAfterPaymentController::class, 'Riwayat
 Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu']);
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
 Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
-
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
+
+Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
+Route::get('/editUsermitra',[AdminUnivAfterPaymentController::class, 'editUsermitra']);
+// Route::middleware('auth')->post('/editmitra', 'AdminUnivAfterPaymentController@editUsermitra')->name('editmit ra');
+
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
 Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
@@ -153,5 +157,5 @@ Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSub
 Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.destroy');
 //Edit Profile
 Route::get('/admin/profile/edit', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-Route::patch('/admin/profile/update', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/admin/foto/update', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+// Route::patch('/admin/profile/update', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+// Route::patch('/admin/foto/update', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
