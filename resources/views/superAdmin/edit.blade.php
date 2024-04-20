@@ -3,8 +3,8 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/super-admin.css') }}">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <div class="d-flex gap-4 mt-0 mb-5 px-5">
-        <div class="bg-white rounded text-center" style="padding: 80px 50px 40px; width: 30%;">
+    <div class="d-flex untukmobile mt-0 mb-5 px-2 row  justify-content-evenly gap-lg-0 gap-md-3 ">
+        <div class="bg-white rounded text-center tes col-xl-3 col-lg-3 col-md-11 col-sm-9 " style="padding: 50px 0px 0px;">
             <div>
                 @if ($superAdmin->foto_profil)
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil">
@@ -20,7 +20,7 @@
                 <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $superAdmin->about }}</p>
             </div>
         </div>
-        <div class="bg-white rounded" style="padding: 80px 80px 40px; width: 70%;">
+        <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
             <div class="d-flex gap-4">
                 @if ($superAdmin->foto_profil)
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil">
