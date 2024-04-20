@@ -63,8 +63,8 @@ class PresensiMitraController extends Controller
         $total_terlambat_pulang = 0;
         $total_terlambat_istirahat_keluar = 0;
         $total_terlambat_istirahat_kembali = 0;
-        $total_terlambat_izin_keluar = 0;
-        $total_terlambat_izin_kembali = 0;
+        $total_terlambat_ijin_keluar = 0;
+        $total_terlambat_ijin_kembali = 0;
 
         // Menghitung total terlambat masuk dan pulang
         foreach ($presensi as $item) {
@@ -77,7 +77,21 @@ class PresensiMitraController extends Controller
             if ($item->jam_pulang > $jam_default_pulang) {
                 $total_terlambat_pulang++;
             }
-            
+            if ($item->terlambat_istirahat_keluar > 0) {
+                $total_terlambat_istirahat_keluar++;
+            }
+
+            if ($item->terlambat_istirahat_kembali > 0) {
+                $total_terlambat_istirahat_kembali++;
+            }
+
+            if ($item->terlambat_ijin_keluar > 0) {
+                $total_terlambat_ijin_keluar++;
+            }
+
+            if ($item->terlambat_ijin_kembali > 0) {
+                $total_terlambat_ijin_kembali++;
+            }
         }
 
         // Hitung total jam masuk dalam format waktu
@@ -137,7 +151,22 @@ class PresensiMitraController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json($presensi, 200);
         } else {
-            return view('user.ContributorForMitra.datapresensi', compact(['presensi', 'nama_lengkap', 'user', 'jam_default_masuk', 'jam_default_pulang', 'totalJamMasukFormatted', 'totalMasukHari', 'target', 'sisa', 'total_terlambat_masuk', 'total_terlambat_pulang']));
+            return view('user.ContributorForMitra.datapresensi', compact([
+                'presensi',
+                'nama_lengkap',
+                'user',
+                'jam_default_masuk',
+                'jam_default_pulang',
+                'totalJamMasukFormatted',
+                'totalMasukHari',
+                'target',
+                'sisa',
+                'total_terlambat_masuk',
+                'total_terlambat_pulang',
+                'total_terlambat_istirahat_keluar',
+                'total_terlambat_istirahat_kembali',
+                'total_terlambat_ijin_keluar',
+                'total_terlambat_ijin_kembali']));
         }
     }
 
@@ -205,7 +234,7 @@ class PresensiMitraController extends Controller
             $presensi->save();
         }
 
-        return response()->json(["message" => "Seluruh presensi berhasil diperbarui menjadi accept all"], 200);
+        return redirect()->route('daftar-presensi')->with('success', "Seluruh presensi berhasil diperbarui menjadi accept all");
     }
 
 

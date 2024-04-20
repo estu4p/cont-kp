@@ -177,7 +177,7 @@
     </table>
         <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
 
-   
+
     </div>
 
 
@@ -361,27 +361,27 @@
     </div>
     </div>
     <script>
-        const checkButton = document.getElementById('check-button-{{ $key }}');
-        const crossButton = document.getElementById('cross-button-{{ $key }}');
+       @foreach($presensi as $key => $reject)
+            const checkButton{{ $key }} = document.getElementById('check-button-{{ $key }}');
+            const crossButton{{ $key }} = document.getElementById('cross-button-{{ $key }}');
 
-        checkButton.addEventListener('click', function() {
-            checkButton.classList.add('active');
-            crossButton.classList.remove('active');
-            console.log('sukses'); // Pastikan konsol.log ini berjalan
-            showsukses();
-        });
+            checkButton{{ $key }}.addEventListener('click', function() {
+                checkButton{{ $key }}.classList.add('checked');
+                crossButton{{ $key }}.classList.remove('checked');
+                showsukses();
+            });
 
-        crossButton.addEventListener('click', function() {
-            crossButton.classList.add('active');
-            checkButton.classList.remove('active');
-            showsukses();
-        });
+            crossButton{{ $key }}.addEventListener('click', function() {
+                crossButton{{ $key }}.classList.add('checked');
+                checkButton{{ $key }}.classList.remove('checked');
+                showsukses();
+            });
 
+        @endforeach
 
         function showsukses() {
             swal("berhasil", "perubahan waktu berhasil disimpan", "success");
         }
-
 
         function handleButtonClick(buttonNumber) {
             var buttonId = 'button' + buttonNumber;
@@ -396,13 +396,14 @@
             if (!button.classList.contains('active')) {
                 button.classList.add('active');
             } else {
-                button.classList.remove('active');
+                button.classList.remove('checked');
             }
             // Isi fungsi disini sesuai dengan aksi yang ingin dilakukan ketika tombol diklik
             var formId = 'form-accept-' + buttonNumber;
             var form = document.getElementById(formId);
             form.submit();
         }
+
 
 
         function checkAll(ele) {

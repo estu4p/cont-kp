@@ -86,15 +86,15 @@
                               </tr>
                               <tr>
                                 <td>Istirahat keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_istirahat_keluar }} x</span></td>
                                 <td>istirahat kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_istirahat_kembali }} x</span></td>
                               </tr>
                               <tr>
                                 <td>Ijin keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_ijin_keluar }} x</span></td>
                                 <td>ijin kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_ijin_kembali }} x</span></td>
                               </tr>
                             </tbody>
                             </table>
@@ -166,7 +166,8 @@
                                         <td>{{$item->kebaikan}}</td>
                                         <td>{{$item->keterangan_status}}</td>
                                         <td>
-                                            <i class="fa-regular fa-pen-to-square"></i>                                        </td>
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </td>
                                     </tr>
                         @endforeach
 
@@ -394,7 +395,6 @@
 
 
 
-@endsection
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     const btnTambah = document.getElementById('btn-tambah');
@@ -403,3 +403,5 @@
         swal("Berhasil!!", "Catatan berhasil ditambahkan", "success");
     })
 </script>
+
+@endsection
