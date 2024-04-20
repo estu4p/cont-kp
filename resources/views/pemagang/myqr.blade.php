@@ -29,11 +29,11 @@
             <div class="text-container">
         
                 <div class="text-container">
-                    <h3>Iqra's QR Code</h3>
+                    <h3>{{ $user->nama_lengkap }}</h3>
                 </div>
                 <div class="qr-container">
-                    {{-- <img src="{{ asset('assets/images/qrlinkedin.png') }}" alt="Syalita's QR Code" class="qr-image"> --}}
-                    <img src="{{ asset('barcodes/qrcode_' . Auth::id() . '.svg') }}" alt="QR Code">
+                    {{-- {!! QrCode::size(300)->generate(route('scan-barcode', ['id' => Auth::id()])) !!} --}}
+                    {!! $barcodeSvg !!}
                 </div>
 
             </div>
