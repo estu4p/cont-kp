@@ -17,13 +17,6 @@ class PresensiMitraController extends Controller
     public function getAllPresensi()
     {
         $presensi = Presensi::all();
-
-        // Periksa apakah ada data yang ditemukan
-        if ($presensi->isEmpty()) {
-            return "Tidak ada data presensi yang ditemukan";
-        }
-
-        // Jika ada data, kembalikan view blade dengan data presensi
         return view('user.ContributorForMitra.MitraPresensi', ['presensi' => $presensi]);
     }
 
