@@ -134,11 +134,11 @@ class ResetPasswordController extends Controller
             if (!$user) {
                 return back()->withErrors(['email' => 'User not found.']);
             }
-            if ($user->otp !== $request->otp) {
-                return response()->json([
-                    'error' => ' Invalid OTP'
-                ], 400);
-            }
+            // if ($user->otp !== $request->otp) {
+            //     return response()->json([
+            //         'error' => ' Invalid OTP'
+            //     ], 400);
+            // }
             $request->session()->forget('otp_' . $request->email);
         }
         return redirect()->to('/user/reset-password/new-password');

@@ -13,11 +13,22 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
 
+    <style>
+        /* Tambahkan gaya untuk pesan kesalahan */
+        .error-message {
+            color: #dc3545;
+            /* Warna teks merah */
+            font-size: 80%;
+            /* Ukuran teks kecil */
+            display: none;
+            /* Sembunyikan pesan kesalahan secara default */
+        }
+    </style>
 </head>
 
 <body>
     <div class="wadah justify-content-center">
-        <form action="{{route ('password.newAdmin')}}" method="POST">
+        <form action="{{ route('password.newAdmin') }}" method="POST" onsubmit="return validatePassword()">
             @csrf
             <div class="judul">Buat Password Baru</div>
             <div class="teks">
@@ -37,7 +48,7 @@
                             </div>
                         </div>
                         <div class="input-group atas">
-                            <input type="password" id="password" class="form-control" name="password_confirmation"
+                            <input type="password" id="konfirm" class="form-control" name="password_confirmation"
                                 placeholder="Konfirmasi password">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary toggle-password" type="button">
@@ -45,11 +56,14 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- Tambahkan pesan kesalahan -->
+                        <div class="error-message" id="passwordMatchError">Password dan konfirmasi password harus sama.
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="bawah">
-                <button type="submit" class="continue" onclick="showSuccessModal()">Reset Password</button>
+                <button type="submit" class="continue">Reset Password</button>
             </div>
         </form>
     </div>
@@ -72,6 +86,21 @@
                 }
             });
         });
+
+        function validatePassword() {
+            var passwordInput = document.getElementById('password').value;
+            var konfirmInput = document.getElementById('konfirm').value;
+            var errorText = document.getElementById('passwordMatchError');
+
+            if (passwordInput !== konfirmInput) {
+                errorText.style.display = 'block';
+                return false; // Mencegah pengiriman formulir jika password tidak cocok
+            } else {
+                errorText.style.display = 'none';
+                showSuccessModal(); // Panggil modal sukses jika password cocok
+                return true; // Lanjutkan pengiriman formulir jika password cocok
+            }
+        }
 
         function showSuccessModal() {
             swal({
