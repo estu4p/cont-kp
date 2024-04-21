@@ -8,7 +8,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/AdminUniv-InputOTP.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
-    
+
 </head>
 
 <body>
