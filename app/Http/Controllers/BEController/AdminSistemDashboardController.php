@@ -13,24 +13,22 @@ use Illuminate\Validation\ValidationException;
 
 class AdminSistemDashboardController extends Controller
 {
-    public function filterDashboard(Request $request)
+    public function dashboard(Request $request)
     {
-        // Menghitung total subscription
+        $userAdmin = User::where('role_id', 2)->first();
         $totalSubscription = User::count();
-
-        // Menghitung total aktif dan tidak aktif
         $totalAktif = User::where('status_akun', 'aktif')->count();
-        $totalTidakAktif = User::where('status_akun', 'alumni')->count(); // Ubah sesuai dengan nilai yang menunjukkan status tidak aktif
+        $totalTidakAktif = User::where('status_akun', 'alumni')->count();
 
-        //return ke tampilan
-        if ($request->is('api/*') || $request->wantsJson()) {
+        if ($request->is('api/*')||$request->wantsJson()) {
             return response()->json([
                 'total_subscription' => $totalSubscription,
                 'total_aktif' => $totalAktif,
                 'total_alumni' => $totalTidakAktif,
+                'userAdmin' => $userAdmin,
             ], 200);
         } else {
-            return view('SistemLokasi.AdminSistem-Dashboard', compact(['totalSubscription', 'totalAktif', 'totalTidakAktif']));
+            return view('SistemLokasi.AdminSistem-Dashboard',compact(['userAdmin', 'totalSubscription', 'totalAktif', 'totalTidakAktif']));
         }
     }
 
@@ -46,7 +44,7 @@ class AdminSistemDashboardController extends Controller
 
     public function updateProfile(Request $request, $username)
     {
-        $superAdmin = User::where('role_id', 1)->first();
+        $userAdmin = User::where('role_id', 2)->first();
         $data = $request->all();
         try {
             $validator = Validator::make($request->all(), [
@@ -55,7 +53,7 @@ class AdminSistemDashboardController extends Controller
                 'email' => [
                     'string',
                     'email',
-                    Rule::unique('users', 'email')->ignore($superAdmin->email, 'email')
+                    Rule::unique('users', 'email')->ignore($userAdmin->email, 'email')
                 ],
                 'no_hp' => 'string',
                 'alamat' => 'string',
@@ -65,7 +63,7 @@ class AdminSistemDashboardController extends Controller
         } catch (ValidationException $e) {
             $errorValidate = $e->validator->errors()->all();
             $errorMessage = implode('<br>', $errorValidate);
-            return redirect()->route('superAdmin.editProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
 
         $profile = User::where('username', $username)->first();
@@ -78,12 +76,13 @@ class AdminSistemDashboardController extends Controller
                 'alamat' => $data['alamat'],
                 'about' => $data['about'],
             ]);
-            return redirect()->route('superAdmin.editProfile')->with('success', 'Data Profil Berhasil diUbah');
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Data Profil Berhasil diUbah');
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('superAdmin.editProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
     }
+
     public function updateFoto(Request $request, $username)
     {
         try {
@@ -94,7 +93,7 @@ class AdminSistemDashboardController extends Controller
         } catch (ValidationException $e) {
             $errorValidate = $e->validator->errors()->all();
             $errorMessage = implode('<br>', $errorValidate);
-            return redirect()->route('superAdmin.editProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
 
         $profile = User::where('username', $username)->firstOrFail();
@@ -108,10 +107,10 @@ class AdminSistemDashboardController extends Controller
             $profile->update([
                 'foto_profil' => 'foto_profil/' . $namaFoto,
             ]);
-            return redirect()->route('superAdmin.editProfile')->with('success', 'Foto Berhasil diUbah');
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Foto Berhasil diUbah');
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('superAdmin.editProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
     }
 
@@ -123,13 +122,13 @@ class AdminSistemDashboardController extends Controller
                 Storage::delete('public/' . $profil->foto_profil);
                 $profil->foto_profil = null;
                 $profil->save();
-                return redirect()->route('superAdmin.editProfile')->with('success', 'Foto Berhasil diHapus');
+                return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Foto Berhasil diHapus');
             } else {
-                return redirect()->route('superAdmin.editProfile')->with('error', 'Anda tidak memiliki Foto Profil');
+                return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', 'Anda tidak memiliki Foto Profil');
             }
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('superAdmin.editProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
     }
 }
