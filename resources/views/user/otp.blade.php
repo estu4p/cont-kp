@@ -28,11 +28,9 @@
             </div>
             <div class="button-container text-center">
                 <div class="mt-5">
-                    {{-- <a href="/user/reset-password/new-password" id="kirim-otp" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim OTP</a> --}}
                     <button  id="kirim-otp" type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none" style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim OTP</button>
                     <p class="mt-5 fw-medium" style="margin-bottom: -20px;">Belum menerima email? <a href="/user/reset-password"
                         class="text-decoration-none" style="color: #A61C1CE5;">Kirim ulang</a></p>
-                    {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
                 </div>
             </div>  
         </form>
