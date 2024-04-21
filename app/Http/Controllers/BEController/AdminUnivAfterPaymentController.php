@@ -756,30 +756,40 @@ class AdminUnivAfterPaymentController extends Controller
 
         return response()->json(['data'=> $mitra]);
     }
-
-    public function editUsermitraupdate(Request $request, $id)
+    public function editUserMitra(Request $request, $id)
     {
-            $request->validate([
-                'nama_lengkap' => 'nullable|string|max:255',
-                'username'=>'nullable|string',
-                'email' => 'nullable|string|email|max:255|unique:users,email',
-                'no_hp' => 'nullable|string|max:20',
-                'password' => 'nullable|string|min:8|confirmed',
-                'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //ukuran file 2MB
-            ]);
+        $user = User::find($id);
 
-            $user = User::find($id);
-            $user->nama_lengkap = $request->input('nama_lengkap');
-            $user->email = $request->input('email');
-            $user->username = $request->input('username');
-            $user->no_hp = $request->input('no_hp');
+        $data = [
+            'nama_lengkap' => 'nullable|string|max:255',
+            'username' => 'nullable|string|unique:users,username',
+            'email' => 'nullable|string|email|max:255|unique:users,email,' .$user->id,
+            'no_hp' => 'nullable|string|max:20',
+            'password' => 'nullable|string|min:8|confirmed',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
 
-            // if ($request->filled('password')) {
-            //     $user->password = bcrypt($request->input('password'));
-            // }
+        $validator = Validator::make($request->all(), $data);
 
-            $user->save();
-            return response()->json(['message' => 'Profile updated successfully']);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
+        // Update user mitra data
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->no_hp = $request->no_hp;
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+
+
+        return response()->json(['message' => 'Profile updated successfully', 'tambah'=>$mahasiswa], 200); 
     }
 }

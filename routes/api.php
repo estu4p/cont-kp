@@ -111,7 +111,8 @@ Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkout
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
 
 Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
-Route::post('/editUsermitra/update/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitraupdate'])->name('editmitra');
+// Route::post('/editUsermitra/update/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitraupdate'])->name('editmitra');
+Route::post('/editUsermitra/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
 // Route::middleware('auth')->post('/editmitra', 'AdminUnivAfterPaymentController@editUsermitra')->name('editmit ra');
 
 //Contributor for univ
