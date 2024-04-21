@@ -16,12 +16,33 @@ body{
     z-index:10;
     box-shadow: 0 0 20px rgb(146, 146, 146);
   }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .sidebar{
+      width: 200px;
+    }
+    body{
+    padding-left: 200px;
+    }
+    
+  }
+  @media screen and (max-width: 767px) {
+    body{
+      padding-left: 160px;
+      }
+    .sidebar{
+      width:150px;
+      
+    }
+    .area{
+      width: 100% !important;
+    }
+  }
   .nav {
-    text-align: left;
-    margin-left: 60px;
+ 
+    
   }
   .log-out {
-    margin-left: -60px;
+ 
   }
   .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
@@ -120,4 +141,31 @@ body{
 }
 .kanan{
     justify-content: space-between !important;
+}
+@media only screen and (min-width: 992px) {
+  .untukmobile{
+    /* padding:30px !important;
+    justify-content: space-evenly !important; */
+    
+  }
+  .untukmobile div:nth-child(1){
+  
+  }
+  .untukmobile div:nth-child(2){
+
+    
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body{
+    padding-top: 0 !important;
+  }
+  .untukmobile{
+    padding:30px !important;
+    
+  }
+  .untukmobile div{
+    margin: 20px 0;
+  }
 }
