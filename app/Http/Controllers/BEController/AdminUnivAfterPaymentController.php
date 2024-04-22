@@ -777,6 +777,7 @@ class AdminUnivAfterPaymentController extends Controller
 
         // Update user mitra data
         $user->nama_lengkap = $request->nama_lengkap;
+        $user->foto_profil = $request->foto_profil;
         $user->email = $request->email;
         $user->username = $request->username;
         $user->no_hp = $request->no_hp;
@@ -790,6 +791,6 @@ class AdminUnivAfterPaymentController extends Controller
         $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
 
 
-        return response()->json(['message' => 'Profile updated successfully', 'tambah'=>$mahasiswa], 200); 
+        return response()->json(['message' => 'Profile updated successfully', 'tambah'=>$mahasiswa], 200);
     }
 }
