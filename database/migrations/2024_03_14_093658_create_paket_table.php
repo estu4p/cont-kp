@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_paket');
-            $table->enum('metode_bayar', ['BNI', 'Dana'])->default('BNI');
+            $table->enum('paket', ['Bronze', 'Silver', 'Gold', 'Platinum']);
+            $table->string('harga');
             $table->timestamps();
             // kota ambil dari users ya
         });

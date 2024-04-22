@@ -6,7 +6,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <div class="container-fluid p-3 ml-2">
         <div class="d-flex align-items-center">
-            <a href="#" class="kekiri mr-2"><i class="fas fa-chevron-left"></i></a>
+            <a href="/mitra-adminunivmitra" class="kekiri mr-2"><i class="fas fa-chevron-left"></i></a>
             <div class="header" style="display: grid; grid-template-columns: 1fr auto;">
                 <div style="margin: 15px">
                     <h3 style="font-size: 50px; ">Laporan Data Presensi</h3>
@@ -75,7 +75,9 @@
                             <td><input type="checkbox" id="#" name=""></td>
                             <td>{{ $no + 1 }}</td>
                             <td><a href="">{{ $item->user->nama_lengkap }}</a></td>
-                            <td>MJ/UIUX/{{ $item->user->sekolah }}/{{ $item->user->nomor_induk }}/AGST2023/06</td>
+                            <td>MJ/ {{ $item->nama_divisi->nama_divisi }}
+                                /{{ $item->nama_sekolah->nama_sekolah }}/{{ $item->user->nomor_induk }}/{{ $item->bulan }}{{ $item->tahun_masuk }}/{{ $item->user->id }}
+                            </td>
                             <td>{{ $item->total_kehadiran }} &nbsp; <a
                                     href="{{ route('adminUniv.detailHadir', $item->nama_lengkap) }}"
                                     class="fa-solid fa-circle-info" style="color: #000"></td>

@@ -12,6 +12,7 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       margin: 10px;
       padding: 20px;
+      
       font-size: 50px; /* Memperbesar ukuran angka pada kartu */
       margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
       margin-left: 80px; /* Menggeser kartu ke samping kanan sejauh 20px */
@@ -22,7 +23,7 @@
       background-color:#169423;
       border-radius: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      margin: 10px;
+      
       padding: 20px;
       font-size: 50px; /* Memperbesar ukuran angka pada kartu */
       margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
@@ -59,10 +60,10 @@
   
   .logo1 {
     width: 100px; /* Ubah ukuran gambar sesuai kebutuhan */
-    height: auto; /* Biarkan tinggi otomatis sesuai perbandingan aspek */
+    height:auto;/* Biarkan tinggi otomatis sesuai perbandingan aspek */
     float: right; /* Mengatur gambar ke tepi kanan */
     margin-left: 20px; /* Menambahkan jarak antara gambar dengan elemen sekitarnya */
-    margin-top: 120px; /* Menggeser gambar ke bawah sejauh 20px */
+    margin-top: 50%; /* Menggeser gambar ke bawah sejauh 20px */
   }
 
   .buku{
@@ -74,3 +75,4 @@
     margin-top: 150px;
     color: #0063F8;
   }
+   

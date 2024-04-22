@@ -23,14 +23,17 @@ return new class extends Migration
             $table->string('barcode')->nullable()->unique();
             $table->string('password')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('kota')->nullable();
+            $table->enum('kota', ['Kota Surabaya', 'Kota Semarang'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('about')->nullable();
             $table->string('os')->nullable();
             $table->enum('status_akun', ['aktif', 'alumni'])->nullable();
+            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->time('jam_default_masuk')->nullable();
+            $table->time('jam_default_pulang')->nullable();
             // $table->bigInteger('subscription')->nullable();
             $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum')->nullable();
             $table->timestamp('email_verified_at')->nullable();

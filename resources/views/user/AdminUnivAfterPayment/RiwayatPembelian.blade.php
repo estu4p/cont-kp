@@ -15,90 +15,30 @@
         </a>
     </div>
     <div class="isie">
-        <div class="kartu">
-            <p class="stt">Status</p>
-            <p class="aktif"><img src="assets/images/check_circle.png" class="ceklis"><b>Aktif</b></p>
-            <p class="np">No Pesanan</p>
-            <p class="nnp"><b>2jerh292324</b></p>
-            <p class="H">Harga</p>
-            <p class="jt"><b>Rp.1.000.000</b></p>
-            <p class="pkt2">Paket</p>
-            <p class="brz"><b>Bronze</b></p>
-            <p class="tgl">Tanggal</p>
-            <p class="ttgl"><b>10/10/2023</b></p>
-            <p class="mp">Metode Pembayaran</p>
-            <p class="mtp"><img src="assets/images/Mandiri.png" class="lb"><b>Mandiri Virtual</b></p>
-            <p class="acr"><img src="assets/images/arrow_circle_right.png">
-
-        </div>
-
-        <div class="kartu2">
-            <p class="stt">Status</p>
-            <p class="aktif"><img src="assets/images/cancel.png" class="ceklis"><b>Tidak Aktif</b></p>
-            <p class="np">No Pesanan</p>
-            <p class="nnp"><b>2jerh292324</b></p>
-            <p class="H">Harga</p>
-            <p class="jt"><b>Rp.1.000.000</b></p>
-            <p class="pkt2">Paket</p>
-            <p class="brz"><b>Bronze</b></p>
-            <p class="tgl">Tanggal</p>
-            <p class="ttgl"><b>10/10/2023</b></p>
-            <p class="mp">Metode Pembayaran</p>
-            <p class="sp"><img src="assets/images/ShopeePay.png" class="lb"><b>ShopeePay</b></p>
-            <p class="acr"><img src="assets/images/arrow_circle_right.png">
-
-        </div>
-
-        <div class="kartu3">
-            <p class="stt">Status</p>
-            <p class="aktif"><img src="assets/images/cancel.png" class="ceklis"><b>Tidak Aktif</b></p>
-            <p class="np">No Pesanan</p>
-            <p class="nnp"><b>2jerh292324</b></p>
-            <p class="H">Harga</p>
-            <p class="jt"><b>Rp.1.000.000</b></p>
-            <p class="pkt2">Paket</p>
-            <p class="brz"><b>Bronze</b></p>
-            <p class="tgl">Tanggal</p>
-            <p class="ttgl"><b>10/10/2022</b></p>
-            <p class="mp">Metode Pembayaran</p>
-            <p class="sp"><img src="assets/images/ShopeePay.png" class="lb"><b>ShopeePay</b></p>
-            <p class="acr"><img src="assets/images/arrow_circle_right.png">
-
-        </div>
-
-        <div class="kartu4">
-            <p class="stt">Status</p>
-            <p class="aktif"><img src="assets/images/cancel.png" class="ceklis"><b>Tidak Aktif</b></p>
-            <p class="np">No Pesanan</p>
-            <p class="nnp"><b>2jerh292324</b></p>
-            <p class="H">Harga</p>
-            <p class="jt"><b>Rp.1.000.000</b></p>
-            <p class="pkt2">Paket</p>
-            <p class="brz"><b>Bronze</b></p>
-            <p class="tgl">Tanggal</p>
-            <p class="ttgl"><b>10/10/2021</b></p>
-            <p class="mp">Metode Pembayaran</p>
-            <p class="sp"><img src="assets/images/ShopeePay.png" class="lb"><b>ShopeePay</b></p>
-            <p class="acr"><img src="assets/images/arrow_circle_right.png">
-
-        </div>
-
-        <div class="kartu5">
-            <p class="stt">Status</p>
-            <p class="aktif"><img src="assets/images/cancel.png" class="ceklis"><b>Tidak Aktif</b></p>
-            <p class="np">No Pesanan</p>
-            <p class="nnp"><b>2jerh292324</b></p>
-            <p class="H">Harga</p>
-            <p class="jt"><b>Rp.1.000.000</b></p>
-            <p class="pkt2">Paket</p>
-            <p class="brz"><b>Bronze</b></p>
-            <p class="tgl">Tanggal</p>
-            <p class="ttgl"><b>10/10/2020</b></p>
-            <p class="mp">Metode Pembayaran</p>
-            <p class="sp"><img src="assets/images/ShopeePay.png" class="lb"><b>ShopeePay</b></p>
-            <p class="acr"><img src="assets/images/arrow_circle_right.png">
-
-        </div>
-
-
-
+        @foreach ($paket as $data)
+            <div class="kartu">
+                <p class="stt">Status</p>
+                <p class="aktif">
+                    @if ($data->status == 'Aktif')
+                        <img src="assets/images/check_circle.png" class="ceklis">
+                    @else
+                        <img src="assets/images/cancel.png" class="ceklis">
+                    @endif
+                    <b>{{ $data->status }}</b>
+                </p>
+                <p class="np">No Pesanan</p>
+                <p class="nnp"><b>{{ $data->no_pesanan }}</b></p>
+                <p class="H">Harga</p>
+                <p class="jt"><b>Rp. {{ $data->harga }}</b></p>
+                <p class="pkt2">Paket</p>
+                <p class="brz"><b>{{ $data->paket }}</b></p>
+                <p class="tgl">Tanggal</p>
+                <p class="ttgl"><b>{{ $data->tanggal }}</b></p>
+                <p class="mp">Metode Pembayaran</p>
+                <p class="mtp"><img src="{{ asset('assets/images/' . $data->metode_bayar . '.png') }}"
+                        class="lb"><b>{{ $data->metode_bayar }}</b></p>
+                <p class="acr"><img src="assets/images/arrow_circle_right.png">
+            </div>
+        @endforeach
+    </div>
+@endsection

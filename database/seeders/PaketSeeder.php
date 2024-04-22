@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\paket;
+use App\Models\Paket;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,13 +13,12 @@ class PaketSeeder extends Seeder
      */
     public function run(): void
     {
-        $paket = ['Gold', 'Silver', 'Bronze'];
-        $metode = ['BNI', 'Dana'];
-        $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 3; $i++) {
+        $paket = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+        $harga = ['1000000', '4000000', '7000000', '10000000'];
+        for ($i = 0; $i < 4; $i++) {
             paket::create([
-                'nama_paket' => $paket[$i],
-                'metode_bayar' => $faker->randomElement($metode),
+                'paket' => $paket[$i],
+                'harga' => $harga[$i],
             ]);
         }
     }

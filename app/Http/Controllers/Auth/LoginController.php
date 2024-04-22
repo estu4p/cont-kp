@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\QrCodeServiceProvider;
 
 class LoginController extends Controller
 {
@@ -16,7 +17,16 @@ class LoginController extends Controller
     {
         return view('adminUniv-afterPayment.AdminUniv-Login');
     }
-
+    public function loginsuperadmin()
+    {
+        $title = 'loginsuperadmin';
+        return view('superAdmin.Login')->with('title', $title);
+    }
+    public function loginmitra()
+    {
+        $title = 'loginmitra';
+        return view('loginmitra')->with('title', $title);
+    }
     public function ValidateLogin(Request $request)
     {
         $request->validate([
@@ -30,32 +40,31 @@ class LoginController extends Controller
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
 
-            if ($user->role == 1) {
-                return redirect()->to('/pemagang/home');
-            } else if ($user->role == 2) {
-                return redirect()->to('/pemagang/home');
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Super Admin',
-                    'redirect' => 'SuperAdmin/dashboard'
-                ], 200);
-            } else if ($user->role == 2) {
-                return response()->json([
-                    'message' => 'Login berhasil sebagai Admin',
-                    'redirect' => 'Admin/dashboard'
-                ], 200);
-            } else if ($user->role == 3) {
-                return redirect()->to('/pemagang/home');
-            } else if ($user->role == 4) {
-                return redirect()->to('/pemagang/home');
-            } else {
+            $role_id = $user->role->id;
+
+            if ($role_id == 1) { //super admin
+                return redirect()->to('/superAdmin');
+            } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
+            } else if ($role_id == 3) { //mahasiawa /pemagang
+                return redirect()->to('/user');
+            } else if ($role_id == 4) { //dosen-contributoruniv
+                return redirect()->to('/dashboard');
+            } else { // mitra
+                return redirect()->to('/contributorformitra-dashboard');
 
                 // return redirect('/AdminUniv-Dashboard');
             }
         } else {
-            return response()->json([
-                'error' => 'Email atau Password yang anda masukan salah'
-            ], 422);
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah.']);
         }
+    }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
     }
 }

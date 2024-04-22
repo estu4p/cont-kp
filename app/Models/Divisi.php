@@ -9,12 +9,8 @@ class Divisi extends Model
 {
     use HasFactory;
     protected $table = "divisi";
-    protected $fillable = ['nama_divisi', 'deskripsi_divisi'];
+    protected $fillable = ['nama_divisi', 'foto_divisi'];
 
-    // Tetapkan nilai default untuk deskripsi_divisi
-    protected $attributes = [
-        'deskripsi_divisi' => ''
-    ];
 
     public function mahasiswa()
     {
@@ -24,5 +20,10 @@ class Divisi extends Model
     public function anggotaDivisi()
     {
         return $this->hasMany(User::class, 'divisi_id')->where('role_id', 3);
+    }
+
+    public function namaDivisi()
+    {
+        return $this->belongsTo(User::class, 'nama_lengkap');
     }
 }

@@ -1,20 +1,6 @@
 @extends('layouts.user')
 
 @section('content')
-{{-- <div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckout" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modal-content-transparent">
-            <div class="my-5 d-flex flex-column justify-content-center">
-                <p class="text-capitalize text-center fs-5 alert-hapus fw-medium ">Yakin memilih paket ini?</p>
-                <div class="mx-auto d-flex gap-2">
-                    <button type="button" class="btn mb-3 btn-danger px-5" data-bs-dismiss="modal"
-                        data-bs-dismiss="modal">Tidak</button>
-                    <a href="/user/login" class="btn btn-success mb-3 px-5">Yakin</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="box-reset">
@@ -31,7 +17,6 @@
             <div class="mt-5 d-flex gap-3">
                 <a href="/user/login" class="btn btn-outline-primary fw-semibold text-decoration-none" style="padding: 10px; width: 50%;">Batal</a>
                 <button type="submit" onclick="location.href='{{ url('user/login') }}'" data-bs-toggle="modal"  class="btn btn-outline-primary fw-semibold text-decoration-none" style="padding: 10px; width: 50%;">Yakin</button>
-                {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
             </div>
         </div>  
     </div>

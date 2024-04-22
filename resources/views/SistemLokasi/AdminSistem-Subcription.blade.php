@@ -5,6 +5,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
@@ -21,161 +22,97 @@
             <p>Cari data subcription</p>
         </div>
 
-        <div class="search-bar px-2 search-wadah border border-secondary ovweflow-hidden">
+        <div class="search-bar px-2 search-wadah  ovweflow-hidden">
             <i class="bi bi-search"></i>
             <input type="search" class="inputsearch" placeholder="pencarian">
         </div>
         <div>
             <select name="page" class="page">
-                <option value="page">page 1 of 1</option>
+                <option value="1">page 1 of 2</option>
             </select>
-            <select name="item" class="item">
-                <option value="item">5 item per page</option>
+            <select name="item" class="bodi">
+            <option value="5" selected>5 item per page</option>
             </select>
         </div>
 
-        <table>
-            <thead style="background-color: white;">
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Perguruan Tinggi</th>
-                    <th>Paket Berlangganan</th>
-                    <th>Lokasi</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Raihan Hafidz</td>
-                    <td>valhanhafidz@gmail.com</td>
-                    <td>Universitas Ahmad Dahlan</td>
-                    <td>
-                        <div class="Bronze">Bronze</di>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
-
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr style="background-color: white;">
-                    <td>2</td>
-                    <td>Syolita Widyandini</td>
-                    <td>syalitawdya@gmail.com</td>
-                    <td>Universitas Indonesia</td>
-                    <td>
-                        <div class="Silver">Silver</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
-
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>3</td>
-                    <td>Canni Hernanda</td>
-                    <td>dannhernando1/@gmail.com</td>
-                    <td>Universitas Negeri Yogyakarta</td>
-                    <td>
-                        <div class="Bronze">Bronze</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
-
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-
-                <tr style="background-color: white;">
-                    <td>4</td>
-                    <td>Fetnan Adipurmowo</td>
-                    <td>febrianadip@gmail.com</td>
-                    <td>Universitas Gadjah Mada</td>
-                    <td>
-                        <div class="Gold">Gold</div>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                        </button>
-
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-
-                <tr>
-                    <td>5</td>
-                    <td>Yessa Khoirunissa</td>
-                    <td>Yessaakhh@gmail.com</td>
-                    <td>Universitas Alma ata</td>
-                    <td>
-                        <div class="Platinum">Platinum</di>
-                    </td>
-                    <td>Yogyakarta</td>
-                    <td class="aksi d-flex flex-row justify-content-around">
-                        <button class="d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                            <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                            <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+        <div class="tabel">
+        <table class="table table-striped">
+            <thead class="text-center">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Perguruan Tinggi</th>
+                        <th>Paket Berlangganan</th>
+                        <th>Lokasi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach($subscriptions as $key => $subscription)
+            <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
+                        <td class="align-middle">{{ $subscription->user->email }}</td>
+                        <td class="align-middle">{{ $sekolah[$subscription->user->sekolah] }}</td>
+                        @if ($subscription->paket->paket === 'Bronze')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Silver')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Gold')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @endif
+                        <td class="align-middle">{{ $subscription->user->kota }}</td>
+                        <td>
+                            <div class="aksi d-flex flex-row justify-content-around ">
+                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
+                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
+                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
+                                </button>
+                                <button style="border: none;" onclick="showdeletemodal()">
+                                    <i class="fa-solid fa-trash-can red-icon"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
 
 
-                        </button>
+                </tbody>
+            </table>
+        </div>
 
-                        <button style="border: none;" onclick="showdeletemodal()">
-                            <i class="fa-solid fa-trash-can red-icon"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <nav aria-label="Page ">
+            <ul class="paging pagination">
+                <li class="page-item "><a class="page-link" href="#">1
 
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    </a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-
-                </li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">10</a></li>
             </ul>
         </nav>
-
 
         <div id="edit-pelanggan" class="modal fade ">
             <div class="modal-dialog">
@@ -211,7 +148,7 @@
                         <div class="kanann">
                             <div class="form-group">
                                 <label for="paket-berlangganan">Paket Berlangganan:</label>
-                                <div class="custom-select" >
+                                <div class="custom-select">
                                     <select class="inputt" id="paket-berlangganan" name="paket-berlangganan">
                                         <option class="opsions" value="Bronze">Bronze</option>
                                         <hr>
@@ -223,7 +160,7 @@
                                         <hr>
                                     </select>
                                 </div>
-                       
+
 
                             </div>
                             <div style="display: flex;">
@@ -231,9 +168,9 @@
                                     <label for="start-date">Start Date:</label>
                                     <input class="inputt2" type="date" id="start-date" name="start-date" value="2023-10-23">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="end-date">End Date:</label>
+                                    <label for="end-date" style="padding-left: 25px">End Date:</label>
+                                    <span style="padding-left: 5px;">to</span>
                                     <input class="inputt2" type="date" id="end-date" name="end-date" value="2024-01-23">
                                 </div>
                             </div>
@@ -243,7 +180,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="status-berlangganan">Status Berlangganan:</label>
-                                <div class="custom-select" >
+                                <div class="custom-select">
                                     <select class="inputt" id="paket-berlangganan" name="paket-berlangganan">
                                         <option class="opsions" value="Akti">Aktif</option>
                                         <hr>
@@ -275,26 +212,21 @@
             <script>
                 function showdeletemodal() {
                     swal({
-                        title: "Hapus",
-                        text: "Apakah anda yakin ingin menghapus?",
-                        buttons: {
-                            cancel: {
-                                text: "Batal",
-                                value: null,
-                                visible: true,
-                                className: "swal-button--cancel",
-                                closeModal: true,
-                            },
-                            confirm: {
-                                text: "ya",
-                                value: true,
-                                visible: true,
-                                className: "swal-button--confirm",
-                                closeModal: true,
-                            },
-                        },
-                        reverseButtons: true, // Mengubah posisi tombol menjadi kiri (batal) dan kanan (ok)
-                    });
+                            title: "Hapus",
+                            text: "Apakah anda yakin ingin menghapus!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Data berhasil dihapus!", {
+                                    icon: "success",
+                                });
+                            } else {
+                                swal("Your imaginary file is safe!");
+                            }
+                        });
                 }
 
                 function showEditModal() {
@@ -390,6 +322,79 @@
                 /* If the user clicks anywhere outside the select box,
                 then close all select boxes: */
                 document.addEventListener("click", closeAllSelect);
+
+
+
+
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    const pageLinks = document.querySelectorAll('.paging .page-link');
+
+                    pageLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault(); // Menghentikan aksi default dari link
+
+                            // Mendapatkan nomor halaman dari teks
+                            const pageNumber = parseInt(this.textContent.trim());
+
+                            // Menghapus kelas 'active' dari semua link pagination
+                            pageLinks.forEach(page => page.classList.remove('active'));
+
+                            // Menambahkan kelas 'active' ke yang diklik
+                            this.classList.add('active');
+
+                            // Mengambil semua baris tabel
+                            const rows = document.querySelectorAll('tr');
+
+                            // Menyembunyikan semua baris kecuali yang sesuai dengan nomor halaman yang dipilih
+                            rows.forEach(row => {
+                                if (row.children.length > 0 && parseInt(row.children[0].textContent) !== pageNumber) {
+                                    row.style.display = 'none';
+                                } else {
+                                    row.style.display = 'table-row';
+                                }
+                            });
+                        });
+                    });
+                });
+
+
+                // Mendapatkan elemen input pencarian
+                const searchInput = document.querySelector('.inputsearch');
+
+                // Mendapatkan semua baris tabel
+                const rows = document.querySelectorAll('table tbody tr');
+
+                // Fungsi untuk menyaring baris berdasarkan kata kunci pencarian
+                const filterRows = (searchTerm) => {
+                    searchTerm = searchTerm.toLowerCase(); // Mengkonversi kata kunci pencarian menjadi lowercase
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td'); // Mendapatkan sel-sel dalam setiap baris
+
+                        // Memeriksa setiap sel untuk mencocokkan kata kunci pencarian
+                        let found = false;
+                        cells.forEach(cell => {
+                            const text = cell.innerText.toLowerCase();
+                            if (text.includes(searchTerm)) {
+                                found = true;
+                            }
+                        });
+
+                        // Menampilkan atau menyembunyikan baris berdasarkan hasil pencarian
+                        if (found) {
+                            row.style.display = ''; // Menampilkan baris
+                        } else {
+                            row.style.display = 'none'; // Menyembunyikan baris
+                        }
+                    });
+                };
+
+                // Event listener untuk memanggil fungsi filterRows saat input pencarian berubah
+                searchInput.addEventListener('input', () => {
+                    filterRows(searchInput.value);
+                });
             </script>
+
 
             @endsection
