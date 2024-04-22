@@ -4,6 +4,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="/assets/css//datapresensi.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
 <div id="datapresensisiswa">
     <div class="container-fluid p-5 ml-2">
         <div class="row">
@@ -319,7 +320,8 @@
                           </tr> --}}
                       </tbody>
                 </table>
-                      <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+                <a href="{{ route('cetak.presensi', ['nama_lengkap' => urlencode($nama_lengkap)]) }}" class="btnpdf"><i class="fas fa-download"></i> PDF</a>
+                {{-- <button class="btnpdf"><i class="fas fa-download"></i> PDF</button> --}}
 
 
 
@@ -404,6 +406,7 @@
     btnTambah.addEventListener('click', function() {
         swal("Berhasil!!", "Catatan berhasil ditambahkan", "success");
     })
+
 </script>
 
 @endsection

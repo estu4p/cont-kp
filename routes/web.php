@@ -665,6 +665,8 @@ Route::get('/datapresensi/{nama_lengkap}', [PresensiMitraController::class, 'get
 Route::post('/presensi/accept', [PresensiMitraController::class, 'presensiAccept'])->name('presensi-accept');
 Route::put('/presensi/reject', [PresensiMitraController::class, 'presensiReject'])->name('presensi-reject');
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll'])->name('presensi-accept-all');
+Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiPDF'])->name('cetak.presensi');
+
 
 
 
