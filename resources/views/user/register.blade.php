@@ -18,7 +18,8 @@
                         placeholder="Masukkan username / email">
                 </div>
 
-                <label for="nomor_induk" class="mt-2 fw-5 mb-2">nomor induk mahasiswa<span class="text-danger">*</span></label>
+                <label for="nomor_induk" class="mt-2 fw-5 mb-2">nomor induk mahasiswa<span
+                        class="text-danger">*</span></label>
                 <div class="d-flex">
                     <input type="number" name="nomor_induk" id="nomor_induk"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
@@ -38,6 +39,11 @@
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Contoh : raihan@gmail.com">
                 </div>
+                @if (session('error'))
+                    <div class="alert alert-danger" style="font-family: 'Times New Roman', Times, serif; font-size: 14px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 <label for="username" class="mt-2 fw-5 mb-2">username<span class="text-danger">*</span></label>
                 <div class="d-flex">
@@ -59,7 +65,6 @@
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan Password">
                 </div>
-
                 <label for="password-confirm" class="mt-2 fw-5 mb-2">konfirmasi password</label>
                 <div class="d-flex">
                     <input type="password" name="password-confirm" id="password-confirm"
@@ -70,8 +75,8 @@
                 </div>
 
                 <div class="button-container text-center mt-4">
-                    {{-- <button type="submit" id="registerButton" class="reg-button border-0 mt-4 shadow fw-semibold" disabled>Daftar</button> --}}
-                    <a href="/user" class="reg-button border-0 shadow fw-semibold text-decoration-none" id="registerButton" disabled>Daftar</a>
+                    <button type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none"
+                        id="registerButton">Daftar</button>
                 </div>
             </form>
         </div>
@@ -95,7 +100,8 @@
             }
 
             // Mengatur status tombol daftar
-            const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
+            const inputs = document.querySelectorAll(
+                'input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             let allFilled = true;
             inputs.forEach(input => {
                 if (input.value.trim() === '') {
@@ -104,13 +110,15 @@
             });
 
             const registerButton = document.getElementById('registerButton');
-            registerButton.disabled = !(allFilled && passwordInput.value.length >= 8 && confirmPasswordInput.value === passwordInput.value);
+            registerButton.disabled = !(allFilled && passwordInput.value.length >= 8 && confirmPasswordInput.value ===
+                passwordInput.value);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             checkInputs();
 
-            const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
+            const inputs = document.querySelectorAll(
+                'input[type="text"], input[type="number"], input[type="email"], input[type="password"]');
             inputs.forEach(input => {
                 input.addEventListener('input', checkInputs);
             });

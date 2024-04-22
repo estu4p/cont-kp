@@ -311,11 +311,10 @@
         <div class="container container-footer">
             <div class="row align-items-center min767">
                 <div class="col-4  untukmobile">
-                    <div class="d-flex untukmobilelogo justify-content-center">
+                    <div class="d-flex untukmobilelogo ">
                         <div class="  "><img src="assets/images/logo.png" width="70px" />
                             <h4 class="text-uppercase my-auto ms-3 ms-sm-0 my-sm-0 fw-bold ">seven.inc</h4>
                         </div>
-
                     </div>
                     <p class="mt-4">+6282934397492</p>
                     <p class="flex-wrap  untukmobiletext" style="margin-top: -12px;">Jalan Raya Janti, Gang Arjuna Nomor 59,

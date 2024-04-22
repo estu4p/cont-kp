@@ -7,7 +7,7 @@
   <div class="dashboard">
     <div class="kartu1 d-flex flex-column">
       <h3 class="kartu-judul">Jumlah Subcription</h3>
-       <td class=>300</td>
+       <td class=>{{ $totalSubscription }}</td>
       
   
 
@@ -19,7 +19,7 @@
 
     <div class=" kartu2 d-flex flex-column">
       <h2 class="kartu-judul">Aktif</h2>
-      <td class=>200</td>
+      <td class=>{{ $totalAktif }}</td>
         <!-- <img src="assets/images/vectorr.png"alt="logoo" class="vectorr">
         <img src="assets/images/Vector3.png" alt="panah" class="panah"> -->
 
@@ -29,7 +29,7 @@
 
     <div class="kartu3 dm-flex flex-colum ">
       <h2 class="kartu-judul">Tidak aktif</h2>
-        <td>100</td>
+        <td>{{ $totalTidakAktif }}</td>
 
       
       <!-- <i class="bi bi-app text-dark icon3 col-12 d-flex justify-content-end py-2 px-4">

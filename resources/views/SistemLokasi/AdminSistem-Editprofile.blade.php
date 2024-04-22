@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
 <div class="wadah">
 
-    <div class="propil">
+<div class="propil">
         <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com</div>
+        <div class="nama">{{ $userAdmin->nama_lengkap }}</div>
+        <div class="email">{{ $userAdmin->email }}</div>
         <div class="about">About</div>
-        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
+        <div class="keterangan">{{ $userAdmin->about }}</div>
     </div>
 
     <div id="preview" class="preview"></div>
@@ -19,7 +19,7 @@
                 <div id="previewZone">
                     <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
                 </div>
-                <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
+                <div class="upload col-5 d-flex flex-column mx-4 my-auto gap-1">
                     <label for="imageInput" class="custom-file-upload">
                         <span class="change">Change Photo</span>
                         <input type="file" id="imageInput" style="display: none;">
@@ -28,49 +28,59 @@
                 </div>
             </div>
 
+
             <div class="tengah row ">
+            <form action="{{ route('userAdmin.updateFoto', $userAdmin->username )}}" method="POST">
+                @csrf
+                @method('PATCH')
                 <div class="judulkanan">Personal Details</div>
-                <div class="isi col-12 row justify-content-evenly  ">
-                    <div class="form-group  col-6   p-2">
-                        <label for="username">Nama lengkap</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="name" placeholder="Atun Khostriatun">
+                    <div class="isi col-12 row justify-content-evenly">
+                        <div class="form-group  col-6   p-2">
+                            <label for="nama">Nama Lengkap</label>
+                            <div class="input-group mb-3">
+                            <input type="text" name="nama_lengkap" value="{{ $userAdmin->nama_lengkap }}"
+                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="nama">
+                            </div>
+                        </div>
+                        <div class="form-group  col-6   p-2">
+                            <label for="email">Email</label>
+                            <div class="input-group mb-3">
+                            <input type="email" name="email" value="{{ $userAdmin->email }}"
+                                class="input form-control" type="email" style="background-color: #F2F4F8;" id="email">
+                            </div>
+                        </div>
+                        <div class="form-group  col-6   p-2">
+                            <label for="hp">No Hp</label>
+                            <div class="input-group mb-3">
+                            <input type="text" name="no_hp" value="{{ $userAdmin->no_hp }}"
+                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="no.Hp">
+                            </div>
+                        </div>
+                        <div class="form-group  col-6   p-2">
+                            <label for="alamat">Alamat</label>
+                            <div class="input-group mb-3">
+                            <input type="text" name="alamat" value="{{ $userAdmin->alamat }}"
+                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="alamat">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="NoHP">No HP</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="NoHP" placeholder="081326273187">
-                        </div>
-                    </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="email">Email</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="email" id="email" placeholder="wahyudiatkinson@gmail.com">
-                        </div>
-                    </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="alamat">Alamat</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="alamat" placeholder="Jateng">
-                        </div>
-                    </div>
-                </div>
+            </form>
             </div>
+
             <div class="bawah p-0 col-6">
                 <div class="judulkanan">Additional Info</div>
+                        <div class="form-group  col-4   p-2">
+                            <label for="about">About</label>
+                        </div>
                 <div class="form-group form-floating">
-                    <!-- <label for="alamat">About</label> -->
                     <div class="col-12  ">
-                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="text
-... "></textarea>
-
+                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
                     </div>
                 </div>
             </div>
             <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
-                <button class="Update" onclick="showSuccessModal()">Update</button>
+                <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;" onclick="showSuccessModal()">Update</button>
             </div>
         </div>
     </div>

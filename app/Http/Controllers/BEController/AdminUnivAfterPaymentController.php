@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BEController;
 
+use App\Models\Riwayat;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\User;
@@ -11,18 +12,18 @@ use App\Models\Divisi;
 use App\Mail\SendEmail;
 use App\Models\Sekolah;
 use App\Models\Presensi;
+use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
-
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -249,21 +250,22 @@ class AdminUnivAfterPaymentController extends Controller
 
         // $divisi = Mitra::with('divisiMitra')->findOrFail($id);
         // $divisiMitra = $divisi->divisi_mitra;
+        $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
         $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
         // dd($divisiMitra);
         $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'team aktif',   'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota', 'divisiMitraId'));
         }
     }
 
     public function daftarMitraPengaturanDivisi(Request
-    $request)
+    $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        $divisi = Divisi::all();
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
@@ -736,23 +738,73 @@ class AdminUnivAfterPaymentController extends Controller
     //riwayatpembelian
     public function RiwayatPembelian()
     {
-        $paket = Paket::all();
-        // Anda dapat menentukan variabel status, no_pesanan, harga, tanggal, dan metode_pembayaran
-        // jika Anda ingin menggunakannya dalam view
-        $status = 'nilai_status';
-        $no_pesanan = 'nilai_no_pesanan';
-        $harga = 'nilai_harga';
-        $tanggal = 'nilai_tanggal';
-        $metode_pembayaran = 'nilai_metode_pembayaran';
+        $paket = Riwayat::all();
 
-        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('status', 'no_pesanan', 'harga', 'paket', 'tanggal', 'metode_pembayaran'));
+        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('paket'));
     }
 
     //jangka waktu
     public function JangkaWaktu()
     {
-        $paket = Paket::where('status', 'Aktif')->get();
-        return response()->json(['data' => $paket], 200);
+        // $paket = Paket::where('status', 'Aktif')->get();
+        $paket = Riwayat::all();
+        return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu', compact('paket'));
     }
-}
+    public function bagianMitra()
+    {
+        // $mitra=User::all();
+        $mitra=User::where('role_id', 5)->select('nama_lengkap', 'username')->get();
 
+        return response()->json(['data'=> $mitra]);
+    }
+
+    public function editUsermitra()
+    {
+       $user = auth()->user();
+       return response()->json(['data'=> $user]);
+    }
+    public function editUsermitraupdate(Request $request)
+    {
+        $user = auth()->user();
+        // Validasi data
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255|unique:users,email,'.$user->id,
+            'phone' => 'nullable|string|max:20',
+            'password' => 'nullable|string|min:8|confirmed',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //ukuran file 2MB
+            'mahasiswa' => 'nullable|string', // penambahan mahasiswa
+        ]);
+
+        // Update data profil pengguna
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+
+        // memeriksa jika ada perubahan password
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        // memeriksa jika ada foto yang diunggah
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($user->photo) {
+                Storage::delete($user->photo);
+            }
+
+            // menyimpan foto baru
+            $photoPath = $request->file('photo')->store('public/photos');
+            $user->photo = $photoPath;
+        }
+
+        $user->save();
+
+        // penambahan data mahasiswa
+        if ($request->filled('mahasiswa')) {
+            $mahasiswa=User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+        }
+
+        // return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
+        }
+}

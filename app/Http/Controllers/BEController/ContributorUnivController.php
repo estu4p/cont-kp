@@ -10,11 +10,26 @@ use App\Models\User;
 class ContributorUnivController extends Controller
 {
     public function DataPresensiSiswa($id)
-{
-    $siswa = Presensi::findOrFail($id);
-    // Mengirim data siswa ke view
-    return view('presensi.datapresensisiswa', compact('siswa'));
+    {
+        // Mengambil data siswa berdasarkan ID
+       
+        $datasiswa = Presensi::with('user')->where('nama_lengkap', $id)->first();
+        $presensi = Presensi::where('nama_lengkap', $id)->get();
+
+  
+
+    // Menangani kasus di mana siswa tidak ditemukan
+    if (!$datasiswa) {
+        abort(404); // Tampilkan halaman 404 jika siswa tidak ditemukan
+    }
+
+    // Mengambil data presensi siswa menggunakan relasi antara User dan Presensi
+    // $presensi_siswa = $datasiswa->presensi;
+
+    // Mengirim data siswa dan presensi ke view
+    return view('presensi.datapresensisiswa', compact('datasiswa', 'presensi'));
 }
+
     public function DataPresensi()
     {
         // Ambil data presensi dari database

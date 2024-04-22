@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
+use App\Models\Penilaian;
 use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
@@ -783,6 +784,10 @@ class ContributorForMitra extends Controller
     public function view_jam_mulai_istirahat()
     {
         $presensi = Presensi::with('user')->latest()->first();
+        $presensiHariIni = Presensi::where('hari', Carbon::today())->exists();
+        if (!$presensiHariIni) {
+            return redirect('mitra-presensi-barcode/masuk');
+        }
         return view('User.ContributorForMitra.barcode_jam-mulai-istirahat', compact('presensi'));
     }
     public function jam_mulai_istirahat(Request $request)
@@ -830,8 +835,16 @@ class ContributorForMitra extends Controller
             ->whereDate('hari', date('Y-m-d')) // Ambil data presensi untuk hari ini
             ->latest()
             ->first();
+
         if ($presensi) {
-            $presensi->jam_pulang = now();
+            $jam_pulang = now();
+            $jam_masuk = Carbon::parse($presensi->jam_masuk);
+
+            // Menghitung total jam kerja dalam bentuk jam
+            $total_jam_kerja = $jam_pulang->diff($jam_masuk)->format('%H:%I:%S');
+
+            $presensi->jam_pulang = $jam_pulang;
+            $presensi->total_jam_kerja = $total_jam_kerja;
             $presensi->save();
             return redirect('mitra-presensi-barcode/selesai')->with('success', 'silahkan masuk')->with('presensi', $presensi);
         } else {
@@ -856,10 +869,8 @@ class ContributorForMitra extends Controller
         $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
         $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
 
-        return response()->json([
-            'total_mahasiswa' => $totalMahasiswa,
-            'total_hadir' => $totalHadir,
-            'total_izin' => $totalIzin,
-        ]);
+        return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin'));
+        
     }
+
 }
