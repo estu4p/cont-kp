@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Models\Riwayat;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\User;
@@ -10,8 +9,10 @@ use App\Models\Mitra;
 use App\Models\Paket;
 use App\Models\Divisi;
 use App\Mail\SendEmail;
+use App\Models\Riwayat;
 use App\Models\Sekolah;
 use App\Models\Presensi;
+use App\Models\Mahasiswa;
 use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
@@ -790,7 +791,26 @@ class AdminUnivAfterPaymentController extends Controller
         $user->save();
 
         $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+        $mahasiswa = $request->input('mahasiswa_id');
+        $result = [];
 
+        // Clear existing relationships before adding new ones
+        Mahasiswa::where('user_id', $user->id)->delete();
+
+        if (is_array($mahasiswa) && !empty($mahasiswa)) { 
+            foreach ($mahasiswa as $mhs) {
+                Mahasiswa::create([
+                    'user_id' => $user->id,
+                    'mahasiswa_id' => $mhs,
+                ]);
+
+                $result[] = [
+                    'user_id' => $user->id,
+                    'mahasiswa_id' => $mhs,
+                ];
+            }
+        }
+        $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
 
         return response()->json(['message' => 'Profile updated successfully', 'tambah'=>$mahasiswa], 200);
     }
