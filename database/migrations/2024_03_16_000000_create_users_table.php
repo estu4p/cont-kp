@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('os')->nullable();
             // $table->enum('status_akun', ['active','inactive', 'done'])->nullable();
-            $table->enum('status_akun', ['aktif','alunmi'])->nullable();
+            $table->enum('status_akun', ['aktif', 'alumni'])->nullable();
             $table->enum('status_absensi', ['Scan QR Code', 'Button']);
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
