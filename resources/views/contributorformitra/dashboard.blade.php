@@ -21,7 +21,7 @@
 
         <div class="card-body d-flex justify-content-between bawah">
             <p>View Detail</p>
-            <a href="/jumlah-mahasiswa" ><i class="fa-solid fa-circle-arrow-right icon"></i></a>
+            <a href="/contributorformitra-devisi" ><i class="fa-solid fa-circle-arrow-right icon"></i></a>
         </div>
     </div>
 
