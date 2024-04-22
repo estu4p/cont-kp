@@ -36,7 +36,7 @@ class AdminSistemDashboardController extends Controller
     {
         $userAdmin = User::where('role_id', 2)->first();
 
-        return view('SistemLokasi.AdminSistem-EditProfile', [
+        return view('SistemLokasi.AdminSistem-Editprofile', [
             'title' => "userAdmin - Ubah Profil",
             'userAdmin' => $userAdmin
         ]);
@@ -45,41 +45,55 @@ class AdminSistemDashboardController extends Controller
     public function updateProfile(Request $request, $username)
     {
         $userAdmin = User::where('role_id', 2)->first();
-        $data = $request->all();
-        try {
-            $validator = Validator::make($request->all(), [
-                'nama_lengkap' => 'string',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'email' => [
-                    'string',
-                    'email',
-                    Rule::unique('users', 'email')->ignore($userAdmin->email, 'email')
-                ],
-                'no_hp' => 'string',
-                'alamat' => 'string',
-                'about' => 'string',
-            ]);
-            $validator->validate();
-        } catch (ValidationException $e) {
-            $errorValidate = $e->validator->errors()->all();
-            $errorMessage = implode('<br>', $errorValidate);
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
+        if (!$userAdmin) {
+            return response()->json(['message' => 'Pengguna dengan peran 2 tidak ditemukan'], 404);
         }
+
+        // // Update data pengguna
+        // $userAdmin->username = $username;
+
+        // Validasi input form
+        $data = $request->validate([
+            'nama_lengkap' => 'required|string',
+            'email' => 'required|email|max:255',
+            'no_hp' => 'required|string|max:20',
+            'alamat' => 'required|string|max:255',
+            'about' => 'nullable|string|max:500',
+        ]);
 
         $profile = User::where('username', $username)->first();
 
-        try {
-            $profile->update([
-                'nama_lengkap' => $data['nama_lengkap'],
-                'email' => $data['email'],
-                'no_hp' => $data['no_hp'],
-                'alamat' => $data['alamat'],
-                'about' => $data['about'],
+        // Periksa apakah profil ditemukan
+        if (!$profile) {
+            return response()->json(['message' => 'Profil pengguna tidak ditemukan'], 404);
+        }
+
+        $profile->update([
+        'nama_lengkap' => $data['nama_lengkap'],
+        'email' => $data['email'],
+        'no_hp' => $data['no_hp'],
+        'alamat' => $data['alamat'],
+        'about' => $data['about'],
+        ]);
+
+        // // Update data pengguna
+        // $userAdmin->nama_lengkap = $validatedData['nama_lengkap'];
+        // $userAdmin->email = $validatedData['email'];
+        // $userAdmin->no_hp = $validatedData['no_hp'];
+        // $userAdmin->alamat = $validatedData['alamat'];
+        // $userAdmin->about = $validatedData['about'];
+        // $userAdmin->save();
+
+        // Periksa jenis respons yang diminta
+        if ($request->wantsJson()) {
+            // Respon dalam format JSON
+            return response()->json([
+                'message' => 'Profil berhasil diperbarui.',
+                'user' => $userAdmin
             ]);
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Data Profil Berhasil diUbah');
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
+        } else {
+            // Redirect ke halaman profil yang diperbarui
+            return view('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Profil berhasil diperbarui.');
         }
     }
 
@@ -93,7 +107,8 @@ class AdminSistemDashboardController extends Controller
         } catch (ValidationException $e) {
             $errorValidate = $e->validator->errors()->all();
             $errorMessage = implode('<br>', $errorValidate);
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
+            return response()->json(['success' => false, 'error' => $errorMessage]);
+            // return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
         }
 
         $profile = User::where('username', $username)->firstOrFail();
@@ -107,10 +122,12 @@ class AdminSistemDashboardController extends Controller
             $profile->update([
                 'foto_profil' => 'foto_profil/' . $namaFoto,
             ]);
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Foto Berhasil diUbah');
+            return response()->json(['success' => true, 'message' => 'Foto Berhasil diUbah']);
+            // return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diUbah');
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
+            return response()->json(['success' => false, 'error' => $errorMessage]);
+            // return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
         }
     }
 
@@ -122,13 +139,13 @@ class AdminSistemDashboardController extends Controller
                 Storage::delete('public/' . $profil->foto_profil);
                 $profil->foto_profil = null;
                 $profil->save();
-                return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('success', 'Foto Berhasil diHapus');
+                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diHapus');
             } else {
-                return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', 'Anda tidak memiliki Foto Profil');
+                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', 'Anda tidak memiliki Foto Profil');
             }
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
+            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
         }
     }
 }
