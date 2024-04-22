@@ -121,6 +121,7 @@ Route::get('/jumlahmahasiswa', [SchoolController::class, 'jumlahMahasiswa']);
 Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
 Route::get('datapresensi', [ContributorUnivController::class, 'DataPresensi']);
 Route::get('datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
+Route::get('/datapenilaianmhs', [SchoolController::class, 'datamhs']);
 
 //Contributor for Mitra
 Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
