@@ -18,6 +18,7 @@ use App\Http\Controllers\BEController\DashboardAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\PresensiMitraController;
+use App\Http\Controllers\BEController\AdminUserOrganizations;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
@@ -144,7 +145,16 @@ Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiA
 Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
 
-Route::get('laporan-presensi', [ContributorForMitra::class, 'laporanPresensi']);
+
+
+//Admin Pengaturan User & Organizations
+Route::post('addGuru', [AdminUserOrganizations::class, 'addGuru']);
+Route::post('addMentor', [AdminUserOrganizations::class, 'addMentor']);
+Route::get('searchNIM', [AdminUserOrganizations::class, 'searchNIM']);
+Route::post('addMahasiswaToGuru', [AdminUserOrganizations::class, 'addMahasiswa']);
+Route::post('deleteMahasiswa', [AdminUserOrganizations::class, 'deleteMahasiswa']);
+Route::put('editMahasiswa/{id}', [AdminUserOrganizations::class, 'editMahasiswa']);
+
 Route::get('presensi-detail-hadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailHadir']);
 Route::get('/laporan-presensi/{nama_lengkap}/izin', [ContributorForMitra::class, 'laporanPresensiDetailIzin']);
 Route::get('/laporan-presensi/{nama_lengkap}/tidak-hadir', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir']);
