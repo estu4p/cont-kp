@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('username')->unique()->nullable();
             $table->string('no_hp')->nullable();
             $table->string('barcode')->nullable()->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('alamat')->nullable();
             $table->enum('kota', ['Kota Surabaya', 'Kota Semarang'])->nullable();
             $table->date('tgl_lahir')->nullable();
@@ -32,14 +32,15 @@ return new class extends Migration
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
-            $table->time('jam_default_masuk');
-            $table->time('jam_default_pulang');
+            $table->time('jam_default_masuk')->nullable();
+            $table->time('jam_default_pulang')->nullable();
             // $table->bigInteger('subscription')->nullable();
             $table->enum('konfirmasi_email', ['Sudah', 'Belum'])->default('belum')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('sekolah')->nullable();
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
+            $table->unsignedBigInteger('privilege_id')->nullable();
             $table->unsignedBigInteger('divisi_id')->nullable();
             $table->unsignedBigInteger('shift_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
@@ -49,6 +50,7 @@ return new class extends Migration
 
             $table->foreign('sekolah')->references('id')->on('sekolah')->onDelete('SET NULL');
             $table->foreign('role_id')->references('id')->on('role')->onDelete('SET NULL');
+            $table->foreign('privilege_id')->references('id')->on('privilage')->onDelete('SET NULL');
             $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('SET NULL');
             $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('SET NULL');
             $table->foreign('shift_id')->references('id')->on('shift')->onDelete('SET NULL');

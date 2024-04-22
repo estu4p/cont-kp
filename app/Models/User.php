@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
         'nama_lengkap',
         'nomor_induk',
@@ -37,6 +39,7 @@ class User extends Authenticatable
         'email_verified_at',
         'mitra_id',
         'role_id',
+        'privilage_id',
         'divisi_id',
         'shift_id',
         'paket_id',
@@ -54,6 +57,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function assignPrivilege($privilegeId)
+    {
+        $this->privileges()->attach($privilegeId);
+    }
+
+    // Relasi dengan model Profile
+    
     public function mitra()
     {
         return $this->belongsTo(Mitra::class);
@@ -68,6 +78,35 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Divisi::class);
     }
+
+    public function privilage()
+    {
+        return $this->belongsToMany(Privilage::class);
+    }
+
+    public function privilageuser()
+    {
+        return $this->belongsToMany(PrivilageUser::class);
+    }
+
+    public function privileges()
+    {
+        return $this->belongsToMany(Privilage::class, 'user_privilege', 'user_id', 'privilege_id');
+    }
+
+
+  
+
+    public function mahasiswa()
+    {
+        return $this->belongsToMany(Privilage::class, 'mahasiswa', 'user_id', 'mahasiswa_id');
+    }
+    public function mahasiswas()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_user', 'user_id', 'mahasiswa_id');
+    }
+   
+
 
     public function shift()
     {
@@ -93,3 +132,6 @@ class User extends Authenticatable
         return $this->BelongsTo(Divisi::class, 'divisi_id');
     }
 }
+
+
+

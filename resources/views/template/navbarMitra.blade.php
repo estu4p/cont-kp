@@ -13,7 +13,7 @@
                     <span class="profile-status">Mitra</span>
                 </div>
                 <div class="navbar-logo">
-                  <a href="/contributorformitra-editprofile"><img src="assets/images/Rectangle 22.png" alt="Profile Logo"></a>
+                  <a href="/contributorformitra-editprofile"><img src="{{ asset('assets/images/user2.png') }}" alt="Profile Logo"></a>
                 </div>
             </div>
 

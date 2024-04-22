@@ -18,6 +18,7 @@
     display: inline-block;
     position: relative;
     text-decoration: none;
+    
 }
 
 .menu-navbar {
@@ -31,6 +32,7 @@
 
 .menu-reg {
     color: #a61c1c;
+
 }
 
 .menu-navbar:before,
@@ -71,6 +73,7 @@
     color: #a61c1c;
     border: 2px solid #a61c1c;
     border-radius: 8px;
+    
 }
 .menu-reg:hover {
     color: #a61c1c;
@@ -91,6 +94,7 @@
     border-radius: 12px;
     padding: 16px 28px;
     text-decoration: none;
+    
 }
 .btn-header:hover {
     color: #a61c1c;
@@ -130,6 +134,7 @@
 .card-paket:hover {
     border: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 .register {
     padding: 80px;
@@ -240,15 +245,12 @@
     width: 10px;
 }
 .dalam {
-    /* Frame 2427 */
-
     box-sizing: border-box;
 
-    width: 420px;
+    /* width: 420px; */
     height: 216px;
 
     background: #a61c1c;
-    border: 1px solid #dcdcdc;
     border-radius: 5px;
 }
 .list-pembayaran {
@@ -284,7 +286,6 @@
     margin-left: 16%;
     bottom: 2%;
     background: #f2f4f8;
-    border: 1px solid #c1c7cd;
     border-radius: 5px;
 }
 .btn-text {
@@ -676,6 +677,45 @@ border-radius: 5px;
     }
     .untukmobile{
         width:39%;
+    }
+}
+
+/* bronze ,silver ,gold ,platinum*/
+@media only screen and (max-width: 582px){
+
+    .max582{
+        padding:20px !important;
+    }
+  
+
+}
+@media only screen and (max-width: 768px){
+  .dalam{
+        flex-direction: column !important;
+        background-color: transparent !important;
+        width: 100% !important;
+        justify-content: center;
+        border: 1px solid black;
+        padding: 0 !important;
+        align-items: center;
+    }
+    .dalamchild{
+        background-color: #A61C1C;
+        z-index: 10;
+        width: max-content !important;
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 10px;
+        
+       
+    }
+    .dalamchild:nth-child(2){
+        padding-bottom: 20px;
+    }
+    #collapseExample {
+
+        margin-top: 30%; 
     }
 }
 
