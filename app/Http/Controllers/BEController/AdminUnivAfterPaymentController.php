@@ -793,11 +793,10 @@ class AdminUnivAfterPaymentController extends Controller
         $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
         $mahasiswa = $request->input('mahasiswa_id');
         $result = [];
-
-        // Clear existing relationships before adding new ones
+        
         Mahasiswa::where('user_id', $user->id)->delete();
 
-        if (is_array($mahasiswa) && !empty($mahasiswa)) { 
+        if (is_array($mahasiswa) && !empty($mahasiswa)) {
             foreach ($mahasiswa as $mhs) {
                 Mahasiswa::create([
                     'user_id' => $user->id,

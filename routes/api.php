@@ -111,10 +111,9 @@ Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'Jangka
 Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
 
+//Admin Pengaturan User & Organizations
 Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
-// Route::post('/editUsermitra/update/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitraupdate'])->name('editmitra');
 Route::post('/editUsermitra/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
-// Route::middleware('auth')->post('/editmitra', 'AdminUnivAfterPaymentController@editUsermitra')->name('editmit ra');
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
