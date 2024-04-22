@@ -12,16 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
-
     <style>
-        /* Tambahkan gaya untuk pesan kesalahan */
         .error-message {
             color: #dc3545;
-            /* Warna teks merah */
             font-size: 80%;
-            /* Ukuran teks kecil */
             display: none;
-            /* Sembunyikan pesan kesalahan secara default */
         }
     </style>
 </head>
@@ -57,8 +52,7 @@
                             </div>
                         </div>
                         <!-- Tambahkan pesan kesalahan -->
-                        <div class="error-message" id="passwordMatchError">Password dan konfirmasi password harus sama.
-                        </div>
+                        <div class="error-message" id="passwordMatchError">Password dan konfirmasi password harus sama. </div>
                     </div>
                 </div>
             </div>
