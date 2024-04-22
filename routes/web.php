@@ -22,9 +22,9 @@ use App\Http\Controllers\AdminUnivAfterPaymentController;
 use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
-use App\Http\Controllers\BEController\MitraDashboardController;
+use App\Http\Controllers\Auth\ResetPasswordAdminController;
 use App\Http\Controllers\BEController\PresensiMitraController;
-use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
+use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
@@ -32,6 +32,7 @@ use App\Http\Controllers\BEController\SuperadminSistemController;
 use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
+use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
 
 
 
@@ -452,6 +453,10 @@ Route::get('/AdminUniv-InputOTP', function () {
 Route::get('/AdminUniv-InputNewPassword', function () {
     return view('adminUniv-afterPayment.AdminUniv-InputNewPassword');
 });
+Route::post('/AdminUniv-ResetPassword', [ResetPasswordAdminController::class, 'resetPassword'])->name('password.resetAdmin');
+Route::post('/AdminUniv-InputOTP', [ResetPasswordAdminController::class, 'verifyOTP'])->name('otp.verifyAdmin');
+Route::post('/AdminUniv-InputNewPassword', [ResetPasswordAdminController::class, 'newPassword'])->name('password.newAdmin');
+
 
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 
@@ -667,6 +672,8 @@ Route::get('/datapresensi/{nama_lengkap}', [PresensiMitraController::class, 'get
 Route::post('/presensi/accept', [PresensiMitraController::class, 'presensiAccept'])->name('presensi-accept');
 Route::put('/presensi/reject', [PresensiMitraController::class, 'presensiReject'])->name('presensi-reject');
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll'])->name('presensi-accept-all');
+Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiPDF'])->name('cetak.presensi');
+
 
 
 
