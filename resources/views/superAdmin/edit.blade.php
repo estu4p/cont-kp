@@ -9,7 +9,7 @@
                 @if ($superAdmin->foto_profil ?? '')
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil" class="foto-profil-full">
                 @else
-                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Foto Profil">
                 @endif
                 <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap ?? 'nama lengkap' }}
                 </h4>
