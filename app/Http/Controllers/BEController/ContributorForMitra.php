@@ -256,8 +256,7 @@ class ContributorForMitra extends Controller
         // Kirim data ke tampilan
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-                'message' => 'Berhasil mendapat data'
-            ], 200);
+                'message' => 'Berhasil mendapat data'], 200);
         } else {
             return view('user.ContributorForMitra.laporanpresensi')->with([
                 'presensi' => $presensi,
@@ -465,6 +464,10 @@ class ContributorForMitra extends Controller
         $namaBulan['bulan_tahun_masuk'] = $nama_bulan_tahun_masuk;
 
         $presensi = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->where(function ($query) {
+                $query->where('status_kehadiran', 'izin')
+                    ->orWhere('status_kehadiran', 'sakit');
+            })->get();
             ->where(function ($query) {
                 $query->where('status_kehadiran', 'izin')
                     ->orWhere('status_kehadiran', 'sakit');
@@ -871,7 +874,7 @@ class ContributorForMitra extends Controller
 
         return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin'));
     }
-<<<<<<< HEAD
+
     //InputNilai
     public function InputNilai($id)
     {
@@ -902,7 +905,7 @@ class ContributorForMitra extends Controller
     }
  
 }
-=======
 
-}
->>>>>>> 878a8dbf727d8f3636277046d020b5e1165b7aae
+
+
+
