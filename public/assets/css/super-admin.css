@@ -120,6 +120,7 @@ body{
 
 .navbar-profile {
   margin-right: 20px;
+ 
 }
 
 .profile-name,
@@ -168,4 +169,7 @@ body{
   .untukmobile div{
     margin: 20px 0;
   }
+}
+.non-clickable-icon {
+  pointer-events: none;
 }
