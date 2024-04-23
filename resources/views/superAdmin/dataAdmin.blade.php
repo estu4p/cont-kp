@@ -115,7 +115,7 @@
                 style="background-color: white; border-radius: 10px; border: 0.2px solid #00000050; padding: 1.2rem; width: 75%; margin-bottom: 8px;">
                 <div class="d-flex gap-4">
                 @if ($admin->foto_profil)
-                    <img src="{{ asset('storage/' . $admin->foto_profil) }}" width="80" height="80" alt="Foto Profil" class="img-fluid object-fit-contain foto-profil">
+                    <img src="{{ asset('storage/' . $admin->foto_profil) }}" width="80" height="80" alt="Foto Profil" class="img-fluid object-fit-contain foto-profil ">
                 @else
                     <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" height="80" alt="Foto Profil" class="img-fluid object-fit-contain  foto-profil">
                 @endif

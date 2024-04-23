@@ -141,9 +141,9 @@
                     @foreach ($subscriptions as $subscription)
                         <tr>
                             <td class="align-middle">{{ $loop->iteration }}</td>
-                            <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
-                            <td class="align-middle text-lowercase">{{ $subscription->user->email }}</td>
-                            <td class="align-middle">{{ $subscription->user->perguruanTinggi->nama_sekolah }}</td>
+                            <td class="align-middle">{{ $subscription->user->nama_lengkap ?? '' }}</td>
+                            <td class="align-middle text-lowercase">{{ $subscription->user->email ?? '' }}</td>
+                            <td class="align-middle">{{ $subscription->user->perguruanTinggi->nama_sekolah ?? '' }}</td>
                             @if ($subscription->paket->paket === 'Bronze')
                                 <td class="align-middle">
                                     <p
@@ -169,10 +169,10 @@
                                         {{ $subscription->paket->paket }}</p>
                                 </td>
                             @endif
-                            <td class="align-middle">{{ $subscription->user->kota }}</td>
-                            <td class="align-middle">{{ $subscription->user->status_akun }}</td>
+                            <td class="align-middle">{{ $subscription->user->kota ?? '' }}</td>
+                            <td class="align-middle">{{ $subscription->user->status_akun ?? '' }}</td>
                             <td class="align-middle">
-                                <button class="btn btn-sm btn-primary edit-button" data-id="{{ $subscription->id }}"><svg
+                                <button class="btn btn-sm btn-primary edit-button" data-id="{{ $subscription->id ?? '' }}"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -184,7 +184,7 @@
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                <button onclick="showAlert('{{ $subscription->id }}', '{{ $subscription->user->nama_lengkap }}')" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg"
+                                <button onclick="showAlert('{{ $subscription->id ?? '' }}', '{{ $subscription->user->nama_lengkap ?? '' }}')" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="16" height="16" fill="currentColor" class="bi bi-trash"
                                         viewBox="0 0 16 16">
                                         <path

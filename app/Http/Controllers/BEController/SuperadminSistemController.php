@@ -165,7 +165,6 @@ class SuperadminSistemController extends Controller
                     Rule::unique('users', 'username')->ignore($admin->username, 'username')
                 ],
                 'email' => [
-                    'required',
                     'string',
                     'email',
                     'nullable',
@@ -234,12 +233,12 @@ class SuperadminSistemController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'nama_lengkap' => 'string',
+                'nama_lengkap' => 'string|nullable',
                 'username' => 'required|string|unique:users',
-                'email' => 'string|email|unique:users,email',
-                'no_hp' => 'string',
+                'email' => 'string|email|unique:users,email|nullable',
+                'no_hp' => 'string|nullable',
                 'password' => 'required|string|confirmed',
-                'kota' => 'string',
+                'kota' => 'string|nullable',
             ]);
             $validator->validate();
         } catch (ValidationException $e) {
@@ -308,9 +307,9 @@ class SuperadminSistemController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'email' => [
-                    'required',
                     'string',
                     'email',
+                    'nullable',
                     Rule::unique('users', 'email')->ignore($subscription->user->email, 'email')
                 ],
             ]);

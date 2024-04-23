@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('paket_id')->nullable();
             $table->decimal('harga', 10, 2)->nullable();
 
-            $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('SET NULL');
-            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('SET NULL ');
+            $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('cascade');
             $table->timestamps();
         });
     }
