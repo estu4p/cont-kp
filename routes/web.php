@@ -288,7 +288,7 @@ Route::get('/lihat', function () {
 });
 
 //penilaian mahasiswa-contributor mitra
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
@@ -303,7 +303,6 @@ Route::get('/kategoripenilaian', function () {
 
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
-Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 
 
 Route::get('/input-nilai', function () {
@@ -630,6 +629,13 @@ Route::get('/presensitidakhadir', function () {
 });
 
 
+Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
+
+// Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+
+Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+
+
 
 // contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {
@@ -710,6 +716,7 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
+// barcode presensi
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -717,6 +724,8 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
+
+
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
 
 Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
@@ -728,6 +737,14 @@ Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
 Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
 
+// ganti jam
+Route::get('/mitra-presensi-barcode/ganti-jam-masuk', function () {
+    return view('User.ContributorForMitra.barcode_ganti-jam-masuk', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+    ]);
+});
 // Route::get('/mitra-presensi-barcode/pulang', function () {
 //     $presensi = Presensi::all();
 
