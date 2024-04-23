@@ -3,20 +3,23 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="/assets/css//datapresensi.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
 <div id="datapresensisiswa">
     <div class="container-fluid p-5 ml-2">
         <div class="row">
             <div class="col-md-12 parent-relatife">
-                <a href="/mitra-optionpresensi" class="kekiri" style="color:#000"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
+                <a href="{{ route('daftar-presensi')}}" class="kekiri" style="color:#000"><i class="fs-1 fa-solid fa-chevron-left"></i></a>
                 <div class="card">
                     <div class="card-header" style="display: grid; grid-template-columns: auto 1fr auto;">
                         <div style="overflow: hidden;">
                             <img src="assets/images/user.png" class="user">
                         </div>
                         <div style="padding-left: 25px;">
-                            
-                            <h3 style="font-size: 20px; margin: 0;">Simpay</h3>
-                            <p style="margin: 10;">NIP : MJ/UIUX/POLINES/AGST2023/06</p>
+
+                            <h3 style="font-size: 20px; margin: 0;">{{ $nama_lengkap }}
+                            </h3>
+                            <p style="margin: 10;">NIM : {{ $user->nomor_induk }}</p>
                         </div>
                         <div style="align-self: center;">
                             <label for="search-input">Cari Mahasiswa</label>
@@ -38,11 +41,11 @@
                                 </tr>
                                 <tr>
                                     <th>Jam Default Masuk</th>
-                                    <td>06:30:00</td>
+                                    <td>{{ $jam_default_masuk }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jam Default Pulang</th>
-                                    <td>21:00:00</td>
+                                    <td>{{ $jam_default_pulang }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,19 +55,19 @@
                             <tbody>
                                 <tr>
                                     <th>Total jam masuk</th>
-                                    <td><span class="masuk">47:30:50</span></td>
+                                    <td><span class="masuk">{{ $totalJamMasukFormatted }}</span></td>
                                 </tr>
                                 <tr>
                                     <th>total masuk</th>
-                                    <td><span class="total">16 hari</td>
+                                    <td><span class="total">{{ $totalMasukHari}}</td>
                                 </tr>
                                 <tr>
                                     <th>target</th>
-                                    <td><span class="target">1100 jam</td>
+                                    <td><span class="target">{{ $target }} jam</td>
                                 </tr>
                                 <tr>
                                     <th>sisa</th>
-                                    <td><span class="sisa">152:30:10</td>
+                                    <td><span class="sisa">{{ $sisa }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -79,38 +82,39 @@
                             <tbody>
                               <tr>
                                 <td>Masuk</td>
-                                <td><span class="total_terlambat">0 x</span></td>
+                                <td><span class="total_terlambat">{{ $total_terlambat_masuk }} x</span></td>
                                 <td>pulang</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_pulang }} x</span></td>
                               </tr>
                               <tr>
                                 <td>Istirahat keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_istirahat_keluar }} x</span></td>
                                 <td>istirahat kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_istirahat_kembali }} x</span></td>
                               </tr>
                               <tr>
                                 <td>Ijin keluar</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_ijin_keluar }} x</span></td>
                                 <td>ijin kembali</td>
-                                <td><span class="total_terlambat"  >0 x</span></td>
+                                <td><span class="total_terlambat"  >{{ $total_terlambat_ijin_kembali }} x</span></td>
                               </tr>
                             </tbody>
                             </table>
                     </div>
                     <div class="masa">
                         <table class="tg">
-                         
-                            
+
+
                             <tbody>
                               <tr>
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <textarea class="form-control fz8 w-100" placeholder="Tambahkan Catatan Untuk User" id="floatingTextarea2"
+                                    style="height: 50px; background-color:#E9E9E9;"></textarea>
                                     <label for="floatingTextarea">Comments</label>
                                   </div>
                                   <br>
                                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-primary me-md-2" type="button">tambahkan</button>
+                                    <button class="btn btn-primary me-md-2" id="btn-tambah" type="button">tambahkan</button>
                                   </div>
                               </tr>
                             </tbody>
@@ -146,9 +150,30 @@
                           <th>total jam</th>
                           <th style="border-left: 1px solid black;">(+)(-)</th>
                         </tr>
-                      </thead>
+                    </thead>
                       <tbody>
-                        <tr>
+                        @foreach($presensi as $item)
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$item->hari}}</td>
+                                        <td>{{$item->jam_masuk}}</td>
+                                        <td>{{$item->jam_pulang}}</td>
+                                        <td>{{$item->jam_mulai_istirahat}}</td>
+                                        <td>{{$item->jam_selesai_istirahat}}</td>
+                                        <td>{{ $item->total_jam_kerja }}</td>
+                                        <td>{{ $item->hutang_presensi }}</td>
+                                        <td>{{$item->log_aktivitas}}</td>
+                                        <td>{{$item->status_kehadiran}}</td>
+                                        <td>{{$item->kebaikan}}</td>
+                                        <td>{{$item->keterangan_status}}</td>
+                                        <td>
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </td>
+                                    </tr>
+                        @endforeach
+
+                        {{-- <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
                             <td>Selasa, 22-08-2023</td>
@@ -292,10 +317,11 @@
                             <td>--</td>
                             <td>--</td>
                             <td><i class="fa-regular fa-pen-to-square"></i></td>
-                          </tr>
+                          </tr> --}}
                       </tbody>
-                      </table>
-                      <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+                </table>
+                <a href="{{ route('cetak.presensi', ['nama_lengkap' => urlencode($nama_lengkap)]) }}" class="btnpdf"><i class="fas fa-download"></i> PDF</a>
+                {{-- <button class="btnpdf"><i class="fas fa-download"></i> PDF</button> --}}
 
 
 
@@ -303,19 +329,19 @@
 
 
                       {{-----------modallllllllllllllllllllllllllll-----}}
-                    
-                      <div class="modal fade" id="statuskehadiran">
+
+                    <div class="modal fade" id="statuskehadiran">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header" style="padding-left: 40%;">
                                     <h1>Izin</h1>
                                 </div>
-                                
+
                                 <!-- Isi dari modal -->
                                 <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
-                
+
                                     <!-- Baris Ke-1 -->
-                             
+
                                     <div class="keterangan">
                                         “ Maaf saya tidak dapat mengikuti magang untuk
                                         hari ini dikarenakan saya sedang tidak enak
@@ -327,7 +353,7 @@
                                     Link Foto Gdrive
                                     <textarea class="form-control" placeholder id="floatingTextarea"></textarea>
                                     <label for="floatingTextarea"></label>
-                
+
                                     <!-- Break Line -->
                                     <!-- Baris Ke-3 -->
                                     kategori izin
@@ -338,12 +364,12 @@
                                             <option value="3">keperluan sekolah/kampus</option>
                                             <option value="4">keperluan lainnya</option>
                                     </select>
-                
-                                    </div>   
+
+                                    </div>
                                     <!-- Break Line -->
                                     <!-- End -->
                                     <div>
-                
+
                                       <div class="d-grid gap-2 d-md-block">
                                         <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
                                         <div class="d">
@@ -355,21 +381,32 @@
                                         <button class="btn btn-primary save" data-bs-dismiss="modal">simpan</button>
                                         </div>
                                     </div>
-                                 
+
                                 </div>
-                
+
                             </div>
-                        </div>    
-                      
                         </div>
-
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
-                </div>
 
 
 
 
 
 
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    const btnTambah = document.getElementById('btn-tambah');
+
+    btnTambah.addEventListener('click', function() {
+        swal("Berhasil!!", "Catatan berhasil ditambahkan", "success");
+    })
+
+</script>
 
 @endsection

@@ -56,9 +56,15 @@ class LoginController extends Controller
                 // return redirect('/AdminUniv-Dashboard');
             }
         } else {
-            return response()->json([
-                'error' => 'Email atau Password yang anda masukan salah'
-            ], 422);
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah.']);
         }
+    }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
     }
 }

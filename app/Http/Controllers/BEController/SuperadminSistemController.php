@@ -21,9 +21,9 @@ class SuperadminSistemController extends Controller
         $superAdmin = User::where('role_id', 1)->first();
         $jumlah_admin_sistem = User::where('role_id', 2)->count();
         $jumlah_subscriptions = Subscription::count();
+
         return view('superAdmin.dashboard', [
-            'title' => "Super Admin - Dashboard",
-            'subscription' => 200,
+            'title' => "Dashboard",
             'admin_sistem' => $jumlah_admin_sistem,
             'subscription' => $jumlah_subscriptions,
             'superAdmin' => $superAdmin,
@@ -135,7 +135,6 @@ class SuperadminSistemController extends Controller
     public function dataAdmin()
     {
         $superAdmin = User::where('role_id', 1)->first();
-        // $admins = User::where('role_id', 2)->paginate(10);
         $admins = User::where('role_id', 2)->get();
         return view('superAdmin.dataAdmin', [
             'title' => "Data Admin",
@@ -144,7 +143,8 @@ class SuperadminSistemController extends Controller
         ]);
     }
 
-    public function showAlertEditAdmin($adminId)
+
+    public function showAlertAdmin($adminId)
     {
         $admin = User::where('id', $adminId)->firstOrFail();
         return response()->json(['admin' => $admin], 200);
@@ -157,7 +157,6 @@ class SuperadminSistemController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'password' => 'confirmed',
                 'username' => [
                     'required',
@@ -180,16 +179,6 @@ class SuperadminSistemController extends Controller
         }
 
         try {
-            if (isset($data['foto_profil'])) {
-                if ($admin->foto_profil) {
-                    Storage::delete('public/' . $admin->foto_profil);
-                }
-                $namaFoto = time() . '.' . $request->foto_profil->getClientOriginalExtension();
-                $path = $request->file('foto_profil')->storeAs('public/foto_profil', $namaFoto);
-                $admin->update([
-                    'foto_profil' => 'foto_profil/' . $namaFoto,
-                ]);
-            }
             if ($data['password']) {
                 $admin->update([
                     'nama_lengkap' => $data['nama_lengkap'],
@@ -249,26 +238,13 @@ class SuperadminSistemController extends Controller
         }
 
         try {
-            if (isset($data['foto_profil'])) {
-                $namaFoto = time() . '.' . $data['foto_profil']->getClientOriginalExtension();
-                $path = $request->file('foto_profil')->storeAs('public/foto_profil', $namaFoto);
-                $pathFoto = 'foto_profil/' . $namaFoto;
-            } else {
-                $namaFoto = null;
-                $pathFoto = null;
-            }
-
             User::create([
-                // 'foto_profil' => ($data['foto_profil']) ? 'foto_profil/' . $namaFoto : null,
-                'foto_profil' => $pathFoto,
                 'nama_lengkap' => $data['nama_lengkap'],
                 'username' => $data['username'],
                 'email' => $data['email'],
                 'no_hp' => $data['no_hp'],
                 'password' => Hash::make($data['password']),
                 'kota' => $data['kota'],
-                'jam_default_masuk' => '06:30:00',
-                'jam_default_pulang' => '13:00:00',
                 'role_id' => 2,
             ]);
             return redirect()->route('superAdmin.dataAdmin')->with('success', "Berhasil menambahkan data {$data['nama_lengkap']}");
@@ -322,7 +298,7 @@ class SuperadminSistemController extends Controller
         }
 
         try {
-            $sekolah = Sekolah::where('nama_sekolah', $data['sekolah'])->firstOrFail();
+            $sekolah = Sekolah::where('sekolah', $data['sekolah'])->firstOrFail();
             $subscription->user->update([
                 'nama_lengkap' => $data['nama_lengkap'],
                 'email' => $data['email'],
@@ -335,7 +311,7 @@ class SuperadminSistemController extends Controller
             $subscription->update([
                 'harga' => $data['harga'],
             ]);
-            $paket = Paket::where('paket', $data['nama_paket'])->firstOrFail();
+            $paket = Paket::where('nama_paket', $data['nama_paket'])->firstOrFail();
             $subscription->paket()->associate($paket);
             $subscription->save();
             return redirect()->route('superAdmin.langganan')->with('success', 'Data Berhasil diUpdate');
@@ -354,24 +330,6 @@ class SuperadminSistemController extends Controller
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
             return redirect()->route('superAdmin.langganan')->with('error', $errorMessage);
-        }
-    }
-
-    public function deleteFotoAdmin($username)
-    {
-        $admin = User::where('username', $username)->firstOrFail();
-        try {
-            if ($admin->foto_profil) {
-                Storage::delete('public/' . $admin->foto_profil);
-                $admin->foto_profil = null;
-                $admin->save();
-                return redirect()->route('superAdmin.dataAdmin')->with('success', 'Foto Berhasil diHapus');
-            } else {
-                return redirect()->route('superAdmin.dataAdmin')->with('error', 'Anda tidak memiliki Foto Profil');
-            }
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('superAdmin.dataAdmin')->with('error', $errorMessage);
         }
     }
 }

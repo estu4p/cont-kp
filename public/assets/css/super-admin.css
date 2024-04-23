@@ -15,12 +15,28 @@ body {
     z-index: 10;
     box-shadow: 0 0 20px rgb(146, 146, 146);
 }
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .sidebar {
+        width: 200px;
+    }
+    body {
+        padding-left: 200px;
+    }
+}
+@media screen and (max-width: 767px) {
+    body {
+        padding-left: 160px;
+    }
+    .sidebar {
+        width: 150px;
+    }
+    .area {
+        width: 100% !important;
+    }
+}
 .nav {
-    text-align: left;
-    margin-left: 60px;
 }
 .log-out {
-    margin-left: -60px;
 }
 .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
@@ -28,16 +44,15 @@ body {
     color: #000; /* Ubah warna teks tautan */
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
+    cursor: pointer;
 }
 
 .nav-link:hover {
     background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
 }
 
-a.nav-link.activee {
-    font-weight: bold; /* Menebalkan tautan aktif */
-    background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
-    color: #fff; /* Warna teks untuk tautan aktif */
+a.nav-link.active {
+    font-weight: bold;
 }
 
 .sidebar {
@@ -112,7 +127,6 @@ a.nav-link.activee {
 .kanan {
     justify-content: space-between !important;
 }
-
 .foto-profil {
     border-radius: 50%;
     overflow: hidden;
@@ -138,4 +152,27 @@ a.nav-link.activee {
     height: 55px;
     object-fit: cover;
     object-position: center;
+}
+
+@media only screen and (min-width: 992px) {
+    .untukmobile {
+        /* padding:30px !important;
+    justify-content: space-evenly !important; */
+    }
+    .untukmobile div:nth-child(1) {
+    }
+    .untukmobile div:nth-child(2) {
+    }
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        padding-top: 0 !important;
+    }
+    .untukmobile {
+        padding: 30px !important;
+    }
+    .untukmobile div {
+        margin: 20px 0;
+    }
 }

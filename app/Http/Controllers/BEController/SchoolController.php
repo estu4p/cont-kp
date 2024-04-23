@@ -70,4 +70,17 @@ class SchoolController extends Controller
             // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
         }
     }
+    public function datamhs(Request $request)
+    {   //Menampilkan Data Mahasiswa pada penilaian Mahasiswa
+        $mahasiswa = User::where('role_id', 3)->get();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "data Mahasiswa" => "view data Mahasiswa ",
+                "data" => $mahasiswa,
+            ]);
+        } else {
+            return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
+        }
+    }
 }

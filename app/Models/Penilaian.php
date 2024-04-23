@@ -14,4 +14,9 @@ class Penilaian extends Model
     {
         return $this->hasMany(KategoriPenilaian::class, 'id');
     }
+    public function subKategoriPenilaian()
+    {
+        // Gunakan nama kelas yang benar dan pastikan menggunakan penamaan kolom yang sesuai
+        return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id');
+    }
 }

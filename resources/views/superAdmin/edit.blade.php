@@ -3,13 +3,13 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/super-admin.css') }}">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <div class="d-flex gap-4 mt-0 mb-5 px-5">
-        <div class="bg-white rounded text-center" style="padding: 80px 50px 40px; width: 30%;">
+    <div class="d-flex untukmobile mt-0 mb-5 px-2 row  justify-content-evenly gap-lg-0 gap-md-3 ">
+        <div class="bg-white rounded text-center tes col-xl-3 col-lg-3 col-md-11 col-sm-9 " style="padding: 50px 0px 0px;">
             <div>
                 @if ($superAdmin->foto_profil ?? '')
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil" class="foto-profil-full">
                 @else
-                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
                 @endif
                 <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap ?? 'nama lengkap' }}
                 </h4>
@@ -20,7 +20,7 @@
                 <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $superAdmin->about ?? 'about' }}</p>
             </div>
         </div>
-        <div class="bg-white rounded" style="padding: 80px 80px 40px; width: 70%;">
+        <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
             <div class="d-flex gap-4">
                 @if ($superAdmin->foto_profil ?? '')
                     <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil" class="foto-profil">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">additional info</h6>
-                <div class="col d-flex flex-column text-capitalize w-50">
+                <div class="col d-flex flex-column text-capitalize w-50 area">
                     <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">about</label>
                     <textarea name="about" id="alamat" cols="30" rows="4" class="px-3 py-2 border-0 border-bottom"
                         style="background-color: #F2F4F8;">{{ $superAdmin->about ?? '' }}</textarea>
@@ -125,7 +125,7 @@
                         formDelete.setAttribute('action', '/superAdmin/langganan/fotoProfil/' + $username);
                         formDelete.submit();
                     } else {
-                        swal("Foto profil tidak jadi dihapus.");
+                        swal("Data subscription tidak jadi dihapus.");
                     }
                 });
         }
