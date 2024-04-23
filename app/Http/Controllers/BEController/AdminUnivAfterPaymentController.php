@@ -862,25 +862,14 @@ class AdminUnivAfterPaymentController extends Controller
     public function teamAktifKlik(Request $Request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
-        // $divisi = Divisi::with('anggotaDivisi')->find($id);
-
-        $divisi = User::where('role_id', 3)->where('divisi_id', $id)->get();
-
-        // $user = $anggota_divisi->nama_lengkap;
-
+        $divisi = Divisi::with('anggotaDivisi')->find($id);
         if (!$divisi) {
             return response()->json(['message' => 'Divisi not found'], 404);
         }
-
-        if ($Request->is('api/*') || $Request->wantsJson()) {
-            return response()->json([
-                'message' => 'Success to get detail data divisi with mahasiswa',
-                'data' => $divisi,
-
-                // 'user' => $user
-            ]);
-        } else {
-            return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
-        }
+        $users = User::where('role_id', 3)->where('divisi_id', $id)->get();
+        return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', [
+            'divisi' => $divisi,
+            'users' => $users, 
+        ]);
     }
 }
