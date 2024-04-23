@@ -10,10 +10,16 @@ class Mahasiswa extends Model
     use HasFactory;
 
     protected $table = 'mahasiswa';
-    protected $fillable = ['nama_mahasiswa', 'email', 'nomor_induk_mahasiswa', 'jurusan', 'no_hp', 'address', 'about', 'mitra_id'];
-    public $timestamps = false;
+    protected $fillable = ['user_id', 'mahasiswa_id'];
 
 
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    
     // private static $dataMahasiswa = [
     //     ['nama' => 'Syalita Widyandini', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],
     //     ['nama' => 'Fairuza Attar Aviciena', 'nip' => '2000018247', 'divisi' => 'UI/UX', 'status' => 'Active'],

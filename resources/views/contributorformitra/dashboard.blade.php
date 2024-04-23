@@ -1,10 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.masterMitra')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
 <div class="wadah  p-5">
 <h1 >SELAMAT DATANG</h1>
-<h2 >DI PANEL CONTRIBUTOR</h2>
+<h2 >DI PANEL MITRA</h2>
 <p class="pantau">Pantau Mahasiswa/Siswa/i Anda Disini</p>
 
 <div class="card-group  gap-5 p-5 row d-flex flex-row justify-content-around">
@@ -21,7 +21,7 @@
 
         <div class="card-body d-flex justify-content-between bawah">
             <p>View Detail</p>
-            <a href="/jumlah-mahasiswa" ><i class="fa-solid fa-circle-arrow-right icon"></i></a>
+            <a href="/contributorformitra-devisi" ><i class="fa-solid fa-circle-arrow-right icon"></i></a>
         </div>
     </div>
 

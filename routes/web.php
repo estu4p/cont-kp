@@ -3,9 +3,10 @@
 use App\Models\Mitra;
 
 use App\Models\Divisi;
+use App\Models\Quotes;
 use App\Models\Sekolah;
-use App\Models\Presensi;
 
+use App\Models\Presensi;
 use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Auth\ResetPasswordAdminController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
+use App\Http\Controllers\Auth\ResetPasswordSuperAdminController;
 use App\Http\Controllers\BEController\ContributorUnivController;
 use App\Http\Controllers\BEController\UserAdminSistemController;
 use App\Http\Controllers\BEController\SuperadminSistemController;
@@ -96,6 +98,10 @@ Route::get('/superAdmin/login/newPass', function () {
     return view('superAdmin.NewPassword');
 });
 
+Route::post('/superAdmin/login/reset', [ResetPasswordSuperAdminController::class, 'resetPassword'])->name('password.resetSuperAdmin');
+Route::post('/superAdmin/login/OTP', [ResetPasswordSuperAdminController::class, 'verifyOTP'])->name('otp.verifySuperAdmin');
+Route::post('/superAdmin/login/newPass', [ResetPasswordSuperAdminController::class, 'newPassword'])->name('password.newSuperAdmin');
+
 Route::get('/superAdmin', [SuperadminSistemController::class, 'dashboard'])->name('superAdmin.dashboard');
 Route::get('/superAdmin/editProfil', [SuperadminSistemController::class, 'editProfile'])->name('superAdmin.editProfile');
 Route::patch('/superAdmin/editProfil/{username}', [SuperadminSistemController::class, 'updateProfile'])->name('superAdmin.updateProfile');
@@ -155,10 +161,10 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 
 
 
-Route::get('/dashboard-admin', function () {
-    return view('dashboard.dashboard-admin', ['title' => 'Admin']);
-});
-Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
+// Route::get('/dashboard-admin', function () {
+//     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
+// });
+// Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 
 Route::get('/checkout/bronze', function () {
@@ -275,16 +281,18 @@ Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPr
 Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
 // return view('presensi.presensiharian')->name('presensi.con');
 
-Route::get('/presensihadir', function () {
-    return view('presensi.presensihadir');
-});
-Route::get('/presensiizin', function () {
-    return view('presensi.presensiizin');
-});
-Route::get('/presensitidakhadir', function () {
-    return view('presensi.presensitidakhadir');
+//penilaian mahasiswa-contributor for univ
+Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
+Route::get('/lihat', function () {
+    return view('template.contributingforunivschool.lihat');
 });
 
+//penilaian mahasiswa-contributor mitra
+Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+
+Route::get('/input-nilai', function () {
+    return view('penilaian-siswa.input-nilai');
+});
 Route::get('/pengaturan-contri', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
@@ -301,8 +309,6 @@ Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenila
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 })->name('input-nilaimhs');
-
-
 
 
 Route::get('/MitraPresensiDetailHadir', function () {
@@ -364,6 +370,7 @@ Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
 
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
@@ -376,9 +383,6 @@ Route::get('/presensiizin', function () {
 Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
-
-
-
 
 
 
@@ -562,8 +566,8 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-// Route::patch('/AdminSistem/editProfil/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-// Route::patch('/AdminSistem/editFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
@@ -584,6 +588,7 @@ Route::middleware('auth')->group(function () {
         $user = Auth::user();
         $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
         $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
+        $quote = Quotes::inRandomOrder()->first();
         $today = date('F Y/d');
         return view('user.home', [
             'title' => "Home",
@@ -593,6 +598,7 @@ Route::middleware('auth')->group(function () {
             'user' => $user,
             'nama_divisi' => $nama_divisi,
             'nama_sekolah' => $nama_sekolah,
+            'quote' => $quote,
         ]);
     });
     Route::get('/pemagang/home/{id}', [HomeMitraController::class, 'profil']);
@@ -622,15 +628,6 @@ Route::get('/presensiizin', function () {
 Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
-
-// Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-// Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
-
-// Route::get('/input-nilai', function () {
-//     return view('penilaian-siswa.input-nilai');
-// });
-
 
 
 
@@ -887,9 +884,7 @@ Route::get('/UserScanBarcode', function () {
 });
 
 
-Route::get('/lihat', function () {
-    return view('template.contributingforunivschool.lihat');
-});
+
 
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');

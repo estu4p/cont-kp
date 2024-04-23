@@ -18,22 +18,20 @@
 
     <div class="text-capitalize p-5" style="background-color: #F2F4F7; max-height: 100%;">
         <h4 class="text-center fw-bold">selesaikan pembayaran anda</h4>
-        <div class="checkout mt-5">
-            <form class="fw-medium">
-                <label for="paket" class="mt-4">paket<span class="text-danger">*</span></label>
-                <div class="d-flex">
-                    <div style="background-color: #E9E9E9; padding: 12px 15px 12px 15px;" class="label-img">
-                        <img src="{{ asset('assets/images/icon/paket.png') }}" style="width: 25px" class="icon-labelinput">
-                    </div>
+        <div class="checkout mt-5 max582">
+        <form class="fw-medium ">
+            <label for="paket" class="mt-4">paket<span class="text-danger">*</span></label>
+            <div class="d-flex">
+                <div style="background-color: #E9E9E9; padding: 12px 15px 12px 15px;" class="label-img">
+                    <img src="{{ asset('assets/images/icon/paket.png') }}" style="width: 25px" class="icon-labelinput">
+                </div>
                     {{-- <script>
                         var currentUrl = window.location.pathname;
                         var urlParts = currentUrl.split('/');
                         var packageName = urlParts[urlParts.length - 1];
                     </script> --}}
-                    <input type="text" name="paket"
-                        style="border: 2px solid #E9E9E9; color:#5e5e5e; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        value="Gold" disabled>
-                </div>
+                    <input type="text" name="paket" style="border: 2px solid #E9E9E9; color:#5e5e5e; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;" value="Bronze" disabled>
+            </div>
 
                 <label for="bayar" class="mt-4">metode pembayaran<span class="text-danger">*</span></label>
                 <div class="d-flex">
@@ -46,13 +44,13 @@
                 </div>
 
                 <div class="collapse" id="collapseExample">
-                    <div class="dalam card-body" style="display: flex">
-                      <div>
+                    <div class="dalam w-100 border border mnone" style="display:flex; border:none !important;">
+                      <div class="dalamchild">
                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="Mandiri Virtual Account"> Mandiri Virtual Account <img src="/assets/images/icon/mandiri.png" > </div>
                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BNI Virtual Account"> BNI Virtual Account <img src="/assets/images/icon/bni.png"></div>
                         <div class="list-pembayaran" ><input type="radio" class="radio" name="metode" value="Shopee Pay"> Shopee Pay <img src="/assets/images/icon/shopeePay.png" ></div>
                       </div>
-                      <div>
+                      <div class="dalamchild">
                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BCA Virtual Account"> BCA Virtual Account <img src="/assets/images/icon/bca.png" ></div>
                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BRI Virtual Account"> BRI Virtual Account <img src="/assets/images/icon/bri.png" ></div>
                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="GoPay"> GoPay <img src="/assets/images/icon/gopay.png" ></div>
@@ -125,6 +123,16 @@
           }
         });
       });
+      button.addEventListener('click', function() {
+            if (collapseExample.classList.contains('show')) {
+                collapseExample.classList.remove('show');
+            } else {
+                collapseExample.classList.add('show');
+                collapseExample.style.marginBottom="70px";
+            }
+        });
+
+
     });
   </script>
 
