@@ -630,6 +630,13 @@ Route::get('/presensitidakhadir', function () {
 });
 
 
+Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
+
+Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+
+Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+
+
 
 // contributor for mitra
 Route::get('/MitraPresensiDetailHadir', function () {

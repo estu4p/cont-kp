@@ -37,7 +37,12 @@
                     <td>
                         <div class="{{ ($mhs['status']) }}">{{ $mhs->status_akun}}</div>
                     </td>
+
+                    <td class="icon"><a href="{{ route('input-nilai', ['id' => $mhs->id]) }}"><i class="fa-solid fa-file-lines"></i></a></td>
+
+
                     <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td>
+
                 </tr>
                 @endforeach
             </tbody>
