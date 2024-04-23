@@ -11,12 +11,17 @@ class SubKategoriPenilaian extends Model
     protected $fillable = ['kategori_id', 'nama_sub_kategori'];
     protected $table = 'sub_kategori_penilaian';
 
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriPenilaian::class, 'nama_kategori');
+    }
+    public function Penilaian()
+    {
+        return $this->belongsTo(Penilaian::class, 'nilai');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function penilaian()
-    {
-        return $this->hasMany(Penilaian::class, 'sub_id');
-    }
- }
+}
