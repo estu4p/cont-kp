@@ -142,7 +142,7 @@ class SuperadminSistemController extends Controller
         ]);
     }
 
-    public function showAlertEditAdmin($adminId)
+    public function showAlertAdmin($adminId)
     {
         $admin = User::where('id', $adminId)->firstOrFail();
         return response()->json(['admin' => $admin], 200);

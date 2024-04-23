@@ -37,7 +37,7 @@
                     <td>
                         <div class="{{ ($mhs['status']) }}">{{ $mhs['status'] }}</div>
                     </td>
-                    <td class="icon"><a href="{{ route('input-nilai', ['id' => $inputnilai['id']]) }}"><i class="fa-solid fa-file-lines"></i></a></td>
+                    <td class="icon"><a href="{{ route('input-nilai', ['id' => $mhs->id]) }}"><i class="fa-solid fa-file-lines"></i></a></td>
 
                 </tr>
                 @endforeach
