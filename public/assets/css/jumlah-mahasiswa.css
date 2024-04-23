@@ -52,15 +52,15 @@ table{
 }
 
 td {
-    padding: 8px;
-    text-align: left;
+   padding:  8px 0px 8px 0px ;
+    
     border-bottom: 1px solid #ddd;
 }
 th{
     background: #e1e1e1;
 }
 
-.Active{
+.aktif{
     width: 75px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -69,7 +69,7 @@ th{
     border-radius: 5px;
     text-align: center;
 }
-.Inactive{
+.alumni{
     width: 75px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -77,8 +77,9 @@ th{
     color: #F5F3F4;
     border-radius: 5px;
     text-align: center;
+  
 }
-.Done{
+.done{
     width: 75px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -88,7 +89,10 @@ th{
     text-align: center;
 }
 
-
+.center{
+    justify-content: center;
+    display: flex;
+}
 .icon{
     color: #26577C;
 }
