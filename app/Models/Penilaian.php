@@ -19,4 +19,13 @@ class Penilaian extends Model
         // Gunakan nama kelas yang benar dan pastikan menggunakan penamaan kolom yang sesuai
         return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id');
     }
+     public function user()
+    {
+        return $this->belongsTo(User::class, 'nama_lengkap');
+    }
+
+    public function kategoriPenilaian()
+    {
+      return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
+    }
 }

@@ -196,14 +196,6 @@ Route::get('/adminafterpayment', function () {
     return view('mitra.adminafterpayment');
 });
 
-
-
-Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-// Route::get('/contributingforuniv', function () {
-//     return view('template.contributingforunivschool.penilaianmahasiswa');
-// });
-
 //user
 
 Route::get('/user/register', function () {
@@ -299,12 +291,6 @@ Route::get('/pengaturan-contri', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
-
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
