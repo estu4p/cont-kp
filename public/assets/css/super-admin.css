@@ -103,13 +103,6 @@ a.nav-link.activee {
 .profile-status {
     display: block;
 }
-.navbar-logo {
-    width: 40px; /* Ubah ukuran lebar gambar profil */
-    height: 40px; /* Ubah ukuran tinggi gambar profil */
-}
-.navbar-logo img {
-    width: 100%;
-}
 
 /* navbar.css */
 .nav.flex-column,
@@ -125,4 +118,24 @@ a.nav-link.activee {
     overflow: hidden;
     width: 80px;
     height: 80px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.foto-profil-full {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.foto-profil-nav {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    object-position: center;
 }

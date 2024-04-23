@@ -51,7 +51,7 @@
                             <div class="mt-3 d-flex flex-column">
                                 <label for="nama"
                                     style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama</label>
-                                <input type="text" name="nama_lengkap" placeholder="Nama" required
+                                <input type="text" name="nama_lengkap" placeholder="Nama"
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
                                     id="nama_lengkap">
                             </div>
@@ -65,14 +65,14 @@
                             <div class="mt-3 d-flex flex-column">
                                 <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email
                                     address</label>
-                                <input type="email" name="email" placeholder="E-Mail" required
+                                <input type="email" name="email" placeholder="E-Mail"
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
                                     id="email">
                             </div>
                             <div class="mt-3 d-flex flex-column">
                                 <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No
                                     HP</label>
-                                <input type="text" name="no_hp" placeholder="08328732777" required
+                                <input type="text" name="no_hp" placeholder="08328732777"
                                     class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;"
                                     id="no_hp">
                             </div>
@@ -95,7 +95,7 @@
                             <div class="mt-3 d-flex flex-column">
                                 <label for="lokasi"
                                     style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">lokasi</label>
-                                <select name="kota" id="lokasi" class="form-select" style="background-color: #F2F4F8;" required>
+                                <select name="kota" id="lokasi" class="form-select" style="background-color: #F2F4F8;">
                                     <option value="">Pilih Lokasi</option>
                                     <option value="Kota Surabaya">Kota Surabaya</option>
                                     <option value="Kota Semarang">Kota Semarang</option>

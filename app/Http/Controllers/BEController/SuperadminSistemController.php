@@ -44,18 +44,20 @@ class SuperadminSistemController extends Controller
     {
         $superAdmin = User::where('role_id', 1)->first();
         $data = $request->all();
+        // dd($data);
         try {
             $validator = Validator::make($request->all(), [
-                'nama_lengkap' => 'string',
+                'nama_lengkap' => 'string|nullable',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'email' => [
                     'string',
                     'email',
+                    'nullable',
                     Rule::unique('users', 'email')->ignore($superAdmin->email, 'email')
                 ],
-                'no_hp' => 'string',
-                'alamat' => 'string',
-                'about' => 'string',
+                'no_hp' => 'string|nullable',
+                'alamat' => 'string|nullable',
+                'about' => 'string|nullable',
             ]);
             $validator->validate();
         } catch (ValidationException $e) {
@@ -166,6 +168,7 @@ class SuperadminSistemController extends Controller
                     'required',
                     'string',
                     'email',
+                    'nullable',
                     Rule::unique('users', 'email')->ignore($admin->email, 'email')
                 ],
             ]);
@@ -231,12 +234,12 @@ class SuperadminSistemController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'nama_lengkap' => 'required|string',
+                'nama_lengkap' => 'string',
                 'username' => 'required|string|unique:users',
-                'email' => 'required|string|email|unique:users,email',
-                'no_hp' => 'required|string',
+                'email' => 'string|email|unique:users,email',
+                'no_hp' => 'string',
                 'password' => 'required|string|confirmed',
-                'kota' => 'required|string',
+                'kota' => 'string',
             ]);
             $validator->validate();
         } catch (ValidationException $e) {
