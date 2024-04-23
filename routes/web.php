@@ -895,3 +895,7 @@ Route::get('/user-AdminSistem/InputOTP', function () {
 Route::get('/user-AdminSistem/InputnewPassword', function () {
     return view('SistemLokasi.AdminSistem-InputnewPassword');
 });
+
+Route::get('/contributingforuniv-lihat', function () {
+    return view('template.contributingforunivschool.lihat');
+});

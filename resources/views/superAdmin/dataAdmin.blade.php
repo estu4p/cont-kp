@@ -1,4 +1,3 @@
-@include('template.navbar-super', ['superAdmin', $superAdmin])
 @extends('layouts.superadmin')
 
 @section('content')
@@ -133,7 +132,7 @@
             {{ $admins->links() }}
         </div> --}}
     </div>
-    
+
     @if (session('success'))
         <script>
             successMessage = "{{ session('success') }}";
@@ -230,7 +229,7 @@
         });
 
         function showModal() {
-            // $('#addUserModal').on('hidden.bs.modal', function () { 
+            // $('#addUserModal').on('hidden.bs.modal', function () {
                 $('#nama_lengkap').val('');
                 $('#username').val('');
                 $('#email').val('');

@@ -30,33 +30,33 @@ body{
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
   }
-  
+
   .nav-link:hover {
     background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
   }
-  
+
   a.nav-link.activee {
     font-weight: bold; /* Menebalkan tautan aktif */
     background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
     color: #fff; /* Warna teks untuk tautan aktif */
-  
+
   }
-  
+
   .sidebar {
     text-align: center;
   }
-  
+
   .logo {
     margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
   }
-  
+
   .logout{
     position:absolute;
    bottom:10%;
    color: #302f2f;
    opacity: 0.6;
   }
-  
+
 .navbar {
   padding: 20px;
   background-color: transparent;

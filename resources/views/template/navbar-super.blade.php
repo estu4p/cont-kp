@@ -6,7 +6,7 @@
       <div class="kosongan"></div>
         <div class="kanan d-flex flex-row justify-content-between gap-5">
             <div class="ml-5 mr-2">
-              <i class="fa-solid fa-bell fa-2x"></i>               
+              <i class="fa-solid fa-bell fa-2x"></i>
             </div>
             <div class="d-flex justify-content-evenly flex-row text-center">
                 <div class="navbar-profile">
@@ -25,3 +25,4 @@
         </div>
 
     </a>
+
