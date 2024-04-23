@@ -35,8 +35,7 @@ use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-
-
+use App\Http\Controllers\BEController\PenilaianMitraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -302,6 +301,16 @@ Route::get('/kategoripenilaian', function () {
 });
 
 
+Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
+
+Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
+
+
+Route::get('/input-nilai', function () {
+    return view('penilaian-siswa.input-nilai');
+})->name('input-nilaimhs');
+
+
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
 });
@@ -360,6 +369,22 @@ Route::get('/laporandatapresensi', function () {
 Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
+
+
+Route::get('/presensi', function () {
+    return view('presensi.presensiharian');
+});
+Route::get('/presensihadir', function () {
+    return view('presensi.presensihadir');
+});
+Route::get('/presensiizin', function () {
+    return view('presensi.presensiizin');
+});
+Route::get('/presensitidakhadir', function () {
+    return view('presensi.presensitidakhadir');
+});
+
+
 
 Route::get('/MitraPresensiDetailHadir', function () {
     return view('user.ContributorForMitra.MitraPresensiDetailHadir');
@@ -603,8 +628,6 @@ Route::get('/presensiizin', function () {
 Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
-
-
 
 
 
