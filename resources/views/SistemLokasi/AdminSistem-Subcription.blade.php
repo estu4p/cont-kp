@@ -29,11 +29,9 @@
         <div>
             <select name="page" class="page">
                 <option value="1">page 1 of 2</option>
-            <option   option value="2">page 2 of 2</option>
             </select>
             <select name="item" class="bodi">
             <option value="5" selected>5 item per page</option>
-            <option value="10">10 item per page</option>
             </select>
         </div>
 

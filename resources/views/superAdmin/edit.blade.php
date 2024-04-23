@@ -76,9 +76,9 @@
                     </div>
                 </div>
                 <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">additional info</h6>
-                <div class="col d-flex flex-column text-capitalize w-50">
+                <div class="col d-flex flex-column text-capitalize w-50 area">
                     <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">about</label>
-                    <textarea name="about" id="alamat" cols="30" rows="4" class="px-3 py-2 border-0 border-bottom"
+                    <textarea name="about"  id="alamat" cols="30" rows="4" class="px-3 py-2 border-0 border-bottom"
                         style="background-color: #F2F4F8;">{{ $superAdmin->about }}</textarea>
                 </div>
                 <div class="d-flex gap-3 mt-4">

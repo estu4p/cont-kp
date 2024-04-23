@@ -19,22 +19,33 @@
         <div class="teks">
             <div class="">Masukkan 4 digit kode OTP yang telah kami kirimkan ke email Anda.</div>
         </div>
-
-        <div class="form-group otp-container">
-        <input type="text" class="form-control otp-input" id="otp1" maxlength="1" oninput="moveToNextInput(this, 'otp2')" required>
-        <input type="text" class="form-control otp-input" id="otp2" maxlength="1" oninput="moveToNextInput(this, 'otp3')" required>
-        <input type="text" class="form-control otp-input" id="otp3" maxlength="1" oninput="moveToNextInput(this, 'otp4')" required>
-        <input type="text" class="form-control otp-input" id="otp4" maxlength="1" oninput="moveToNextInput(this, null)" required>
+        <form action="{{ route('otp.verifySuperAdmin') }}" method="POST">
+            @csrf
+            <div class="form-group otp-container">
+                <input type="text" name="digit1" class="form-control otp-input" id="otp1" maxlength="1"
+                    oninput="moveToNextInput(this, 'otp2')" required>
+                <input type="text" name="digit2" class="form-control otp-input" id="otp2" maxlength="1"
+                    oninput="moveToNextInput(this, 'otp3')" required>
+                <input type="text" name="digit3" class="form-control otp-input" id="otp3" maxlength="1"
+                    oninput="moveToNextInput(this, 'otp4')" required>
+                <input type="text" name="digit4" class="form-control otp-input" id="otp4" maxlength="1"
+                    oninput="moveToNextInput(this, null)" required>
+            </div>
+            <div class="alert"
+                style="font-family: 'Times New Roman', Times, serif; font-size: 15px; max-width: 400px; margin: 0 auto;">
+                {{ session('error') }}
+            </div>
+            <div class="bawah">
+                <button type="submit" style="text-decoration: none;"
+                    class="continue">Verify Now</button>
+            </div>
+            <div class="belum">
+                Belum menerima email? <span class="ulang">Kirim ulang</span>
+            </div>
+        </form>
     </div>
-        <div class="bawah">
-            <a href="/superAdmin/login/newPass" style="text-decoration: none;"><button class="continue">Verify Now</button></a>
-        </div>
-        <div class="belum">
-        Belum menerima email? <span class="ulang">Kirim ulang</span> 
-        </div>
-    </div>
 
-    
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

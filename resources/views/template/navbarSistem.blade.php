@@ -11,8 +11,8 @@
                 
                   <div class="navbar-profile">
                   
-                      <span class="profile-name">Nama Profil</span>
-                      <span class="profile-status">Status Profil</span>
+                      <span class="profile-name">{{ $userAdmin->nama_lengkap }}</span>
+                      <span class="profile-status">{{ $userAdmin->status_akun }}</span>
                       
                   </div>
                   <a href="/AdminSistem-Editprofile"> <div class="navbar-logo">

@@ -8,9 +8,13 @@ use App\Models\Presensi;
 use App\Models\Sekolah;
 use App\Models\Shift;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Dompdf\Dompdf;
+
 
 class PresensiMitraController extends Controller
 {
@@ -229,6 +233,24 @@ class PresensiMitraController extends Controller
 
         return redirect()->route('daftar-presensi')->with('success', "Seluruh presensi berhasil diperbarui menjadi accept all");
     }
+
+    public function getPresensiPDF(Request $request, $nama_lengkap)
+    {
+        $user = User::where('nama_lengkap', urldecode($nama_lengkap))->first();
+        // Ambil data presensi berdasarkan nama lengkap yang di-klik
+        $presensi = Presensi::where('nama_lengkap', $user->id)->get();
+        // Render tampilan HTML tabel
+        $data = view('user.ContributorForMitra.presensipdf', compact('presensi', 'nama_lengkap', 'user'))->render();
+        $dompdf = new Dompdf();
+        // Load HTML ke Dompdf
+        $dompdf->loadHtml($data);
+        // Render PDF
+        $dompdf->render();
+        // Unduh PDF
+        return $dompdf->stream('presensi_'.$nama_lengkap.'.pdf');
+    }
+
+
 
 
 }
