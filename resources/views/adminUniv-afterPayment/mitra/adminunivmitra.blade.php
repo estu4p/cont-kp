@@ -4,11 +4,8 @@
     <link href="/assets/css//adminunivmitra.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
 
-
     <div class="wadah p-5">
         <h1 class="text-center mb-5 judulmitra">DATA MITRA</h1>
-
-
         <div class="container">
             <button type="button" class="btn btn-primary position-relative btn-tambah-mitra">
                 <i class="fa-solid fa-circle-plus"></i>

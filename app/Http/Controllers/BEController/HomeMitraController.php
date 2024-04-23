@@ -80,7 +80,6 @@ class HomeMitraController extends Controller
         $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
-        $data->jam_default_masuk = $jam_default_masuk;
         $data->status_ganti_jam = $status_ganti_jam;
         $data->save();
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();

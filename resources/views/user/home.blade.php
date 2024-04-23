@@ -57,10 +57,10 @@
                     <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
                          @csrf
                         <p><b>{{ $user->nama_lengkap }}</b></p>
-                        <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
+                        {{-- <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
                             {{ $nama_sekolah->nama_sekolah}}/
                             {{$today}}
-                        </p>
+                        </p> --}}
                     </form>
                 </div>
             </div>
