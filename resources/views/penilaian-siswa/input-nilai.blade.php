@@ -3,14 +3,13 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/input-nilai.css') }}">
 <div class="wadah">
-
     <div class="judul d-flex flex-row justify-content-start">
         <a href="/penilaian-mahasiswa"> <i class="fa-solid text-dark ikon-kiri fa-chevron-left icon fs-1 p-2"></i></a>
         <div class="tengah-judul d-flex flex-row align-items-center gap-3">
             <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user" style="color: #ffffff;"></i></div>
             <div class="kekanan">
-                <p class="name">JAMES CLEAR</p>
-                <p class="nip">NIP: MJ/UIUX/POLINES/AGST2023/06</p>
+                <p class="name">{{ $inputnilai->user->nama_lengkap }}</p>
+                <p class="nip">NIP: {{ $inputnilai->user->nomor_induk }}</p>
             </div>
         </div>
     </div>
@@ -25,26 +24,26 @@
                     <div class="judulgrup">Pengetahuan</div>
                     <div class="grupinput d-flex justify-content-between">
                         <label for="topik" class="text-input">Pemahaman topik magang</label>
-                        <input class="input" type="text" id="topik" placeholder="">
+                        <input class="input" type="text" id="topik" placeholder="{{ $inputnilai->nilai }}">
                     </div>
                     <div class="grupinput d-flex justify-content-between">
                         <label for="ruanglingkup" class="text-input">Pemahaman ruang lingkup magang</label>
-                        <input class="input" type="text" id="ruanglingkup" placeholder="">
+                        <input class="input" type="text" id="ruanglingkup" placeholder="{{ $inputnilai->nilai  }}">
                     </div>
                 </div>
                 <div class="grup w-100 p-3 d-flex flex-column gap-3">
                     <div class="judulgrup">Keterampilan</div>
                     <div class="grupinput d-flex justify-content-between">
                         <label for="Indentifikasi" class="text-input">Indentifikasi masalah</label>
-                        <input class="input" type="text" id="Indentifikasi" placeholder="">
+                        <input class="input" type="text" id="Indentifikasi" placeholder="{{ $inputnilai->nilai  }}">
                     </div>
                     <div class="grupinput d-flex justify-content-between">
                         <label for="PemecahanMasalah" class="text-input">Pemecahan Masalah</label>
-                        <input class="input" type="text" id="PemecahanMasalah" placeholder="">
+                        <input class="input" type="text" id="PemecahanMasalah" placeholder="{{ $inputnilai->nilai  }}">
                     </div>
                     <div class="grupinput d-flex justify-content-between">
                         <label for="Hasilkerja" class="text-input">Hasil kerja</label>
-                        <input class="input" type="text" id="Hasilkerja" placeholder="">
+                        <input class="input" type="text" id="Hasilkerja" placeholder="{{ $inputnilai->nilai  }}">
                     </div>
                 </div>
             </div>
@@ -53,23 +52,23 @@
                 <div class="judulgrup">Lainnya</div>
                 <div class="grupinput row  d-flex justify-content-between">
                     <label for="Partisipasi" class="text-input col-6">Partisipasi</label>
-                    <input class="input col-6" type="text" id="Partisipasi" placeholder="">
+                    <input class="input col-6" type="text" id="Partisipasi" placeholder="{{ $inputnilai->nilai  }}">
                 </div>
                 <div class="grupinput row d-flex justify-content-between">
                     <label for="Kejujuran" class="text-input col-6">Kejujuran</label>
-                    <input class="input col-6" type="text" id="Kejujuran" placeholder="">
+                    <input class="input col-6" type="text" id="Kejujuran" placeholder="{{ $inputnilai->nilai  }}">
                 </div>
                 <div class="grupinput row d-flex justify-content-between">
                     <label for="Kedisiplinan" class="text-input col-6">Kedisiplinan</label>
-                    <input class="input col-6" type="text" id="Kedisiplinan" placeholder="">
+                    <input class="input col-6" type="text" id="Kedisiplinan" placeholder="{{ $inputnilai->nilai  }}">
                 </div>
                 <div class="grupinput row  d-flex justify-content-between">
                     <label for="TanggungJawab" class="text-input col-6">Tanggung Jawab</label>
-                    <input class="input col-6" type="text" id="TanggungJawab" placeholder="">
+                    <input class="input col-6" type="text" id="TanggungJawab" placeholder="{{ $inputnilai->nilai  }}">
                 </div>
                 <div class="grupinput row d-flex  justify-content-between">
                     <label for="Inisiatif" class="text-input col-6">Inisiatif</label>
-                    <input class="input col-6" type="text" id="Inisiatif" placeholder="">
+                    <input class="input col-6" type="text" id="Inisiatif" placeholder="{{ $inputnilai->nilai  }}">
                 </div>
                 <div class="row">
                     <div class="col-6">
