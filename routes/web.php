@@ -302,6 +302,10 @@ Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 })->name('input-nilaimhs');
 
+Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
+
+Route::post('/input-nilai/{id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
+
 
 
 
