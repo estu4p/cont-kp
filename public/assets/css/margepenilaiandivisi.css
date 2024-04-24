@@ -158,3 +158,64 @@
     overflow: scroll !important;
     height: max-content;
 }
+p.membuat {
+    font-size: 14px;
+}
+
+td {
+    padding: 10px; /* Atur jarak padding di sel td */
+}
+
+/* Atur lebar tombol agar tetap konsisten */
+.btn {
+    width: 70px; /* Anda bisa menyesuaikan lebar sesuai kebutuhan */
+}
+/* Mengatur tombol aksi agar rata kanan */
+td.actions {
+    text-align: right;
+}
+
+th:nth-child(3) {
+    padding-left: 33%; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}
+div select {
+    font-size: 14px; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}
+.nav-item.manageP a {
+    text-decoration: none;
+}
+td.tengah {
+    text-align: center;
+}
+
+
+
+.paging.pagination {
+    justify-content: center;
+    box-shadow: none;
+
+}
+
+.page-link {
+    color: black;
+    background-color: transparent;
+
+
+}
+.paging .page-item a {
+    border: none;
+    margin: 0;
+
+}
+
+.page-link:hover {
+    background-color: #f0f0f0;
+    outline: none;
+}
+.pagination a {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    margin: 0 3px;
+
+}

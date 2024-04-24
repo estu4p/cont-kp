@@ -122,12 +122,12 @@ class AdminSistemDashboardController extends Controller
             $profile->update([
                 'foto_profil' => 'foto_profil/' . $namaFoto,
             ]);
-            return response()->json(['success' => true, 'message' => 'Foto Berhasil diUbah']);
-            // return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diUbah');
+            //return response()->json(['success' => true, 'message' => 'Foto Berhasil diUbah']);
+            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diUbah');
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
-            return response()->json(['success' => false, 'error' => $errorMessage]);
-            // return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
+            //return response()->json(['success' => false, 'error' => $errorMessage]);
+            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
         }
     }
 

@@ -16,8 +16,6 @@ class ContributorUnivController extends Controller
         $datasiswa = Presensi::with('user')->where('nama_lengkap', $id)->first();
         $presensi = Presensi::where('nama_lengkap', $id)->get();
 
-  
-
     // Menangani kasus di mana siswa tidak ditemukan
     if (!$datasiswa) {
         abort(404); // Tampilkan halaman 404 jika siswa tidak ditemukan
