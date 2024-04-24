@@ -10,6 +10,7 @@ use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Quotes;
 use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -43,6 +44,7 @@ class HomeMitraController extends Controller
         $user = Auth::user();
         $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
         $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
+        $quote = Quotes::inRandomOrder()->first();
         $today = date('F Y/d');
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
         
@@ -55,6 +57,7 @@ class HomeMitraController extends Controller
             'nama_sekolah' => $nama_sekolah,
             'today' => $today,
             'user' => $user,
+            'quote' => $quote,
         ]);
     }
 
@@ -89,7 +92,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response([
@@ -116,7 +120,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -143,7 +148,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -170,7 +176,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -206,7 +213,8 @@ class HomeMitraController extends Controller
                     'user' => $user,
                     'today' => date('F Y/d'),
                     'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                    'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                    'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                    'quote' => Quotes::inRandomOrder()->first()
                 ]);
             } else {
                 return response()->json([
@@ -237,7 +245,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -263,7 +272,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -297,7 +307,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -317,7 +328,8 @@ class HomeMitraController extends Controller
             'user' => $user,
             'today' => date('F Y/d'),
             'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-            'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+            'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+            'quote' => Quotes::inRandomOrder()->first()
         ]);
     }
 

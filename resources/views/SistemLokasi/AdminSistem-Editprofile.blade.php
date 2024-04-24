@@ -4,35 +4,53 @@
 <link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
 <div class="wadah">
 
-<div class="propil">
-        <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">{{ $userAdmin->nama_lengkap }}</div>
-        <div class="email">{{ $userAdmin->email }}</div>
-        <div class="about">About</div>
-        <div class="keterangan">{{ $userAdmin->about }}</div>
-    </div>
+<div class="bg-white rounded text-center tes col-xl-3 col-lg-3 col-md-11 col-sm-9 " style="padding: 50px 0px 0px;">
+            <div>
+                @if ($userAdmin->foto_profil)
+                    <img src="{{ asset('storage/' . $userAdmin->foto_profil) }}" width="180" alt="Foto Profil">
+                @else
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
+                @endif
+                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $userAdmin->nama_lengkap }}
+                </h4>
+                <p class=" fw-light ">{{ $userAdmin->email }}</p>
+            </div>
+            <div>
+                <h5 style="opacity: 0.8; font-size: 20px; font-weight: 700; margin-top: 6rem;">About</h5>
+                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $userAdmin->about }}</p>
+            </div>
+        </div>
 
-    <div id="preview" class="preview"></div>
-    <div class="wadahedit d-flex">
-        <div class=" p-5">
-            <div class="atas d-flex flex-row  col-5">
-                <div id="previewZone">
-                    <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
-                </div>
-                <div class="upload col-5 d-flex flex-column mx-4 my-auto gap-1">
-                    <label for="imageInput" class="custom-file-upload">
-                        <span class="change">Change Photo</span>
-                        <input type="file" id="imageInput" style="display: none;">
-                    </label>
-                    <span class="remove m-0">remove</span>
+    <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
+            <div class="d-flex gap-4">
+                @if ($userAdmin->foto_profil)
+                    <img src="{{ asset('storage/' . $userAdmin->foto_profil) }}" width="80" alt="Foto Profil">
+                @else
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
+                @endif
+                <div class="my-auto d-flex flex-column" style="flex-direction: row;">
+                    <form action="{{ route('superAdmin.updateFoto', $userAdmin->username) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
+                        <input type="file" name="foto_profil" id="uploadFoto" style="display: none;" onchange="uploadFile()">
+                        <button type="button" onclick="document.getElementById('uploadFoto').click()" style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
+                            Change photo
+                        </button>
+                    </form>
+                    <form id="deleteFoto" action="" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button onclick="showAlertDeleteProfile('{{ $userAdmin->username }}')"
+                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
                 </div>
             </div>
 
 
             <div class="tengah row ">
-            <form action="{{ route('userAdmin.updateFoto', $userAdmin->username )}}" method="POST">
+            <form action="{{ route('userAdmin.updateProfile', $userAdmin->username) }}" method="POST">
                 @csrf
-                @method('PATCH')
+                @method('PUT')
                 <div class="judulkanan">Personal Details</div>
                     <div class="isi col-12 row justify-content-evenly">
                         <div class="form-group  col-6   p-2">
