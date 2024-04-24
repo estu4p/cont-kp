@@ -10,7 +10,7 @@
             <div class="ml-5 mr-2"></div>
             <div>
                 <i class="fa-solid fa-bell fa-2x non-clickable-icon" style="pointer-events: none;"></i>
->>>>>>> 6f05637f7df4408f79010c45d4c3de82512248e4
+
             </div>
             <div class="d-flex justify-content-evenly flex-row text-center">
                 <div class="navbar-profile">
@@ -29,4 +29,4 @@
 
     </div>
 </body>
->>>>>>> 6f05637f7df4408f79010c45d4c3de82512248e4
+
