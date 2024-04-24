@@ -29,7 +29,8 @@
                             <i class="ikon fas fa-ellipsis-v ikon-klik" aria-haspopup="true" aria-expanded="false"></i>
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
+                            <a class="dropdown-item" href="{{ route('adminUniv.editUser', $anggota->id) }}">Lihat Profil
+                                Mahasiswa</a>
                             <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
                         </div>
                     </div>
