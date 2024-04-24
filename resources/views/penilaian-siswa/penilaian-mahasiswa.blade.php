@@ -19,33 +19,35 @@
         <table class="">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="text-align: center;">No</th>
                     <th>Nama</th>
-                    <th>NIP</th>
-                    <th>Divisi</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                    <th >NIP</th>
+                    <th style="text-align: center;">Divisi</th>
+                    <th style="text-align: center;">Status</th>
+                    <th style="text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($mahasiswa as $key => $mhs)
-                <tr class="{{ $key % 2 == 0 ? 'abu' : 'putih' }}">
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $mhs->nama_lengkap }}</td>
-                    <td>{{ $mhs->nomor_induk }}</td>
-                    <td>{{ $mhs->divisi->nama_divisi}}</td>
-                    <td>
-                        <div class="{{ ($mhs['status']) }}">{{ $mhs->status_akun}}</div>
+                <tr class="{{$key % 2 == 0 ? 'abu' : 'putih'}}">
+                    <td style="text-align: center;">{{$key + 1}}</td>
+                    <td>{{$mhs->nama_lengkap}}</td>
+                    <td >{{$mhs->nomor_induk}}</td>
+                    <td style="text-align: center;">{{$mhs->divisi->nama_divisi}}</td>
+                    <td class="center">
+                        <div class="{{($mhs['status_akun'])}}">{{$mhs->status_akun == 'alumni' ? 'inactive' : $mhs->status_akun}}</div>
                     </td>
 
                     <td class="icon"><a href="{{ route('input-nilai', ['id' => $mhs->id]) }}"><i class="fa-solid fa-file-lines"></i></a></td>
 
 
-                    <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td>
+                    // <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td>
 
 
-                    <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td>
+                    // <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td>
 
+
+                    <td class="icon" style="text-align: center;"><a href="{{route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)])}}"> <i class="fa-solid fa-file-lines"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>

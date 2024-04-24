@@ -196,14 +196,6 @@ Route::get('/adminafterpayment', function () {
     return view('mitra.adminafterpayment');
 });
 
-
-
-Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-// Route::get('/contributingforuniv', function () {
-//     return view('template.contributingforunivschool.penilaianmahasiswa');
-// });
-
 //user
 
 Route::get('/user/register', function () {
@@ -288,7 +280,7 @@ Route::get('/lihat', function () {
 });
 
 //penilaian mahasiswa-contributor mitra
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
@@ -299,12 +291,6 @@ Route::get('/pengaturan-contri', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
-
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
@@ -487,6 +473,8 @@ Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
+Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
+Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
 Route::get('/AdminUniv/setting/quotes', function () {
     $quotes = [
@@ -568,6 +556,7 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'da
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
 Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
@@ -632,9 +621,9 @@ Route::get('/presensitidakhadir', function () {
 
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+// Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
-Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
 
 
 
@@ -717,6 +706,7 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
+// barcode presensi
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -724,6 +714,8 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
+
+
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
 
 Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
@@ -735,6 +727,14 @@ Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
 Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
 
+// ganti jam
+Route::get('/mitra-presensi-barcode/ganti-jam-masuk', function () {
+    return view('User.ContributorForMitra.barcode_ganti-jam-masuk', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+    ]);
+});
 // Route::get('/mitra-presensi-barcode/pulang', function () {
 //     $presensi = Presensi::all();
 
@@ -907,4 +907,8 @@ Route::get('/user-AdminSistem/InputOTP', function () {
 });
 Route::get('/user-AdminSistem/InputnewPassword', function () {
     return view('SistemLokasi.AdminSistem-InputnewPassword');
+});
+
+Route::get('/contributingforuniv-lihat', function () {
+    return view('template.contributingforunivschool.lihat');
 });

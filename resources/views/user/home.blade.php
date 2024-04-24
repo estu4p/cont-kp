@@ -13,6 +13,11 @@
                         <option value="{{ $id }}">{{ $namaMitra }}</option>
                     @endforeach
                 </select>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <p style="font-size: 14px;">Mitra belum terdaftar? <a href="" class="text-danger">Hubungi admin</a>
                 </p>
 
@@ -55,7 +60,7 @@
                 </div>
                 <div>
                     <form action="{{ route('profil', ['id' => Auth::id()]) }}" method="GET">
-                         @csrf
+                        @csrf
                         <p><b>{{ $user->nama_lengkap }}</b></p>
                         <p>NIP: MJ/{{ $nama_divisi->nama_divisi }}/
                             {{ $nama_sekolah->nama_sekolah}}/

@@ -256,7 +256,8 @@ class ContributorForMitra extends Controller
         // Kirim data ke tampilan
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-                'message' => 'Berhasil mendapat data'], 200);
+                'message' => 'Berhasil mendapat data'
+            ], 200);
         } else {
             return view('user.ContributorForMitra.laporanpresensi')->with([
                 'presensi' => $presensi,
@@ -775,6 +776,8 @@ class ContributorForMitra extends Controller
         $Presensi->nama_lengkap = $request->nama_lengkap;
         $Presensi->hari = date('Y-m-d');
         $Presensi->jam_masuk = now();
+        $Presensi->status_ganti_jam = 'Tidak Ganti Jam';
+        $Presensi->target = 3600;
         $Presensi->save();
 
         return redirect('mitra-presensi-barcode/istirahat')->with('success', 'silahkan masuk');
@@ -839,12 +842,29 @@ class ContributorForMitra extends Controller
             $jam_pulang = now();
             $jam_masuk = Carbon::parse($presensi->jam_masuk);
 
-            // Menghitung total jam kerja dalam bentuk jam
-            $total_jam_kerja = $jam_pulang->diff($jam_masuk)->format('%H:%I:%S');
+            // Menghitung total jam kerja dalam bentuk detik
+            $total_jam_kerja_detik = $jam_pulang->diffInSeconds($jam_masuk);
 
             $presensi->jam_pulang = $jam_pulang;
-            $presensi->total_jam_kerja = $total_jam_kerja;
+
+            // Total jam kerja yang diinginkan
+            $jam_kerja = 0; // Jam
+            $menit_kerja = 0.1; // Menit
+
+            // Ubah total jam kerja yang diinginkan ke dalam detik
+            $total_jam_kerja_diinginkan_detik = ($jam_kerja * 3600) + ($menit_kerja * 60);
+
+            // Hitung selisih waktu kerja yang diinginkan dengan total jam kerja
+            $kurang_jam_kerja_detik = $total_jam_kerja_diinginkan_detik - $total_jam_kerja_detik;
+
+            // Ubah kembali ke format jam:menit:detik jika perlu
+            $kurang_jam_kerja = gmdate("H:i:s", $kurang_jam_kerja_detik);
+
+            $presensi->total_jam_kerja = gmdate("H:i:s", $total_jam_kerja_detik);
+            $presensi->kurang_jam_kerja = $kurang_jam_kerja;
+
             $presensi->save();
+
             return redirect('mitra-presensi-barcode/selesai')->with('success', 'silahkan masuk')->with('presensi', $presensi);
         } else {
             return response()->json(['message', 'gagal']);
@@ -881,7 +901,3 @@ class ContributorForMitra extends Controller
         return view('penilaian-siswa.input-nilai', compact('inputnilai'));
     }
 }
-
-
-
-

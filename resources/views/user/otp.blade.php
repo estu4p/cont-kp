@@ -38,7 +38,7 @@
                             style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim
                             OTP</button>
                         <p class="mt-5 fw-medium" style="margin-bottom: -20px;">Belum menerima email? <a
-                                href="/user/reset-password" class="text-decoration-none" style="color: #A61C1CE5;">Kirim
+                                href="/user/resetPassword" class="text-decoration-none" style="color: #A61C1CE5;">Kirim
                                 ulang</a></p>
                     </div>
                 </div>

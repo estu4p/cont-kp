@@ -7,8 +7,11 @@ use App\Models\Shift;
 use App\Models\Divisi;
 use App\Models\Project;
 use App\Models\Presensi;
+use App\Models\Penilaian;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Database\Seeders\KategoriPenilaian;
+use Database\Seeders\SubKategoriPenilaian;
 
 class SchoolController extends Controller
 {
@@ -71,7 +74,7 @@ class SchoolController extends Controller
         }
     }
     public function datamhs(Request $request)
-    {   //Menampilkan Data Mahasiswa pada penilaian Mahasiswa
+    {   //Menampilkan Data Mahasiswa pada Penilaian Mahasiswa
         $mahasiswa = User::where('role_id', 3)->get();
 
         if ($request->is('api/*') || $request->wantsJson()) {
@@ -83,4 +86,23 @@ class SchoolController extends Controller
             return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
         }
     }
+    public function lihatPenilaian($id)
+    {// Penilaian Mahasiswa- lihat
+
+        $penilaian = User::findOrFail($id);
+        // $penilaian = Penilaian::findOrFail($id);
+
+        $nilai = $penilaian->nilai->first();
+        $subkategori = $penilaian->subKategoriPenilaian->first();
+        $kategoripen = $penilaian->kategoriPenilaian->first();
+
+            return response()->json([
+            "Penilaian" => "view Penilaian Mahasiswa ",
+            "mahasiswa" => $penilaian,
+            "nilai" => $nilai,
+            "sub-kategori" => $subkategori,
+            "kategori" => $kategoripen,
+            ]);
+
+        }
 }
