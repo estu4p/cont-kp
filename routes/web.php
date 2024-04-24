@@ -853,9 +853,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
+Route::get('/contributorformitra/editprofile', [ContributorForMitra::class, 'editProfile'])->name('userAdmin.editProfile');
+Route::put('/contributorformitra/updateProfile/{username}', [ContributorForMitra::class, 'updateProfile'])->name('userMitra.updateProfile');
+Route::patch('/contributorformitra/updateFoto/{username}', [ContributorForMitra::class, 'updateFoto'])->name('userMitra.updateFoto');
+Route::delete('/contributorformitra/deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('userMitra.deleteFoto');
+
+
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
 });

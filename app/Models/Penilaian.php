@@ -22,11 +22,6 @@ class Penilaian extends Model
     {
         return $this->belongsTo(User::class, 'nama_lengkap');
     }
-     public function user()
-    {
-        return $this->belongsTo(User::class, 'nama_lengkap');
-    }
-
     public function kategoriPenilaian()
     {
       return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
