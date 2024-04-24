@@ -89,20 +89,19 @@ class SchoolController extends Controller
     public function lihatPenilaian($id)
     {// Penilaian Mahasiswa- lihat
 
-        $penilaian = User::findOrFail($id);
-        // $penilaian = Penilaian::findOrFail($id);
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->findOrFail($id);
 
-        $nilai = $penilaian->nilai->first();
-        $subkategori = $penilaian->subKategoriPenilaian->first();
-        $kategoripen = $penilaian->kategoriPenilaian->first();
-
-            return response()->json([
+        $responseData = [
             "Penilaian" => "view Penilaian Mahasiswa ",
-            "mahasiswa" => $penilaian,
-            "nilai" => $nilai,
-            "sub-kategori" => $subkategori,
-            "kategori" => $kategoripen,
-            ]);
+            "mahasiswa" => $penilaian->user,
+            "nilai" => $penilaian->nilai,
+            "sub-kategori" => $penilaian->subKategori->nama_sub_kategori,
+            "kategori" => $penilaian->subKategori->kategori_id,
+            "kritik-saran"=>$penilaian->kritik_saran
+        ];
 
-        }
+        return response()->json($responseData);
+    }
+
+
 }
