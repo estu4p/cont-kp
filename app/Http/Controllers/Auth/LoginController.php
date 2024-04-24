@@ -47,7 +47,7 @@ class LoginController extends Controller
             $role_id = $user->role->id;
 
             if ($role_id == 1) { //super admin
-                return redirect()->to('/superAdmin');
+                return redirect()->to('/AdminSistem-Dashboard');
             } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
             } else if ($role_id == 3) { //mahasiawa /pemagang

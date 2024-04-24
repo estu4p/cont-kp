@@ -554,8 +554,8 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+Route::patch('/AdminSistem/updateFoto', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
 Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
@@ -853,9 +853,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
+Route::get('/contributorformitra/editprofile', [ContributorForMitra::class, 'editProfile'])->name('userAdmin.editProfile');
+Route::put('/contributorformitra/updateProfile/{username}', [ContributorForMitra::class, 'updateProfile'])->name('userMitra.updateProfile');
+Route::patch('/contributorformitra/updateFoto/{username}', [ContributorForMitra::class, 'updateFoto'])->name('userMitra.updateFoto');
+Route::delete('/contributorformitra/deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('userMitra.deleteFoto');
+
+
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
 });
