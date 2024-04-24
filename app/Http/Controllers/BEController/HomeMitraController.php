@@ -47,7 +47,7 @@ class HomeMitraController extends Controller
         $quote = Quotes::inRandomOrder()->first();
         $today = date('F Y/d');
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
-        
+
         return view('pemagang.home', [
             'title' => "Home",
             'button' => "Masuk",
@@ -111,7 +111,7 @@ class HomeMitraController extends Controller
                 'jam_mulai_istirahat' => $request->jam,
                 'keterangan_jam_mulai_istirahat' => $request->keterangan
             ]);
-        
+
             return view('pemagang/home', [
                 'button' => 'Masuk Kembali',
                 'route' => '/jamSelesaiIstirahat/{id}',
@@ -189,37 +189,27 @@ class HomeMitraController extends Controller
     public function totalJamKerja(Request $request, $id)
     {
         $user = Auth::user();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest();
-
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
         if ($dataPresensi) {
-            $jam_masuk = $dataPresensi->jam_masuk;
-            $jam_pulang = $dataPresensi->jam_pulang;
+            $jamMasuk = Carbon::parse($dataPresensi->jam_masuk);
+            $jamPulang = Carbon::parse($dataPresensi->jam_pulang);
+            $totalJamKerja = $jamPulang->diffInHours($jamMasuk);
+            $totalMenitKerja = $jamPulang->diffInMinutes($jamMasuk) % 60;
+            $totalJamKerja += $totalMenitKerja / 60;
+            $dataPresensi->update([
+                'total_jam_kerja' => $totalJamKerja
+            ]);
 
-            if ($jam_masuk && $jam_pulang) {
-                $jam_masuk_formatted = date('H:i:s', strtotime($jam_masuk));
-                $jam_pulang_formatted = date('H:i:s', strtotime($jam_pulang));
-
-                $jam_masuk_obj = new DateTime($jam_masuk_formatted);
-                $jam_pulang_obj = new DateTime($jam_pulang_formatted);
-                $total_jam_kerja = $jam_masuk_obj->diff($jam_pulang_obj)->format('%H:%I:%S');
-
-                $dataPresensi->update(['total_jam_kerja' => $total_jam_kerja]);
-
-                return view('pemagang/home', [
-                    'button' => 'Log Activity',
-                    'route' => '/catatLogAktivity/{id}',
-                    'dataPresensi' => $dataPresensi,
-                    'user' => $user,
-                    'today' => date('F Y/d'),
-                    'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                    'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
-                    'quote' => Quotes::inRandomOrder()->first()
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 'Jam masuk atau jam pulang belum diisi',
-                ], 400);
-            }
+            return view('pemagang/home', [
+                'button' => 'Log Activity',
+                'route' => '/catatLogAktivity/{id}',
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
+            ]);
         } else {
             return response()->json([
                 'status' => 'Data tidak ditemukan',
@@ -290,7 +280,7 @@ class HomeMitraController extends Controller
 
         $data = new Presensi;
         $data->nama_lengkap = $user->id;
-        $data->hari = Carbon::now()->format('Y-m-d'); 
+        $data->hari = Carbon::now()->format('Y-m-d');
         $data->keterangan_status = $keterangan_status;
         $data->bukti_foto_izin = $bukti_foto_izin;
         $data->status_kehadiran = 'Izin';
@@ -320,7 +310,7 @@ class HomeMitraController extends Controller
     {
         $user = Auth::user();
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->get()->reverse();
-        
+
         return view('pemagang/gantiJam', [
             'button' => 'Log Activity',
             'dataPresensi' => $dataPresensi,
@@ -332,12 +322,13 @@ class HomeMitraController extends Controller
         ]);
     }
 
-    public function generateQRCode(Request $request, $id){
+    public function generateQRCode(Request $request, $id)
+    {
         $user = Auth::user();
-        $userData = $user->id; 
+        $userData = $user->id;
         $barcodeSvg = QrCode::size(300)->generate($userData);
-        return view('pemagang.myqr' ,[
+        return view('pemagang.myqr', [
             'user' => $user,
-        ],compact('barcodeSvg'));
+        ], compact('barcodeSvg'));
     }
 }
