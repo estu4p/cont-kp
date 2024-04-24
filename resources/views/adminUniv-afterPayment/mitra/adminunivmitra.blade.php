@@ -43,7 +43,8 @@
                                 <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
                                         siswa/Mahasiswa</a></li>
-                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
+                                        Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
                             </ul>
                         </div>
@@ -85,12 +86,17 @@
                 //     }
                 //   });
                 document.addEventListener("DOMContentLoaded", function() {
-                    const dropdownToggle = document.querySelector(".dropdown-toggle");
+                    const dropdownToggle = document.querySelectorAll(".dropdown-toggle");
                     const dropdownMenu = document.querySelector(".dropdown-menu");
 
-                    dropdownToggle.addEventListener("click", function() {
-                        dropdownMenu.classList.toggle("show");
-                    });
+                    for (let i = 0; i < dropdownToggle.length; i++) {
+                        dropdownToggle[i].addEventListener("click", function() {
+                            this.nextElementSibling.classList.toggle("show");
+
+
+                        });
+
+                    }
 
                     document.addEventListener("click", function(event) {
                         if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {

@@ -23,7 +23,7 @@ body{
     body{
     padding-left: 200px;
     }
-    
+
   }
   @media screen and (max-width: 767px) {
     body{
@@ -31,18 +31,18 @@ body{
       }
     .sidebar{
       width:150px;
-      
+
     }
     .area{
       width: 100% !important;
     }
   }
   .nav {
- 
-    
+
+
   }
   .log-out {
- 
+
   }
   .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
@@ -50,32 +50,34 @@ body{
     color: #000; /* Ubah warna teks tautan */
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
-    cursor: pointer;
-}
+  }
 
-.nav-link:hover {
+  .nav-link:hover {
     background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
-}
+  }
 
-a.nav-link.active {
-    font-weight: bold;
-}
-  
+  a.nav-link.activee {
+    font-weight: bold; /* Menebalkan tautan aktif */
+    background-color: #007bff; /* Warna latar belakang untuk tautan aktif */
+    color: #fff; /* Warna teks untuk tautan aktif */
+
+  }
+
   .sidebar {
     text-align: center;
   }
-  
+
   .logo {
     margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
   }
-  
+
   .logout{
     position:absolute;
    bottom:10%;
    color: #302f2f;
    opacity: 0.6;
   }
-  
+
 .navbar {
   padding: 20px;
   background-color: transparent;
@@ -118,6 +120,7 @@ a.nav-link.active {
 
 .navbar-profile {
   margin-right: 20px;
+
 }
 
 .profile-name,
@@ -140,18 +143,20 @@ a.nav-link.active {
 .kanan{
     justify-content: space-between !important;
 }
+
+
 @media only screen and (min-width: 992px) {
   .untukmobile{
     /* padding:30px !important;
     justify-content: space-evenly !important; */
-    
+
   }
   .untukmobile div:nth-child(1){
-  
+
   }
   .untukmobile div:nth-child(2){
 
-    
+
   }
 }
 
@@ -161,9 +166,13 @@ a.nav-link.active {
   }
   .untukmobile{
     padding:30px !important;
-    
+
   }
   .untukmobile div{
     margin: 20px 0;
   }
 }
+.non-clickable-icon {
+  pointer-events: none;
+}
+

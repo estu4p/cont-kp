@@ -473,6 +473,8 @@ Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
+Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
+Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
 Route::get('/AdminUniv/setting/quotes', function () {
     $quotes = [
@@ -621,7 +623,7 @@ Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('p
 
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
-Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
 
 
 
@@ -905,4 +907,8 @@ Route::get('/user-AdminSistem/InputOTP', function () {
 });
 Route::get('/user-AdminSistem/InputnewPassword', function () {
     return view('SistemLokasi.AdminSistem-InputnewPassword');
+});
+
+Route::get('/contributingforuniv-lihat', function () {
+    return view('template.contributingforunivschool.lihat');
 });
