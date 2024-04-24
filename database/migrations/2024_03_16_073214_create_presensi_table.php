@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('jam_selesai_istirahat')->nullable();
             $table->string('Keterangan_jam_selesai_istirahat')->nullable();
             $table->time('total_jam_kerja')->nullable();
+            $table->time('default_jam_kerja')->nullable();
             $table->time('kurang_jam_kerja')->nullable();
             $table->text('log_aktivitas')->nullable();
             $table->boolean('aksi')->default(false);
