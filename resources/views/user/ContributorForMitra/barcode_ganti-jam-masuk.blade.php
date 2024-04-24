@@ -47,12 +47,10 @@
         <div class="kiri col-4 overflow-hidden">
             <div>
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a style="font-size: 80%;" class="nav-link text-dark active disabled"
+                    <li class="nav-item"><a style="font-size: 80%;" class="nav-link bg-secondary-subtle text-dark"
                             href="/mitra-presensi-barcode/masuk"><b>Scan Presensi Harian</b></a></li>
-                    <li class="nav-item active"><a style="font-size: 80%; "
-                            class="nav-link bg-secondary-subtle  text-dark"
-                            href="/mitra-presensi-barcode/ganti-jam-masuk"><b>Scan Ganti Jam</b></a></li>
-
+                    <li class="nav-item active"><a style="font-size: 80%;" class="nav-link active"
+                            href="/UserPresensi"><b>Scan Ganti Jam</b></a></li>
                 </ul>
             </div>
             <div class=" border border-top-0 ">

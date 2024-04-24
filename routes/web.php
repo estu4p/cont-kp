@@ -35,8 +35,7 @@ use App\Http\Controllers\BEController\AdminSistemDashboardController;
 use App\Http\Controllers\BEController\AdminSettingJamQuotesController;
 use App\Http\Controllers\BEController\CheckoutAdminUniv\CheckoutController;
 use App\Http\Controllers\BEController\AdminUnivAfterPaymentController as BEControllerAdminUnivAfterPaymentController;
-
-
+use App\Http\Controllers\BEController\PenilaianMitraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,10 +161,10 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 
 
 
-Route::get('/dashboard-admin', function () {
-    return view('dashboard.dashboard-admin', ['title' => 'Admin']);
-});
-Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
+// Route::get('/dashboard-admin', function () {
+//     return view('dashboard.dashboard-admin', ['title' => 'Admin']);
+// });
+// Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 
 Route::get('/checkout/bronze', function () {
@@ -196,14 +195,6 @@ Route::get('/adminbeforepayment', function () {
 Route::get('/adminafterpayment', function () {
     return view('mitra.adminafterpayment');
 });
-
-
-
-Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-// Route::get('/contributingforuniv', function () {
-//     return view('template.contributingforunivschool.penilaianmahasiswa');
-// });
 
 //user
 
@@ -282,16 +273,18 @@ Route::get('/datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPr
 Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'DataPresensi']);
 // return view('presensi.presensiharian')->name('presensi.con');
 
-Route::get('/presensihadir', function () {
-    return view('presensi.presensihadir');
-});
-Route::get('/presensiizin', function () {
-    return view('presensi.presensiizin');
-});
-Route::get('/presensitidakhadir', function () {
-    return view('presensi.presensitidakhadir');
+//penilaian mahasiswa-contributor for univ
+Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
+Route::get('/lihat', function () {
+    return view('template.contributingforunivschool.lihat');
 });
 
+//penilaian mahasiswa-contributor mitra
+Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
+
+Route::get('/input-nilai', function () {
+    return view('penilaian-siswa.input-nilai');
+});
 Route::get('/pengaturan-contri', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
@@ -299,16 +292,9 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
-
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
-
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
-});
-
-
+})->name('input-nilaimhs');
 
 
 Route::get('/MitraPresensiDetailHadir', function () {
@@ -370,6 +356,7 @@ Route::get('/datapresensisiswa', function () {
     return view('presensi.datapresensisiswa');
 });
 
+
 Route::get('/presensi', function () {
     return view('presensi.presensiharian');
 });
@@ -382,15 +369,6 @@ Route::get('/presensiizin', function () {
 Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
-
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
-
-Route::get('/input-nilai', function () {
-    return view('penilaian-siswa.input-nilai');
-});
-
 
 
 
@@ -574,8 +552,9 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-// Route::patch('/AdminSistem/editProfil/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-// Route::patch('/AdminSistem/editFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
@@ -637,14 +616,12 @@ Route::get('/presensitidakhadir', function () {
     return view('presensi.presensitidakhadir');
 });
 
+
 Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
-Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
+// Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
-Route::get('/input-nilai', function () {
-    return view('penilaian-siswa.input-nilai');
-});
-
+Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
 
 
 
@@ -727,6 +704,7 @@ Route::get('/mitra-laporanpresensi-detailizin/{nama_lengkap}', [ContributorForMi
 Route::get('/mitra-laporanpresensi-detailtidakhadir/{nama_lengkap}', [ContributorForMitra::class, 'laporanPresensiDetailTidakHadir'])->name('cont.mitrapresensi.detailtidakhadir');
 
 
+// barcode presensi
 Route::get('/mitra-presensi-barcode/masuk', function () {
     return view('User.ContributorForMitra.barcode_jam-masuk', [
         'title' => "Barcode Pemagang",
@@ -734,6 +712,8 @@ Route::get('/mitra-presensi-barcode/masuk', function () {
         'presensi' => Presensi::all(),
     ]);
 });
+
+
 Route::post('/mitra-presensi-barcode/jam-masuk', [ContributorForMitra::class, 'jam_masuk'])->name('barcode.store');
 
 Route::get('/mitra-presensi-barcode/istirahat', [ContributorForMitra::class, 'view_jam_mulai_istirahat'])->name('barcode.jamMasuk');
@@ -745,6 +725,14 @@ Route::get('/mitra-presensi-barcode/pulang', [ContributorForMitra::class, 'view_
 Route::post('/mitra-presensi-barcode/jam-pulang', [ContributorForMitra::class, 'jam_pulang'])->name('barcode.jam-pulang');
 Route::get('/mitra-presensi-barcode/selesai', [ContributorForMitra::class, 'view_jam_pulang_selesai']);
 
+// ganti jam
+Route::get('/mitra-presensi-barcode/ganti-jam-masuk', function () {
+    return view('User.ContributorForMitra.barcode_ganti-jam-masuk', [
+        'title' => "Barcode Pemagang",
+        'nama' => "Naufal",
+        'presensi' => Presensi::all(),
+    ]);
+});
 // Route::get('/mitra-presensi-barcode/pulang', function () {
 //     $presensi = Presensi::all();
 
@@ -901,9 +889,7 @@ Route::get('/UserScanBarcode', function () {
 });
 
 
-Route::get('/lihat', function () {
-    return view('template.contributingforunivschool.lihat');
-});
+
 
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
