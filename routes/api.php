@@ -122,8 +122,7 @@ Route::get('/lihatprofil/{id}', [SchoolController::class, 'Lihatprofil']);
 Route::get('datapresensi', [ContributorUnivController::class, 'DataPresensi']);
 Route::get('datapresensisiswa/{id}', [ContributorUnivController::class, 'DataPresensiSiswa']);
 Route::get('/datapenilaianmhs', [SchoolController::class, 'datamhs']);
-Route::get('/lihatpenilaian/{id}', [SchoolController::class, 'lihatPenilaian'])->name('penilian');
-Route::get('/lihatpenilaian1/{id}', [SchoolController::class, 'lihatPenilaian2'])->name('penilian');
+Route::get('/lihatpenilaian/{id}', [SchoolController::class, 'lihatPenilaian'])->name('penilaian');
 
 
 //Contributor for Mitra

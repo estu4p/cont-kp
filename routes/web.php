@@ -275,9 +275,10 @@ Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'Dat
 
 //penilaian mahasiswa-contributor for univ
 Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
-Route::get('/lihat', function () {
-    return view('template.contributingforunivschool.lihat');
-});
+Route::get('/lihat/{id}',[SchoolController::class, 'lihatPenilaian'])->name('penilaian');
+// function () {
+//     return view('template.contributingforunivschool.lihat');
+// });
 
 //penilaian mahasiswa-contributor mitra
 Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
