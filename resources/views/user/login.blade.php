@@ -32,6 +32,12 @@
 
                         </div>
                     @endif
+                    @if (session('mitra_error'))
+                        <div class="alert alert-danger">
+                            {{ session('mitra_error') }}
+                        </div>
+                    @endif
+
                     <small id="warn-email" class="text-warning bg-warning-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">

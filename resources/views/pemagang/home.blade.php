@@ -239,7 +239,6 @@
                         <textarea id="pesan" name="keterangan" rows="6" cols="60"
                             placeholder="Tuliskan keterengan (opsional)" style="background-color: #E9ECEF" ;></textarea>
                         <div class="bawahmodal">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                             <input type="hidden" name="id" value="{{ Auth::id() }}">
                             <input type="hidden" id="jamSekarang" name="jam" readonly
                                 value="{{ now()->format('H:i:s') }}">
