@@ -474,6 +474,8 @@ Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
+Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
+Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
 Route::get('/AdminUniv/setting/quotes', function () {
     $quotes = [
@@ -553,8 +555,9 @@ Route::get('/kategoripenilaian', function () {
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+Route::patch('/AdminSistem/updateFoto', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 
@@ -621,7 +624,7 @@ Route::get('/presensitidakhadir', function () {
 
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
-Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
 
 
 
@@ -851,9 +854,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
+Route::get('/contributorformitra/editprofile', [ContributorForMitra::class, 'editProfile'])->name('userAdmin.editProfile');
+Route::put('/contributorformitra/updateProfile/{username}', [ContributorForMitra::class, 'updateProfile'])->name('userMitra.updateProfile');
+Route::patch('/contributorformitra/updateFoto/{username}', [ContributorForMitra::class, 'updateFoto'])->name('userMitra.updateFoto');
+Route::delete('/contributorformitra/deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('userMitra.deleteFoto');
+
+
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
 });
@@ -905,4 +911,8 @@ Route::get('/user-AdminSistem/InputOTP', function () {
 });
 Route::get('/user-AdminSistem/InputnewPassword', function () {
     return view('SistemLokasi.AdminSistem-InputnewPassword');
+});
+
+Route::get('/contributingforuniv-lihat', function () {
+    return view('template.contributingforunivschool.lihat');
 });

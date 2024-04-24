@@ -3,33 +3,25 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
 <div class="wadah">
-
-<div class="bg-white rounded text-center tes col-xl-3 col-lg-3 col-md-11 col-sm-9 " style="padding: 50px 0px 0px;">
-            <div>
-                @if ($userAdmin->foto_profil)
-                    <img src="{{ asset('storage/' . $userAdmin->foto_profil) }}" width="180" alt="Foto Profil">
-                @else
-                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
-                @endif
-                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $userAdmin->nama_lengkap }}
-                </h4>
-                <p class=" fw-light ">{{ $userAdmin->email }}</p>
-            </div>
-            <div>
-                <h5 style="opacity: 0.8; font-size: 20px; font-weight: 700; margin-top: 6rem;">About</h5>
-                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $userAdmin->about }}</p>
-            </div>
-        </div>
-
-    <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
+    <div class="propil"> 
+    <div class="gambarkiri" > 
+    <img src="{{ asset('assets/images/' . $userAdmin->foto_profil) }}" style="border-radius: 50%;" width="80" alt="Foto Profil">
+    </div>
+            <div class="nama">{{ $userAdmin->nama_lengkap }}</div>
+            <div class="email">{{ $userAdmin->email }}</div>
+            <div class="about">About</div>
+            <div class="keterangan">{{ $userAdmin->about }}</div>
+    </div>
+    
+        <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
             <div class="d-flex gap-4">
-                @if ($userAdmin->foto_profil)
-                    <img src="{{ asset('storage/' . $userAdmin->foto_profil) }}" width="80" alt="Foto Profil">
-                @else
+                <!-- @if ($userAdmin->foto_profil) -->
+                <img src="{{ asset('assets/images/' . $userAdmin->foto_profil) }}" style="border-radius: 50%;" width="80" alt="Foto Profil">
+                <!-- @else -->
                     <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
-                @endif
+                <!-- @endif -->
                 <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                    <form action="{{ route('superAdmin.updateFoto', $userAdmin->username) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('userAdmin.updateFoto', $userAdmin->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <input type="file" name="foto_profil" id="uploadFoto" style="display: none;" onchange="uploadFile()">
@@ -45,64 +37,57 @@
                         style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
                 </div>
             </div>
-
-
-            <div class="tengah row ">
-            <form action="{{ route('userAdmin.updateProfile', $userAdmin->username) }}" method="POST">
+            
+            <form action="{{ route('userAdmin.updateProfile', $userAdmin->id )}}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="judulkanan">Personal Details</div>
-                    <div class="isi col-12 row justify-content-evenly">
-                        <div class="form-group  col-6   p-2">
-                            <label for="nama">Nama Lengkap</label>
-                            <div class="input-group mb-3">
+                <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">personal details</h6>
+                <div class="text-capitalize">
+                    <div class="row">
+                        <div class="col d-flex flex-column">
+                            <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama
+                                lengkap</label>
                             <input type="text" name="nama_lengkap" value="{{ $userAdmin->nama_lengkap }}"
-                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="nama">
-                            </div>
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="email">Email</label>
-                            <div class="input-group mb-3">
+                        <div class="col d-flex flex-column">
+                            <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email</label>
                             <input type="email" name="email" value="{{ $userAdmin->email }}"
-                                class="input form-control" type="email" style="background-color: #F2F4F8;" id="email">
-                            </div>
-                        </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="hp">No Hp</label>
-                            <div class="input-group mb-3">
-                            <input type="text" name="no_hp" value="{{ $userAdmin->no_hp }}"
-                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="no.Hp">
-                            </div>
-                        </div>
-                        <div class="form-group  col-6   p-2">
-                            <label for="alamat">Alamat</label>
-                            <div class="input-group mb-3">
-                            <input type="text" name="alamat" value="{{ $userAdmin->alamat }}"
-                                class="input form-control" type="text" style="background-color: #F2F4F8;" id="alamat">
-                            </div>
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                     </div>
-            </form>
-            </div>
-
-            <div class="bawah p-0 col-6">
+                    <div class="row mt-4">
+                        <div class="col d-flex flex-column">
+                            <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No HP</label>
+                            <input type="text" name="no_hp" value="{{ $userAdmin->no_hp }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <label for="alamat" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">alamat</label>
+                            <input type="text" name="alamat" value="{{ $userAdmin->alamat }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                        </div>
+                    </div>
+                </div>
+                <div class="bawah p-0 col-6">
                 <div class="judulkanan">Additional Info</div>
                         <div class="form-group  col-4   p-2">
                             <label for="about">About</label>
                         </div>
                 <div class="form-group form-floating">
                     <div class="col-12  ">
-                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
+                        <textarea id="about" name="about" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
-                <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;" onclick="showSuccessModal()">Update</button>
-            </div>
+             </div>
+                <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                    <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                    
+                    <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

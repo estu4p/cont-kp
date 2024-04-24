@@ -18,8 +18,8 @@ class Penilaian extends Model
     {
         return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id', 'id', 'nama_sub_kategori');
     }
-     public function user()
+    public function kategoriPenilaian()
     {
-        return $this->belongsTo(User::class, 'nama_lengkap');
+      return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
     }
 }

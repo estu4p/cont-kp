@@ -39,11 +39,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
+            if (!$user->mitra_id || !$user->divisi_id || !$user->sekolah) {
+                Auth::logout();
+                return redirect()->to('/user/login')->with('mitra_error', 'Mitra atau Devisi belum di isi Admin.');
+            }
 
             $role_id = $user->role->id;
 
             if ($role_id == 1) { //super admin
-                return redirect()->to('/superAdmin');
+                return redirect()->to('/AdminSistem-Dashboard');
             } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
             } else if ($role_id == 3) { //mahasiawa /pemagang
