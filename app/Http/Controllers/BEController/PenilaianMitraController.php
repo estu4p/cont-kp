@@ -61,42 +61,56 @@ class PenilaianMitraController extends Controller
         return view('penilaian-siswa.input-nilai', compact('user','nama_lengkap','divisi', 'sekolah', 'namaBulan'));
     }
 
+
     public function penilaianPost(Request $request, $id)
     {
-        // Mengambil data penilaian beserta relasi subKategori dan kategori berdasarkan ID
-        $penilaian = Penilaian::with('subKategori')->find($id);
+        $user = User::findOrFail($id); // Validasi keberadaan pengguna
 
-        // Memeriksa apakah data penilaian ditemukan
-        if (!$penilaian) {
-            // Jika tidak ditemukan, mengembalikan response dengan pesan error
-            return abort(404, 'Data penilaian tidak ditemukan.');
-        }
-
-        // Memeriksa apakah relasi subKategori tersedia
-        if ($penilaian->subKategori !== null) {
-            // Jika relasi subKategori tersedia, gunakan metode where() untuk mencari nilaiSubkategori
-            $nilaiPemahamanDesain = $penilaian->kategori->where('sub_id', 'Pemahaman Penerapan Desain')->first()->nilai;
-            $nilaiDesainThinking = $penilaian->kategori->where('sub_id', 'Desain Thinking')->first()->nilai;
-        } else {
-            // Jika relasi subKategori null, handle sesuai kebutuhan aplikasi Anda
-            // Misalnya, set nilaiSubkategori menjadi null atau berikan nilai default
-            $nilaiPemahamanDesain = null;
-            $nilaiDesainThinking = null;
-        }
-
-        // Membuat objek Penilaian baru untuk disimpan
-        $user = User::findOrFail($id);
-        $nilai = new Penilaian([
-            'nama_lengkap' => $user->id,
-            'sub_id' => $request->input('sub_id'),
-            'nilai' => $request->input('nilai'),
-            'kritik_saran' => $request->input('kritik_saran'),
+        // Validasi data input (disesuaikan dengan kebutuhan)
+        $request->validate([
+            'topik' => 'required',
+            'ruanglingkup' => 'required',
+            'Indentifikasi' => 'required',
+            'PemecahanMasalah' => 'required',
+            'Hasilkerja' => 'required',
+            'Partisipasi' => 'required',
+            'Kejujuran' => 'required',
+            'Kedisiplinan' => 'required',
+            'TanggungJawab' => 'required',
+            'Inisiatif' => 'required',
+            'kritik_saran' => 'required', // Pastikan 'kritik_saran' juga divalidasi jika diasumsikan sama untuk semua input
         ]);
-        $nilai->save();
 
-        // Kembali ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Nilai berhasil disimpan!');
+        // Peta nama input ke sub_ids
+        $subIds = [
+            'topik' => 1,
+            'ruanglingkup' => 2,
+            'Indentifikasi' => 3,
+            'PemecahanMasalah' => 4,
+            'Hasilkerja' => 5,
+            'Partisipasi' => 6,
+            'Kejujuran' => 7,
+            'Kedisiplinan' => 8,
+            'TanggungJawab' => 9,
+            'Inisiatif' => 10
+        ];
+
+        foreach ($subIds as $inputName => $subId) {
+            if ($request->has($inputName)) { // Periksa jika input hadir
+                $penilaian = new Penilaian([
+                    'nama_lengkap' => $user->id,
+                    'sub_id' => $subId,
+                    'nilai' => $request->input($inputName),
+                    'kritik_saran' => $request->input('kritik_saran'),
+                ]);
+                $penilaian->save();
+            }
+        }
+
+        return back()->with('success', 'Nilai berhasil disimpan!');
     }
+
+
 
 
 

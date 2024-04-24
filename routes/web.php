@@ -292,6 +292,8 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+
+// Contributor For mitra - Penilaian Mahasiswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 })->name('input-nilaimhs');
