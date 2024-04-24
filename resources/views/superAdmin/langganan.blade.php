@@ -25,7 +25,7 @@
                                 <label for="paket" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Paket</label>
                                 <select name="nama_paket" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="paket">
                                     @foreach ($paket as $item)
-                                        <option value="{{ $item->paket }}">{{ $item->paket }} - {{ $item->metode_bayar }}</option>
+                                        <option value="{{ $item->paket }}">{{ $item->paket }}</option>
                                     @endforeach
                                     {{-- <option value="Bronze">Bronze</option>
                                     <option value="Silver">Silver</option>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col d-flex flex-column">
                                 <label for="harga" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">Harga</label>
-                                <input type="number" name="harga" placeholder="Harga" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="harga">
+                                <input type="text" name="harga" placeholder="Harga" class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="harga">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -340,6 +340,10 @@
             });
         });
 
+        function formatRupiah(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
         // menampilkan modal edit
         $('.edit-button').click(function() {
             let subsId = $(this).data('id');
@@ -356,7 +360,7 @@
                     $('#paket').val(response.subscription.paket.paket);
                     $('#start').val(response.subscription.user.tgl_masuk);
                     $('#end').val(response.subscription.user.tgl_keluar);
-                    $('#harga').val(response.subscription.harga);
+                    $('#harga').val(formatRupiah(response.subscription.harga));
                     $('#pilihStatus').val(response.subscription.user.status_akun);
                     $('#form-edit').attr('action', '/superAdmin/langganan/update/' + response.subscription.id);
                     $('#edit').modal('show');

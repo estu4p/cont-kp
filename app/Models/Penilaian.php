@@ -12,6 +12,19 @@ class Penilaian extends Model
     protected $table = 'penilaian';
     public function kategori()
     {
-        return $this->hasMany(KategoriPenilaian::class, 'id');
+        return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
+    }
+    public function subKategori()
+{
+    return $this->belongsTo(SubKategoriPenilaian::class, 'nama_sub_kategori');
+}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nama_lengkap');
+    }
+
+    public function kategoriPenilaian()
+    {
+      return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
     }
 }

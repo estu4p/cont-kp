@@ -39,6 +39,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
+            if (!$user->mitra_id || !$user->divisi_id || !$user->sekolah) {
+                Auth::logout();
+                return redirect()->to('/user/login')->with('mitra_error', 'Mitra atau Devisi belum di isi Admin.');
+            }
 
             $role_id = $user->role->id;
 
@@ -56,9 +60,15 @@ class LoginController extends Controller
                 // return redirect('/AdminUniv-Dashboard');
             }
         } else {
-            return response()->json([
-                'error' => 'Email atau Password yang anda masukan salah'
-            ], 422);
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah.']);
         }
+    }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
     }
 }

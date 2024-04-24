@@ -16,18 +16,21 @@
 
     </div>
     <div class="isie">
-        <div class="kartu">
-            <p class="pkt"><b>Paket Bronze</b></p>
-            <p class="thn">1 tahun</p>
-            <p class="lns"><img src="assets/images/new_releases.png" class="gambar">Sudah Lunas</p>
-            <p class="tb">Tanggal Beli</p>
-            <p class="ttb">10/10/2023</p>
-            <p class="tbr">Tanggal Berakhir</p>
-            <p class="ttbr">10/10/2024</p>
-            <a href="/CheckoutBronze">
-                <button class="blue-button">Perpanjang</button>
-            </a>
-        </div>
+        @foreach ($paket as $item)
+            <div class="kartu">
+                <p class="pkt"><b>Paket {{ $item->nama_paket }}</b></p>
+                <p class="thn">1 tahun</p>
+                <p class="lns"><img src="assets/images/new_releases.png" class="gambar">Sudah Lunas</p>
+                <p class="tb">Tanggal Beli</p>
+                <p class="ttb">{{ $item->tanggal }}</p>
+                <p class="tbr">Tanggal Berakhir</p>
+                <p class="ttbr">{{ $item->tanggal_berakhir }}</p>
+                <a href="/CheckoutBronze">
+                    <button class="blue-button">Perpanjang</button>
+                </a>
+            </div>
+        @endforeach
+
 
 
     </div>

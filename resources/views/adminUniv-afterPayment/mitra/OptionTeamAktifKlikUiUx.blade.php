@@ -16,33 +16,35 @@
         </div>
     </div>
     <br>
+
     <div class="row isi">
-        @foreach ($divisi as $anggota)
-            <div class="col-3 my-5">
-                <div class="dropdown" style="color: blueviolet;">
-                    <div class="atasan">
-                        <span>{{ $anggota->nomor_induk }}</span>
-                        <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                            aria-expanded="false"></i>
+        @if ($users->count() === 0)
+            <p>Tidak ada data anggota divisi yang ditemukan.</p>
+        @else
+            @foreach ($users as $anggota)
+                <div class="col-3 my-5">
+                    <div class="dropdown" style="color: blueviolet;">
+                        <div class="atasan">
+                            <span>{{ $anggota->nomor_induk }}</span>
+                            <i class="ikon fas fa-ellipsis-v ikon-klik" aria-haspopup="true" aria-expanded="false"></i>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ route('adminUniv.editUser', $anggota->id) }}">Lihat Profil
+                                Mahasiswa</a>
+                            <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
+                        </div>
                     </div>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Lihat Profil Mahasiswa</a>
-                        <a class="dropdown-item" href="#">Lihat Data Presensi Mahasiswa</a>
+                    <div class="bawahan">
+                        <p>{{ $anggota->nama_lengkap }}</p>
                     </div>
                 </div>
-                <div class="bawahan">
-                    <p>{{ $anggota->nama_lengkap }}</p>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
 
     <script>
         // JavaScript untuk menangani dropdown
         document.addEventListener('DOMContentLoaded', function() {
-
-
-
             var dropdownMenus = document.querySelectorAll('.ikon-klik');
             for (let i = 0; i < dropdownMenus.length; i++) {
                 dropdownMenus[i].addEventListener('click', function(event) {

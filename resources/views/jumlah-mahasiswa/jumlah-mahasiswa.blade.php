@@ -17,34 +17,34 @@
     <div class="wadah-tabel w-100 p-0">
         <table class="" id="example">
             <thead>
-                <tr>
-                    <th>No</th>
+            <tr>
+                    <th style="text-align: center;">No</th>
                     <th>Nama</th>
-                    <th>NIP</th>
-                    <th>Divisi</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th >NIP</th>
+                    <th style="text-align: center;">Divisi</th>
+                    <th style="text-align: center;">Status</th>
+                    <th style="text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($mahasiswa as $key => $mhs)
-                <tr class="{{ $key % 2 == 0 ? 'abu' : 'putih' }}">
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{  $mhs->nama_lengkap ?? ''}}</td>
-                    <td>{{  $mhs->nomor_induk?? ''}}</td>
-                    <td>{{  $mhs->divisi->nama_divisi?? ''}}</td>
-                    <td>
-                        <div class="{{ strtolower($mhs->status_akun) }}">{{ $mhs->status_akun }}</div>
+                <tr class="{{$key % 2 == 0 ? 'abu' : 'putih'}}">
+                    <td style="text-align: center;">{{$key + 1}}</td>
+                    <td>{{$mhs->nama_lengkap}}</td>
+                    <td>{{$mhs->nomor_induk}}</td>
+                    <td style="text-align: center;">{{$mhs->divisi->nama_divisi}}</td>
+                    <td class="center">
+                        <div class="{{($mhs['status_akun'])}}">{{$mhs->status_akun == 'alumni' ? 'inactive' : $mhs->status_akun}}</div>
                     </td>
-                    <td>
+                    <td style="text-align: center;">
                         <a href="{{ route('detail-profil-siswa', ['id' => $mhs->id])}}">
                             <i class="fa-solid fa-circle-info icon"></i>
                         </a>
-
                     </td>
                 </tr>
                 @endforeach
             </tbody>
+
         </table>
 
     </div>
