@@ -118,6 +118,7 @@ a.nav-link.active {
 
 .navbar-profile {
   margin-right: 20px;
+ 
 }
 
 .profile-name,
@@ -166,4 +167,7 @@ a.nav-link.active {
   .untukmobile div{
     margin: 20px 0;
   }
+}
+.non-clickable-icon {
+  pointer-events: none;
 }
