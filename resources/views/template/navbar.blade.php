@@ -1,4 +1,5 @@
-  <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
+  <head>
+      <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
   </head>
 
   <body>
@@ -19,7 +20,6 @@
 
                   </div>
               </div>
-
           </div>
-
       </nav>
+  </body>

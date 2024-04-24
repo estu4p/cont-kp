@@ -5,9 +5,12 @@
     <div class="navbar d-flex justify-content-between text-decoration-none" style="color: #000000;">
         <div class="kosongan"></div>
         <div class="kanan d-flex flex-row justify-content-between gap-5">
+
+
             <div class="ml-5 mr-2"></div>
             <div>
                 <i class="fa-solid fa-bell fa-2x non-clickable-icon" style="pointer-events: none;"></i>
+
             </div>
             <div class="d-flex justify-content-evenly flex-row text-center">
                 <div class="navbar-profile">
@@ -23,5 +26,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </body>
+
