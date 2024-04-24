@@ -26,16 +26,22 @@ class HomeMitraController extends Controller
             'divisi_id' => 'required|exists:divisi,id',
         ]);
         $validatedData = $validator->validate();
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
-        }
+
+        // Memeriksa apakah mitra_id dan divisi_id yang dipilih sesuai dengan data di database
         $mitraId = $validatedData['mitra_id'];
         $divisiId = $validatedData['divisi_id'];
-        $user = User::findOrFail($id);
+        $mitraExists = Mitra::where('id', $mitraId)->exists();
+        $divisiExists = Divisi::where('id', $divisiId)->exists();
 
-        $user->mitra_id = $mitraId;
-        $user->divisi_id = $divisiId;
-        $user->save();
+        // if (!$mitraExists || !$divisiExists) {
+        //     return redirect()->back()->with('error', 'Mitra atau Divisi yang anda pilih salah.');
+        // }
+        // Memeriksa apakah mitra_id dan divisi_id yang dipilih sesuai dengan data di database
+        $user = User::findOrFail($id);
+        if ($user->mitra_id != $mitraId || $user->divisi_id != $divisiId) {
+            return redirect()->back()->with('error', 'Mitra atau divisi yang dipilih tidak sesuai dengan data pengguna.');
+        }
+
         return redirect()->to('/pemagang/home/' . $id);
     }
 
