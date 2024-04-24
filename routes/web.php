@@ -196,14 +196,6 @@ Route::get('/adminafterpayment', function () {
     return view('mitra.adminafterpayment');
 });
 
-
-
-Route::get('/contributingforuniv', [MahasiswaController::class, 'show']);
-
-// Route::get('/contributingforuniv', function () {
-//     return view('template.contributingforunivschool.penilaianmahasiswa');
-// });
-
 //user
 
 Route::get('/user/register', function () {
@@ -299,11 +291,6 @@ Route::get('/pengaturan-contri', function () {
 Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
-
-
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
-
-
 
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
@@ -567,6 +554,7 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'da
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
 Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 

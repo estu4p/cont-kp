@@ -63,7 +63,7 @@ class User extends Authenticatable
     }
 
     // Relasi dengan model Profile
-    
+
     public function mitra()
     {
         return $this->belongsTo(Mitra::class);
@@ -94,9 +94,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Privilage::class, 'user_privilege', 'user_id', 'privilege_id');
     }
 
-
-  
-
     public function mahasiswa()
     {
         return $this->belongsToMany(Privilage::class, 'mahasiswa', 'user_id', 'mahasiswa_id');
@@ -105,8 +102,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_user', 'user_id', 'mahasiswa_id');
     }
-   
-
 
     public function shift()
     {
@@ -131,7 +126,16 @@ class User extends Authenticatable
     {
         return $this->BelongsTo(Divisi::class, 'divisi_id');
     }
+    public function subKategoriPenilaian()
+    {
+        return $this->hasOne(SubKategoriPenilaian::class);
+    }
+    public function kategoriPenilaian()
+    {
+        return $this->hasOne(KategoriPenilaian::class);
+    }
+    public function penilaian()
+    {
+        return $this->hasMany(Penilaian::class, 'nama_lengkap');
+    }
 }
-
-
-

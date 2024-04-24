@@ -120,6 +120,7 @@ body{
 
 .navbar-profile {
   margin-right: 20px;
+
 }
 
 .profile-name,
@@ -142,3 +143,36 @@ body{
 .kanan{
     justify-content: space-between !important;
 }
+
+
+@media only screen and (min-width: 992px) {
+  .untukmobile{
+    /* padding:30px !important;
+    justify-content: space-evenly !important; */
+
+  }
+  .untukmobile div:nth-child(1){
+
+  }
+  .untukmobile div:nth-child(2){
+
+
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body{
+    padding-top: 0 !important;
+  }
+  .untukmobile{
+    padding:30px !important;
+
+  }
+  .untukmobile div{
+    margin: 20px 0;
+  }
+}
+.non-clickable-icon {
+  pointer-events: none;
+}
+

@@ -2,27 +2,31 @@
 </head>
 
 <body>
-    <a href="/superAdmin/editProfil" class="navbar d-flex justify-content-between text-decoration-none" style=" color: #000000;">
-      <div class="kosongan"></div>
+    <div class="navbar d-flex justify-content-between text-decoration-none" style="color: #000000;">
+        <div class="kosongan"></div>
         <div class="kanan d-flex flex-row justify-content-between gap-5">
-            <div class="ml-5 mr-2">
-              <i class="fa-solid fa-bell fa-2x"></i>
+
+
+            <div class="ml-5 mr-2"></div>
+            <div>
+                <i class="fa-solid fa-bell fa-2x non-clickable-icon" style="pointer-events: none;"></i>
+>>>>>>> 6f05637f7df4408f79010c45d4c3de82512248e4
             </div>
             <div class="d-flex justify-content-evenly flex-row text-center">
                 <div class="navbar-profile">
-                    <span class="profile-name fw-bold">{{ $superAdmin->nama_lengkap }}</span>
+                    <a href="/superAdmin/editProfil" at><span class="profile-name fw-bold">{{ $superAdmin->nama_lengkap }}</span></a>
                     <span class="profile-status" style="font-size: 14px;">{{ $superAdmin->status_akun }}</span>
                 </div>
                 <div class="navbar-logo">
                     @if ($superAdmin->foto_profil)
-                        <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Profile Logo">
+                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Profile Logo">
                     @else
-                        <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Profile Logo">
+                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Profile Logo">
                     @endif
                 </div>
             </div>
-
         </div>
 
-    </a>
-
+    </div>
+</body>
+>>>>>>> 6f05637f7df4408f79010c45d4c3de82512248e4

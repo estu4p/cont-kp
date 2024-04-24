@@ -13,7 +13,7 @@
                 href="/presensi">Presensi</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Penilaian</a>
+            <a class="nav-link" href="/penilaianMahasiswa">Penilaian</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/pengaturan-contri">Pengaturan</a>

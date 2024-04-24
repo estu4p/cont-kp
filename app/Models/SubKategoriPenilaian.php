@@ -15,9 +15,13 @@ class SubKategoriPenilaian extends Model
     {
         return $this->belongsTo(KategoriPenilaian::class, 'nama_kategori');
     }
-
     public function Penilaian()
     {
         return $this->belongsTo(Penilaian::class, 'nilai');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
