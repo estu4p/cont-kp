@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/super-admin.css">
+<link rel="stylesheet" href="{{ asset('assets/Css/sidebar.css') }}">
 <div class="sidebar">
   <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo">
   <ul class="nav flex-column d-flex justify-content-center">

@@ -869,7 +869,39 @@ class AdminUnivAfterPaymentController extends Controller
         $users = User::where('role_id', 3)->where('divisi_id', $id)->get();
         return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', [
             'divisi' => $divisi,
-            'users' => $users, 
+            'users' => $users,
         ]);
+    }
+    public function teamAktifEdit(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $sekolah = Sekolah::all();
+        $mitra = Mitra::all();
+        $divisi = Divisi::all();
+
+        return view('adminUniv-afterPayment.mitra.OptionEditUser', compact('user', 'sekolah', 'mitra', 'divisi'));
+    }
+    public function teamAktifEditPost(Request $request, $id)
+    {
+        // Ambil data pengguna berdasarkan ID
+        $user = User::find($id);
+
+        // Periksa apakah pengguna ditemukan
+        if ($user) {
+            // Perbarui properti pengguna sesuai dengan data yang diterima dari permintaan
+
+            $user->nama_lengkap = $request->nama_lengkap;
+            $user->sekolah = $request->sekolah;
+            $user->mitra_id = $request->mitra_id;
+            $user->divisi_id = $request->divisi_id;
+            // Simpan perubahan
+            $user->save();
+
+            // Tambahkan pesan sukses atau tindakan lain jika diperlukan
+            return redirect()->route('adminUniv.editUser', $user->id)->with('success', 'Data pengguna berhasil diperbarui.');
+        } else {
+            // Tindakan jika pengguna tidak ditemukan
+            return redirect()->back()->with('error', 'Pengguna tidak ditemukan.');
+        }
     }
 }

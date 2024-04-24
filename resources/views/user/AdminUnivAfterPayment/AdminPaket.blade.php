@@ -38,7 +38,6 @@
                                 <td>Max User 500 Siswa/Mahasiswa</td>
                             </tr>
                         </table>
-                    </div>
                     <a href="{{ route('checkout.bronze.adminUniv') }}">
                         <button type="button" class="btn btn-outline-danger mb-4 rounded-pill">Upgrade</button>
                     </a>

@@ -468,9 +468,7 @@ class ContributorForMitra extends Controller
             ->where(function ($query) {
                 $query->where('status_kehadiran', 'izin')
                     ->orWhere('status_kehadiran', 'sakit');
-            })
-            ->get();
-
+            })->get();
 
         // Mengambil data shift berdasarkan user
         $shift = Shift::where('id', $nama_lengkap)->first();
@@ -896,29 +894,10 @@ class ContributorForMitra extends Controller
     //InputNilai
     public function InputNilai($id)
     {
-        $inputnilai = Penilaian::findOrFail($id);
-
+        $inputnilai = Penilaian::with('user','subKategori', 'subKategori.kategori')->where('nama_lengkap', $id)->first();
+        
         // Mengambil data penilaian beserta relasi subKategori dan kategori berdasarkan ID
-        $penilaian = Penilaian::with('subKategori')->find($id);
-
-        // Memeriksa apakah data penilaian ditemukan
-        if (!$penilaian) {
-            // Jika tidak ditemukan, mengembalikan response dengan pesan error
-            return abort(404, 'Data penilaian tidak ditemukan.');
-        }
-        // Memeriksa apakah relasi subKategori tersedia
-        if ($penilaian->subKategori !== null) {
-            // Jika relasi subKategori tersedia, gunakan metode where() untuk mencari nilaiSubkategori
-            $nilaiPemahamanDesain = $penilaian->kategori->where('sub_id', 'Pemahaman Penerapan Desain')->first()->nilai;
-            $nilaiDesainThinking = $penilaian->kategori->where('sub_id', 'Desain Thinking')->first()->nilai;
-        } else {
-            // Jika relasi subKategori null, handle sesuai kebutuhan aplikasi Anda
-            // Misalnya, set nilaiSubkategori menjadi null atau berikan nilai default
-            $nilaiPemahamanDesain = null;
-            $nilaiDesainThinking = null;
-        }
-
         // Mengirim data ke view 'input-nilai' bersamaan dengan nama variabel yang sesuai
-        return view('penilaian-siswa.input-nilai', compact('penilaian', 'nilaiPemahamanDesain', 'nilaiDesainThinking', 'inputnilai'));
+        return view('penilaian-siswa.input-nilai', compact('inputnilai'));
     }
 }

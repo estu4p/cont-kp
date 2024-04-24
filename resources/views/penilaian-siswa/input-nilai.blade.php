@@ -7,7 +7,6 @@
 
 
 <div class="wadah">
-
     <div class="judul d-flex flex-row justify-content-start">
         <a href="/penilaian-mahasiswa"> <i class="fa-solid text-dark ikon-kiri fa-chevron-left icon fs-1 p-2"></i></a>
         <div class="tengah-judul d-flex flex-row align-items-center gap-3">
