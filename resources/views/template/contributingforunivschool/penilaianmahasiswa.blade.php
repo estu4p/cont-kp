@@ -42,9 +42,10 @@
                             <td>
                                 <div class="{{ $mhs['status'] }}">{{ $mhs->status_akun }}</div>
                             </td>
-                            <td><a href="/lihat"> <i class="fa-solid fa-file-lines"></i></a></td>
+                            {{-- <td><a href="/lihat,['id' => $mhs->id]"> <i class="fa-solid fa-file-lines"></i></a></td> --}}
+                            <td><a href="{{ route('penilaian', ['id' => $mhs->id])}}"><i class="fa-solid fa-file-lines"></i></a></td>
                         </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
             </table>
         </div>
