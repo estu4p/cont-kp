@@ -41,7 +41,7 @@
             <div class="jam" id="jam"><?php echo date('H:i:s'); ?></div>
         </div>
         <div class="tengah">
-            <h3>"Change your life now for better future"</h3>
+           <h3>"{{ $quote->quote }}"</h3>
         </div>
         <div class="bawah mx-auto">
             <div class="judul d-flex flex-row justify-content-start">
@@ -70,7 +70,8 @@
     </div>
     <div class="wadah">
         <div class="qr">
-            <button class="btnqr"><a href="/pemagang/MyQR/{{ Auth::id() }}" style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
+            <button class="btnqr"><a href="/pemagang/MyQR/{{ Auth::id() }}"
+                    style="text-decoration: none;  color: #A4161A;">Lihat QR Code Saya</a></button>
         </div>
         <div class="konten">
             <div class="shif">
@@ -240,7 +241,7 @@
                         <div class="bawahmodal">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                             <input type="hidden" name="id" value="{{ Auth::id() }}">
-                            <input type="text" id="jamSekarang" name="jam" readonly
+                            <input type="hidden" id="jamSekarang" name="jam" readonly
                                 value="{{ now()->format('H:i:s') }}">
                             <input type="hidden" name="hari" value="{{ date('Y-m-d') }}">
                             <input type="hidden" name="status_kehadiran" value="Hadir">
@@ -280,7 +281,7 @@
         </div>
     </div>
 
-    
+
     <script></script>
     <script>
         function showmodal() {

@@ -10,6 +10,7 @@ use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Quotes;
 use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -38,40 +39,12 @@ class HomeMitraController extends Controller
         return redirect()->to('/pemagang/home/' . $id);
     }
 
-    //return ke 3 view
-    // public function profil($id)
-    // {
-    //     $user = Auth::user();
-    //     $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
-    //     $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
-    //     $today = date('F Y/d');
-    //     $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
-
-    //     $view = 'pemagang.home';
-
-    //     if ($user->role_id === 3 && $user->izinSubmitted) {
-    //         $view = 'pemagang.gantiJam';
-    //     } elseif ($user->role_id === 3) {
-    //         $view = 'user.home';
-    //     }
-
-    //     return view($view, [
-    //         'title' => "Home",
-    //         'button' => "Masuk",
-    //         'route' => '/jamMasuk/{id}',
-    //         'data' => $dataPresensi,
-    //         'nama_divisi' => $nama_divisi,
-    //         'nama_sekolah' => $nama_sekolah,
-    //         'today' => $today,
-    //         'user' => $user,
-    //     ]);
-    // }
-
     public function profil($id)
     {
         $user = Auth::user();
         $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
         $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
+        $quote = Quotes::inRandomOrder()->first();
         $today = date('F Y/d');
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
         
@@ -84,6 +57,7 @@ class HomeMitraController extends Controller
             'nama_sekolah' => $nama_sekolah,
             'today' => $today,
             'user' => $user,
+            'quote' => $quote,
         ]);
     }
 
@@ -106,7 +80,6 @@ class HomeMitraController extends Controller
         $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
-        $data->jam_default_masuk = $jam_default_masuk;
         $data->status_ganti_jam = $status_ganti_jam;
         $data->save();
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
@@ -118,7 +91,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response([
@@ -145,7 +119,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -172,7 +147,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -199,7 +175,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -235,7 +212,8 @@ class HomeMitraController extends Controller
                     'user' => $user,
                     'today' => date('F Y/d'),
                     'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                    'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                    'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                    'quote' => Quotes::inRandomOrder()->first()
                 ]);
             } else {
                 return response()->json([
@@ -266,7 +244,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -292,7 +271,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -326,7 +306,8 @@ class HomeMitraController extends Controller
                 'user' => $user,
                 'today' => date('F Y/d'),
                 'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -346,72 +327,17 @@ class HomeMitraController extends Controller
             'user' => $user,
             'today' => date('F Y/d'),
             'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-            'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
+            'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+            'quote' => Quotes::inRandomOrder()->first()
         ]);
     }
 
-    public function generateQRCode(Request $request, $id)
-    {
+    public function generateQRCode(Request $request, $id){
         $user = Auth::user();
-        $presensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
-        if (!$presensi) {
-            return response()->json([
-                'status' => 'Pengguna tidak ditemukan'
-            ], 404);
-        }
-
-        $currentTime = Carbon::now();
-        $sessionKey = 'lastBarcodeTime_' . $id;
-        $lastBarcodeTime = $request->session()->get($sessionKey, null);
-
-        if (!$lastBarcodeTime || $currentTime->diffInMinutes($lastBarcodeTime) >= 5) {
-            $qrCode = QrCode::size(300)->format('svg')->generate("ID: $id");
-            $filename = "qrcode_$id.svg";
-            $path = public_path("barcodes/$filename");
-            file_put_contents($path, $qrCode);
-            $path = str_replace('\\', '/', $path);
-
-            $presensi->barcode = "/barcodes/$filename";
-            $presensi->save();
-
-            $request->session()->put($sessionKey, $currentTime);
-
-            return response()->json([
-                'status' => 'QR Code berhasil dibuat dan disimpan',
-                'barcode_url' => asset("barcodes/$filename")
-            ]);
-        } else {
-            $remainingTime = 5 - $currentTime->diffInMinutes($lastBarcodeTime);
-            if ($remainingTime < 0) {
-                $request->session()->forget($sessionKey);
-                return $this->generateQRCode($request, $id);
-            } else {
-                return response()->json([
-                    'status' => 'Anda hanya dapat mengubah barcode setiap 5 menit',
-                    'remaining_time' => $remainingTime
-                ], 403);
-            }
-        }
-    }
-
-    public function detailGantiJam(Request $request, $id)
-    {
-        $user = Auth::user();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
-        $data = Presensi::select('hari', 'keterangan_status', 'status_kehadiran')->find($id);
-        if ($dataPresensi) {
-            return response([
-                'pesan' => 'dataPresensi berhasil di tampilkan',
-                'dataPresensi' => $dataPresensi,
-                'user' => $user,
-                'today' => date('F Y/d'),
-                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first()
-            ], 200);
-        } else {
-            return response([
-                'pesan' => 'data tidak ada',
-            ], 404);
-        }
+        $userData = $user->id; 
+        $barcodeSvg = QrCode::size(300)->generate($userData);
+        return view('pemagang.myqr' ,[
+            'user' => $user,
+        ],compact('barcodeSvg'));
     }
 }

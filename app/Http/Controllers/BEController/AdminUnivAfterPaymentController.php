@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Models\Riwayat;
 use DateTime;
 use Carbon\Carbon;
 use App\Models\User;
@@ -10,8 +9,10 @@ use App\Models\Mitra;
 use App\Models\Paket;
 use App\Models\Divisi;
 use App\Mail\SendEmail;
+use App\Models\Riwayat;
 use App\Models\Sekolah;
 use App\Models\Presensi;
+use App\Models\Mahasiswa;
 use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
@@ -168,18 +169,19 @@ class AdminUnivAfterPaymentController extends Controller
     }
 
 
-    public function adminUnivMitra(Request $request)
-    // univ - mitra
-    {
-        $mitra = Mitra::withCount('mahasiswa')->get();
-        // $mitra = Mitra::all();
+    // public function adminUnivMitra(Request $request)
+    // // univ - mitra
+    // // punya nopal be
+    // {
+    //     $mitra = Mitra::withCount('mahasiswa')->get();
+    //     // $mitra = Mitra::all();
 
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
-        } else {
-            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
-        }
-    }
+    //     if ($request->is('api/*') || $request->wantsJson()) {
+    //         return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
+    //     } else {
+    //         return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
+    //     }
+    // }
 
     public function adminUnivDivisiMitra($id)
     {
@@ -244,34 +246,37 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function daftarMitraTeamAktif(Request $request, $id)
-    // daftarMitra-teamAktif
-    {
+    // public function daftarMitraTeamAktif(Request $request, $id)
+    // // daftarMitra-teamAktif
+    // // Punya Nopal BE
+    // {
 
-        // $divisi = Mitra::with('divisiMitra')->findOrFail($id);
-        // $divisiMitra = $divisi->divisi_mitra;
-        $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
-        $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
-        $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'team aktif',   'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
-        } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota', 'divisiMitraId'));
-        }
-    }
+    //     // $divisi = Mitra::with('divisiMitra')->findOrFail($id);
+    //     // $divisiMitra = $divisi->divisi_mitra;
+    //     $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
+    //     $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+    //     // dd($divisiMitra);
+    //     $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
+    //     if ($request->is('api/*') || $request->wantsJson()) {
+    //         return response()->json(['message' => 'team aktif',   'divisiMitra' => $divisiMitra, 'jml_anggota' => $jml_anggota]);
+    //     } else {
+    //         return view('adminUniv-afterPayment.mitra.Option-TeamAktif', compact('divisiMitra', 'jml_anggota', 'divisiMitraId'));
+    //     }
+    // }
 
-    public function daftarMitraPengaturanDivisi(Request
-    $request, $id)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
-    {
-        $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+    // public function daftarMitraPengaturanDivisi(Request
+    // $request, $id)
+    // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
+    // punya nopal BE
+    // {
+    //     $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
 
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
-        } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
-        }
-    }
+    //     if ($request->is('api/*') || $request->wantsJson()) {
+    //         return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+    //     } else {
+    //         return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
+    //     }
+    // }
 
     public function addDivisi(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
@@ -387,30 +392,31 @@ class AdminUnivAfterPaymentController extends Controller
         ]);
     }
 
-    public function teamAktifKlik(Request $Request, $id)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
-    {
-        // $divisi = Divisi::with('anggotaDivisi')->find($id);
+    // public function teamAktifKlik(Request $Request, $id)
+    // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
+    // //punya Nopal Be
+    // {
+    //     // $divisi = Divisi::with('anggotaDivisi')->find($id);
 
-        $divisi = User::where('role_id', 3)->where('divisi_id', $id)->get();
+    //     $divisi = User::where('role_id', 3)->where('divisi_id', $id)->get();
 
-        // $user = $anggota_divisi->nama_lengkap;
+    //     // $user = $anggota_divisi->nama_lengkap;
 
-        if (!$divisi) {
-            return response()->json(['message' => 'Divisi not found'], 404);
-        }
+    //     if (!$divisi) {
+    //         return response()->json(['message' => 'Divisi not found'], 404);
+    //     }
 
-        if ($Request->is('api/*') || $Request->wantsJson()) {
-            return response()->json([
-                'message' => 'Success to get detail data divisi with mahasiswa',
-                'data' => $divisi,
+    //     if ($Request->is('api/*') || $Request->wantsJson()) {
+    //         return response()->json([
+    //             'message' => 'Success to get detail data divisi with mahasiswa',
+    //             'data' => $divisi,
 
-                // 'user' => $user
-            ]);
-        } else {
-            return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
-        }
-    }
+    //             // 'user' => $user
+    //         ]);
+    //     } else {
+    //         return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', compact('divisi'));
+    //     }
+    // }
 
     public function teamAktifSeeAllTeam(Request $request) // menggunakan $id mitra jika berdasarkan mitra yang diikuti
     {
@@ -752,58 +758,118 @@ class AdminUnivAfterPaymentController extends Controller
     public function bagianMitra()
     {
         // $mitra=User::all();
-        $mitra=User::where('role_id', 5)->select('nama_lengkap', 'username')->get();
+        $mitra = User::where('role_id', 5)->select('nama_lengkap', 'username')->get();
 
-        return response()->json(['data'=> $mitra]);
+        return response()->json(['data' => $mitra]);
     }
+    public function editUserMitra(Request $request, $id)
+    {
+        $user = User::find($id);
 
-    public function editUsermitra()
-    {
-       $user = auth()->user();
-       return response()->json(['data'=> $user]);
-    }
-    public function editUsermitraupdate(Request $request)
-    {
-        $user = auth()->user();
-        // Validasi data
-        $request->validate([
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email,'.$user->id,
-            'phone' => 'nullable|string|max:20',
+        $data = [
+            'nama_lengkap' => 'nullable|string|max:255',
+            'username' => 'nullable|string|unique:users,username',
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id,
+            'no_hp' => 'nullable|string|max:20',
             'password' => 'nullable|string|min:8|confirmed',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //ukuran file 2MB
-            'mahasiswa' => 'nullable|string', // penambahan mahasiswa
-        ]);
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
 
-        // Update data profil pengguna
-        $user->name = $request->name;
+        $validator = Validator::make($request->all(), $data);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // Update user mitra data
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->foto_profil = $request->foto_profil;
         $user->email = $request->email;
-        $user->phone = $request->phone;
+        $user->username = $request->username;
+        $user->no_hp = $request->no_hp;
 
-        // memeriksa jika ada perubahan password
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
         }
 
-        // memeriksa jika ada foto yang diunggah
-        if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
-            if ($user->photo) {
-                Storage::delete($user->photo);
-            }
-
-            // menyimpan foto baru
-            $photoPath = $request->file('photo')->store('public/photos');
-            $user->photo = $photoPath;
-        }
-
         $user->save();
 
-        // penambahan data mahasiswa
-        if ($request->filled('mahasiswa')) {
-            $mahasiswa=User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
-        }
+        $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+        $mahasiswa = $request->input('mahasiswa_id');
+        $result = [];
 
-        // return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
+        Mahasiswa::where('user_id', $user->id)->delete();
+
+        if (is_array($mahasiswa) && !empty($mahasiswa)) {
+            foreach ($mahasiswa as $mhs) {
+                Mahasiswa::create([
+                    'user_id' => $user->id,
+                    'mahasiswa_id' => $mhs,
+                ]);
+
+                $result[] = [
+                    'user_id' => $user->id,
+                    'mahasiswa_id' => $mhs,
+                ];
+            }
         }
+        $mahasiswa = User::where('role_id', 3)->select('nama_lengkap', 'nomor_induk', 'jurusan')->get();
+
+        return response()->json(['message' => 'Profile updated successfully', 'tambah' => $mahasiswa], 200);
+    }
+
+    // ALWAN BE
+    public function daftarMitraTeamAktif(Request $request, $id)
+    // daftarMitra-teamAktif
+    {
+        $divisi = Mitra::with('divisiMitra')->findOrFail($id);
+        $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
+        $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+        $jml_anggota = User::with('divisi')->where('role_id', 3)->where('mitra_id', $id)->count();
+        return view('adminUniv-afterPayment.mitra.Option-TeamAktif', [
+            'divisi' => $divisi,
+            'divisiMitra' => $divisiMitra,
+            'jml_anggota' => $jml_anggota,
+            'divisiMitraId' => $divisiMitraId,
+        ]);
+    }
+
+    public function adminUnivMitra(Request $request)
+    // univ - mitra
+    {
+        $mitra = Mitra::withCount('mahasiswa')->get();
+        // $mitra = Mitra::all();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
+        }
+    }
+
+    public function daftarMitraPengaturanDivisi(Request $request, $id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
+    {
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
+        }
+    }
+
+    public function teamAktifKlik(Request $Request, $id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
+    {
+        $divisi = Divisi::with('anggotaDivisi')->find($id);
+        if (!$divisi) {
+            return response()->json(['message' => 'Divisi not found'], 404);
+        }
+        $users = User::where('role_id', 3)->where('divisi_id', $id)->get();
+        return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', [
+            'divisi' => $divisi,
+            'users' => $users, 
+        ]);
+    }
 }

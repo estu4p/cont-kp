@@ -18,7 +18,7 @@
 
     <div class="text-capitalize p-5" style="background-color: #F2F4F7; max-height: 100%;">
         <h4 class="text-center fw-bold">selesaikan pembayaran anda</h4>
-        <div class="checkout mt-5">
+        <div class="checkout mt-5  max582">
             <form class="fw-medium">
                 <label for="paket" class="mt-4">paket<span class="text-danger">*</span></label>
                 <div class="d-flex">
@@ -37,28 +37,33 @@
 
                 <label for="bayar" class="mt-4">metode pembayaran<span class="text-danger">*</span></label>
                 <div class="d-flex">
-                    <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img
-                            src="{{ asset('assets/images/icon/bayar.png') }}" style="width: 25px" class="icon-labelinput">
-                    </div>
-                    <button id="pilihMetode" class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="border: 2px solid #E9E9E9; padding: 15px; border-radius: 0px 8px 8px 0px; width: 100%;">
-                        Pilih Metode Pembayaran<i class="fa-solid fa-caret-down" style="padding-left: 40%"></i>
-                      </button>
+                <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img src="{{ asset('assets/images/icon/bayar.png') }}" style="width: 25px" class="icon-labelinput">
                 </div>
+               <button id="pilihMetode" class="btn" type="button" style="border: 2px solid #E9E9E9; padding: 15px; border-radius: 0px 8px 8px 0px; width: 100%;">
+                    Pilih Metode Pembayaran<i class="fa-solid fa-caret-down" style="padding-left: 40%;z-index:20;"></i>
+                </button>
+     
+            </div>
 
-                <div class="collapse" id="collapseExample">
-                    <div class="dalam card-body" style="display: flex">
-                      <div>
-                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="Mandiri Virtual Account"> Mandiri Virtual Account <img src="/assets/images/icon/mandiri.png" > </div>
-                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BNI Virtual Account"> BNI Virtual Account <img src="/assets/images/icon/bni.png"></div>
-                        <div class="list-pembayaran" ><input type="radio" class="radio" name="metode" value="Shopee Pay"> Shopee Pay <img src="/assets/images/icon/shopeePay.png" ></div>
-                      </div>
-                      <div>
-                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BCA Virtual Account"> BCA Virtual Account <img src="/assets/images/icon/bca.png" ></div>
-                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BRI Virtual Account"> BRI Virtual Account <img src="/assets/images/icon/bri.png" ></div>
-                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="GoPay"> GoPay <img src="/assets/images/icon/gopay.png" ></div>
-                      </div>
+            <div class="collapse " id="collapseExample">
+          
+                <div class="dalam w-100 border border mnone" style="display:flex; border:none !important;">
+                    <div class="dalamchild">
+                         <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="Mandiri Virtual Account"> Mandiri Virtual Account 
+                            <img src="/assets/images/icon/mandiri.png"> 
+                        </div>
+                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BNI Virtual Account"> BNI Virtual Account   
+                            <img src="/assets/images/icon/bni.png">
+                        </div>
+                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="Shopee Pay"> Shopee Pay <img src="/assets/images/icon/shopeePay.png"></div>
                     </div>
-                  </div>
+                    <div class="dalamchild">
+                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BCA Virtual Account"> BCA Virtual Account <img src="/assets/images/icon/bca.png"></div>
+                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="BRI Virtual Account"> BRI Virtual Account <img src="/assets/images/icon/bri.png"></div>
+                        <div class="list-pembayaran"><input type="radio" class="radio" name="metode" value="GoPay"> GoPay <img src="/assets/images/icon/gopay.png"></div>
+                    </div>
+                </div>
+            </div>
 
 
                 <label for="kota" class="mt-4">lokasi<span class="text-danger">*</span></label>
@@ -112,19 +117,31 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const radios = document.querySelectorAll('.radio');
-      const button = document.getElementById('pilihMetode');
-      const collapseExample = document.getElementById('collapseExample');
+     document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.querySelectorAll('.radio');
+        const button = document.getElementById('pilihMetode');
+        const collapseExample = document.getElementById('collapseExample');
 
-      radios.forEach(radio => {
-        radio.addEventListener('change', function() {
-          if (this.checked) {
-            button.textContent = ' ' + this.value;
-            collapseExample.classList.remove('show'); // Menghilangkan kelas 'show' dari elemen collapse
-          }
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    button.textContent = ' ' + this.value;
+                    collapseExample.classList.remove('show'); 
+                }
+            });
         });
-      });
+
+
+        button.addEventListener('click', function() {
+            if (collapseExample.classList.contains('show')) {
+                collapseExample.classList.remove('show');
+            } else {
+                collapseExample.classList.add('show');
+                collapseExample.style.marginBottom="70px";
+            }
+        });
+
+
     });
   </script>
 

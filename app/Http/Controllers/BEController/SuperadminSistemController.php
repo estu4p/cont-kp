@@ -21,9 +21,9 @@ class SuperadminSistemController extends Controller
         $superAdmin = User::where('role_id', 1)->first();
         $jumlah_admin_sistem = User::where('role_id', 2)->count();
         $jumlah_subscriptions = Subscription::count();
+
         return view('superAdmin.dashboard', [
-            'title' => "Super Admin - Dashboard",
-            'subscription' => 200,
+            'title' => "Dashboard",
             'admin_sistem' => $jumlah_admin_sistem,
             'subscription' => $jumlah_subscriptions,
             'superAdmin' => $superAdmin,
@@ -143,6 +143,7 @@ class SuperadminSistemController extends Controller
         // ]);
         return view('superAdmin.dataAdmin', compact('superAdmin', 'admins', 'title'));
     }
+
 
     public function showAlertAdmin($adminId)
     {

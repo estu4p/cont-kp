@@ -57,7 +57,7 @@
                 <br>
                 <p style="text-align: center;">Scan Barcode Anda</p>
                 <div>
-                    <video style="width: 100%" id="preview"></video>
+                    <video style="width: 100%" id="preview" @disabled(true)></video>
                 </div>
                 <form action="" method="POST" id="form">
                     @csrf
@@ -95,6 +95,13 @@
                     <tr>
                         <td class="keterangan"><i class="bi bi-clock"></i> Jam Pulang</td>
                         <td class="isi">{{ $presensi->jam_pulang }}</td>
+                    </tr>
+                    <tr>
+                        <td class="keterangan"><i class="bi bi-clock"></i> Jam Pulang</td>
+                        <td class="isi" style="color: {{ $presensi->kurang_jam_kerja ? 'red' : 'green' }}">
+                            {{ $presensi->kurang_jam_kerja }}
+                        </td>
+
                     </tr>
                 </tbody>
             </table>

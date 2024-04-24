@@ -61,29 +61,25 @@
                                 {{ $today }}
                             </p>
                         </form>
-                        {{-- <p class="name fz9 m-0"><b>PIQRI</b></p>
-                        <p class="nip fz9 m-0">NIP: MJ/UIUX/POLINES/AGST2023/06</p> --}}
                     </div>
                 </div>
             </div>
             <div class="logout">
-                <button onclick="showSweet()" style="background-color: transparent; border: none;"><i
-                        class="fa-solid text-white fa-arrow-right-from-bracket"></i>
+                <a href="/user/login">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: white;"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="wadah">
         <div style="display: flex; align-items: center; justify-content: space-between;  ">
-
-            <a href="/UserScanQRDefault" style=""><i class="fa-solid fa-chevron-left"
+            <a href="/pemagang/home/{{ Auth::id() }}" style=""><i class="fa-solid fa-chevron-left"
                     style="font-size: 30px;"></i></a>
             <div class="tittle-container">
                 <h1 style="padding: 20px; text-align: center; font-size: 20px;" class="datahari">
                     Data Hari Mengganti Jam</h1>
             </div>
             <div class=""></div>
-
-
         </div>
     </div>
 
@@ -101,45 +97,27 @@
             <tbody class="table-borderless table-group-divider">
                 @php
                     $totalData = 1;
+                    $dataPresensi = App\Models\Presensi::where('status_ganti_jam', 'Ganti Jam')
+                        ->orderBy('created_at', 'asc')
+                        ->get();
                 @endphp
                 @foreach ($dataPresensi as $item)
-                    @if (is_object($item))
-                        <tr>
-                            <th scope="row" class="tangah">{{ $totalData++ }}</th>
-                            <td class="tangah">
-                                {{ \Carbon\Carbon::parse($item->hari)->translatedFormat('l, d F Y', 'ID') }}</td>
-                            <td class="fixed-width"> {{ $item->keterangan_status }}</td>
-                            <td style="color :red;" class="tangah">{{ $item->status_ganti_jam }}</td>
-                            <td class="tangah"><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat
-                                    Bukti</button>
-                            </td>
-                        </tr>
-                    @endif
+                    <tr>
+                        <th scope="row" class="tangah">{{ $loop->iteration }}</th>
+                        <td class="tangah">{{ \Carbon\Carbon::parse($item->hari)->translatedFormat('l, d F Y', 'ID') }} </td>
+                        <td class="fixed-width">{{ $item->keterangan_status }}</td>
+                        <td style="color :red;" class="tangah">{{ $item->status_ganti_jam }}</td>
+                        <td class="tangah">
+                            <a href="{{$item->bukti_foto_izin}}">
+                                <button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
                 @endforeach
-                <tr>
-                    <th class="align-middle">5</th>
-                    <td class="align-middle">Senin 30-10-2023</td>
-                    <td class="align-middle">Gak Dibangunin Temen Kos</td>
-                    <td class="align-middle" style="color :red;">Ganti jam</td>
-                    <td><button type="button" class="btn btn-info" style="color: #ffffff;">Lihat Bukti</button></td>
-                </tr>
             </tbody>
         </table>
     </div>
-
-    <script>
-        setInterval(function() {
-            var now = new Date();
-            var jam = now.getHours();
-            var menit = now.getMinutes();
-            var detik = now.getSeconds();
-            jam = jam < 10 ? "0" + jam : jam;
-            menit = menit < 10 ? "0" + menit : menit;
-            detik = detik < 10 ? "0" + detik : detik;
-            var waktu = jam + ":" + menit + ":" + detik;
-            document.getElementById('jam').innerText = waktu;
-        }, 1000);
-    </script>
 </body>
 
 </html>

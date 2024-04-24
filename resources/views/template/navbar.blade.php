@@ -11,12 +11,12 @@
               </div>
               <div class="d-flex justify-content-evenly flex-row ">
                   <div class="navbar-profile">
-                      <span class="profile-name">Nama Profil</span>
-                      <span class="profile-status">Status Profil</span>
+                      <span class="profile-name">Lala Lisa</span>
+                      <span class="profile-status">Guru</span>
                   </div>
                   <div class="navbar-logo">
 
-                      <img src="{{ asset('assets/images/Rectangle 22.png') }}" alt="Profile Logo">
+                      <img src="{{ asset('assets/images/Lalalisa.png') }}" alt="Profile Logo">
 
                   </div>
               </div>

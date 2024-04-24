@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use Illuminate\Http\Request;
 use App\Models\Shift;
 use App\Models\KategoriPenilaian;
+use App\Models\Penilaian;
 use App\Models\SubKategoriPenilaian;
 use App\Models\User;
 use App\Models\Presensi;
@@ -467,7 +468,9 @@ class ContributorForMitra extends Controller
             ->where(function ($query) {
                 $query->where('status_kehadiran', 'izin')
                     ->orWhere('status_kehadiran', 'sakit');
-            })->get();
+            })
+            ->get();
+
 
         // Mengambil data shift berdasarkan user
         $shift = Shift::where('id', $nama_lengkap)->first();
@@ -775,6 +778,8 @@ class ContributorForMitra extends Controller
         $Presensi->nama_lengkap = $request->nama_lengkap;
         $Presensi->hari = date('Y-m-d');
         $Presensi->jam_masuk = now();
+        $Presensi->status_ganti_jam = 'Tidak Ganti Jam';
+        $Presensi->target = 3600;
         $Presensi->save();
 
         return redirect('mitra-presensi-barcode/istirahat')->with('success', 'silahkan masuk');
@@ -839,12 +844,29 @@ class ContributorForMitra extends Controller
             $jam_pulang = now();
             $jam_masuk = Carbon::parse($presensi->jam_masuk);
 
-            // Menghitung total jam kerja dalam bentuk jam
-            $total_jam_kerja = $jam_pulang->diff($jam_masuk)->format('%H:%I:%S');
+            // Menghitung total jam kerja dalam bentuk detik
+            $total_jam_kerja_detik = $jam_pulang->diffInSeconds($jam_masuk);
 
             $presensi->jam_pulang = $jam_pulang;
-            $presensi->total_jam_kerja = $total_jam_kerja;
+
+            // Total jam kerja yang diinginkan
+            $jam_kerja = 0; // Jam
+            $menit_kerja = 0.1; // Menit
+
+            // Ubah total jam kerja yang diinginkan ke dalam detik
+            $total_jam_kerja_diinginkan_detik = ($jam_kerja * 3600) + ($menit_kerja * 60);
+
+            // Hitung selisih waktu kerja yang diinginkan dengan total jam kerja
+            $kurang_jam_kerja_detik = $total_jam_kerja_diinginkan_detik - $total_jam_kerja_detik;
+
+            // Ubah kembali ke format jam:menit:detik jika perlu
+            $kurang_jam_kerja = gmdate("H:i:s", $kurang_jam_kerja_detik);
+
+            $presensi->total_jam_kerja = gmdate("H:i:s", $total_jam_kerja_detik);
+            $presensi->kurang_jam_kerja = $kurang_jam_kerja;
+
             $presensi->save();
+
             return redirect('mitra-presensi-barcode/selesai')->with('success', 'silahkan masuk')->with('presensi', $presensi);
         } else {
             return response()->json(['message', 'gagal']);
@@ -868,10 +890,35 @@ class ContributorForMitra extends Controller
         $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
         $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
 
-        return response()->json([
-            'total_mahasiswa' => $totalMahasiswa,
-            'total_hadir' => $totalHadir,
-            'total_izin' => $totalIzin,
-        ]);
+        return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin'));
+    }
+
+    //InputNilai
+    public function InputNilai($id)
+    {
+        $inputnilai = Penilaian::findOrFail($id);
+
+        // Mengambil data penilaian beserta relasi subKategori dan kategori berdasarkan ID
+        $penilaian = Penilaian::with('subKategori')->find($id);
+
+        // Memeriksa apakah data penilaian ditemukan
+        if (!$penilaian) {
+            // Jika tidak ditemukan, mengembalikan response dengan pesan error
+            return abort(404, 'Data penilaian tidak ditemukan.');
+        }
+        // Memeriksa apakah relasi subKategori tersedia
+        if ($penilaian->subKategori !== null) {
+            // Jika relasi subKategori tersedia, gunakan metode where() untuk mencari nilaiSubkategori
+            $nilaiPemahamanDesain = $penilaian->kategori->where('sub_id', 'Pemahaman Penerapan Desain')->first()->nilai;
+            $nilaiDesainThinking = $penilaian->kategori->where('sub_id', 'Desain Thinking')->first()->nilai;
+        } else {
+            // Jika relasi subKategori null, handle sesuai kebutuhan aplikasi Anda
+            // Misalnya, set nilaiSubkategori menjadi null atau berikan nilai default
+            $nilaiPemahamanDesain = null;
+            $nilaiDesainThinking = null;
+        }
+
+        // Mengirim data ke view 'input-nilai' bersamaan dengan nama variabel yang sesuai
+        return view('penilaian-siswa.input-nilai', compact('penilaian', 'nilaiPemahamanDesain', 'nilaiDesainThinking', 'inputnilai'));
     }
 }
