@@ -16,7 +16,7 @@ class UserAdminSistemController extends Controller
 {
     public function IndexSubscription(Request $request)
     {
-        $User = User::where('role_id', 2)->first();
+        $userAdmin = User::where('role_id', 2)->first();
         $subscriptions = Subscription::with(['user.perguruanTinggi', 'paket', 'user.sekolah'])->get();
         $paket = Paket::all();
         $sekolah = Sekolah::pluck('nama_sekolah', 'id');
@@ -25,13 +25,13 @@ class UserAdminSistemController extends Controller
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
             'title' => "Subscription",
-            'user' => $User,
+            'user' => $userAdmin,
             'subscriptions' => $subscriptions,
             'sekolah' => $sekolah,
             'paket' => $paket,
             ], 200);
         } else {
-            return view('SistemLokasi.AdminSistem-Subcription', compact(['User', 'subscriptions', 'sekolah', 'paket']));
+            return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'paket']));
         }
     }
     public function storeSubs(Request $request)
