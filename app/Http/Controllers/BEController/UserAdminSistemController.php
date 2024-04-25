@@ -4,7 +4,6 @@ namespace App\Http\Controllers\BEController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Subscription;
 use App\Models\Paket;
 use App\Models\Sekolah;
@@ -16,7 +15,7 @@ class UserAdminSistemController extends Controller
 {
     public function IndexSubscription(Request $request)
     {
-        $userAdmin = User::where('role_id', 2)->first();
+        $userAdmin = auth()->user();
         $subscriptions = Subscription::with(['user.perguruanTinggi', 'paket', 'user.sekolah'])->get();
         $paket = Paket::all();
         $sekolah = Sekolah::pluck('nama_sekolah', 'id');

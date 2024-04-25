@@ -21,7 +21,7 @@
                     <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
                 <!-- @endif -->
                 <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                    <form action="{{ route('userAdmin.updateFoto', $userAdmin->username) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('userAdmin.updateFoto', $userAdmin->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <input type="file" name="foto_profil" id="uploadFoto" style="display: none;" onchange="uploadFile()">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             
-            <form action="{{ route('userAdmin.updateProfile', $userAdmin->username )}}" method="POST">
+            <form action="{{ route('userAdmin.updateProfile', $userAdmin->id )}}" method="POST">
                 @csrf
                 @method('PUT')
                 <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">personal details</h6>
@@ -76,14 +76,15 @@
                         </div>
                 <div class="form-group form-floating">
                     <div class="col-12  ">
-                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
+                        <textarea id="about" name="about" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
-                <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;" onclick="showSuccessModal()">Update</button>
-            </div>
+             </div>
+                <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                    <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                    
+                    <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
+                </div>
             </form>
         </div>
     </div>

@@ -16,12 +16,14 @@ class Penilaian extends Model
     }
     public function subKategori()
     {
-        return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id', 'id');
+        return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id', 'id', 'nama_sub_kategori');
     }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'nama_lengkap');
     }
+
 
     public function kategoriPenilaian()
     {

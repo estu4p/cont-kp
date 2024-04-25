@@ -22,4 +22,8 @@ class KategoriPenilaian extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function penilaian()
+    {
+      return $this->hasMany(Penilaian::class, 'kategori_id');
+    }
 }

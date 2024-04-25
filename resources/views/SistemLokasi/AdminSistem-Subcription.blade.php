@@ -130,11 +130,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="inputt" id="nama" name="nama" placeholder="Raihan Hafidz">
+                                <input type="text" class="inputt" id="nama" name="nama" placeholder="{{ $subscription->user->nama_lengkap }}">
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="text" class="inputt" id="Email" name="Email" placeholder="RaihanHafidz@gmail.com">
+                                <input type="text" class="inputt" id="Email" name="Email" placeholder="{{ $subscription->user->email }}">
                             </div>
                             <div class="form-group">
                                 <label for="Telepon">Telepon</label>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Sekolah">Sekolah/perguruantinggi</label>
-                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="Universitas Ahmad Dahlan">
+                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="{{ $sekolah[$subscription->user->sekolah] }}">
                             </div>
                         </div>
                         <div class="kanann">
