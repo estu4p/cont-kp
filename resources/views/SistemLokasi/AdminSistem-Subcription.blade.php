@@ -28,16 +28,16 @@
         </div>
         <div>
             <select name="page" class="page">
-                <option value="page">page 1 of 1</option>
+                <option value="1">page 1 of 2</option>
             </select>
             <select name="item" class="bodi">
-                <option value="item">5 item per page</option>
+            <option value="5" selected>5 item per page</option>
             </select>
         </div>
 
         <div class="tabel">
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead class="text-center">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -49,16 +49,38 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>Raihan Hafidz</td>
-                        <td>valhanhafidz@gmail.com</td>
-                        <td>Universitas Ahmad Dahlan</td>
-                        <td>
-                            <div class="Bronze">Bronze</di>
-                        </td>
-                        <td>Yogyakarta</td>
+            @foreach($subscriptions as $key => $subscription)
+            <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
+                        <td class="align-middle">{{ $subscription->user->email }}</td>
+                        <td class="align-middle">{{ $sekolah[$subscription->user->sekolah] }}</td>
+                        @if ($subscription->paket->paket === 'Bronze')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Silver')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Gold')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @endif
+                        <td class="align-middle">{{ $subscription->user->kota }}</td>
                         <td>
                             <div class="aksi d-flex flex-row justify-content-around ">
                                 <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
@@ -71,94 +93,9 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
 
-                    <tr>
-                        <td>2</td>
-                        <td>Syolita Widyandini</td>
-                        <td>syalitawdya@gmail.com</td>
-                        <td>Universitas Indonesia</td>
-                        <td>
-                            <div class="Silver">Silver</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around ">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
 
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Canni Hernanda</td>
-                        <td>dannhernando1@gmail.com</td>
-                        <td>Universitas Negeri Yogyakarta</td>
-                        <td>
-                            <div class="Bronze">Bronze</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr class="bg-none">
-                        <td>4</td>
-                        <td>Fetnan Adipurmowo</td>
-                        <td>febrianadip@gmail.com</td>
-                        <td>Universitas Gadjah Mada</td>
-                        <td>
-                            <div class="Gold">Gold</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around"><button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>5</td>
-                        <td>Yessa Khoirunissa</td>
-                        <td>Yessaakhh@gmail.com</td>
-                        <td>Universitas Alma ata</td>
-                        <td>
-                            <div class="Platinum">Platinum</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around">
-                                <button class="d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showDeleteModal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -193,11 +130,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="inputt" id="nama" name="nama" placeholder="Raihan Hafidz">
+                                <input type="text" class="inputt" id="nama" name="nama" placeholder="{{ $subscription->user->nama_lengkap }}">
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="text" class="inputt" id="Email" name="Email" placeholder="RaihanHafidz@gmail.com">
+                                <input type="text" class="inputt" id="Email" name="Email" placeholder="{{ $subscription->user->email }}">
                             </div>
                             <div class="form-group">
                                 <label for="Telepon">Telepon</label>
@@ -205,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Sekolah">Sekolah/perguruantinggi</label>
-                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="Universitas Ahmad Dahlan">
+                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="{{ $sekolah[$subscription->user->sekolah] }}">
                             </div>
                         </div>
                         <div class="kanann">

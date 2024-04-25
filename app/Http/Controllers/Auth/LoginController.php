@@ -17,7 +17,16 @@ class LoginController extends Controller
     {
         return view('adminUniv-afterPayment.AdminUniv-Login');
     }
-
+    public function loginsuperadmin()
+    {
+        $title = 'loginsuperadmin';
+        return view('superAdmin.Login')->with('title', $title);
+    }
+    public function loginmitra()
+    {
+        $title = 'loginmitra';
+        return view('loginmitra')->with('title', $title);
+    }
     public function ValidateLogin(Request $request)
     {
         $request->validate([
@@ -30,26 +39,36 @@ class LoginController extends Controller
 
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
+            if (!$user->mitra_id || !$user->divisi_id || !$user->sekolah) {
+                Auth::logout();
+                return redirect()->to('/user/login')->with('mitra_error', 'Mitra atau Devisi belum di isi Admin.');
+            }
 
             $role_id = $user->role->id;
 
-            if ( $role_id == 1) {
-                return redirect()->to('/superAdmin');
-            } else if ( $role_id == 2) {
+            if ($role_id == 1) { //super admin
+                return redirect()->to('/AdminSistem-Dashboard');
+            } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
-            } else if ( $role_id == 3) {
+            } else if ($role_id == 3) { //mahasiawa /pemagang
                 return redirect()->to('/user');
-            } else if ( $role_id == 4) {
+            } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
-            } else {
-                return redirect()->to('/');
+            } else { // mitra
+                return redirect()->to('/contributorformitra-dashboard');
 
                 // return redirect('/AdminUniv-Dashboard');
             }
         } else {
-            return response()->json([
-                'error' => 'Email atau Password yang anda masukan salah'
-            ], 422);
+            return redirect()->back()->withInput()->withErrors(['email' => 'Email atau password salah.']);
         }
+    }
+
+    public function logoutAdminUniv(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/AdminUniv-Login');
     }
 }

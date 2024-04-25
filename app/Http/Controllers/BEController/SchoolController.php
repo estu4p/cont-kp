@@ -7,8 +7,11 @@ use App\Models\Shift;
 use App\Models\Divisi;
 use App\Models\Project;
 use App\Models\Presensi;
+use App\Models\Penilaian;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Database\Seeders\KategoriPenilaian;
+use Database\Seeders\SubKategoriPenilaian;
 
 class SchoolController extends Controller
 {
@@ -70,4 +73,39 @@ class SchoolController extends Controller
             // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
         }
     }
+    public function datamhs(Request $request)
+    {   //Menampilkan Data Mahasiswa pada Penilaian Mahasiswa
+        $mahasiswa = User::where('role_id', 3)->get();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "data Mahasiswa" => "view data Mahasiswa ",
+                "data" => $mahasiswa,
+            ]);
+        } else {
+            return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
+        }
+    }
+    public function lihatPenilaian(Request $request, $id)
+    {// Penilaian Mahasiswa- lihat
+        $byId = Penilaian::findOrFail($id);
+        dd($byId);
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $byId);
+
+        $responseData = [
+            "Penilaian" => "view Penilaian Mahasiswa ",
+            "mahasiswa" => $penilaian->user,
+            "nilai" => $penilaian->nilai,
+            "sub-kategori" => $penilaian->subKategori->nama_sub_kategori,
+            "kategori" => $penilaian->subKategori->kategori_id,
+            "kritik-saran"=>$penilaian->kritik_saran
+        ];
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json($responseData);
+        }else{
+            return view('template.contributingforunivschool.lihat',compact('penilaian'));
+        }
+    }
+
+
 }

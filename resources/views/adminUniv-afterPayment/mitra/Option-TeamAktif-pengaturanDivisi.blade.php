@@ -57,7 +57,7 @@
                                     @foreach ($divisi as $no => $item)
                                         <tr>
                                             <td class="ratakanan">{{ $no + 1 }}</td>
-                                            <td>{{ $item->nama_divisi }}</td>
+                                            <td>{{ $item->divisi->nama_divisi }}</td>
 
                                             <td class="ratakanan"><a href="/TeamAktif-kategoripenilaian-UiuX"><i
                                                         class="fa-regular fa-file-lines ic"></i></a></td>

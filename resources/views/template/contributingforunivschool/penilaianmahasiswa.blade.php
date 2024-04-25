@@ -11,7 +11,8 @@
         <h1 class="w-100 text-center">Penilaian Mahasiswa</h1>
         <div class="gruppage">
             <select name="page" class="page" id="page">
-                <option class="tampil" value="page">page 1 of 1</style></option>
+                <option class="tampil" value="page">page 1 of 1</style>
+                </option>
             </select>
             <select name="item" class="item">
                 <option value="item">5 item per page</option>
@@ -33,14 +34,16 @@
                 <tbody>
                     @foreach ($mahasiswa as $key => $mhs)
                         <tr class="{{ $key % 2 == 0 ? 'abu' : 'putih' }}">
+                            {{-- @dd($mhs) --}}
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $mhs['nama'] }}</td>
-                            <td>{{ $mhs['nip'] }}</td>
-                            <td>{{ $mhs['divisi'] }}</td>
+                            <td>{{ $mhs->nama_lengkap }}</td>
+                            <td>{{ $mhs->nomor_induk }}</td>
+                            <td>{{ $mhs->divisi->nama_divisi }}</td>
                             <td>
-                                <div class="{{ strtolower($mhs['status']) }}">{{ $mhs['status'] }}</div>
+                                <div class="{{ $mhs['status'] }}">{{ $mhs->status_akun }}</div>
                             </td>
-                            <td><a href="#"> <i class="fa-solid fa-file-lines"></i></a></td>
+                            {{-- <td><a href="/lihat,['id' => $mhs->id]"> <i class="fa-solid fa-file-lines"></i></a></td> --}}
+                            <td><a href="{{ route('penilaian', ['id' => $mhs->id])}}"><i class="fa-solid fa-file-lines"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -111,7 +114,8 @@
                         if (i > 0 && i <= totalPages) {
                             if (i === currentPageNumber) {
                                 pagination +=
-                                    '<button class="pagination-button actived" onclick="handlePaginationClick(' + i +
+                                    '<button class="pagination-button actived" onclick="handlePaginationClick(' +
+                                    i +
                                     ')"><b><u>' + i + '</u></b></button>';
                             } else {
                                 pagination += '<button class="pagination-button" onclick="handlePaginationClick(' +

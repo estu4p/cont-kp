@@ -15,13 +15,18 @@
                 @csrf
                 <input type="text" name="email" id="email" placeholder="Masukan alamat E-Mail"
                     oninput="validateEmail()">
+                @if (session('error'))
+                <div class="alert alert-danger"
+                    style="font-family: 'Times New Roman', Times, serif; font-size: 15px; max-width: 400px; margin: 0 auto;">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="button-container text-center">
                     <div class="mt-5">
                         <button id="kirim-otp" type="submit"
                             class="reg-button border-0 shadow fw-semibold text-decoration-none"
                             style="background-color: #A61C1CE5; padding: 15px 80px; pointer-events: none; opacity: 0.5;">Kirim
                             OTP</button>
-                        {{-- <button class="reg-button border-0 my-4 shadow fw-semibold" style="background-color: #A61C1CE5; padding: 12px; width: 40%;">Kirim OTP</button> --}}
                     </div>
                 </div>
             </form>

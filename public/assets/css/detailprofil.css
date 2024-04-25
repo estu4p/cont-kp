@@ -1,6 +1,6 @@
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .card-header{
@@ -191,3 +191,57 @@ table {
     .btnkembali:hover {
         color: #000000;
     }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        .fzt5{font-size: 50% !important;}
+        .fzt6{font-size: 60% !important;}
+        .fzt7{font-size: 70% !important;}
+        .fzt8{font-size: 80% !important;}
+      }
+      modal-body table {
+        width: 100%; /* Pastikan tabel memiliki lebar 100% dari kontainer */
+        white-space: nowrap; /* Mencegah pembungkusan teks, agar konten tabel tidak pindah ke baris baru */
+        overflow-x: auto; /* Tambahkan scrollbar horizontal jika konten lebih lebar dari kontainer */
+      }
+      .parent-relative {
+        position: relative;
+        overflow-x: auto;
+        white-space: nowrap; /* Menghindari pemisahan baris */
+      }
+      
+      
+    
+     
+      
+      .scroller {
+        width: 1000px; /* Lebar total konten */
+        height: 100%; /* Atur tinggi sesuai kebutuhan */
+        overflow-y: hidden;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+      
+      .content {
+        display: inline-block;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      /* CSS untuk Status Pencarian Mahasiswa */
+.input-group {
+    position: relative;
+    width: 90%;
+}
+
+#search-input {
+    padding-left: 10px; /* Menambahkan ruang di sebelah kiri untuk ikon */
+}
+
+.fa-search {
+    position: absolute;
+    left: 30px; /* Jarak dari tepi kiri */
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(10, 10, 10); /* Warna ikon */
+}
+.h3{
+    padding-left: 100%;
+}

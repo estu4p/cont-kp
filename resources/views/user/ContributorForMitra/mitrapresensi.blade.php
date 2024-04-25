@@ -3,8 +3,9 @@
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="/assets/css//presensiaccept.css" rel="stylesheet">
+    <link href="/assets/css//mitrapresensi.css" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <div id="presentasi-harian">
         <i class="fs-1 fa-solid fa-chevron-left"></i>
@@ -14,7 +15,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 style="font-size: 50px;">Presensi Harian</h3>
-                            <p>Data per tanggal 2023-09-04</p>
+                            <p>Data per tanggal <?php echo date('Y - m - d'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -70,12 +71,12 @@
             </div>
         </div>
     </div>
-    </div>
-    <div class="col-md-6 text-right">
-    </div>
-    </div>
-    <br>
-    <table class="table" style="font-size: 10px;">
+      </div>
+     <div class="col-md-6 text-right">
+     </div>
+     </div>
+     <br>
+      <table class="table" style="font-size: 10px;">
         <thead style="text-align: center;">
             <tr>
                 <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" onchange="checkAll(this)"
@@ -98,13 +99,50 @@
                 <th class="bates">Log Aktivitas</th>
                 <th style="border-left: 1px solid black;">
                     <div class="">Aksi</div>
-                    
+
 
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr>
+            @foreach($presensi as $key => $data)
+                <tr>
+                    <td><input type="checkbox" id="checkbox-{{ $key }}" name="">&nbsp;{{ $key + 1 }}</td>
+                    <td class="bates" href><a href="{{ route('presensi-by-name', ['nama_lengkap' => rawurlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a></td>
+                    <td>{{ $data->jam_masuk }}</td>
+                    <td>{{ $data->jam_pulang }}</td>
+                    <td>{{ $data->jam_mulai_istirahat }}</td>
+                    <td>{{ $data->jam_selesai_istirahat }}</td>
+                    <td>{{ $data->total_jam_kerja }}</td>
+                    <td>{{ $data->hutang_presensi }}</td>
+                    <td>{{ $data->log_aktivitas }}</td>
+                    <td>
+                        <div class="toggle-set">
+                            <form id="form-accept-{{ $key }}" action="{{ route('presensi-accept', ['id' => $data->id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $data->id }}">
+                                <input type="radio" id="check-button-{{ $key }}" name="button-toggle" class="toggle-button" onclick="handleButtonClick('{{ $key }}')" />
+                                <label for="check-button-{{ $key }}" class="round-button-check" tabindex="2">
+                                    <i class="fa-solid fa-check"></i>
+                                </label>
+                                <button type="submit" class="toggle-button" value="1">Accept</button>
+                            </form>
+
+                            <input type="radio" id="cross-button-{{ $key }}" name="button-toggle" class="toggle-button" />
+                            <a class="round-button-cross" data-bs-toggle="modal" data-bs-target="#silang{{$data->id}} ">
+                                <i class="fa-solid fa-xmark"></i>
+                             </a>
+
+                        </div>
+                    </td>
+                    <td>{{ $data->status_kehadiran }}</td>
+                    <td>{{ $data->kebaikan }}</td>
+
+
+                </tr>
+            @endforeach
+
+            {{-- <tr>
                 <td><input type="checkbox" name="chkbox[]" id="#" name=""> &nbsp; 1</td>
                 <td class="bates" href><a href="/ContributorForMitra-datapresensi">simpay</a></td>
                 <td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#modaljam"
@@ -118,25 +156,28 @@
                 <td class="bates">Membuat ributt anak gang sebelah</td>
                 <td>
                     <div class="toggle-set">
-                        <input type="radio" id="check" name="button-toggle" class="toggle-button" />
+                        <input type="radio" id="check-button" name="button-toggle" class="toggle-button" />
                         <label for="check" class="round-button-check" tabindex="2">
                             <i class="fa-solid fa-check"></i>
                         </label>
-    
-                        <input type="radio" id="cross" name="button-toggle" class="toggle-button" />
-                        <label for="cross" class="round-button-cross" tabindex="1"> <a class='text-light'
-                                data-bs-toggle="modal" data-bs-target="#silang" href="#"><i
-                                    class="fa-solid fa-xmark"></i></a></label>
+
+                        <input type="radio" id="cross{{ $key }}" name="button-toggle" class="toggle-button" />
+                        <a class="round-button-cross text-light" data-bs-toggle="modal" data-bs-target="#silang" href="#" data-id="{{ $data->id }}">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+
                     </div>
                 </td>
                 <td>tidak hadir <i class="fas fa-info-circle" data-bs-toggle="modal"
                     data-bs-target="#statuskehadiran"></i></td>
                 <td>merapikan parkiran motor</td>
-            </tr>
-         
+            </tr> --}}
+
         </tbody>
     </table>
-    <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+        <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+
+
     </div>
 
 
@@ -154,7 +195,7 @@
                 <div class="modal-body" style="max-height: 500px; overflow-x: auto;">
 
                     <!-- Baris Ke-1 -->
-             
+
                     <div class="keterangan">
                         “ Maaf saya tidak dapat mengikuti magang untuk
                         hari ini dikarenakan saya sedang tidak enak
@@ -166,7 +207,7 @@
                     Link Foto Gdrive
                     <textarea class="form-control" id="floatingTextarea" placeholder=" " style="padding: 1px;"></textarea>
                     <label for="floatingTextarea"></label>
-                    
+
 
                     <!-- Break Line -->
                     <!-- Baris Ke-3 -->
@@ -180,7 +221,7 @@
                     </select>
                 </div>
 
-                 
+
                     <div>
 
                         <div class="d-grid gap-2 d-md-block">
@@ -286,69 +327,84 @@
 
     </div>
     </div>
-    <div class="modal fade " id="silang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-jam">
-            <div class="modal-content modal-content-jam">
-                <div class="modal-header  justify-content-center">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">log activity</h1>
-                </div>
-                <P style="padding-left: 10px">mengedit riwayat proses</P>
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="width: 90%; margin-left: 5%;"></textarea>
-                    <label for="floatingTextarea2">
-
-                    </label>
-                </div>
-
-
-
-                <P style="padding-left: 10px">keterangan.......</P>
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="width: 90%; margin-left: 5%;"></textarea>
-                    <label for="floatingTextarea2">
-
-                    </label>
-                </div>
-                <div class="modal-footer p-5">
-                    <button type="button" class="btn btn-primary p-1">Save</button>
+    @foreach($presensi as $reject)
+        <div class="modal fade" id="silang{{ $reject->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-jam">
+                <div class="modal-content modal-content-jam">
+                    <div class="modal-header justify-content-center">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Log Activity</h1>
+                    </div>
+                    <form action="{{ route('presensi-reject', $reject->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id" value="{{ $reject->id }}">
+                        <div style="padding-left: 10px">Mengedit riwayat proses</div>
+                        <div class="form-floating">
+                            <textarea class="form-control" name="log_activitas" placeholder="Leave a comment here" id="floatingTextarea1" style="width: 90%; margin-left: 5%;">{{ $reject->log_aktivitas }}</textarea>
+                        </div>
+                        <div style="padding-left: 10px">Keterangan.......</div>
+                        <div class="form-floating">
+                            <textarea class="form-control" name="keterangan" placeholder="Leave a comment here" id="floatingTextarea2" style="width: 90%; margin-left: 5%;"></textarea>
+                        </div>
+                        <div class="modal-footer p-5">
+                            <button type="submit" class="btn btn-primary p-1">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+        @endforeach
+
     </div>
     </div>
 
     </div>
     </div>
     <script>
-        const checkButton = document.getElementById('check-button');
-        const crossButton = document.getElementById('cross-button');
+       @foreach($presensi as $key => $reject)
+            const checkButton{{ $key }} = document.getElementById('check-button-{{ $key }}');
+            const crossButton{{ $key }} = document.getElementById('cross-button-{{ $key }}');
 
-        checkButton.addEventListener('click', function() {
-            checkButton.classList.add('active');
-            crossButton.classList.remove('active');
-        });
+            checkButton{{ $key }}.addEventListener('click', function() {
+                checkButton{{ $key }}.classList.add('checked');
+                crossButton{{ $key }}.classList.remove('checked');
+                showsukses();
+            });
 
-        crossButton.addEventListener('click', function() {
-            crossButton.classList.add('active');
-            checkButton.classList.remove('active');
-        });
+            crossButton{{ $key }}.addEventListener('click', function() {
+                crossButton{{ $key }}.classList.add('checked');
+                checkButton{{ $key }}.classList.remove('checked');
+                showsukses();
+            });
+
+        @endforeach
 
         function showsukses() {
             swal("berhasil", "perubahan waktu berhasil disimpan", "success");
         }
 
-
         function handleButtonClick(buttonNumber) {
             var buttonId = 'button' + buttonNumber;
-            var button = document.getElementById(buttonId);
+            var button = document.getElementById('check-button-' + buttonNumber);
             if (!button.classList.contains('btn-with-checkmark')) {
                 button.classList.add('btn-with-checkmark');
             } else {
                 button.classList.remove('btn-with-checkmark');
             }
+
+            // Tambahkan atau hapus kelas 'active' untuk mengubah warna tombol
+            if (!button.classList.contains('active')) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('checked');
+            }
             // Isi fungsi disini sesuai dengan aksi yang ingin dilakukan ketika tombol diklik
+            var formId = 'form-accept-' + buttonNumber;
+            var form = document.getElementById(formId);
+            form.submit();
         }
+
+
 
         function checkAll(ele) {
             var checkboxes = document.getElementsByTagName('input');
@@ -366,5 +422,7 @@
                 }
             }
         }
+
+
     </script>
 @endsection

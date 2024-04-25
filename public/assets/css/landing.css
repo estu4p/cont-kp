@@ -18,20 +18,21 @@
     display: inline-block;
     position: relative;
     text-decoration: none;
+    
 }
 
 .menu-navbar {
     color: #000;
 }
 
-.menu-reg {
-}
+
 .menu-navbar {
     color: #000;
 }
 
 .menu-reg {
     color: #a61c1c;
+
 }
 
 .menu-navbar:before,
@@ -72,6 +73,7 @@
     color: #a61c1c;
     border: 2px solid #a61c1c;
     border-radius: 8px;
+    
 }
 .menu-reg:hover {
     color: #a61c1c;
@@ -92,6 +94,7 @@
     border-radius: 12px;
     padding: 16px 28px;
     text-decoration: none;
+    
 }
 .btn-header:hover {
     color: #a61c1c;
@@ -118,19 +121,20 @@
 }
 .card {
     border-radius: 16px;
-    width: 22rem;
+    /* width: 22rem; */
     margin: 0 auto; /* Untuk membuat card berada di tengah */
     display: flex; /* Menjadikan konten menjadi flexbox */
     justify-content: center; /* Memusatkan konten secara horizontal */
 }
 .card {
     border-radius: 16px;
-    width: 22rem;
+    /* width: 22rem; */
     margin: 0 auto; /* Untuk membuat card berada di tengah */
 }
 .card-paket:hover {
     border: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 .register {
     padding: 80px;
@@ -241,15 +245,12 @@
     width: 10px;
 }
 .dalam {
-    /* Frame 2427 */
-
     box-sizing: border-box;
 
-    width: 420px;
+    /* width: 420px; */
     height: 216px;
 
     background: #a61c1c;
-    border: 1px solid #dcdcdc;
     border-radius: 5px;
 }
 .list-pembayaran {
@@ -285,7 +286,6 @@
     margin-left: 16%;
     bottom: 2%;
     background: #f2f4f8;
-    border: 1px solid #c1c7cd;
     border-radius: 5px;
 }
 .btn-text {
@@ -297,8 +297,8 @@
 
 @media (max-width: 992px) {
     #paket .col-3 {
-        flex: 0 0 50%;
-        max-width: 50%;
+        /* flex: 0 0 50%; */
+        /* max-width: 50%; */
     }
     .fw-semibold.fs-5 p {
         font-size: 16px;
@@ -306,9 +306,9 @@
     .fw-semibold.fs-5 p.mb-5 {
         font-size: 16px;
     }
-    .box-form {
+    /* .box-form {
         width: 80%;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -335,7 +335,7 @@
         padding: 20px;
     }
     .card {
-        width: 100%;
+        /* width: 100%; */
         max-width: none;
         margin-bottom: 20px; /* Menambahkan ruang antara kartu */
     }
@@ -485,7 +485,7 @@
         flex-direction: column;
     }
     .card {
-        width: 100%;
+        /* width: 100%; */
     }
     .col-last {
         display: none;
@@ -589,4 +589,133 @@ border-radius: 5px;
 }
 
 
+.untukmobilelogo div{
+ display: flex;
+ flex-direction: row;       
+}
+@media only screen and (min-width: 1024px) {
+    .fzt170{
+        font-size:170% !important;
+    }
+    .height{
+        height: 240px;
+        padding-top: 5px;
+    }
+    
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .fzt992{
+        font-size:140% !important;
+    }
+    
+}
+@media only screen and (min-width: 576px) {
+    .sosmed576{
+        justify-content: center;
+        display: flex;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .untukmobile{
+        width:100%;
+    }
+        .untukmobiletext {
+            padding:0 25%;
+            border: 1px solid white;
+          }
+    .untukmobilelogo{
+        justify-content: center;
+        border: 1px solid white;
+    }
+    .untukmobilelogo div h4{
+        padding-top: 20px;
+        
+    }
+    .untukmobilelogo div img{
+       margin: auto;
+    }
+    
+    .untukmobilelogo div{
+        display: flex;
+        flex-direction: column;       
+      
+       }
+       .sosmed767{
+        display: flex;
+        justify-content: center;
+       }
+}
+@media only screen and (min-width: 577px) and (max-width: 767px) {
+    .tengahr{
+        display: flex;
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 577px){
+    .tengahr{
+        display: flex;
+        padding-top: 10%;
+        flex-direction: column;
+    }
+    .tengahr div{
+        border: 1px solid white;
+        margin: auto;
+        width:50%;
+    }
+
+}
+@media only screen and (min-width: 767px){
+    .min767{
+        display: flex;
+        flex-direction: row;
+    }
+    .tengahr{
+        width:60%;
+        display: flex;        
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .untukmobile{
+        width:39%;
+    }
+}
+
+/* bronze ,silver ,gold ,platinum*/
+@media only screen and (max-width: 582px){
+
+    .max582{
+        padding:20px !important;
+    }
+  
+
+}
+@media only screen and (max-width: 768px){
+  .dalam{
+        flex-direction: column !important;
+        background-color: transparent !important;
+        width: 100% !important;
+        justify-content: center;
+        border: 1px solid black;
+        padding: 0 !important;
+        align-items: center;
+    }
+    .dalamchild{
+        background-color: #A61C1C;
+        z-index: 10;
+        width: max-content !important;
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 10px;
+        
+       
+    }
+    .dalamchild:nth-child(2){
+        padding-bottom: 20px;
+    }
+    #collapseExample {
+
+        margin-top: 30%; 
+    }
+}
 

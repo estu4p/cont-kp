@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
         'nama_lengkap',
         'nomor_induk',
@@ -34,9 +36,12 @@ class User extends Authenticatable
         'browser',
         'tgl_masuk',
         'tgl_keluar',
+        'jam_default_masuk',
+        'jam_default_pulang',
         'email_verified_at',
         'mitra_id',
         'role_id',
+        'privilage_id',
         'divisi_id',
         'shift_id',
         'paket_id',
@@ -54,6 +59,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function assignPrivilege($privilegeId)
+    {
+        $this->privileges()->attach($privilegeId);
+    }
+
+    // Relasi dengan model Profile
+
     public function mitra()
     {
         return $this->belongsTo(Mitra::class);
@@ -67,6 +79,30 @@ class User extends Authenticatable
     public function divisi()
     {
         return $this->belongsTo(Divisi::class);
+    }
+
+    public function privilage()
+    {
+        return $this->belongsToMany(Privilage::class);
+    }
+
+    public function privilageuser()
+    {
+        return $this->belongsToMany(PrivilageUser::class);
+    }
+
+    public function privileges()
+    {
+        return $this->belongsToMany(Privilage::class, 'user_privilege', 'user_id', 'privilege_id');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsToMany(Privilage::class, 'mahasiswa', 'user_id', 'mahasiswa_id');
+    }
+    public function mahasiswas()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_user', 'user_id', 'mahasiswa_id');
     }
 
     public function shift()
@@ -91,5 +127,17 @@ class User extends Authenticatable
     public function namaDivisi()
     {
         return $this->BelongsTo(Divisi::class, 'divisi_id');
+    }
+    public function subKategoriPenilaian()
+    {
+        return $this->BelongsTo(SubKategoriPenilaian::class);
+    }
+    public function kategoriPenilaian()
+    {
+        return $this->BelongsTo(KategoriPenilaian::class);
+    }
+    public function penilaian()
+    {
+        return $this->BelongsTo(Penilaian::class, 'nama_lengkap');
     }
 }

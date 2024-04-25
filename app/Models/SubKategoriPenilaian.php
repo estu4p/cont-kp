@@ -10,4 +10,18 @@ class SubKategoriPenilaian extends Model
     use HasFactory;
     protected $fillable = ['kategori_id', 'nama_sub_kategori'];
     protected $table = 'sub_kategori_penilaian';
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriPenilaian::class, 'kategori_id', 'id','id');
+    }
+    public function Penilaian()
+    {
+        return $this->hasMany(Penilaian::class, 'sub_id', 'id', 'sub_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -41,7 +41,7 @@ return new class extends Migration
             $table->foreign('nama_lengkap')
                 ->references('id')->on('users')
                 ->where('role', 3)
-                ->onDelete('SET NULL');
+                ->onDelete('cascade');
         });
     }
 
