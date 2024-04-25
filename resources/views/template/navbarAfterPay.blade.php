@@ -12,8 +12,8 @@
                 <a href="/AdminUniv-EditProfile">
                     <div class="navbar-profile">
                         <a href="/AdminUniv-EditProfile" style="text-decoration: none; color: #000;">
-                            <span class="profile-name">Wahyu Atkinson</span>
-                            <span class="profile-status">Admin</span>
+                            <span class="profile-name">{{ $user->nama_lengkap }}</span>
+                            <span class="profile-status">{{ $user->role->role }}</span>
                         </a>
 
                     </div>

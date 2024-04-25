@@ -822,9 +822,7 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
-Route::get('/AdminPaket', function () {
-    return view('user.AdminUnivAfterPayment.AdminPaket');
-});
+Route::get('/AdminPaket', [BEControllerAdminUnivAfterPaymentController::class, 'adminPaket']);
 
 // Route::get('/CheckoutBronze', function () {
 //     return view('user.AdminUnivAfterPayment.CheckoutBronze');

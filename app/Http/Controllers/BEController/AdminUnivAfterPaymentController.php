@@ -35,7 +35,7 @@ class AdminUnivAfterPaymentController extends Controller
     { // menampilkan seluruh data yang diperlukan
         $jumlah_mitra = Mitra::all()->count();
         $jumlah_siswa = User::where("role_id", 3)->count();
-
+        $user = auth()->user();
         // Mengambil nama siswa dari koleksi data
 
         if ($request->is('api/*') || $request->wantsJson()) {
@@ -45,7 +45,7 @@ class AdminUnivAfterPaymentController extends Controller
                 "jumlah siswa" => $jumlah_siswa,
             ]);
         } else {
-            return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa]);
+            return view('adminUniv-afterPayment.AdminUniv-Dashboard', ['jml_mitra' => $jumlah_mitra, 'jml_siswa' => $jumlah_siswa, 'user' => $user]);
         }
     }
 
@@ -744,16 +744,23 @@ class AdminUnivAfterPaymentController extends Controller
     public function RiwayatPembelian()
     {
         $paket = Riwayat::all();
-
-        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('paket'));
+        $user = auth()->user();
+        return view('user.AdminUnivAfterPayment.RiwayatPembelian', compact('paket', 'user'));
     }
 
+    // admin paket
+    public function adminPaket()
+    {
+        $user = auth()->user();
+        return view('user.AdminUnivAfterPayment.AdminPaket', compact('user'));
+    }
     //jangka waktu
     public function JangkaWaktu()
     {
         // $paket = Paket::where('status', 'Aktif')->get();
+        $user = auth()->user();
         $paket = Riwayat::all();
-        return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu', compact('paket'));
+        return view('user.AdminUnivAfterPayment.RiwayatJangkaWaktu', compact('paket', 'user'));
     }
     public function bagianMitra()
     {
@@ -837,13 +844,14 @@ class AdminUnivAfterPaymentController extends Controller
     public function adminUnivMitra(Request $request)
     // univ - mitra
     {
+        $user = auth()->user();
         $mitra = Mitra::withCount('mahasiswa')->get();
         // $mitra = Mitra::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['Jumlah Mahasiswa pada tiap Mitra' => $mitra]);
         } else {
-            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra]);
+            return view('adminUniv-afterPayment.mitra.adminunivmitra', ['mitra' => $mitra, 'user' => $user]);
         }
     }
 
