@@ -477,22 +477,6 @@ Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfter
 Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
 Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
-Route::get('/AdminUniv/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('adminUniv-afterPayment.AdminUniv-Quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
 Route::get('/AdminUniv/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
@@ -789,11 +773,27 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
+// Route::get('/AdminUniv/setting/quotes', function () {
+//     $quotes = [
+//         ['id' => 1, 'quotes' => "Change your life now for better future"],
+//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+//     ];
+//     return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+//         'title' => "Admin - Setting Jam & Quotes",
+//         'quotes' => $quotes
+//     ]);
+// });
 
-Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
-Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
-Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
-Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
+Route::get('/AdminUniv/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
+Route::post('/AdminUniv/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
+Route::delete('/AdminUniv/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/AdminUniv/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
 
 Route::get('/admin/setting/user', function () {
     $users = [
