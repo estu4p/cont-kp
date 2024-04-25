@@ -853,11 +853,12 @@ class ContributorForMitra extends Controller
         $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
         $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
 
-        return response()->json([
-            'total_mahasiswa' => $totalMahasiswa,
-            'total_hadir' => $totalHadir,
-            'total_izin' => $totalIzin,
+        return view('contributorformitra.dashboard', [
+            'totalMahasiswa' => $totalMahasiswa,
+            'totalHadir' => $totalHadir,
+            'totalIzin' => $totalIzin,
         ]);
+
     }
 
 }
