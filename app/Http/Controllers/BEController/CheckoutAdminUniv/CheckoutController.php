@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Http;
 
 class CheckoutController extends Controller
 {
+public function userCheckoutBronze(){
+    $api = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json');
+    if($api->successful()){
+        $data = $api->json();
+        return view('checkout.bronze', ['title' => "Checkout - Bronze"], compact('data'));
+    }
+    
+}
+
     public function CheckoutBronze(Request $request,)
     {
         $api = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json');

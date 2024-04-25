@@ -167,9 +167,7 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 // Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 
-Route::get('/checkout/bronze', function () {
-    return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
-});
+Route::get('/checkout/bronze', [CheckoutController::class, 'userCheckoutBronze']);
 Route::get('/checkout/silver', function () {
     return view('checkout.silver', ['title' => "Checkout - Silver"]);
 });
