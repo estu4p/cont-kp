@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BEController;
 
+
 use DateTime;
 use App\Models\User;
 use App\Models\Shift;
@@ -903,114 +904,52 @@ class ContributorForMitra extends Controller
         return view('penilaian-siswa.input-nilai', compact('inputnilai'));
     }
 
-    public function editProfile()
-    {
-        $userMitra = User::where('role_id', 5)->first();
+    //edit profil untuk mitra
 
-        return view('SistemLokasi.AdminSistem-Editprofile', [
-            'title' => "userAdmin - Ubah Profil",
-            'userAdmin' => $userMitra
-        ]);
+    // Menampilkan halaman pengeditan profil
+    public function edit()
+    {
+        // Mendapatkan informasi profil kontributor dari database berdasarkan role_id 5
+        $contributor = User::where('role_id', 5)->first();
+  
+        return view('contributorformitra.editprofile')->with('contributor', $contributor);
     }
 
-    public function updateProfile(Request $request, $username)
+    // Menyimpan perubahan pada profil
+    public function update(Request $request )
     {
-        $userMitra = User::where('role_id', 2)->first();
-        if (!$userMitra) {
-            return response()->json(['message' => 'Pengguna dengan peran 2 tidak ditemukan'], 404);
-        }
-
-        // // Update data pengguna
-        // $userAdmin->username = $username;
-
-        // Validasi input form
-        $data = $request->validate([
-            'nama_lengkap' => 'required|string',
+        // Validasi data yang diinput
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'no_hp' => 'required|string|max:20',
-            'alamat' => 'required|string|max:255',
-            'about' => 'nullable|string|max:500',
+            'no_hp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string|max:255',
+            'about' => 'nullable|string',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk gambar
         ]);
+    
+        // Mendapatkan informasi profil kontributor dari database berdasarkan role_id 5
+        $contributor = User::where('role_id', 5)->first();
+    
+        // Memperbarui data profil
+        $contributor->nama_lengkap = $request->nama_lengkap;
+        $contributor->email = $request->email;
+        $contributor->no_hp = $request->no_hp;
+        $contributor->alamat = $request->alamat;
+        $contributor->about = $request->about;
 
-        $profile = User::where('username', $username)->first();
-
-        // Periksa apakah profil ditemukan
-        if (!$profile) {
-            return response()->json(['message' => 'Profil pengguna tidak ditemukan'], 404);
-        }
-
-        $profile->update([
-        'nama_lengkap' => $data['nama_lengkap'],
-        'email' => $data['email'],
-        'no_hp' => $data['no_hp'],
-        'alamat' => $data['alamat'],
-        'about' => $data['about'],
-        ]);
-
-        // Periksa jenis respons yang diminta
-        if ($request->wantsJson()) {
-            // Respon dalam format JSON
-            return response()->json([
-                'message' => 'Profil berhasil diperbarui.',
-                'user' => $userMitra
-            ]);
-        } else {
-            // Redirect ke halaman profil yang diperbarui
-            return view('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Profil berhasil diperbarui.');
-        }
-    }
-
-    public function updateFoto(Request $request, $username)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-            $validator->validate();
-        } catch (ValidationException $e) {
-            $errorValidate = $e->validator->errors()->all();
-            $errorMessage = implode('<br>', $errorValidate);
-            return response()->json(['success' => false, 'error' => $errorMessage]);
-            // return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
-        }
-
-        $profile = User::where('username', $username)->firstOrFail();
-
-        try {
-            if ($profile->foto_profil) {
-                Storage::delete('public/' . $profile->foto_profil);
-            }
-            $namaFoto = time() . '.' . $request->foto_profil->getClientOriginalExtension();
-            $path = $request->file('foto_profil')->storeAs('public/foto_profil', $namaFoto);
-            $profile->update([
-                'foto_profil' => 'foto_profil/' . $namaFoto,
-            ]);
-            //return response()->json(['success' => true, 'message' => 'Foto Berhasil diUbah']);
-            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diUbah');
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            //return response()->json(['success' => false, 'error' => $errorMessage]);
-            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
-        }
-    }
-
-    public function deleteFoto($username)
-    {
-        $profil = User::where('username', $username)->firstOrFail();
-        try {
-            if ($profil->foto_profil) {
-                Storage::delete('public/' . $profil->foto_profil);
-                $profil->foto_profil = null;
-                $profil->save();
-                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diHapus');
-            } else {
-                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', 'Anda tidak memiliki Foto Profil');
-            }
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
-        }
-    }
-}
 
     
+        // Mengunggah gambar profil baru jika ada
+        if ($request->hasFile('foto_profil')) {
+            $image = $request->file('foto_profil');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploads/profile_images'), $imageName);
+            $contributor->foto_profil = $imageName;
+        }
+    
+        // Menyimpan perubahan pada database
+        $contributor->save();
+        return redirect()->route('contributorformitra.editprofile')->with('success', 'Profil berhasil diperbarui!');
+    }
+}

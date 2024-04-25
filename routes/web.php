@@ -81,7 +81,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
-// Super Admin
+// === Super Admin ===
 Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
 // function () {
 //     return view('superAdmin.Login');
@@ -273,7 +273,7 @@ Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'Dat
 
 //penilaian mahasiswa-contributor for univ
 Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
-Route::get('/lihat/{id}',[SchoolController::class, 'lihatPenilaian'])->name('penilaian');
+Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('penilaian');
 // function () {
 //     return view('template.contributingforunivschool.lihat');
 // });
@@ -475,22 +475,6 @@ Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfter
 Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
 Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
-Route::get('/AdminUniv/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('adminUniv-afterPayment.AdminUniv-Quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
 Route::get('/AdminUniv/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
@@ -554,7 +538,7 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'da
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/AdminSistem/updateFoto', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
@@ -787,11 +771,27 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
+// Route::get('/AdminUniv/setting/quotes', function () {
+//     $quotes = [
+//         ['id' => 1, 'quotes' => "Change your life now for better future"],
+//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+//     ];
+//     return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+//         'title' => "Admin - Setting Jam & Quotes",
+//         'quotes' => $quotes
+//     ]);
+// });
 
-Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
-Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
-Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
-Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
+Route::get('/AdminUniv/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
+Route::post('/AdminUniv/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
+Route::delete('/AdminUniv/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/AdminUniv/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
 
 Route::get('/admin/setting/user', function () {
     $users = [
@@ -820,13 +820,11 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
-Route::get('/AdminPaket', function () {
-    return view('user.AdminUnivAfterPayment.AdminPaket');
-});
+Route::get('/AdminPaket', [BEControllerAdminUnivAfterPaymentController::class, 'adminPaket']);
 
-Route::get('/CheckoutBronze', function () {
-    return view('user.AdminUnivAfterPayment.CheckoutBronze');
-});
+// Route::get('/CheckoutBronze', function () {
+//     return view('user.AdminUnivAfterPayment.CheckoutBronze');
+// });
 
 Route::get('/CheckoutSilver', function () {
     return view('user.AdminUnivAfterPayment.CheckoutSilver');
@@ -852,11 +850,8 @@ Route::get('/', function () {
 
 
 
-Route::get('/contributorformitra/editprofile', [ContributorForMitra::class, 'editProfile'])->name('userAdmin.editProfile');
-Route::put('/contributorformitra/updateProfile/{username}', [ContributorForMitra::class, 'updateProfile'])->name('userMitra.updateProfile');
-Route::patch('/contributorformitra/updateFoto/{username}', [ContributorForMitra::class, 'updateFoto'])->name('userMitra.updateFoto');
-Route::delete('/contributorformitra/deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('userMitra.deleteFoto');
-
+Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
+Route::put('/contributorformitra-update', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
 
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
@@ -898,9 +893,10 @@ Route::get('/UserScanBarcode', function () {
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
 });
-Route::get('/user-AdminSistem/login', function () {
-    return view('SistemLokasi.AdminSistem-login');
-});
+Route::get('/user-AdminSistem/login', [LoginController::class, 'loginadminSistem']);
+
+Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
+
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });

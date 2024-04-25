@@ -28,6 +28,9 @@ class RoleSeeder extends Seeder
             ],
             [
                 'role' => 'mitra',
+            ],
+            [
+                'role' => 'sistem admin',
             ]
         ]);
     }
