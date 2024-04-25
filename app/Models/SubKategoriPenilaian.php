@@ -17,7 +17,7 @@ class SubKategoriPenilaian extends Model
     }
     public function Penilaian()
     {
-        return $this->hasMany(Penilaian::class, 'sub_id', 'id', 'sub_id');
+        return $this->hasMany(Penilaian::class, 'sub_id', 'id');
     }
 
     public function user()

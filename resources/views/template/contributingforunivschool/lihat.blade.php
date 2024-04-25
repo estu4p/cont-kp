@@ -10,8 +10,8 @@
                     <i class="text-white fs-2 fa-solid fa-user"></i>
                 </div>
                 <div class="identitas d-flex p-3 flex-column col-4">
-                    <p class="m-0 text-white"><b>{{$penilaian->user->nama_lengkap}}</b></p>
-                    <p class="m-0 text-white"><b>{{$penilaian->user->nomor_induk}}</b></p>
+                    <p class="m-0 text-white"><b> {{$user}}</b></p>
+                    <p class="m-0 text-white"><b>{{$Id->nomor_induk}}</b></p>
                 </div>
             </div>
             <div class="bawah w-100 d-flex flex-column p-5">
@@ -22,12 +22,13 @@
                             <br>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8 m-0">Pemahaman Topik Magang</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$nilaiPemahaman->nilai}}</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$nilaiPemahaman->nilai}}</p>
                             </div>
+                            {{-- @foreach($penilaian as $nilai) --}}
                         </div>
                         <div class="keterampilan w-100 d-flex flex-column p-3">
                             <h5>Keterampilan</h5>
@@ -64,7 +65,7 @@
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Tangung jawab</p>
                             <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
-                        </div>
+                        </div>nilai
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Inisiatif</p>
                             <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
@@ -76,6 +77,7 @@
                             <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="height: 200px; background-color:#DCDCDC; width:930px">{{$penilaian->kritik_saran}}</textarea>
                         </div>
                         <br>
+                        {{-- @endforeach --}}
                         <button type="button" class="btn btn-primary">Download</button>
                     </div>
                 </div>
