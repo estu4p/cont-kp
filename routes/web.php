@@ -896,9 +896,10 @@ Route::get('/UserScanBarcode', function () {
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
 });
-Route::get('/user-AdminSistem/login', function () {
-    return view('SistemLokasi.AdminSistem-login');
-});
+Route::get('/user-AdminSistem/login', [LoginController::class, 'loginadminSistem']);
+
+Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
+
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });

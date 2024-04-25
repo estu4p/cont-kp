@@ -22,6 +22,9 @@ class LoginController extends Controller
         $title = 'loginsuperadmin';
         return view('superAdmin.Login')->with('title', $title);
     }
+    public function loginadminSistem(){
+        return view('SistemLokasi.AdminSistem-login');
+    }
     public function loginmitra()
     {
         $title = 'loginmitra';
@@ -32,6 +35,10 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
+        ], [
+            'email.required' => 'email harus diisi!',
+            'email.email' => 'format email salah',
+            'password.required' => 'password harus diisi!',
         ]);
 
         $login = $request->only('email', 'password');
@@ -54,6 +61,8 @@ class LoginController extends Controller
                 return redirect()->to('/user');
             } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
+            }else if ($role_id == 6) {
+                return redirect('/AdminSistem-Dashboard');
             } else { // mitra
                 return redirect()->to('/contributorformitra-dashboard');
 
