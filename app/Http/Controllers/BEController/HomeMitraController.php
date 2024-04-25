@@ -170,7 +170,7 @@ class HomeMitraController extends Controller
             $defaultJamKerjaDetik = strtotime($user->default_jam_kerja) - strtotime('00:00:00');
             $kurangJamKerjaDetik = $defaultJamKerjaDetik - $selisihWaktu;
             $kurangJamKerja = gmdate('H:i:s', $kurangJamKerjaDetik);
-            dd($defaultJamKerjaDetik);
+            // dd($kurangJamKerja);
             $dataPresensi->update([
                 'jam_pulang' => $jamPulang,
                 'keterangan_jam_pulang' => $keterangan,
