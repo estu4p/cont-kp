@@ -911,8 +911,7 @@ class ContributorForMitra extends Controller
     {
         // Mendapatkan informasi profil kontributor dari database berdasarkan role_id 5
         $contributor = User::where('role_id', 5)->first();
-       
-
+  
         return view('contributorformitra.editprofile')->with('contributor', $contributor);
     }
 

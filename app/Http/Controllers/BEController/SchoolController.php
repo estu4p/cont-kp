@@ -86,23 +86,26 @@ class SchoolController extends Controller
             return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
         }
     }
-    public function lihatPenilaian($id)
+    public function lihatPenilaian(Request $request, $id)
     {// Penilaian Mahasiswa- lihat
+        $byId = Penilaian::findOrFail($id);
+        dd($byId);
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $byId);
 
-        $penilaian = User::findOrFail($id);
-        // $penilaian = Penilaian::findOrFail($id);
-
-        $nilai = $penilaian->nilai->first();
-        $subkategori = $penilaian->subKategoriPenilaian->first();
-        $kategoripen = $penilaian->kategoriPenilaian->first();
-
-            return response()->json([
+        $responseData = [
             "Penilaian" => "view Penilaian Mahasiswa ",
-            "mahasiswa" => $penilaian,
-            "nilai" => $nilai,
-            "sub-kategori" => $subkategori,
-            "kategori" => $kategoripen,
-            ]);
-
+            "mahasiswa" => $penilaian->user,
+            "nilai" => $penilaian->nilai,
+            "sub-kategori" => $penilaian->subKategori->nama_sub_kategori,
+            "kategori" => $penilaian->subKategori->kategori_id,
+            "kritik-saran"=>$penilaian->kritik_saran
+        ];
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json($responseData);
+        }else{
+            return view('template.contributingforunivschool.lihat',compact('penilaian'));
         }
+    }
+
+
 }

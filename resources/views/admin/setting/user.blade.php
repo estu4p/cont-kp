@@ -10,7 +10,7 @@
             <div style="margin-left: -28px;">
                 <h6 class="text-uppercase fw-normal" style="font-size: 14px;">pengaturan utama</h6>
                 <ul class="text-capitalize fw-normal sub-menu" style="font-size: 14px;">
-                    <li style="margin-left: 2rem;"><a href="/admin/setting/quotes"
+                    <li style="margin-left: 2rem;"><a href="/AdminUniv/setting/quotes"
                             class="text-black text-decoration-none">quotes</a></li>
                 </ul>
                 <hr class="line" />

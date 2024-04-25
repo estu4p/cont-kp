@@ -52,7 +52,8 @@ class CheckoutController extends Controller
             'status' => 'Aktif',
             'no_pesanan' =>   $no_pesanan,
             'harga' => $harga,
-            'metode_bayar' => $request->input('metode_bayar')
+            'metode_bayar' => $request->input('metode_bayar'),
+            'lokasi' => $request->input('lokasi')
         ]);
 
         $data->save();
