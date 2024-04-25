@@ -68,7 +68,7 @@ class HomeMitraController extends Controller
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
         $keterangan_jam_masuk = $request->input('keterangan');
-        $default_jam_kerja = '06:30:00';
+        $default_jam_kerja = '00:00:10';
         $status_ganti_jam = 'Tidak Ganti jam';
 
         $data = new Presensi;
@@ -166,15 +166,35 @@ class HomeMitraController extends Controller
             $keterangan = $request->keterangan;
             $jamMasuk = $dataPresensi->jam_masuk;
             $selisihWaktu = strtotime($jamPulang) - strtotime($jamMasuk);
-            
-            $defaultJamKerjaDetik = strtotime($user->default_jam_kerja) - strtotime('00:00:00');
-            $kurangJamKerjaDetik = $defaultJamKerjaDetik - $selisihWaktu;
-            $kurangJamKerja = gmdate('H:i:s', $kurangJamKerjaDetik);
-            // dd($kurangJamKerja);
+
+            // Konversi selisih waktu ke dalam format jam, menit, dan detik
+            $hours = floor($selisihWaktu / 3600);
+            $minutes = floor(($selisihWaktu % 3600) / 60);
+            $seconds = $selisihWaktu % 60;
+
+            // Hitung total jam kerja dalam detik
+            $totalJamKerjaDetik = $hours * 3600 + $minutes * 60 + $seconds;
+
+            // Hitung total jam, menit, dan detik yang melebihi 24 jam
+            $totalJam = floor($totalJamKerjaDetik / 3600);
+            $totalMenit = floor(($totalJamKerjaDetik % 3600) / 60);
+            $totalDetik = $totalJamKerjaDetik % 60;
+
+            // Format total jam kerja untuk disimpan di database
+            $totalJamKerjaFormatted = sprintf('%02d:%02d:%02d', $totalJam, $totalMenit, $totalDetik);
+            $defaultJamKerjaDetik = strtotime($dataPresensi->default_jam_kerja) - strtotime('00:00:00');
+            $selisihJamKerja = $totalJamKerjaDetik - $defaultJamKerjaDetik;
+
+            if ($selisihJamKerja > 0) {
+                $kurangJamKerja = '+' .gmdate('H:i:s', $selisihJamKerja);
+            } else {
+                $kurangJamKerja = '-' . gmdate('H:i:s', abs($selisihJamKerja));
+            }
+
             $dataPresensi->update([
                 'jam_pulang' => $jamPulang,
                 'keterangan_jam_pulang' => $keterangan,
-                'total_jam_kerja' => $selisihWaktu,
+                'total_jam_kerja' => $totalJamKerjaFormatted,
                 'kurang_jam_kerja' => $kurangJamKerja
             ]);
 
