@@ -92,10 +92,10 @@ class SchoolController extends Controller
         $user= $Id->nama_lengkap;
         $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
         // // $sub_id = Penilaian::select('sub_id')->get()->sub_id;
-        $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategori'])
-                ->where('nama_lengkap', $Id->id)->where('kategori', $id)->orderBy('sub_id')->first();
-        // $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategoriPenilaian'])
-        //         ->where('nama_lengkap', $Id->id)->where('sub_id',2)->first();
+        // $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategori'])
+        //         ->where('nama_lengkap', $Id->id)->where('kategori', $id)->orderBy('sub_id')->first();
+        $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategoriPenilaian'])
+                ->where('nama_lengkap', $Id->id)->where('sub_id',2)->first();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['data' => $penilaian, $nilaiPemahaman]);
