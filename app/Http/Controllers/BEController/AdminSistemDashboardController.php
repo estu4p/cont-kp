@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -34,10 +35,10 @@ class AdminSistemDashboardController extends Controller
     public function editProfile()
     {
         $userAdmin = auth()->user();
-
         return view('SistemLokasi.AdminSistem-Editprofile', [
             'title' => "userAdmin - Ubah Profil",
-            'userAdmin' => $userAdmin
+            'userAdmin' => $userAdmin,
+            'csrfToken' => $csrfToken = csrf_token(),
         ]);
     }
 
@@ -56,15 +57,16 @@ class AdminSistemDashboardController extends Controller
         return redirect('/AdminSistem-Editprofile');
     }
 
-    public function updateFoto(Request $request)
+    public function updateFoto(Request $request, $id)
     {
+        try {
         // Mendapatkan profil pengguna yang sedang masuk
-        $profile = auth()->user();
-
+        $profile = User::findOrFail($id);
         // Validasi file gambar yang diunggah
         $request->validate([
             'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        // dd($request->all());
 
         // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
         if ($profile->foto_profil) {
@@ -72,49 +74,20 @@ class AdminSistemDashboardController extends Controller
         }
 
         // Simpan file gambar baru
-        $namaFoto = time() . '.' . $request->foto_profil->getClientOriginalExtension();
-        $path = $request->file('foto_profil')->storeAs('public/assets/images', $namaFoto);
+        $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
+        $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
 
         // Perbarui data foto profil pengguna
         $profile->update([
-            'foto_profil' => 'images/' . $namaFoto,
+            'foto_profil' => $namaFoto,
         ]);
 
         // Redirect kembali ke halaman edit profile
-        return redirect('/AdminSistem-Editprofile')->with('success', 'Foto Profil Berhasil Diperbarui');
+        return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
     }
-
-
-    // public function updateFoto(Request $request)
-    // {
-    //     try {
-    //         $validator = Validator::make($request->all(), [
-    //             'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         ]);
-    //         $validator->validate();
-    //     } catch (ValidationException $e) {
-    //         $errorValidate = $e->validator->errors()->all();
-    //         $errorMessage = implode('<br>', $errorValidate);
-    //         return redirect()->route('SistemLokasi.AdminSistem-EditProfile')->with('error', $errorMessage);
-    //     }
-
-    //     $profile = auth()->user();
-
-    //     try {
-    //         if ($profile->foto_profil) {
-    //             Storage::delete('public/' . $profile->foto_profil);
-    //         }
-    //         $namaFoto = time() . '.' . $request->foto_profil->getClientOriginalExtension();
-    //         $path = $request->file('foto_profil')->storeAs('public/foto_profil', $namaFoto);
-    //         $profile->update([
-    //             'foto_profil' => 'foto_profil/' . $namaFoto,
-    //         ]);
-    //         return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diUbah');
-    //     } catch (\Exception $e) {
-    //         $errorMessage = strip_tags($e->getMessage());
-    //         return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
-    //     }
-    // }
 
     public function deleteFoto($username)
     {

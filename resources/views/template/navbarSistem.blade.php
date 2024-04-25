@@ -16,7 +16,7 @@
                       
                   </div>
                   <a href="/AdminSistem-Editprofile"> <div class="navbar-logo">
-                      <img src="{{ asset('assets/images/' . $userAdmin->foto_profil) }}" style="border-radius: 50%;" alt="Profile Logo"></a>
+                      <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png" }}" style="border-radius: 50%;" alt="Profile Logo"></a>
                   </div>
                   
                
