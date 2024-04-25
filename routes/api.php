@@ -166,7 +166,7 @@ Route::get('/adminsistem/dashboard', [AdminSistemDashboardController::class, 'da
 
 Route::get('/adminsistem/profile/edit', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/adminsistem/updateprofile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/adminsistem/updatefoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
+Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateProfile');
 Route::delete('/adminsistem/deletefoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 //Subscription
 Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
