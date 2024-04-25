@@ -137,7 +137,7 @@
     
 }
 .register {
-    padding: 80px;
+    padding: 20px;
     font-family: "Montserrat", sans-serif;
 }
 .box-form {
@@ -147,7 +147,7 @@
     max-width: 540px;
     margin: auto;
     align-items: center;
-    padding: 60px 80px 60px;
+    padding: 20px 80px 60px;
 }
 .button-container {
     width: 100%;
