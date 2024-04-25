@@ -155,6 +155,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function updateAdminProfile(Request $request)
     {
         $user = auth()->user();
+        // $updateUser = User::where('id', $user);
         // Update the user's profile with the validated data
         $user->update([
             'nama_lengkap' => $request->nama_lengkap,
@@ -829,6 +830,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function daftarMitraTeamAktif(Request $request, $id)
     // daftarMitra-teamAktif
     {
+        $user = auth()->user();
         $divisi = Mitra::with('divisiMitra')->findOrFail($id);
         $divisiMitraId = DivisiItem::where('mitra_id', $id)->first();
         $divisiMitra = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
@@ -838,6 +840,7 @@ class AdminUnivAfterPaymentController extends Controller
             'divisiMitra' => $divisiMitra,
             'jml_anggota' => $jml_anggota,
             'divisiMitraId' => $divisiMitraId,
+            'user' => $user
         ]);
     }
 
