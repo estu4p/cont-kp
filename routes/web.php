@@ -81,7 +81,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
-// Super Admin
+// === Super Admin ===
 Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
 // function () {
 //     return view('superAdmin.Login');
@@ -275,7 +275,7 @@ Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'Dat
 
 //penilaian mahasiswa-contributor for univ
 Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
-Route::get('/lihat/{id}',[SchoolController::class, 'lihatPenilaian'])->name('penilaian');
+Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('penilaian');
 // function () {
 //     return view('template.contributingforunivschool.lihat');
 // });
@@ -826,9 +826,9 @@ Route::get('/AdminPaket', function () {
     return view('user.AdminUnivAfterPayment.AdminPaket');
 });
 
-Route::get('/CheckoutBronze', function () {
-    return view('user.AdminUnivAfterPayment.CheckoutBronze');
-});
+// Route::get('/CheckoutBronze', function () {
+//     return view('user.AdminUnivAfterPayment.CheckoutBronze');
+// });
 
 Route::get('/CheckoutSilver', function () {
     return view('user.AdminUnivAfterPayment.CheckoutSilver');
