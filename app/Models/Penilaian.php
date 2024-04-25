@@ -10,6 +10,11 @@ class Penilaian extends Model
     use HasFactory;
     protected $fillable = ['nama_lengkap', 'sub_id', 'nilai', 'kritik_saran'];
     protected $table = 'penilaian';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nama_lengkap');
+    }
     public function kategori()
     {
         return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
@@ -18,8 +23,5 @@ class Penilaian extends Model
     {
         return $this->belongsTo(SubKategoriPenilaian::class, 'sub_id', 'id', 'nama_sub_kategori');
     }
-    public function kategoriPenilaian()
-    {
-      return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
-    }
+    
 }

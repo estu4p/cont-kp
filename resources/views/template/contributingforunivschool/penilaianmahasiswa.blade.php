@@ -44,6 +44,7 @@
                             </td>
                             {{-- <td><a href="/lihat,['id' => $mhs->id]"> <i class="fa-solid fa-file-lines"></i></a></td> --}}
                             <td><a href="{{ route('penilaian', ['id' => $mhs->id])}}"><i class="fa-solid fa-file-lines"></i></a></td>
+                            {{-- <td><a href="{{ route('penilaian', ['nama_lengkap' => $nama_lengkap])}}"><i class="fa-solid fa-file-lines"></i></a></td> --}}
                         </tr>
                     @endforeach
                 </tbody>
