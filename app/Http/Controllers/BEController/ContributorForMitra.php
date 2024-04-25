@@ -911,6 +911,7 @@ class ContributorForMitra extends Controller
             'title' => "userAdmin - Ubah Profil",
             'userAdmin' => $userMitra
         ]);
+
     }
 
     public function updateProfile(Request $request, $username)

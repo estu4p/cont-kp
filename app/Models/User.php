@@ -130,14 +130,14 @@ class User extends Authenticatable
     }
     public function subKategoriPenilaian()
     {
-        return $this->hasOne(SubKategoriPenilaian::class);
+        return $this->BelongsTo(SubKategoriPenilaian::class);
     }
     public function kategoriPenilaian()
     {
-        return $this->hasOne(KategoriPenilaian::class);
+        return $this->BelongsTo(KategoriPenilaian::class);
     }
     public function penilaian()
     {
-        return $this->hasMany(Penilaian::class, 'nama_lengkap');
+        return $this->BelongsTo(Penilaian::class, 'nama_lengkap');
     }
 }
