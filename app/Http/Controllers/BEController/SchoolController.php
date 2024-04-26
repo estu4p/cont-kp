@@ -88,22 +88,19 @@ class SchoolController extends Controller
     }
     public function lihatPenilaian(Request $request, $id)
     {// Penilaian Mahasiswa- lihat
-        $byId = Penilaian::findOrFail($id);
-        dd($byId);
-        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $byId);
+        $Id = User::findOrFail($id);
+        $user= $Id->nama_lengkap;
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
+        // // $sub_id = Penilaian::select('sub_id')->get()->sub_id;
+        $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategori'])
+                ->where('nama_lengkap', $Id->id)->where('kategori', $id)->orderBy('sub_id')->first();
+        // $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategoriPenilaian'])
+        //         ->where('nama_lengkap', $Id->id)->where('sub_id',2)->first();
 
-        $responseData = [
-            "Penilaian" => "view Penilaian Mahasiswa ",
-            "mahasiswa" => $penilaian->user,
-            "nilai" => $penilaian->nilai,
-            "sub-kategori" => $penilaian->subKategori->nama_sub_kategori,
-            "kategori" => $penilaian->subKategori->kategori_id,
-            "kritik-saran"=>$penilaian->kritik_saran
-        ];
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json($responseData);
+            return response()->json(['data' => $penilaian, $nilaiPemahaman]);
         }else{
-            return view('template.contributingforunivschool.lihat',compact('penilaian'));
+            return view('template.contributingforunivschool.lihat',compact('penilaian', 'user','Id', 'nilaiPemahaman'));
         }
     }
 
