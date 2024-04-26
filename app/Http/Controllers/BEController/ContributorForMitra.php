@@ -911,11 +911,27 @@ class ContributorForMitra extends Controller
 
     public function editProfile()
     {
+
         $userMitra = User::where('role_id', 5)->first();
         return view('contributorformitra.editprofile', [
             'title' => "userMitra- Ubah Profil",
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
+        ]);
+ }
+
+    // Menyimpan perubahan pada profil
+    public function update(Request $request )
+    {
+        // Validasi data yang diinput
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'no_hp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string|max:255',
+            'about' => 'nullable|string',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk gambar
+
         ]);
     }
 

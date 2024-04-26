@@ -48,17 +48,14 @@
                         <img src="{{ asset('assets/images/icon/paket.png') }}" style="width: 25px"
                             class="icon-labelinput">
                     </div>
-                    {{-- <script>
-                            var currentUrl = window.location.pathname;
-                            var urlParts = currentUrl.split('/');
-                            var packageName = urlParts[urlParts.length - 1];
-                        </script> --}}
+
                     <input type="text" name="nama_paket"
                         style="border: 2px solid #E9E9E9; color:#5e5e5e; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
                         value="Bronze" readonly>
 
                 </div>
 
+                {{-- metode pembayaran --}}
                 <label for="bayar" class="mt-4">metode pembayaran<span class="text-danger">*</span></label>
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img
@@ -106,7 +103,7 @@
                     </div>
                 </div>
 
-
+                {{-- lokasi --}}
                 <label for="kota" class="mt-4">lokasi<span class="text-danger">*</span></label>
                 <div class="d-flex">
                     <div style="background-color: #E9E9E9; padding: 14px 15px 17px 14px;" class="label-img"><img
@@ -121,16 +118,12 @@
                     </button>
                 </div>
                 <div class="collapse" id="collapseExample2">
-                    <div class="dalam2 card-body">
-                        Yogyakarta <input type="radio" name="option" value="Yogyakarta"
-                            style="float: Right;"><br>
-                        Jawa Tengah <input type="radio" name="option" value="Jawa Tengah"
-                            style="float: Right;"><br>
-                        Jawa Barat <input type="radio" name="option" value="Jawa Barat"
-                            style="float: Right;"><br>
-                        Jawa Timur <input type="radio" name="option" value="Jawa Timur"
-                            style="float: Right;"><br>
-                    </div>
+                    @foreach ($data as $item)
+                        <div class="dalam2 card-body">
+                            {{ $item['name'] }} <input type="radio" name="lokasi" value="{{ $item['name'] }}"
+                                style="float: Right;"><br>
+                        </div>
+                    @endforeach
                 </div>
 
 

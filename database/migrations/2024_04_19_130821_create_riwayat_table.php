@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_paket')->nullable();
             $table->date('tanggal');
             $table->date('tanggal_berakhir');
+            $table->text('lokasi');
             $table->enum('status', ['Aktif', 'Tidak Aktif']);
             $table->string('no_pesanan');
             $table->string('harga');
