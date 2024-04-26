@@ -13,11 +13,14 @@ use App\Models\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+
 
 
 class ContributorForMitra extends Controller
@@ -906,51 +909,79 @@ class ContributorForMitra extends Controller
 
     //edit profil untuk mitra
 
-    // Menampilkan halaman pengeditan profil
-    public function edit()
+    public function editProfile()
     {
-        // Mendapatkan informasi profil kontributor dari database berdasarkan role_id 5
-        $contributor = User::where('role_id', 5)->first();
-       
-
-        return view('contributorformitra.editprofile')->with('contributor', $contributor);
+        $userMitra = User::where('role_id', 5)->first();
+        return view('contributorformitra.editprofile', [
+            'title' => "userMitra- Ubah Profil",
+            'userMitra' => $userMitra,
+            'csrfToken' => $csrfToken = csrf_token(),
+        ]);
     }
 
-    // Menyimpan perubahan pada profil
-    public function update(Request $request )
+    public function updateProfile(Request $request)
     {
-        // Validasi data yang diinput
-        $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'no_hp' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string|max:255',
-            'about' => 'nullable|string',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Menambahkan validasi untuk gambar
+              $userMitra = User::where('role_id', 5)->first();
+
+        
+        $userMitra->update([
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'email' => $request->input('email'),
+            'no_hp' => $request->input('no_hp'),
+            'alamat' => $request->input('alamat'),
+            'about' => $request->input('about'),
         ]);
-    
-        // Mendapatkan informasi profil kontributor dari database berdasarkan role_id 5
-        $contributor = User::where('role_id', 5)->first();
-    
-        // Memperbarui data profil
-        $contributor->nama_lengkap = $request->nama_lengkap;
-        $contributor->email = $request->email;
-        $contributor->no_hp = $request->no_hp;
-        $contributor->alamat = $request->alamat;
-        $contributor->about = $request->about;
+        
+        return redirect('/contributorformitra-editProfile');
+    }
 
+    public function updateFoto(Request $request, $id)
+    {
+        try {
+        // Mendapatkan profil pengguna yang sedang masuk
+        $profile = User::findOrFail($id);
+        // Validasi file gambar yang diunggah
+        $request->validate([
+            'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // dd($request->all());
 
-    
-        // Mengunggah gambar profil baru jika ada
-        if ($request->hasFile('foto_profil')) {
-            $image = $request->file('foto_profil');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('uploads/profile_images'), $imageName);
-            $contributor->foto_profil = $imageName;
+        // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
+        if ($profile->foto_profil) {
+            Storage::delete('public/' . $profile->foto_profil);
         }
-    
-        // Menyimpan perubahan pada database
-        $contributor->save();
-        return redirect()->route('contributorformitra.editprofile')->with('success', 'Profil berhasil diperbarui!');
+
+        // Simpan file gambar baru
+        $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
+        $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
+
+        // Perbarui data foto profil pengguna
+        $profile->update([
+            'foto_profil' => $namaFoto,
+        ]);
+
+        // Redirect kembali ke halaman edit profile
+        return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+    }
+
+    public function deleteFoto($username)
+    {
+        $profil = User::where('username', $username)->firstOrFail();
+        try {
+            if ($profil->foto_profil) {
+                Storage::delete('public/' . $profil->foto_profil);
+                $profil->foto_profil = null;
+                $profil->save();
+                return redirect()->route('contributorformitra.editprofile')->with('success', 'Foto Berhasil diHapus');
+            } else {
+                return redirect()->route('contributorformitra.editprofile')->with('error', 'Anda tidak memiliki Foto Profil');
+            }
+        } catch (\Exception $e) {
+            $errorMessage = strip_tags($e->getMessage());
+            return redirect()->route('contributorformitra.editprofile')->with('error', $errorMessage);
+        }
     }
 }
