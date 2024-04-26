@@ -140,6 +140,11 @@ Route::post('add-shift', [ContributorForMitra::class, 'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
 Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
 
+Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
+Route::put('/contributorformitra-update/{$username}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
+Route::put('/contributorformitra-delete/{$username}', [ContributorForMitra::class, 'delete'])->name('contributorformitra.deleteFoto');
+
+
 //Contributor for Mitra - Presensi
 Route::get('daftar-presensi', [PresensiMitraController::class, 'getAllPresensi']);
 Route::get('presensi/by-name', [PresensiMitraController::class, 'getPresensiByNama']);
