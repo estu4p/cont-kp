@@ -68,49 +68,104 @@ class UserAdminSistemController extends Controller
     }
 
     public function updateSubs(Request $request, $id)
-    {
-        $data = $request->all();
-        $subscription = Subscription::with(['user.perguruanTinggi', 'paket'])->findOrFail($id);
+{
+    $data = $request->all();
+    $subscription = Subscription::with(['user.perguruanTinggi', 'paket'])->findOrFail($id);
 
-        try {
-            $validator = Validator::make($request->all(), [
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    Rule::unique('users', 'email')->ignore($subscription->user->email, 'email')
-                ],
-            ]);
-            $validator->validate();
-        } catch (ValidationException $e) {
-            $errorValidate = $e->validator->errors()->all();
-            $errorMessage = implode('<br>', $errorValidate);
-            return response()->json(['error' => $errorMessage]);
-        }
+    // Validasi input
+    $validator = Validator::make($request->all(), [
+        'nama_lengkap' => 'required|string',
+        'email' => [
+            'required',
+            'string',
+            'email',
+            Rule::unique('users', 'email')->ignore($subscription->user->id, 'id')
+        ],
+        'no_hp' => 'required|string',
+        'tgl_masuk' => 'required|date',
+        'tgl_keluar' => 'nullable|date',
+        'status_akun' => 'required|string',
+        'sekolah' => 'required|exists:sekolah,id'
+    ]);
 
-        try {
-            $sekolah = Sekolah::where('sekolah', $data['sekolah'])->firstOrFail();
-            $subscription->user->update([
-                'nama_lengkap' => $data['nama_lengkap'],
-                'email' => $data['email'],
-                'no_hp' => $data['no_hp'],
-                'tgl_masuk' => $data['tgl_masuk'],
-                'tgl_keluar' => $data['tgl_keluar'],
-                'status_akun' => $data['status_akun'],
-                'sekolah' => $sekolah->id,
-            ]);
-            $subscription->update([
-                'harga' => $data['harga'],
-            ]);
-            $paket = Paket::where('nama_paket', $data['nama_paket'])->firstOrFail();
-            $subscription->paket()->associate($paket);
-            $subscription->save();
-            return response()->json(['success' => 'Data Berhasil diUpdate']);
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return response()->json(['error' => $errorMessage]);
-        }
+    // Penanganan exception jika validasi gagal
+    try {
+        $validator->validate();
+    } catch (ValidationException $e) {
+        $errorMessages = $e->validator->errors()->all();
+        $errorMessage = implode('<br>', $errorMessages);
+        return response()->json(['error' => $errorMessage]);
     }
+
+    try {
+        $sekolah = Sekolah::where('sekolah', $data['sekolah'])->firstOrFail();
+        $subscription->user->update([
+            'nama_lengkap' => $data['nama_lengkap'],
+            'email' => $data['email'],
+            'no_hp' => $data['no_hp'],
+            'tgl_masuk' => $data['tgl_masuk'],
+            'tgl_keluar' => $data['tgl_keluar'],
+            'status_akun' => $data['status_akun'],
+            'sekolah' => $sekolah->id,
+        ]);
+        $subscription->update([
+            'harga' => $data['harga'],
+        ]);
+        $paket = Paket::findOrFail($data['paket_id']);
+        $subscription->paket()->associate($paket);
+        $subscription->save();
+        return response()->json(['success' => 'Data Berhasil diUpdate']);
+    } catch (\Exception $e) {
+        $errorMessage = strip_tags($e->getMessage());
+        return response()->json(['error' => $errorMessage]);
+    }
+}
+
+
+    // public function updateSubs(Request $request, $id)
+    // {
+    //     $data = $request->all();
+    //     $subscription = Subscription::with(['user.perguruanTinggi', 'paket'])->findOrFail($id);
+
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'email' => [
+    //                 'required',
+    //                 'string',
+    //                 'email',
+    //                 Rule::unique('users', 'email')->ignore($subscription->user->id, 'id')
+    //             ],
+    //         ]);
+    //         $validator->validate();
+    //     } catch (ValidationException $e) {
+    //         $errorValidate = $e->validator->errors()->all();
+    //         $errorMessage = implode('<br>', $errorValidate);
+    //         return response()->json(['error' => $errorMessage]);
+    //     }
+
+    //     try {
+    //         $sekolah = Sekolah::where('sekolah', $data['sekolah'])->firstOrFail();
+    //         $subscription->user->update([
+    //             'nama_lengkap' => $data['nama_lengkap'],
+    //             'email' => $data['email'],
+    //             'no_hp' => $data['no_hp'],
+    //             'tgl_masuk' => $data['tgl_masuk'],
+    //             'tgl_keluar' => $data['tgl_keluar'],
+    //             'status_akun' => $data['status_akun'],
+    //             'sekolah' => $sekolah->id,
+    //         ]);
+    //         $subscription->update([
+    //             'harga' => $data['harga'],
+    //         ]);
+    //         $paket = Paket::where('nama_paket', $data['nama_paket'])->firstOrFail();
+    //         $subscription->paket()->associate($paket);
+    //         $subscription->save();
+    //         return response()->json(['success' => 'Data Berhasil diUpdate']);
+    //     } catch (\Exception $e) {
+    //         $errorMessage = strip_tags($e->getMessage());
+    //         return response()->json(['error' => $errorMessage]);
+    //     }
+    // }
 
     public function deleteSubs($id)
     {
