@@ -10,8 +10,8 @@
                     <i class="text-white fs-2 fa-solid fa-user"></i>
                 </div>
                 <div class="identitas d-flex p-3 flex-column col-4">
-                    <p class="m-0 text-white"><b> {{$user}}</b></p>
-                    <p class="m-0 text-white"><b>{{$Id->nomor_induk}}</b></p>
+                    <p class="m-0 text-white"><b> {{ $user }}</b></p>
+                    <p class="m-0 text-white"><b>{{ $Id->nomor_induk }}</b></p>
                 </div>
             </div>
             <div class="bawah w-100 d-flex flex-column p-5">
@@ -20,30 +20,39 @@
                         <div class="pengetahuan w-100 d-flex flex-column p-3 py-0">
                             <h5>Pengetahuan</h5>
                             <br>
-                            <div class="pemahaman-topik w-100 row">
-                                <p class="col-8 m-0">Pemahaman Topik Magang</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$nilaiPemahaman->nilai}}</p>
-                            </div>
-                            <div class="pemahaman-topik w-100 row">
-                                <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$nilaiPemahaman->nilai}}</p>
-                            </div>
-                            {{-- @foreach($penilaian as $nilai) --}}
+                            
+                            @foreach ($nilaiPemahaman as $user)
+                                @foreach ($user->penilaian as $p)
+                                    <div class="pemahaman-topik w-100 row">
+                                        <p class="col-8 m-0">Pemahaman Topik Magang</p>
+                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            style="background-color: #DCDCDC">{{ $p->nilai }}</p>
+                                    </div>
+                                    <div class="pemahaman-topik w-100 row">
+                                        <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
+                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            style="background-color: #DCDCDC">{{ $p->nilai }}</p>
+                                    </div>
+                                @endforeach
+                            @endforeach
                         </div>
                         <div class="keterampilan w-100 d-flex flex-column p-3">
                             <h5>Keterampilan</h5>
                             <br>
                             <div class="pemahaman-topik w-100 row ">
                                 <p class="col-8 m-0">Identifikasi masalah</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                    style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8 m-0">Pemecahan masalah</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                    style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                             </div>
                             <div class="pemahaman-topik w-100 row">
                                 <p class="col-8 m-0">Hasil kerja</p>
-                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                                <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                    style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                             </div>
                         </div>
                     </div>
@@ -52,29 +61,35 @@
                         <br>
                         <div class="pemahaman-topik w-100 row ">
                             <p class="col-8 m-0">Partisipasi</p>
-                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Kejujuran</p>
-                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Kedisiplinan</p>
-                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                         </div>
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Tangung jawab</p>
-                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                         </div>nilai
                         <div class="pemahaman-topik w-100 row">
                             <p class="col-8 m-0">Inisiatif</p>
-                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0" style="background-color: #DCDCDC">{{$penilaian->nilai}}</p>
+                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                style="background-color: #DCDCDC">{{ $penilaian->nilai }}</p>
                         </div>
                     </div>
                     <div class="bawah-dua w-100 p-5 gap-3" style="margin-left: -20px ">
                         <h5 class="my-3">Kritik Saran</h5>
                         <div class="form-floating col-12" style="text-align: left;">
-                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2" style="height: 200px; background-color:#DCDCDC; width:930px">{{$penilaian->kritik_saran}}</textarea>
+                            <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2"
+                                style="height: 200px; background-color:#DCDCDC; width:930px">{{ $penilaian->kritik_saran }}</textarea>
                         </div>
                         <br>
                         {{-- @endforeach --}}
