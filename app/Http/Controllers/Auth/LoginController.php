@@ -80,4 +80,13 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect('/AdminUniv-Login');
     }
+
+    public function logoutSistemLokasi(Request $request)
+    {
+        Auth::Logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.adminsistem');
+
+    }
 }
