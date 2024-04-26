@@ -24,6 +24,7 @@ use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\Auth\ResetPasswordAdminController;
+use App\Http\Controllers\Auth\ResetPasswordAdminSistemController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
@@ -894,6 +895,14 @@ Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });
+
+Route::post('/user-AdminSistem/resetpassword', [ResetPasswordAdminSistemController::class, 'resetPassword'])->name('password.resetAdminSistem');
+Route::post('/user-AdminSistem/InputOTP', [ResetPasswordAdminSistemController::class, 'verifyOTP'])->name('otp.verifyAdminSistem');
+Route::post('/user-AdminSistem/InputnewPassword', [ResetPasswordAdminSistemController::class, 'newPassword'])->name('password.newAdminSistem');
+
+
+
+
 Route::get('/user-AdminSistem/InputOTP', function () {
     return view('SistemLokasi.AdminSistem-InputOTP');
 });
