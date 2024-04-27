@@ -20,18 +20,18 @@
                         <div class="pengetahuan w-100 d-flex flex-column p-3 py-0">
                             <h5>Pengetahuan</h5>
                             <br>
-                            
+
                             @foreach ($nilaiPemahaman as $user)
-                                @foreach ($user->penilaian as $p)
+                                @foreach ($user->penilaian as $nilai)
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman Topik Magang</p>
                                         <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
-                                            style="background-color: #DCDCDC">{{ $p->nilai }}</p>
+                                            style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
                                     </div>
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
                                         <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
-                                            style="background-color: #DCDCDC">{{ $p->nilai }}</p>
+                                            style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
                                     </div>
                                 @endforeach
                             @endforeach
@@ -89,7 +89,8 @@
                         <h5 class="my-3">Kritik Saran</h5>
                         <div class="form-floating col-12" style="text-align: left;">
                             <textarea class="ta" placeholder="Kerja Bagus." id="floatingTextarea2"
-                                style="height: 200px; background-color:#DCDCDC; width:930px">{{ $penilaian->kritik_saran }}</textarea>
+                                style="height: 200px; background-color:#DCDCDC;width:930px
+                                overflow: hidden; white-space: nowrap; resize: none;">{{ $penilaian->kritik_saran }}</textarea>
                         </div>
                         <br>
                         {{-- @endforeach --}}

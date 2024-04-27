@@ -92,30 +92,18 @@ class SchoolController extends Controller
         $Id = User::findOrFail($id);
         $user = $Id->nama_lengkap;
         $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
-        // $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])
-        //     ->where('nama_lengkap', $Id->id)
-        //     ->groupBy('nama_lengkap')
-        //     ->get(['nama_lengkap', DB::raw('COUNT(id) as total')]);
 
-        // $query = DB::table('penilaian')
-        //     ->join('users', 'penilaian.nama_lengkap', '=', 'users.id')
-        //     ->join('sub_kategori_penilaian', 'penilaian.sub_id', '=' ,'sub_kategori_penilaian.id')
-        //     ->where('penilaian.nama_lengkap', $Id)
-        //     ->select('penilaian.*', 'users.nama_lengkap as nama', 'users.nomor_induk as nik');
+        $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
+            ->where('id', $Id->id)->get();
 
-        // $penilaian = $query->get()->groupBy('nama');
-        // dd($penilaian);
-        // // $sub_id = Penilaian::select('sub_id')->get()->sub_id;
-        // $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategori'])
-        //         ->where('nama_lengkap', $Id->id)->where('kategori', $id)->orderBy('sub_id')->first();
-        $nilaiPemahaman = User::with(['penilaian' => function ($query) {
-            $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
-                  ->groupBy('nama_lengkap', 'sub_id', 'nilai')
-                  ->orderBy('nama_lengkap')
-                  ->get();
-        }])
-        ->where('id', $Id->id)
-        ->get();
+        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
+        //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
+        //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
+        //           ->orderBy('nama_lengkap')
+        //           ->get();
+        // }])
+        // ->where('id', $Id->id)
+        // ->get();
         // dd($nilaiPemahaman->toArray());
 
         if ($request->is('api/*') || $request->wantsJson()) {
