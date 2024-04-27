@@ -7,11 +7,11 @@
 <!-- <div class="kanan-tabel p-5 container-fluid m-auto  w-100 justify-content-center" style="background-color:#EFAF18"> -->
     <div class="container p-5   w-100 justify-content-start" style="position:relative ;">
         <a href="/pengaturan-contri" class="kekiri" style="color:black"><i class="fa-solid fa-chevron-left" style="color: black;"></i></a>
-        <h3 class="kategori">Kategori Penilaian Ui/Ux</h3>
+        <h3 class="kategori">Kategori Penilaian {{ $nama_divisi }}</h3>
         <div class="card">
             <div class="card-header">
-                <h3 style="color: white;">Tambah Kategori Penilaian Ui/Ux</h3>
-                <p style="color: white;">Digunakan untuk menentukan kategori penilaian kepada peserta magang</p>
+                <h3 style="color: rgb(24, 11, 11);">Tambah Kategori Penilaian  {{ $nama_divisi }}</h3>
+                <p style="color: rgb(50, 24, 24);">Digunakan untuk menentukan kategori penilaian kepada peserta magang</p>
             </div>
             <div class="card-body">
                 <form @submit.prevent="tambahPenilaian">

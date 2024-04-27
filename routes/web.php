@@ -274,6 +274,10 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 // });
 
 //penilaian mahasiswa-contributor mitra
+Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian']);
+
+
 Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 
 Route::get('/input-nilai', function () {
@@ -762,7 +766,7 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
-Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
+// Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
 
 
