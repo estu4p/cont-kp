@@ -911,7 +911,7 @@ class ContributorForMitra extends Controller
 
     public function editProfile()
     {
-
+        //$userMitra = auth()->user();
         $userMitra = User::where('role_id', 5)->first();
         return view('contributorformitra.editprofile', [
             'title' => "userMitra- Ubah Profil",
@@ -937,9 +937,8 @@ class ContributorForMitra extends Controller
 
     public function updateProfile(Request $request)
     {
-              $userMitra = User::where('role_id', 5)->first();
-
-        
+        //$userMitra = auth()->user();
+       $userMitra = User::where('role_id', 5)->first();
         $userMitra->update([
             'nama_lengkap' => $request->input('nama_lengkap'),
             'email' => $request->input('email'),
@@ -948,7 +947,7 @@ class ContributorForMitra extends Controller
             'about' => $request->input('about'),
         ]);
         
-        return redirect('/contributorformitra-editProfile');
+        return redirect('/contributorformitra-editprofile');
     }
 
     public function updateFoto(Request $request, $id)
@@ -982,22 +981,21 @@ class ContributorForMitra extends Controller
             Log::error($e->getMessage());
         }
     }
-
-    public function deleteFoto($username)
-    {
-        $profil = User::where('username', $username)->firstOrFail();
-        try {
-            if ($profil->foto_profil) {
-                Storage::delete('public/' . $profil->foto_profil);
-                $profil->foto_profil = null;
-                $profil->save();
-                return redirect()->route('contributorformitra.editprofile')->with('success', 'Foto Berhasil diHapus');
-            } else {
-                return redirect()->route('contributorformitra.editprofile')->with('error', 'Anda tidak memiliki Foto Profil');
-            }
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('contributorformitra.editprofile')->with('error', $errorMessage);
+  public function deleteFoto($id)
+{
+    $profil = User::findOrFail($id);
+    try {
+        if ($profil->foto_profil) {
+            Storage::delete('public/' . $profil->foto_profil);
+            $profil->foto_profil = null;
+            $profil->save();
+            return response()->json(['success' => 'Foto Berhasil diHapus']);
+        } else {
+            return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
         }
+    } catch (\Exception $e) {
+        $errorMessage = strip_tags($e->getMessage());
+        return response()->json(['error' => $errorMessage]);
     }
+}
 }
