@@ -853,10 +853,7 @@ Route::get('/', function () {
 Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'editProfile'])->name('contributorformitra.editProfile');
 Route::put('/contributorformitra/updateProfile', [ContributorForMitra::class, 'updateProfile'])->name('contributorformitra.updateProfile');
 Route::post('/contributorformitra/updateFoto/{id}', [ContributorForMitra::class, 'updateFoto'])->name('contributorformitra.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-Route::delete('/contributorformitra-deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('contributorformitra.deleteFoto');
-
-
-
+Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::class, 'deleteFoto'])->name('contributorformitra.deleteFoto');
 
 //Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
 //Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
