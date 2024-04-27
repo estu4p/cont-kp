@@ -177,7 +177,7 @@
     max-width: 540px;
     margin: 0 auto;
     margin-top: 40%;
-    padding: 60px;
+    padding: 20px;
     position: block;
     background-color: white;
 }
@@ -249,7 +249,7 @@
     box-sizing: border-box;
 
     /* width: 420px; */
-    height: 216px;
+    height: 210px;
 
     background: #a61c1c;
     border-radius: 5px;
@@ -265,11 +265,15 @@
     margin-left: 5px;
     background: #ffffff;
     border-radius: 5px;
+    padding: 10px;
 }
+
+
+
 .list-pembayaran input[type="radio"] {
     margin-left: 3%;
     margin-right: 10px;
-    transform: scale(2);
+    transform: scale(1);
 }
 .list-pembayaran {
     display: flex;
@@ -284,10 +288,23 @@
 .dalam2 {
     overflow-y: scroll;
     box-sizing: border-box;
-    margin-left: 16%;
+    padding: 10px !important;
     bottom: 2%;
+    margin-left: 10%;
+    max-height: 120px;
+    border-color: #c4baba !important;
     background: #f2f4f8;
     border-radius: 5px;
+    font-size: 13px;
+}
+hr{
+    margin: 0; /* Menghilangkan margin */
+    padding: 2; /* Menghilangkan padding */
+}
+.tes{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: 400;
 }
 .btn-text {
     padding: 15px;
@@ -551,7 +568,7 @@ box-sizing: border-box;
 
 
 width: 420px;
-height: 216px;
+height: 210px;
 
 
 background: #A61C1C;
@@ -576,11 +593,6 @@ border-radius: 5px;
 
 
 
-.list-pembayaran input[type="radio"] {
-    margin-left: 3%;
-    margin-right: 10px;
-    transform: scale(2);
-}
 
 
 .list-pembayaran {
@@ -595,15 +607,7 @@ border-radius: 5px;
     text-align: left;
 }
 
-.dalam2{
-overflow-y: scroll;
-box-sizing: border-box;
-margin-left: 16%;
-bottom: 2%;
-background: #F2F4F8;
-border: 1px solid #C1C7CD;
-border-radius: 5px;
-}
+
 
 .btn-text {
     padding: 15px;

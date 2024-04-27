@@ -18,8 +18,5 @@ class KategoriPenilaian extends Model
     {
         return $this->hasMany(SubKategoriPenilaian::class, 'kategori_id', 'id');
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    
 }

@@ -121,6 +121,7 @@
                         <h5 class="modal-title modaltitle">Edit Pelanggan</h5>
 
                     </div>
+                    <form id="edit-pelanggan-form">
                     <div class="modal-body modalbodi">
                         <!-- Isi konten form modal disini -->
                         <div class="kiri">
@@ -130,11 +131,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="inputt" id="nama" name="nama" placeholder="Raihan Hafidz">
+                                <input type="text" class="inputt" id="nama" name="nama" placeholder="{{ $subscription->user->nama_lengkap }}">
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="text" class="inputt" id="Email" name="Email" placeholder="RaihanHafidz@gmail.com">
+                                <input type="text" class="inputt" id="Email" name="Email" placeholder="{{ $subscription->user->email }}">
                             </div>
                             <div class="form-group">
                                 <label for="Telepon">Telepon</label>
@@ -142,7 +143,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Sekolah">Sekolah/perguruantinggi</label>
-                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="Universitas Ahmad Dahlan">
+                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="{{ $sekolah[$subscription->user->sekolah] }}">
                             </div>
                         </div>
                         <div class="kanann">
@@ -196,9 +197,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
 
-                        <button type="submit" class="btn btn-danger" onclick="showSuccessModal()">Simpan</button>
-
+                        <button type="button" class="btn btn-danger" onclick="submitEditForm()">Simpan</button>
                     </div>
+                    </form>
                 </div>
             </div>
 
@@ -206,32 +207,75 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 
-
-
-
             <script>
-                function showdeletemodal() {
-                    swal({
-                            title: "Hapus",
-                            text: "Apakah anda yakin ingin menghapus!",
-                            icon: "warning",
-                            buttons: true,
-                            dangerMode: true,
-                        })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                swal("Data berhasil dihapus!", {
-                                    icon: "success",
-                                });
-                            } else {
-                                swal("Your imaginary file is safe!");
-                            }
-                        });
-                }
 
                 function showEditModal() {
                     $('#edit-pelanggan').modal('show');
                 }
+
+                function submitEditForm() {
+                // Mengambil data dari inputan
+                var idPelanggan = $("#id-pelanggan").val();
+                var nama = $("#nama").val();
+                var email = $("#Email").val();
+                var telepon = $("#Telepon").val();
+                var sekolah = $("#Sekolah").val();
+                var paketBerlangganan = $("#paket-berlangganan").val();
+                var startDate = $("#start-date").val();
+                var endDate = $("#end-date").val();
+                var harga = $("#telepon").val();
+                var statusBerlangganan = $("#status-berlangganan").val();
+
+                // Data yang akan dikirim ke backend
+                var data = {
+                    id_pelanggan: idPelanggan,
+                    nama: nama,
+                    email: email,
+                    telepon: telepon,
+                    sekolah: sekolah,
+                    paket_berlangganan: paketBerlangganan,
+                    start_date: startDate,
+                    end_date: endDate,
+                    harga: harga,
+                    status_berlangganan: statusBerlangganan
+                };
+
+                // Kirim data ke backend melalui AJAX
+                $.ajax({
+                    url: '/subscriptions/' + idPelanggan + '/update', // Ganti dengan URL endpoint backend Anda
+                    type: 'PUT',
+                    data: data,
+                    success: function(response) {
+                        // Tampilkan notifikasi sukses
+                        showSuccessModal();
+                    },
+                    error: function(xhr, status, error) {
+                        // Tampilkan notifikasi error jika terjadi kesalahan
+                        alert('Terjadi kesalahan: ' + error);
+                    }
+                });
+            }
+
+
+                // function showdeletemodal() {
+                //     swal({
+                //             title: "Hapus",
+                //             text: "Apakah anda yakin ingin menghapus!",
+                //             icon: "warning",
+                //             buttons: true,
+                //             dangerMode: true,
+                //         })
+                //         .then((willDelete) => {
+                //             if (willDelete) {
+                //                 swal("Data berhasil dihapus!", {
+                //                     icon: "success",
+                //                 });
+                //             } else {
+                //                 swal("Your imaginary file is safe!");
+                //             }
+                //         });
+                // }
+
 
                 function showSuccessModal() {
                     swal("Successfully Saved", "user has been changed.", "success")
