@@ -537,6 +537,8 @@ Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::cla
 Route::delete('/AdminSistem/deleteFoto/{id}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+Route::put('/AdminSistem-Subcription/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.updateSubs');
+Route::delete('/AdminSistem-Subcription/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.deleteSubs');
 
 Route::get('/AdminSistem-login', [LoginController::class, 'loginadminSistem'])->name('login.adminsistem');
 Route::get('/AdminSistem/logout-sistemlokasi', [LoginController::class, 'logoutSistemLokasi'])->name('logout.sistemlokasi');

@@ -87,9 +87,13 @@
                                     <i class="fas fa-pen m-0 p-0 blue-icon"></i>
                                     <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
                                 </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
+                                <form action="{{ route('subscriptions.deleteSubs', ['id' => $subscription->id]) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="border: none;" onclick="return showdeletemodal(event)">
+                                        <i class="fa-solid fa-trash-can red-icon"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -131,19 +135,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="inputt" id="nama" name="nama" placeholder="{{ $subscription->user->nama_lengkap }}">
+                                <input type="text" class="inputt" id="nama" name="nama" placeholder="nama lengkap">
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="text" class="inputt" id="Email" name="Email" placeholder="{{ $subscription->user->email }}">
+                                <input type="text" class="inputt" id="Email" name="Email" placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label for="Telepon">Telepon</label>
-                                <input type="text" class="inputt" id="Telepon" name="Telepon" placeholder="081234567890">
+                                <input type="text" class="inputt" id="Telepon" name="Telepon" placeholder="08xxxxxxxxxx">
                             </div>
                             <div class="form-group">
                                 <label for="Sekolah">Sekolah/perguruantinggi</label>
-                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="{{ $sekolah[$subscription->user->sekolah] }}">
+                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="sekolah/perguruan tinggi">
                             </div>
                         </div>
                         <div class="kanann">
@@ -256,26 +260,25 @@
                 });
             }
 
-
-                // function showdeletemodal() {
-                //     swal({
-                //             title: "Hapus",
-                //             text: "Apakah anda yakin ingin menghapus!",
-                //             icon: "warning",
-                //             buttons: true,
-                //             dangerMode: true,
-                //         })
-                //         .then((willDelete) => {
-                //             if (willDelete) {
-                //                 swal("Data berhasil dihapus!", {
-                //                     icon: "success",
-                //                 });
-                //             } else {
-                //                 swal("Your imaginary file is safe!");
-                //             }
-                //         });
-                // }
-
+                // Fungsi untuk menampilkan modal konfirmasi penghapusan
+                function showdeletemodal(event) {
+                    event.preventDefault();
+                    swal({
+                            title: "Hapus",
+                            text: "Apakah anda yakin ingin menghapus!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                // Jika pengguna mengonfirmasi penghapusan, submit form
+                                event.target.closest('.delete-form').submit();
+                            } else {
+                                swal("Penghapusan dibatalkan.");
+                            }
+                        });
+                }
 
                 function showSuccessModal() {
                     swal("Successfully Saved", "user has been changed.", "success")
