@@ -24,6 +24,7 @@ use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\Auth\ResetPasswordAdminController;
+use App\Http\Controllers\Auth\ResetPasswordAdminSistemController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
@@ -533,9 +534,13 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'da
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
 Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
+Route::delete('/AdminSistem/deleteFoto/{id}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+
+Route::get('/AdminSistem-login', [LoginController::class, 'loginadminSistem'])->name('login.adminsistem');
+Route::get('/AdminSistem/logout-sistemlokasi', [LoginController::class, 'logoutSistemLokasi'])->name('logout.sistemlokasi');
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -842,10 +847,17 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
+Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'editProfile'])->name('contributorformitra.editProfile');
+Route::put('/contributorformitra/updateProfile', [ContributorForMitra::class, 'updateProfile'])->name('contributorformitra.updateProfile');
+Route::post('/contributorformitra/updateFoto/{id}', [ContributorForMitra::class, 'updateFoto'])->name('contributorformitra.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::delete('/contributorformitra-deleteFoto/{username}', [ContributorForMitra::class, 'deleteFoto'])->name('contributorformitra.deleteFoto');
 
 
-Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
-Route::put('/contributorformitra-update', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
+
+
+//Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
+//Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
+//Route::put('/contributorformitra-profile/{$id}', [ContributorForMitra::class, 'Profile'])->name('contributorformitra.profile');
 
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
@@ -894,6 +906,14 @@ Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });
+
+Route::post('/user-AdminSistem/resetpassword', [ResetPasswordAdminSistemController::class, 'resetPassword'])->name('password.resetAdminSistem');
+Route::post('/user-AdminSistem/InputOTP', [ResetPasswordAdminSistemController::class, 'verifyOTP'])->name('otp.verifyAdminSistem');
+Route::post('/user-AdminSistem/InputnewPassword', [ResetPasswordAdminSistemController::class, 'newPassword'])->name('password.newAdminSistem');
+
+
+
+
 Route::get('/user-AdminSistem/InputOTP', function () {
     return view('SistemLokasi.AdminSistem-InputOTP');
 });
