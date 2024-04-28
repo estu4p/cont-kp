@@ -23,6 +23,7 @@
 
                             @foreach ($nilaiPemahaman as $user)
                                 @foreach ($user->penilaian as $nilai)
+
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman Topik Magang</p>
                                         <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
@@ -100,4 +101,65 @@
             </div>
         </div>
     </div>
+
+    {{-- <script>
+        $(document).ready(function() {
+            //  var id = <?php echo json_encode($Id->id); ?>;
+            var id = {{ $Id->id }};
+
+        $.ajax({
+            url:'/penilaian/lihat/' + id,    , //"{{ route('penilaian')}}",///lihat/{id}'
+            method: 'GET',
+            // data: $('#penilaian').serialize(),
+            success: function(response) {
+                // Menampilkan data penilaian
+                $('.user').text(response.user);
+                $('.nomor_induk').text(response.Id.nomor_induk);
+
+                // Menampilkan data nilai pemahaman tanpa duplikat
+                var uniqueSubIds = {};
+                $.each(response.nilai, function(index, nilai) {
+                    if (!uniqueSubIds[nilai.sub_id]) {
+                        uniqueSubIds[nilai.sub_id] = true;
+                        $('.nilaiPemahaman').append('<div><p>Pemahaman ' + nilai.subKategori.nama + '</p><p>Nilai: ' + nilai.nilai + '</p></div>');
+                    }
+                });
+            }
+        });
+
+        })
+    <script> --}}
+
+ {{-- <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/lihat/{id}',
+                method: 'GET',
+                success: function(response) {
+                    var penilaianBySubId = {};
+
+                    // Memproses data yang diterima
+                    response.nilai.forEach(function(item) {
+                        // Mengecek apakah sub_id sudah ada dalam objek penilaianBySubId
+                        if (!penilaianBySubId[item.sub_id]) {
+                            // Jika belum ada, tambahkan sub_id ke objek dan inisialisasikan dengan array kosong
+                            penilaianBySubId[item.sub_id] = [];
+                        }
+                        // Tambahkan data penilaian ke dalam array sesuai dengan sub_id
+                        penilaianBySubId[item.sub_id].push(item);
+                    });
+
+                    // Menampilkan data penilaian ke dalam div berdasarkan sub_id
+                    Object.keys(penilaianBySubId).forEach(function(subId) {
+                        // Membuat div untuk menampilkan data penilaian
+                        var penilaianDiv = $('<div>');
+
+                        // Menambahkan judul sub_id
+                        penilaianDiv.append('<h2>Sub-ID: ' + subId + '</h2>');
+
+                    });
+                }
+            });
+        });
+    </script> --}}
 @endsection

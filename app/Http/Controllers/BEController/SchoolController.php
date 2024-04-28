@@ -95,7 +95,13 @@ class SchoolController extends Controller
 
         $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
             ->where('id', $Id->id)->get();
+        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
+        //     $query->distinct()->with('subKategori', 'subKategori.kategori');
+        // }])
+        // ->where('id', $Id->id)
+        // ->get();
 
+        // dd($nilaiPemahaman);
         // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
         //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
         //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
