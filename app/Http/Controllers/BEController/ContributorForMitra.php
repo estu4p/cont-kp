@@ -924,6 +924,7 @@ class ContributorForMitra extends Controller
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
         ]);
+
     }
 
     // Menyimpan perubahan pada profil
