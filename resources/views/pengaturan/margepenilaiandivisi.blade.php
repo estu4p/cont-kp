@@ -49,8 +49,9 @@
                                 <td>{{ $division->nama_divisi }}</td>
                                 <td class="actions">
                                     <div class="d-flex justify-content-end">
-                                        <a href="{{ url('kategoripenilaian/' . $division->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                                       
+                                        <a href="{{ url('kategoripenilaian/' . $division->id) }}"
+                                            class="btn btn-primary btn-sm me-2">Edit</a>
+
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#konfirmasi">Hapus</button>
                                     </div>

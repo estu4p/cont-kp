@@ -349,50 +349,7 @@ class AdminUnivAfterPaymentController extends Controller
     //         return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
     //     }
     // }
-    public function addKategoriPenilaian(Request $request)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
-    {
-        $validator = Validator::make($request->all(), [
-            'divisi_id' => 'required',
-            'nama_kategori' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Fail to add kategori penilaian',], 400);
-        }
-        $data = new KategoriPenilaian([
-            'divisi_id' => $request->input('divisi_id'),
-            'nama_kategori' => $request->input('nama_kategori')
-        ]);
-        $data->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'success to add data'
-        ]);
-    }
-
-    public function addSubKategoriPenilaian(Request $request)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
-    {
-        $validator = Validator::make($request->all(), [
-            'kategori_id' => 'required',
-            'nama_sub_kategori' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Fail to add Sub Kategori',], 400);
-        }
-
-        $data = new SubKategoriPenilaian([
-            'kategori_id' => $request->input('kategori_id'),
-            'nama_sub_kategori' => $request->input('nama_sub_kategori')
-        ]);
-
-        $data->save();
-
-        return response()->json([
-            'message' => 'success to add Sub Kategori'
-        ]);
-    }
+    
 
     // public function teamAktifKlik(Request $Request, $id)
     // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
@@ -934,18 +891,44 @@ class AdminUnivAfterPaymentController extends Controller
         return redirect()->to('/pengaturan-contri');
     }
 
-    public function showKategoriPenilaian(Request $request)
+    public function showKategoriPenilaian($divisi_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        // Mengambil id divisi dari request atau dari sesi, tergantung dari kebutuhan aplikasi Anda
-        $divisi_id = $request->input('divisi_id');
-
-        // Mengambil data divisi dari tabel Divisi berdasarkan id
-        $divisi = Divisi::find($divisi_id);
-        $nama_divisi = $divisi ? $divisi->nama_divisi : null;
+        $divisi = Divisi::findOrFail($divisi_id);
 
         return view('pengaturan.kategoripenilaian', [
-            'nama_divisi' => $nama_divisi
+            'divisi' => $divisi
+        ]);
+    }
+
+    public function addKategoriPenilaian(Request $request, $divisi_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $divisi = Divisi::findOrFail($divisi_id);
+        $nama_kategori = $request->input('nama_kategori');
+        $data = new KategoriPenilaian;
+        $data->divisi_id = $divisi_id;    
+        $data->nama_kategori = $nama_kategori;            
+        $data->save();
+        return view('pengaturan.kategoripenilaian',[
+            'divisi' => $divisi
+        ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $divisi = Divisi::findOrFail($divisi_id);
+        $nama_sub_kategori = $request->input('nama_sub_kategori');
+        $data = new SubKategoriPenilaian;
+        $data->divisi_id = $divisi_id;
+        $data->kategori_id = $kategori_id;      
+        $data->nama_sub_kategori = $nama_sub_kategori;
+        $data->save();
+
+        return view('pengaturan.kategoripenilaian', [
+            'divisi' => $divisi,
+            'kategori_id' => $kategori_id
         ]);
     }
 }
