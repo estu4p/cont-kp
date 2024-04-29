@@ -27,21 +27,13 @@ class HomeMitraController extends Controller
         ]);
         $validatedData = $validator->validate();
 
-        // Memeriksa apakah mitra_id dan divisi_id yang dipilih sesuai dengan data di database
         $mitraId = $validatedData['mitra_id'];
         $divisiId = $validatedData['divisi_id'];
-        $mitraExists = Mitra::where('id', $mitraId)->exists();
-        $divisiExists = Divisi::where('id', $divisiId)->exists();
 
-        // if (!$mitraExists || !$divisiExists) {
-        //     return redirect()->back()->with('error', 'Mitra atau Divisi yang anda pilih salah.');
-        // }
-        // Memeriksa apakah mitra_id dan divisi_id yang dipilih sesuai dengan data di database
         $user = User::findOrFail($id);
         if ($user->mitra_id != $mitraId || $user->divisi_id != $divisiId) {
             return redirect()->back()->with('error', 'Mitra atau divisi yang dipilih tidak sesuai dengan data pengguna.');
         }
-
         return redirect()->to('/pemagang/home/' . $id);
     }
 
@@ -76,7 +68,7 @@ class HomeMitraController extends Controller
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
         $keterangan_jam_masuk = $request->input('keterangan');
-        $jam_default_masuk = '06:30';
+        $default_jam_kerja = '00:00:10';
         $status_ganti_jam = 'Tidak Ganti jam';
 
         $data = new Presensi;
@@ -86,6 +78,7 @@ class HomeMitraController extends Controller
         $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
+        $data->default_jam_kerja = $default_jam_kerja;
         $data->status_ganti_jam = $status_ganti_jam;
         $data->save();
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
@@ -169,9 +162,40 @@ class HomeMitraController extends Controller
         $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
 
         if ($dataPresensi) {
+            $jamPulang = $request->jam;
+            $keterangan = $request->keterangan;
+            $jamMasuk = $dataPresensi->jam_masuk;
+            $selisihWaktu = strtotime($jamPulang) - strtotime($jamMasuk);
+
+            // Konversi selisih waktu ke dalam format jam, menit, dan detik
+            $hours = floor($selisihWaktu / 3600);
+            $minutes = floor(($selisihWaktu % 3600) / 60);
+            $seconds = $selisihWaktu % 60;
+
+            // Hitung total jam kerja dalam detik
+            $totalJamKerjaDetik = $hours * 3600 + $minutes * 60 + $seconds;
+
+            // Hitung total jam, menit, dan detik yang melebihi 24 jam
+            $totalJam = floor($totalJamKerjaDetik / 3600);
+            $totalMenit = floor(($totalJamKerjaDetik % 3600) / 60);
+            $totalDetik = $totalJamKerjaDetik % 60;
+
+            // Format total jam kerja untuk disimpan di database
+            $totalJamKerjaFormatted = sprintf('%02d:%02d:%02d', $totalJam, $totalMenit, $totalDetik);
+            $defaultJamKerjaDetik = strtotime($dataPresensi->default_jam_kerja) - strtotime('00:00:00');
+            $selisihJamKerja = $totalJamKerjaDetik - $defaultJamKerjaDetik;
+
+            if ($selisihJamKerja > 0) {
+                $kurangJamKerja = '+' .gmdate('H:i:s', $selisihJamKerja);
+            } else {
+                $kurangJamKerja = '-' . gmdate('H:i:s', abs($selisihJamKerja));
+            }
+
             $dataPresensi->update([
-                'jam_pulang' => $request->jam,
-                'keterangan_jam_pulang' => $request->keterangan
+                'jam_pulang' => $jamPulang,
+                'keterangan_jam_pulang' => $keterangan,
+                'total_jam_kerja' => $totalJamKerjaFormatted,
+                'kurang_jam_kerja' => $kurangJamKerja
             ]);
 
             return view('pemagang/home', [
@@ -190,39 +214,6 @@ class HomeMitraController extends Controller
             ], 404);
         }
     }
-
-
-    public function totalJamKerja(Request $request, $id)
-    {
-        $user = Auth::user();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
-        if ($dataPresensi) {
-            $jamMasuk = Carbon::parse($dataPresensi->jam_masuk);
-            $jamPulang = Carbon::parse($dataPresensi->jam_pulang);
-            $totalJamKerja = $jamPulang->diffInHours($jamMasuk);
-            $totalMenitKerja = $jamPulang->diffInMinutes($jamMasuk) % 60;
-            $totalJamKerja += $totalMenitKerja / 60;
-            $dataPresensi->update([
-                'total_jam_kerja' => $totalJamKerja
-            ]);
-
-            return view('pemagang/home', [
-                'button' => 'Log Activity',
-                'route' => '/catatLogAktivity/{id}',
-                'dataPresensi' => $dataPresensi,
-                'user' => $user,
-                'today' => date('F Y/d'),
-                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
-                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
-                'quote' => Quotes::inRandomOrder()->first()
-            ]);
-        } else {
-            return response()->json([
-                'status' => 'Data tidak ditemukan',
-            ], 404);
-        }
-    }
-
 
     public function kebaikan(Request $request)
     {

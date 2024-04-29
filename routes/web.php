@@ -24,6 +24,7 @@ use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\Auth\ResetPasswordAdminController;
+use App\Http\Controllers\Auth\ResetPasswordAdminSistemController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
@@ -47,7 +48,6 @@ use App\Http\Controllers\BEController\PenilaianMitraController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -167,18 +167,11 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 // Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 
-Route::get('/checkout/bronze', function () {
-    return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
-});
-Route::get('/checkout/silver', function () {
-    return view('checkout.silver', ['title' => "Checkout - Silver"]);
-});
-Route::get('/checkout/gold', function () {
-    return view('checkout.gold', ['title' => "Checkout - Gold"]);
-});
-Route::get('/checkout/platinum', function () {
-    return view('checkout.platinum', ['title' => "Checkout - Platinum"]);
-});
+Route::get('/checkout/bronze', [CheckoutController::class, 'userCheckoutBronze']);
+Route::get('/checkout/silver', [CheckoutController::class, 'userCheckoutSilver']);
+Route::get('/checkout/gold', [CheckoutController::class, 'userCheckoutGold']);
+Route::get('/checkout/platinum', [CheckoutController::class, 'userCheckoutPlatinum']);
+
 Route::get('/after-checkout', function () {
     return view('checkout.after-checkout', ['title' => "After Checkout"]);
 });
@@ -541,9 +534,15 @@ Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'da
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
 Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
 Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
+Route::delete('/AdminSistem/deleteFoto/{id}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+Route::put('/AdminSistem-Subcription/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.updateSubs');
+Route::delete('/AdminSistem-Subcription/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.deleteSubs');
+
+Route::get('/AdminSistem-login', [LoginController::class, 'loginadminSistem'])->name('login.adminsistem');
+Route::get('/AdminSistem/logout-sistemlokasi', [LoginController::class, 'logoutSistemLokasi'])->name('logout.sistemlokasi');
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -898,6 +897,14 @@ Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });
+
+Route::post('/user-AdminSistem/resetpassword', [ResetPasswordAdminSistemController::class, 'resetPassword'])->name('password.resetAdminSistem');
+Route::post('/user-AdminSistem/InputOTP', [ResetPasswordAdminSistemController::class, 'verifyOTP'])->name('otp.verifyAdminSistem');
+Route::post('/user-AdminSistem/InputnewPassword', [ResetPasswordAdminSistemController::class, 'newPassword'])->name('password.newAdminSistem');
+
+
+
+
 Route::get('/user-AdminSistem/InputOTP', function () {
     return view('SistemLokasi.AdminSistem-InputOTP');
 });

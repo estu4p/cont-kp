@@ -22,12 +22,30 @@ class UserSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('id_ID');
         for ($i = 0; $i < 10; $i++) {
+            $role_id = Role::inRandomOrder()->first()->id;
+            $email = '';
+            switch ($role_id) {
+                case 1:
+                    $email = 'SuperAdmin@gmail.com';
+                    break;
+                case 2:
+                    $email = 'Admin@gmail.com';
+                    break;
+                case 4:
+                    $email = 'Dosen@gmail.com';
+                    break;
+                case 5:
+                    $email = 'Mitra@gmail.com';
+                    break;
+                default:
+                    $email = 'example@gmail.com';
+            }
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
                 'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
-                'email' => 'example@gmail.com',
+                'email' => $email,
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),

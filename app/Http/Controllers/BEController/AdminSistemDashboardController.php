@@ -60,9 +60,9 @@ class AdminSistemDashboardController extends Controller
     public function updateFoto(Request $request, $id)
     {
         try {
-        // Mendapatkan profil pengguna yang sedang masuk
+        // Mendapatkan profil pengguna yang sedang login
         $profile = User::findOrFail($id);
-        // Validasi file gambar yang diunggah
+        // Validasi file foto yang diunggah
         $request->validate([
             'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -73,7 +73,7 @@ class AdminSistemDashboardController extends Controller
             Storage::delete('public/' . $profile->foto_profil);
         }
 
-        // Simpan file gambar baru
+        // Simpan file foto baru
         $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
         $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
 
@@ -89,21 +89,20 @@ class AdminSistemDashboardController extends Controller
         }
     }
 
-    public function deleteFoto($username)
+    public function deletePhoto($id)
     {
-        $profil = User::where('username', $username)->firstOrFail();
-        try {
-            if ($profil->foto_profil) {
-                Storage::delete('public/' . $profil->foto_profil);
-                $profil->foto_profil = null;
-                $profil->save();
-                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('success', 'Foto Berhasil diHapus');
-            } else {
-                return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', 'Anda tidak memiliki Foto Profil');
-            }
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return redirect()->route('SistemLokasi.AdminSistem-Editprofile')->with('error', $errorMessage);
+        // Mendapatkan profil pengguna yang sedang login
+        $userAdmin = User::findOrFail($id);
+
+        // Hapus foto profil pengguna jika ada
+        if ($userAdmin->foto_profil) {
+            // Hapus file dari penyimpanan
+            Storage::delete('public/assets/images/' . $userAdmin->foto_profil);
+            // Hapus nama file dari database
+            $userAdmin->foto_profil = null;
+            $userAdmin->save();
         }
+
+        return redirect()->back()->with('success', 'Foto Profil Berhasil Dihapus');
     }
 }

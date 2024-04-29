@@ -126,18 +126,11 @@ class User extends Authenticatable
 
     public function namaDivisi()
     {
-        return $this->BelongsTo(Divisi::class, 'divisi_id');
+        return $this->belongsTo(Divisi::class, 'divisi_id');
     }
-    public function subKategoriPenilaian()
-    {
-        return $this->BelongsTo(SubKategoriPenilaian::class);
-    }
-    public function kategoriPenilaian()
-    {
-        return $this->BelongsTo(KategoriPenilaian::class);
-    }
+
     public function penilaian()
     {
-        return $this->BelongsTo(Penilaian::class, 'nama_lengkap');
+        return $this->hasMany(Penilaian::class, 'nama_lengkap', 'id');
     }
 }
