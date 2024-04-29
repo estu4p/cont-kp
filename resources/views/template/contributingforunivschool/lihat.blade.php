@@ -21,20 +21,30 @@
                             <h5>Pengetahuan</h5>
                             <br>
 
-                            @foreach ($nilaiPemahaman as $user)
-                                @foreach ($user->penilaian as $nilai)
+                            @foreach ($nilaiPemahaman as $nilaiPemahaman)
+                                {{-- @foreach ($user->penilaian as $nilai) --}}
 
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman Topik Magang</p>
-                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
-                                            style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
+                                        @if ($nilaiPemahaman)
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            style="background-color: #DCDCDC">{{ $nilaiPemahaman->nilai }}</p>
+                                        @else
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            style="background-color: #DCDCDC">-</p>
+                                        @endif
                                     </div>
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
-                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
-                                            style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
+                                        @if ($nilaiPemahaman)
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                                style="background-color: #DCDCDC">{{ $nilaiPemahaman->nilai }}</p>
+                                        @else
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            style="background-color: #DCDCDC">-</p>
+                                        @endif
                                     </div>
-                                @endforeach
+                                {{-- {{-- @endforeach --}}
                             @endforeach
                         </div>
                         <div class="keterampilan w-100 d-flex flex-column p-3">
@@ -108,9 +118,10 @@
             var id = {{ $Id->id }};
 
         $.ajax({
-            url:'/penilaian/lihat/' + id,    , //"{{ route('penilaian')}}",///lihat/{id}'
+            url:"{{ asset('assets/css/lihat.css') }}"+id ,
             method: 'GET',
-            // data: $('#penilaian').serialize(),
+            data: { id: id },
+            // data: data,
             success: function(response) {
                 // Menampilkan data penilaian
                 $('.user').text(response.user);
