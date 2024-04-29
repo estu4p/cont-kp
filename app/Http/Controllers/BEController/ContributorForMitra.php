@@ -919,7 +919,7 @@ class ContributorForMitra extends Controller
             'csrfToken' => $csrfToken = csrf_token(),
         ]);
  }
-
+ 
     // Menyimpan perubahan pada profil
     public function update(Request $request )
     {
