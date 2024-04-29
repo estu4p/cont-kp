@@ -28,16 +28,16 @@
         </div>
         <div>
             <select name="page" class="page">
-                <option value="page">page 1 of 1</option>
+                <option value="1">page 1 of 2</option>
             </select>
             <select name="item" class="bodi">
-                <option value="item">5 item per page</option>
+            <option value="5" selected>5 item per page</option>
             </select>
         </div>
 
         <div class="tabel">
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead class="text-center">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -49,116 +49,57 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>Raihan Hafidz</td>
-                        <td>valhanhafidz@gmail.com</td>
-                        <td>Universitas Ahmad Dahlan</td>
-                        <td>
-                            <div class="Bronze">Bronze</di>
-                        </td>
-                        <td>Yogyakarta</td>
+            @foreach($subscriptions as $key => $subscription)
+            <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
+                        <td class="align-middle">{{ $subscription->user->email }}</td>
+                        <td class="align-middle">{{ $sekolah[$subscription->user->sekolah] }}</td>
+                        @if ($subscription->paket->paket === 'Bronze')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Silver')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @elseif ($subscription->paket->paket === 'Gold')
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    <p
+                                        style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
+                                        {{ $subscription->paket->paket }}</p>
+                                </td>
+                            @endif
+                        <td class="align-middle">{{ $subscription->user->kota }}</td>
                         <td>
                             <div class="aksi d-flex flex-row justify-content-around ">
                                 <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
                                     <i class="fas fa-pen m-0 p-0 blue-icon"></i>
                                     <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
                                 </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
+                                <form action="{{ route('subscriptions.deleteSubs', ['id' => $subscription->id]) }}" method="POST" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="border: none;" onclick="return showdeletemodal(event)">
+                                        <i class="fa-solid fa-trash-can red-icon"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
+                    @endforeach
 
-                    <tr>
-                        <td>2</td>
-                        <td>Syolita Widyandini</td>
-                        <td>syalitawdya@gmail.com</td>
-                        <td>Universitas Indonesia</td>
-                        <td>
-                            <div class="Silver">Silver</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around ">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
 
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Canni Hernanda</td>
-                        <td>dannhernando1@gmail.com</td>
-                        <td>Universitas Negeri Yogyakarta</td>
-                        <td>
-                            <div class="Bronze">Bronze</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr class="bg-none">
-                        <td>4</td>
-                        <td>Fetnan Adipurmowo</td>
-                        <td>febrianadip@gmail.com</td>
-                        <td>Universitas Gadjah Mada</td>
-                        <td>
-                            <div class="Gold">Gold</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around"><button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showdeletemodal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>5</td>
-                        <td>Yessa Khoirunissa</td>
-                        <td>Yessaakhh@gmail.com</td>
-                        <td>Universitas Alma ata</td>
-                        <td>
-                            <div class="Platinum">Platinum</div>
-                        </td>
-                        <td>Yogyakarta</td>
-                        <td>
-                            <div class="aksi d-flex flex-row justify-content-around">
-                                <button class="d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal()">
-                                    <i class="fas fa-pen m-0 p-0 blue-icon"></i>
-                                    <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
-                                </button>
-                                <button style="border: none;" onclick="showDeleteModal()">
-                                    <i class="fa-solid fa-trash-can red-icon"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -184,6 +125,7 @@
                         <h5 class="modal-title modaltitle">Edit Pelanggan</h5>
 
                     </div>
+                    <form id="edit-pelanggan-form">
                     <div class="modal-body modalbodi">
                         <!-- Isi konten form modal disini -->
                         <div class="kiri">
@@ -193,19 +135,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="inputt" id="nama" name="nama" placeholder="Raihan Hafidz">
+                                <input type="text" class="inputt" id="nama" name="nama" placeholder="nama lengkap">
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
-                                <input type="text" class="inputt" id="Email" name="Email" placeholder="RaihanHafidz@gmail.com">
+                                <input type="text" class="inputt" id="Email" name="Email" placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label for="Telepon">Telepon</label>
-                                <input type="text" class="inputt" id="Telepon" name="Telepon" placeholder="081234567890">
+                                <input type="text" class="inputt" id="Telepon" name="Telepon" placeholder="08xxxxxxxxxx">
                             </div>
                             <div class="form-group">
                                 <label for="Sekolah">Sekolah/perguruantinggi</label>
-                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="Universitas Ahmad Dahlan">
+                                <input type="text" class="inputt" id="Sekolah" name="Sekolah" placeholder="sekolah/perguruan tinggi">
                             </div>
                         </div>
                         <div class="kanann">
@@ -259,9 +201,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
 
-                        <button type="submit" class="btn btn-danger" onclick="showSuccessModal()">Simpan</button>
-
+                        <button type="button" class="btn btn-danger" onclick="submitEditForm()">Simpan</button>
                     </div>
+                    </form>
                 </div>
             </div>
 
@@ -269,11 +211,58 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 
-
-
-
             <script>
-                function showdeletemodal() {
+
+                function showEditModal() {
+                    $('#edit-pelanggan').modal('show');
+                }
+
+                function submitEditForm() {
+                // Mengambil data dari inputan
+                var idPelanggan = $("#id-pelanggan").val();
+                var nama = $("#nama").val();
+                var email = $("#Email").val();
+                var telepon = $("#Telepon").val();
+                var sekolah = $("#Sekolah").val();
+                var paketBerlangganan = $("#paket-berlangganan").val();
+                var startDate = $("#start-date").val();
+                var endDate = $("#end-date").val();
+                var harga = $("#telepon").val();
+                var statusBerlangganan = $("#status-berlangganan").val();
+
+                // Data yang akan dikirim ke backend
+                var data = {
+                    id_pelanggan: idPelanggan,
+                    nama: nama,
+                    email: email,
+                    telepon: telepon,
+                    sekolah: sekolah,
+                    paket_berlangganan: paketBerlangganan,
+                    start_date: startDate,
+                    end_date: endDate,
+                    harga: harga,
+                    status_berlangganan: statusBerlangganan
+                };
+
+                // Kirim data ke backend melalui AJAX
+                $.ajax({
+                    url: '/subscriptions/' + idPelanggan + '/update', // Ganti dengan URL endpoint backend Anda
+                    type: 'PUT',
+                    data: data,
+                    success: function(response) {
+                        // Tampilkan notifikasi sukses
+                        showSuccessModal();
+                    },
+                    error: function(xhr, status, error) {
+                        // Tampilkan notifikasi error jika terjadi kesalahan
+                        alert('Terjadi kesalahan: ' + error);
+                    }
+                });
+            }
+
+                // Fungsi untuk menampilkan modal konfirmasi penghapusan
+                function showdeletemodal(event) {
+                    event.preventDefault();
                     swal({
                             title: "Hapus",
                             text: "Apakah anda yakin ingin menghapus!",
@@ -283,17 +272,12 @@
                         })
                         .then((willDelete) => {
                             if (willDelete) {
-                                swal("Data berhasil dihapus!", {
-                                    icon: "success",
-                                });
+                                // Jika pengguna mengonfirmasi penghapusan, submit form
+                                event.target.closest('.delete-form').submit();
                             } else {
-                                swal("Your imaginary file is safe!");
+                                swal("Penghapusan dibatalkan.");
                             }
                         });
-                }
-
-                function showEditModal() {
-                    $('#edit-pelanggan').modal('show');
                 }
 
                 function showSuccessModal() {

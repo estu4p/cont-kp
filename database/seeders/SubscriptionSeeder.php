@@ -15,11 +15,12 @@ class SubscriptionSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 5; $i++) {
+        $harga = ['1000000', '4000000', '7000000', '10000000'];
+        for ($i = 0; $i < 4; $i++) {
             Subscription::create([
                 "nama_lengkap" => User::inRandomOrder()->first()->id,
                 "paket_id" => Paket::inRandomOrder()->first()->id,
-                "harga" => rand(100000, 300000),
+                "harga" => $harga[$i],
             ]);
         }
     }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="register text-capitalize">
         <h2 class="text-center fw-bold" style="color: #A61C1CE5;">log in</h2>
-        <div class="box-form mt-5">
+        <div class="box-form mt-4">
             <img src="assets/images/logo.png" class="img-container image-fluid mx-auto" />
             <form action="/loginpage" method="POST" class="fw-medium">
                 @csrf
@@ -13,7 +13,7 @@
                             src="assets/images/icon/mail.png" /></div>
                     <input type="email" name="email"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        placeholder="Masukkan Email">
+                        placeholder="Masukkan Email" >
                 </div>
 
                 <label for="password" class="mt-4">password<span class="text-danger">*</span></label>
@@ -22,7 +22,7 @@
                             src="assets/images/icon/pass.png" /></div>
                     <input type="password"
                         style="border: 2px solid #E9E9E9; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;"
-                        placeholder="Masukkan Password" name="password">
+                        placeholder="Masukkan Password" name="password" >
                 </div>
 
                 <div class="remember d-flex mt-4 fs-6 fw-medium align-items-center">
@@ -38,7 +38,7 @@
                     <button type="submit" class="border-0 mt-3 fw-semibold"
                         style="background-color: #A61C1CE5; color: white; padding: 8px 20px; border-radius: 8px;">Log
                         In</button>
-                    <p class="mt-3" style="margin-bottom: -20px;">Belum punya akun? <a href="/register"
+                    <p class="mt-4" style="margin-bottom: -30px;">Belum punya akun? <a href="/register"
                             class="text-decoration-none" style="color: #A61C1CE5;">Daftar</a></p>
                 </div>
             </form>

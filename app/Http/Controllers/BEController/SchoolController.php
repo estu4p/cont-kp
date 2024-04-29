@@ -7,8 +7,12 @@ use App\Models\Shift;
 use App\Models\Divisi;
 use App\Models\Project;
 use App\Models\Presensi;
+use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Database\Seeders\KategoriPenilaian;
+use Database\Seeders\SubKategoriPenilaian;
 
 class SchoolController extends Controller
 {
@@ -68,6 +72,44 @@ class SchoolController extends Controller
                 compact('lihat', 'Shift', 'presensi', 'project', 'divisi')
             );
             // ["profile" => $lihat,"Shift"=>$Shift,"presensi"=>$presensi,]);
+        }
+    }
+    public function datamhs(Request $request)
+    {   //Menampilkan Data Mahasiswa pada Penilaian Mahasiswa
+        $mahasiswa = User::where('role_id', 3)->get();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                "data Mahasiswa" => "view data Mahasiswa ",
+                "data" => $mahasiswa,
+            ]);
+        } else {
+            return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
+        }
+    }
+    public function lihatPenilaian(Request $request, $id)
+    { // Penilaian Mahasiswa- lihat
+        $Id = User::findOrFail($id);
+        $user = $Id->nama_lengkap;
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
+
+        $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
+            ->where('id', $Id->id)->get();
+
+        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
+        //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
+        //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
+        //           ->orderBy('nama_lengkap')
+        //           ->get();
+        // }])
+        // ->where('id', $Id->id)
+        // ->get();
+        // dd($nilaiPemahaman->toArray());
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['data' => $penilaian, 'nilai' => $nilaiPemahaman]);
+        } else {
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }
     }
 }

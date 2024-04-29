@@ -11,12 +11,12 @@
                 
                   <div class="navbar-profile">
                   
-                      <span class="profile-name">Nama Profil</span>
-                      <span class="profile-status">Status Profil</span>
+                      <span class="profile-name">{{ $userAdmin->nama_lengkap }}</span>
+                      <span class="profile-status">{{ $userAdmin->status_akun }}</span>
                       
                   </div>
                   <a href="/AdminSistem-Editprofile"> <div class="navbar-logo">
-                      <img src="assets/images/atun.png" alt="Profile Logo"></a>
+                      <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png" }}" style="border-radius: 50%;" alt="Profile Logo"></a>
                   </div>
                   
                

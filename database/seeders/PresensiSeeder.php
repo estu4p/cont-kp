@@ -35,6 +35,7 @@ class PresensiSeeder extends Seeder
                         'jam_mulai_istirahat' => '12:00:00',
                         'jam_selesai_istirahat' => '12:15:00',
                         'total_jam_kerja' => '06:15:00', // Misalnya, total jam kerja antara 0 dan 8 jam
+                        'default_jam_kerja' => '06:30:00', // Misalnya, default jam kerja 0 sampai 6 jam setengah
                         'log_aktivitas' => $faker->sentence,
                         'aksi' => $faker->boolean,
                         'status_kehadiran' => $faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Tidak Hadir']),

@@ -1,80 +1,91 @@
 @extends('layouts.masterSistemProfile')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/AdminSistem-Editprofile.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/AdminSistem-Editprofile.css') }}">
 <div class="wadah">
-
-    <div class="propil">
-        <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
-        <div class="nama">Atun Khosriatun</div>
-        <div class="email">atunkhosriatun@gmail.com</div>
-        <div class="about">About</div>
-        <div class="keterangan">Mengatur pelaksanaan sistem kerja perusahaan, mulai dari meng-input, memproses, mengelola hingga mengevaluasi data</div>
+    <div class="propil"> 
+    <div class="gambarkiri" > 
+    <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil" id="gambarKiri">
     </div>
+            <div class="nama">{{ $userAdmin->nama_lengkap }}</div>
+            <div class="email">{{ $userAdmin->email }}</div>
+            <div class="about">About</div>
+            <div class="keterangan">{{ $userAdmin->about }}</div>
+    </div>
+    
+        <div class="bg-white p-4 rounded  tes col-xl-7 col-lg-7 col-md-11  col-sm-9  " style="">
+            <div class="d-flex gap-4">
+                <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil" id="gambarKanan">
+                <div class="my-auto d-flex flex-column" style="flex-direction: row;">
+                    <form action="{{ route('userAdmin.updateFoto', $userAdmin->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        <input type="file" name="foto_profile" id="uploadFoto" style="display: none;" onchange="uploadFile(event)">
+                        <button type="button" onclick="document.getElementById('uploadFoto').click()" style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 8px 12px; text-transform: capitalize;">
+                            Change photo
+                        </button>
+                    </form>
+                    <form id="deleteFoto" action="" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button id="removeButton" onclick="deleteProfilePhoto('{{ auth()->user()->id }}')" style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
 
-    <div id="preview" class="preview"></div>
-    <div class="wadahedit d-flex">
-        <div class=" p-5">
-            <div class="atas d-flex flex-row  col-5">
-                <div id="previewZone">
-                    <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
-                </div>
-                <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
-                    <label for="imageInput" class="custom-file-upload">
-                        <span class="change">Change Photo</span>
-                        <input type="file" id="imageInput" style="display: none;">
-                    </label>
-                    <span class="remove m-0">remove</span>
+                    <!-- <button onclick="showAlertDeleteProfilePhoto('{{ $userAdmin->id }}')"
+                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button> -->
                 </div>
             </div>
-
-            <div class="tengah row ">
-                <div class="judulkanan">Personal Details</div>
-                <div class="isi col-12 row justify-content-evenly  ">
-                    <div class="form-group  col-6   p-2">
-                        <label for="username">Nama lengkap</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="name" placeholder="Atun Khostriatun">
+            
+            <form action="{{ route('userAdmin.updateProfile', $userAdmin->id )}}" method="POST">
+                @csrf
+                @method('PUT')
+                <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">personal details</h6>
+                <div class="text-capitalize">
+                    <div class="row">
+                        <div class="col d-flex flex-column">
+                            <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama
+                                lengkap</label>
+                            <input type="text" name="nama_lengkap" value="{{ $userAdmin->nama_lengkap }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
+                        </div>
+                        <div class="col d-flex flex-column">
+                            <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email</label>
+                            <input type="email" name="email" value="{{ $userAdmin->email }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                     </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="NoHP">No HP</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="NoHP" placeholder="081326273187">
+                    <div class="row mt-4">
+                        <div class="col d-flex flex-column">
+                            <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No HP</label>
+                            <input type="text" name="no_hp" value="{{ $userAdmin->no_hp }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
-                    </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="email">Email</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="email" id="email" placeholder="wahyudiatkinson@gmail.com">
-                        </div>
-                    </div>
-                    <div class="form-group  col-6   p-2">
-                        <label for="alamat">Alamat</label>
-                        <div class="input-group mb-3">
-                            <input class="input form-control" type="text" id="alamat" placeholder="Jateng">
+                        <div class="col d-flex flex-column">
+                            <label for="alamat" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">alamat</label>
+                            <input type="text" name="alamat" value="{{ $userAdmin->alamat }}"
+                                class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="bawah p-0 col-6">
+                <div class="bawah p-0 col-6">
                 <div class="judulkanan">Additional Info</div>
+                        <div class="form-group  col-4   p-2">
+                            <label for="about">About</label>
+                        </div>
                 <div class="form-group form-floating">
-                    <!-- <label for="alamat">About</label> -->
                     <div class="col-12  ">
-                        <textarea id="About" name="About" class="form-control " style="width:97%;" placeholder="text
-... "></textarea>
-
+                        <textarea id="about" name="about" class="form-control " style="width:97%;" placeholder="{{ $userAdmin->about }}"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                <a href="{{ url('AdminSistem-Dashboard') }}" class="btn btn-edit btn-sm">Cancel</a>
-                <button class="Update" onclick="showSuccessModal()">Update</button>
-            </div>
+             </div>
+                <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                    <a href="{{ url('AdminSistem-Dashboard') }}" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                    
+                    <button type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -110,33 +121,86 @@
     // Menetapkan gambar default saat dokumen dimuat
     window.addEventListener('DOMContentLoaded', setDefaultImage);
 
-    function setDefaultImage() {
-        const defaultImageSrc = 'assets/images/atun.png';
+    // function setDefaultImage() {
+    //     const defaultImageSrc = 'assets/images/atun.png';
 
-        const previewImage = document.querySelector('.gambarkiri');
-        previewImage.src = defaultImageSrc;
+    //     const previewImage = document.getElementById('gambarKiri');
+    //     previewImage.src = defaultImageSrc;
 
-        const previewImage2 = document.querySelector('.gambarkanan');
-        previewImage2.src = defaultImageSrc;
-    }
+    //     const previewImage2 = document.getElementById('gambarKanan');
+    //     previewImage2.src = defaultImageSrc;
+    // }
 
-    function handleImageChange(event) {
+    function uploadFile(event) {
         const file = event.target.files[0];
+        const csrfToken = "{{ $csrfToken }}"
+        const userId = "{{ $userAdmin->id }}"
+        console.log(csrfToken);
+        var formData = new FormData();
+        formData.append('foto_profile', file);
+        
+        fetch('/AdminSistem/updateFoto/' + userId, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response from server:', data);
+        // Handle response from server as needed
+    })
+    .catch(error => {
+        console.error('Error uploading image:', error);
+    });
 
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = function(e) {
-                const previewImage = document.querySelector('.gambarkiri');
-                previewImage.src = e.target.result;
-
-                const previewImage2 = document.querySelector('.gambarkanan');
-                previewImage2.src = e.target.result; 
+            reader.onload = function(event) {
+                const previewImage = document.getElementById('gambarKiri');
+                console.log(previewImage);
+                previewImage.src = event.target.result;
+                
+                const previewImage2 = document.getElementById('gambarKanan');
+                console.log(previewImage2);
+                previewImage2.src = event.target.result; 
             };
 
             reader.readAsDataURL(file);
         }
     }
+
+    function deleteProfilePhoto(Id) {
+    if (confirm('Apakah Anda yakin ingin menghapus foto profil?')) {
+        fetch(`/AdminSistem/deleteFoto/${Id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete photo');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error deleting photo:', error);
+            // Handle error, misalnya tampilkan pesan error
+            alert('Failed to delete photo');
+        });
+    }
+    }
+    // Event listener untuk tombol "remove"
+    document.querySelector('#removeButton').addEventListener('click', () => {
+        deleteProfilePhoto('{{ $userAdmin->id }}');
+    });
+
 
     const imageInput = document.getElementById('imageInput');
     imageInput.addEventListener('change', handleImageChange);

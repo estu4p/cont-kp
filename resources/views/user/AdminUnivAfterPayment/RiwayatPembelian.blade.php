@@ -15,11 +15,11 @@
         </a>
     </div>
     <div class="isie">
-        @foreach($paket as $data)
+        @foreach ($paket as $data)
             <div class="kartu">
                 <p class="stt">Status</p>
                 <p class="aktif">
-                    @if($data->status == 'Aktif')
+                    @if ($data->status == 'Aktif')
                         <img src="assets/images/check_circle.png" class="ceklis">
                     @else
                         <img src="assets/images/cancel.png" class="ceklis">
@@ -35,7 +35,8 @@
                 <p class="tgl">Tanggal</p>
                 <p class="ttgl"><b>{{ $data->tanggal }}</b></p>
                 <p class="mp">Metode Pembayaran</p>
-                <p class="mtp"><img src="{{ asset('assets/images/' . $data->metode_pembayaran . '.png') }}" class="lb"><b>{{ $data->metode_pembayaran }}</b></p>
+                <p class="mtp"><img src="{{ asset('assets/images/' . $data->metode_bayar . '.png') }}"
+                        class="lb"><b>{{ $data->metode_bayar }}</b></p>
                 <p class="acr"><img src="assets/images/arrow_circle_right.png">
             </div>
         @endforeach

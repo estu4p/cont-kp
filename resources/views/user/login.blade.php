@@ -17,6 +17,7 @@
                 <h5 class="heading-login1">Hi Welcome Back</h5>
                 <h5 class="subhead">Log in to continue</h5>
             </div>
+
             <form class="content-form" action="{{ route('user.login') }}" method="POST">
                 @csrf
                 <label for="email" class="label-form">Username/Email</label>
@@ -24,12 +25,26 @@
                     <input type="email" name="email"
                         style="border: 0.5px solid #00000075; padding: 8px 10px; border-radius: 4px; width: 100%;"
                         placeholder="Masukkan username / email" value="">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+
+                        </div>
+                    @endif
+                    @if (session('mitra_error'))
+                        <div class="alert alert-danger">
+                            {{ session('mitra_error') }}
+                        </div>
+                    @endif
+
                     <small id="warn-email" class="text-warning bg-warning-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
                             <path
                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
-                        </svg>  email tidak diketahui</small>
+                        </svg> email tidak diketahui</small>
                 </div>
 
                 <label for="password" class="label-form">Password</label>
@@ -37,12 +52,12 @@
                     <input type="password" name="password"
                         style="border: 0.5px solid #00000075; padding: 8px 10px; border-radius: 4px; width: 100%;"
                         placeholder="Masukkan password">
-                        <small id="warn-password" class="text-danger bg-danger-subtle py-1 px-2 text-capitalize d-none"
+                    <small id="warn-password" class="text-danger bg-danger-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
                             <path
                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
-                        </svg>  password harus lebih dari 8 karakter</small>
+                        </svg> password harus lebih dari 8 karakter</small>
                 </div>
 
                 <div class="remember">
@@ -50,38 +65,43 @@
                             style="color: #A61C1CE5;">
                         <label for="remember" class="mb-0">Ingat Saya</label>
                     </div>
-                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="/user/reset-password" class="text-decoration-none"
+                    <p class="ms-auto mb-0">Lupa kata sandi? <a href="/user/resetPassword" class="text-decoration-none"
                             style="color:#A61C1CE5;">Reset</a></p>
                 </div>
 
                 <div class="button-container text-center">
-                    <button type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
-                    <p style="margin-bottom: -20px; font-size: 12px; font-weight: 400;">Belum punya akun? <a href="/user/register"
-                            class="text-decoration-none fw-bold" style="color: #A61C1CE5;">Daftar</a></p>
+                    <button id="login-btn" type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
+                    <div id="role-error" class="alert alert-danger" style="display: none;">
+                        Anda tidak diizinkan untuk melakukan login.
+                    </div>
+
+                    <p style="margin-bottom: -20px; font-size: 12px; font-weight: 400;">Belum punya akun? <a
+                            href="/user/register" class="text-decoration-none fw-bold" style="color: #A61C1CE5;">Daftar</a>
+                    </p>
                 </div>
             </form>
         </div>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const emailInput = document.querySelector('input[name="email"]');
             const warnEmail = document.getElementById('warn-email');
             const passwordInput = document.querySelector('input[name="password"]');
             const warnPassword = document.getElementById('warn-password');
 
-            emailInput.addEventListener('input', function () {
+            emailInput.addEventListener('input', function() {
                 const enteredEmail = this.value.trim();
-                const correctEmail = "{{ $email }}";
+                // const correctEmail = "{{ $email }}";
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                if (enteredEmail !== correctEmail) {
+                if (!enteredEmail.match(emailPattern)) {
                     warnEmail.classList.remove('d-none');
                 } else {
                     warnEmail.classList.add('d-none');
                 }
             });
 
-            passwordInput.addEventListener('input', function () {
+            passwordInput.addEventListener('input', function() {
                 const enteredPassword = this.value.trim();
 
                 if (enteredPassword.length < 8) {
@@ -90,6 +110,14 @@
                     warnPassword.classList.add('d-none');
                 }
             });
+        });
+
+        document.getElementById('login-btn').addEventListener('click', function(event) {
+            var role_id = {{ Auth::check() ? Auth::user()->role_id : -1 }};
+            if (role_id == 1 || role_id == 2 || role_id == 4 || role_id == 5 || role_id == 6) {
+                document.getElementById('role-error').style.display = 'block';
+                event.preventDefault(); // Mencegah formulir untuk disubmit
+            }
         });
     </script>
 @endsection

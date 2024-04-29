@@ -24,7 +24,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        {{-- @include('template.navbar-super') --}}
+        @include('template.navbar-super', ['superAdmin' => $superAdmin])
 
         <div class="content-wrapper">
             <section class="content">

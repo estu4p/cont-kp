@@ -6,29 +6,29 @@
     <div class="d-flex gap-4 mt-0 mb-5 px-5">
         <div class="bg-white rounded text-center" style="padding: 80px 50px 40px; width: 30%;">
             <div>
-                @if ($superAdmin->foto_profil)
-                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil">
+                @if ($superAdmin->foto_profil ?? '')
+                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="180" alt="Foto Profil" class="foto-profil-full">
                 @else
-                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="180" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Foto Profil">
                 @endif
-                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap }}
+                <h4 class="mt-4 text-capitalize" style="opacity: 0.8; font-size: 20px; font-weight: 700;">{{ $superAdmin->nama_lengkap ?? 'nama lengkap' }}
                 </h4>
-                <p class=" fw-light ">{{ $superAdmin->email }}</p>
+                <p class=" fw-light ">{{ $superAdmin->email ?? 'email' }}</p>
             </div>
             <div>
                 <h5 style="opacity: 0.8; font-size: 20px; font-weight: 700; margin-top: 6rem;">About</h5>
-                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $superAdmin->about }}</p>
+                <p class="fw-light" style="margin-top: 20px; line-height: 1.3; font-size: 14px;">{{ $superAdmin->about ?? 'about' }}</p>
             </div>
         </div>
         <div class="bg-white rounded" style="padding: 80px 80px 40px; width: 70%;">
             <div class="d-flex gap-4">
-                @if ($superAdmin->foto_profil)
-                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil">
+                @if ($superAdmin->foto_profil ?? '')
+                    <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" width="80" alt="Foto Profil" class="foto-profil">
                 @else
-                    <img src="{{ asset('assets/images/default-fotoProfil.png') }}" width="80" alt="Foto Profil">
+                    <img src="{{ asset('assets/images/User Thumb.png') }}" width="80" alt="Foto Profil" class="foto-profil">
                 @endif
                 <div class="my-auto d-flex flex-column" style="flex-direction: row;">
-                    <form action="{{ route('superAdmin.updateFoto', $superAdmin->username) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('superAdmin.updateFoto', $superAdmin->username ?? '') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <input type="file" name="foto_profil" id="uploadFoto" style="display: none;" onchange="uploadFile()">
@@ -40,11 +40,11 @@
                         @csrf
                         @method('DELETE')
                     </form>
-                    <button onclick="showAlertDeleteProfile('{{ $superAdmin->username }}')"
+                    <button onclick="showAlertDeleteProfile('{{ $superAdmin->username ?? '' }}')"
                         style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
                 </div>
             </div>
-            <form action="{{ route('superAdmin.updateProfile', $superAdmin->username )}}" method="POST">
+            <form action="{{ route('superAdmin.updateProfile', $superAdmin->username ?? 'asd' )}}" method="POST">
                 @csrf
                 @method('PATCH')
                 <h6 class="mb-4 mt-5 text-capitalize" style="font-weight: 700; opacity: 0.8;">personal details</h6>
@@ -53,24 +53,24 @@
                         <div class="col d-flex flex-column">
                             <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">nama
                                 lengkap</label>
-                            <input type="text" name="nama_lengkap" value="{{ $superAdmin->nama_lengkap }}"
+                            <input type="text" name="nama_lengkap" value="{{ $superAdmin->nama_lengkap ?? '' }}"
                                 class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                         <div class="col d-flex flex-column">
                             <label for="email" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">email</label>
-                            <input type="email" name="email" value="{{ $superAdmin->email }}"
+                            <input type="email" name="email" value="{{ $superAdmin->email ?? '' }}"
                                 class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col d-flex flex-column">
                             <label for="hp" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">No HP</label>
-                            <input type="text" name="no_hp" value="{{ $superAdmin->no_hp }}"
+                            <input type="text" name="no_hp" value="{{ $superAdmin->no_hp ?? '' }}"
                                 class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                         <div class="col d-flex flex-column">
                             <label for="alamat" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">alamat</label>
-                            <input type="text" name="alamat" value="{{ $superAdmin->alamat }}"
+                            <input type="text" name="alamat" value="{{ $superAdmin->alamat ?? '' }}"
                                 class="px-3 py-2 border-0 border-bottom" style="background-color: #F2F4F8;" id="">
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="col d-flex flex-column text-capitalize w-50">
                     <label for="nama" style="font-size: 14px; margin-bottom: 8px; opacity: 0.8;">about</label>
                     <textarea name="about" id="alamat" cols="30" rows="4" class="px-3 py-2 border-0 border-bottom"
-                        style="background-color: #F2F4F8;">{{ $superAdmin->about }}</textarea>
+                        style="background-color: #F2F4F8;">{{ $superAdmin->about ?? '' }}</textarea>
                 </div>
                 <div class="d-flex gap-3 mt-4">
                     <button
@@ -125,7 +125,7 @@
                         formDelete.setAttribute('action', '/superAdmin/langganan/fotoProfil/' + $username);
                         formDelete.submit();
                     } else {
-                        swal("Data subscription tidak jadi dihapus.");
+                        swal("Foto profil tidak jadi dihapus.");
                     }
                 });
         }

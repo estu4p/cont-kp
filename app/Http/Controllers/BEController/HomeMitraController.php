@@ -9,50 +9,54 @@ use App\Models\Divisi;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Quotes;
+use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
-
-
-
 class HomeMitraController extends Controller
 {
-    public function pilihMitra(Request $request)
+    public function pilihMitra($id, Request $request)
     {
-        $mitra = Mitra::all();
-        $divisi = Divisi::all();
+        $validator = Validator::make($request->all(), [
+            'mitra_id' => 'required|exists:mitra,id',
+            'divisi_id' => 'required|exists:divisi,id',
+        ]);
+        $validatedData = $validator->validate();
 
-        if ($request->isMethod('post')) {
-            $validator = Validator::make($request->all(), [
-                'nama_mitra' => 'required|string',
-                'divisi_mitra' => 'required|string',
-            ]);
+        $mitraId = $validatedData['mitra_id'];
+        $divisiId = $validatedData['divisi_id'];
 
-            // Ambil nama mitra dan divisi yang dipilih dari formulir
-            $selectedMitraNama = $request->input('nama_mitra');
-            $selectedDivisiNama = $request->input('divisi_mitra');
-
-            // Cari ID mitra berdasarkan nama
-            $selectedMitraId = Mitra::where('nama_mitra', $selectedMitraNama)->value('id');
-
-            // Cari ID divisi berdasarkan nama
-            $selectedDivisiId = Divisi::where('nama_divisi', $selectedDivisiNama)->value('id');
-
-            // Simpan ID mitra dan divisi yang dipilih ke dalam sesi
-            Session::put('selected_mitra_id', $selectedMitraId);
-            Session::put('selected_divisi_id', $selectedDivisiId);
-
-            // return redirect()->route('home_masuk')->with('success', 'Anda telah memilih mitra!');
-            return response()->json(['status' => 'success', 'message' => 'Anda telah memilih mitra!']);
+        $user = User::findOrFail($id);
+        if ($user->mitra_id != $mitraId || $user->divisi_id != $divisiId) {
+            return redirect()->back()->with('error', 'Mitra atau divisi yang dipilih tidak sesuai dengan data pengguna.');
         }
+        return redirect()->to('/pemagang/home/' . $id);
+    }
 
-        // return view('pilihmitra', compact('mitra', 'divisi'));
+    public function profil($id)
+    {
+        $user = Auth::user();
+        $nama_divisi = Divisi::where('id', $user->divisi_id)->first();
+        $nama_sekolah = Sekolah::where('id', $user->sekolah)->first();
+        $quote = Quotes::inRandomOrder()->first();
+        $today = date('F Y/d');
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $id)->latest()->first();
+
+        return view('pemagang.home', [
+            'title' => "Home",
+            'button' => "Masuk",
+            'route' => '/jamMasuk/{id}',
+            'data' => $dataPresensi,
+            'nama_divisi' => $nama_divisi,
+            'nama_sekolah' => $nama_sekolah,
+            'today' => $today,
+            'user' => $user,
+            'quote' => $quote,
+        ]);
     }
 
     public function jamMasuk(Request $request)
@@ -64,6 +68,8 @@ class HomeMitraController extends Controller
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
         $keterangan_jam_masuk = $request->input('keterangan');
+        $default_jam_kerja = '00:00:10';
+        $status_ganti_jam = 'Tidak Ganti jam';
 
         $data = new Presensi;
 
@@ -72,13 +78,20 @@ class HomeMitraController extends Controller
         $data->keterangan_jam_masuk = $keterangan_jam_masuk;
         $data->jam_masuk = $jam_masuk;
         $data->status_kehadiran = $status_kehadiran;
+        $data->default_jam_kerja = $default_jam_kerja;
+        $data->status_ganti_jam = $status_ganti_jam;
         $data->save();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
         if ($data) {
             return view('pemagang/home', [
                 'button' => 'Istirahat',
-                'route' => '/jamMulaiIstirahat',
-                'data' => $dataPresensi
+                'route' => '/jamMulaiIstirahat/{id}',
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response([
@@ -89,20 +102,24 @@ class HomeMitraController extends Controller
 
     public function jamMulaiIstirahat(Request $request)
     {
-        // $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest();
+        $user = Auth::user();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
 
-        if ($data) {
-            $data->update([
+        if ($dataPresensi) {
+            $dataPresensi->update([
                 'jam_mulai_istirahat' => $request->jam,
                 'keterangan_jam_mulai_istirahat' => $request->keterangan
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Masuk Kembali',
-                'route' => '/jamSelesaiIstirahat',
-                'data' => $dataPresensi
+                'route' => '/jamSelesaiIstirahat/{id}',
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -114,18 +131,23 @@ class HomeMitraController extends Controller
     public function jamSelesaiIstirahat(Request $request)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest();
-        if ($data) {
-            $data->update([
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
+
+        if ($dataPresensi) {
+            $dataPresensi->update([
                 'jam_selesai_istirahat' => $request->jam,
                 'keterangan_jam_selesai_istirahat' => $request->keterangan
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Pulang',
-                'route' => '/jamPulang',
-                'data' => $dataPresensi
+                'route' => '/jamPulang/{id}',
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -137,19 +159,54 @@ class HomeMitraController extends Controller
     public function jamPulang(Request $request,)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
 
-        if ($data) {
-            $data->update([
-                'jam_pulang' => $request->jam,
-                'keterangan_jam_pulang' => $request->keterangan
+        if ($dataPresensi) {
+            $jamPulang = $request->jam;
+            $keterangan = $request->keterangan;
+            $jamMasuk = $dataPresensi->jam_masuk;
+            $selisihWaktu = strtotime($jamPulang) - strtotime($jamMasuk);
+
+            // Konversi selisih waktu ke dalam format jam, menit, dan detik
+            $hours = floor($selisihWaktu / 3600);
+            $minutes = floor(($selisihWaktu % 3600) / 60);
+            $seconds = $selisihWaktu % 60;
+
+            // Hitung total jam kerja dalam detik
+            $totalJamKerjaDetik = $hours * 3600 + $minutes * 60 + $seconds;
+
+            // Hitung total jam, menit, dan detik yang melebihi 24 jam
+            $totalJam = floor($totalJamKerjaDetik / 3600);
+            $totalMenit = floor(($totalJamKerjaDetik % 3600) / 60);
+            $totalDetik = $totalJamKerjaDetik % 60;
+
+            // Format total jam kerja untuk disimpan di database
+            $totalJamKerjaFormatted = sprintf('%02d:%02d:%02d', $totalJam, $totalMenit, $totalDetik);
+            $defaultJamKerjaDetik = strtotime($dataPresensi->default_jam_kerja) - strtotime('00:00:00');
+            $selisihJamKerja = $totalJamKerjaDetik - $defaultJamKerjaDetik;
+
+            if ($selisihJamKerja > 0) {
+                $kurangJamKerja = '+' .gmdate('H:i:s', $selisihJamKerja);
+            } else {
+                $kurangJamKerja = '-' . gmdate('H:i:s', abs($selisihJamKerja));
+            }
+
+            $dataPresensi->update([
+                'jam_pulang' => $jamPulang,
+                'keterangan_jam_pulang' => $keterangan,
+                'total_jam_kerja' => $totalJamKerjaFormatted,
+                'kurang_jam_kerja' => $kurangJamKerja
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',
-                'route' => '/catatLogAktivity',
-                'data' => $dataPresensi
+                'route' => '/catatLogAktivity/{id}',
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -157,58 +214,25 @@ class HomeMitraController extends Controller
             ], 404);
         }
     }
-
-
-    public function totalJamKerja(Request $request, $id)
-    {
-        $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
-
-        if ($data) {
-            $jam_masuk = $data->jam_masuk;
-            $jam_pulang = $data->jam_pulang;
-
-            if ($jam_masuk && $jam_pulang) {
-                $jam_masuk_formatted = date('H:i:s', strtotime($jam_masuk));
-                $jam_pulang_formatted = date('H:i:s', strtotime($jam_pulang));
-
-                $jam_masuk_obj = new DateTime($jam_masuk_formatted);
-                $jam_pulang_obj = new DateTime($jam_pulang_formatted);
-                $total_jam_kerja = $jam_masuk_obj->diff($jam_pulang_obj)->format('%H:%I:%S');
-
-                $data->update(['total_jam_kerja' => $total_jam_kerja]);
-
-                return response()->json([
-                    'status' => 'success',
-                    'data' => $data,
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 'Jam masuk atau jam pulang belum diisi',
-                ], 400);
-            }
-        } else {
-            return response()->json([
-                'status' => 'Data tidak ditemukan',
-            ], 404);
-        }
-    }
-
 
     public function kebaikan(Request $request)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
 
-        if ($data) {
-            $data->update([
+        if ($dataPresensi) {
+            $dataPresensi->update([
                 'kebaikan' => $request->kebaikan
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',
-                'data' => $dataPresensi
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -220,18 +244,22 @@ class HomeMitraController extends Controller
     public function catatLogAktivity(Request $request)
     {
         $user = Auth::user();
-        $data = Presensi::where('nama_lengkap', 1)->latest()->first();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
 
-        if ($data) {
-            $data->update([
+        if ($dataPresensi) {
+            $dataPresensi->update([
                 'log_aktivitas' => $request->log_aktivitas
             ]);
-            $dataPresensi = Presensi::with('user')->where('nama_lengkap', 1)->latest()->first();
 
             return view('pemagang/home', [
                 'button' => 'Log Activity',
                 'logActivitySubmitted' => true,
-                'data' => $dataPresensi
+                'dataPresensi' => $dataPresensi,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
             ]);
         } else {
             return response()->json([
@@ -242,15 +270,14 @@ class HomeMitraController extends Controller
 
     public function catatIzin(Request $request)
     {
-        // $user = Auth::user();
-        // $data = Presensi::where('nama_lengkap', 1)->first();
-        $nama_lengkap = 1;
+        $user = Auth::user();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->get()->reverse()->first();
         $keterangan_status = $request->input('keterangan_status');
         $bukti_foto_izin = $request->input('bukti_foto_izin');
 
         $data = new Presensi;
-        $data->nama_lengkap = $nama_lengkap;
-        $data->hari = Carbon::now()->addDay();
+        $data->nama_lengkap = $user->id;
+        $data->hari = Carbon::now()->format('Y-m-d');
         $data->keterangan_status = $keterangan_status;
         $data->bukti_foto_izin = $bukti_foto_izin;
         $data->status_kehadiran = 'Izin';
@@ -258,10 +285,17 @@ class HomeMitraController extends Controller
 
         $data->save();
 
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $nama_lengkap)->latest()->get()->reverse();
-
         if ($data) {
-            return redirect()->to('/pemagang/detail/' . $nama_lengkap);
+            return view('pemagang/home', [
+                'button' => 'Masuk',
+                'dataPresensi' => $dataPresensi,
+                'izinSubmitted' => true,
+                'user' => $user,
+                'today' => date('F Y/d'),
+                'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+                'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+                'quote' => Quotes::inRandomOrder()->first()
+            ]);
         } else {
             return response()->json([
                 'status' => 'Data presensi tidak ditemukan',
@@ -269,71 +303,29 @@ class HomeMitraController extends Controller
         }
     }
 
-    public function ijin($nama_lengkap)
+    public function ijin()
     {
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $nama_lengkap)->latest()->get()->reverse();
+        $user = Auth::user();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->get()->reverse();
 
         return view('pemagang/gantiJam', [
             'button' => 'Log Activity',
-            'data' => $dataPresensi
+            'dataPresensi' => $dataPresensi,
+            'user' => $user,
+            'today' => date('F Y/d'),
+            'nama_divisi' => Divisi::where('id', $user->divisi_id)->first(),
+            'nama_sekolah' => Sekolah::where('id', $user->sekolah)->first(),
+            'quote' => Quotes::inRandomOrder()->first()
         ]);
     }
 
     public function generateQRCode(Request $request, $id)
     {
-        $presensi = Presensi::where('nama_lengkap', $id)->first();
-        if (!$presensi) {
-            return response()->json([
-                'status' => 'Pengguna tidak ditemukan'
-            ], 404);
-        }
-
-        $currentTime = Carbon::now();
-        $sessionKey = 'lastBarcodeTime_' . $id;
-        $lastBarcodeTime = $request->session()->get($sessionKey, null);
-
-        if (!$lastBarcodeTime || $currentTime->diffInMinutes($lastBarcodeTime) >= 5) {
-            $qrCode = QrCode::size(300)->format('svg')->generate("ID: $id");
-            $filename = "qrcode_$id.svg";
-            $path = public_path("barcodes/$filename");
-            file_put_contents($path, $qrCode);
-            $path = str_replace('\\', '/', $path);
-
-            $presensi->barcode = "/barcodes/$filename";
-            $presensi->save();
-
-            $request->session()->put($sessionKey, $currentTime);
-
-            return response()->json([
-                'status' => 'QR Code berhasil dibuat dan disimpan',
-                'barcode_url' => asset("barcodes/$filename")
-            ]);
-        } else {
-            $remainingTime = 5 - $currentTime->diffInMinutes($lastBarcodeTime);
-            if ($remainingTime < 0) {
-                $request->session()->forget($sessionKey);
-                return $this->generateQRCode($request, $id);
-            } else {
-                return response()->json([
-                    'status' => 'Anda hanya dapat mengubah barcode setiap 5 menit',
-                    'remaining_time' => $remainingTime
-                ], 403);
-            }
-        }
-    }
-
-    public function detailGantiJam(Request $request, $id)
-    {
-        $data = Presensi::select('hari', 'keterangan_status', 'status_kehadiran')->find($id);
-        if ($data) {
-            return response([
-                'pesan' => 'data berhasil di tampilkan',
-                'data' => $data,
-            ], 200);
-        } else {
-            return response([
-                'pesan' => 'data tidak ada',
-            ], 404);
-        }
+        $user = Auth::user();
+        $userData = $user->id;
+        $barcodeSvg = QrCode::size(300)->generate($userData);
+        return view('pemagang.myqr', [
+            'user' => $user,
+        ], compact('barcodeSvg'));
     }
 }
