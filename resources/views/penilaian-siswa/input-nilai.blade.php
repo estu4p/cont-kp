@@ -5,7 +5,19 @@
 <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
 
 
+@php
+    $kategori_penilaian = App\Models\KategoriPenilaian::with('subKategori')->get();
+    // dd($kategori_penilaian);
+    $subkategori_per_kategori = [
+            1 => [21, 22],
+            2 => [23, 24, 25, 26],
+            3 => [28, 29],
+            4 => [27],
+            5 => [26],
+        ];
+    // dd($subkategori_per_kategori);
 
+@endphp
 <div class="wadah">
     <div class="judul d-flex flex-row justify-content-start">
         <a href="/penilaian-mahasiswa"> <i class="fa-solid text-dark ikon-kiri fa-chevron-left icon fs-1 p-2"></i></a>
@@ -22,69 +34,119 @@
         <div class="judulmagang">
             INPUT NILAI MAGANG
         </div>
-        <form action="{{ route('input-nilai.store', ['id' => $user->id]) }}" method="POST">
+        <form action="{{ route('input-nilai.store', ['user_id' => $user->id]) }}" method="POST">
             @csrf
             <div class="d-flex justify-content-between row flex-row">
-                <div class="kiri col-6 d-flex flex-column">
-                    <div class="grup w-100 p-3  d-flex flex-column gap-3">
-                        <div class="judulgrup">Pengetahuan</div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="topik" class="text-input">Pemahaman topik magang</label>
-                            <input class="input" type="text" id="topik" name="topik" placeholder="" value="{{ $nilai['topik'] ?? old('topik') }}">
+                @foreach($kategori_penilaian as $kategori)
+                    <div class="kiri col-6 d-flex flex-column">
+                        <div class="grup w-100 p-3 d-flex flex-column gap-3">
+                            @if($kategori->id == 1)
+                                <div class="judulgrup">Pengetahuan</div>
+                                {{-- <input class="input" type="hidden" name="kategori_id[1]" value="{{ $kategori->id }}"> --}}
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                    {{-- @dd($subK->id); --}}
+                                        <div class="grupinput d-flex justify-content-between">
+                                            <label for="{{ $subK->nama_sub_kategori }}" class="text-input">Pemahaman topik magang</label>
+                                            <input class="input" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                            {{-- <input type="hidden" name="subkategori_id[21]" value="{{ $subK->id }}"> --}}
+                                        </div>
+                                        <div class="grupinput d-flex justify-content-between">
+                                            <label for="{{ $subK->nama_sub_kategori }}" class="text-input">Pemahaman ruang lingkup magang</label>
+                                            <input class="input" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                            {{-- <input type="hidden" name="subkategori_id[22]" value="{{ $subK->id }}"> --}}
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="ruanglingkup" class="text-input">Pemahaman ruang lingkup magang</label>
-                            <input class="input" type="text" id="ruanglingkup" name="ruanglingkup" placeholder="" value="{{ $nilai['ruanglingkup'] ?? old('ruanglingkup') }}">
-                        </div>
-                    </div>
-                    <div class="grup w-100 p-3 d-flex flex-column gap-3">
-                        <div class="judulgrup">Keterampilan</div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="Indentifikasi" class="text-input">Indentifikasi masalah</label>
-                            <input class="input" type="text" id="Indentifikasi" name="Indentifikasi" placeholder="" value="{{ $nilai['Indentifikasi'] ?? old('Indentifikasi') }}">
-                        </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="PemecahanMasalah" class="text-input">Pemecahan Masalah</label>
-                            <input class="input" type="text" id="PemecahanMasalah" name="PemecahanMasalah" placeholder="" value="{{ $nilai['PemecahanMasalah'] ?? old('PemecahanMasalah') }}">
-                        </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="Hasilkerja" class="text-input">Hasil kerja</label>
-                            <input class="input" type="text" id="Hasilkerja" name="Hasilkerja" placeholder="" value="{{ $nilai['Hasilkerja'] ?? old('Hasilkerja') }}">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="grup kanan col-6 d-flex flex-column p-3 gap-3">
-                    <div class="judulgrup">Lainnya</div>
-                    <div class="grupinput row  d-flex justify-content-between">
-                        <label for="Partisipasi" class="text-input col-6">Partisipasi</label>
-                        <input class="input col-6" type="text" id="Partisipasi" name="Partisipasi" placeholder="" value="{{ $nilai['Partisipasi'] ?? old('Partisipasi') }}">
+                        <div class="grup w-100 p-3 d-flex flex-column gap-3">
+                            @if($kategori->id == 2)
+                                <div class="judulgrup">Keterampilan</div>
+                                {{-- <input class="input" type="hidden" id="keterampilan" name="kategori[2]" placeholder="" value="2"> --}}
+                                    @foreach($kategori->subKategori as $subK)
+                                        @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                            <div class="grupinput d-flex justify-content-between">
+                                                <label for="{{ $subK->nama_sub_kategori }}" class="text-input">Indentifikasi masalah</label>
+                                                <input class="input" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                            </div>
+                                            <div class="grupinput d-flex justify-content-between">
+                                                <label for="{{ $subK->nama_sub_kategori }}" class="text-input">Pemecahan Masalah</label>
+                                                <input class="input" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                            </div>
+                                            <div class="grupinput d-flex justify-content-between">
+                                                <label for="{{ $subK->nama_sub_kategori }}" class="text-input">Hasil kerja</label>
+                                                <input class="input" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                            @endif
+                        </div>
                     </div>
-                    <div class="grupinput row d-flex justify-content-between">
-                        <label for="Kejujuran" class="text-input col-6">Kejujuran</label>
-                        <input class="input col-6" type="text" id="Kejujuran" name="Kejujuran" placeholder="" value="{{ $nilai['Kejujuran'] ?? old('Kejujuran') }}">
-                    </div>
-                    <div class="grupinput row d-flex justify-content-between">
-                        <label for="Kedisiplinan" class="text-input col-6">Kedisiplinan</label>
-                        <input class="input col-6" type="text" id="Kedisiplinan" name="Kedisiplinan" placeholder="" value="{{ $nilai['Kedisiplinan'] ?? old('Kedisiplinan') }}">
-                    </div>
-                    <div class="grupinput row  d-flex justify-content-between">
-                        <label for="TanggungJawab" class="text-input col-6">Tanggung Jawab</label>
-                        <input class="input col-6" type="text" id="TanggungJawab" name="TanggungJawab" placeholder="" value="{{ $nilai['TanggungJawab'] ?? old('TanggungJawab') }}">
-                    </div>
-                    <div class="grupinput row d-flex  justify-content-between">
-                        <label for="Inisiatif" class="text-input col-6">Inisiatif</label>
-                        <input class="input col-6" type="text" id="Inisiatif" name="Inisiatif" placeholder="" value="{{ $nilai['Inisiatif'] ?? old('Inisiatif') }}">
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
 
+                    <div class="grup kanan col-6 d-flex flex-column p-3 gap-3">
+                        <div class="judulgrup">Lainnya</div>
+                        <div class="grupinput row  d-flex justify-content-between">
+                            @if($kategori->id == 5)
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                    @dd($subK->id);
+                                        <label for="{{ $subK->nama_sub_kategori }}" class="text-input col-6">Partisipasi</label>
+                                        <input class="input col-6" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
-                        <div class="col-6 justify-content-center d-flex">
-                            <button class="btn-md btn py-0 px-4 text-center submit" style="width:max-content !important">Submit</button>
+                        <div class="grupinput row d-flex justify-content-between">
+                            @if($kategori->id == 4)
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                        <label for="{{ $subK->nama_sub_kategori }}" class="text-input col-6">Kejujuran</label>
+                                        <input class="input col-6" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}]" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="grupinput row d-flex justify-content-between">
+                            @if($kategori->id == 3)
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                        <label for="{{ $subK->nama_sub_kategori }}" class="text-input col-6">Kedisiplinan</label>
+                                        <input class="input col-6" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="grupinput row  d-flex justify-content-between">
+                            @if($kategori->id == 3)
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                        <label for="{{ $subK->nama_sub_kategori }}" class="text-input col-6">Tanggung Jawab</label>
+                                        <input class="input col-6" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="grupinput row d-flex  justify-content-between">
+                            @if($kategori->id == 3)
+                                @foreach($kategori->subKategori as $subK)
+                                    @if(in_array($subK->id, $subkategori_per_kategori[$kategori->id] ?? []))
+                                        <label for="{{ $subK->nama_sub_kategori }}" class="text-input col-6">Inisiatif</label>
+                                        <input class="input col-6" type="text" id="nilai_{{ $subK->id }}" name="nilai[{{ $kategori->id }}][{{ $subK->id }}" placeholder="" value="{{ $nilai[$kategori->id][$subK->id] ?? '' }}">
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                            </div>
+                            <div class="col-6 justify-content-center d-flex">
+                                <button type="submit" class="btn-md btn py-0 px-4 text-center submit" style="width:max-content !important">Submit</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
             </div>
         </form>

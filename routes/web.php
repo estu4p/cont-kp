@@ -300,7 +300,7 @@ Route::get('/input-nilai', function () {
 
 Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
 
-Route::post('/input-nilai/{id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
+Route::post('/input-nilai/{user_id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
 
 
 Route::get('/MitraPresensiDetailHadir', function () {

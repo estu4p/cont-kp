@@ -10,6 +10,7 @@ class KategoriPenilaian extends Model
     use HasFactory;
     protected $fillable = [
         'divisi_id',
+        'nama_lengkap',
         'nama_kategori'
     ];
     protected $table = 'kategori_penilaian';
@@ -20,6 +21,6 @@ class KategoriPenilaian extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'nama_lengkap');
     }
 }

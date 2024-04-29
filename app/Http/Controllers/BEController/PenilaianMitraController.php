@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BEController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\KategoriPenilaian;
 use App\Models\Penilaian;
 use App\Models\Sekolah;
 use App\Models\SubKategoriPenilaian;
@@ -61,62 +62,157 @@ class PenilaianMitraController extends Controller
         return view('penilaian-siswa.input-nilai', compact('user','nama_lengkap','divisi', 'sekolah', 'namaBulan'));
     }
 
+    // public function penilaianPost(Request $request, $id)
+    // {
+    //     $user = User::findOrFail($id);
+    //     dd($request->all());
+    //     $request->validate([
+    //         'nilai' => 'required|array',
+    //         'kritik_saran' => 'required|string',
+    //     ]);
+
+    //     // Atur subkategori untuk setiap kategori
+    //     $subkategori_per_kategori = [
+    //         1 => [21, 22],
+    //         2 => [23, 24, 25, 26],
+    //         3 => [28, 29],
+    //         4 => [27],
+    //         5 => [26],
+    //     ];
+
+    //     $kategori_penilaian = KategoriPenilaian::all();
+    //     $nilai = $request->nilai;
+
+    //     // Simpan nilai pada tabel penilaian untuk setiap input
+    //     foreach ($request->kategori_id as $kategoriId) {
+    //         // Ambil kategori terkait
+    //         $kategori = $kategori_penilaian->find($kategoriId);
+
+    //         // Periksa apakah kategori ditemukan
+    //         if ($kategori) {
+    //             // Ambil subkategori yang sesuai dengan kategori
+    //             $subKategoriIds = $subkategori_per_kategori[$kategoriId] ?? [];
+
+    //             foreach ($subKategoriIds as $subKategoriId) {
+    //                 $nilaiSubKategori = $nilai[$kategoriId][$subKategoriId] ?? null;
+
+    //                 if ($nilaiSubKategori !== null) {
+    //                     // Simpan nilai jika subkategori ditemukan dalam kategori yang sesuai
+    //                     $penilaian = new Penilaian([
+    //                         'nama_lengkap' => $user->id,
+    //                         'sub_id' => $subKategoriId,
+    //                         'nilai' => $nilaiSubKategori,
+    //                         'kritik_saran' => $request->kritik_saran,
+    //                     ]);
+    //                     $penilaian->save();
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     $nilai = Penilaian::with('user', 'subKategori', 'subKategori.kategori')
+    //                     ->where('nama_lengkap', $id)->first();
+
+    //     return view('penilaian-siswa.input-nilai', compact('nilai', 'kategori_penilaian'))->with('success', 'Nilai berhasil disimpan!');
+    // }
+
 
     public function penilaianPost(Request $request, $id)
     {
-        $user = User::findOrFail($id); // Validasi keberadaan pengguna
-
-        // Validasi data input (disesuaikan dengan kebutuhan)
+        dd($request->all());
+        $user = User::findOrFail($id);
         $request->validate([
-            'topik' => 'required',
-            'ruanglingkup' => 'required',
-            'Indentifikasi' => 'required',
-            'PemecahanMasalah' => 'required',
-            'Hasilkerja' => 'required',
-            'Partisipasi' => 'required',
-            'Kejujuran' => 'required',
-            'Kedisiplinan' => 'required',
-            'TanggungJawab' => 'required',
-            'Inisiatif' => 'required',
-            'kritik_saran' => 'required', // Pastikan 'kritik_saran' juga divalidasi jika diasumsikan sama untuk semua input
+            'nilai' => 'required|array',
+            'kritik_saran' => 'required|string',
         ]);
 
-        // Peta nama input ke sub_ids
-        $subIds = [
-            'topik' => 1,
-            'ruanglingkup' => 2,
-            'Indentifikasi' => 3,
-            'PemecahanMasalah' => 4,
-            'Hasilkerja' => 5,
-            'Partisipasi' => 6,
-            'Kejujuran' => 7,
-            'Kedisiplinan' => 8,
-            'TanggungJawab' => 9,
-            'Inisiatif' => 10
+        $kategori_penilaian = KategoriPenilaian::all();
+        // dd($kategori_penilaian);
+
+        // Atur subkategori untuk setiap kategori
+        $subkategori_per_kategori = [
+            1 => [21, 22],
+            2 => [23, 24, 25, 26],
+            3 => [28, 29],
+            4 => [27],
+            5 => [26],
         ];
 
-        foreach ($subIds as $inputName => $subId) {
-            if ($request->has($inputName)) { // Periksa jika input hadir
-                $penilaian = new Penilaian([
-                    'nama_lengkap' => $user->id,
-                    'sub_id' => $subId,
-                    'nilai' => $request->input($inputName),
-                    'kritik_saran' => $request->input('kritik_saran'),
-                ]);
-                $penilaian->save();
+        // dd($subkategori_per_kategori);
+
+        // dd($kategori_penilaian);
+        $nilai = $request->nilai;
+
+        // Simpan nilai pada tabel penilaian untuk setiap input
+        foreach ($request->kategori_id as $kategoriId => $kategoriValue) {
+            // Ambil kategori terkait
+            $kategori = $kategori_penilaian->find($kategoriValue);
+
+            // Periksa apakah kategori ditemukan
+            if ($kategori) {
+                // Ambil subkategori yang sesuai dengan kategori
+                $subKategoriIds = $subkategori_per_kategori[$kategoriValue] ?? [];
+
+                foreach ($subKategoriIds as $subKategoriId) {
+                    // Periksa apakah ada nilai untuk subkategori ini
+                    if (isset($nilai[$kategoriValue][$subKategoriId])) {
+                        $nilaiSubKategori = $nilai[$kategoriValue][$subKategoriId];
+
+                        // Simpan nilai jika subkategori ditemukan dalam kategori yang sesuai
+                        $penilaian = new Penilaian([
+                            'nama_lengkap' => $user->id,
+                            'sub_id' => $subKategoriId,
+                            'nilai' => $nilaiSubKategori,
+                            'kritik_saran' => $request->kritik_saran,
+                        ]);
+                        $penilaian->save();
+                    }
+                }
             }
         }
 
-        return back()->with('success', 'Nilai berhasil disimpan!');
+        $nilai = Penilaian::with('user', 'subKategori', 'subKategori.kategori')
+                        ->where('nama_lengkap', $id)->first();
+
+        return view('penilaian-siswa.input-nilai', compact('nilai', 'kategori_penilaian', 'subkategori_per_kategori'))->with('success', 'Nilai berhasil disimpan!');
     }
 
+    // public function penilaianPost(Request $request, $id)
+    // {
+    //     // Temukan pengguna berdasarkan ID
+    //     $user = User::findOrFail($id);
+    //     dd($request->all());
+    //     // Ambil data kategori penilaian tanpa eager loading
+    //     $kategori_penilaian = KategoriPenilaian::all();
+    //     // Validasi permintaan
+    //     $request->validate([
+    //         'nilai' => 'required|array',
+    //         'kritik_saran' => 'required|string',
+    //     ]);
 
+    //     // Ambil data nilai dari permintaan
+    //     $nilai = $request->nilai;
 
+    //     // Simpan nilai pada tabel penilaian untuk setiap input
+    //     foreach ($request->kategori_id as $kategoriId => $kategoriValue) {
+    //         $kategori = $kategori_penilaian->find($kategoriValue);
 
+    //         if ($kategori) {
+    //             // Lakukan operasi lainnya, seperti menyimpan nilai
+    //             // (Kode penyimpanan nilai Anda di sini)
+    //         }
+    //     }
 
+    //     // Ambil data nilai untuk pengguna yang ditentukan
+    //     $nilai = Penilaian::with('user', 'subKategori', 'subKategori.kategori')
+    //                     ->where('nama_lengkap', $id)
+    //                     ->first();
 
+    //     // Kemudian, kirim data kategori penilaian dan nilai ke view
+    //     return view('penilaian-siswa.input-nilai', compact('kategori_penilaian', 'nilai'))
+    //         ->with('success', 'Nilai berhasil disimpan!');
+    // }
 }
-
 
 
 
