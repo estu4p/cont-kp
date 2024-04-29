@@ -22,6 +22,9 @@ class LoginController extends Controller
         $title = 'loginsuperadmin';
         return view('superAdmin.Login')->with('title', $title);
     }
+    public function loginadminSistem(){
+        return view('SistemLokasi.AdminSistem-login');
+    }
     public function loginmitra()
     {
         $title = 'loginmitra';
@@ -32,6 +35,10 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
+        ], [
+            'email.required' => 'email harus diisi!',
+            'email.email' => 'format email salah',
+            'password.required' => 'password harus diisi!',
         ]);
 
         $login = $request->only('email', 'password');
@@ -47,13 +54,15 @@ class LoginController extends Controller
             $role_id = $user->role->id;
 
             if ($role_id == 1) { //super admin
-                return redirect()->to('/superAdmin');
+                return redirect()->to('/AdminSistem-Dashboard');
             } else if ($role_id == 2) { //admin
                 return redirect()->to('/AdminUniv-Dashboard');
             } else if ($role_id == 3) { //mahasiawa /pemagang
                 return redirect()->to('/user');
             } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
+            }else if ($role_id == 6) {
+                return redirect('/AdminSistem-Dashboard');
             } else { // mitra
                 return redirect()->to('/contributorformitra-dashboard');
 
@@ -70,5 +79,14 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/AdminUniv-Login');
+    }
+
+    public function logoutSistemLokasi(Request $request)
+    {
+        Auth::Logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.adminsistem');
+
     }
 }

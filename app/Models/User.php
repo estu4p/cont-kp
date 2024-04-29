@@ -36,6 +36,8 @@ class User extends Authenticatable
         'browser',
         'tgl_masuk',
         'tgl_keluar',
+        'jam_default_masuk',
+        'jam_default_pulang',
         'email_verified_at',
         'mitra_id',
         'role_id',
@@ -124,18 +126,11 @@ class User extends Authenticatable
 
     public function namaDivisi()
     {
-        return $this->BelongsTo(Divisi::class, 'divisi_id');
+        return $this->belongsTo(Divisi::class, 'divisi_id');
     }
-    public function subKategoriPenilaian()
-    {
-        return $this->hasOne(SubKategoriPenilaian::class);
-    }
-    public function kategoriPenilaian()
-    {
-        return $this->hasOne(KategoriPenilaian::class);
-    }
+
     public function penilaian()
     {
-        return $this->hasMany(Penilaian::class, 'nama_lengkap');
+        return $this->hasMany(Penilaian::class, 'nama_lengkap', 'id');
     }
 }

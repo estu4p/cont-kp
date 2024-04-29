@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nama_lengkap')->nullable();
             $table->unsignedBigInteger('paket_id')->nullable();
-            $table->decimal('harga', 10, 2)->nullable();
+            $table->string('harga')->nullable();
 
-            $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('SET NULL');
-            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('SET NULL ');
+            $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('paket_id')->references('id')->on('paket')->onDelete('cascade');
             $table->timestamps();
         });
     }
