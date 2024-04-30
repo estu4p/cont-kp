@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group form-floating">
                     <div class="col-12">
-                        <textarea id="about" name="about" class="form-control" style="width:97%;" placeholder="{{ $userMitra->about }}"></textarea>
+                        <textarea id="about" class="tex-about" name="about" class="form-control" style="width:97%;" placeholder="{{ $userMitra->about }}"></textarea>
                     </div>
                 </div>
             </div>
