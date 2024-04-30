@@ -96,6 +96,23 @@ class SchoolController extends Controller
         $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
             ->where('id', $Id->id)->get();
 
+        $sub_ids= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+        // $nilaiPemahaman = ;
+        foreach ($sub_ids as $sub_id) {
+            $nilaiPemahaman = Penilaian::with('subKategori')
+                ->where('nama_lengkap', $Id->id)
+                ->where('sub_id', $sub_id)
+                ->first();
+            }
+            // dd($nilaiPemahaman);
+
+        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
+        //     $query->distinct()->with('subKategori', 'subKategori.kategori');
+        // }])
+        // ->where('id', $Id->id)
+        // ->get();
+
+        // dd($nilaiPemahaman);
         // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
         //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
         //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
@@ -107,9 +124,9 @@ class SchoolController extends Controller
         // dd($nilaiPemahaman->toArray());
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['data' => $penilaian, 'nilai' => $nilaiPemahaman]);
+            return response()->json(['data' => $penilaian]);
         } else {
-            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'sub_id', 'nilaiPemahaman'));
         }
     }
 }
