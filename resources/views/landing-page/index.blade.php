@@ -352,23 +352,23 @@
                 </div>
                 <div class="tengahr ">
                     <!-- <div class="col-2 "></div> -->
-                    <div class="col-2 text-capitalize ">
+                    <div class="col-3 text-capitalize ">
                         <h3 class="mb-4">fitur</h3>
-                        <p>presensi siswa</p>
-                        <p>penilaian siswa</p>
-                        <p>pantau siswa</p>
-                        <p>pengaturan team</p>
+                        <a href="/loginpage">presensi siswa</a>
+                        <a href="/loginpage">penilaian siswa</a>
+                        <a href="/loginpage">pantau siswa</a>
+                        <a href="/loginpage">pengaturan team</a>
                     </div>
-                    <div class="col-2 text-capitalize">
+                    <div class="col-3 text-capitalize">
                         <h3 class="mb-4">harga</h3>
-                        <p>bronze</p>
-                        <p>silver</p>
-                        <p>gold</p>
-                        <p>platinum</p>
+                        <a href="/checkout/bronze">bronze</a>
+                        <a href="/checkout/silver">silver</a>
+                        <a href="/checkout/gold">gold</a>
+                        <a href="/checkout/platinum">platinum</a>
                     </div>
-                    <div class="col-2 text-capitalize">
+                    <div class="text-capitalize alat">
                         <h3 class="mb-4">tools bisnis</h3>
-                        <p>presensi siswa</p>
+                        <a href="/loginpage">presensi siswa</a>
                     </div>
                 </div>
 
