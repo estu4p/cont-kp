@@ -115,6 +115,31 @@
                 </div>
             </div>
 
+
+            </span>
+        </div>
+
+        <body>
+            @foreach ($mitra as $data)
+                <div class="card wadah">
+                    <div class="card-header">
+                        MITRA
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal"
+                                    data-target="#exampleModal"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="/mitra-optionpresensi">Data Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
+                                        siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
+                                        Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
+                            </ul>
+                        </div>
+
       <br>
 
         <!-- Loop untuk menampilkan data mitra -->
@@ -136,6 +161,7 @@
                                     Siswa/Mahasiswa</a></li>
                             <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
                         </ul>
+
                     </div>
                 </div>
                 <div class="card-body flex justify-content-between">

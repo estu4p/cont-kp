@@ -9,8 +9,8 @@
                 <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user"
                         style="color: #ffffff;"></i></div>
                 <div class="kekanan">
-                    <p class="name">nama lengkap</p>
-                    <p class="nip">NIP: NIP</p>
+                    <p class="name">{{ $user->nama_lengkap }}</p>
+                    <p class="nip">NIP: {{ $user->nomor_induk }}</p>
                 </div>
             </div>
         </div>
@@ -22,15 +22,30 @@
             <div class="d-flex justify-content-between row flex-row">
                 <div class="kiri col-6 d-flex flex-column">
                     <div class="grup w-100 p-3  d-flex flex-column gap-3">
-                        <div class="judulgrup">Pengetahuan</div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="topik" class="text-input">Pemahaman topik magang</label>
-                            <input class="input" type="text" id="topik" placeholder="">
-                        </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="ruanglingkup" class="text-input">Pemahaman ruang lingkup magang</label>
-                            <input class="input" type="text" id="ruanglingkup" placeholder="">
-                        </div>
+                        @foreach ($subKategori as $kategoriId => $subKategoris)
+                            <div class="judulgrup">
+                                <h2> {{ $subKategoris->first()->kategori->nama_kategori }}</h2>
+                                @foreach ($subKategoris as $subKategori)
+                                    <div class="grupinput d-flex justify-content-between">
+                                        <label for="topik"
+                                            class="text-input">{{ $subKategori->nama_sub_kategori }}</label>
+
+                                        {{-- {{ $subKategori->kategori->nama_kategori }} --}}
+                                        <input class="input mb-1" type="text" id="topik" placeholder="">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        {{-- @foreach ($subKategori as $kategoriId => $subKategoris)
+                            <h2>Kategori {{ $kategoriId }}</h2>
+                            <ul>
+                                @foreach ($subKategoris as $subKategori)
+                                    <li>{{ $subKategori->nama_sub_kategori }}</li>
+                                @endforeach
+                            </ul>
+                        @endforeach --}}
+
+
                     </div>
                     <div class="grup w-100 p-3 d-flex flex-column gap-3">
                         <div class="judulgrup">Keterampilan</div>

@@ -18,5 +18,4 @@ class KategoriPenilaian extends Model
     {
         return $this->hasMany(SubKategoriPenilaian::class, 'kategori_id', 'id');
     }
-    
 }
