@@ -96,10 +96,13 @@ class SchoolController extends Controller
         $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
             ->where('id', $Id->id)->get();
 
-        $sub_id= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+        $sub_ids= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
         // $nilaiPemahaman = ;
-        if (in_array($sub_id, $sub_id)) {
-            $nilaiPemahaman = Penilaian::with([ 'subKategori'])->where('nama_lengkap', $id)->where('sub_id', $sub_id)->first();
+        foreach ($sub_ids as $sub_id) {
+            $nilaiPemahaman = Penilaian::with('subKategori')
+                ->where('nama_lengkap', $Id->id)
+                ->where('sub_id', $sub_id)
+                ->first();
             }
             // dd($nilaiPemahaman);
 

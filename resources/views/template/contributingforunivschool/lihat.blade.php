@@ -21,7 +21,7 @@
                             <h5>Pengetahuan</h5>
                             <br>
 
-                            @foreach ($nilaiPemahaman as $nilaiPemahaman)
+                            {{-- @foreach ($nilaiPemahaman as $nilaiPemahaman) --}}
                                 {{-- @foreach ($user->penilaian as $nilai) --}}
 
                                     <div class="pemahaman-topik w-100 row">
@@ -45,7 +45,7 @@
                                         @endif
                                     </div>
                                 {{-- {{-- @endforeach --}}
-                            @endforeach
+                            {{-- @endforeach --}}
                         </div>
                         <div class="keterampilan w-100 d-flex flex-column p-3">
                             <h5>Keterampilan</h5>
