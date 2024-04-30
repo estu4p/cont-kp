@@ -9,8 +9,8 @@
                 <div class="profil d-flex justify-content-center align-items-center "><i class="fa-solid fa-user"
                         style="color: #ffffff;"></i></div>
                 <div class="kekanan">
-                    <p class="name">{{ $user->nama_lengkap }}</p>
-                    <p class="nip">NIP: {{ $user->nomor_induk }}</p>
+                    <p class="name">{{ $userId->nama_lengkap }}</p>
+                    <p class="nip">NIP: {{ $userId->nomor_induk }}</p>
                 </div>
             </div>
         </div>
@@ -19,85 +19,35 @@
             <div class="judulmagang">
                 INPUT NILAI MAGANG
             </div>
-            <div class="d-flex justify-content-between row flex-row">
-                <div class="kiri col-6 d-flex flex-column">
-                    <div class="grup w-100 p-3  d-flex flex-column gap-3">
+            <form action="{{ route('mitra.inputNilai', $userId->id) }}" method="POST">
+                @csrf
+                <div class="col-6">
+                    <div class="grup w-100 p-3 d-flex flex-column gap-3">
                         @foreach ($subKategori as $kategoriId => $subKategoris)
                             <div class="judulgrup">
-                                <h2> {{ $subKategoris->first()->kategori->nama_kategori }}</h2>
+                                <h2>{{ $subKategoris->first()->kategori->nama_kategori }}</h2>
                                 @foreach ($subKategoris as $subKategori)
                                     <div class="grupinput d-flex justify-content-between">
                                         <label for="topik"
                                             class="text-input">{{ $subKategori->nama_sub_kategori }}</label>
-
-                                        {{-- {{ $subKategori->kategori->nama_kategori }} --}}
-                                        <input class="input mb-1" type="text" id="topik" placeholder="">
+                                        <input type="hidden" value="{{ $subKategori->id }}" name="sub_id[]">
+                                        <!-- Menggunakan array pada nama input -->
+                                        <input class="input mb-1" type="text" id="topik" placeholder=""
+                                            name="nilai[]">
+                                        <!-- ^^^^^^ -->
                                     </div>
                                 @endforeach
                             </div>
                         @endforeach
-                        {{-- @foreach ($subKategori as $kategoriId => $subKategoris)
-                            <h2>Kategori {{ $kategoriId }}</h2>
-                            <ul>
-                                @foreach ($subKategoris as $subKategori)
-                                    <li>{{ $subKategori->nama_sub_kategori }}</li>
-                                @endforeach
-                            </ul>
-                        @endforeach --}}
-
-
                     </div>
-                    <div class="grup w-100 p-3 d-flex flex-column gap-3">
-                        <div class="judulgrup">Keterampilan</div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="Indentifikasi" class="text-input">Indentifikasi masalah</label>
-                            <input class="input" type="text" id="Indentifikasi" placeholder="">
-                        </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="PemecahanMasalah" class="text-input">Pemecahan Masalah</label>
-                            <input class="input" type="text" id="PemecahanMasalah" placeholder="">
-                        </div>
-                        <div class="grupinput d-flex justify-content-between">
-                            <label for="Hasilkerja" class="text-input">Hasil kerja</label>
-                            <input class="input" type="text" id="Hasilkerja" placeholder="">
-                        </div>
+                    <div class="col-6 justify-content-center d-flex">
+                        <button class="btn-md btn py-0 px-4 text-center submit" style="width:max-content !important"
+                            type="submit">Submit</button>
                     </div>
                 </div>
+            </form>
 
-                <div class="grup kanan col-6 d-flex flex-column p-3 gap-3">
-                    <div class="judulgrup">Lainnya</div>
-                    <div class="grupinput row  d-flex justify-content-between">
-                        <label for="Partisipasi" class="text-input col-6">Partisipasi</label>
-                        <input class="input col-6" type="text" id="Partisipasi" placeholder="">
-                    </div>
-                    <div class="grupinput row d-flex justify-content-between">
-                        <label for="Kejujuran" class="text-input col-6">Kejujuran</label>
-                        <input class="input col-6" type="text" id="Kejujuran" placeholder="">
-                    </div>
-                    <div class="grupinput row d-flex justify-content-between">
-                        <label for="Kedisiplinan" class="text-input col-6">Kedisiplinan</label>
-                        <input class="input col-6" type="text" id="Kedisiplinan" placeholder="">
-                    </div>
-                    <div class="grupinput row  d-flex justify-content-between">
-                        <label for="TanggungJawab" class="text-input col-6">Tanggung Jawab</label>
-                        <input class="input col-6" type="text" id="TanggungJawab" placeholder="">
-                    </div>
-                    <div class="grupinput row d-flex  justify-content-between">
-                        <label for="Inisiatif" class="text-input col-6">Inisiatif</label>
-                        <input class="input col-6" type="text" id="Inisiatif" placeholder="">
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
 
-                        </div>
-                        <div class="col-6 justify-content-center d-flex">
-                            <button class="btn-md btn py-0 px-4 text-center submit"
-                                style="width:max-content !important">Submit</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
 
             <div class="peringatan">
                 <h5>Lihat Hutang Jam Siswa/Mahasiswa</h5>

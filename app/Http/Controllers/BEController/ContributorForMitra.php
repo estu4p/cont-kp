@@ -899,19 +899,45 @@ class ContributorForMitra extends Controller
     }
 
     //InputNilai
-    public function InputNilai(Request $request)
+    public function InputNilai(Request $request, $id)
     {
         $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+
+        $userId = User::find($id);
         $user = auth()->user();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-
                 'subKategori' => $subKategori
             ]);
         };
-        return view('penilaian-siswa.input-nilai', compact('user', 'subKategori'));
+        return view('penilaian-siswa.input-nilai', compact('user', 'subKategori', 'userId'));
     }
+    public function inputNilaiPost(Request $request, $id)
+    {
+        // Mengambil ID User
+        $userId = $id;
+
+
+        foreach ($request->input('sub_id') as $key => $subId) {
+            // Membuat objek Penilaian untuk setiap input
+            $nilai = new Penilaian([
+                'nama_lengkap' => $userId,
+                'sub_id' => $subId,
+                'nilai' => $request->input('nilai')[$key] // Mengambil nilai dari array
+            ]);
+
+            // Menyimpan data Penilaian
+            $nilai->save();
+        }
+
+        // Memberikan respons JSON
+        return response()->json([
+            'user' => $userId,
+            'nilai' => $request->input('nilai')
+        ]);
+    }
+
 
     //edit profil untuk mitra
 
