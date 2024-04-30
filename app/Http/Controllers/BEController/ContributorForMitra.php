@@ -918,25 +918,30 @@ class ContributorForMitra extends Controller
         // Mengambil ID User
         $userId = $id;
 
-
         foreach ($request->input('sub_id') as $key => $subId) {
-            // Membuat objek Penilaian untuk setiap input
-            $nilai = new Penilaian([
-                'nama_lengkap' => $userId,
-                'sub_id' => $subId,
-                'nilai' => $request->input('nilai')[$key] // Mengambil nilai dari array
-            ]);
+            // Mencari data Penilaian berdasarkan ID user dan sub_id
+            $penilaian = Penilaian::where('nama_lengkap', $userId)
+                ->where('sub_id', $subId)
+                ->first();
 
-            // Menyimpan data Penilaian
-            $nilai->save();
+            // Jika data Penilaian ditemukan, perbarui nilai
+            // Jika tidak, buat data Penilaian baru
+            if ($penilaian) {
+                $penilaian->update([
+                    'nilai' => $request->input('nilai')[$key]
+                ]);
+            } else {
+                Penilaian::create([
+                    'nama_lengkap' => $userId,
+                    'sub_id' => $subId,
+                    'nilai' => $request->input('nilai')[$key]
+                ]);
+            }
         }
 
-        // Memberikan respons JSON
-        return response()->json([
-            'user' => $userId,
-            'nilai' => $request->input('nilai')
-        ]);
+        return redirect('/penilaian-mahasiswa');
     }
+
 
 
     //edit profil untuk mitra

@@ -21,13 +21,13 @@
             </div>
             <form action="{{ route('mitra.inputNilai', $userId->id) }}" method="POST">
                 @csrf
-                <div class="col-6">
+                <div class="col-12 px-5">
                     <div class="grup w-100 p-3 d-flex flex-column gap-3">
                         @foreach ($subKategori as $kategoriId => $subKategoris)
-                            <div class="judulgrup">
+                            <div class="judulgrup  ">
                                 <h2>{{ $subKategoris->first()->kategori->nama_kategori }}</h2>
                                 @foreach ($subKategoris as $subKategori)
-                                    <div class="grupinput d-flex justify-content-between">
+                                    <div class="grupinput d-flex justify-content-between ">
                                         <label for="topik"
                                             class="text-input">{{ $subKategori->nama_sub_kategori }}</label>
                                         <input type="hidden" value="{{ $subKategori->id }}" name="sub_id[]">
@@ -40,7 +40,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="col-6 justify-content-center d-flex">
+                    <div class="col-12 justify-content-center d-flex">
                         <button class="btn-md btn py-0 px-4 text-center submit" style="width:max-content !important"
                             type="submit">Submit</button>
                     </div>
