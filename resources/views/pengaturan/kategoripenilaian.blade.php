@@ -7,7 +7,7 @@
     <div class="container p-4 w-120 justify-content-start" style="position:relative ;">
         <div style="display:flex;">
             <a href="/pengaturan-contri" class="kekiri m-2 mt-1" style="color:black"><i class="fa-solid fa-chevron-left"
-                style="color: black;"></i></a>
+                    style="color: black;"></i></a>
             <h3 class="kategori">Kategori Penilaian {{ $divisi->nama_divisi }}</h3>
         </div>
         <div class="card m-4 mt-3 ">
@@ -16,77 +16,71 @@
                 <p class="text-light">Digunakan untuk menentukan kategori penilaian kepada peserta magang</p>
             </div>
             <div class="card-body">
-                <form @submit.prevent="tambahPenilaian">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-danger col-4 btn-sm"
-                                    onclick="openConfirmationModal()"> +Tambahkan Kategori</button>
-                            </div>
-
-                            <div class="form-group">
-                                <h3 class="">kreativitas</h3>
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Desain yang menarik</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-
-                                <hr class="m-0 p-0">
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Pemecahan masalah pengguna</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Hasil kerja</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-input mt-4 m-1 d-flex justify-content-between flex-row row ">
-                                    <form action="{{ route('tambahSubKategori',['divisi_id' => $divisi->id, 'kategori_id']) }}" method="POST">
-                                        @csrf
-                                        <input name="nama_sub_kategori" type="text" class="form-control" id="nama_kategori"
-                                            v-model="newPenilaian.namaKategori" placeholder="">
-                                        <button type="submit" class="btn btn-danger col-4">tambahkan</button>
-                                    </form>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger col-4 btn-sm" onclick="openConfirmationModal()">
+                                +Tambahkan Kategori</button>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <h3 class="">Lainnya</h3>
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Aktif Presentasi</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Kejujuran</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">Kedisiplinan</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-p justify-content-between d-flex w-100">
-                                    <p class="">tanggung jawab</p>
-                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                </div>
-                                <hr class="m-0 p-0">
-                                <div class="tag-input mt-4 m-1 d-flex justify-content-between flex-row row ">
-                                    <input type="text" class="form-control" id="nama_kategori"
-                                        v-model="newPenilaian.namaKategori" placeholder="">
-                                    <button type="button" class="btn btn-danger col-4">Tambahkan</button>
-
-                                </div>
-                                <button class="btn btnsubmit" onclick="showSuccessModal()">Submit</button>
+                        <div class="form-group">
+                            <h3 class="">kreativitas</h3>
+                            <hr class="m-0 p-0">
+                            <div class="tag-p justify-content-between d-flex w-100">
+                                <p class="">Hasil kerja</p>
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <div class="tag-input mt-4 m-1 d-flex justify-content-between flex-row row ">
+                                <form action="{{ route('tambahSubKategori', ['divisi_id' => $divisi->id, 'kategori_id' => $kategori->id]) }}" method="POST">
+                                    @csrf
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <input name="nama_sub_kategori" type="text" class="form-control"
+                                                id="nama_kategori" v-model="newPenilaian.namaKategori" placeholder="">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-danger" style="padding: 8px 40px;">tambahkan</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </form>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h3 class="">Lainnya</h3>
+                            <div class="tag-p justify-content-between d-flex w-100">
+                                <p class="">Aktif Presentasi</p>
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <div class="tag-p justify-content-between d-flex w-100">
+                                <p class="">Kejujuran</p>
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <div class="tag-p justify-content-between d-flex w-100">
+                                <p class="">Kedisiplinan</p>
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <div class="tag-p justify-content-between d-flex w-100">
+                                <p class="">tanggung jawab</p>
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <hr class="m-0 p-0">
+                            <div class="tag-input mt-4 m-1 d-flex justify-content-between flex-row row ">
+                                <input type="text" class="form-control" id="nama_kategori"
+                                    v-model="newPenilaian.namaKategori" placeholder="">
+                                <button type="button" class="btn btn-danger col-4">Tambahkan</button>
+
+                            </div>
+                            <button class="btn btnsubmit" onclick="showSuccessModal()">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -123,8 +117,8 @@
                                 <hr class="m-0 p-0">
                             </div>
                         </div>
-                        <input name="nama_kategori" class="form-control form-control-lg" type="text" placeholder="tamabah kategori"
-                            aria-label=".form-control-lg example"
+                        <input name="nama_kategori" class="form-control form-control-lg" type="text"
+                            placeholder="tamabah kategori" aria-label=".form-control-lg example"
                             style="background-color: #f0f0f0; border-style: solid; border-radius: 5px;">
 
 

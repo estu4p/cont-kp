@@ -19,8 +19,7 @@
                             <span class="profile-name">{{ $user->nama_lengkap }}</span>
                             <span class="profile-status">{{ $user->role->role }}</span>
                         </a>
-                        <span class="profile-name" style="font-weight: bold;">{{ $user->nama_lengkap }}</span>
-                        <span class="profile-status">{{ $user->role->role }}</span>
+                        
                     </div>
                     <div class="navbar-logo">
                         <img src="{{ asset('/assets/images/Rectangle 22 (3).png') }}" alt="Profile Logo">

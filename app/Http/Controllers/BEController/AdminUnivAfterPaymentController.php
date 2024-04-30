@@ -866,4 +866,79 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
+    public function hapusDivisi($id)
+    {
+        Penilaian::whereIn('sub_id', function ($query) use ($id) {
+            $query->select('id')
+                ->from('sub_kategori_penilaian')
+                ->whereIn('kategori_id', function ($query) use ($id) {
+                    $query->select('id')
+                        ->from('kategori_penilaian')
+                        ->where('divisi_id', $id);
+                });
+        })->delete();
+
+        SubKategoriPenilaian::whereIn('kategori_id', function ($query) use ($id) {
+            $query->select('id')
+                ->from('kategori_penilaian')
+                ->where('divisi_id', $id);
+        })->delete();
+
+        KategoriPenilaian::where('divisi_id', $id)->delete();
+
+        Divisi::findOrFail($id)->delete();
+
+        return redirect()->to('/pengaturan-contri');
+    }
+
+    public function showKategoriPenilaian($divisi_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $divisi = Divisi::findOrFail($divisi_id);
+        $kategori = KategoriPenilaian::find($divisi_id);
+        return view('pengaturan.kategoripenilaian', [
+            'divisi' => $divisi, 'kategori' => $kategori
+        ]);
+    }
+
+    public function addKategoriPenilaian(Request $request, $divisi_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $divisi = Divisi::findOrFail($divisi_id);
+        $kategori = KategoriPenilaian::find($divisi_id);
+        $nama_kategori = $request->input('nama_kategori');
+        $data = new KategoriPenilaian;
+        $data->divisi_id = $divisi_id;
+        $data->nama_kategori = $nama_kategori;
+        $data->save();
+        return view('pengaturan.kategoripenilaian', [
+            'divisi' => $divisi,
+            'kategori' => $kategori
+        ]);
+        // return redirect()->to('/kategoripenilaian')
+        //     ->with(['divisi' => $divisi, 'kategori' => $kategori]);
+        // return redirect()->route('showKategoriPenilaian', [
+        //     'id' => $data->id,
+        //     'divisi' => $divisi,
+        //     'kategori' => $kategori
+        // ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $divisi = Divisi::findOrFail($divisi_id);
+        $kategori = KategoriPenilaian::findOrFail($kategori_id);
+        $nama_sub_kategori = $request->input('nama_sub_kategori');
+        $data = new SubKategoriPenilaian;
+        $data->kategori_id = $kategori_id;
+        $data->nama_sub_kategori = $nama_sub_kategori;
+        $data->save();
+
+        return view('pengaturan.kategoripenilaian', [
+            'divisi' => $divisi,
+            'kategori' => $kategori
+        ]);
+    }
+
 }
