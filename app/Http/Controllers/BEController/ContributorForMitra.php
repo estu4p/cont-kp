@@ -902,7 +902,7 @@ class ContributorForMitra extends Controller
     public function InputNilai(Request $request, $id)
     {
         $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
-
+        $penilaian = Penilaian::find($id);
         $userId = User::find($id);
         $user = auth()->user();
 
@@ -911,7 +911,7 @@ class ContributorForMitra extends Controller
                 'subKategori' => $subKategori
             ]);
         };
-        return view('penilaian-siswa.input-nilai', compact('user', 'subKategori', 'userId'));
+        return view('penilaian-siswa.input-nilai', compact('user', 'subKategori', 'userId', 'penilaian'));
     }
     public function inputNilaiPost(Request $request, $id)
     {
@@ -928,12 +928,14 @@ class ContributorForMitra extends Controller
             // Jika tidak, buat data Penilaian baru
             if ($penilaian) {
                 $penilaian->update([
-                    'nilai' => $request->input('nilai')[$key]
+                    'nilai' => $request->input('nilai')[$key],
+                    'sertifikat' => $request->input('sertifikat'),
                 ]);
             } else {
                 Penilaian::create([
                     'nama_lengkap' => $userId,
                     'sub_id' => $subId,
+                    'sertifikat' => $request->input('sertifikat'),
                     'nilai' => $request->input('nilai')[$key]
                 ]);
             }

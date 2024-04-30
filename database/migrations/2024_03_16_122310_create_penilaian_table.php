@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('nilai');
             $table->text('kritik_saran')->nullable();
             $table->timestamps();
+
             $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('sub_id')->references('id')->on('sub_kategori_penilaian');
         });

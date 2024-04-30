@@ -45,26 +45,26 @@
                             type="submit">Submit</button>
                     </div>
                 </div>
-            </form>
 
 
+                <div class="peringatan">
+                    <h5>Lihat Hutang Jam Siswa/Mahasiswa</h5>
+                    <p>Klik pada link untuk melihat sertifikat dan penilaian siswa/mahasiswa</p>
+                </div>
 
-            <div class="peringatan">
-                <h5>Lihat Hutang Jam Siswa/Mahasiswa</h5>
-                <p>Klik pada link untuk melihat sertifikat dan penilaian siswa/mahasiswa</p>
-            </div>
-
-            <div class="card lengkung p-0 col-3">
-                <div class="card-header d-flex align-items-center justify-content-between p-3 atas">
-                    <div class="d-flex  flex-column  h-100 mx-2">
-                        <h5 class="card-title m-0 d-flex justify-content-end fs-6 sertif">Sertifikat</h5>
+                <div class="card lengkung p-0 col-3">
+                    <div class="card-header d-flex align-items-center justify-content-between p-3 atas">
+                        <div class="d-flex  flex-column  h-100 mx-2">
+                            <h5 class="card-title m-0 d-flex justify-content-end fs-6 sertif">Sertifikat</h5>
+                        </div>
+                    </div>
+                    <div class="card-body ">
+                        <label for="Inisiatif" class=" col-6">Link G-Drive</label>
+                        <input class="inputnilai col-8" type="text" id="Inisiatif" placeholder="berisi link sertifikat"
+                            name="sertifikat">
                     </div>
                 </div>
-                <div class="card-body ">
-                    <label for="Inisiatif" class=" col-6">Link G-Drive</label>
-                    <input class="inputnilai col-8" type="text" id="Inisiatif" placeholder="">
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection
