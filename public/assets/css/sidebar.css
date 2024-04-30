@@ -12,7 +12,7 @@ body {
     background-color: #dcdcdc; /* Ubah warna latar belakang sidebar */
     color: #000; /* Ubah warna teks tautan */
     padding-top: 50px; /* Ruang atas sidebar */
-    z-index: 10;
+    z-index: 15;
     box-shadow: 0 0 20px rgb(146, 146, 146);
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
