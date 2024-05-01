@@ -89,25 +89,18 @@ class SchoolController extends Controller
     }
     public function lihatPenilaian(Request $request, $id)
     { // Penilaian Mahasiswa- lihat
+
         $Id = User::findOrFail($id);
         $user = $Id->nama_lengkap;
         $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
-
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
         $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
             ->where('id', $Id->id)->get();
-
-        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
-        //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
-        //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
-        //           ->orderBy('nama_lengkap')
-        //           ->get();
-        // }])
-        // ->where('id', $Id->id)
-        // ->get();
-        // dd($nilaiPemahaman->toArray());
+            // $subKategori = SubKategoriPenilaian::get()->groupBy('kategori_id');
+            // $subKategori->load('kategori');
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['data' => $penilaian, 'nilai' => $nilaiPemahaman]);
+            return response()->json(['data' => $penilaian, $nilaiPemahaman]);
         } else {
             return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }

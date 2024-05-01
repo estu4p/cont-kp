@@ -8,14 +8,14 @@
             <h2 class="kartu-judul">Jumlah Mitra</h2>
             <tr>
                 <th>{{ $jml_mitra }}</th>
-                <td><img src="assets/images/apartment.png" alt="Logo1" class="logo1"></td>
+                <td><img src="assets/images/apartment.png" alt="Logo1" class="logo1 rounded"></td>
             </tr>
         </div>
         <div class="kartu2 m-lg-0 m-md-auto m-sm-auto my-md-3">
             <h2 class="kartu-judul">Jumlah Siswa</h2>
             <tr>
                 <td>{{ $jml_siswa }}</td>
-               <td> <img src="assets/images/school.png" alt="Logo1" class="logo1"></td>
+                <td> <img src="assets/images/school.png" alt="Logo1" class="logo2 rounded"></td>
             </tr>
         </div>
     </div>

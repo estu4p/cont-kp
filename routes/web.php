@@ -48,6 +48,7 @@ use App\Http\Controllers\BEController\PenilaianMitraController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -614,6 +615,7 @@ Route::get('/presensitidakhadir', function () {
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
+Route::post('/input-nilai/{id}', [ContributorForMitra::class, 'inputNilaiPost'])->name('mitra.inputNilai');
 
 
 
@@ -673,17 +675,9 @@ Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
 });
 
-Route::get('/mitra-pengaturpersensi', function () {
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
-});
-
-Route::get('/mitra-optionpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.optionpresensi');
-});
-
-Route::get('/mitra-detailprofil', function () {
-    return view('adminUniv-afterPayment.mitra.detailprofil');
-});
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'PengaturPersensi']);
+Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::get('/mitra-detailprofil', [BEControllerAdminUnivAfterPaymentController::class, 'DetailProfil'])->name('adminunivafterpayment.detailprofil');
 
 // CONTRIBUTOR FOR MITRA PRESENSI
 Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);

@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('kategori_penilaian', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_kategori');
             $table->unsignedBigInteger('divisi_id');
             $table->unsignedBigInteger('nama_lengkap');
             $table->string('nama_kategori');
+            $table->unsignedBigInteger('divisi_id');
             $table->timestamps();
 
             $table->foreign('divisi_id')->references('id')->on('divisi');
