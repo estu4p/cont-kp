@@ -155,15 +155,20 @@ class AdminUnivAfterPaymentController extends Controller
     public function updateAdminProfile(Request $request)
     {
         $user = auth()->user();
-        // $updateUser = User::where('id', $user);
-        // Update the user's profile with the validated data
-        $user->update([
+        $userID = User::findOrFail($user->id);
+        $userGambar = $user->foto_profil;
+
+        $data = [
             'nama_lengkap' => $request->nama_lengkap,
+            'foto_profil' => $userGambar,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
             'kota' => $request->kota,
             'about' => $request->about,
-        ]);
+        ];
+
+        $request->foto_profil->move(public_path() . '/images', $userGambar);
+        $userID->update($data);
 
         // Redirect back to the edit profile page
         return redirect()->route('adminUniv.editProfile');
@@ -923,11 +928,11 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $userAdmin = User::where('role_id', 5)->get();
         // Memuat data presensi untuk setiap user
-    foreach ($userAdmin as $user) {
-        $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
+        foreach ($userAdmin as $user) {
+            $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
 
-        $user->presensi = $presensi;
-    }
+            $user->presensi = $presensi;
+        }
         //$user = auth()->user();
         return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
     }
@@ -935,32 +940,31 @@ class AdminUnivAfterPaymentController extends Controller
     public function DetailProfil($id)
     {
         // Mengambil data siswa berdasarkan ID
-       
+
         $datasiswa = User::where('role_id', 5)->get();
         // Memuat data presensi untuk setiap user
-    foreach ($datasiswa as $user) {
-        $presensi = Presensi::select('hari','jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan','catatan')->first();
+        foreach ($datasiswa as $user) {
+            $presensi = Presensi::select('hari', 'jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan', 'catatan')->first();
 
-        $user->presensi = $presensi;
+            $user->presensi = $presensi;
+        }
+        // Mengirim data siswa dan presensi ke view
+        return view('adminuniv-afterPayment.mitra.detailprofil', compact('datasiswa', 'presensi'));
     }
-    // Mengirim data siswa dan presensi ke view
-    return view('adminuniv-afterPayment.mitra.detailprofil', compact('datasiswa', 'presensi'));
-}
 
     //pengaturanpresensi
     public function PengaturPersensi(Request $request)
-{
-    // Mendapatkan data yang dikirim dari form
-    $pilihan = $request->input('pilihan');
+    {
+        // Mendapatkan data yang dikirim dari form
+        $pilihan = $request->input('pilihan');
 
-    // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
-    if ($pilihan === 'klik_button') {
-        // Logika untuk mengubah status_absensi menjadi "button"
-    } elseif ($pilihan === 'scan_qr_code') {
-        // Logika untuk mengubah status_absensi menjadi "scan QR code"
+        // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
+        if ($pilihan === 'klik_button') {
+            // Logika untuk mengubah status_absensi menjadi "button"
+        } elseif ($pilihan === 'scan_qr_code') {
+            // Logika untuk mengubah status_absensi menjadi "scan QR code"
+        }
+        // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
+        return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
     }
-    // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
-    return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
-}
-
 }
