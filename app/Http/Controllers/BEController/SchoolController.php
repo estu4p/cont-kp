@@ -89,44 +89,20 @@ class SchoolController extends Controller
     }
     public function lihatPenilaian(Request $request, $id)
     { // Penilaian Mahasiswa- lihat
+
         $Id = User::findOrFail($id);
         $user = $Id->nama_lengkap;
         $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
-
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
         $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
             ->where('id', $Id->id)->get();
-
-        $sub_ids= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-        // $nilaiPemahaman = ;
-        foreach ($sub_ids as $sub_id) {
-            $nilaiPemahaman = Penilaian::with('subKategori')
-                ->where('nama_lengkap', $Id->id)
-                ->where('sub_id', $sub_id)
-                ->first();
-            }
-            // dd($nilaiPemahaman);
-
-        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
-        //     $query->distinct()->with('subKategori', 'subKategori.kategori');
-        // }])
-        // ->where('id', $Id->id)
-        // ->get();
-
-        // dd($nilaiPemahaman);
-        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
-        //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
-        //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
-        //           ->orderBy('nama_lengkap')
-        //           ->get();
-        // }])
-        // ->where('id', $Id->id)
-        // ->get();
-        // dd($nilaiPemahaman->toArray());
+            // $subKategori = SubKategoriPenilaian::get()->groupBy('kategori_id');
+            // $subKategori->load('kategori');
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['data' => $penilaian]);
+            return response()->json(['data' => $penilaian, $nilaiPemahaman]);
         } else {
-            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'sub_id', 'nilaiPemahaman'));
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }
     }
 }
