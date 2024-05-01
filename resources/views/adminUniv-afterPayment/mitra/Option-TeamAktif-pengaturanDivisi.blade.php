@@ -90,6 +90,7 @@
                 <div class="modal-dialog">
                     <form action="{{ route('adminUniv.updateDivisi', $value->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
@@ -112,9 +113,18 @@
                                 </div>
                                 <div class="grupinputt">
                                     <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                                    <input type="text" class="inputmodalll" id="editNamaDivisi"
+                                    {{-- <input type="text" class="inputmodalll" id="editNamaDivisi"
                                         placeholder="Masukkan nama divisi" value="{{ $value->nama_divisi }}"
-                                        name="nama_divisi">
+                                        name="nama_divisi"> --}}
+                                        <select class="form-select shadow" id="editNamaDivisi" name="nama_divisi">
+                                            <option selected disabled> Pilih Nama Divisi</option>
+                                            @php
+                                                $divisi = App\Models\Divisi::all();
+                                            @endphp
+                                            @foreach ($divisi as $item)
+                                            <option value="{{ $item->nama_divisi }}">{{ $item->nama_divisi }}</option>
+                                            @endforeach
+                                        </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -188,8 +198,17 @@
                             </div>
                             <div class="grupinputt">
                                 <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                                <input type="text" name="nama_divisi" id="nama_divisi" class="inputmodall"
-                                    placeholder="Masukkan nama divisi">
+                                {{-- <input type="text" name="nama_divisi" id="nama_divisi" class="inputmodall"
+                                    placeholder="Masukkan nama divisi"> --}}
+                                    <select class="form-select shadow" id="nama_divisi" name="nama_divisi">
+                                        <option selected disabled> Pilih Nama Divisi</option>
+                                        @php
+                                            $divisi = App\Models\Divisi::all();
+                                        @endphp
+                                        @foreach ($divisi as $item)
+                                        <option value="{{ $item->nama_divisi }}">{{ $item->nama_divisi }}</option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
                         <div class="modal-footer">

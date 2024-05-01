@@ -282,6 +282,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function addDivisi(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
+
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
             'foto_divisi' => '',
@@ -291,6 +292,8 @@ class AdminUnivAfterPaymentController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
         $data = new Divisi([
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan nama yang benar dari permintaan
         ]);
@@ -301,15 +304,28 @@ class AdminUnivAfterPaymentController extends Controller
             $data->save();
         }
         $data->save();
+
+        // Mengambil ID mitra dari sesi
+        $mitra_id = auth()->user()->id;
+        // dd($mitra_id);
+         // Simpan data divisi ke dalam tabel 'divisi_item'
+        $divisiItem = new DivisiItem([
+            'mitra_id' => $mitra_id,
+            'divisi_id' => $divisi_id,
+        ]);
+
+        $divisiItem->save();
+
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
         } else {
-            return redirect()->route('adminUniv.addDivisi');
+            return redirect()->back()->with('success','Data berhasil ditambahkan');
         }
     }
     public function updateDivisi(Request $request, $id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
+        // dd($request->all());
         $divisi = Divisi::all();
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
@@ -318,12 +334,15 @@ class AdminUnivAfterPaymentController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => 'gagal update divisi',], 404);
         }
-        $data = Divisi::find($id);
-        $data->fill([
-            'nama_divisi' => $request->nama_divisi
-        ]);
+        $data = Divisi::findOrFail($request->nama_divisi);
+        // Jika data divisi tidak ditemukan, kembalikan pesan kesalahan
+        if (!$data) {
+            return redirect()->back()->with('error', 'Divisi tidak ditemukan');
+        }
+         // Isi data divisi dengan input yang diterima dari request
+        $data->nama_divisi = $request->input('nama_divisi');
         $data->save();
-        return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
+        return redirect()->back()->with('success','Data berhasil diubah');
     }
     public function destroyDivisi($id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
