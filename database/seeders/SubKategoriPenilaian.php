@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\KategoriPenilaian;
-use App\Models\SubKategoriPenilaian as ModelsSubKategoriPenilaian;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\KategoriPenilaian;
+use SebastianBergmann\Comparator\Factory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SubKategoriPenilaian as ModelsSubKategoriPenilaian;
 
 class SubKategoriPenilaian extends Seeder
 {
@@ -21,5 +22,10 @@ class SubKategoriPenilaian extends Seeder
                 'nama_sub_kategori' => $faker->randomElement(['Desain Thinking', 'Pemahaman Penerapan Desain']),
             ]);
         }
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriPenilaian::class, 'kategori_id');
     }
 }

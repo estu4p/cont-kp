@@ -17,6 +17,9 @@
         </div>
         <br>
         <div class="container">
+          <form action="{{ route('mitra-pengaturpersensi') }}" method="POST">
+            @csrf
+            @method('GET')
             <div class="round">
               <input type="checkbox" checked id="checkbox1" />
               <label for="checkbox1" style="color: black">button (klik button)</label>
