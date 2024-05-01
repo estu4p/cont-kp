@@ -541,6 +541,7 @@ return new class extends Migration
             $table->string('browser')->nullable();
             $table->date('tgl_masuk')->nullable();
             $table->date('tgl_keluar')->nullable();
+            $table->text('sertifikat')->nullable();
             $table->time('jam_default_masuk')->nullable();
             $table->time('jam_default_pulang')->nullable();
             // $table->bigInteger('subscription')->nullable();

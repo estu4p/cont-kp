@@ -5,13 +5,15 @@
         <li class="nav-item">
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/contributorformitra-dashboard">Dashboard</a>
+            <a class="nav-link {{ Request::is('contributorformitra-dashboard') ? 'active' : '' }}"
+                href="/contributorformitra-dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/contributorformitra-devisi">Devisi</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Presensi</a>
+            <a class="nav-link {{ Request::is('daftar-presensi') ? 'active' : '' }}"
+                href="/daftar-presensi">Presensi</a>
         </li>
         <li class="nav-item">
                 <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}" href="/penilaian-mahasiswa">Penilaian</a>

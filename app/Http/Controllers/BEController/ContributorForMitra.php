@@ -898,14 +898,52 @@ class ContributorForMitra extends Controller
     }
 
     //InputNilai
-    public function InputNilai($id)
+    public function InputNilai(Request $request, $id)
     {
-        $inputnilai = Penilaian::with('user','subKategori', 'subKategori.kategori')->where('nama_lengkap', $id)->first();
-        
-        // Mengambil data penilaian beserta relasi subKategori dan kategori berdasarkan ID
-        // Mengirim data ke view 'input-nilai' bersamaan dengan nama variabel yang sesuai
-        return view('penilaian-siswa.input-nilai', compact('inputnilai'));
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+        $penilaian = Penilaian::find($id);
+        $userId = User::find($id);
+        $user = auth()->user();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json([
+                'subKategori' => $subKategori
+            ]);
+        };
+        return view('penilaian-siswa.input-nilai', compact('user', 'subKategori', 'userId', 'penilaian'));
     }
+    public function inputNilaiPost(Request $request, $id)
+    {
+        // Mengambil ID User
+        $userId = $id;
+
+        foreach ($request->input('sub_id') as $key => $subId) {
+            // Mencari data Penilaian berdasarkan ID user dan sub_id
+            $penilaian = Penilaian::where('nama_lengkap', $userId)
+                ->where('sub_id', $subId)
+                ->first();
+
+            // Jika data Penilaian ditemukan, perbarui nilai
+            // Jika tidak, buat data Penilaian baru
+            if ($penilaian) {
+                $penilaian->update([
+                    'nilai' => $request->input('nilai')[$key],
+                    'sertifikat' => $request->input('sertifikat'),
+                ]);
+            } else {
+                Penilaian::create([
+                    'nama_lengkap' => $userId,
+                    'sub_id' => $subId,
+                    'sertifikat' => $request->input('sertifikat'),
+                    'nilai' => $request->input('nilai')[$key]
+                ]);
+            }
+        }
+
+        return redirect('/penilaian-mahasiswa');
+    }
+
+
 
     //edit profil untuk mitra
 

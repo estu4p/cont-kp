@@ -441,7 +441,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function laporanDataPresensi(Request $request)
     {
         $presensi = User::where('role_id', 3)->get();
-
+        $user = auth()->user();
         $namaBulan = [
             1 => 'Januari',
             2 => 'Februari',
@@ -485,7 +485,7 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
             return view('adminUniv-afterPayment.mitra.laporanpresensi',)
-                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
+                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama)->with('user', $user);
         }
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)

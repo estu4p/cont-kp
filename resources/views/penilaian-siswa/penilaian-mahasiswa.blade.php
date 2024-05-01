@@ -38,21 +38,19 @@
                         <div class="{{($mhs['status_akun'])}}">{{$mhs->status_akun == 'alumni' ? 'inactive' : $mhs->status_akun}}</div>
                     </td>
 
-                    <td class="icon"><a href="{{ route('input-nilai', ['id' => $mhs->id]) }}"><i class="fa-solid fa-file-lines"></i></a></td>
-
-
-                     <!-- <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td> -->
-
-
-                     <!-- <td class="icon"><a href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}"> <i class="fa-solid fa-file-lines"></i></a></td> -->
-
-
-                    <td class="icon" style="text-align: center;"><a href="{{route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)])}}"> <i class="fa-solid fa-file-lines"></i></a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                            {{-- <td class="icon" style="text-align: center;"><a
+                                    href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}">
+                                    <i class="fa-solid fa-file-lines"></i></a></td> --}}
+                            <td class="icon" style="text-align: center;">
+                                <a href="{{ route('contributorformitra.input-nilai', $mhs->id) }}">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
 </div>
 @endsection

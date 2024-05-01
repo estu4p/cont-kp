@@ -71,12 +71,12 @@
             </div>
         </div>
     </div>
-      </div>
-     <div class="col-md-6 text-right">
-     </div>
-     </div>
-     <br>
-      <table class="table" style="font-size: 10px;">
+    </div>
+    <div class="col-md-6 text-right">
+    </div>
+    </div>
+    <br>
+    <table class="table" style="font-size: 10px;">
         <thead style="text-align: center;">
             <tr>
                 <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" onchange="checkAll(this)"
@@ -105,10 +105,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($presensi as $key => $data)
+            @foreach ($presensi as $key => $data)
                 <tr>
-                    <td><input type="checkbox" id="checkbox-{{ $key }}" name="">&nbsp;{{ $key + 1 }}</td>
-                    <td class="bates" href><a href="{{ route('presensi-by-name', ['nama_lengkap' => rawurlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a></td>
+                    <td><input type="checkbox" id="checkbox-{{ $key }}" name="">&nbsp;{{ $key + 1 }}
+                    </td>
+                    <td class="bates" href><a
+                            href="{{ route('presensi-by-name', ['nama_lengkap' => rawurlencode($data->user->nama_lengkap)]) }}">{{ $data->user->nama_lengkap }}</a>
+                    </td>
                     <td>{{ $data->jam_masuk }}</td>
                     <td>{{ $data->jam_pulang }}</td>
                     <td>{{ $data->jam_mulai_istirahat }}</td>
@@ -118,20 +121,32 @@
                     <td>{{ $data->log_aktivitas }}</td>
                     <td>
                         <div class="toggle-set">
-                            <form id="form-accept-{{ $key }}" action="{{ route('presensi-accept', ['id' => $data->id]) }}" method="POST">
+                            <form id="form-accept-{{ $key }}"
+                                action="{{ route('presensi-accept', ['id' => $data->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $data->id }}">
-                                <input type="radio" id="check-button-{{ $key }}" name="button-toggle" class="toggle-button" onclick="handleButtonClick('{{ $key }}')" />
-                                <label for="check-button-{{ $key }}" class="round-button-check" tabindex="2">
+                                <input type="radio" id="check-button-{{ $key }}" name="button-toggle"
+                                    class="toggle-button" onclick="handleButtonClick('{{ $key }}')" />
+                                @php
+                                    $background = $data->aksi == 1 ? 'green' : '';
+                                @endphp
+                                <label for="check-button-{{ $key }}" class="round-button-check" tabindex="2"
+                                    style="background: {{ $background }}">
                                     <i class="fa-solid fa-check"></i>
                                 </label>
                                 <button type="submit" class="toggle-button" value="1">Accept</button>
                             </form>
 
-                            <input type="radio" id="cross-button-{{ $key }}" name="button-toggle" class="toggle-button" />
-                            <a class="round-button-cross" data-bs-toggle="modal" data-bs-target="#silang{{$data->id}} ">
+                            <input type="radio" id="cross-button-{{ $key }}" name="button-toggle"
+                                class="toggle-button" />
+
+                            @php
+                                $background = $data->aksi == 0 ? 'red' : '';
+                            @endphp
+                            <a class="round-button-cross" data-bs-toggle="modal" style="background: {{ $background }}"
+                                data-bs-target="#silang{{ $data->id }} ">
                                 <i class="fa-solid fa-xmark"></i>
-                             </a>
+                            </a>
 
                         </div>
                     </td>
@@ -175,14 +190,14 @@
 
         </tbody>
     </table>
-        <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+    <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
 
 
     </div>
 
 
 
-{{--------------modal------------------}}
+    {{-- ------------modal---------------- --}}
 
 
     <div class="modal fade" id="statuskehadiran">
@@ -212,30 +227,32 @@
                     <!-- Break Line -->
                     <!-- Baris Ke-3 -->
                     kategori izin
-                  <select class="form-select" aria-label="Default select example">
-                          <option selected>Pilih kategori izin</option>
-                          <option value="1">Sakit dengan surat dokter </option>
-                          <option value="2">sakit tanpa surat dokter</option>
-                            <option value="3">keperluan sekolah/kampus</option>
-                            <option value="4">keperluan lainnya</option>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Pilih kategori izin</option>
+                        <option value="1">Sakit dengan surat dokter </option>
+                        <option value="2">sakit tanpa surat dokter</option>
+                        <option value="3">keperluan sekolah/kampus</option>
+                        <option value="4">keperluan lainnya</option>
                     </select>
                 </div>
 
 
-                    <div>
+                <div>
 
-                        <div class="d-grid gap-2 d-md-block">
-                            <button id="button1" class="btn btn-primary_gantijam" type="button" onclick="handleButtonClick(1)">Ganti jam </button>
-                            <button id="button2" class="btn btn-primary_tidak" type="button" onclick="handleButtonClick(2)">tidak ganti jam</button>
-                        </div>
-                    </div>
-                    <div style="text-align: center">
-                        <button class="btnkembali" data-bs-dismiss="modal">simpan</button>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button id="button1" class="btn btn-primary_gantijam" type="button"
+                            onclick="handleButtonClick(1)">Ganti jam </button>
+                        <button id="button2" class="btn btn-primary_tidak" type="button"
+                            onclick="handleButtonClick(2)">tidak ganti jam</button>
                     </div>
                 </div>
-
+                <div style="text-align: center">
+                    <button class="btnkembali" data-bs-dismiss="modal">simpan</button>
+                </div>
             </div>
+
         </div>
+    </div>
     </div>
 
     </div>
@@ -312,11 +329,13 @@
                             </div>
                             <div class="modal-footer p-5">
                                 <div class="keluar">
-                                    <button type="button" class="close" data-bs-dismiss="modal" style="background-color: transparent; border-color: transparent;">Close</button>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        style="background-color: transparent; border-color: transparent;">Close</button>
 
 
                                 </div>
-                               <button type="button" class="save" onclick="showsukses()" style="background-color: rgb(255, 0, 13); color: white; padding: 3px; border-color:transparent;">Save</button>
+                                <button type="button" class="save" onclick="showsukses()"
+                                    style="background-color: rgb(255, 0, 13); color: white; padding: 3px; border-color:transparent;">Save</button>
 
                             </div>
                         </div>
@@ -327,8 +346,9 @@
 
     </div>
     </div>
-    @foreach($presensi as $reject)
-        <div class="modal fade" id="silang{{ $reject->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @foreach ($presensi as $reject)
+        <div class="modal fade" id="silang{{ $reject->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-jam">
                 <div class="modal-content modal-content-jam">
                     <div class="modal-header justify-content-center">
@@ -340,11 +360,13 @@
                         <input type="hidden" name="id" value="{{ $reject->id }}">
                         <div style="padding-left: 10px">Mengedit riwayat proses</div>
                         <div class="form-floating">
-                            <textarea class="form-control" name="log_activitas" placeholder="Leave a comment here" id="floatingTextarea1" style="width: 90%; margin-left: 5%;">{{ $reject->log_aktivitas }}</textarea>
+                            <textarea class="form-control" name="log_activitas" placeholder="Leave a comment here" id="floatingTextarea1"
+                                style="width: 90%; margin-left: 5%;">{{ $reject->log_aktivitas }}</textarea>
                         </div>
                         <div style="padding-left: 10px">Keterangan.......</div>
                         <div class="form-floating">
-                            <textarea class="form-control" name="keterangan" placeholder="Leave a comment here" id="floatingTextarea2" style="width: 90%; margin-left: 5%;"></textarea>
+                            <textarea class="form-control" name="keterangan" placeholder="Leave a comment here" id="floatingTextarea2"
+                                style="width: 90%; margin-left: 5%;"></textarea>
                         </div>
                         <div class="modal-footer p-5">
                             <button type="submit" class="btn btn-primary p-1">Save</button>
@@ -353,7 +375,7 @@
                 </div>
             </div>
         </div>
-        @endforeach
+    @endforeach
 
     </div>
     </div>
@@ -361,7 +383,7 @@
     </div>
     </div>
     <script>
-       @foreach($presensi as $key => $reject)
+        @foreach ($presensi as $key => $reject)
             const checkButton{{ $key }} = document.getElementById('check-button-{{ $key }}');
             const crossButton{{ $key }} = document.getElementById('cross-button-{{ $key }}');
 
@@ -376,7 +398,6 @@
                 checkButton{{ $key }}.classList.remove('checked');
                 showsukses();
             });
-
         @endforeach
 
         function showsukses() {
@@ -422,7 +443,5 @@
                 }
             }
         }
-
-
     </script>
 @endsection
