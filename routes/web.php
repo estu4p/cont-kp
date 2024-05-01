@@ -288,7 +288,7 @@ Route::get('/input-nilai', function () {
 Route::get('/pengaturan-contri', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
-Route::post('/kategoripenilaian', function () {
+Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 

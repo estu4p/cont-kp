@@ -891,21 +891,28 @@ class AdminUnivAfterPaymentController extends Controller
         return redirect()->to('/pengaturan-contri');
     }
 
-    public function showKategoriPenilaian($divisi_id)
+    public function showKategoriPenilaian($divisi_id) 
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        $divisi = Divisi::findOrFail($divisi_id);
-        $kategori = KategoriPenilaian::find($divisi_id);
+        $divisi = Divisi::findOrFail($divisi_id);       
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id'); 
+        dd($subKategori);       
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
+        // $kategori = KategoriPenilaian::find($divisi_id);
+       
         return view('pengaturan.kategoripenilaian', [
-            'divisi' => $divisi, 'kategori' => $kategori
+            'divisi' => $divisi, 
+            'kategori' => $kategori,
+            'subKategori' => $subKategori,                        
         ]);
     }
 
     public function addKategoriPenilaian(Request $request, $divisi_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
         $divisi = Divisi::findOrFail($divisi_id);
-        $kategori = KategoriPenilaian::find($divisi_id);
+        // $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
         $nama_kategori = $request->input('nama_kategori');
         $data = new KategoriPenilaian;
         $data->divisi_id = $divisi_id;
@@ -913,7 +920,8 @@ class AdminUnivAfterPaymentController extends Controller
         $data->save();
         return view('pengaturan.kategoripenilaian', [
             'divisi' => $divisi,
-            'kategori' => $kategori
+            // 'kategori' => $kategori,
+            // 'subKategori' => $subKategori,            
         ]);
         // return redirect()->to('/kategoripenilaian')
         //     ->with(['divisi' => $divisi, 'kategori' => $kategori]);
@@ -927,8 +935,9 @@ class AdminUnivAfterPaymentController extends Controller
     public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
         $divisi = Divisi::findOrFail($divisi_id);
-        $kategori = KategoriPenilaian::findOrFail($kategori_id);
+        // $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
         $nama_sub_kategori = $request->input('nama_sub_kategori');
         $data = new SubKategoriPenilaian;
         $data->kategori_id = $kategori_id;
@@ -937,8 +946,8 @@ class AdminUnivAfterPaymentController extends Controller
 
         return view('pengaturan.kategoripenilaian', [
             'divisi' => $divisi,
-            'kategori' => $kategori
+            // 'kategori' => $kategori,
+            // 'subKategori' => $subKategori,            
         ]);
     }
-
 }

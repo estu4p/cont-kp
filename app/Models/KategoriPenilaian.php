@@ -18,5 +18,9 @@ class KategoriPenilaian extends Model
     {
         return $this->hasMany(SubKategoriPenilaian::class, 'kategori_id', 'id');
     }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
     
 }
