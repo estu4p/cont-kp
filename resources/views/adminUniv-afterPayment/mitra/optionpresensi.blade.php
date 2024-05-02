@@ -87,7 +87,7 @@
                 @foreach($userAdmin as $user)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td class="bates" href><a href="/mitra-detailprofil/{{ $user->id }}">{{ $user->nama_lengkap }}</a></td>
+                    <td class="bates" href><a href="/mitra-detailprofil">{{ $user->nama_lengkap }}</a></td>
                     <td>{{ $user->presensi->jam_masuk }}</td>
                     <td>{{ $user->presensi->jam_pulang }}</td>
                     <td>{{ $user->presensi->jam_mulai_istirahat}}</td>
