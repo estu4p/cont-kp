@@ -17,7 +17,6 @@ use App\Models\Penilaian;
 use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
@@ -380,12 +379,11 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function teamAktifSeeAllTeam(Request $request) // menggunakan $id mitra jika berdasarkan mitra yang diikuti
     {
-        $user = auth()->user();
-        $users = User::where('role_id', 3)->get();
+        $user = User::where('role_id', 3)->get();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json($user);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user', 'users'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user'));
         }
     }
 
@@ -870,7 +868,6 @@ class AdminUnivAfterPaymentController extends Controller
 
     public function hapusDivisi($id)
     {
-
         Penilaian::whereIn('sub_id', function ($query) use ($id) {
             $query->select('id')
                 ->from('sub_kategori_penilaian')
@@ -894,19 +891,19 @@ class AdminUnivAfterPaymentController extends Controller
         return redirect()->to('/pengaturan-contri');
     }
 
-        $user = auth()->user();
-        $userAdmin = User::where('role_id', 5)->get();
-        // Memuat data presensi untuk setiap user
-        foreach ($userAdmin as $user) {
-            $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
+    //     $user = auth()->user();
+    //     $userAdmin = User::where('role_id', 5)->get();
+    //     // Memuat data presensi untuk setiap user
+    //     foreach ($userAdmin as $user) {
+    //         $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
 
-            $user->presensi = $presensi;
-        }
-        //$user = auth()->user();
+    //         $user->presensi = $presensi;
+    //     }
+    //     //$user = auth()->user();
 
-        return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi', 'user'));
+    //     return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi', 'user'));
 
-    }    
+    // }    
 // Controller
 public function Pengaturpersensi(Request $request)
 {
@@ -932,11 +929,12 @@ public function Pengaturpersensi(Request $request)
     }
     // Mengembalikan view untuk halaman "pengaturanpresensi"
     return view('adminuniv-afterPayment.mitra.pengaturpersensi');
+}
 
     //adminunivdetailprofil
-    public function DetailProfil($id)
-    {
-        // Mengambil data siswa berdasarkan ID
+    // public function DetailProfil($id)
+    // {
+    //     // Mengambil data siswa berdasarkan ID
 
 
     public function showKategoriPenilaian($divisi_id) 
@@ -1013,14 +1011,14 @@ public function Pengaturpersensi(Request $request)
             'id' => $divisi->id,            
         ]);
 
-        // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
-        if ($pilihan === 'klik_button') {
-            // Logika untuk mengubah status_absensi menjadi "button"
-        } elseif ($pilihan === 'scan_qr_code') {
-            // Logika untuk mengubah status_absensi menjadi "scan QR code"
-        }
-        // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
-        return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+        // // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
+        // if ($pilihan === 'klik_button') {
+        //     // Logika untuk mengubah status_absensi menjadi "button"
+        // } elseif ($pilihan === 'scan_qr_code') {
+        //     // Logika untuk mengubah status_absensi menjadi "scan QR code"
+        // }
+        // // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
+        // return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
 
     }
 }

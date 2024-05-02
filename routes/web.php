@@ -147,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
 //login contributor mitra
 Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
 Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
-Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa'])->name('contributorformitra-dashboard');
+Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
 
 //login afterpayment
 Route::get('/AdminUniv-Login', function () {
@@ -448,9 +448,6 @@ Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControlle
 
 Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
-Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
-Route::get('/mitra-detailprofil', [BEControllerAdminUnivAfterPaymentController::class, 'DetailProfil'])->name('adminunivafterpayment.detailprofil');
-
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
@@ -669,14 +666,13 @@ Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
 });
 
+// Route::get('/mitra-pengaturpersensi', function () {
+//     return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+// });
 
-Route::get('/mitra-pengaturpersensi', function () {
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
-});
-
-Route::get('/mitra-optionpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.optionpresensi');
-});
+// Route::get('/mitra-optionpresensi', function () {
+//     return view('adminUniv-afterPayment.mitra.optionpresensi');
+// });
 
 
 Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'PengaturPersensi']);
@@ -689,7 +685,6 @@ Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentControll
 Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
-
 
 // CONTRIBUTOR FOR MITRA PRESENSI
 Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);
@@ -781,7 +776,22 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
-
+// Route::get('/AdminUniv/setting/quotes', function () {
+//     $quotes = [
+//         ['id' => 1, 'quotes' => "Change your life now for better future"],
+//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+//     ];
+//     return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+//         'title' => "Admin - Setting Jam & Quotes",
+//         'quotes' => $quotes
+//     ]);
+// });
 
 Route::get('/AdminUniv/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
 Route::post('/AdminUniv/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
@@ -854,20 +864,18 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
-})->name('contributorformitra-devisi');
-
+});
 Route::get('/contributorformitra-devisi-Seeallteams', function () {
     return view('contributorformitra.devisi-Seeallteams');
-})->name('contributorformitra-devisi-Seeallteams');
+});
 
 Route::get('/contributorformitra-devisi-LihatProfil', function () {
     return view('contributorformitra.Lihat-Profil-Mahasiswa');
-})->name('contributorformitra-devisi-LihatProfil');
+});
 
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
-})->name('contributorformitra-devisi-teamaktif');
-
+});
 Route::get('/contributorformitra-penilaian', function () {
     return view('contributorformitra.teamaktifanggota');
 });

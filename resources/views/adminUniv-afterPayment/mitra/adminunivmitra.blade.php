@@ -3,13 +3,12 @@
 @section('content')
     <link href="/assets/css//adminunivmitra.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2632061c04.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <div class="wadah p-5">
         <h1 class="text-center mb-5 judulmitra">DATA MITRA</h1>
         <div class="container">
-            <button type="button" class=" position-relative btn-tambah-mitra">
-            <i class="bi bi-plus-circle" style="font-size: 1rem; padding-right: 5px; "></i>
+            <button type="button" class="btn btn-primary position-relative btn-tambah-mitra">
+                <i class="fa-solid fa-circle-plus"></i>
                 Tambah Mitra
             </button>
 
@@ -35,14 +34,13 @@
                     <div class="card-header">
                         MITRA
                         <div class="dropdown">
-                            <button class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal"
                                     data-target="#exampleModal"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="{{ route('adminunivpayment.optionpresensi') }}">Data
-                                        Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
                                         siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
