@@ -40,7 +40,7 @@
                             <td>{{ $mhs->nomor_induk }}</td>
                             <td>{{ $mhs->divisi->nama_divisi }}</td>
                             <td>
-                                <div class="{{ $mhs['status'] }}">{{ $mhs->status_akun }}</div>
+                                <div class="{{ $mhs['status_akun'] }}">{{ $mhs->status_akun }}</div>
                             </td>
                             {{-- <td><a href="/lihat,['id' => $mhs->id]"> <i class="fa-solid fa-file-lines"></i></a></td> --}}
                             <td><a href="{{ route('penilaian', ['id' => $mhs->id])}}"><i class="fa-solid fa-file-lines"></i></a></td>
