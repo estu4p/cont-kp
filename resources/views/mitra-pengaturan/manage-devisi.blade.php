@@ -19,7 +19,7 @@
     <div class="card-header">
         <h3 class="card-title">Pengaturan</h3>
     </div>
-    <a class="" href="/manage-devisi">
+    <a class="" href="{{ route('mitra.showdivisi') }}">
         <div class="nav-devisi" style="background-color:  #f9caca; font-weight: bold;">
             <li>Manage Divisi</li>
         </div>
@@ -67,9 +67,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($divisi as $no => $division)
                     <tr>
-                        <td class="ratatengah">1</td>
-                        <td>Ui/Ux</td>
+                        <td class="ratatengah">{{$no + 1}}</td>
+                        <td>{{ $division->nama_divisi}}</td>
 
                         <td class="ratatengah"><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
 
@@ -78,7 +79,7 @@
                             <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
                         </td>
                     </tr>
-                    <!-- tambahkan baris data yang lain di sini -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -129,12 +130,14 @@
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form id="addDivisiForm" action="{{ route('mitra.adddivisi') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="modal-body">
                 <div class="textdivisi">Profil Divisi</div>
                 <div class="tambahgambar gap-3">
                     <div class="gambar border d-flex align-items-center justify-content-center">
                         <i class="fa-regular fa-image"></i>
-                        <input type="file" id="fileInput" style="display: none;">
+                        <input type="file" name="foto_divisi" id="fileInput" style="display: none;">
                     </div>
                     <div>
                         <button class="addgambar">Add Photo</button>
@@ -145,18 +148,47 @@
                 </div>
                 <div class="grupinputt">
                     <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                    <input type="text" class="inputmodall" placeholder="Masukkan nama divisi">
+                    <input type="text" name="nama_divisi" class="inputmodall" placeholder="Masukkan nama divisi">
                 </div>
             </div>
             <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
                 <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
 
 <script>
+
+// function addDivisi() {
+//         var form = document.getElementById('formDivisi');
+//         var formData = new FormData(form);
+
+//         fetch('/add-divisi', {
+//             method: 'POST',
+//             body: formData,
+//             headers: {
+//                 'X-CSRF-Token': '{{ csrf_token() }}'
+//             }
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 alert(data.message);
+
+//                 $('#exampleModal').modal('hide');
+
+//             } else {
+//                 alert('Gagal menambahkan divisi. Silakan coba lagi.');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+//     }
+
     // Variabel global untuk menyimpan indeks divisi yang akan diedit
     let editedIndex = null;
 
@@ -201,6 +233,7 @@
 
     // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
     function sowsukses() {
+    
         // Dapatkan nilai input dari modal
         var namaDivisi = document.querySelector('.inputmodall').value;
 
@@ -218,13 +251,28 @@
         // Sisipkan baris baru ke dalam tabel
         document.querySelector('#examplee tbody').insertAdjacentHTML('beforeend', newRow);
 
-        // Tampilkan pesan sukses
-        swal({
-            title: "Berhasil !",
-            icon: "success",
-            text: "Perubahan berhasil disimpan",
-            timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
-            buttons: false // Sembunyikan tombol "OK"
+         // AJAX di sini untuk mengirim data form ke server
+         $.ajax({
+            url: $("#addDivisiForm").attr("action"),
+            method: "POST",
+            data: $("#addDivisiForm").serialize(), // Serialize form data
+            success: function(response) {
+                swal({
+                    title: "Berhasil !",
+                    icon: "success",
+                    text: "Perubahan berhasil disimpan",
+                    timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
+                    buttons: false // Sembunyikan tombol "OK"
+                });
+            },
+            error: function(xhr, status, error) {
+                swal({
+                    title: "Gagal !",
+                    icon: "error",
+                    text: "Gagal menambahkan divisi. Silakan coba lagi.",
+                    buttons: true // Tampilkan tombol "OK"
+                });
+            }
         });
     }
 

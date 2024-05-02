@@ -110,6 +110,9 @@ Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu'
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
 Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
+Route::get('/mitra-optionpresensi', [AdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::post('/mitra-pengaturpersensi', [AdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+
 
 //Admin Pengaturan User & Organizations
 Route::get('/bagianmitra', [AdminUnivAfterPaymentController::class, 'bagianMitra']);
@@ -126,10 +129,15 @@ Route::get('/lihatpenilaian/{id}', [SchoolController::class, 'lihatPenilaian'])-
 
 
 //Contributor for Mitra
+
 Route::get('daftar-divisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi']);
 Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
+
+Route::get('show-divisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+
 Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
-Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
+Route::delete('delete-divisi/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenilaian']);
 Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);
