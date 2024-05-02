@@ -1,78 +1,89 @@
-
 /* Gaya dasar untuk kartu */
-.dashboard{
+.dashboard {
     display: flex;
 }
-  
-.kartu1{
-      width: 300px;
-      height: 300px;
-      background-color:#0063F8;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      margin: 10px;
-      padding: 20px;
-      
-      font-size: 50px; /* Memperbesar ukuran angka pada kartu */
-      margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
-      margin-left: 80px; /* Menggeser kartu ke samping kanan sejauh 20px */
-    }
-    .kartu2{
-      width: 300px;
-      height:300px;
-      background-color:#169423;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      
-      padding: 20px;
-      font-size: 50px; /* Memperbesar ukuran angka pada kartu */
-      margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
-      margin-left: 50px; /* Menggeser kartu ke samping kanan sejauh 20px */
-    }
-  
-    
-    /* Gaya untuk judul */
-    .kartu-judul {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    
-    /* Gaya untuk tabel */
-    .kartu-tabel {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    .kartu-tabel th,
-    .kartu-tabel td {
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #ddd;
-    }
-    
-    .kartu-tabel th {
-      background-color: #f2f2f2;
-    }
-.kartu1,.kartu2 {
-      color: #FFFFFF;
-  }
-  
-  .logo1 {
-    width: 100px; /* Ubah ukuran gambar sesuai kebutuhan */
-    height:auto;/* Biarkan tinggi otomatis sesuai perbandingan aspek */
-    float: right; /* Mengatur gambar ke tepi kanan */
-    margin-left: 20px; /* Menambahkan jarak antara gambar dengan elemen sekitarnya */
-    margin-top: 50%; /* Menggeser gambar ke bawah sejauh 20px */
-  }
 
-  .buku{
+.kartu1 {
+    width: 300px;
+    height: 300px;
+    background-color: #0063f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    padding: 20px;
+
+    font-size: 50px; /* Memperbesar ukuran angka pada kartu */
+    margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
+    margin-left: 80px; /* Menggeser kartu ke samping kanan sejauh 20px */
+}
+.kartu2 {
+    width: 300px;
+    height: 300px;
+    background-color: #206c36;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    padding: 20px;
+    font-size: 50px; /* Memperbesar ukuran angka pada kartu */
+    margin-top: 100px; /* Menggeser kartu ke bawah sejauh 20px */
+    margin-left: 50px; /* Menggeser kartu ke samping kanan sejauh 20px */
+}
+
+/* Gaya untuk judul */
+.kartu-judul {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: -17%;
+}
+
+/* Gaya untuk tabel */
+.kartu-tabel {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+/* .kartu-tabel td {
+    margin: 2px;
+    text-align: center;
+    border: 1px solid #ddd;
+} */
+
+.kartu-tabel th {
+    background-color: #f2f2f2;
+    top: 2px;
+}
+.kartu1,
+.kartu2 {
+    color: #ffffff;
+}
+
+.logo1 {
+    position: relative;
+    width: 170px; /* Ubah ukuran gambar sesuai kebutuhan */
+    height: auto; /* Biarkan tinggi otomatis sesuai perbandingan aspek */
+    top: 50%;
+    left: 16%;
+}
+.logo2 {
+    position: relative;
+    width: 190px; /* Ubah ukuran gambar sesuai kebutuhan */
+    height: auto; /* Biarkan tinggi otomatis sesuai perbandingan aspek */
+    top: 41%;
+    left: 19%;
+}
+
+.buku {
     width: 330px;
     height: 30px;
     background-color: #ffffff;
     border-radius: 15px;
     margin-left: 80px;
     margin-top: 150px;
-    color: #0063F8;
-  }
-   
+    color: #0063f8;
+}
+.buku a {
+    font-weight: bold;
+}
+th {
+    font-size: smaller;
+}

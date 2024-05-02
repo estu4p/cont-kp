@@ -1,79 +1,80 @@
-html,
-body {
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-
-.wadah{
+.wadah {
     display: flex;
     padding-top: 10px;
     padding-left: 50px;
+    flex-wrap: wrap;
+    
 }
-.propil{
-    height: 650px;
-    width: 300px;
+
+.propil {
+    height: 610px;
+    width: calc(28% - 20px); 
+    margin-right: 40px;
+    padding-top: 20px;
+    padding-left: 20px;
     text-align: center;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    height: 650px; /* Tentukan tinggi maksimal div */
-    overflow-y: scroll; /* Selalu tampilkan scroll vertikal */
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
-.gambarkiri{
+.tes{
+    height: 100%;
+    width: 67%;
+    margin-top: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    
+}
+.tombol{
+    margin-top: 15px;
+}
+.gambarkiri {
     padding-top: 30px;
     transform: scale(1.7);
 }
-.nama{
+.nama {
     padding-top: 70px;
     font-weight: bold;
     font-size: 20px;
-    width: 80%;
-    margin-left: 10%;
-
-
 }
-.email{
-
+.email {
     padding-top: 15px;
-    width: auto;
-    width: 80%;
-    margin-left: 10%;
-    text-align: justify;
 }
-.about{
+.about {
     padding-top: 100px;
     font-weight: bold;
     font-size: 20px;
-    width: auto;
-
 }
-.keterangan{
+.keterangan {
     padding-top: 30px;
 
-    width: 100%;
-  padding-left: 35px;
-  height: 200px; /* Tentukan tinggi maksimal div */
-
+    width: 90%;
+    padding-left: 35px;
 }
-.wadahedit{
-    padding-left: 30px;
-
-}
-.editprofil{
+.wadahedit {
     height: 650px;
-    width: 850px;
+    width: calc(72% - 20px); 
+    margin-right: 10px;
     padding-top: 20px;
     padding-left: 20px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    width: 95%;
 }
-/* .gambarkanan{
-    transform: scale(1.2);
-} */
+
+
+.editprofil {
+    height: 650px;
+    width:800px;
+    padding-top: 20px;
+    padding-left: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  
+}
+
 .change{
 color: #000000;
 box-sizing: border-box;
@@ -81,60 +82,79 @@ display: flex;
 justify-content: center;
 align-items: center;
 font-size: 12px;
-width: 100px;
+width: 150px;
 height: 40px;
 border: 2px solid rgba(0, 0, 0, 0.5);
 border-radius: 5px;
+  }
 
+.gambarkanan{
+    transform: scale(1.2);
 }
-.remove{
-    background: #FFFFFF;
-    color: #BA181BE8;
+
+
+.remove {
+    background: #ffffff;
+    color: #ba181be8;
     border: none;
+    padding-left: 50px;
 }
-.judulkanan{
+.judulkanan {
     padding-top: 20px;
+    padding-bottom: 20px;
     font-weight: bold;
     font-size: 20px;
+    
 }
-.input{
+.input {
     width: 97%;
 
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
 }
-#About{
+#About {
     width: 300px;
-    background-color: #F2F4F8;
+    background-color: #f2f4f8;
 }
-.Cancel{
+.cancel{
     border-radius: 7px;
-    color: #ffffff;
-    background-color: #7a7a7a;
+    height: 40px;
+    width: 90px;
+    border: none;
+    background-color: transparent;
+   
 }
-.Update{
+.Update {
     border-radius: 7px;
+    height: 40px;
+    width: 90px;
     color: #ffffff;
     background-color: #A4161A;
+    border: none;
+    
 }
-/* Media Query untuk tampilan responsif */
-@media screen and (max-width: 768px) {
-    .nama,
-    .email,
-    .about,
-    .keterangan {
-        white-space: normal; /* Mengatur agar teks dapat wrap */
-        text-overflow: unset; /* Menghapus ellipsis untuk teks yang wrap */
-        max-width: 100%; /* Mengatur lebar maksimal agar teks tidak keluar dari container */
-        padding-top: 10px; /* Mengurangi padding atas untuk responsivitas */
-        padding-left: 0; /* Menghapus padding kiri untuk responsivitas */
-    }
+.atas{
+    justify-content: space-between;
+    width: 25%;
+}
 
-    .gambarkiri {
-        padding-top: 10px; /* Mengurangi padding atas untuk gambar */
-        transform: scale(1.2); /* Mengurangi skala gambar untuk responsivitas */
-    }
 
-    .about {
-        font-size: 16px; /* Mengurangi ukuran font untuk about pada tampilan kecil */
+/* Media query untuk tata letak responsif */
+@media (max-width: 1162px) {
+    .wadah {
+        padding: 40px;
     }
+    .tes{
+        width: 100%;
+    }
+    .propil,
+    .wadahedit {
+        width: 100%; /* Penuhi lebar saat layar kecil */
+        margin-right: 0; /* Hapus margin saat satu kolom */
+    }
+}
+@media (max-width: 767px) {
+    .bawah{
+        width: 100%;
+    }
+    
 }

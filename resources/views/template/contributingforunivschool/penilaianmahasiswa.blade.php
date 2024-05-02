@@ -57,7 +57,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             var table = document.getElementById('mahasiswa-table');
             var rows = table.getElementsByTagName('tr');
-            var itemPerPage = 5;
+            var itemPerPage = 6;
             var currentPage = 0;
 
             function showPage(page) {
