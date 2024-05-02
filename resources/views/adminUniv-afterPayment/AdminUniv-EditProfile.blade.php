@@ -25,64 +25,60 @@
                         <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
                             <label for="imageInput" class="custom-file-upload">
                                 <span class="change">Change Photo</span>
-                                <input type="file" id="imageInput" style="display: none;" name="foto_profil">
+                                <input type="file" id="imageInput" style="display: none;">
                             </label>
                             <span class="remove m-0">remove</span>
                         </div>
                     </div>
 
                     <div class="tengah row ">
-                        <div class="additional-content">
-                            <div class="judulkanan">Personal Details</div>
-                            <div class="isi col-12 row justify-content-evenly  ">
-                                <div class="form-group  col-6">
-                                    <label for="username">Nama lengkap</label>
-                                    <div class="input-group mb-3">
-                                        <input class="input form-control" type="text" id="name"
-                                            placeholder="Atun Khostriatun" value="{{ $user->nama_lengkap }}"
-                                            name="nama_lengkap">
-                                    </div>
-                                </div>
-                                <div class="form-group  col-6">
-                                    <label for="email">Email</label>
-                                    <div class="input-group mb-3">
-                                        <input class="input form-control" type="email" id="email"
-                                            placeholder="wahyudiatkinson@gmail.com" value="{{ $user->email }}"
-                                            name="email">
-                                    </div>
-                                </div>
-                                <div class="form-group  col-6">
-                                    <label for="NoHP">No HP</label>
-                                    <div class="input-group mb-3">
-                                        <input class="input form-control" type="text" id="NoHP"
-                                            placeholder="081326273187" value="{{ $user->no_hp }}" name="no_hp">
-                                    </div>
-                                </div>
-
-                                <div class="form-group  col-6">
-                                    <label for="alamat">Alamat</label>
-                                    <div class="input-group mb-3">
-                                        <input class="input form-control" type="text" id="alamat" placeholder="Jateng"
-                                            value="{{ $user->kota }}" name="kota">
-                                    </div>
+                        <div class="judulkanan">Personal Details</div>
+                        <div class="isi col-12 row justify-content-evenly  ">
+                            <div class="form-group  col-6   p-3">
+                                <label for="username">Nama lengkap</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text" id="name"
+                                        placeholder="Atun Khostriatun" value="{{ $user->nama_lengkap }}"
+                                        name="nama_lengkap">
                                 </div>
                             </div>
-
-                            <div class="bawah p-0 col-6">
-                                <div class="judulkanan">Additional Info</div>
-                                <div class="form-group form-floating">
-                                    <div class="col-12  ">
-                                        <label for="alamat">About</label>
-                                        <textarea id="About" class="form-control " style="width:97%;" placeholder="{{ $user->about }}" name="about"></textarea>
-                                    </div>
+                            <div class="form-group  col-6   p-3">
+                                <label for="NoHP">No HP</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text" id="NoHP"
+                                        placeholder="081326273187" value="{{ $user->no_hp }}" name="no_hp">
                                 </div>
                             </div>
-                        </div>
-                        <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                            <button class="cancel">Cancel</button>
-                            <button class="Update" type="submit">Update</button>
+                            <div class="form-group  col-6   p-3">
+                                <label for="email">Email</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="email" id="email"
+                                        placeholder="wahyudiatkinson@gmail.com" value="{{ $user->email }}" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group  col-6   p-3">
+                                <label for="alamat">Alamat</label>
+                                <div class="input-group mb-3">
+                                    <input class="input form-control" type="text" id="alamat" placeholder="Jateng"
+                                        value="{{ $user->kota }}" name="kota">
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="bawah p-0 col-6">
+                        <div class="judulkanan">Additional Info</div>
+                        <div class="form-group form-floating">
+                            <div class="col-12  ">
+                                <label for="alamat">About</label>
+                                <textarea id="About" class="form-control " style="width:97%;" placeholder="{{ $user->about }}" name="about"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                        <button class="cancel">Cancel</button>
+                        <button class="Update" type="submit">Update</button>
+                    </div>
+                </div>
             </form>
 
         </div>
