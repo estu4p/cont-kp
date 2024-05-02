@@ -112,8 +112,8 @@ Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkout
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
 
 //Admin Pengaturan User & Organizations
-Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
-Route::post('/editUsermitra/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
+Route::get('/bagianmitra', [AdminUnivAfterPaymentController::class, 'bagianMitra']);
+Route::post('/editUsermitra/{id}', [AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
@@ -143,7 +143,8 @@ Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']
 Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
 Route::put('/contributorformitra-update/{$username}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
 Route::put('/contributorformitra-delete/{$username}', [ContributorForMitra::class, 'delete'])->name('contributorformitra.deleteFoto');
-
+Route::get('/mitra-penilaian', [ContributorForMitra::class, 'InputNilai']);
+Route::post('/penilaian-mitra/{id}', [ContributorForMitra::class, 'inputNilaiPost']);
 
 //Contributor for Mitra - Presensi
 Route::get('daftar-presensi', [PresensiMitraController::class, 'getAllPresensi']);
@@ -176,8 +177,8 @@ Route::delete('/AdminSistem/deletefoto/{id}', [AdminSistemDashboardController::c
 //Subscription
 Route::get('/subscriptions', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
 Route::post('/subscriptions-store', [UserAdminSistemController::class, 'storeSubs'])->name('subscriptions.store');
-Route::put('/subscriptions/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.update');
-Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.destroy');
+Route::put('/subscriptions/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.updateSubs');
+Route::delete('/subscriptions/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.deleteSubs');
 
 Route::get('adminSistem-login', [LoginController::class, 'loginadminSistem'])->name('login.adminsistem');
 Route::get('adminsistem/logout-sistemlokasi', [LoginController::class, 'logoutSistemLokasi'])->name('logout.sistemlokasi');

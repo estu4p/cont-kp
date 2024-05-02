@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');
             $table->string('nama_sub_kategori');
             $table->timestamps();
-            $table->foreign('kategori_id')->references('id')->on('kategori_penilaian');
+            $table->foreign('kategori_id')->references('id')->on('kategori_penilaian')->onDelete('CASCADE');
         });
     }
 
@@ -27,5 +27,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('sub_kategori_penilaian');
     }
-    
 };

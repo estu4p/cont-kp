@@ -29,7 +29,9 @@
                         var urlParts = currentUrl.split('/');
                         var packageName = urlParts[urlParts.length - 1];
                     </script> --}}
+
                 <input type="text" name="paket" style="border: 2px solid #E9E9E9; color:#5e5e5e; padding: 12px; border-radius: 0px 8px 8px 0px; width: 100%;" value="Gold" disabled>
+
             </div>
 
             <label for="bayar" class="mt-4">metode pembayaran<span class="text-danger">*</span></label>

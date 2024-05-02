@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Presensi;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Database\Seeders\KategoriPenilaian;
 use Database\Seeders\SubKategoriPenilaian;
@@ -87,22 +88,21 @@ class SchoolController extends Controller
         }
     }
     public function lihatPenilaian(Request $request, $id)
-    {// Penilaian Mahasiswa- lihat
+    { // Penilaian Mahasiswa- lihat
+
         $Id = User::findOrFail($id);
-        $user= $Id->nama_lengkap;
+        $user = $Id->nama_lengkap;
         $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
-        // // $sub_id = Penilaian::select('sub_id')->get()->sub_id;
-        $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategori'])
-                ->where('nama_lengkap', $Id->id)->where('kategori', $id)->orderBy('sub_id')->first();
-        // $nilaiPemahaman = Penilaian::with(['user', 'subKategori', 'kategoriPenilaian'])
-        //         ->where('nama_lengkap', $Id->id)->where('sub_id',2)->first();
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+        $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
+            ->where('id', $Id->id)->get();
+            // $subKategori = SubKategoriPenilaian::get()->groupBy('kategori_id');
+            // $subKategori->load('kategori');
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['data' => $penilaian, $nilaiPemahaman]);
-        }else{
-            return view('template.contributingforunivschool.lihat',compact('penilaian', 'user','Id', 'nilaiPemahaman'));
+        } else {
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }
     }
-
-
 }
