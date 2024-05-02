@@ -41,7 +41,8 @@
                                     data-target="#exampleModal"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="{{ route('adminunivpayment.optionpresensi') }}">Data
+                                        Presensi Siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
                                         siswa/Mahasiswa</a></li>
                                 <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi

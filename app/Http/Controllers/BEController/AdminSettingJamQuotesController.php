@@ -12,12 +12,14 @@ class AdminSettingJamQuotesController extends Controller
 {
     public function quotes()
     {
+        $user = auth()->user();
         $quotes = Quotes::where('type', 'quotes_harian')->get();
         $quotes_ulangtahun = Quotes::where('type', 'quotes_ulangtahun')->first();
         return view('admin.setting.quotes', [
             'title' => "Admin - Setting Jam & Quotes",
             'quotes' => $quotes,
             'quotes_ulangtahun' => $quotes_ulangtahun,
+            'user' => $user
         ]);
     }
 
@@ -59,7 +61,7 @@ class AdminSettingJamQuotesController extends Controller
         }
     }
 
-    public function quotes_ulangtahun_update(Request $request ,$id)
+    public function quotes_ulangtahun_update(Request $request, $id)
     {
         $data = $request->all();
 
