@@ -17,6 +17,11 @@
 }
 .btn-tambah-mitra {
     margin-left: 10px; /* Jarak antara tombol "Tambah Mitra" dengan kotak pencarian */
+    border: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    
 } /* Tombol */
 .btn {
     display: inline-block;
@@ -182,6 +187,11 @@
 
 .dropdown-toggle::after {
     display: none;
+}
+.dropdown-toggle{
+    background-color: transparent;
+    color: white;
+    border: none;
 }
 
 .dropdown-toggle i {

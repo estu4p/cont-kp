@@ -21,7 +21,7 @@
     </div>
     <button class="buku">
         <i class="fa-solid fa-book-bookmark"></i>
-        <a href="#">Buku Panduan Menggunakan Website</a>
+        <a href="#"><b>Buku Panduan Menggunakan Website</b></a>
     </button>
 </div>
 @endsection
