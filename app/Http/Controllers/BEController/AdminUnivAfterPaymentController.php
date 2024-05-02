@@ -933,29 +933,35 @@ class AdminUnivAfterPaymentController extends Controller
         return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
     }
     
-// Controller
+
 public function Pengaturpersensi(Request $request)
 {
-           // Periksa jika permintaan adalah metode POST
-    if ($request->isMethod('POST')) {
-        // Tangani permintaan dari formulir
-        $pilihan = $request->input('pilihan');
-    
-        // Memeriksa apakah pilihan valid
+   // Periksa jika permintaan adalah metode POST
+ 
+    // Tangani permintaan dari formulir
+    $pilihan = $request->input('pilihan');
+
+    // Memeriksa apakah pilihan valid
+    if (!empty($pilihan) && is_array($pilihan)) {
+        $statusAbsensi = [];
+
         if (in_array('klik_button', $pilihan)) {
-            // Logika untuk mengubah status_absensi menjadi "button"
-            User::query()->update(['status_absensi' => 'Button']);
-                
+            $statusAbsensi[] = 'Button';
         }
+
         if (in_array('scan_qr_code', $pilihan)) {
-            // Logika untuk mengubah status_absensi menjadi "scan QR code"
-            User::query()->update(['status_absensi' => 'Scan QR Code']);
+            $statusAbsensi[] = 'Scan QR Code';
         }
-    
+
+        // Perbarui status absensi hanya untuk pengguna dengan role_id 5 yang dipilih
+        if (!empty($statusAbsensi)) {
+            User::where('role_id', 5)->update(['status_absensi' => $statusAbsensi[0]]);
+        }
+
         // Berikan notifikasi sukses
         return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
     }
     // Mengembalikan view untuk halaman "pengaturanpresensi"
-    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
+    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
     }
 }
