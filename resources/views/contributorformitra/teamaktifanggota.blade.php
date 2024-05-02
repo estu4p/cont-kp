@@ -160,7 +160,7 @@
       var className = '';
       switch(status) {
         case 'active':
-          className = 'active';
+          className = 'aktive';
           break;
         case 'inactive':
           className = 'inactive';
