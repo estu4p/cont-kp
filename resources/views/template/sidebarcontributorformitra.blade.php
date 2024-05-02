@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/Css/sidebar.css">
+<link rel="stylesheet" href="{{ asset('assets/Css/sidebar.css') }}">
 <div class="sidebar">
     <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo">
     <ul class="nav flex-column">
@@ -16,13 +16,16 @@
                 href="/daftar-presensi">Presensi</a>
         </li>
         <li class="nav-item">
-                <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}" href="/penilaian-mahasiswa">Penilaian</a>
+            <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}"
+                href="/penilaian-mahasiswa">Penilaian</a>
         </li>
         <li class="nav-item">
 
-            <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}" href="/manage-devisi">Pengaturan</a>
+            <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}"
+                href="/manage-devisi">Pengaturan</a>
 
-            <a class="nav-link {{ Request::is('manage.devisiyy', 'manage-shift') ? 'active' : '' }}" href="/manage-devisi">Pengaturan</a>
+            <a class="nav-link {{ Request::is('manage.devisiyy', 'manage-shift') ? 'active' : '' }}"
+                href="/manage-devisi">Pengaturan</a>
 
         </li>
         <li class="nav-item">

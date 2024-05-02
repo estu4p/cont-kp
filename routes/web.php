@@ -275,9 +275,9 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 // });
 
 //penilaian mahasiswa-contributor mitra
-Route::delete('/delete-division/{id}',[BEControllerAdminUnivAfterPaymentController::class,'hapusDivisi']);
-Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class,'showKategoriPenilaian'])->name('showKategoriPenilaian');
-Route::post('/kategoripenilaian/{divisi_id}/tambah',[BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
+Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
+Route::post('/kategoripenilaian/{divisi_id}/tambah', [BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
 Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
 Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
 Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
@@ -862,12 +862,8 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 //Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
 //Route::put('/contributorformitra-profile/{$id}', [ContributorForMitra::class, 'Profile'])->name('contributorformitra.profile');
 
-Route::get('/contributorformitra-devisi', function () {
-    return view('contributorformitra.devisi');
-});
-Route::get('/contributorformitra-devisi-Seeallteams', function () {
-    return view('contributorformitra.devisi-Seeallteams');
-});
+Route::get('/contributorformitra-devisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
+Route::get('/contributorformitra-devisi-Seeallteams/{id}', [ContributorForMitra::class, 'showAllTeams'])->name('mitra.allteams');
 
 Route::get('/contributorformitra-devisi-LihatProfil', function () {
     return view('contributorformitra.Lihat-Profil-Mahasiswa');
