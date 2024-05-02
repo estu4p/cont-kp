@@ -48,6 +48,7 @@ use App\Http\Controllers\BEController\PenilaianMitraController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -296,10 +297,11 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    $title = "Pengaturan";
-    return view('manage_devisi', compact('title'));
-});
+// Route::get('/manage-devisi', function () {
+//     $title = "Pengaturan";
+//     return view('manage_devisi', compact('title'));
+// });
+
 
 Route::get('/manage-shift', function () {
     $title = "Pengaturan";
@@ -321,9 +323,10 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
+Route::get('manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('manage.showDivisi');
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
@@ -371,9 +374,9 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -396,9 +399,9 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -636,6 +639,9 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
+Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');
@@ -649,9 +655,7 @@ Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
