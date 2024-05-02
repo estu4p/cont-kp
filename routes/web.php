@@ -147,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
 //login contributor mitra
 Route::get('/loginmitra', [LoginController::class, 'loginmitra']);
 Route::post('/loginmitra', [LoginController::class, 'ValidateLogin']);
-Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa']);
+Route::get('/contributorformitra-dashboard', [ContributorForMitra::class, 'filterMahasiswa'])->name('contributorformitra-dashboard');
 
 //login afterpayment
 Route::get('/AdminUniv-Login', function () {
@@ -850,18 +850,20 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 
 Route::get('/contributorformitra-devisi', function () {
     return view('contributorformitra.devisi');
-});
+})->name('contributorformitra-devisi');
+
 Route::get('/contributorformitra-devisi-Seeallteams', function () {
     return view('contributorformitra.devisi-Seeallteams');
-});
+})->name('contributorformitra-devisi-Seeallteams');
 
 Route::get('/contributorformitra-devisi-LihatProfil', function () {
     return view('contributorformitra.Lihat-Profil-Mahasiswa');
-});
+})->name('contributorformitra-devisi-LihatProfil');
 
 Route::get('/contributorformitra-devisi-teamaktif', function () {
     return view('contributorformitra.teamaktifanggota');
-});
+})->name('contributorformitra-devisi-teamaktif');
+
 Route::get('/contributorformitra-penilaian', function () {
     return view('contributorformitra.teamaktifanggota');
 });
