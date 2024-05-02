@@ -5,12 +5,8 @@
         <li class="nav-item">
         </li>
         <li class="nav-item">
-<<<<<<<<< Temporary merge branch 1
             <a class="nav-link {{ Request::is('contributorformitra-dashboard') ? 'active' : '' }}"
                 href="/contributorformitra-dashboard">Dashboard</a>
-=========
-            <a class="nav-link {{ Request::is('contributorformitra-dashboard') ? 'active' : '' }}"  href="/contributorformitra-dashboard">Dashboard</a>
->>>>>>>>> Temporary merge branch 2
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/contributorformitra-devisi">Devisi</a>
@@ -23,12 +19,8 @@
                 <a class=" nav-link {{ Request::is('penilaian-mahasiswa') ? 'active' : '' }}" href="/penilaian-mahasiswa">Penilaian</a>
         </li>
         <li class="nav-item">
-<<<<<<<<< Temporary merge branch 1
             <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}"
                 href="/manage-devisi">Pengaturan</a>
-=========
-            <a class="nav-link {{ Request::is('manage.devisiyy', 'manage-shift') ? 'active' : '' }}" href="/manage-devisi">Pengaturan</a>
->>>>>>>>> Temporary merge branch 2
         </li>
         <li class="nav-item">
             <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
