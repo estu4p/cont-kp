@@ -110,6 +110,9 @@ Route::get('jangkawaktu', [AdminUnivAfterPaymentController::class, 'JangkaWaktu'
 Route::get('jangkawaktubydate', [AdminUnivAfterPaymentController::class, 'JangkaWaktuByDate']);
 Route::get('checkoutpesanan', [AdminUnivAfterPaymentController::class, 'checkoutpesanan']);
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost']);
+Route::get('/mitra-optionpresensi', [AdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::post('/mitra-pengaturpersensi', [AdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+
 
 //Admin Pengaturan User & Organizations
 Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
