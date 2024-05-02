@@ -13,11 +13,15 @@ class SubKategoriPenilaian extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(KategoriPenilaian::class, 'kategori_id', 'id','id');
+        return $this->belongsTo(KategoriPenilaian::class, 'kategori_id', 'id', 'id');
     }
     public function Penilaian()
     {
         return $this->hasMany(Penilaian::class, 'sub_id', 'id');
     }
 
+    public function kategoriAll()
+    {
+        return $this->hasMany(KategoriPenilaian::class, 'nama_kategori');
+    }
 }

@@ -48,6 +48,7 @@ use App\Http\Controllers\BEController\PenilaianMitraController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -444,6 +445,9 @@ Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentControlle
 
 Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 
+Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::get('/mitra-detailprofil', [BEControllerAdminUnivAfterPaymentController::class, 'DetailProfil'])->name('adminunivafterpayment.detailprofil');
+
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
 });
@@ -608,6 +612,7 @@ Route::get('/presensitidakhadir', function () {
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
+Route::post('/input-nilai/{id}', [ContributorForMitra::class, 'inputNilaiPost'])->name('mitra.inputNilai');
 
 
 
@@ -667,17 +672,17 @@ Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
 });
 
-Route::get('/mitra-pengaturpersensi', function () {
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
-});
 
-Route::get('/mitra-optionpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.optionpresensi');
-});
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'PengaturPersensi']);
+
+Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+
 
 Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
 });
+
 
 // CONTRIBUTOR FOR MITRA PRESENSI
 Route::get('/mitra/laporanpresensi', [ContributorForMitra::class, 'laporanPresensi']);
@@ -772,22 +777,7 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
-// Route::get('/AdminUniv/setting/quotes', function () {
-//     $quotes = [
-//         ['id' => 1, 'quotes' => "Change your life now for better future"],
-//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-//     ];
-//     return view('adminUniv-afterPayment.AdminUniv-Quotes', [
-//         'title' => "Admin - Setting Jam & Quotes",
-//         'quotes' => $quotes
-//     ]);
-// });
+
 
 Route::get('/AdminUniv/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
 Route::post('/AdminUniv/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
