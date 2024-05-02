@@ -115,8 +115,8 @@ Route::post('/mitra-pengaturpersensi', [AdminUnivAfterPaymentController::class, 
 
 
 //Admin Pengaturan User & Organizations
-Route::get('/bagianmitra', [AdminUnivAfterPaymentController::class, 'bagianMitra']);
-Route::post('/editUsermitra/{id}', [AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
+Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
+Route::post('/editUsermitra/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
