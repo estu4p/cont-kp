@@ -926,6 +926,7 @@ class AdminUnivAfterPaymentController extends Controller
     //mitraoptionpresensi
     public function OptionPresensi()
     {
+        $user = auth()->user();
         $userAdmin = User::where('role_id', 5)->get();
         // Memuat data presensi untuk setiap user
         foreach ($userAdmin as $user) {
@@ -934,7 +935,7 @@ class AdminUnivAfterPaymentController extends Controller
             $user->presensi = $presensi;
         }
         //$user = auth()->user();
-        return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
+        return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi', 'user'));
     }
     //adminunivdetailprofil
     public function DetailProfil($id)
