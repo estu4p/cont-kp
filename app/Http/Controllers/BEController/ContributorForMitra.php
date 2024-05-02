@@ -25,14 +25,17 @@ use Illuminate\Validation\ValidationException;
 
 class ContributorForMitra extends Controller
 {
-    public function showDaftarDivisi(Request $request)
+    public function showDivisi(Request $request)
     {
         $divisi = Divisi::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi]);
+            return response()->json([
+                'message' => 'Daftar Divisi', 
+                'divisi' => $divisi,
+            ], 200);
         } else {
-            return view('manage.margepenilaiandivisi', ['divisi' => $divisi]);
+            return view('mitra-pengaturan.manage-devisi', compact('divisi'));
         }
     }
 
@@ -40,21 +43,28 @@ class ContributorForMitra extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if ($request->hasFile('foto_divisi')) {
+            $image = $request->file('foto_divisi');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('public/images/' . $filename);
+            $image->move($path);
+        }
+
         $data = new Divisi([
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
-            'deskripsi_divisi' => $request->input('deskripsi_divisi'),
+            'foto_divisi' => $filename,
         ]);
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan divisi'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menambahkan divisi']);
     }
     public function updateDivisi(Request $request, $id)
     {
@@ -73,15 +83,13 @@ class ContributorForMitra extends Controller
         $data->save();
         return response()->json(['success' => true, 'message' => 'Berhasil update divisi', 'data' => $data], 200);
     }
-    public function destroyDivisi($id)
+    public function deleteDivisi($id)
     {
         $data = Divisi::find($id);
         if ($data) {
             $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
             $data->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus divisi dengan id $deletedId"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data dengan id $id tidak ditemukan"], 404);
+            return back()->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
         }
     }
 
