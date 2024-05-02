@@ -28,19 +28,18 @@ body {
 .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
     display: block; /* Tautan menjadi blok */
-    color: grey; /* Ubah warna teks tautan */
+    color: #000; /* Ubah warna teks tautan */
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
     cursor: pointer;
 }
 
 .nav-link:hover {
-    color: black;
+    background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
 }
 
 a.nav-link.active {
     font-weight: bold;
-    color: black;
 }
 
 .nav-item {
@@ -48,22 +47,18 @@ a.nav-link.active {
 }
 
 .sidebar {
-    padding-left: 2%;
-    text-align: left;
+    text-align: center;
 }
 
 .logo {
-    margin-bottom: 80px;
-    padding-left: 20%;
+    margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
 }
 
 .logout {
-    padding-right: 20%;
     position: absolute;
     bottom: 10%;
     color: #302f2f;
     opacity: 0.6;
-
 }
 .swal-button--confirm {
     background-color: red;
@@ -72,5 +67,3 @@ a.nav-link.active {
 .swal-button--cancel {
     background-color: darkgray;
 }
-
-

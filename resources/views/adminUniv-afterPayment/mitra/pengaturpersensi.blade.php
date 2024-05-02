@@ -13,21 +13,21 @@
                   <div class="container-fluid p-0">
                 <h3 style="font-size: 50px; margin: 0;">Pengatur Presensi</h3>
                 <div class="p">
-                <p>atur presensi di mitra/perusahaan ini menggunakan tombol button atau scan QR code</p>
+                <p>atur presensi di mitra/perusahaan ini menggunakan tombol buttom atau scan QR code</p>
         </div>
         <br>
         <div class="container">
           <form action="{{ route('adminunivafterpayment.Pengaturpersensi') }}" method="POST">
            @csrf
             <div class="round">
-              <input type="checkbox" name="pilihan" value="klik_button" id="checkbox1">
+              <input type="checkbox" checked id="checkbox1" />
               <label for="checkbox1" style="color: black">button (klik button)</label>
             </div>
           </div>
           
           <div class="container">
             <div class="round">
-              <input type="checkbox" name="pilihan" value="scan_qr_code" id="checkbox2">
+              <input type="checkbox" checked id="checkbox2" />
               <label for="checkbox2" style="color: black">scan QR Code</label>
             </div>
           </div>
