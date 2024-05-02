@@ -17,6 +17,8 @@
         </div>
         <br>
         <div class="container">
+          <form action="{{ route('adminunivafterpayment.Pengaturpersensi') }}" method="POST">
+           @csrf
             <div class="round">
               <input type="checkbox" checked id="checkbox1" />
               <label for="checkbox1" style="color: black">button (klik button)</label>

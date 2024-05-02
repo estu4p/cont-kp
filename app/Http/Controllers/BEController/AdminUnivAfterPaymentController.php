@@ -891,6 +891,52 @@ class AdminUnivAfterPaymentController extends Controller
         return redirect()->to('/pengaturan-contri');
     }
 
+    //     $user = auth()->user();
+    //     $userAdmin = User::where('role_id', 5)->get();
+    //     // Memuat data presensi untuk setiap user
+    //     foreach ($userAdmin as $user) {
+    //         $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
+
+    //         $user->presensi = $presensi;
+    //     }
+    //     //$user = auth()->user();
+
+    //     return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi', 'user'));
+
+    // }    
+// Controller
+public function Pengaturpersensi(Request $request)
+{
+           // Periksa jika permintaan adalah metode POST
+    if ($request->isMethod('POST')) {
+        // Tangani permintaan dari formulir
+        $pilihan = $request->input('pilihan');
+    
+        // Memeriksa apakah pilihan valid
+        if (in_array('klik_button', $pilihan)) {
+            // Logika untuk mengubah status_absensi menjadi "button"
+            User::query()->update(['status_absensi' => 'Button']);
+                
+        }
+        if (in_array('scan_qr_code', $pilihan)) {
+            // Logika untuk mengubah status_absensi menjadi "scan QR code"
+            User::query()->update(['status_absensi' => 'Scan QR Code']);
+        }
+    
+        // Berikan notifikasi sukses
+        return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+
+    }
+    // Mengembalikan view untuk halaman "pengaturanpresensi"
+    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
+}
+
+    //adminunivdetailprofil
+    // public function DetailProfil($id)
+    // {
+    //     // Mengambil data siswa berdasarkan ID
+
+
     public function showKategoriPenilaian($divisi_id) 
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
@@ -937,6 +983,7 @@ class AdminUnivAfterPaymentController extends Controller
         $data->nama_sub_kategori = $nama_sub_kategori;
         $data->save();
 
+
         return redirect()->route('showKategoriPenilaian',  [
             'id' => $divisi->id,
             'divisi' => $divisi,
@@ -963,5 +1010,15 @@ class AdminUnivAfterPaymentController extends Controller
         return redirect()->route('showKategoriPenilaian',  [
             'id' => $divisi->id,            
         ]);
+
+        // // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
+        // if ($pilihan === 'klik_button') {
+        //     // Logika untuk mengubah status_absensi menjadi "button"
+        // } elseif ($pilihan === 'scan_qr_code') {
+        //     // Logika untuk mengubah status_absensi menjadi "scan QR code"
+        // }
+        // // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
+        // return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+
     }
 }
