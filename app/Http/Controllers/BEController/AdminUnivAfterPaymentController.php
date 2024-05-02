@@ -16,6 +16,7 @@ use App\Models\Mahasiswa;
 use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
@@ -935,7 +936,32 @@ class AdminUnivAfterPaymentController extends Controller
         }
         //$user = auth()->user();
         return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
+    }    
+// Controller
+public function Pengaturpersensi(Request $request)
+{
+           // Periksa jika permintaan adalah metode POST
+    if ($request->isMethod('POST')) {
+        // Tangani permintaan dari formulir
+        $pilihan = $request->input('pilihan');
+    
+        // Memeriksa apakah pilihan valid
+        if (in_array('klik_button', $pilihan)) {
+            // Logika untuk mengubah status_absensi menjadi "button"
+            User::query()->update(['status_absensi' => 'Button']);
+                
+        }
+        if (in_array('scan_qr_code', $pilihan)) {
+            // Logika untuk mengubah status_absensi menjadi "scan QR code"
+            User::query()->update(['status_absensi' => 'Scan QR Code']);
+        }
+    
+        // Berikan notifikasi sukses
+        return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
     }
+    // Mengembalikan view untuk halaman "pengaturanpresensi"
+    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
+
     //adminunivdetailprofil
     public function DetailProfil($id)
     {
@@ -966,5 +992,6 @@ class AdminUnivAfterPaymentController extends Controller
         }
         // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
         return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+
     }
 }
