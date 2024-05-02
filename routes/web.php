@@ -672,7 +672,16 @@ Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
 });
 
+
 Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'PengaturPersensi']);
+
+Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+
+
+Route::get('/mitra-detailprofil', function () {
+    return view('adminUniv-afterPayment.mitra.detailprofil');
+});
 
 
 // CONTRIBUTOR FOR MITRA PRESENSI

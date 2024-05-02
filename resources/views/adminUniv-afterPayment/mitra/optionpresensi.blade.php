@@ -417,6 +417,86 @@
         }
 
 
+        <table class="table">
+            <thead style="text-align: center;">
+                <tr>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">Nama</th>
+                    <th colspan="2">Jam Kerja</th>
+                    <th colspan="2">Jam Istirahat</th>
+                    <th colspan="2">Total Jam Kerja</th>
+                    <th colspan="2">Log Aktivitas</th>
+                    <th rowspan="2">Status Kehadiran</th>
+                    <th rowspan="2">Kebaikan</th>
+                </tr>
+                <tr>
+                    <th>Masuk</th>
+                    <th>Pulang</th>
+                    <th>Mulai</th>
+                    <th>Selesai</th>
+                    <th>Total Jam</th>
+                    <th>(-)(+)</th>
+                    <th>Log Aktivitas</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($userAdmin as $user)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td class="bates" href><a href="/mitra-detailprofil">{{ $user->nama_lengkap }}</a></td>
+                    <td>{{ $user->presensi->jam_masuk }}</td>
+                    <td>{{ $user->presensi->jam_pulang }}</td>
+                    <td>{{ $user->presensi->jam_mulai_istirahat}}</td>
+                    <td>{{ $user->presensi->jam_selesai_istirahat }}</td>
+                    <td>{{ $user->presensi->total_jam_kerja }}</td>
+                    <td>{{ $user->presensi->log_aktivitas }}</td>
+                    <td>{{ $user->presensi->status_kehadiran }}</td>
+                    <td>{{ $user->presensi->kebaikan }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+    </div>
+
+   
+</div>
+
+<script>
+    const checkButton = document.getElementById('check-button');
+    const crossButton = document.getElementById('cross-button');
+
+    checkButton.addEventListener('click', function() {
+        checkButton.classList.add('active');
+        crossButton.classList.remove('active');
+    });
+
+    crossButton.addEventListener('click', function() {
+        crossButton.classList.add('active');
+        checkButton.classList.remove('active');
+    });
+
+    function showsukses(){
+        swal("berhasil", "perubahan waktu berhasil disimpan", "success");
+    }
+
+
+    function handleButtonClick(buttonNumber) {
+    var buttonId = 'button' + buttonNumber;
+    var button = document.getElementById(buttonId);
+    if (!button.classList.contains('btn-with-checkmark')) {
+        button.classList.add('btn-with-checkmark');
+    } else {
+        button.classList.remove('btn-with-checkmark');
+    }
+    // Isi fungsi disini sesuai dengan aksi yang ingin dilakukan ketika tombol diklik
+}
+
+
+    
+</script>
+
 
         function checkAll(ele) {
             var checkboxes = document.getElementsByTagName('input');
