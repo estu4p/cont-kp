@@ -276,9 +276,12 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 
 //penilaian mahasiswa-contributor mitra
 Route::delete('/delete-division/{id}',[BEControllerAdminUnivAfterPaymentController::class,'hapusDivisi']);
-Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class,'showKategoriPenilaian']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class,'showKategoriPenilaian'])->name('showKategoriPenilaian');
 Route::post('/kategoripenilaian/{divisi_id}/tambah',[BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
 Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
+Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
+Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
+
 
 Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 

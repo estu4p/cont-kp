@@ -895,10 +895,8 @@ class AdminUnivAfterPaymentController extends Controller
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
         $divisi = Divisi::findOrFail($divisi_id);       
-        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id'); 
-        dd($subKategori);       
-        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
-        // $kategori = KategoriPenilaian::find($divisi_id);
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');      
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();                     
        
         return view('pengaturan.kategoripenilaian', [
             'divisi' => $divisi, 
@@ -910,44 +908,60 @@ class AdminUnivAfterPaymentController extends Controller
     public function addKategoriPenilaian(Request $request, $divisi_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
         $divisi = Divisi::findOrFail($divisi_id);
-        // $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
         $nama_kategori = $request->input('nama_kategori');
         $data = new KategoriPenilaian;
         $data->divisi_id = $divisi_id;
         $data->nama_kategori = $nama_kategori;
         $data->save();
-        return view('pengaturan.kategoripenilaian', [
+       
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
             'divisi' => $divisi,
-            // 'kategori' => $kategori,
-            // 'subKategori' => $subKategori,            
+            'kategori' => $kategori,
+            'subKategori' => $subKategori, 
         ]);
-        // return redirect()->to('/kategoripenilaian')
-        //     ->with(['divisi' => $divisi, 'kategori' => $kategori]);
-        // return redirect()->route('showKategoriPenilaian', [
-        //     'id' => $data->id,
-        //     'divisi' => $divisi,
-        //     'kategori' => $kategori
-        // ]);
     }
 
     public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
         $divisi = Divisi::findOrFail($divisi_id);
-        // $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
         $nama_sub_kategori = $request->input('nama_sub_kategori');
         $data = new SubKategoriPenilaian;
         $data->kategori_id = $kategori_id;
         $data->nama_sub_kategori = $nama_sub_kategori;
         $data->save();
 
-        return view('pengaturan.kategoripenilaian', [
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
             'divisi' => $divisi,
-            // 'kategori' => $kategori,
-            // 'subKategori' => $subKategori,            
+            'kategori' => $kategori,
+            'subKategori' => $subKategori,
+        ]);
+    }
+
+    public function deleteKategori($id, $divisi_id){
+        $kategori = KategoriPenilaian::find($id);
+        // dd($kategori);
+        $kategori->delete();        
+        $divisi = Divisi::findOrFail($divisi_id);        
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
+        ]);
+    }
+
+    public function deleteSubKategori($id, $divisi_id)
+    {
+        $subKategori = SubKategoriPenilaian::find($id);        
+        $subKategori->delete();
+        $divisi = Divisi::findOrFail($divisi_id);        
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,            
         ]);
     }
 }
