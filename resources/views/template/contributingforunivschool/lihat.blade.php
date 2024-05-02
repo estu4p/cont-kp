@@ -23,15 +23,17 @@
 
                             @foreach ($nilaiPemahaman as $user)
                                 @foreach ($user->penilaian as $nilai)
+
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman Topik Magang</p>
-                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
                                             style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
                                     </div>
                                     <div class="pemahaman-topik w-100 row">
                                         <p class="col-8 m-0">Pemahaman ruang lingkup magang</p>
-                                        <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
-                                            style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
+
+                                            <p class="col-3 d-flex justify-content-center border-2 rounded border border-dark px-5 py-0"
+                                                style="background-color: #DCDCDC">{{ $nilai->nilai }}</p>
                                     </div>
                                 @endforeach
                             @endforeach
@@ -100,4 +102,3 @@
             </div>
         </div>
     </div>
-@endsection

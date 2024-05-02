@@ -48,6 +48,7 @@ use App\Http\Controllers\BEController\PenilaianMitraController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -608,6 +609,7 @@ Route::get('/presensitidakhadir', function () {
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
 Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
+Route::post('/input-nilai/{id}', [ContributorForMitra::class, 'inputNilaiPost'])->name('mitra.inputNilai');
 
 
 
