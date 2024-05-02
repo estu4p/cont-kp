@@ -8,6 +8,7 @@ use App\Models\Sekolah;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,6 @@ class SuperadminSistemController extends Controller
 {
     public function dashboard()
     {
-        $superAdmin = User::where('role_id', 1)->first();
         $jumlah_admin_sistem = User::where('role_id', 2)->count();
         $jumlah_subscriptions = Subscription::count();
         return view('superAdmin.dashboard', [
@@ -26,23 +26,29 @@ class SuperadminSistemController extends Controller
             'subscription' => 200,
             'admin_sistem' => $jumlah_admin_sistem,
             'subscription' => $jumlah_subscriptions,
-            'superAdmin' => $superAdmin,
         ]);
     }
 
-    public function editProfile()
+    public function editProfile(Request $request)
     {
-        $superAdmin = User::where('role_id', 1)->first();
+        $superAdmin = auth()->user();
+        if ($request->is("api/*") || $request->wantsJson()) {
+            return response()->json([
+                'profil' => $superAdmin
+            ]);
+        } else {
+            // return view('adminUniv-afterPayment.AdminUniv-EditProfile', compact('user'));
+            return view('superAdmin.edit', [
+                'title' => "Super Admin - Ubah Profil",
+                'superAdmin' => $superAdmin
+            ]);
+        }
 
-        return view('superAdmin.edit', [
-            'title' => "Super Admin - Ubah Profil",
-            'superAdmin' => $superAdmin
-        ]);
     }
 
     public function updateProfile(Request $request, $username)
     {
-        $superAdmin = User::where('role_id', 1)->first();
+        $superAdmin = auth()->user();
         $data = $request->all();
         // dd($data);
         try {
@@ -134,13 +140,11 @@ class SuperadminSistemController extends Controller
 
     public function dataAdmin()
     {
-        $superAdmin = User::where('role_id', 1)->first();
         // $admins = User::where('role_id', 2)->paginate(10);
         $admins = User::where('role_id', 2)->get();
         return view('superAdmin.dataAdmin', [
             'title' => "Data Admin",
             'admins' => $admins,
-            'superAdmin' => $superAdmin
         ]);
     }
 
@@ -279,14 +283,12 @@ class SuperadminSistemController extends Controller
 
     public function langganan()
     {
-        $superAdmin = User::where('role_id', 1)->first();
         $subscriptions = Subscription::with(['user.perguruanTinggi', 'paket'])->get();
         $paket = Paket::all();
         $sekolah = Sekolah::all();
 
         return view('superAdmin.langganan', [
             'title' => "Langganan",
-            'superAdmin' => $superAdmin,
             'subscriptions' => $subscriptions,
             'sekolah' => $sekolah,
             'paket' => $paket,

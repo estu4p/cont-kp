@@ -89,4 +89,12 @@ class LoginController extends Controller
         return redirect()->route('login.adminsistem');
 
     }
+
+    public function logoutSuperAdmin(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/superAdmin/login');
+    }
 }
