@@ -13,7 +13,6 @@ use App\Models\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SubKategoriPenilaian;
@@ -957,11 +956,10 @@ class ContributorForMitra extends Controller
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
         ]);
-
-    }
+ }
 
     // Menyimpan perubahan pada profil
-    public function update(Request $request)
+    public function update(Request $request )
     {
         // Validasi data yang diinput
         $request->validate([
@@ -978,7 +976,7 @@ class ContributorForMitra extends Controller
     public function updateProfile(Request $request)
     {
         //$userMitra = auth()->user();
-        $userMitra = User::where('role_id', 5)->first();
+       $userMitra = User::where('role_id', 5)->first();
         $userMitra->update([
             'nama_lengkap' => $request->input('nama_lengkap'),
             'email' => $request->input('email'),
@@ -986,56 +984,56 @@ class ContributorForMitra extends Controller
             'alamat' => $request->input('alamat'),
             'about' => $request->input('about'),
         ]);
-
+        
         return redirect('/contributorformitra-editprofile');
     }
 
     public function updateFoto(Request $request, $id)
     {
         try {
-            // Mendapatkan profil pengguna yang sedang masuk
-            $profile = User::findOrFail($id);
-            // Validasi file gambar yang diunggah
-            $request->validate([
-                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-            // dd($request->all());
+        // Mendapatkan profil pengguna yang sedang masuk
+        $profile = User::findOrFail($id);
+        // Validasi file gambar yang diunggah
+        $request->validate([
+            'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // dd($request->all());
 
-            // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
-            if ($profile->foto_profil) {
-                Storage::delete('public/' . $profile->foto_profil);
-            }
+        // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
+        if ($profile->foto_profil) {
+            Storage::delete('public/' . $profile->foto_profil);
+        }
 
-            // Simpan file gambar baru
-            $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
-            $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
+        // Simpan file gambar baru
+        $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
+        $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
 
-            // Perbarui data foto profil pengguna
-            $profile->update([
-                'foto_profil' => $namaFoto,
-            ]);
+        // Perbarui data foto profil pengguna
+        $profile->update([
+            'foto_profil' => $namaFoto,
+        ]);
 
-            // Redirect kembali ke halaman edit profile
-            return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
+        // Redirect kembali ke halaman edit profile
+        return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
     }
-    public function deleteFoto($id)
-    {
-        $profil = User::findOrFail($id);
-        try {
-            if ($profil->foto_profil) {
-                Storage::delete('public/' . $profil->foto_profil);
-                $profil->foto_profil = null;
-                $profil->save();
-                return response()->json(['success' => 'Foto Berhasil diHapus']);
-            } else {
-                return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
-            }
-        } catch (\Exception $e) {
-            $errorMessage = strip_tags($e->getMessage());
-            return response()->json(['error' => $errorMessage]);
+  public function deleteFoto($id)
+{
+    $profil = User::findOrFail($id);
+    try {
+        if ($profil->foto_profil) {
+            Storage::delete('public/' . $profil->foto_profil);
+            $profil->foto_profil = null;
+            $profil->save();
+            return response()->json(['success' => 'Foto Berhasil diHapus']);
+        } else {
+            return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
         }
+    } catch (\Exception $e) {
+        $errorMessage = strip_tags($e->getMessage());
+        return response()->json(['error' => $errorMessage]);
     }
+}
 }

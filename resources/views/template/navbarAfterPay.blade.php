@@ -15,8 +15,11 @@
             <a href="/AdminUniv-EditProfile" style="text-decoration: none; color: #000;">
                 <div class="d-flex justify-content-evenly flex-row ">
                     <div class="navbar-profile">
-                        <span class="profile-name" style="font-weight: bold;">{{ $user->nama_lengkap }}</span>
-                        <span class="profile-status">{{ $user->role->role }}</span>
+                        <a href="/AdminUniv-EditProfile" style="text-decoration: none; color: #000;">
+                            <span class="profile-name">{{ $user->nama_lengkap }}</span>
+                            <span class="profile-status">{{ $user->role->role }}</span>
+                        </a>
+                        
                     </div>
                     <div class="navbar-logo">
                         <img src="{{ asset('/assets/images/Rectangle 22 (3).png') }}" alt="Profile Logo">

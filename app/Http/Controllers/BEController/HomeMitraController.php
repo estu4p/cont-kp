@@ -68,7 +68,7 @@ class HomeMitraController extends Controller
         $jam_masuk = $request->input('jam');
         $status_kehadiran = $request->input('status_kehadiran');
         $keterangan_jam_masuk = $request->input('keterangan');
-        $default_jam_kerja = '00:00:10';
+        $default_jam_kerja = '06:30:00';
         $status_ganti_jam = 'Tidak Ganti jam';
 
         $data = new Presensi;
@@ -186,16 +186,28 @@ class HomeMitraController extends Controller
             $selisihJamKerja = $totalJamKerjaDetik - $defaultJamKerjaDetik;
 
             if ($selisihJamKerja > 0) {
-                $kurangJamKerja = '+' .gmdate('H:i:s', $selisihJamKerja);
+                $kurangJamKerja = '+' . gmdate('H:i:s', $selisihJamKerja);
             } else {
                 $kurangJamKerja = '-' . gmdate('H:i:s', abs($selisihJamKerja));
+            }
+
+            $hutangPresensi = Presensi::where('nama_lengkap', $user->id)
+                ->orderBy('hutang_presensi', 'desc')
+                ->first();
+            if (isset($hutangPresensi)) {
+                $hutangPresensiDetik = strtotime($hutangPresensi->hutang_presensi) - strtotime('00:00:00');
+                $hutangPresensi2 = $hutangPresensiDetik - $totalJamKerjaDetik;
+                $totalHutangPresensi = gmdate('H:i:s', ($hutangPresensi2));
+            } else {
+                $totalHutangPresensi = '00:00:00';
             }
 
             $dataPresensi->update([
                 'jam_pulang' => $jamPulang,
                 'keterangan_jam_pulang' => $keterangan,
                 'total_jam_kerja' => $totalJamKerjaFormatted,
-                'kurang_jam_kerja' => $kurangJamKerja
+                'kurang_jam_kerja' => $kurangJamKerja,
+                'hutang_presensi' => $totalHutangPresensi
             ]);
 
             return view('pemagang/home', [
@@ -271,7 +283,7 @@ class HomeMitraController extends Controller
     public function catatIzin(Request $request)
     {
         $user = Auth::user();
-        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->get()->reverse()->first();
+        $dataPresensi = Presensi::with('user')->where('nama_lengkap', $user->id)->latest()->first();
         $keterangan_status = $request->input('keterangan_status');
         $bukti_foto_izin = $request->input('bukti_foto_izin');
 
@@ -283,6 +295,14 @@ class HomeMitraController extends Controller
         $data->status_kehadiran = 'Izin';
         $data->status_ganti_jam = 'Ganti Jam';
 
+        if (!$dataPresensi || !$dataPresensi->hutang_presensi) {
+            $data->hutang_presensi = '06:30:00';
+        } else {
+            $data->hutang_presensi = $dataPresensi->hutang_presensi;
+            if (!$dataPresensi->total_jam_kerja) {
+                $data->hutang_presensi = Carbon::parse($data->hutang_presensi)->addHours(6)->addMinutes(30)->format('H:i:s');
+            }
+        }
         $data->save();
 
         if ($data) {
