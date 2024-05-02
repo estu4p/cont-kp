@@ -156,15 +156,20 @@ class AdminUnivAfterPaymentController extends Controller
     public function updateAdminProfile(Request $request)
     {
         $user = auth()->user();
-        // $updateUser = User::where('id', $user);
-        // Update the user's profile with the validated data
-        $user->update([
+        $userID = User::findOrFail($user->id);
+        $userGambar = $user->foto_profil;
+
+        $data = [
             'nama_lengkap' => $request->nama_lengkap,
+            'foto_profil' => $userGambar,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
             'kota' => $request->kota,
             'about' => $request->about,
-        ]);
+        ];
+
+        $request->foto_profil->move(public_path() . '/images', $userGambar);
+        $userID->update($data);
 
         // Redirect back to the edit profile page
         return redirect()->route('adminUniv.editProfile');
@@ -484,7 +489,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function laporanDataPresensi(Request $request)
     {
         $presensi = User::where('role_id', 3)->get();
-
+        $user = auth()->user();
         $namaBulan = [
             1 => 'Januari',
             2 => 'Februari',
@@ -528,7 +533,7 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'success get data', 'kehadiran_per_nama' => $kehadiranPerNama], 200);
         } else {
             return view('adminUniv-afterPayment.mitra.laporanpresensi',)
-                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama);
+                ->with('presensi', $presensi)->with('kehadiran', $kehadiranPerNama)->with('user', $user);
         }
     }
     public function teamAktifDetailHadir(Request $request, $nama_lengkap)
@@ -924,16 +929,16 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $userAdmin = User::where('role_id', 5)->get();
         // Memuat data presensi untuk setiap user
-    foreach ($userAdmin as $user) {
-        $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
+        foreach ($userAdmin as $user) {
+            $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
 
-        $user->presensi = $presensi;
-    }
+            $user->presensi = $presensi;
+        }
         //$user = auth()->user();
         return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
     }
     
-
+// Controller
 public function Pengaturpersensi(Request $request)
 {
    // Periksa jika permintaan adalah metode POST
@@ -962,6 +967,6 @@ public function Pengaturpersensi(Request $request)
         return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
     }
     // Mengembalikan view untuk halaman "pengaturanpresensi"
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
     }
 }
