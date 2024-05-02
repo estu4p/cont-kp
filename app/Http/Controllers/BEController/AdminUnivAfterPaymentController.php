@@ -863,11 +863,11 @@ class AdminUnivAfterPaymentController extends Controller
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
-
+        $user = auth()->user();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi, 'user' => $user]);
         }
     }
 
@@ -879,9 +879,11 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'Divisi not found'], 404);
         }
         $users = User::where('role_id', 3)->where('divisi_id', $id)->get();
+        $user = auth()->user();
         return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', [
             'divisi' => $divisi,
             'users' => $users,
+            'user' => $user
         ]);
     }
     public function teamAktifEdit(Request $request, $id)

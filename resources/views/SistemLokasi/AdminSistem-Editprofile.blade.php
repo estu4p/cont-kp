@@ -29,8 +29,10 @@
                         @csrf
                         @method('DELETE')
                     </form>
-                    <button onclick="showAlertDeleteProfile('{{ $userAdmin->id }}')"
-                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
+                    <button id="removeButton" onclick="deleteProfilePhoto('{{ auth()->user()->id }}')" style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
+
+                    <!-- <button onclick="showAlertDeleteProfilePhoto('{{ $userAdmin->id }}')"
+                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button> -->
                 </div>
             </div>
             
@@ -171,6 +173,34 @@
             reader.readAsDataURL(file);
         }
     }
+
+    function deleteProfilePhoto(Id) {
+    if (confirm('Apakah Anda yakin ingin menghapus foto profil?')) {
+        fetch(`/AdminSistem/deleteFoto/${Id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete photo');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error deleting photo:', error);
+            // Handle error, misalnya tampilkan pesan error
+            alert('Failed to delete photo');
+        });
+    }
+    }
+    // Event listener untuk tombol "remove"
+    document.querySelector('#removeButton').addEventListener('click', () => {
+        deleteProfilePhoto('{{ $userAdmin->id }}');
+    });
+
 
     const imageInput = document.getElementById('imageInput');
     imageInput.addEventListener('change', handleImageChange);

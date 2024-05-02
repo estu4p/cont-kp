@@ -200,4 +200,20 @@
     .fzt7{font-size: 70% !important;}
     .fzt8{font-size: 80% !important;}
   } 
- 
+  .carimahasiswa {
+    position: relative;
+    width: fit-content;
+    margin-left: 73%; /* Mendorong elemen ke kanan */
+}
+
+.carimahasiswa input[type="text"] {
+    padding-left: 30px; /* Menyesuaikan ruang untuk ikon */
+}
+
+.carimahasiswa .fa-search {
+    position: absolute;
+    top: 50%;
+    left: 5px; /* Jarak ikon dari kiri input */
+    transform: translateY(-50%);
+}
+

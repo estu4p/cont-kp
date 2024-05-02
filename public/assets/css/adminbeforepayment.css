@@ -4,10 +4,12 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
 .tittle-container {
     text-align: center;
     margin-top: 50px;
 }
+
 .tittle-container h1 {
     color: #333;
     margin-top: 10px;
@@ -15,14 +17,12 @@ body {
 
 .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 58vh;
+    min-height: 80vh;
     background-color: #f0f0f0;
-}
-
-.mb-5{
-    margin-bottom: 3rem !important;
+    padding: 20px;
 }
 
 .card {
@@ -30,26 +30,20 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
-    width:100px;
-    height: 20px;
-    margin:5px;
+    width: 250px;
+    margin: 10px;
+    overflow: auto;
+}
 
+.card div table tr td {
+    padding: 5px 10px;
+    font-size: 14px;
+}
 
-}
-.card div table tr td{
-    padding:5px 10px;
-    font-size:70%;
-}
-.card div ul li{
-    list-style: none;
-}
-.merah div ul li{
-    color:red;
-}
 .plan-title {
     font-weight: bold;
     font-size: 20px;
@@ -67,5 +61,6 @@ body {
 }
 
 .btn {
-    margin-top: 10px;
+    margin-top: 20px;
 }
+

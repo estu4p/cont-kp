@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Presensi;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Database\Seeders\KategoriPenilaian;
 use Database\Seeders\SubKategoriPenilaian;
@@ -87,25 +88,28 @@ class SchoolController extends Controller
         }
     }
     public function lihatPenilaian(Request $request, $id)
-    {// Penilaian Mahasiswa- lihat
-        $byId = Penilaian::findOrFail($id);
-        dd($byId);
-        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $byId);
+    { // Penilaian Mahasiswa- lihat
+        $Id = User::findOrFail($id);
+        $user = $Id->nama_lengkap;
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
 
-        $responseData = [
-            "Penilaian" => "view Penilaian Mahasiswa ",
-            "mahasiswa" => $penilaian->user,
-            "nilai" => $penilaian->nilai,
-            "sub-kategori" => $penilaian->subKategori->nama_sub_kategori,
-            "kategori" => $penilaian->subKategori->kategori_id,
-            "kritik-saran"=>$penilaian->kritik_saran
-        ];
+        $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
+            ->where('id', $Id->id)->get();
+
+        // $nilaiPemahaman = User::with(['penilaian' => function ($query) {
+        //     $query->select(DB::raw('DISTINCT nama_lengkap'), 'sub_id', 'nilai')
+        //           ->groupBy('nama_lengkap', 'sub_id', 'nilai')
+        //           ->orderBy('nama_lengkap')
+        //           ->get();
+        // }])
+        // ->where('id', $Id->id)
+        // ->get();
+        // dd($nilaiPemahaman->toArray());
+
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json($responseData);
-        }else{
-            return view('template.contributingforunivschool.lihat',compact('penilaian'));
+            return response()->json(['data' => $penilaian, 'nilai' => $nilaiPemahaman]);
+        } else {
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }
     }
-
-
 }
