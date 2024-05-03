@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
@@ -16,29 +17,30 @@ class RegisterController extends Controller
     }
     public function register_user(Request $request)
     {
-        $nama_lengkap = $request->input('nama_lengkap');
-        $nomor_induk = $request->input('nomor_induk');
-        $jurusan = $request->input('jurusan');
-        $email = $request->input('email');
-        $username = $request->input('username');
-        $no_hp = $request->input('no_hp');
-        $password = $request->input('password');
-
-        $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
+        $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->latest();
         if ($existingUser) {
             return redirect()->route('register')->with('error', 'Email anda sudah terdaftar, Silahkan Login!');
         }
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'nomor_induk' => 'required|string|max:255',
+            'jurusan' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|string|unique:users,username',
+            'no_hp' => 'required|string',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
         
-        $user = new User();
-        $user->nama_lengkap = $nama_lengkap;
-        $user->nomor_induk = $nomor_induk;
-        $user->jurusan = $jurusan;
-        $user->email = $email;
-        $user->username = $username;
-        $user->no_hp = $no_hp;
-        $user->role_id = 3;
-        $user->password = $password;
-        $user->save();
+        $user = User::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'nomor_induk' => $request->nomor_induk,
+            'jurusan' => $request->jurusan,
+            'email' => $request->email,
+            'username' => $request->username,
+            'no_hp' => $request->no_hp,
+            'role_id' => 3,
+            'password' => Hash::make($request->password)
+        ]);
 
         if ($user) {
             $userId = $user->id;
