@@ -89,7 +89,7 @@ class ContributorForMitra extends Controller
         if ($data) {
             $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
             $data->delete();
-            return back()->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
+            return view('mitra-pengaturan.manage-devisi')->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
         }
     }
 
@@ -146,28 +146,33 @@ class ContributorForMitra extends Controller
         ]);
     }
 
-    public function showDataShift(Request $request)
+    public function showShift(Request $request)
     {
         $shift = Shift::all();
+
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['success' => true, 'nilai' => $shift], 200);
+            return response()->json([
+                'message' => 'Daftar Shift', 
+                'shift' => $shift,
+            ], 200);
         } else {
-            return view('manage.datashift', ['shift' => $shift]);
+            return view('mitra-pengaturan.manage-shift', compact('shift'));
         }
     }
+   
 
     public function addShift(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
-            'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nama_shift' => 'required',
+        //     'jml_jam_kerja' => 'required',
+        //     'jam_masuk' => 'required',
+        //     'jam_pulang' => 'required',
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
@@ -177,22 +182,23 @@ class ContributorForMitra extends Controller
         ]);
 
         $data->save();
-
-        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
+        return redirect('/manage-shift');
+        // return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
+            // 'jml_jam_kerja' => 'required',
             'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
+            'istirahat' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['message' => 'Gagal update data shift',], 404);
         }
+
         $data = Shift::find($id);
         if (!$data) {
             return response()->json(['message' => 'Data shift tidak ditemukan'], 404);
@@ -202,7 +208,7 @@ class ContributorForMitra extends Controller
             'nama_shift' => $request->input('nama_shift'),
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
-            'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat'),
         ]);
 
         $data->save();
@@ -210,13 +216,13 @@ class ContributorForMitra extends Controller
         return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
     }
 
-    public function destroyShift($id)
+    public function deleteShift($id)
     {
-        $data = Shift::find($id);
-        if ($data) {
-            $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
-            $data->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan id $deletedId"], 200);
+        $shift = Shift::find($id);
+
+        if ($shift) {
+            $shift->delete();
+            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan ID $id"], 200);
         } else {
             return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
         }

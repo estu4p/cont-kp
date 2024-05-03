@@ -275,9 +275,9 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 // });
 
 //penilaian mahasiswa-contributor mitra
-Route::delete('/delete-division/{id}',[BEControllerAdminUnivAfterPaymentController::class,'hapusDivisi']);
-Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class,'showKategoriPenilaian'])->name('showKategoriPenilaian');
-Route::post('/kategoripenilaian/{divisi_id}/tambah',[BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
+Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
+Route::post('/kategoripenilaian/{divisi_id}/tambah', [BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
 Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
 Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
 Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
@@ -639,7 +639,14 @@ Route::get('/laporanpresensi', function () {
 
 Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
 Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
+
+Route::get('/manage-shift', [ContributorForMitra::class, 'showShift'])->name('mitra.showshift');
+Route::post('/addShift', [ContributorForMitra::class, 'addShift'])->name('mitra.addShift');
+Route::post('/updateShift/{id}', [ContributorForMitra::class, 'updateShift'])->name('mitra.updateShift');
+Route::delete('/manage-shift/delete/{id}', [ContributorForMitra::class, 'deleteshift'])->name('mitra.deleteshift');
+
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');
