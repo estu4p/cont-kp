@@ -22,7 +22,8 @@ class LoginController extends Controller
         $title = 'loginsuperadmin';
         return view('superAdmin.Login')->with('title', $title);
     }
-    public function loginadminSistem(){
+    public function loginadminSistem()
+    {
         return view('SistemLokasi.AdminSistem-login');
     }
     public function loginmitra()
@@ -46,9 +47,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($login, $remember)) {
             $user = Auth::user();
-            if (!$user->mitra_id || !$user->divisi_id || !$user->sekolah) {
-                Auth::logout();
-                return redirect()->to('/user/login')->with('mitra_error', 'Mitra atau Devisi belum di isi Admin.');
+            if ($user->role_id == 3) {
+                if (!$user->mitra_id || !$user->divisi_id || !$user->sekolah) {
+                    Auth::logout();
+                    return redirect()->to('/user/login')->with('mitra_error', 'Mitra atau Devisi belum di isi Admin.');
+                }
             }
 
             $role_id = $user->role->id;
@@ -61,7 +64,7 @@ class LoginController extends Controller
                 return redirect()->to('/user');
             } else if ($role_id == 4) { //dosen-contributoruniv
                 return redirect()->to('/dashboard');
-            }else if ($role_id == 6) {
+            } else if ($role_id == 6) {
                 return redirect('/AdminSistem-Dashboard');
             } else { // mitra
                 return redirect()->to('/contributorformitra-dashboard');
@@ -87,6 +90,5 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login.adminsistem');
-
     }
 }
