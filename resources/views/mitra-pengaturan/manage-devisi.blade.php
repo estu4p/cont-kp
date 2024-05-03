@@ -24,7 +24,7 @@
             <li>Manage Divisi</li>
         </div>
     </a>
-    <a class=" " href="/manage-shift">
+    <a class=" " href="{{ route('mitra.showshift') }}">
         <div class="nav-devisi">
             <li>Manage Shift</li>
         </div>
@@ -67,16 +67,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($divisi as $no => $division)
+                @foreach($divisi as $division)
+                @csrf
                     <tr>
-                        <td class="ratatengah">{{$no + 1}}</td>
+                        <td class="ratatengah">{{ $loop->iteration }}</td>
                         <td>{{ $division->nama_divisi}}</td>
 
                         <td class="ratatengah"><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
 
                         <td class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
+                            <button class="btn btn-edit btn-sm" data-idUpdate="'.$division->id'" data-bs-target="#editModal{{$division->id}}" data-bs-toggle="modal" type="button">Edit</button>
+                            <button class="btn btn-danger btn-sm" data-id="{{ $division->id }}" type="button" onclick="deleteDivisi(this)">Hapus</button>
                         </td>
                     </tr>
                     @endforeach
@@ -88,8 +89,11 @@
 </div>
 
 <!-- Modal edit divisi -->
-<div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($divisi as $item)
+<div class="modal fade modal-sm" id="editModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
+    <form action="{{route('mitra.updateDivisi', $item->id)}}" method="POST">
+        @csrf
         <div class="modal-content space">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
@@ -116,11 +120,13 @@
             </div>
             <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
                 <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
             </div>
         </div>
+        </form>
     </div>
 </div>
+@endforeach
 
 <!-- Modal tambah divisi -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
@@ -276,7 +282,36 @@
         });
     }
 
-    function deleteDivisi(index) {
+    // function deleteDivisi(index) {
+    //     // Tampilkan modal konfirmasi penghapusan
+    //     swal({
+    //         title: "Hapus",
+    //         text: "Apakah Anda ingin menghapus divisi ini?",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //     }).then((willDelete) => {
+    //         if (willDelete) {
+    //             // Hapus baris divisi dari tabel
+    //             document.querySelector('#examplee tbody').deleteRow(index);
+
+    //             // Tampilkan pesan sukses
+    //             swal("Berhasil!", "Divisi berhasil dihapus.", {
+    //                 icon: "success",
+    //                 timer: 1500,
+    //                 buttons: false
+    //             });
+    //         } else {
+    //             // Tampilkan pesan bahwa data aman
+    //             swal("Data Anda aman.");
+    //         }
+    //     });
+    // }
+
+    function deleteDivisi(button) {
+        var id = button.getAttribute('data-id');
+    console.log("ID divisi yang akan dihapus:", id);
+
         // Tampilkan modal konfirmasi penghapusan
         swal({
             title: "Hapus",
@@ -286,14 +321,30 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                // Hapus baris divisi dari tabel
-                document.querySelector('#examplee tbody').deleteRow(index);
+                // Kirim permintaan penghapusan ke server
+                fetch(`/manage-devisi/delete/${id}`, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hapus baris divisi dari tabel jika penghapusan berhasil
+                    if (data.success) {
+                        document.querySelector(`#examplee tbody tr[data-id="${id}"]`).remove();
 
-                // Tampilkan pesan sukses
-                swal("Berhasil!", "Divisi berhasil dihapus.", {
-                    icon: "success",
-                    timer: 1500,
-                    buttons: false
+                        // Tampilkan pesan sukses
+                        swal("Berhasil!", "Divisi berhasil dihapus.", {
+                            icon: "success",
+                            timer: 1500,
+                            buttons: false
+                        });
+                    } else {
+                        // Tampilkan pesan gagal jika penghapusan tidak berhasil
+                        swal("Gagal!", "Terjadi kesalahan saat menghapus divisi.", "error");
+                    }
+                })
+                .catch(error => {
+                    // Tampilkan pesan gagal jika terjadi kesalahan saat menghubungi server
+                    swal("Gagal!", "Terjadi kesalahan saat menghubungi server.", "error");
                 });
             } else {
                 // Tampilkan pesan bahwa data aman
@@ -301,6 +352,7 @@
             }
         });
     }
+
     document.querySelector('.addgambar').addEventListener('click', function() {
         document.getElementById('fileInput').click();
     });

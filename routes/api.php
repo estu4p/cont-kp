@@ -135,7 +135,7 @@ Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
 
 Route::get('show-divisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
 Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
-
+Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
 Route::delete('delete-divisi/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
@@ -144,10 +144,10 @@ Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenil
 Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);
 Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class, 'addSubKategoriPenilaian']);
 
-Route::get('data-shift', [ContributorForMitra::class, 'showDataShift']);
+Route::get('data-shift', [ContributorForMitra::class, 'showShift'])->name('mitra.showshift');
 Route::post('add-shift', [ContributorForMitra::class, 'addShift']);
 Route::put('update-shift/{id}', [ContributorForMitra::class, 'updateShift']);
-Route::delete('destroy-shift/{id}', [ContributorForMitra::class, 'destroyShift']);
+Route::delete('delete-shift/{id}', [ContributorForMitra::class, 'deleteShift'])->name('mitra.deleteshift');
 
 Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
 Route::put('/contributorformitra-update/{$username}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
