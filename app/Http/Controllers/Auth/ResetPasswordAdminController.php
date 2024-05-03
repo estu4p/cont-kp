@@ -56,10 +56,7 @@ class ResetPasswordAdminController extends Controller
             $user = User::where('email', $request->email)->first();
             if (!$user) {
                 return back()->withErrors(['email' => 'User not found.']);
-            }
-            // if ($user->otp !== $request->otp) {
-            //     return redirect()->back()->with('error', 'Invalid OTP');
-            // }
+            }           
             $request->session()->forget('otp_' . $request->email);
         }
         return redirect()->to('/AdminUniv-InputNewPassword');
