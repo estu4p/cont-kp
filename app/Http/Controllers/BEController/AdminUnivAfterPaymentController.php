@@ -939,7 +939,7 @@ class AdminUnivAfterPaymentController extends Controller
     }
     
 // Controller
-public function Pengaturpersensi(Request $request)
+public function Pengaturpresensi(Request $request)
 {
    // Periksa jika permintaan adalah metode POST
  
