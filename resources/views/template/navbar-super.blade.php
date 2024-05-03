@@ -12,18 +12,18 @@
                     <span class="badge">3</span>
                 </i>
             </div>
-            <a href="#" style="text-decoration: none; color: #000;">
+            <a href="{{ $href ?? '' }}" style="text-decoration: none; color: #000;">
                 <div class="d-flex justify-content-evenly flex-row ">
                     <div class="navbar-profile">
-                        <span class="profile-name fw-bold">{{ $superAdmin->nama_lengkap ?? '' }}</span>
-                        <span class="profile-status" style="font-size: 14px;">{{ $superAdmin->status_akun ?? '' }}</span>
+                        <span class="profile-name fw-bold">{{ $admin->nama_lengkap ?? '' }}</span>
+                        <span class="profile-status" style="font-size: 14px;">{{ $admin->status_akun ?? '' }}</span>
                     </div>
-                    <div class="navbar-logo">
-                        <div class="navbar-logo">
-                            @if ($superAdmin->foto_profil ?? '')
-                            <img src="{{ asset('storage/' . $superAdmin->foto_profil) }}" alt="Foto Profil" class="foto-profil-nav">
+                    <div class="">
+                        <div class="">
+                            @if ($admin->foto_profil ?? '')
+                            <img src="{{ asset('storage/' . $admin->foto_profil) }}" alt="Foto Profil" class="foto-profil-nav">
                             @else
-                            <img src="{{ asset('assets/images/User Thumb.png') }}" width="180" alt="Profile Logo" class="foto-profil-nav">
+                            <img src="{{ asset('assets/images/User Thumb.png') }}" alt="Profile Logo" class="foto-profil-nav">
                             @endif
                         </div>
                     </div>

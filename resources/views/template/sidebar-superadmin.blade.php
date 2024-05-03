@@ -21,9 +21,12 @@
     <!-- <li class="nav-item">
       <a class="nav-link" href="/superAdmin/langganan">Langganan</a>
     </li> -->
-    <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
-      <b>Log Out</b> <i class="fa-solid fa-right-from-bracket"></i>
-    </div>
+    <a href="{{ route('logout.superadmin') }}">
+      @csrf
+      <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
+        <b>Log Out</b> <i class="fa-solid fa-right-from-bracket"></i>
+      </div>
+    </a>
 </div>
 </li>
 </ul>
