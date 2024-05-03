@@ -796,6 +796,11 @@
         }
 
 
+
+    
+</script>
+@endsection
+=======
         function handleButtonClick(buttonNumber) {
             var buttonId = 'button' + buttonNumber;
             var button = document.getElementById(buttonId);
@@ -814,3 +819,4 @@
 
         >>>>>>> 87ebf212db6cf13530fd0549f3d69e2591f3e2da
     @endsection
+
