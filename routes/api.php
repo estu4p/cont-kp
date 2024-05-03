@@ -115,8 +115,8 @@ Route::post('/mitra-pengaturpersensi', [AdminUnivAfterPaymentController::class, 
 
 
 //Admin Pengaturan User & Organizations
-Route::get('/bagianmitra',[AdminUnivAfterPaymentController::class, 'bagianMitra']);
-Route::post('/editUsermitra/{id}',[AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
+Route::get('/bagianmitra', [AdminUnivAfterPaymentController::class, 'bagianMitra']);
+Route::post('/editUsermitra/{id}', [AdminUnivAfterPaymentController::class, 'editUsermitra'])->name('editmitra');
 
 //Contributor for univ
 Route::get('/dashboard-univ', [SchoolController::class, 'index']);
@@ -129,10 +129,15 @@ Route::get('/lihatpenilaian/{id}', [SchoolController::class, 'lihatPenilaian'])-
 
 
 //Contributor for Mitra
-Route::get('daftar-divisi', [ContributorForMitra::class, 'showDaftarDivisi']);
+
+Route::get('daftar-divisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi']);
 Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
+
+Route::get('show-divisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+
 Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
-Route::delete('destroy-divisi/{id}', [ContributorForMitra::class, 'destroyDivisi']);
+Route::delete('delete-divisi/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenilaian']);
 Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);

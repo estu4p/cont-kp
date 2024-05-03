@@ -275,9 +275,9 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 // });
 
 //penilaian mahasiswa-contributor mitra
-Route::delete('/delete-division/{id}',[BEControllerAdminUnivAfterPaymentController::class,'hapusDivisi']);
-Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class,'showKategoriPenilaian'])->name('showKategoriPenilaian');
-Route::post('/kategoripenilaian/{divisi_id}/tambah',[BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
+Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
+Route::post('/kategoripenilaian/{divisi_id}/tambah', [BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
 Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
 Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
 Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
@@ -305,10 +305,11 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    $title = "Pengaturan";
-    return view('manage_devisi', compact('title'));
-});
+// Route::get('/manage-devisi', function () {
+//     $title = "Pengaturan";
+//     return view('manage_devisi', compact('title'));
+// });
+
 
 Route::get('/manage-shift', function () {
     $title = "Pengaturan";
@@ -330,9 +331,10 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
+Route::get('manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('manage.showDivisi');
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
@@ -377,9 +379,9 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -402,9 +404,9 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -635,6 +637,9 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
+Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');
@@ -648,9 +653,7 @@ Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
@@ -863,12 +866,8 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 //Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
 //Route::put('/contributorformitra-profile/{$id}', [ContributorForMitra::class, 'Profile'])->name('contributorformitra.profile');
 
-Route::get('/contributorformitra-devisi', function () {
-    return view('contributorformitra.devisi');
-});
-Route::get('/contributorformitra-devisi-Seeallteams', function () {
-    return view('contributorformitra.devisi-Seeallteams');
-});
+Route::get('/contributorformitra-devisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
+Route::get('/contributorformitra-devisi-Seeallteams/{id}', [ContributorForMitra::class, 'showAllTeams'])->name('mitra.allteams');
 
 Route::get('/contributorformitra-devisi-LihatProfil', function () {
     return view('contributorformitra.Lihat-Profil-Mahasiswa');
