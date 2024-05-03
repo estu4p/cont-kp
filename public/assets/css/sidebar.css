@@ -10,7 +10,7 @@ body {
     height: 100%; /* Mengisi tinggi layar penuh */
     width: 250px; /* Lebar sidebar */
     background-color: #dcdcdc; /* Ubah warna latar belakang sidebar */
-    color: #000; /* Ubah warna teks tautan */
+    color: grey; /* Ubah warna teks tautan */
     padding-top: 50px; /* Ruang atas sidebar */
     z-index: 15;
     box-shadow: 0 0 20px rgb(146, 146, 146);
@@ -28,18 +28,19 @@ body {
 .nav-link {
     padding: 10px 20px; /* Padding untuk setiap tautan */
     display: block; /* Tautan menjadi blok */
-    color: #000; /* Ubah warna teks tautan */
+    color: grey; /* Ubah warna teks tautan */
     text-decoration: none; /* Hilangkan garis bawah */
     list-style-type: none; /* Menghilangkan bullet */
     cursor: pointer;
 }
 
 .nav-link:hover {
-    background-color: #e9ecef; /* Warna latar belakang saat mouse di atas tautan */
+    color: black; /* Warna latar belakang saat mouse di atas tautan */
 }
 
 a.nav-link.active {
     font-weight: bold;
+    color: black;
 }
 
 .nav-item {
@@ -47,14 +48,18 @@ a.nav-link.active {
 }
 
 .sidebar {
-    text-align: center;
+    padding-left: 2%;
+    text-align: left;
+
 }
 
 .logo {
-    margin-bottom: 80px; /* Atur jarak antara logo dan daftar menu */
+    margin-bottom: 80px;
+    padding-left: 20%;
 }
 
 .logout {
+    padding-right: 20%;
     position: absolute;
     bottom: 10%;
     color: #302f2f;
