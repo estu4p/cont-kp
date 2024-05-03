@@ -24,7 +24,6 @@
 
             <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}"
                 href="/manage-devisi">Pengaturan</a>
-
         </li>
         <li class="nav-item">
             <div class="log-out align-items-center gap-3 d-flex flex-row w-100 justify-content-center logout">
