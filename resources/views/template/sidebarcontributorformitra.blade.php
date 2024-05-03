@@ -9,7 +9,8 @@
                 href="/contributorformitra-dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/contributorformitra-devisi">Devisi</a>
+            <a class="nav-link {{ Request::is('contributorformitra-devisi') ? 'active' : '' }}"
+                href="/contributorformitra-devisi">divisi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('daftar-presensi') ? 'active' : '' }}"
@@ -22,9 +23,6 @@
         <li class="nav-item">
 
             <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}"
-                href="/manage-devisi">Pengaturan</a>
-
-            <a class="nav-link {{ Request::is('manage.devisiyy', 'manage-shift') ? 'active' : '' }}"
                 href="/manage-devisi">Pengaturan</a>
 
         </li>
