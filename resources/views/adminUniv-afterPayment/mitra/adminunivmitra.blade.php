@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <div class="wadah p-5">
-        <h1 class="text-center mb-5 judulmitra">DATA MITRA</h1>
+        <h1 class="text-center mb-5 judulmitra"><b>DATA MITRA</b></h1>
         <div class="container">
             <button type="button" class=" position-relative btn-tambah-mitra">
             <i class="bi bi-plus-circle" style="font-size: 1rem; padding-right: 5px; "></i>
