@@ -16,11 +16,7 @@
     margin-left: 10px; /* Jarak antara kotak pencarian dengan tombol "Tambah Mitra" */
 }
 .btn-tambah-mitra {
-    margin-left: 10px; 
-    border: none;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
+    margin-left: 10px; /* Jarak antara tombol "Tambah Mitra" dengan kotak pencarian */
 } /* Tombol */
 .btn {
     display: inline-block;
@@ -126,13 +122,23 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 30%;
-    margin: 5px;
-    display: inline-block;
+    margin: 10px;
+    display: inline-flex; /* Menggunakan flexbox */
+    flex-direction: column; /* Mengatur arah flex menjadi vertikal */
 }
+
+.card-content {
+    flex-grow: 1; /* Memastikan konten card memanfaatkan seluruh ruang yang tersedia */
+    display: flex;
+    justify-content: center; /* Pusatkan konten horizontal */
+    align-items: center; /* Pusatkan konten vertikal */
+}
+
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -148,14 +154,25 @@
     text-align: center;
     color: #f5f7fa;
     padding-left: 50%;
+    transition: background-color 0.3s; /* Tambahkan transition untuk efek smooth */
+}
+
+.card-header:hover {
+    background: linear-gradient(to right,rgb(120, 6, 6), black); /* Ubah warna latar belakang saat hover */
+}
+.dropdown-toggle::after {
+    display: none; /* Menghilangkan panah arah bawah */
 }
 
 .card-body {
     display: flex;
+    justify-content: space-between; /* Menempatkan elemen secara merata di sepanjang sumbu horizontal */
+    align-items: center; /* Pusatkan elemen secara vertikal */
     padding: 10px;
     text-align: center;
-    margin-left: 10px;
 }
+
+
 .wadah {
     position: relative;
 }
@@ -174,31 +191,34 @@
 .judulmitra {
     color: #0e0d0d;
     text-align: center;
-}
+    overflow: hidden; /* Agar teks yang berlebihan terpotong */
+    white-space: nowrap; /* Agar teks tidak melipat */
+    text-overflow: ellipsis; /* Menampilkan elipsis untuk teks yang terpotong */
+    max-width: 100%; /* Atur lebar maksimum agar tidak melebihi lebar kartu */
+} 
 
 .text-center {
     text-align: center;
+    font-size: 30px;
 }
 
 .mb-5 {
     margin-bottom: 5rem; /* Margin bottom 5x1 rem */
 }
 
-.dropdown-toggle::after {
-    display: none;
-}
-
 .dropdown-toggle {
     background-color: transparent;
-    color: white;
     border: none;
+    color: inherit; /* Menggunakan warna teks yang sama dengan konten sekitarnya */
+    padding: 0; /* Hapus padding agar ikon tetap di tengah tombol */
+    background-image: none; /* Menghilangkan background image (panah) */
 }
 
-.dropdown-toggle i {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px; /* Sesuaikan margin sesuai kebutuhan */
+.dropdown-toggle:focus {
+    outline: none; /* Hapus outline saat tombol mendapatkan fokus */
 }
+
+    
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
 
@@ -210,4 +230,20 @@
     .fzt7{font-size: 70% !important;}
     .fzt8{font-size: 80% !important;}
   } 
- 
+  .carimahasiswa {
+    position: relative;
+    width: fit-content;
+    margin-left: 73%; /* Mendorong elemen ke kanan */
+}
+
+.carimahasiswa input[type="text"] {
+    padding-left: 30px; /* Menyesuaikan ruang untuk ikon */
+}
+
+.carimahasiswa .fa-search {
+    position: absolute;
+    top: 50%;
+    left: 5px; /* Jarak ikon dari kiri input */
+    transform: translateY(-50%);
+}
+
