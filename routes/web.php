@@ -84,6 +84,7 @@ Route::get('/dashboard', function () {
 
 // === Super Admin ===
 Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+Route::get('/superAdmin/logout', [LoginController::class, 'logoutSuperAdmin'])->name('logout.superadmin');
 // function () {
 //     return view('superAdmin.Login');
 // })->name('login.superadmin');
