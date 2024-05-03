@@ -8,8 +8,11 @@
         </div>
         <div>
             <div class="input">
-                <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
-                <input type="search" class="inputsearch" placeholder="cari team/project">
+                <form action="{{ route('mitra.divisi') }}" method="GET">
+                    <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
+                    <input type="text" name="query" class="inputsearch" placeholder="cari team/project">
+                    <button type="submit" hidden></button>
+                </form>
             </div>
         </div>
     </div>
@@ -63,7 +66,7 @@
                         <i class="icon fa-solid fa-user"></i>
                     @endif
 
-                    <a href="" style="text-decoration: none">
+                    <a href="{{ route('mitra.divisiTeam', $item->divisi_id) }}" style="text-decoration: none">
                         {{ $item->divisi->nama_divisi }}<br>
                         Anggota
                     </a>
@@ -72,7 +75,7 @@
         @endif
 
     </div>
-    <div class="container">
+    <div class="isi">
         <a href="{{ route('mitra.allteams', $user->id) }}" style="color: #A4161A">See all teams...
         </a>
     </div>
