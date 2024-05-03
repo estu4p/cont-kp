@@ -6,9 +6,11 @@
 <div class="inputan">
     <form id="resetPasswordForm" method="POST" action="{{ route('password.newAdminSistem') }}">
         @csrf
-        <input type="password" placeholder="Ketikkan password baru" name="password" class="passwordbaru"><br>
-        <input type="password" placeholder="Konfirmasi password baru" name="password_confirmation" class="passwordbaru">
-        <br><br>
+        <input type="password" placeholder="Ketikkan password baru" name="password" class="passwordbaru" oninput="checkPasswordMatch()"><br>
+        <input type="password" placeholder="Konfirmasi password baru" name="password_confirmation" class="passwordbaru" oninput="checkPasswordMatch()">
+        <br>
+        <p id="passwordMatchError" style="color: red; display: none;">Password dan konfirmasi password harus sama.</p>
+        <br>
         <button type="submit" class="botton" id="resetPasswordBtn">Reset Password</button>
     </form>
 </div>
@@ -48,78 +50,22 @@
         }, 2000);
     }
 
-    // Get the form element
-    var form = document.getElementById("resetPasswordForm");
+    // Function to check if password and confirm password match
+    function checkPasswordMatch() {
+        var passwordField = document.querySelector('.passwordbaru[name="password"]');
+        var confirmPasswordField = document.querySelector('.passwordbaru[name="password_confirmation"]');
+        var resetPasswordBtn = document.getElementById("resetPasswordBtn");
+        var passwordMatchError = document.getElementById("passwordMatchError");
 
-    // When the form is submitted
-    form.addEventListener('submit', function(event) {
-        // Prevent the default form submission
-        event.preventDefault();
-        // Display modal and submit form
-        displayModalAndSubmitForm();
-    });
-
-// Get the form element
-var form = document.getElementById("resetPasswordForm");
-
-// When the form is submitted
-form.addEventListener('submit', function(event) {
-    // Prevent the default form submission
-    event.preventDefault();
-
-    // Get the password input fields
-    var passwordField = document.querySelector('.passwordbaru[name="password"]');
-    var confirmPasswordField = document.querySelector('.passwordbaru[name="password_confirmation"]');
-
-    // Get the values of password input fields
-    var passwordValue = passwordField.value.trim();
-    var confirmPasswordValue = confirmPasswordField.value.trim();
-
-    // Check if both password fields are filled
-    if (passwordValue === '' || confirmPasswordValue === '') {
-        // Display an error message or take any other action you prefer
-        alert("Harap isi kedua input password.");
-        return;
+        // Check if both passwords match
+        if (passwordField.value === confirmPasswordField.value) {
+            // Enable the reset password button and hide the error message
+            resetPasswordBtn.disabled = false;
+            passwordMatchError.style.display = 'none';
+        } else {
+            // Disable the reset password button and display the error message
+            resetPasswordBtn.disabled = true;
+            passwordMatchError.style.display = 'block';
+        }
     }
-
-    // Display modal and submit form if both passwords are filled
-    displayModalAndSubmitForm();
-});
-
-// Get the form element
-var form = document.getElementById("resetPasswordForm");
-
-// When the form is submitted
-form.addEventListener('submit', function(event) {
-    // Prevent the default form submission
-    event.preventDefault();
-
-    // Get the password input fields
-    var passwordField = document.querySelector('.passwordbaru[name="password"]');
-    var confirmPasswordField = document.querySelector('.passwordbaru[name="password_confirmation"]');
-
-    // Get the values of password input fields
-    var passwordValue = passwordField.value.trim();
-    var confirmPasswordValue = confirmPasswordField.value.trim();
-
-    // Check if both password fields are filled
-    if (passwordValue === '' || confirmPasswordValue === '') {
-        // Display an error message or take any other action you prefer
-        alert("Harap isi kedua input password.");
-        return;
-    }
-
-    // Check if both passwords have more than 8 characters
-    if (passwordValue.length <= 8 || confirmPasswordValue.length <= 8) {
-        // Display an error message or take any other action you prefer
-        alert("Password harus lebih dari 8 karakter.");
-        return;
-    }
-
-    // Display modal and submit form if both passwords are filled and meet length requirement
-    displayModalAndSubmitForm();
-});
-
-
-
 </script>

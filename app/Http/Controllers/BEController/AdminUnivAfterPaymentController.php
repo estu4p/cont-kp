@@ -378,12 +378,12 @@ class AdminUnivAfterPaymentController extends Controller
     // }
 
     public function teamAktifSeeAllTeam(Request $request) // menggunakan $id mitra jika berdasarkan mitra yang diikuti
-    {
-        $user = User::where('role_id', 3)->get();
+    { $user = auth()->user();
+        $users = User::where('role_id', 3)->get();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json($user);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user', 'users'));
         }
     }
 
