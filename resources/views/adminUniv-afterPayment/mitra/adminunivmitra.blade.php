@@ -53,7 +53,7 @@
                     {{-- dari BE, pake flex mas jangan pake margin left :) --}}
                     <div class="card-body flex justify-content-between">
                         <div>
-                            <h5>{{ $data->nama_mitra }}</h5>
+                            <h6>{{ $data->nama_mitra }}</h6>
                         </div>
                         <div>
                             <p>{{ $data->mahasiswa_count }} Orang</p>
