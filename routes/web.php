@@ -866,16 +866,14 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 //Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
 //Route::put('/contributorformitra-profile/{$id}', [ContributorForMitra::class, 'Profile'])->name('contributorformitra.profile');
 
-Route::get('/contributorformitra-devisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
+Route::get('/contributorformitra-devisi', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
 Route::get('/contributorformitra-devisi-Seeallteams/{id}', [ContributorForMitra::class, 'showAllTeams'])->name('mitra.allteams');
 
 Route::get('/contributorformitra-devisi-LihatProfil', function () {
     return view('contributorformitra.Lihat-Profil-Mahasiswa');
 });
 
-Route::get('/contributorformitra-devisi-teamaktif', function () {
-    return view('contributorformitra.teamaktifanggota');
-});
+Route::get('/contributorformitra-devisi-teamaktif/{id}', [ContributorForMitra::class, 'showDataMahasiswa'])->name('mitra.divisiTeam');
 Route::get('/contributorformitra-penilaian', function () {
     return view('contributorformitra.teamaktifanggota');
 });

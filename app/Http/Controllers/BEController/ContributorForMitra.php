@@ -27,27 +27,49 @@ use Illuminate\Validation\ValidationException;
 class ContributorForMitra extends Controller
 {
 
-    public function showDaftarDivisi(Request $request, $id)
+    public function showDaftarDivisi(Request $request)
 
     {
-        $user = User::find($id);
-
-        $divisi = DivisiItem::with('divisi')->get();
-
+        $user = auth()->user();
+        $query = $request->input('query');
+        $divisi = DivisiItem::with('divisi')
+            ->whereHas('divisi', function ($q) use ($query) {
+                $q->where('nama_divisi', 'like', "%$query%");
+            })
+            ->get();
         if ($request->is('api/*') || $request->wantsJson()) {
 
             return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi, 'user' => $user]);
         } else {
-            return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);        
+            return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);
         }
     }
 
-    public function showAllTeams($id)
+    public function showAllTeams(Request $request, $id)
     {
         $user = User::find($id);
-
         $users = User::where('role_id', 3)->where('mitra_id', $id)->get();
         return view('contributorformitra.devisi-Seeallteams', compact('users', 'user'));
+    }
+    public function showDataMahasiswa(Request $request, $id)
+    {
+        $user = auth()->user();
+        $query = $request->input('query');
+
+        $usersQuery = User::where('role_id', 3)
+            ->where('divisi_id', $id)
+            ->where('nama_lengkap', 'like', "%$query%");
+
+        // Jika Anda ingin menyaring berdasarkan kolom tertentu atau mengurutkan hasil pencarian, Anda dapat menambahkan kode berikut
+        // Contoh pengurutan berdasarkan nama_lengkap secara default
+        $usersQuery->orderBy('nama_lengkap');
+
+        // Jika Anda ingin menggunakan pagination untuk membatasi jumlah pengguna yang ditampilkan per halaman
+        $users = $usersQuery->paginate(10); // 10 adalah jumlah item per halaman, sesuaikan sesuai kebutuhan
+
+        $divisi = Divisi::find($id);
+
+        return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
     }
     public function addDivisi(Request $request)
     {
