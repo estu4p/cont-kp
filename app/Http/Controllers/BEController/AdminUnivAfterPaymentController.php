@@ -283,6 +283,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function addDivisi(Request $request)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
+
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
             'foto_divisi' => '',
@@ -292,6 +293,8 @@ class AdminUnivAfterPaymentController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
         $data = new Divisi([
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan nama yang benar dari permintaan
         ]);
@@ -302,38 +305,95 @@ class AdminUnivAfterPaymentController extends Controller
             $data->save();
         }
         $data->save();
+
+        // Mengambil ID mitra dari sesi
+        $mitra_id = auth()->user()->id;
+        // dd($mitra_id);
+         // Simpan data divisi ke dalam tabel 'divisi_item'
+        $divisiItem = new DivisiItem([
+            'mitra_id' => $mitra_id,
+            'divisi_id' => $divisi_id,
+        ]);
+
+        $divisiItem->save();
+
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
         } else {
-            return redirect()->route('adminUniv.addDivisi');
+            return redirect()->back()->with('success','Data berhasil ditambahkan');
         }
     }
+    // public function updateDivisi(Request $request, $id)
+    // // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
+    // {
+    //     // dd($request->all());
+    //     $divisi = Divisi::all();
+    //     $validator = Validator::make($request->all(), [
+    //         'nama_divisi' => 'required',
+    //         'deskripsi_divisi' => '',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['message' => 'gagal update divisi',], 404);
+    //     }
+    //     // Cari data divisi berdasarkan ID divisi
+    //     $data = DivisiItem::where('divisi_id', $id)->first();
+    //     // Jika data divisi tidak ditemukan, kembalikan pesan kesalahan
+    //     if (!$data) {
+    //         return redirect()->back()->with('error', 'Divisi tidak ditemukan');
+    //     }
+    //      // Isi data divisi dengan input yang diterima dari request
+    //     $data->divisi->nama_divisi = $request->input('nama_divisi');
+    //     $data->divisi->save();
+    //     return redirect()->back()->with('success','Data berhasil diubah');
+    // }
+
     public function updateDivisi(Request $request, $id)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        $divisi = Divisi::all();
+        // Validasi data yang diterima dari request
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => '',
         ]);
+
         if ($validator->fails()) {
-            return response()->json(['message' => 'gagal update divisi',], 404);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        $data = Divisi::find($id);
-        $data->fill([
-            'nama_divisi' => $request->nama_divisi
-        ]);
-        $data->save();
-        return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
+
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
+
+        // Ambil data DivisiItem yang akan diupdate
+        $divisiItem = DivisiItem::find($id);
+
+        // Perbarui nama divisi
+        $divisiItem->divisi_id = $divisi_id;
+
+        // Perbarui foto divisi jika ada
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $divisiItem->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+        }
+
+        // Simpan perubahan
+        $divisiItem->save();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to edit divisi'], 200);
+        } else {
+            return redirect()->back()->with('success', 'Data berhasil diubah');
+        }
     }
+
+
+
     public function destroyDivisi($id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        $data = Divisi::find($id);
+        $data = DivisiItem::find($id);
         if ($data) {
             $data->delete();
 
-            return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
+            return redirect()->back();
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
@@ -349,7 +409,7 @@ class AdminUnivAfterPaymentController extends Controller
     //         return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
     //     }
     // }
-    
+
 
     // public function teamAktifKlik(Request $Request, $id)
     // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
@@ -878,6 +938,24 @@ class AdminUnivAfterPaymentController extends Controller
                 });
         })->delete();
 
+
+        $user->presensi = $presensi;
+          //$user = auth()->user();
+          return view('adminuniv-afterPayment.mitra.optionpresensi', compact('userAdmin', 'presensi'));
+    }
+
+
+
+    //adminunivdetailprofil
+    public function DetailProfil($id)
+    {
+        // Mengambil data siswa berdasarkan ID
+
+        $datasiswa = User::where('role_id', 5)->get();
+        // Memuat data presensi untuk setiap user
+    foreach ($datasiswa as $user) {
+        $presensi = Presensi::select('hari','jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan','catatan')->first();
+
         SubKategoriPenilaian::whereIn('kategori_id', function ($query) use ($id) {
             $query->select('id')
                 ->from('kategori_penilaian')
@@ -890,68 +968,69 @@ class AdminUnivAfterPaymentController extends Controller
 
         return redirect()->to('/pengaturan-contri');
     }
+    }
 
 
 
-// Controller
-public function Pengaturpresensi(Request $request)
-{
-   // Periksa jika permintaan adalah metode POST
- 
-    // Tangani permintaan dari formulir
-    $pilihan = $request->input('pilihan');
+    // Controller
+    public function Pengaturpresensi(Request $request)
+    {
+    // Periksa jika permintaan adalah metode POST
 
-    // Memeriksa apakah pilihan valid
-    if (!empty($pilihan) && is_array($pilihan)) {
-        $statusAbsensi = [];
+        // Tangani permintaan dari formulir
+        $pilihan = $request->input('pilihan');
 
-        if (in_array('klik_button', $pilihan)) {
-            $statusAbsensi[] = 'Button';
+        // Memeriksa apakah pilihan valid
+        if (!empty($pilihan) && is_array($pilihan)) {
+            $statusAbsensi = [];
+
+            if (in_array('klik_button', $pilihan)) {
+                $statusAbsensi[] = 'Button';
+            }
+
+            if (in_array('scan_qr_code', $pilihan)) {
+                $statusAbsensi[] = 'Scan QR Code';
+            }
+
+            // Perbarui status absensi hanya untuk pengguna dengan role_id 5 yang dipilih
+            if (!empty($statusAbsensi)) {
+                User::where('role_id', 5)->update(['status_absensi' => $statusAbsensi[0]]);
+            }
+
+            // Berikan notifikasi sukses
+            return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+
         }
-
-        if (in_array('scan_qr_code', $pilihan)) {
-            $statusAbsensi[] = 'Scan QR Code';
-        }
-
-        // Perbarui status absensi hanya untuk pengguna dengan role_id 5 yang dipilih
-        if (!empty($statusAbsensi)) {
-            User::where('role_id', 5)->update(['status_absensi' => $statusAbsensi[0]]);
-        }
-
-        // Berikan notifikasi sukses
-        return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+        // Mengembalikan view untuk halaman "pengaturanpresensi"
+        return view('adminuniv-afterPayment.mitra.pengaturpersensi');
 
     }
-    // Mengembalikan view untuk halaman "pengaturanpresensi"
-    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
-
-}
     public function addKategoriPenilaian(Request $request, $divisi_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
         $divisi = Divisi::findOrFail($divisi_id);
-        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
         $nama_kategori = $request->input('nama_kategori');
         $data = new KategoriPenilaian;
         $data->divisi_id = $divisi_id;
         $data->nama_kategori = $nama_kategori;
         $data->save();
-       
+
         return redirect()->route('showKategoriPenilaian',  [
             'id' => $divisi->id,
             'divisi' => $divisi,
             'kategori' => $kategori,
-            'subKategori' => $subKategori, 
+            'subKategori' => $subKategori,
         ]);
     }
 
     public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
     {
-        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');        
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
         $divisi = Divisi::findOrFail($divisi_id);
-        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();        
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
         $nama_sub_kategori = $request->input('nama_sub_kategori');
         $data = new SubKategoriPenilaian;
         $data->kategori_id = $kategori_id;
@@ -970,8 +1049,8 @@ public function Pengaturpresensi(Request $request)
     public function deleteKategori($id, $divisi_id){
         $kategori = KategoriPenilaian::find($id);
         // dd($kategori);
-        $kategori->delete();        
-        $divisi = Divisi::findOrFail($divisi_id);        
+        $kategori->delete();
+        $divisi = Divisi::findOrFail($divisi_id);
         return redirect()->route('showKategoriPenilaian',  [
             'id' => $divisi->id,
         ]);
@@ -979,11 +1058,11 @@ public function Pengaturpresensi(Request $request)
 
     public function deleteSubKategori($id, $divisi_id)
     {
-        $subKategori = SubKategoriPenilaian::find($id);        
+        $subKategori = SubKategoriPenilaian::find($id);
         $subKategori->delete();
-        $divisi = Divisi::findOrFail($divisi_id);        
+        $divisi = Divisi::findOrFail($divisi_id);
         return redirect()->route('showKategoriPenilaian',  [
-            'id' => $divisi->id,            
+            'id' => $divisi->id,
         ]);
     }
 
@@ -1031,3 +1110,5 @@ public function Pengaturpresensi(Request $request)
         return redirect()->route('adminUniv.mitra');
     }
 }
+
+

@@ -296,9 +296,15 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+
+// Contributor For mitra - Penilaian Mahasiswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 })->name('input-nilaimhs');
+
+Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
+
+Route::post('/input-nilai/{user_id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
 
 
 Route::get('/MitraPresensiDetailHadir', function () {
@@ -469,7 +475,7 @@ Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymen
 
 Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
-Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
+Route::put('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
 Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'destroyDivisi'])->name('adminUniv.destroyDivisi');
 
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
