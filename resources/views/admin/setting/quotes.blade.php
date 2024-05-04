@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.masterAfterPay')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/adminAfter.css') }}">
@@ -6,17 +6,17 @@
 
     <aside>
         <div class="sidebar" style="left: 250px; background-color: white;">
-            <h5 class="text-capitalize mb-5" style="margin-left: -4rem;">pengaturan</h5>
+            <h5 class="text-capitalize mb-5" style="">pengaturan</h5>
             <div style="margin-left: -28px;">
                 <h6 class="text-uppercase fw-normal" style="font-size: 14px;">pengaturan utama</h6>
                 <ul class="text-capitalize fw-normal sub-menu" style="font-size: 14px;">
-                    <li style="margin-left: 2rem;"><a href="/AdminUniv/setting/quotes"
+                    <li style="margin-left: "><a href="/AdminUniv/setting/quotes"
                             class="text-black text-decoration-none">quotes</a></li>
                 </ul>
                 <hr class="line" />
                 <h6 class="text-uppercase fw-normal mt-4" style="font-size: 14px;">panel administrator</h6>
                 <ul class="text-capitalize fw-normal sub-menu" style="font-size: 14px;">
-                    <li style="margin-left: 2rem;"><a href="/admin/setting/user"
+                    <li style="margin-left: "><a href="/admin/setting/user"
                             class="text-black text-decoration-none">user & organization</a></li>
                 </ul>
             </div>
