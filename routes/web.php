@@ -910,3 +910,7 @@ Route::get('/user-AdminSistem/InputnewPassword', function () {
 Route::get('/contributingforuniv-lihat', function () {
     return view('template.contributingforunivschool.lihat');
 });
+
+Route::get('/MitraTeamAktif', function () {
+    return view('layouts.admin-univ-mitra.admin-univ-mitra-teamaktif');
+});
