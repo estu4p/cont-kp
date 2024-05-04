@@ -11,12 +11,9 @@
     @csrf
     <div class="konfirmasi-email">
         <input type="email" name="email" placeholder="Masukkan email Anda" class="inputt"  oninput="validateEmail()">
-        @if (session('error'))
-                <div class="alert alert-danger"
-                    style="font-family: 'Times New Roman', Times, serif; font-size: 15px; max-width: 400px; margin: 0 auto;">
-                    {{ session('error') }}
-                </div>
-            @endif
+        @error('email')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
     </div>
     <div class="tombol-Continue">
         <button type="submit" class="botton" id="kirim-otp">Continue</button>

@@ -21,6 +21,7 @@
                 href="/penilaian-mahasiswa">Penilaian</a>
         </li>
         <li class="nav-item">
+
             <a class="nav-link {{ Request::is('manage-devisi', 'manage-shift') ? 'active' : '' }}"
                 href="/manage-devisi">Pengaturan</a>
         </li>

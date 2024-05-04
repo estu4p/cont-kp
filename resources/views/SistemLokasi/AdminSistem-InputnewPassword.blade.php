@@ -4,54 +4,122 @@
     <p>Password baru harus berbeda dari password sebelumnya.</p>
 </div>
 <div class="inputan">
-    <form method="POST" action="{{ route('password.newAdminSistem') }}" onsubmit="return validatePassword()">
+    <form id="resetPasswordForm" method="POST" action="{{ route('password.newAdminSistem') }}">
         @csrf
-        <input id="password" type="password" placeholder="Ketikkan password baru" name="password" class="passwordbaru"><br>
-        <input id="password_confirmation" type="password" placeholder="Konfirmasi password baru" name="password_confirmation" class="passwordbaru"><br>
-        <p id="passwordMatchError" style="color: red; display: none;">Password dan konfirmasi password harus sama.</p>
-        <p id="passwordLengthError" style="color: red; display: none;">Password harus memiliki panjang minimal 8 karakter.</p>
-        <br>
-        <button type="submit" class="botton">Reset Password</button>
+        <input type="password" placeholder="Ketikkan password baru" name="password" class="passwordbaru"><br>
+        <input type="password" placeholder="Konfirmasi password baru" name="password_confirmation" class="passwordbaru">
+        <br><br>
+        <button type="submit" class="botton" id="resetPasswordBtn">Reset Password</button>
     </form>
 </div>
 
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h1>Berhasil !</h1>
+        <img src="/assets/images/berhasil.png" alt="">
+        <p>Password berhasil diubah silahkan login kembali</p>
+    </div>
+</div>
+
 <script>
-    function validatePassword() {
-        var passwordInput = document.getElementById('password').value;
-        var konfirmInput = document.getElementById('password_confirmation').value;
-        var errorTextMatch = document.getElementById('passwordMatchError');
-        var errorTextLength = document.getElementById('passwordLengthError');
+    // Get the modal element
+    var modal = document.getElementById("myModal");
 
-        // Periksa panjang password
-        if (passwordInput.length < 8) {
-            errorTextLength.style.display = 'block';
-            errorTextMatch.style.display = 'none'; // Sembunyikan pesan kesalahan kecocokan password jika ada
-            return false; // Mencegah pengiriman formulir jika password kurang dari 8 karakter
-        } else {
-            errorTextLength.style.display = 'none'; // Sembunyikan pesan kesalahan panjang password jika ada
-        }
-
-        // Periksa kesamaan password dan konfirmasi password
-        if (passwordInput !== konfirmInput) {
-            errorTextMatch.style.display = 'block';
-            return false; // Mencegah pengiriman formulir jika password tidak cocok
-        } else {
-            errorTextMatch.style.display = 'none'; // Sembunyikan pesan kesalahan kecocokan password jika ada
-            showSuccessModal(); // Panggil modal sukses jika password cocok
-            return true; // Lanjutkan pengiriman formulir jika password cocok
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            // Redirect to login page
+            window.location.href = "/user-AdminSistem/login";
         }
     }
 
-    function showSuccessModal() {
-        swal({
-            title: "Berhasil!",
-            text: "Password berhasil diubah silahkan login kembali",
-            icon: "success",
-            buttons: false // Tidak menampilkan tombol OK
-        });
+    // Function to display modal and submit form
+    function displayModalAndSubmitForm() {
+        // Show the modal
+        modal.style.display = "block";
+
+        // Set timeout to close the modal after 2 seconds
         setTimeout(function() {
-            const urlLoginAdmin = "{{ route('login') }}"
-            window.location.href = urlLoginAdmin
+            // Hide the modal
+            modal.style.display = "none";
+            // Submit the form
+            document.getElementById("resetPasswordForm").submit();
         }, 2000);
     }
+
+    // Get the form element
+    var form = document.getElementById("resetPasswordForm");
+
+    // When the form is submitted
+    form.addEventListener('submit', function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        // Display modal and submit form
+        displayModalAndSubmitForm();
+    });
+
+// Get the form element
+var form = document.getElementById("resetPasswordForm");
+
+// When the form is submitted
+form.addEventListener('submit', function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get the password input fields
+    var passwordField = document.querySelector('.passwordbaru[name="password"]');
+    var confirmPasswordField = document.querySelector('.passwordbaru[name="password_confirmation"]');
+
+    // Get the values of password input fields
+    var passwordValue = passwordField.value.trim();
+    var confirmPasswordValue = confirmPasswordField.value.trim();
+
+    // Check if both password fields are filled
+    if (passwordValue === '' || confirmPasswordValue === '') {
+        // Display an error message or take any other action you prefer
+        alert("Harap isi kedua input password.");
+        return;
+    }
+
+    // Display modal and submit form if both passwords are filled
+    displayModalAndSubmitForm();
+});
+
+// Get the form element
+var form = document.getElementById("resetPasswordForm");
+
+// When the form is submitted
+form.addEventListener('submit', function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get the password input fields
+    var passwordField = document.querySelector('.passwordbaru[name="password"]');
+    var confirmPasswordField = document.querySelector('.passwordbaru[name="password_confirmation"]');
+
+    // Get the values of password input fields
+    var passwordValue = passwordField.value.trim();
+    var confirmPasswordValue = confirmPasswordField.value.trim();
+
+    // Check if both password fields are filled
+    if (passwordValue === '' || confirmPasswordValue === '') {
+        // Display an error message or take any other action you prefer
+        alert("Harap isi kedua input password.");
+        return;
+    }
+
+    // Check if both passwords have more than 8 characters
+    if (passwordValue.length <= 8 || confirmPasswordValue.length <= 8) {
+        // Display an error message or take any other action you prefer
+        alert("Password harus lebih dari 8 karakter.");
+        return;
+    }
+
+    // Display modal and submit form if both passwords are filled and meet length requirement
+    displayModalAndSubmitForm();
+});
+
+
+
 </script>
