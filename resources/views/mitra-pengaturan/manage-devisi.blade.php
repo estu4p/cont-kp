@@ -67,6 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                 @foreach($divisi as $division)
                 @csrf
                     <tr>
@@ -131,13 +132,13 @@
 <!-- Modal tambah divisi -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
     <div class="modal-dialog modal-dialog-centered ">
+    <form action="{{ route('mitra.adddivisi') }}" method="post">
+        @csrf
         <div class="modal-content space">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="addDivisiForm" action="{{ route('mitra.adddivisi') }}" method="POST" enctype="multipart/form-data">
-            @csrf
             <div class="modal-body">
                 <div class="textdivisi">Profil Divisi</div>
                 <div class="tambahgambar gap-3">
@@ -161,8 +162,8 @@
                 <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
                 <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
             </div>
-            </form>
         </div>
+    </form>
     </div>
 </div>
 

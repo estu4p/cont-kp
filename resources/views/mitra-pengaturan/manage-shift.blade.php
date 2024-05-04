@@ -87,11 +87,16 @@
                     <tr>
                         <td class="ratatengah">{{ $loop->iteration }}</td>
                         <td>{{ $shifts->nama_shift}}</td>
-                        <td>07:30:00 - 18:00:00</td>
-                        <td>13:30:00 - 15:00:00</td>
+                        <td>{{ $shifts->jam_masuk }}</td>
+                        <td>{{ $shifts->istirahat }}</td>
                         <td class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-idUpdate="'.$shift->id'" data-bs-target="#editModal{{$shifts->id}}" data-bs-toggle="modal" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteShift({{ $shifts->id }})" type="button">Hapus</button>
+                            <form action="{{ route('mitra.deleteshift', ['id' => $shifts->id]) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-edit btn-sm" data-idUpdate="'.$shift->id'" data-bs-target="#editModal{{$shifts->id}}" data-bs-toggle="modal" type="button">Edit</button>
+
+                                <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="return showdeletemodal(event)" type="button">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -106,7 +111,7 @@
 <div class="modal fade modal-sm" id="editModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <form action="{{route('mitra.updateShift', $item->id)}}" method="post">
-        @csrf
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Shift</h1>
@@ -119,11 +124,11 @@
                     </div>
                     <div class="grupinput">
                         <div><label for="jaml" class="labelmodal">Jam</label></div>
-                        <input type="text" name="jam_masuk" class="inputmodal" id="editJam" placeholder="07:30:00 - 18:00:00">
+                        <input type="text" name="jam_masuk" class="inputmodal" id="editJam" placeholder="06:30:00 - 18:00:00">
                     </div>
                     <div class="grupinput">
                         <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
-                        <input type="text" name="istirahat" class="inputmodal" id="editIstirahat" placeholder="07:30:00 - 18:00:00">
+                        <input type="text" name="istirahat" class="inputmodal" id="editIstirahat" placeholder="06:30:00 - 18:00:00">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -251,7 +256,7 @@
             title: "Berhasil !",
             icon: "success",
             text: "Perubahan berhasil disimpan",
-            timer: 3000, // Pesan akan ditutup otomatis setelah 3 detik
+            timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
             buttons: false // Sembunyikan tombol "OK"
         });
     }
@@ -282,73 +287,35 @@
             });
     }
 
-    // function deleteShift(index) {
-    //     // Tampilkan modal konfirmasi penghapusan
-    //     swal({
-    //         title: "Hapus",
-    //         text: "Apakah Anda ingin menghapus shift ini?",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     }).then((willDelete) => {
-    //         if (willDelete) {
-    //             // Hapus baris divisi dari tabel
-    //             document.querySelector('#examplee tbody').deleteRow(index);
-
-    //             // Tampilkan pesan sukses
-    //             swal("Berhasil!", "Shift berhasil dihapus.", {
-    //                 icon: "success",
-    //                 timer: 1500,
-    //                 buttons: false
-    //             });
-    //         } else {
-    //             // Tampilkan pesan bahwa data aman
-    //             swal("Data Anda aman.");
-    //         }
-    //     });
-    // }
-
-    function deleteShift(id) {
-        // Tampilkan modal konfirmasi penghapusan
+    // Fungsi untuk menampilkan modal konfirmasi penghapusan
+    function showdeletemodal(event) {
+        event.preventDefault();
         swal({
             title: "Hapus",
-            text: "Apakah Anda ingin menghapus shift ini?",
+            text: "Apakah anda yakin ingin menghapus!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-        }).then((willDelete) => {
+        })
+        .then((willDelete) => {
             if (willDelete) {
-                // Lakukan penghapusan melalui AJAX
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ route('mitra.deleteshift', '') }}",
-                    success: function(response) {
-                        if (response.success) {
-                            // Hapus baris divisi dari tabel jika penghapusan berhasil di sisi server
-                            $('#examplee tbody tr[data-id="' + id + '"]').remove();
-
-                            // Tampilkan pesan sukses
-                            swal("Berhasil!", response.message, {
-                                icon: "success",
-                                timer: 1500,
-                                buttons: false
-                            });
-                        } else {
-                            // Tampilkan pesan bahwa data tidak ditemukan
-                            swal("Gagal!", response.message, "error");
-                        }
-                    },
-                    error: function() {
-                        // Tampilkan pesan kesalahan jika terjadi kesalahan saat menghapus data
-                        swal("Error!", "Terjadi kesalahan saat menghapus data.", "error");
-                    }
+                // Jika pengguna mengonfirmasi penghapusan, submit form
+                event.target.closest('.delete-form').submit();
+                // Tampilkan notifikasi sukses
+                swal({
+                    title: "Berhasil !",
+                    icon: "success",
+                    text: "Data berhasil dihapus",
+                    timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
+                    buttons: false // Sembunyikan tombol "OK"
                 });
-            } else {
-                // Tampilkan pesan bahwa data aman
-                swal("Data Anda aman.");
-            }
+                
+                } else {
+                    swal("Penghapusan dibatalkan.");
+                }
         });
     }
+
 </script>
 
 
