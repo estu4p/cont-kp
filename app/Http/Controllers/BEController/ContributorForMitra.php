@@ -265,6 +265,7 @@ class ContributorForMitra extends Controller
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
             'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat')
         ]);
 
         $data->save();
@@ -299,7 +300,7 @@ class ContributorForMitra extends Controller
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data shift']);
     }
 
     public function deleteShift($id)
@@ -308,11 +309,10 @@ class ContributorForMitra extends Controller
 
         if ($shift) {
             $shift->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan ID $id"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
-    }
+}
 
     public function laporanPresensi(Request $request)
     {
@@ -1136,4 +1136,20 @@ class ContributorForMitra extends Controller
             return response()->json(['error' => $errorMessage]);
         }
     }
+
+public function Divisi()
+    {
+        // Ambil semua data devisi
+        $devisiList = Divisi::all();
+        
+        // Loop melalui setiap devisi
+        foreach ($devisiList as $devisi) {
+            // Ambil semua user yang memiliki devisi_id yang sesuai dengan id devisi saat ini
+            $users = User::where('divisi')->first();
+            
+            // Kirim data devisi beserta anggotanya ke view
+            return view('contributorformitra.devisi', compact('devisiList', 'users','devisi'));
+        }
+    }
 }
+
