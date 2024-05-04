@@ -1082,4 +1082,20 @@ class ContributorForMitra extends Controller
             return response()->json(['error' => $errorMessage]);
         }
     }
+
+public function Divisi()
+    {
+        // Ambil semua data devisi
+        $devisiList = Divisi::all();
+        
+        // Loop melalui setiap devisi
+        foreach ($devisiList as $devisi) {
+            // Ambil semua user yang memiliki devisi_id yang sesuai dengan id devisi saat ini
+            $users = User::where('divisi')->first();
+            
+            // Kirim data devisi beserta anggotanya ke view
+            return view('contributorformitra.devisi', compact('devisiList', 'users','devisi'));
+        }
+    }
 }
+
