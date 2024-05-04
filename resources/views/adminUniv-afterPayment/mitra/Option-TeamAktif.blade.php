@@ -77,12 +77,12 @@
         @endif
     </div>
     {{-- @foreach ($divisiMitra as $item) --}}
-    @if (!$divisiMitra->isEmpty())
-        <div class="bawah">
-            <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
+    <div class="bawah">
+        <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
+        @if (!$divisiMitra->isEmpty())
             <a href="{{ route('adminUniv.pengaturanDivisi', $divisiMitraId->mitra_id) }}" style="color: #A4161A">Pengaturan
                 Divisi...<i class="fa-solid fa-gear"></i></a>
-        </div>
-    @endif
+        @endif
+    </div>
     {{-- @endforeach --}}
 @endsection

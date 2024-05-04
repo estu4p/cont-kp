@@ -25,7 +25,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('template.navbar-super', ['superAdmin' => $superAdmin])
+        @include('template.navbar-super', ['admin' => $superAdmin, 'href' => '/superAdmin/editProfil' ])
 
         <div class="content-wrapper">
             <section class="content">

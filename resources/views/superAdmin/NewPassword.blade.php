@@ -52,7 +52,8 @@
                             </div>
                         </div>
                         <!-- Tambahkan pesan kesalahan -->
-                        <div class="error-message" id="passwordMatchError">Password dan konfirmasi password harus sama. </div>
+                        <div class="error-message" id="passwordMatchError">Password dan konfirmasi password harus sama.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +87,16 @@
             var konfirmInput = document.getElementById('konfirm').value;
             var errorText = document.getElementById('passwordMatchError');
 
+            // Periksa panjang password
+            if (passwordInput.length < 8) {
+                errorText.innerText = "Password harus memiliki panjang minimal 8 karakter.";
+                errorText.style.display = 'block';
+                return false; // Mencegah pengiriman formulir jika password kurang dari 8 karakter
+            }
+
+            // Periksa kesamaan password dan konfirmasi password
             if (passwordInput !== konfirmInput) {
+                errorText.innerText = "Password dan konfirmasi password harus sama.";
                 errorText.style.display = 'block';
                 return false; // Mencegah pengiriman formulir jika password tidak cocok
             } else {
@@ -104,7 +114,7 @@
                 buttons: false // Tidak menampilkan tombol OK
             });
             setTimeout(function() {
-                const urlLoginAdmin = "{{ route('login.admin') }}"
+                const urlLoginAdmin = "{{ route('login.superadmin') }}"
                 window.location.href = urlLoginAdmin
             }, 2000);
         }

@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,36 +26,77 @@ use Illuminate\Validation\ValidationException;
 
 class ContributorForMitra extends Controller
 {
-    public function showDaftarDivisi(Request $request)
-    {
-        $divisi = Divisi::all();
 
+    public function showDaftarDivisi(Request $request)
+
+    {
+        $user = auth()->user();
+        $query = $request->input('query');
+        $divisi = DivisiItem::with('divisi')
+            ->whereHas('divisi', function ($q) use ($query) {
+                $q->where('nama_divisi', 'like', "%$query%");
+            })
+            ->get();
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi]);
+
+            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi, 'user' => $user]);
         } else {
-            return view('manage.margepenilaiandivisi', ['divisi' => $divisi]);
+            return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);
         }
     }
 
+    public function showAllTeams(Request $request, $id)
+    {
+        $user = User::find($id);
+        $users = User::where('role_id', 3)->where('mitra_id', $id)->get();
+        return view('contributorformitra.devisi-Seeallteams', compact('users', 'user'));
+    }
+    public function showDataMahasiswa(Request $request, $id)
+    {
+        $user = auth()->user();
+        $query = $request->input('query');
+
+        $usersQuery = User::where('role_id', 3)
+            ->where('divisi_id', $id)
+            ->where('nama_lengkap', 'like', "%$query%");
+
+        // Jika Anda ingin menyaring berdasarkan kolom tertentu atau mengurutkan hasil pencarian, Anda dapat menambahkan kode berikut
+        // Contoh pengurutan berdasarkan nama_lengkap secara default
+        $usersQuery->orderBy('nama_lengkap');
+
+        // Jika Anda ingin menggunakan pagination untuk membatasi jumlah pengguna yang ditampilkan per halaman
+        $users = $usersQuery->paginate(10); // 10 adalah jumlah item per halaman, sesuaikan sesuai kebutuhan
+
+        $divisi = Divisi::find($id);
+
+        return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
+    }
     public function addDivisi(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if ($request->hasFile('foto_divisi')) {
+            $image = $request->file('foto_divisi');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('public/images/' . $filename);
+            $image->move($path);
+        }
+
         $data = new Divisi([
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
-            'deskripsi_divisi' => $request->input('deskripsi_divisi'),
+            'foto_divisi' => $filename,
         ]);
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan divisi'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menambahkan divisi']);
     }
     public function updateDivisi(Request $request, $id)
     {
@@ -73,15 +115,13 @@ class ContributorForMitra extends Controller
         $data->save();
         return response()->json(['success' => true, 'message' => 'Berhasil update divisi', 'data' => $data], 200);
     }
-    public function destroyDivisi($id)
+    public function deleteDivisi($id)
     {
         $data = Divisi::find($id);
         if ($data) {
             $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
             $data->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus divisi dengan id $deletedId"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data dengan id $id tidak ditemukan"], 404);
+            return view('mitra-pengaturan.manage-devisi')->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
         }
     }
 
@@ -138,28 +178,33 @@ class ContributorForMitra extends Controller
         ]);
     }
 
-    public function showDataShift(Request $request)
+    public function showShift(Request $request)
     {
         $shift = Shift::all();
+
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['success' => true, 'nilai' => $shift], 200);
+            return response()->json([
+                'message' => 'Daftar Shift', 
+                'shift' => $shift,
+            ], 200);
         } else {
-            return view('manage.datashift', ['shift' => $shift]);
+            return view('mitra-pengaturan.manage-shift', compact('shift'));
         }
     }
+   
 
     public function addShift(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
-            'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nama_shift' => 'required',
+        //     'jml_jam_kerja' => 'required',
+        //     'jam_masuk' => 'required',
+        //     'jam_pulang' => 'required',
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
@@ -169,22 +214,23 @@ class ContributorForMitra extends Controller
         ]);
 
         $data->save();
-
-        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
+        return redirect('/manage-shift');
+        // return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
+            // 'jml_jam_kerja' => 'required',
             'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
+            'istirahat' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['message' => 'Gagal update data shift',], 404);
         }
+
         $data = Shift::find($id);
         if (!$data) {
             return response()->json(['message' => 'Data shift tidak ditemukan'], 404);
@@ -194,7 +240,7 @@ class ContributorForMitra extends Controller
             'nama_shift' => $request->input('nama_shift'),
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
-            'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat'),
         ]);
 
         $data->save();
@@ -202,13 +248,13 @@ class ContributorForMitra extends Controller
         return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
     }
 
-    public function destroyShift($id)
+    public function deleteShift($id)
     {
-        $data = Shift::find($id);
-        if ($data) {
-            $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
-            $data->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan id $deletedId"], 200);
+        $shift = Shift::find($id);
+
+        if ($shift) {
+            $shift->delete();
+            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan ID $id"], 200);
         } else {
             return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
         }
@@ -956,10 +1002,10 @@ class ContributorForMitra extends Controller
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
         ]);
- }
+    }
 
     // Menyimpan perubahan pada profil
-    public function update(Request $request )
+    public function update(Request $request)
     {
         // Validasi data yang diinput
         $request->validate([
@@ -976,7 +1022,7 @@ class ContributorForMitra extends Controller
     public function updateProfile(Request $request)
     {
         //$userMitra = auth()->user();
-       $userMitra = User::where('role_id', 5)->first();
+        $userMitra = User::where('role_id', 5)->first();
         $userMitra->update([
             'nama_lengkap' => $request->input('nama_lengkap'),
             'email' => $request->input('email'),
@@ -984,58 +1030,59 @@ class ContributorForMitra extends Controller
             'alamat' => $request->input('alamat'),
             'about' => $request->input('about'),
         ]);
-        
+
         return redirect('/contributorformitra-editprofile');
     }
 
     public function updateFoto(Request $request, $id)
     {
         try {
-        // Mendapatkan profil pengguna yang sedang masuk
-        $profile = User::findOrFail($id);
-        // Validasi file gambar yang diunggah
-        $request->validate([
-            'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        // dd($request->all());
+            // Mendapatkan profil pengguna yang sedang masuk
+            $profile = User::findOrFail($id);
+            // Validasi file gambar yang diunggah
+            $request->validate([
+                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            // dd($request->all());
 
-        // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
-        if ($profile->foto_profil) {
-            Storage::delete('public/' . $profile->foto_profil);
-        }
+            // Jika pengguna sudah memiliki foto profil, hapus foto profil sebelumnya
+            if ($profile->foto_profil) {
+                Storage::delete('public/' . $profile->foto_profil);
+            }
 
-        // Simpan file gambar baru
-        $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
-        $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
+            // Simpan file gambar baru
+            $namaFoto = time() . '.' . $request->foto_profile->getClientOriginalExtension();
+            $path = $request->foto_profile->storeAs('public/assets/images', $namaFoto);
 
-        // Perbarui data foto profil pengguna
-        $profile->update([
-            'foto_profil' => $namaFoto,
-        ]);
+            // Perbarui data foto profil pengguna
+            $profile->update([
+                'foto_profil' => $namaFoto,
+            ]);
 
-        // Redirect kembali ke halaman edit profile
-        return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
+            // Redirect kembali ke halaman edit profile
+            return response()->json(['success' => 'Foto Profil Berhasil Diperbarui', 'data' => $namaFoto]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
     }
-  public function deleteFoto($id)
-{
-    $profil = User::findOrFail($id);
-    try {
-        if ($profil->foto_profil) {
-            Storage::delete('public/' . $profil->foto_profil);
-            $profil->foto_profil = null;
-            $profil->save();
-            return response()->json(['success' => 'Foto Berhasil diHapus']);
-        } else {
-            return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
+    public function deleteFoto($id)
+    {
+        $profil = User::findOrFail($id);
+        try {
+            if ($profil->foto_profil) {
+                Storage::delete('public/' . $profil->foto_profil);
+                $profil->foto_profil = null;
+                $profil->save();
+                return response()->json(['success' => 'Foto Berhasil diHapus']);
+            } else {
+                return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
+            }
+        } catch (\Exception $e) {
+            $errorMessage = strip_tags($e->getMessage());
+            return response()->json(['error' => $errorMessage]);
         }
-    } catch (\Exception $e) {
-        $errorMessage = strip_tags($e->getMessage());
-        return response()->json(['error' => $errorMessage]);
     }
-}
+
 public function Divisi()
     {
         // Ambil semua data devisi
@@ -1051,3 +1098,4 @@ public function Divisi()
         }
     }
 }
+

@@ -6,7 +6,7 @@
 
     <div class="topcontent">
         <div>
-            <a href="/contributorformitra-devisi"><i class="icon fa-solid fa-angle-left"></i></a>
+            <a href="{{ route('mitra.divisi', $user->id) }}"><i class="icon fa-solid fa-angle-left"></i></a>
         </div>
         <div>
             <h3>Data Siswa</h3>
@@ -20,198 +20,25 @@
     </div>
     <br>
     <div class="isi  row ">
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
+        @foreach ($users as $item)
+            <div class="col-3 my-5">
+                <div class="dropdown">
+                    <div class="atasan">
+                        <span>{{ $item->nomor_induk }}</span>
+                        <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
+                            aria-expanded="false"></i>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
+                        <a class="dropdown-item" href="#"></a>
+                    </div>
                 </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
+                <div class="bawahan">
+                    <p>{{ $item->nama_lengkap }}</p>
                 </div>
             </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
-        <div class="col-3 my-5">
-            <div class="dropdown">
-                <div class="atasan">
-                    <span>2000018001</span>
-                    <i class="ikon fas fa-ellipsis-v ikon-klik" id="dropdownMenuButton" aria-haspopup="true"
-                        aria-expanded="false"></i>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat Profil Mahasiswa</a>
-                    <a class="dropdown-item" href="#"></a>
-                </div>
-            </div>
-            <div class="bawahan">
-                <p>Syalita Widyandini</p>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 
 
