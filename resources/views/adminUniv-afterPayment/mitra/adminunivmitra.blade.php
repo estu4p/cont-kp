@@ -20,10 +20,15 @@
                 </div>
 
                 <div class="carimahasiswa">
-                    <input type="text" id="search-input" class="form-control" placeholder="     CariMahasiswa"
-                        aria-label="    Cari mitra" aria-describedby="basic-addon2">
-                    <i class="fa-solid fa-search"
-                        style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color:black"></i>
+                    <form action="{{ route('adminUniv.mitra') }}">
+                        <i class="fa-solid fa-search"
+                            style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color:black"></i>
+
+                        <input type="text" name="cari" class="inputsearch" placeholder="Cari Mitra" style="padding-left: 40px">
+                        <button type="submit" hidden></button>
+
+                        <button type="submit" hidden></button>
+                    </form>
                 </div>
             </div>
 
@@ -31,42 +36,47 @@
         </div>
 
         <body>
-            @foreach ($mitra as $data)
-                <div class="card wadah">
-                    <div class="card-header">
-                        MITRA
-                        <div class="dropdown">
-                            <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false">
-                                <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal"
-                                    data-target="#exampleModal"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
-                                <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
-                                        siswa/Mahasiswa</a></li>
-                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
-                                        Siswa/Mahasiswa</a></li>
-                                <li>
-                                    <form action="{{ route('hapusMitra', $data->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="dropdown-item">Hapus Mitra</button>
-                                    </form>
-                                </li>
-                            </ul>
+            @if ($mitra->isEmpty())
+                <div class="text-center">Tidak ada mitra</div>
+            @else
+                @foreach ($mitra as $data)
+                    <div class="card wadah">
+                        <div class="card-header">
+                            MITRA
+                            <div class="dropdown">
+                                <button class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal"
+                                        data-target="#exampleModal"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data
+                                            Divisi
+                                            siswa/Mahasiswa</a></li>
+                                    <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
+                                            Siswa/Mahasiswa</a></li>
+                                    <li>
+                                        <form action="{{ route('hapusMitra', $data->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item">Hapus Mitra</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body flex justify-content-between">
+                            <div>
+                                <h6>{{ $data->nama_mitra }}</h6>
+                            </div>
+                            <div>
+                                <p>{{ $data->mahasiswa_count }} Orang</p>
+                            </div>
                         </div>
                     </div>
-                    {{-- dari BE, pake flex mas jangan pake margin left :) --}}
-                    <div class="card-body flex justify-content-between">
-                        <div>
-                            <h6>{{ $data->nama_mitra }}</h6>
-                        </div>
-                        <div>
-                            <p>{{ $data->mahasiswa_count }} Orang</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
 
             <!-- Modal -->
             <div class="modal fade" id="tambahMitraModal" tabindex="-1" aria-labelledby="exampleModalLabel"
