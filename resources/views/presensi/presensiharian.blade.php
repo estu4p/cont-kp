@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header">
             <h3 style="font-size: 50px;">Presensi Harian</h3>
-            <p>Data per tanggal 2023-09-04</p>
+            <p>Data per tanggal <?php echo date('Y - m - d'); ?></p>
         </div>
     </div>
 </div>
@@ -53,24 +53,29 @@
     <table class="table" style="font-size: 10px;">
         <thead style="text-align: center;">
             <tr>
-                <th rowspan="2"><input type="checkbox" id="#" name="">&nbsp;No</th>
-                <th rowspan="2">Nama</th>
-                <th colspan="2">Jam Kerja</th>
-                <th colspan="2">Jam Istirahat</th>
-                <th colspan="2">Total Jam Kerja</th>
-                <th colspan="2">Log Aktivitas</th>
+                <th rowspan="2" style="vertical-align: middle;"><input type="checkbox" onchange="checkAll(this)"
+                        name="chk[]"id="#" name="">&nbsp;No</th>
+                <th rowspan="2" style="vertical-align: middle;">Nama</th>
+                <th colspan="2" style="border-bottom: 1px solid black;">Jam Kerja</th>
+                <th colspan="2" style="border-bottom: 1px solid black;">Jam Istirahat</th>
+                <th colspan="2" style="border-bottom: 1px solid black;">Total Jam Kerja</th>
+                <th colspan="2" style="border-bottom: 1px solid black;">Log Aktivitas</th>
                 <th rowspan="2">Status <br>Kehadiran</th>
-                <th rowspan="2">Kebaikan</th>
+                <th rowspan="2" style="vertical-align: middle;">Kebaikan</th>
             </tr>
             <tr>
                 <th>Masuk</th>
-                <th>Pulang</th>
+                <th style="border-left: 1px solid black;">Pulang</th>
                 <th>Mulai</th>
-                <th>Selesai</th>
+                <th style="border-left: 1px solid black;">Selesai</th>
                 <th>Total Jam</th>
-                <th>(-)(+)</th>
+                <th style="border-left: 1px solid black;">(-)(+)</th>
                 <th class="bates">Log Aktivitas</th>
-                <th>Aksi</th>
+                <th style="border-left: 1px solid black;">
+                    <div class="">Aksi</div>
+
+
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -83,6 +88,7 @@
                 <td>{{ $data->jam_mulai_istirahat }}</td>
                 <td>{{ $data->jam_selesai_istirahat }}</td>
                 <td>{{ $data->total_jam_kerja }}</td>
+                <td>{{ $data->kurang_jam_kerja }}</td>
                 <td>{{ $data->log_aktivitas }}</td>
                 <td>
                     <input type="radio" id="check" name="button-toggle" class="toggle-button" />
