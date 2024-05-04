@@ -985,7 +985,49 @@ public function Pengaturpresensi(Request $request)
         return redirect()->route('showKategoriPenilaian',  [
             'id' => $divisi->id,            
         ]);
+    }
 
+    public function tambahMitra(Request $request)
+    {
+        $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->latest()->first();
+        if ($existingUser) {
+            return redirect()->route('tambahMitra')->with('error', 'Email anda sudah terdaftar, Silahkan menggunakan email lain!');
+        }
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'foto_profil' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|string|unique:users,username',
+            'no_hp' => 'required|string',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
 
+        $user = User::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'foto_profil' => $request->foto_profil,
+            'email' => $request->email,
+            'username' => $request->username,
+            'no_hp' => $request->no_hp,
+            'role_id' => 3,
+            'password' => Hash::make($request->password)
+        ]);
+
+        if ($user) {
+            $userId = $user->id;
+            $user->barcode = $userId;
+            $user->save();
+            return redirect()->route('adminUniv.mitra');
+        } else {
+            return response([
+                'pesan' => 'Gagal',
+            ], 404);
+        }
+    }
+
+    public function hapusMitra($id)
+    {
+        $mitra = Mitra::find($id);
+        $mitra->delete();       
+        return redirect()->route('adminUniv.mitra');
     }
 }

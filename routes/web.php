@@ -446,6 +446,8 @@ Route::post('/AdminUniv-InputNewPassword', [ResetPasswordAdminController::class,
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 
 Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
+Route::post('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'tambahMitra'])->name('tambahMitra');
+Route::delete('/hapusMitra/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusMitra'])->name('hapusMitra');
 
 Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 
