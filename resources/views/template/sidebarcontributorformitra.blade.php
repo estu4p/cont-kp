@@ -9,7 +9,8 @@
                 href="/contributorformitra-dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/contributorformitra-devisi">Devisi</a>
+            <a class="nav-link {{ Request::is('contributorformitra-devisi') ? 'active' : '' }}"
+                href="/contributorformitra-devisi">divisi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('daftar-presensi') ? 'active' : '' }}"

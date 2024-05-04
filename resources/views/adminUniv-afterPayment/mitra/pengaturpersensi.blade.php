@@ -17,25 +17,25 @@
         </div>
         <br>
         <div class="container">
-          <form action="{{ route('mitra-pengaturpersensi') }}" method="POST">
-            @csrf
-            @method('GET')
+          <form action="{{ route('adminunivafterpayment.Pengaturpersensi') }}" method="POST">
+           @csrf
             <div class="round">
-              <input type="checkbox" checked id="checkbox1" />
+              <input type="checkbox" name="pilihan[]" value="klik_button" id="checkbox1">
               <label for="checkbox1" style="color: black">button (klik button)</label>
             </div>
           </div>
           
           <div class="container">
             <div class="round">
-              <input type="checkbox" checked id="checkbox2" />
+
+              <input type="checkbox" name="pilihan[]" value="scan_qr_code" id="checkbox2">
               <label for="checkbox2" style="color: black">scan QR Code</label>
             </div>
           </div>
     <br>
 
         <div class="simpan">
-            <button type="button" class="save"  onclick="showsukses()" style="background-color: rgb(255, 0, 13); color: white; padding: 3px; border-color:transparent; border-radius:10px;">simpan</button>
+            <button type="submit" class="save"  onclick="showsukses()" style="background-color: rgb(255, 0, 13); color: white; padding: 3px; border-color:transparent; border-radius:10px;">simpan</button>
 
 
         </div>
@@ -47,3 +47,4 @@
             swal("berhasil", "pengaturan presensi telah di simpan", "success");
         }
         </script>
+

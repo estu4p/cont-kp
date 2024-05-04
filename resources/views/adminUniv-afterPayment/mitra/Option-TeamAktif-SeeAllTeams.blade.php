@@ -20,7 +20,7 @@
     </div>
     <br>
     <div class="isi  row ">
-        @foreach ($user as $item)
+        @foreach ($users as $item)
             <div class="col-3 my-5">
                 <div class="dropdown">
                     <div class="atasan">

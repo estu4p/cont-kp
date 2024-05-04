@@ -24,7 +24,7 @@
 <body class="hold-transition sidebar-mini layout-fixed" style="background-color: #EEEEEE;">
     <div class="wrapper">
 
-        @include('template.navbar-super')
+        @include('template.navbar-super', [ 'admin' => $user , 'href' => '/AdminUniv-EditProfile' ])
 
         <div class="content-wrapper">
             <section class="content">

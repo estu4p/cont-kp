@@ -21,31 +21,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 10; $i++) {
-            $role_id = Role::inRandomOrder()->first()->id;
-            $email = '';
-            switch ($role_id) {
-                case 1:
-                    $email = 'SuperAdmin@gmail.com';
-                    break;
-                case 2:
-                    $email = 'Admin@gmail.com';
-                    break;
-                case 4:
-                    $email = 'Dosen@gmail.com';
-                    break;
-                case 5:
-                    $email = 'Mitra@gmail.com';
-                    break;
-                default:
-                    $email = 'example@gmail.com';
-            }
+        $email = ['SuperAdmin@gmail.com', 'Admin@gmail.com', 'example@gmail.com', 'Dosen@gmail.com', 'Mitra@gmail.com', 'AdminLokasi@gmail.com',];
+        $Role = Role::all();
+        for ($i = 0; $i < 6; $i++) {
             User::create([
                 'nama_lengkap' => $faker->name,
                 'nomor_induk' => $faker->unique()->randomNumber(8),
                 'sekolah' => $faker->randomElement(['SMA 8', 'Universitas Ya Pokoknya Situlah', 'Sekolah Tadika Mesra']),
                 'jurusan' => $faker->randomElement(['Ilmu Komputer', 'Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika', 'Teknik Elektro']),
-                'email' => $email,
+                'email' => $email[$i],
                 'username' => $faker->userName,
                 'no_hp' => $faker->phoneNumber,
                 'barcode' => $faker->ean13(),
@@ -64,7 +48,7 @@ class UserSeeder extends Seeder
                 'status_akun' => $faker->randomElement(['Aktif', 'Alumni']),
                 'sekolah' => Sekolah::inRandomOrder()->first()->id,
                 'mitra_id' => Mitra::inRandomOrder()->first()->id,
-                'role_id' => Role::inRandomOrder()->first()->id,
+                'role_id' => $Role->get($i)->id,
                 'shift_id' => Shift::inRandomOrder()->first()->id,
                 'divisi_id' => Divisi::inRandomOrder()->first()->id,
                 'project_id' => Project::inRandomOrder()->first()->id,

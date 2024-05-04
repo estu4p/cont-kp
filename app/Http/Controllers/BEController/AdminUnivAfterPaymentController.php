@@ -13,6 +13,7 @@ use App\Models\Riwayat;
 use App\Models\Sekolah;
 use App\Models\Presensi;
 use App\Models\Mahasiswa;
+use App\Models\Penilaian;
 use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use App\Models\KategoriPenilaian;
@@ -398,60 +399,17 @@ class AdminUnivAfterPaymentController extends Controller
         }
     }
 
-    public function showKategoriPenilaian(Request $request)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
-    {
-        $kategori = KategoriPenilaian::with('kategori')->get();
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['success' => true, 'nilai' => $kategori], 200);
-        } else {
-            return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
-        }
-    }
-    public function addKategoriPenilaian(Request $request)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
-    {
-        $validator = Validator::make($request->all(), [
-            'divisi_id' => 'required',
-            'nama_kategori' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Fail to add kategori penilaian',], 400);
-        }
-        $data = new KategoriPenilaian([
-            'divisi_id' => $request->input('divisi_id'),
-            'nama_kategori' => $request->input('nama_kategori')
-        ]);
-        $data->save();
+    // public function showKategoriPenilaian(Request $request)
+    // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    // {
+    //     $kategori = KategoriPenilaian::with('kategori')->get();
+    //     if ($request->is('api/*') || $request->wantsJson()) {
+    //         return response()->json(['success' => true, 'nilai' => $kategori], 200);
+    //     } else {
+    //         return view('pengaturan.kategoripenilaian', ['kategori' => $kategori]);
+    //     }
+    // }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'success to add data'
-        ]);
-    }
-
-    public function addSubKategoriPenilaian(Request $request)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
-    {
-        $validator = Validator::make($request->all(), [
-            'kategori_id' => 'required',
-            'nama_sub_kategori' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Fail to add Sub Kategori',], 400);
-        }
-
-        $data = new SubKategoriPenilaian([
-            'kategori_id' => $request->input('kategori_id'),
-            'nama_sub_kategori' => $request->input('nama_sub_kategori')
-        ]);
-
-        $data->save();
-
-        return response()->json([
-            'message' => 'success to add Sub Kategori'
-        ]);
-    }
 
     // public function teamAktifKlik(Request $Request, $id)
     // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
@@ -480,12 +438,12 @@ class AdminUnivAfterPaymentController extends Controller
     // }
 
     public function teamAktifSeeAllTeam(Request $request) // menggunakan $id mitra jika berdasarkan mitra yang diikuti
-    {
-        $user = User::where('role_id', 3)->get();
+    { $user = auth()->user();
+        $users = User::where('role_id', 3)->get();
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json($user);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user', 'users'));
         }
     }
 
@@ -922,11 +880,11 @@ class AdminUnivAfterPaymentController extends Controller
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
         $divisi = DivisiItem::with('divisi')->where('mitra_id', $id)->get();
-        $user = auth()->user();
+
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json(['message' => 'Pengaturan Divisi', 'Divisi' => $divisi]);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi, 'user' => $user]);
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', ['divisi' => $divisi]);
         }
     }
 
@@ -938,11 +896,9 @@ class AdminUnivAfterPaymentController extends Controller
             return response()->json(['message' => 'Divisi not found'], 404);
         }
         $users = User::where('role_id', 3)->where('divisi_id', $id)->get();
-        $user = auth()->user();
         return view('adminUniv-afterPayment.mitra.OptionTeamAktifKlikUiUx', [
             'divisi' => $divisi,
             'users' => $users,
-            'user' => $user
         ]);
     }
     public function teamAktifEdit(Request $request, $id)
@@ -956,35 +912,32 @@ class AdminUnivAfterPaymentController extends Controller
     }
     public function teamAktifEditPost(Request $request, $id)
     {
-        // Ambil data pengguna berdasarkan ID
         $user = User::find($id);
 
-        // Periksa apakah pengguna ditemukan
         if ($user) {
-            // Perbarui properti pengguna sesuai dengan data yang diterima dari permintaan
-
             $user->nama_lengkap = $request->nama_lengkap;
             $user->sekolah = $request->sekolah;
             $user->mitra_id = $request->mitra_id;
             $user->divisi_id = $request->divisi_id;
-            // Simpan perubahan
             $user->save();
-
-            // Tambahkan pesan sukses atau tindakan lain jika diperlukan
             return redirect()->route('adminUniv.editUser', $user->id)->with('success', 'Data pengguna berhasil diperbarui.');
         } else {
-            // Tindakan jika pengguna tidak ditemukan
             return redirect()->back()->with('error', 'Pengguna tidak ditemukan.');
         }
     }
 
-    //mitraoptionpresensi
-    public function OptionPresensi()
+    public function hapusDivisi($id)
     {
-        $userAdmin = User::where('role_id', 5)->get();
-        // Memuat data presensi untuk setiap user
-    foreach ($userAdmin as $user) {
-        $presensi = Presensi::select('jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan')->first();
+        Penilaian::whereIn('sub_id', function ($query) use ($id) {
+            $query->select('id')
+                ->from('sub_kategori_penilaian')
+                ->whereIn('kategori_id', function ($query) use ($id) {
+                    $query->select('id')
+                        ->from('kategori_penilaian')
+                        ->where('divisi_id', $id);
+                });
+        })->delete();
+
 
         $user->presensi = $presensi;
     }
@@ -1001,26 +954,114 @@ class AdminUnivAfterPaymentController extends Controller
     foreach ($datasiswa as $user) {
         $presensi = Presensi::select('hari','jam_masuk', 'jam_pulang', 'jam_mulai_istirahat', 'jam_selesai_istirahat', 'total_jam_kerja', 'log_aktivitas', 'status_kehadiran', 'kebaikan','catatan')->first();
 
-        $user->presensi = $presensi;
-    }
-    // Mengirim data siswa dan presensi ke view
-    return view('adminuniv-afterPayment.mitra.detailprofil', compact('datasiswa', 'presensi'));
-}
+        SubKategoriPenilaian::whereIn('kategori_id', function ($query) use ($id) {
+            $query->select('id')
+                ->from('kategori_penilaian')
+                ->where('divisi_id', $id);
+        })->delete();
 
-    //pengaturanpresensi
-    public function PengaturPersensi(Request $request)
+        KategoriPenilaian::where('divisi_id', $id)->delete();
+
+        Divisi::findOrFail($id)->delete();
+
+        return redirect()->to('/pengaturan-contri');
+    }
+
+
+
+// Controller
+public function Pengaturpresensi(Request $request)
 {
-    // Mendapatkan data yang dikirim dari form
+   // Periksa jika permintaan adalah metode POST
+
+    // Tangani permintaan dari formulir
     $pilihan = $request->input('pilihan');
 
-    // Mengubah status_absensi pada database user sesuai dengan pilihan pengguna
-    if ($pilihan === 'klik_button') {
-        // Logika untuk mengubah status_absensi menjadi "button"
-    } elseif ($pilihan === 'scan_qr_code') {
-        // Logika untuk mengubah status_absensi menjadi "scan QR code"
-    }
-    // Redirect pengguna ke halaman sebelumnya atau berikan notifikasi sukses
-    return redirect()->back()->with('success', 'Pengaturan presensi berhasil disimpan.');
-}
+    // Memeriksa apakah pilihan valid
+    if (!empty($pilihan) && is_array($pilihan)) {
+        $statusAbsensi = [];
 
+        if (in_array('klik_button', $pilihan)) {
+            $statusAbsensi[] = 'Button';
+        }
+
+        if (in_array('scan_qr_code', $pilihan)) {
+            $statusAbsensi[] = 'Scan QR Code';
+        }
+
+        // Perbarui status absensi hanya untuk pengguna dengan role_id 5 yang dipilih
+        if (!empty($statusAbsensi)) {
+            User::where('role_id', 5)->update(['status_absensi' => $statusAbsensi[0]]);
+        }
+
+        // Berikan notifikasi sukses
+        return back()->with('success', 'Pengaturan presensi berhasil disimpan.');
+
+    }
+    // Mengembalikan view untuk halaman "pengaturanpresensi"
+    return view('adminuniv-afterPayment.mitra.pengaturpersensi');
+
+}
+    public function addKategoriPenilaian(Request $request, $divisi_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+        $divisi = Divisi::findOrFail($divisi_id);
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
+        $nama_kategori = $request->input('nama_kategori');
+        $data = new KategoriPenilaian;
+        $data->divisi_id = $divisi_id;
+        $data->nama_kategori = $nama_kategori;
+        $data->save();
+
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
+            'divisi' => $divisi,
+            'kategori' => $kategori,
+            'subKategori' => $subKategori,
+        ]);
+    }
+
+    public function addSubKategoriPenilaian(Request $request, $divisi_id, $kategori_id)
+    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi - Kategori Penilaian
+    {
+        $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+        $divisi = Divisi::findOrFail($divisi_id);
+        $kategori = KategoriPenilaian::where('divisi_id', $divisi_id)->get();
+        $nama_sub_kategori = $request->input('nama_sub_kategori');
+        $data = new SubKategoriPenilaian;
+        $data->kategori_id = $kategori_id;
+        $data->nama_sub_kategori = $nama_sub_kategori;
+        $data->save();
+
+
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
+            'divisi' => $divisi,
+            'kategori' => $kategori,
+            'subKategori' => $subKategori,
+        ]);
+    }
+
+    public function deleteKategori($id, $divisi_id){
+        $kategori = KategoriPenilaian::find($id);
+        // dd($kategori);
+        $kategori->delete();
+        $divisi = Divisi::findOrFail($divisi_id);
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
+        ]);
+    }
+
+    public function deleteSubKategori($id, $divisi_id)
+    {
+        $subKategori = SubKategoriPenilaian::find($id);
+        $subKategori->delete();
+        $divisi = Divisi::findOrFail($divisi_id);
+        return redirect()->route('showKategoriPenilaian',  [
+            'id' => $divisi->id,
+        ]);
+
+
+    }
 }

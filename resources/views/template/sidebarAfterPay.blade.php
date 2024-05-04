@@ -1,23 +1,23 @@
 <link rel="stylesheet" href="{{ asset('/assets/Css/sidebar.css') }}">
 <div class="sidebar">
     <img src="{{ asset('/assets/images/logo.png') }}" alt="Logo" class="logo">
-    <ul class="nav flex-column">
+    <ul class="nav flex-column text-start">
         <li class="nav-item">
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminUniv-Dashboard">Dashboard</a>
+            <a class="nav-link text-secondary {{ Request::is('AdminUniv-Dashboard') ? 'active' : '' }} " href="/AdminUniv-Dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/mitra-adminunivmitra">Mitra</a>
+            <a class="nav-link text-secondary {{ Request::is('mitra-adminunivmitra') ? 'active' : '' }} " href="/mitra-adminunivmitra">Mitra</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminUniv/setting/quotes">Pengaturan</a>
+            <a class="nav-link text-secondary {{ Request::is('AdminUniv/setting/quotes') ? 'active' : '' }} " href="/AdminUniv/setting/quotes">Pengaturan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminPaket">Paket</a>
+            <a class="nav-link text-secondary {{ Request::is('AdminPaket') ? 'active' : '' }}" href="/AdminPaket">Paket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/RiwayatJangkaWaktu">Riwayat</a>
+            <a class="nav-link text-secondary {{ Request::is('RiwayatJangkaWaktu') ? 'active' : '' }}" href="/RiwayatJangkaWaktu">Riwayat</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('logout.admin') }}">
@@ -26,8 +26,6 @@
                     <b>Log Out</b> <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
             </a>
-
-
 
 
         </li>

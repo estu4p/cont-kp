@@ -1,7 +1,7 @@
 @extends('layouts.masterMitra')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('assets/css/jumlah-mahasiswa.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jumlah-mahasiswa.css') }}">
 
 <div class="wadah p-5">
 <form action="" method="GET">
@@ -80,6 +80,7 @@
                                     {{ $mhs->status_akun == 'alumni' ? 'inactive' : $mhs->status_akun }}</div>
                             </td>
 
+
                             {{-- <td class="icon" style="text-align: center;"><a
                                     href="{{ route('input-nilaimhs', ['nama_lengkap' => rawurlencode($mhs->nama_lengkap)]) }}">
                                     <i class="fa-solid fa-file-lines"></i></a></td> --}}
@@ -94,5 +95,5 @@
             </table>
         </div>
 
-    </div>
+</div>
 @endsection

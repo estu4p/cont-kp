@@ -13,18 +13,11 @@ return new class extends Migration
     {
         Schema::create('kategori_penilaian', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kategori');
             $table->unsignedBigInteger('divisi_id');
-            $table->unsignedBigInteger('nama_lengkap');
             $table->string('nama_kategori');
-            $table->unsignedBigInteger('divisi_id');
             $table->timestamps();
 
-            $table->foreign('divisi_id')->references('id')->on('divisi');
-            $table->foreign('nama_lengkap')
-                ->references('id')->on('users')
-                ->where('role', 3);
-                // ->onDelete('SET NULL');
+            $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
         });
     }
 
