@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_kategori');
             $table->timestamps();
 
-            $table->foreign('divisi_id')->references('id')->on('divisi');
+            $table->foreign('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
         });
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.masterAfterPay')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/adminAfter.css') }}">
@@ -10,7 +10,7 @@
             <div style="margin-left: -28px;">
                 <h6 class="text-uppercase fw-normal" style="font-size: 14px;">pengaturan utama</h6>
                 <ul class="text-capitalize fw-normal sub-menu" style="font-size: 14px;">
-                    <li style="margin-left: 2rem;"><a href="/admin/setting/quotes"
+                    <li style="margin-left: 2rem;"><a href="/AdminUniv/setting/quotes"
                             class="text-black text-decoration-none">quotes</a></li>
                 </ul>
                 <hr class="line" />
@@ -382,7 +382,7 @@
         var modal = $('#userModal');
         var modalTitle = modal.find('.modal-title');
         var submitButton = modal.find('.modal-footer button');
-        
+
         // Dynamically set title and submit button text based on action
         if (action === 'add') {
             modalTitle.text('Add ' + role);

@@ -42,9 +42,11 @@
                             <td>
                                 <div class="{{ $mhs['status'] }}">{{ $mhs->status_akun }}</div>
                             </td>
-                            <td><a href="/lihat"> <i class="fa-solid fa-file-lines"></i></a></td>
+                            {{-- <td><a href="/lihat,['id' => $mhs->id]"> <i class="fa-solid fa-file-lines"></i></a></td> --}}
+                            <td><a href="{{ route('penilaian', ['id' => $mhs->id])}}"><i class="fa-solid fa-file-lines"></i></a></td>
+                            {{-- <td><a href="{{ route('penilaian', ['nama_lengkap' => $nama_lengkap])}}"><i class="fa-solid fa-file-lines"></i></a></td> --}}
                         </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -55,7 +57,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             var table = document.getElementById('mahasiswa-table');
             var rows = table.getElementsByTagName('tr');
-            var itemPerPage = 5;
+            var itemPerPage = 6;
             var currentPage = 0;
 
             function showPage(page) {

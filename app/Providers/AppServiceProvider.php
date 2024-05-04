@@ -22,10 +22,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // membari variabel $superAdmin ke navbar-super
-        View::composer('template.navbar-super', function ($view) {
-            $superAdmin = User::where('role_id', 1)->first();
+        // membari variabel $superAdmin ke navbar superAdmin
+        View::composer('layouts.superadmin', function ($view) {
+            $superAdmin = auth()->user();
             $view->with('superAdmin', $superAdmin);
+        });
+
+        // memberi variabel $user ke navbar adminUniv
+        View::composer('layouts.admin', function ($view) {
+            $user = auth()->user();
+            $view->with('user', $user);
         });
     }
 }

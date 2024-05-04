@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Presensi;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Database\Seeders\KategoriPenilaian;
 use Database\Seeders\SubKategoriPenilaian;
@@ -86,23 +87,22 @@ class SchoolController extends Controller
             return view('template.contributingforunivschool.penilaianmahasiswa', compact('mahasiswa'));
         }
     }
-    public function lihatPenilaian($id)
-    {// Penilaian Mahasiswa- lihat
+    public function lihatPenilaian(Request $request, $id)
+    { // Penilaian Mahasiswa- lihat
 
-        $penilaian = User::findOrFail($id);
-        // $penilaian = Penilaian::findOrFail($id);
+        $Id = User::findOrFail($id);
+        $user = $Id->nama_lengkap;
+        $penilaian = Penilaian::with(['user', 'subKategori', 'kategori'])->where('nama_lengkap', $Id->id)->first();
+        // $subKategori = SubKategoriPenilaian::with('kategori')->get()->groupBy('kategori_id');
+        $nilaiPemahaman = User::with('penilaian', 'penilaian.subKategori', 'penilaian.subKategori.kategori')
+            ->where('id', $Id->id)->get();
+            // $subKategori = SubKategoriPenilaian::get()->groupBy('kategori_id');
+            // $subKategori->load('kategori');
 
-        $nilai = $penilaian->nilai->first();
-        $subkategori = $penilaian->subKategoriPenilaian->first();
-        $kategoripen = $penilaian->kategoriPenilaian->first();
-
-            return response()->json([
-            "Penilaian" => "view Penilaian Mahasiswa ",
-            "mahasiswa" => $penilaian,
-            "nilai" => $nilai,
-            "sub-kategori" => $subkategori,
-            "kategori" => $kategoripen,
-            ]);
-
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['data' => $penilaian, $nilaiPemahaman]);
+        } else {
+            return view('template.contributingforunivschool.lihat', compact('penilaian', 'user', 'Id', 'nilaiPemahaman'));
         }
+    }
 }

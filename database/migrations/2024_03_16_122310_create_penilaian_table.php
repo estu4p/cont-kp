@@ -16,9 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('nama_lengkap');
             $table->unsignedBigInteger('sub_id');
             $table->integer('nilai');
-            $table->text('kritik_saran');
+            $table->text('kritik_saran')->nullable();
             $table->timestamps();
-            $table->foreign('nama_lengkap')->references('id')->on('users');
+
+            $table->foreign('nama_lengkap')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('sub_id')->references('id')->on('sub_kategori_penilaian');
         });
     }

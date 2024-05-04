@@ -17,6 +17,7 @@
                 <h5 class="heading-login1">Hi Welcome Back</h5>
                 <h5 class="subhead">Log in to continue</h5>
             </div>
+
             <form class="content-form" action="{{ route('user.login') }}" method="POST">
                 @csrf
                 <label for="email" class="label-form">Username/Email</label>
@@ -32,6 +33,12 @@
 
                         </div>
                     @endif
+                    @if (session('mitra_error'))
+                        <div class="alert alert-danger">
+                            {{ session('mitra_error') }}
+                        </div>
+                    @endif
+
                     <small id="warn-email" class="text-warning bg-warning-subtle py-1 px-2 text-capitalize d-none"
                         style="font-size: 12px; border-radius: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                             height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
@@ -63,7 +70,11 @@
                 </div>
 
                 <div class="button-container text-center">
-                    <button type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
+                    <button id="login-btn" type="submit" class="reg-button border-0 my-4 shadow fw-semibold">Log In</button>
+                    <div id="role-error" class="alert alert-danger" style="display: none;">
+                        Anda tidak diizinkan untuk melakukan login.
+                    </div>
+
                     <p style="margin-bottom: -20px; font-size: 12px; font-weight: 400;">Belum punya akun? <a
                             href="/user/register" class="text-decoration-none fw-bold" style="color: #A61C1CE5;">Daftar</a>
                     </p>
@@ -71,7 +82,6 @@
             </form>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const emailInput = document.querySelector('input[name="email"]');
@@ -100,6 +110,14 @@
                     warnPassword.classList.add('d-none');
                 }
             });
+        });
+
+        document.getElementById('login-btn').addEventListener('click', function(event) {
+            var role_id = {{ Auth::check() ? Auth::user()->role_id : -1 }};
+            if (role_id == 1 || role_id == 2 || role_id == 4 || role_id == 5 || role_id == 6) {
+                document.getElementById('role-error').style.display = 'block';
+                event.preventDefault(); // Mencegah formulir untuk disubmit
+            }
         });
     </script>
 @endsection

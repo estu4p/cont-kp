@@ -24,6 +24,7 @@ use App\Http\Controllers\BEController\ContributorForMitra;
 use App\Http\Controllers\BEController\DataMitraController;
 use App\Http\Controllers\BEController\HomeMitraController;
 use App\Http\Controllers\Auth\ResetPasswordAdminController;
+use App\Http\Controllers\Auth\ResetPasswordAdminSistemController;
 use App\Http\Controllers\BEController\PresensiMitraController;
 use App\Http\Controllers\BEController\MitraDashboardController;
 use App\Http\Controllers\BEController\MitraTeamAktifController;
@@ -81,8 +82,9 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
-// Super Admin
+// === Super Admin ===
 Route::get('/superAdmin/login', [LoginController::class, 'loginsuperadmin'])->name('login.superadmin');
+Route::get('/superAdmin/logout', [LoginController::class, 'logoutSuperAdmin'])->name('logout.superadmin');
 // function () {
 //     return view('superAdmin.Login');
 // })->name('login.superadmin');
@@ -167,18 +169,11 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('
 // Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard-admin');
 
 
-Route::get('/checkout/bronze', function () {
-    return view('checkout.bronze', ['title' => "Checkout - Bronze"]);
-});
-Route::get('/checkout/silver', function () {
-    return view('checkout.silver', ['title' => "Checkout - Silver"]);
-});
-Route::get('/checkout/gold', function () {
-    return view('checkout.gold', ['title' => "Checkout - Gold"]);
-});
-Route::get('/checkout/platinum', function () {
-    return view('checkout.platinum', ['title' => "Checkout - Platinum"]);
-});
+Route::get('/checkout/bronze', [CheckoutController::class, 'userCheckoutBronze']);
+Route::get('/checkout/silver', [CheckoutController::class, 'userCheckoutSilver']);
+Route::get('/checkout/gold', [CheckoutController::class, 'userCheckoutGold']);
+Route::get('/checkout/platinum', [CheckoutController::class, 'userCheckoutPlatinum']);
+
 Route::get('/after-checkout', function () {
     return view('checkout.after-checkout', ['title' => "After Checkout"]);
 });
@@ -275,11 +270,20 @@ Route::get('/presensi-contributor-univ', [ContributorUnivController::class, 'Dat
 
 //penilaian mahasiswa-contributor for univ
 Route::get('/penilaianMahasiswa', [SchoolController::class, 'datamhs'])->name('penilaian-siswa.penilaianMahasiswa');
-Route::get('/lihat', function () {
-    return view('template.contributingforunivschool.lihat');
-});
+Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('penilaian');
+// function () {
+//     return view('template.contributingforunivschool.lihat');
+// });
 
 //penilaian mahasiswa-contributor mitra
+Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
+Route::post('/kategoripenilaian/{divisi_id}/tambah', [BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
+Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
+Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
+Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
+
+
 Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
 
 Route::get('/input-nilai', function () {
@@ -292,9 +296,15 @@ Route::get('/kategoripenilaian', function () {
     return view('pengaturan.kategoripenilaian');
 });
 
+
+// Contributor For mitra - Penilaian Mahasiswa
 Route::get('/input-nilai', function () {
     return view('penilaian-siswa.input-nilai');
 })->name('input-nilaimhs');
+
+Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
+
+Route::post('/input-nilai/{user_id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
 
 
 Route::get('/MitraPresensiDetailHadir', function () {
@@ -302,10 +312,11 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    $title = "Pengaturan";
-    return view('manage_devisi', compact('title'));
-});
+// Route::get('/manage-devisi', function () {
+//     $title = "Pengaturan";
+//     return view('manage_devisi', compact('title'));
+// });
+
 
 Route::get('/manage-shift', function () {
     $title = "Pengaturan";
@@ -327,9 +338,10 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
+Route::get('manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('manage.showDivisi');
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
@@ -337,9 +349,6 @@ Route::get('/manage-devisi', function () {
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
-});
-Route::get('/kategoripenilaian', function () {
-    return view('pengaturan.kategoripenilaian');
 });
 
 Route::get('/pemagang/MyQR', function () {
@@ -377,9 +386,9 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -402,9 +411,9 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+// Route::get('/manage-devisi', function () {
+//     return view('mitra-pengaturan.manage-devisi');
+// });
 
 Route::get('/manage-shift', function () {
     return view('mitra-pengaturan.manage-shift');
@@ -413,9 +422,7 @@ Route::get('/manage-shift', function () {
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
 });
-Route::get('/kategoripenilaian', function () {
-    return view('pengaturan.kategoripenilaian');
-});
+
 
 
 
@@ -445,6 +452,8 @@ Route::post('/AdminUniv-InputNewPassword', [ResetPasswordAdminController::class,
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 
 Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
+Route::post('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'tambahMitra'])->name('tambahMitra');
+Route::delete('/hapusMitra/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusMitra'])->name('hapusMitra');
 
 Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 
@@ -466,30 +475,16 @@ Route::get('/AdminUniv/Option-TeamAktif/{id}', [BEControllerAdminUnivAfterPaymen
 
 Route::get('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.pengaturanDivisi');
 Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi', [BEControllerAdminUnivAfterPaymentController::class, 'addDivisi'])->name('adminUniv.addDivisi');
-Route::post('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
+Route::put('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'updateDivisi'])->name('adminUniv.updateDivisi');
 Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'destroyDivisi'])->name('adminUniv.destroyDivisi');
 
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
 Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
+Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
+Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
-Route::get('/AdminUniv/setting/quotes', function () {
-    $quotes = [
-        ['id' => 1, 'quotes' => "Change your life now for better future"],
-        ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
-        ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
-        ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
-        ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
-        ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
-        ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
-        ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
-    ];
-    return view('adminUniv-afterPayment.AdminUniv-Quotes', [
-        'title' => "Admin - Setting Jam & Quotes",
-        'quotes' => $quotes
-    ]);
-});
 Route::get('/AdminUniv/setting/user', function () {
     $users = [
         ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
@@ -525,9 +520,6 @@ Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
 });
 
-Route::get('/kategoripenilaian', function () {
-    return view('pengaturan.kategoripenilaian');
-});
 
 Route::get('/datasiswa', function () {
     return view('adminUniv-afterPayment.dataSiswa');
@@ -544,19 +536,22 @@ Route::get('/pengaturan', function () {
 Route::get('/AdminUniv/CheckoutBronze', [CheckoutController::class, 'CheckoutBronze'])->name('checkout.bronze.adminUniv');
 Route::post('/checkoutBronze', [CheckoutController::class, 'checkoutBronzePost'])->name('checkout.bronze.adminUnivPost');
 
-Route::get('/kategoripenilaian', function () {
-    return view('pengaturan.kategoripenilaian');
-});
 
 //USER ADMIN SISTEM/LOKASI (SEVEN INC)
 Route::get('/AdminSistem-Dashboard', [AdminSistemDashboardController::class, 'dashboard']);
 
 Route::get('/AdminSistem-Editprofile', [AdminSistemDashboardController::class, 'editProfile'])->name('userAdmin.editProfile');
-Route::put('/AdminSistem/updateProfile/{username}', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
-Route::patch('/AdminSistem/updateFoto/{username}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto');
-Route::delete('/AdminSistem/deleteFoto/{username}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
+Route::put('/AdminSistem/updateProfile', [AdminSistemDashboardController::class, 'updateProfile'])->name('userAdmin.updateProfile');
+Route::post('/AdminSistem/updateFoto/{id}', [AdminSistemDashboardController::class, 'updateFoto'])->name('userAdmin.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::delete('/AdminSistem/deleteFoto/{id}', [AdminSistemDashboardController::class, 'deleteFoto'])->name('userAdmin.deleteFoto');
 
 Route::get('/AdminSistem-Subcription', [UserAdminSistemController::class, 'IndexSubscription'])->name('subscriptions.index');
+Route::put('/AdminSistem-Subcription/{id}/update', [UserAdminSistemController::class, 'updateSubs'])->name('subscriptions.updateSubs');
+Route::delete('/AdminSistem-Subcription/{id}/delete', [UserAdminSistemController::class, 'deleteSubs'])->name('subscriptions.deleteSubs');
+
+Route::get('/AdminSistem-login', [LoginController::class, 'loginadminSistem'])->name('login.adminsistem');
+Route::get('/AdminSistem/logout-sistemlokasi', [LoginController::class, 'logoutSistemLokasi'])->name('logout.sistemlokasi');
+
 
 Route::get('/user/barcode', function () {
     return view('user.barcode', [
@@ -617,11 +612,12 @@ Route::get('/presensitidakhadir', function () {
 });
 
 
-Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
+// Route::get('/penilaianMahasiswa', [MahasiswaController::class, 'show'])->name('penilaian-siswa.penilaianMahasiswa');
 
 // Route::get('/penilaian-mahasiswa', [MahasiswaController::class, 'penilaian_siswa'])->name('penilaian-siswa.penilaian-mahasiswa');
 
-Route::get('/input-nilai/{id}',[ContributorForMitra::class, 'InputNilai'])->name ('contributorformitra.input-nilai');
+Route::get('/input-nilai/{id}', [ContributorForMitra::class, 'InputNilai'])->name('contributorformitra.input-nilai');
+Route::post('/input-nilai/{id}', [ContributorForMitra::class, 'inputNilaiPost'])->name('mitra.inputNilai');
 
 
 
@@ -650,6 +646,16 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
+Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
+Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
+
+Route::get('/manage-shift', [ContributorForMitra::class, 'showShift'])->name('mitra.showshift');
+Route::post('/addShift', [ContributorForMitra::class, 'addShift'])->name('mitra.addShift');
+Route::post('/updateShift/{id}', [ContributorForMitra::class, 'updateShift'])->name('mitra.updateShift');
+Route::delete('/manage-shift/delete/{id}', [ContributorForMitra::class, 'deleteshift'])->name('mitra.deleteshift');
+
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');
@@ -663,9 +669,7 @@ Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class
 
 
 
-Route::get('/manage-devisi', function () {
-    return view('mitra-pengaturan.manage-devisi');
-});
+
 
 // Route::get('/manage-shift', function () {
 //     return view('mitra-pengaturan.manage-shift');
@@ -681,13 +685,22 @@ Route::get('/mitra-daftarmitra', function () {
     return view('adminUniv-afterPayment.mitra.daftarmitra');
 });
 
-Route::get('/mitra-pengaturpersensi', function () {
-    return view('adminUniv-afterPayment.mitra.pengaturpersensi');
-});
+// Route::get('/mitra-pengaturpersensi', function () {
+//     return view('adminUniv-afterPayment.mitra.pengaturpersensi');
+// });
 
-Route::get('/mitra-optionpresensi', function () {
-    return view('adminUniv-afterPayment.mitra.optionpresensi');
-});
+// Route::get('/mitra-optionpresensi', function () {
+//     return view('adminUniv-afterPayment.mitra.optionpresensi');
+// });
+
+
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'PengaturPersensi']);
+
+Route::get('/mitra-optionpresensi', [BEControllerAdminUnivAfterPaymentController::class, 'OptionPresensi'])->name('adminunivpayment.optionpresensi');
+Route::get('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+Route::post('/mitra-pengaturpersensi', [BEControllerAdminUnivAfterPaymentController::class, 'Pengaturpersensi'])->name('adminunivafterpayment.Pengaturpersensi');
+
+
 
 Route::get('/mitra-detailprofil', function () {
     return view('adminUniv-afterPayment.mitra.detailprofil');
@@ -774,11 +787,8 @@ Route::get('/pengaturan', function () {
 });
 
 
-Route::get('/kategoripenilaian', function () {
-    return view('pengaturan.kategoripenilaian');
-});
 Route::get('/pengaturan', [BEControllerAdminUnivAfterPaymentController::class, 'daftarMitraPengaturanDivisi'])->name('adminUniv.kategoriPenilaian');
-Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
+// Route::get('/kategoripenilaian', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('adminUniv.kategoriPenilaian');
 
 
 
@@ -786,11 +796,27 @@ Route::get('/UserScanQRDefault', function () {
     return view('user.UserScanQR.Home-Default');
 });
 
+// Route::get('/AdminUniv/setting/quotes', function () {
+//     $quotes = [
+//         ['id' => 1, 'quotes' => "Change your life now for better future"],
+//         ['id' => 2, 'quotes' => "Jujur terlalu tertanam di dalam hati"],
+//         ['id' => 3, 'quotes' => "Aku jujur dan disiplin"],
+//         ['id' => 4, 'quotes' => "Aku selalu mengembangkan potensiku"],
+//         ['id' => 5, 'quotes' => "Aku selalu melakukan yang terbaik"],
+//         ['id' => 6, 'quotes' => "Rasa malas adalah musuhku"],
+//         ['id' => 7, 'quotes' => "Hari ini harus lebih baik dari kemarin"],
+//         ['id' => 8, 'quotes' => "Tidak ada kata menyerah dalam hidupku"]
+//     ];
+//     return view('adminUniv-afterPayment.AdminUniv-Quotes', [
+//         'title' => "Admin - Setting Jam & Quotes",
+//         'quotes' => $quotes
+//     ]);
+// });
 
-Route::get('/admin/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
-Route::post('/admin/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
-Route::delete('/admin/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
-Route::patch('/admin/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
+Route::get('/AdminUniv/setting/quotes', [AdminSettingJamQuotesController::class, 'quotes'])->name('admin-setting.quotes');
+Route::post('/AdminUniv/setting/quotes/store', [AdminSettingJamQuotesController::class, 'quotesStore'])->name('admin-setting.quotes-store');
+Route::delete('/AdminUniv/setting/quotes/delete/{id}', [AdminSettingJamQuotesController::class, 'quotesDelete'])->name('admin-setting.quotes-delete');
+Route::patch('/AdminUniv/setting/quotes/update_quotes_ulangtahun/{id}', [AdminSettingJamQuotesController::class, 'quotes_ulangtahun_update'])->name('admin-setting.quotes-ulangtahun-update');
 
 Route::get('/admin/setting/user', function () {
     $users = [
@@ -819,13 +845,11 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
-Route::get('/AdminPaket', function () {
-    return view('user.AdminUnivAfterPayment.AdminPaket');
-});
+Route::get('/AdminPaket', [BEControllerAdminUnivAfterPaymentController::class, 'adminPaket']);
 
-Route::get('/CheckoutBronze', function () {
-    return view('user.AdminUnivAfterPayment.CheckoutBronze');
-});
+// Route::get('/CheckoutBronze', function () {
+//     return view('user.AdminUnivAfterPayment.CheckoutBronze');
+// });
 
 Route::get('/CheckoutSilver', function () {
     return view('user.AdminUnivAfterPayment.CheckoutSilver');
@@ -849,25 +873,22 @@ Route::get('/', function () {
     return view('landing-page.index', ['title' => 'Controlling Magang']);
 });
 
+Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'editProfile'])->name('contributorformitra.editProfile');
+Route::put('/contributorformitra/updateProfile', [ContributorForMitra::class, 'updateProfile'])->name('contributorformitra.updateProfile');
+Route::post('/contributorformitra/updateFoto/{id}', [ContributorForMitra::class, 'updateFoto'])->name('contributorformitra.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::class, 'deleteFoto'])->name('contributorformitra.deleteFoto');
 
+//Route::get('/contributorformitra-editprofile', [ContributorForMitra::class, 'edit'])->name('contributorformitra.editprofile');
+//Route::put('/contributorformitra-update/{$id}', [ContributorForMitra::class, 'update'])->name('contributorformitra.update');
+//Route::put('/contributorformitra-profile/{$id}', [ContributorForMitra::class, 'Profile'])->name('contributorformitra.profile');
 
-Route::get('/contributorformitra-editprofile', function () {
-    return view('contributorformitra.editprofile');
-});
-Route::get('/contributorformitra-devisi', function () {
-    return view('contributorformitra.devisi');
-});
-Route::get('/contributorformitra-devisi-Seeallteams', function () {
-    return view('contributorformitra.devisi-Seeallteams');
-});
+Route::get('/contributorformitra-devisi', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
+Route::get('/contributorformitra-devisi-Seeallteams/{id}', [ContributorForMitra::class, 'showAllTeams'])->name('mitra.allteams');
 
-Route::get('/contributorformitra-devisi-LihatProfil', function () {
-    return view('contributorformitra.Lihat-Profil-Mahasiswa');
-});
+Route::get('/contributorformitra-devisi-LihatProfil/{id}', [ContributorForMitra::class, 'detailProfil'])->name('mitra.detailprofil');
+Route::post('/mitra-edit-detail-profile/{id}', [ContributorForMitra::class, 'editDetailProfil'])->name('mitra.editProfile');
 
-Route::get('/contributorformitra-devisi-teamaktif', function () {
-    return view('contributorformitra.teamaktifanggota');
-});
+Route::get('/contributorformitra-devisi-teamaktif/{id}', [ContributorForMitra::class, 'showDataMahasiswa'])->name('mitra.divisiTeam');
 Route::get('/contributorformitra-penilaian', function () {
     return view('contributorformitra.teamaktifanggota');
 });
@@ -894,12 +915,21 @@ Route::get('/UserScanBarcode', function () {
 Route::get('/Scanqr', function () {
     return view('user.UserScanQR.Scanqr');
 });
-Route::get('/user-AdminSistem/login', function () {
-    return view('SistemLokasi.AdminSistem-login');
-});
+Route::get('/user-AdminSistem/login', [LoginController::class, 'loginadminSistem']);
+
+Route::post('/login', [LoginController::class, 'ValidateLogin'])->name('login');
+
 Route::get('/user-AdminSistem/resetpassword', function () {
     return view('SistemLokasi.AdminSistem-resetpassword');
 });
+
+Route::post('/user-AdminSistem/resetpassword', [ResetPasswordAdminSistemController::class, 'resetPassword'])->name('password.resetAdminSistem');
+Route::post('/user-AdminSistem/InputOTP', [ResetPasswordAdminSistemController::class, 'verifyOTP'])->name('otp.verifyAdminSistem');
+Route::post('/user-AdminSistem/InputnewPassword', [ResetPasswordAdminSistemController::class, 'newPassword'])->name('password.newAdminSistem');
+
+
+
+
 Route::get('/user-AdminSistem/InputOTP', function () {
     return view('SistemLokasi.AdminSistem-InputOTP');
 });
