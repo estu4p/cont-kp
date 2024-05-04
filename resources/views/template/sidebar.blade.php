@@ -10,7 +10,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('presensi', 'laporandatapresensi', 'datapresensisiswa', 'presensihadir', 'presensiizin', 'presensitidakhadir') ? 'active' : '' }}"
-                href="/presensi">Presensi</a>
+                href="/presensi-contributor-univ">Presensi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/penilaianMahasiswa">Penilaian</a>

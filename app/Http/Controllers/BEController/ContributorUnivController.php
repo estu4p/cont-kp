@@ -12,7 +12,7 @@ class ContributorUnivController extends Controller
     public function DataPresensiSiswa($id)
     {
         // Mengambil data siswa berdasarkan ID
-       
+
         $datasiswa = Presensi::with('user')->where('nama_lengkap', $id)->first();
         $presensi = Presensi::where('nama_lengkap', $id)->get();
 
@@ -30,10 +30,12 @@ class ContributorUnivController extends Controller
 
     public function DataPresensi()
     {
+
         // Ambil data presensi dari database
         $presensiharian = Presensi::all(); // Anda mungkin perlu mengatur query sesuai dengan kebutuhan aplikasi Anda
 
         // Kirim data presensi ke halaman view
         return view('presensi.presensiharian', compact('presensiharian'));
     }
+    
 }
