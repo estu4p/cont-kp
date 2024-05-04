@@ -640,7 +640,14 @@ Route::get('/laporanpresensi', function () {
 
 Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
 Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
+
+Route::get('/manage-shift', [ContributorForMitra::class, 'showShift'])->name('mitra.showshift');
+Route::post('/addShift', [ContributorForMitra::class, 'addShift'])->name('mitra.addShift');
+Route::post('/updateShift/{id}', [ContributorForMitra::class, 'updateShift'])->name('mitra.updateShift');
+Route::delete('/manage-shift/delete/{id}', [ContributorForMitra::class, 'deleteshift'])->name('mitra.deleteshift');
+
 
 // Contributor for Mitra - Presensi
 Route::get('/daftar-presensi', [PresensiMitraController::class, 'getAllPresensi'])->name('daftar-presensi');

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('shift', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_shift');
-            $table->string('jml_jam_kerja');
-            $table->string('jam_masuk');
-            $table->string('jam_pulang');
+            $table->string('nama_shift')->nullable();
+            $table->string('jml_jam_kerja')->nullable();
+            $table->string('jam_masuk')->nullable();
+            $table->string('jam_pulang')->nullable();
+            $table->string('istirahat')->nullable();
             $table->timestamps();
         });
     }
