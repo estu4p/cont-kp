@@ -83,7 +83,7 @@
         </div>
         </div>
 
-        <!-- Modal edit divisi -->
+        <!-- Modal edit dan hapus divisi -->
         @foreach ($divisi as $no => $value)
             <div class="modal fade" id="editModal{{ $value->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -113,17 +113,16 @@
                                 </div>
                                 <div class="grupinputt">
                                     <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                                    {{-- <input type="text" class="inputmodalll" id="editNamaDivisi"
-                                        placeholder="Masukkan nama divisi" value="{{ $value->nama_divisi }}"
-                                        name="nama_divisi"> --}}
                                         <select class="form-select shadow" id="editNamaDivisi" name="nama_divisi">
-                                            <option selected disabled> Pilih Nama Divisi</option>
+                                            <option selected disabled> Edit Nama Divisi</option>
                                             @php
                                                 $divisi = App\Models\Divisi::all();
                                             @endphp
                                             @foreach ($divisi as $item)
-                                            <option value="{{ $item->nama_divisi }}">{{ $item->nama_divisi }}</option>
-                                            @endforeach
+                                            <option value="{{ $item->nama_divisi }}" {{ $item->nama_divisi == $value->nama_divisi ? 'selected' : '' }}>
+                                                {{ $item->nama_divisi }}
+                                            </option>
+                                                @endforeach
                                         </select>
                                 </div>
                             </div>
@@ -137,10 +136,8 @@
                     </form>
                 </div>
             </div>
-        @endforeach
 
-        {{-- hapus modal --}}
-        @foreach ($divisi as $no => $value)
+            {{-- hapus modal --}}
             <div class="modal fade" id="hapusModal{{ $value->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -159,8 +156,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">Batal</button>
-                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                    aria-label="Close">Hapus</button>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
                             </div>
                         </div>
                     </form>
@@ -269,7 +265,41 @@
                 $('#editModal').modal('hide');
             }
 
+            function deleteDivisi(index, divisiId) {
+                console.log('sini')
+                swal({
+                    title: "Hapus",
+                    text: "Apakah Anda ingin menghapus divisi ini?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        // Kirim permintaan AJAX ke server untuk menghapus data
+                        $.ajax({
+                            url: '/hapus-divisi/' + divisiId,
+                            type: 'DELETE',
+                            success: function(response) {
+                                // Hapus baris divisi dari tabel jika penghapusan berhasil
+                                document.querySelector('#example tbody').deleteRow(index);
 
+                                // Tampilkan pesan sukses
+                                swal("Berhasil!", "Divisi berhasil dihapus.", {
+                                    icon: "success",
+                                    timer: 1500,
+                                    buttons: false
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                // Tampilkan pesan kesalahan jika terjadi kesalahan saat menghapus data
+                                swal("Error!", "Gagal menghapus divisi.", "error");
+                            }
+                        });
+                    } else {
+                        swal("Data Anda aman.");
+                    }
+                });
+            }
             // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
             function sowsukses() {
                 // Dapatkan nilai input dari modal
@@ -299,31 +329,8 @@
                 });
             }
 
-            function deleteDivisi(index) {
-                // Tampilkan modal konfirmasi penghapusan
-                swal({
-                    title: "Hapus",
-                    text: "Apakah Anda ingin menghapus divisi ini?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        // Hapus baris divisi dari tabel
-                        document.querySelector('#example tbody').deleteRow(index);
 
-                        // Tampilkan pesan sukses
-                        swal("Berhasil!", "Divisi berhasil dihapus.", {
-                            icon: "success",
-                            timer: 1500,
-                            buttons: false
-                        });
-                    } else {
-                        // Tampilkan pesan bahwa data aman
-                        swal("Data Anda aman.");
-                    }
-                });
-            }
+
             document.querySelector('.addgambar').addEventListener('click', function() {
                 document.getElementById('fileInput').click();
             });

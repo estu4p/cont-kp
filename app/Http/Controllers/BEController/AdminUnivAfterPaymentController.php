@@ -322,36 +322,77 @@ class AdminUnivAfterPaymentController extends Controller
             return redirect()->back()->with('success','Data berhasil ditambahkan');
         }
     }
+    // public function updateDivisi(Request $request, $id)
+    // // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
+    // {
+    //     // dd($request->all());
+    //     $divisi = Divisi::all();
+    //     $validator = Validator::make($request->all(), [
+    //         'nama_divisi' => 'required',
+    //         'deskripsi_divisi' => '',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['message' => 'gagal update divisi',], 404);
+    //     }
+    //     // Cari data divisi berdasarkan ID divisi
+    //     $data = DivisiItem::where('divisi_id', $id)->first();
+    //     // Jika data divisi tidak ditemukan, kembalikan pesan kesalahan
+    //     if (!$data) {
+    //         return redirect()->back()->with('error', 'Divisi tidak ditemukan');
+    //     }
+    //      // Isi data divisi dengan input yang diterima dari request
+    //     $data->divisi->nama_divisi = $request->input('nama_divisi');
+    //     $data->divisi->save();
+    //     return redirect()->back()->with('success','Data berhasil diubah');
+    // }
+
     public function updateDivisi(Request $request, $id)
-    // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        // dd($request->all());
-        $divisi = Divisi::all();
+        // Validasi data yang diterima dari request
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => '',
         ]);
+
         if ($validator->fails()) {
-            return response()->json(['message' => 'gagal update divisi',], 404);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        $data = Divisi::findOrFail($request->nama_divisi);
-        // Jika data divisi tidak ditemukan, kembalikan pesan kesalahan
-        if (!$data) {
-            return redirect()->back()->with('error', 'Divisi tidak ditemukan');
+
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
+
+        // Ambil data DivisiItem yang akan diupdate
+        $divisiItem = DivisiItem::find($id);
+
+        // Perbarui nama divisi
+        $divisiItem->divisi_id = $divisi_id;
+
+        // Perbarui foto divisi jika ada
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $divisiItem->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
         }
-         // Isi data divisi dengan input yang diterima dari request
-        $data->nama_divisi = $request->input('nama_divisi');
-        $data->save();
-        return redirect()->back()->with('success','Data berhasil diubah');
+
+        // Simpan perubahan
+        $divisiItem->save();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to edit divisi'], 200);
+        } else {
+            return redirect()->back()->with('success', 'Data berhasil diubah');
+        }
     }
+
+
+
     public function destroyDivisi($id)
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
     {
-        $data = Divisi::find($id);
+        $data = DivisiItem::find($id);
         if ($data) {
             $data->delete();
 
-            return redirect('/AdminUniv/Option-TeamAktif-pengaturanDivisi');
+            return redirect()->back();
         } else {
             return response()->json(['success' => false, 'message' => 'Data not found'], 404);
         }
@@ -954,7 +995,7 @@ class AdminUnivAfterPaymentController extends Controller
     public function DetailProfil($id)
     {
         // Mengambil data siswa berdasarkan ID
-       
+
         $datasiswa = User::where('role_id', 5)->get();
         // Memuat data presensi untuk setiap user
     foreach ($datasiswa as $user) {
