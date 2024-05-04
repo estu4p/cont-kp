@@ -14,7 +14,7 @@
             <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Pengaturan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminUniv-dashboardBeforePayment">Paket</a>
+            <a class="nav-link {{ Request::is('AdminUniv-dashboardBeforePayment') ? 'active' : '' }}" href="/AdminUniv-dashboardBeforePayment">Paket</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/AdminUniv-dashboardBeforePayment"><i class="fa-solid fa-lock"></i> Riwayat</a>

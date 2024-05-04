@@ -3,14 +3,12 @@
 <div class="sidebar">
     <img src="assets/images/logo.png" alt="Logo" class="logo">
     <ul class="nav flex-column">
-        <li class="nav-item">
 
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('AdminSistem-Dashboard') ? 'active' : '' }}" href="/AdminSistem-Dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/AdminSistem-Dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/AdminSistem-Subcription">Langganan</a>
+            <a class="nav-link {{ Request::is('AdminSistem-Subcription') ? 'active' : '' }}" href="{{ route('subscriptions.index') }}">Langganan</a>
         </li>
         <li class="nav-item">
 
