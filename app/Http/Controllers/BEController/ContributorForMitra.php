@@ -10,12 +10,13 @@ use App\Models\Divisi;
 use App\Models\Sekolah;
 use App\Models\Presensi;
 use App\Models\Penilaian;
+use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -125,6 +126,59 @@ class ContributorForMitra extends Controller
         }
     }
 
+    public function detailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        // dd($users);
+        $shift = Shift::all();
+        if ($user) {
+            $divisiPerMitra = $user->mitra_id;
+        } else {
+            return response()->json([
+                'message' => 'Data User Mitra tidak ditemukan'
+            ]);
+        }
+
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $divisiPerMitra)->get();
+        // dd($divisi);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                [
+                    'user detail' => $users,
+                    'divisi' => $divisi,
+                    'divisi mitra' => $divisiPerMitra
+                ]
+            );
+        }
+        return view("contributorformitra.Lihat-Profil-Mahasiswa", compact('user', 'users', 'divisi', 'shift'));
+    }
+
+    public function editDetailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        $users->update([
+            'tgl_masuk' => $request->input('tgl_masuk'),
+            'tgl_keluar' => $request->input('tgl_keluar'),
+            'divisi_id' => $request->input('divisi_id'),
+            'project' => $request->input('project'),
+            'shift_id' => $request->input('shift_id'),
+            'os' => $request->input('os'),
+            'browser' => $request->input('browser'),
+            'status_absensi' => $request->input('status_absensi'),
+            'status_akun' => $request->input('status_akun'),
+            'konfirmasi_email' => $request->input('konfirmasi_email')
+        ]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                ['user update' => $users]
+            );
+        };
+
+        return redirect()->route('mitra.detailprofil', $users->id)->with('success', 'Data pengguna berhasil diperbarui.');
+    }
     public function showKategoriPenilaian(Request $request)
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
@@ -184,14 +238,14 @@ class ContributorForMitra extends Controller
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-                'message' => 'Daftar Shift', 
+                'message' => 'Daftar Shift',
                 'shift' => $shift,
             ], 200);
         } else {
             return view('mitra-pengaturan.manage-shift', compact('shift'));
         }
     }
-   
+
 
     public function addShift(Request $request)
     {
@@ -211,6 +265,7 @@ class ContributorForMitra extends Controller
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
             'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat')
         ]);
 
         $data->save();
@@ -245,7 +300,7 @@ class ContributorForMitra extends Controller
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data shift']);
     }
 
     public function deleteShift($id)
@@ -254,11 +309,10 @@ class ContributorForMitra extends Controller
 
         if ($shift) {
             $shift->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan ID $id"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
-    }
+}
 
     public function laporanPresensi(Request $request)
     {

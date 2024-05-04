@@ -72,11 +72,10 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="infoDropdown">
-                                        <li><a class="dropdown-item" href="/contributorformitra-devisi-LihatProfil">Lihat
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('mitra.detailprofil', $item->id) }}">Lihat
                                                 Profil
                                                 Mahasiswa</a></li>
-                                        <li><a class="dropdown-item" href="#"></a></li>
-
                                     </ul>
                                 </div>
                             </td>

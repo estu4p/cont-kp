@@ -45,7 +45,7 @@ class User extends Authenticatable
         'divisi_id',
         'shift_id',
         'paket_id',
-        'project_id'
+        'project'
 
     ];
 

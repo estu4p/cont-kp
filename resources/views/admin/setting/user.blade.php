@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.masterAfterPay')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/adminAfter.css') }}">
@@ -382,7 +382,7 @@
         var modal = $('#userModal');
         var modalTitle = modal.find('.modal-title');
         var submitButton = modal.find('.modal-footer button');
-        
+
         // Dynamically set title and submit button text based on action
         if (action === 'add') {
             modalTitle.text('Add ' + role);

@@ -441,10 +441,13 @@ class AdminUnivAfterPaymentController extends Controller
     {
         $user = auth()->user();
         $users = User::where('role_id', 3)->get();
+
+        $user = User::where('role_id', 3)->get();
+
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json($user);
         } else {
-            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user', 'users'));
+            return view('adminUniv-afterPayment.mitra.Option-TeamAktif-SeeAllTeams', compact('user'));
         }
     }
 
@@ -998,10 +1001,15 @@ class AdminUnivAfterPaymentController extends Controller
 
 
 
-    // Controller
-    public function Pengaturpresensi(Request $request)
-    {
-        // Periksa jika permintaan adalah metode POST
+
+
+// Controller
+public function Pengaturpersensi(Request $request)
+{
+   // Periksa jika permintaan adalah metode POST
+ 
+    // Tangani permintaan dari formulir
+    $pilihan = $request->input('pilihan');
 
         // Tangani permintaan dari formulir
         $pilihan = $request->input('pilihan');

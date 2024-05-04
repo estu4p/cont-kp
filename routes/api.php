@@ -133,13 +133,17 @@ Route::get('/lihatpenilaian/{id}', [SchoolController::class, 'lihatPenilaian'])-
 Route::get('daftar-divisi/{id}', [ContributorForMitra::class, 'showDaftarDivisi']);
 Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi']);
 
-Route::get('show-divisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::get('show-divisi', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
 Route::post('add-divisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
 Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::put('update-divisi/{id}', [ContributorForMitra::class, 'updateDivisi']);
 Route::delete('delete-divisi/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 Route::get('/show-data-mahasiswa/{id}', [ContributorForMitra::class, 'showDataMahasiswa']);
+Route::get('/show-detail-mahasiswa/{id}', [ContributorForMitra::class, 'detailProfil']);
+Route::post('/mitra-edit-detail-profile/{id}', [ContributorForMitra::class, 'editDetailProfil']);
+
+
 Route::get('kategori-penilaian', [ContributorForMitra::class, 'showKategoriPenilaian']);
 Route::post('add-kategori-penilaian', [ContributorForMitra::class, 'addKategoriPenilaian']);
 Route::post('add-sub-kategori-penilaian', [ContributorForMitra::class, 'addSubKategoriPenilaian']);
