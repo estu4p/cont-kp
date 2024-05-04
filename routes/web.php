@@ -877,9 +877,8 @@ Route::delete('/contributorformitra-deleteFoto/{id}', [ContributorForMitra::clas
 Route::get('/contributorformitra-devisi', [ContributorForMitra::class, 'showDaftarDivisi'])->name('mitra.divisi');
 Route::get('/contributorformitra-devisi-Seeallteams/{id}', [ContributorForMitra::class, 'showAllTeams'])->name('mitra.allteams');
 
-Route::get('/contributorformitra-devisi-LihatProfil', function () {
-    return view('contributorformitra.Lihat-Profil-Mahasiswa');
-});
+Route::get('/contributorformitra-devisi-LihatProfil/{id}', [ContributorForMitra::class, 'detailProfil'])->name('mitra.detailprofil');
+Route::post('/mitra-edit-detail-profile/{id}', [ContributorForMitra::class, 'editDetailProfil'])->name('mitra.editProfile');
 
 Route::get('/contributorformitra-devisi-teamaktif/{id}', [ContributorForMitra::class, 'showDataMahasiswa'])->name('mitra.divisiTeam');
 Route::get('/contributorformitra-penilaian', function () {
