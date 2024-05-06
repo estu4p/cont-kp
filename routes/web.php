@@ -258,6 +258,7 @@ Route::get('/pemagang/MyQR', function () {
 Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
+Route::get('/univ-detail-profil', [ContributorUnivController::class, 'detailUnivProfile'])->name('detail.univProfil');
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');

@@ -12,7 +12,7 @@
                       <span class="badge">3</span>
                   </i>
               </div>
-              <a href="#" style="text-decoration: none; color: #000;">
+              <a href="{{ route('detail.univProfil') }}" style="text-decoration: none; color: #000;">
                   <div class="d-flex justify-content-evenly flex-row ">
                       <div class="navbar-profile">
                           <span class="profile-name" style="font-weight: bold;">Lala Lisa</span>
