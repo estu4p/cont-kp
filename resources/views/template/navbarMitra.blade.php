@@ -9,7 +9,7 @@
       <div class="ml-5  mr-2">
         <i class="bi bi-bell" style="font-size: 30px; position: relative;">
           <!-- Bulatan notifikasi -->
-          <span class="badge">3</span>
+          <span class="tes">3</span>
         </i>
       </div>
       <a href="/contributorformitra-editprofile" style="text-decoration: none; color: #000;">

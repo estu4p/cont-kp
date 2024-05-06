@@ -10,11 +10,8 @@
 
 .jangkawaktu {
     margin-top: 100px;
-
     width: 230px;
     margin-left: -30px;
-
-
 }
 
 .riwayatpembelian {
@@ -144,10 +141,18 @@
   }
 
   .button-with-icon:hover {
-    background-color: #A4161A33;
-    color: #A4161A;
+    font-weight: bold;
   }
 
+  .button-with-icon.active {
+    text-decoration: none;
+    font-weight: bolder ;
+    background: rgba(164, 22, 26, 0.2);
+    background-size: 1% auto;
+    background-size: 10%;
+    border-radius: 0px 38px 38px 0px;
+    color: #A4161A;
+}
   .button-with-icon i {
     margin-right: 20px;
   }

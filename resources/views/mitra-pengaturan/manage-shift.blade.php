@@ -21,7 +21,7 @@
         <h3 class="card-title">Pengaturan</h3>
 
     </div>
-    <a class="" href="{{ route('mitra.showdivisi') }}">
+    <a class="" href="{{ route('mitra.divisi') }}">
         <div class="nav-devisi">
             <li>Manage Divisi</li>
         </div>
@@ -120,15 +120,15 @@
                 <div class="modal-body">
                     <div class="grupinpu">
                         <div><label for="detail" class="labelmodal">Detail</label></div>
-                        <input type="text" name="nama_shift" class="inputmodal" id="editDetail" placeholder="Masukkan nama shift">
+                        <input type="text" name="nama_shift" class="inputmodal" id="editDetail" placeholder="Masukkan nama shift" value="{{$item->nama_shift}}">
                     </div>
                     <div class="grupinput">
                         <div><label for="jaml" class="labelmodal">Jam</label></div>
-                        <input type="text" name="jam_masuk" class="inputmodal" id="editJam" placeholder="06:30:00 - 18:00:00">
+                        <input type="text" name="jam_masuk" class="inputmodal" id="editJam" placeholder="Masukkan jam masuk - keluar" value="{{$item->jam_masuk}}">
                     </div>
                     <div class="grupinput">
                         <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
-                        <input type="text" name="istirahat" class="inputmodal" id="editIstirahat" placeholder="06:30:00 - 18:00:00">
+                        <input type="text" name="istirahat" class="inputmodal" id="editIstirahat" placeholder="Masukkan jam istirahat" value="{{$item->istirahat}}">
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -15,11 +15,11 @@
         <a href="/AdminSistem-Editprofile" style="text-decoration: none; color: #000;">
           <div class="d-flex justify-content-evenly flex-row ">
             <div class="navbar-profile">
-              <span class="profile-name fw-bold">{{ $userAdmin->nama_lengkap }}</span>
-              <span class="profile-status">{{ $userAdmin->status_akun }}</span>
+              <span class="profile-name fw-bold">nesinta</span>
+              <span class="profile-status">admin</span>
             </div>
             <div class="navbar-logo">
-              <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png" }}" style="border-radius: 50%;" alt="Profile Logo">
+              <img src= {{asset ('assets/images/atun.png')}}style="border-radius: 50%;" alt="Profile Logo">
             </div>
           </div>
         </a>

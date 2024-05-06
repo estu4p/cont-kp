@@ -20,17 +20,17 @@ class ContributorUnivController extends Controller
         $datasiswa = Presensi::with('user')->where('nama_lengkap', $id)->first();
         $presensi = Presensi::where('nama_lengkap', $id)->get();
 
-    // Menangani kasus di mana siswa tidak ditemukan
-    if (!$datasiswa) {
-        abort(404); // Tampilkan halaman 404 jika siswa tidak ditemukan
+        // Menangani kasus di mana siswa tidak ditemukan
+        if (!$datasiswa) {
+            abort(404); // Tampilkan halaman 404 jika siswa tidak ditemukan
+        }
+
+        // Mengambil data presensi siswa menggunakan relasi antara User dan Presensi
+        // $presensi_siswa = $datasiswa->presensi;
+
+        // Mengirim data siswa dan presensi ke view
+        return view('presensi.datapresensisiswa', compact('datasiswa', 'presensi'));
     }
-
-    // Mengambil data presensi siswa menggunakan relasi antara User dan Presensi
-    // $presensi_siswa = $datasiswa->presensi;
-
-    // Mengirim data siswa dan presensi ke view
-    return view('presensi.datapresensisiswa', compact('datasiswa', 'presensi'));
-}
 
     public function DataPresensi()
     {
@@ -142,4 +142,16 @@ class ContributorUnivController extends Controller
         ]);
     }
     
+    public function detailUnivProfile(Request $request)
+    {
+        // $profil = User::find($id);
+        $user = auth()->user();
+        if ($request->is("api/*") || $request->wantsJson()) {
+            return response()->json([
+                'profil' => $user
+            ]);
+        } else {
+            return view('contributorforuniv.editProfile', compact('user'));
+        }
+    }
 }

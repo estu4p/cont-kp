@@ -88,6 +88,16 @@
     color: white;
     font-size: 10px;
 }
+.tes {
+  position: absolute;
+  top: -2 px;
+  right: -5px;
+  padding: 5px 8px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  font-size: 10px;
+}
 
 /* CSS untuk menyembunyikan bulatan notifikasi jika tidak ada notifikasi */
 .badge:empty {
