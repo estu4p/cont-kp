@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             MitraSeeder::class,
             ShiftSeeder::class,
             PaketSeeder::class,
-            ProjectSeeder::class,
             SekolahSeeder::class,
             UserSeeder::class,
             PresensiSeeder::class,

@@ -24,6 +24,7 @@ class Divisi extends Model
 
     public function namaDivisi()
     {
-        return $this->belongsTo(User::class, 'nama_lengkap');
+        return $this->belongsTo(User::class, 'nama_lengkap','email');
     }
+    
 }

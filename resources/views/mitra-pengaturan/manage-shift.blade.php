@@ -21,12 +21,12 @@
         <h3 class="card-title">Pengaturan</h3>
 
     </div>
-    <a class="" href="/manage-devisi">
+    <a class="" href="{{ route('mitra.showdivisi') }}">
         <div class="nav-devisi">
             <li>Manage Divisi</li>
         </div>
     </a>
-    <a class=" " href="/manage-shift">
+    <a class=" " href="{{ route('mitra.showshift') }}">
         <div class="nav-devisi" style="background-color:  #f9caca; font-weight: bold;">
             <li>Manage Shift</li>
         </div>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <button type="button" class="tambah bg my-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
             </svg>
@@ -72,134 +72,112 @@
             <table class="table  table-striped" id="examplee">
                 <thead>
                     <tr>
-                        <th scope="col"  class="ratatengah">No</th>
+                        <th scope="col" class="ratatengah">No</th>
                         <th scope="col">Detail</th>
                         <th scope="col">Jam</th>
                         <th scope="col">Istirahat</th>
-                        <th scope="col"  class="ratatengah">aksi</th>
+                        <th scope="col" class="ratatengah">aksi</th>
                     </tr>
                 </thead>
                 <tbody>
 
+                    @foreach($shift as $shifts)
+                    @csrf
+
                     <tr>
-                        <td  class="ratatengah">1</td>
-                        <td>Shift Full Time</td>
-                        <td>07:30:00 - 18:00:00</td>
-                        <td>13:30:00 - 15:00:00</td>
-                        <td  class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(0)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(0)" type="button">Hapus</button>
+                        <td class="ratatengah">{{ $loop->iteration }}</td>
+                        <td>{{ $shifts->nama_shift}}</td>
+                        <td>{{ $shifts->jam_masuk }}</td>
+                        <td>{{ $shifts->istirahat }}</td>
+                        <td class="ratatengah">
+                            <form action="{{ route('mitra.deleteshift', ['id' => $shifts->id]) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-edit btn-sm" data-idUpdate="'.$shift->id'" data-bs-target="#editModal{{$shifts->id}}" data-bs-toggle="modal" type="button">Edit</button>
+
+                                <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="return showdeletemodal(event)" type="button">Hapus</button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td  class="ratatengah">2</td>
-                        <td>Shift Pagi</td>
-                        <td>06:30:00 - 13:00:00</td>
-                        <td>-</td>
-                        <td  class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td  class="ratatengah">3</td>
-                        <td>Shift Middle</td>
-                        <td>09:00:00 - 17:00:00</td>
-                        <td>12:00:00 - 13:00:00</td>
-                        <td  class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(2)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(2)" type="button">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td  class="ratatengah">4</td>
-                        <td>Shift Siang</td>
-                        <td>13:00:00 - 21:00:00</td>
-                        <td>18:00:00 - 19:00:00</td>
-                        <td  class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(3)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(3)" type="button">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ratatengah">5</td>
-                        <td>Shift Malam</td>
-                        <td>16:00:00 - 23:00:00</td>
-                        <td>-</td>
-                        <td  class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(4)" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="edeleteDivisi(4)" type="button">Hapus</button>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Modal edit shif -->
-<div class="modal fade modal-sm" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal edit shift -->
+@foreach($shift as $item)
+<div class="modal fade modal-sm" id="editModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Shift</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form action="{{route('mitra.updateShift', $item->id)}}" method="post">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Shift</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="grupinpu">
+                        <div><label for="detail" class="labelmodal">Detail</label></div>
+                        <input type="text" name="nama_shift" class="inputmodal" id="editDetail" placeholder="Masukkan nama shift">
+                    </div>
+                    <div class="grupinput">
+                        <div><label for="jaml" class="labelmodal">Jam</label></div>
+                        <input type="text" name="jam_masuk" class="inputmodal" id="editJam" placeholder="06:30:00 - 18:00:00">
+                    </div>
+                    <div class="grupinput">
+                        <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
+                        <input type="text" name="istirahat" class="inputmodal" id="editIstirahat" placeholder="06:30:00 - 18:00:00">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="buttongrup gap-3">
+                        <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="grupinpu">
-                    <div><label for="detail" class="labelmodal">Detail</label></div>
-                    <input type="text" class="inputmodal" id="editDetail" placeholder="Masukkan nama shift">
-                </div>
-                <div class="grupinput">
-                    <div><label for="jaml" class="labelmodal">Jam</label></div>
-                    <input type="text" class="inputmodal" id="editJam" placeholder="07:30:00 - 18:00:00">
-                </div>
-                <div class="grupinput">
-                    <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
-                    <input type="text" class="inputmodal" id="editIstirahat" placeholder="07:30:00 - 18:00:00">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="buttongrup gap-3">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
-                </div>
-            </div>
-        </div>
+        </form>
+
     </div>
 </div>
-
+@endforeach
 
 <!-- Modal tambah shif -->
 
 <div class="modal fade modal-sm" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Shift</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form action="{{route('mitra.addShift')}}" method="post">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Shift</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="grupinpu">
+                        <div><label for="detail" class="labelmodal">Detail</label></div>
+                        <input type="text" name="nama_shift" class="inputmodal inputdetail" placeholder="Masukkan nama shift">
+                    </div>
+                    <div class="grupinput">
+                        <div><label for="jaml" class="labelmodal">Jam</label></div>
+                        <input type="text" name="jam_masuk" class="inputmodal inputjam" placeholder="Masukkan jam masuk - keluar">
+                    </div>
+                    <div class="grupinput">
+                        <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
+                        <input type="text" name="istirahat" class="inputmodal inputistirahat" placeholder="Masukkan jam istirahat">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="button-grup gap-3">
+                        <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="grupinpu">
-                    <div><label for="detail" class="labelmodal">Detail</label></div>
-                    <input type="text" class="inputmodal inputdetail" placeholder="Masukkan nama shift">
-                </div>
-                <div class="grupinput">
-                    <div><label for="jaml" class="labelmodal">Jam</label></div>
-                    <input type="text" class="inputmodal inputjam" placeholder="Masukkan jam masuk - keluar">
-                </div>
-                <div class="grupinput">
-                    <div><label for="Istirahat" class="labelmodal">Istirahat</label></div>
-                    <input type="text" class="inputmodal inputistirahat" placeholder="Masukkan jam istirahat">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="button-grup gap-3">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
-                </div>
-            </div>
-        </div>
+        </form>
+
     </div>
 </div>
 
@@ -219,7 +197,7 @@
             "<td>" + istirahat + "</td>" +
             "<td class = 'ratatengah'>" +
             "<button class='btn btn-edit btn-sm' data-bs-target='#editModal' data-bs-toggle='modal' onclick='editModal(5)' type='button'>Edit</button>" +
-            "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='deleteDivisi(5)' type='button'>Hapus</button>" +
+            "<button class='btn btn-danger btn-sm tomboll' data-bs-target='#hapusModal' data-bs-toggle='modal' onclick='deleteShift(5)' type='button'>Hapus</button>" +
             "</td>" +
             "</tr>";
 
@@ -231,7 +209,7 @@
             title: "Berhasil !",
             icon: "success",
             text: "Perubahan berhasil disimpan",
-            timer: 2000, // Pesan akan ditutup otomatis setelah 3 detik
+            timer: 10000, // Pesan akan ditutup otomatis setelah 3 detik
             buttons: false // Sembunyikan tombol "OK"
         });
     }
@@ -278,7 +256,7 @@
             title: "Berhasil !",
             icon: "success",
             text: "Perubahan berhasil disimpan",
-            timer: 3000, // Pesan akan ditutup otomatis setelah 3 detik
+            timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
             buttons: false // Sembunyikan tombol "OK"
         });
     }
@@ -309,31 +287,35 @@
             });
     }
 
-    function deleteDivisi(index) {
-        // Tampilkan modal konfirmasi penghapusan
+    // Fungsi untuk menampilkan modal konfirmasi penghapusan
+    function showdeletemodal(event) {
+        event.preventDefault();
         swal({
             title: "Hapus",
-            text: "Apakah Anda ingin menghapus divisi ini?",
+            text: "Apakah anda yakin ingin menghapus!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-        }).then((willDelete) => {
+        })
+        .then((willDelete) => {
             if (willDelete) {
-                // Hapus baris divisi dari tabel
-                document.querySelector('#examplee tbody').deleteRow(index);
-
-                // Tampilkan pesan sukses
-                swal("Berhasil!", "Divisi berhasil dihapus.", {
+                // Jika pengguna mengonfirmasi penghapusan, submit form
+                event.target.closest('.delete-form').submit();
+                // Tampilkan notifikasi sukses
+                swal({
+                    title: "Berhasil !",
                     icon: "success",
-                    timer: 1500,
-                    buttons: false
+                    text: "Data berhasil dihapus",
+                    timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
+                    buttons: false // Sembunyikan tombol "OK"
                 });
-            } else {
-                // Tampilkan pesan bahwa data aman
-                swal("Data Anda aman.");
-            }
+                
+                } else {
+                    swal("Penghapusan dibatalkan.");
+                }
         });
     }
+
 </script>
 
 

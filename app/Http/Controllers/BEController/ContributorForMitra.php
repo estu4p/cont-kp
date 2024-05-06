@@ -10,12 +10,13 @@ use App\Models\Divisi;
 use App\Models\Sekolah;
 use App\Models\Presensi;
 use App\Models\Penilaian;
+use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -27,27 +28,49 @@ use Illuminate\Validation\ValidationException;
 class ContributorForMitra extends Controller
 {
 
-    public function showDaftarDivisi(Request $request, $id)
+    public function showDaftarDivisi(Request $request)
 
     {
-        $user = User::find($id);
-
-        $divisi = DivisiItem::with('divisi')->get();
-
+        $user = auth()->user();
+        $query = $request->input('query');
+        $divisi = DivisiItem::with('divisi')
+            ->whereHas('divisi', function ($q) use ($query) {
+                $q->where('nama_divisi', 'like', "%$query%");
+            })
+            ->get();
         if ($request->is('api/*') || $request->wantsJson()) {
 
             return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi, 'user' => $user]);
         } else {
-            return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);        
+            return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);
         }
     }
 
-    public function showAllTeams($id)
+    public function showAllTeams(Request $request, $id)
     {
         $user = User::find($id);
-
         $users = User::where('role_id', 3)->where('mitra_id', $id)->get();
         return view('contributorformitra.devisi-Seeallteams', compact('users', 'user'));
+    }
+    public function showDataMahasiswa(Request $request, $id)
+    {
+        $user = auth()->user();
+        $query = $request->input('query');
+
+        $usersQuery = User::where('role_id', 3)
+            ->where('divisi_id', $id)
+            ->where('nama_lengkap', 'like', "%$query%");
+
+        // Jika Anda ingin menyaring berdasarkan kolom tertentu atau mengurutkan hasil pencarian, Anda dapat menambahkan kode berikut
+        // Contoh pengurutan berdasarkan nama_lengkap secara default
+        $usersQuery->orderBy('nama_lengkap');
+
+        // Jika Anda ingin menggunakan pagination untuk membatasi jumlah pengguna yang ditampilkan per halaman
+        $users = $usersQuery->paginate(10); // 10 adalah jumlah item per halaman, sesuaikan sesuai kebutuhan
+
+        $divisi = Divisi::find($id);
+
+        return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
     }
     public function addDivisi(Request $request)
     {
@@ -99,10 +122,63 @@ class ContributorForMitra extends Controller
         if ($data) {
             $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
             $data->delete();
-            return back()->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
+            return view('mitra-pengaturan.manage-devisi')->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
         }
     }
 
+    public function detailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        // dd($users);
+        $shift = Shift::all();
+        if ($user) {
+            $divisiPerMitra = $user->mitra_id;
+        } else {
+            return response()->json([
+                'message' => 'Data User Mitra tidak ditemukan'
+            ]);
+        }
+
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $divisiPerMitra)->get();
+        // dd($divisi);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                [
+                    'user detail' => $users,
+                    'divisi' => $divisi,
+                    'divisi mitra' => $divisiPerMitra
+                ]
+            );
+        }
+        return view("contributorformitra.Lihat-Profil-Mahasiswa", compact('user', 'users', 'divisi', 'shift'));
+    }
+
+    public function editDetailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        $users->update([
+            'tgl_masuk' => $request->input('tgl_masuk'),
+            'tgl_keluar' => $request->input('tgl_keluar'),
+            'divisi_id' => $request->input('divisi_id'),
+            'project' => $request->input('project'),
+            'shift_id' => $request->input('shift_id'),
+            'os' => $request->input('os'),
+            'browser' => $request->input('browser'),
+            'status_absensi' => $request->input('status_absensi'),
+            'status_akun' => $request->input('status_akun'),
+            'konfirmasi_email' => $request->input('konfirmasi_email')
+        ]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                ['user update' => $users]
+            );
+        };
+
+        return redirect()->route('mitra.detailprofil', $users->id)->with('success', 'Data pengguna berhasil diperbarui.');
+    }
     public function showKategoriPenilaian(Request $request)
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
@@ -156,53 +232,60 @@ class ContributorForMitra extends Controller
         ]);
     }
 
-    public function showDataShift(Request $request)
+    public function showShift(Request $request)
     {
         $shift = Shift::all();
+
         if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json(['success' => true, 'nilai' => $shift], 200);
+            return response()->json([
+                'message' => 'Daftar Shift',
+                'shift' => $shift,
+            ], 200);
         } else {
-            return view('manage.datashift', ['shift' => $shift]);
+            return view('mitra-pengaturan.manage-shift', compact('shift'));
         }
     }
 
+
     public function addShift(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
-            'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nama_shift' => 'required',
+        //     'jml_jam_kerja' => 'required',
+        //     'jam_masuk' => 'required',
+        //     'jam_pulang' => 'required',
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $data = new Shift([
             'nama_shift' => $request->input('nama_shift'),
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
             'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat')
         ]);
 
         $data->save();
-
-        return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
+        return redirect('/manage-shift');
+        // return response()->json(['success' => true, 'message' => 'Berhasil menambahkan data shift'], 200);
     }
 
     public function updateShift($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_shift' => 'required',
-            'jml_jam_kerja' => 'required',
+            // 'jml_jam_kerja' => 'required',
             'jam_masuk' => 'required',
-            'jam_pulang' => 'required',
+            'istirahat' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['message' => 'Gagal update data shift',], 404);
         }
+
         $data = Shift::find($id);
         if (!$data) {
             return response()->json(['message' => 'Data shift tidak ditemukan'], 404);
@@ -212,23 +295,22 @@ class ContributorForMitra extends Controller
             'nama_shift' => $request->input('nama_shift'),
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
-            'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat'),
         ]);
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data shift']);
     }
 
-    public function destroyShift($id)
+    public function deleteShift($id)
     {
-        $data = Shift::find($id);
-        if ($data) {
-            $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
-            $data->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan id $deletedId"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
+        $shift = Shift::find($id);
+
+        if ($shift) {
+            $shift->delete();
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
     }
 
@@ -1052,6 +1134,21 @@ class ContributorForMitra extends Controller
         } catch (\Exception $e) {
             $errorMessage = strip_tags($e->getMessage());
             return response()->json(['error' => $errorMessage]);
+        }
+    }
+
+    public function Divisi()
+    {
+        // Ambil semua data devisi
+        $devisiList = Divisi::all();
+
+        // Loop melalui setiap devisi
+        foreach ($devisiList as $devisi) {
+            // Ambil semua user yang memiliki devisi_id yang sesuai dengan id devisi saat ini
+            $users = User::where('divisi')->first();
+
+            // Kirim data devisi beserta anggotanya ke view
+            return view('contributorformitra.devisi', compact('devisiList', 'users', 'devisi'));
         }
     }
 }

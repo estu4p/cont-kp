@@ -10,11 +10,12 @@
         <a href="/RiwayatJangkaWaktu" style="text-decoration: none;">
             <button class="button-with-icon jangkawaktu"><i class="fas fa-history"></i> Jangka Waktu</button>
         </a>
-        <a href="/RiwayatPembelian" style="text-decoration: none;">
-            <button class="button-with-icon riwayatpembelian"><i class="fas fa-history"></i> Riwayat Pembelian</button>
+        <a href="/RiwayatPembelian" style="text-decoration: none;" >
+            <button class="button-with-icon riwayatpembelian {{ Request::is('RiwayatPembelian') ? 'active' : '' }}"><i class="fas fa-history"></i> Riwayat Pembelian</button>
         </a>
     </div>
     <div class="isie">
+        <h3 style="padding-left: 20%">Riwayat Pembelian</h3>
         @foreach ($paket as $data)
             <div class="kartu">
                 <p class="stt">Status</p>

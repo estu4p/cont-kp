@@ -1,4 +1,3 @@
-@include('template.navbar-super', ['superAdmin', $superAdmin])
 @extends('layouts.superadmin')
 
 @section('content')
