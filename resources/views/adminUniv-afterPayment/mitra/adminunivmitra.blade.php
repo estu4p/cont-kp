@@ -95,7 +95,7 @@
                                 <input type="file" name="foto_profil"> <br>
 
                                 <label for="">Nama mitra</label> <br>
-                                <input type="text" name="nama_lengkap" id=""> <br>
+                                <input type="text" name="nama" id=""> <br>
 
                                 <label for="">Username</label> <br>
                                 <input type="text" name="username"> <br>
