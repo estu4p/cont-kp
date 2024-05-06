@@ -45,6 +45,23 @@ class ContributorForMitra extends Controller
         }
     }
 
+    public function divisiMitra(Request $request)
+    {
+        $query = $request->input('query');
+        $divisi = DivisiItem::with('divisi')
+            ->whereHas('divisi', function ($q) use ($query) {
+                $q->where('nama_divisi', 'like', "%$query%");
+            })
+            ->get();
+            // dd($divisi);
+        if ($request->is('api/*') || $request->wantsJson()) {
+
+            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('mitra-pengaturan.manage-devisi', ['divisi' => $divisi]);
+        }
+    }
+
     public function showAllTeams(Request $request, $id)
     {
         $user = User::find($id);
@@ -71,6 +88,7 @@ class ContributorForMitra extends Controller
 
         return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
     }
+    
     public function addDivisi(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -85,43 +103,45 @@ class ContributorForMitra extends Controller
         if ($request->hasFile('foto_divisi')) {
             $image = $request->file('foto_divisi');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('public/images/' . $filename);
+            $path = public_path('images/' . $filename);
             $image->move($path);
         }
 
-        $data = new Divisi([
+        $data = new DivisiItem([
             'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
             'foto_divisi' => $filename,
         ]);
 
         $data->save();
-
-        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menambahkan divisi']);
+        return redirect('/manage-divisi');
     }
+
     public function updateDivisi(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
+            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => 'Gagal update divisi',], 404);
         }
-        $data = Divisi::find($id);
-        $data->fill([
+        $divisi = DivisiItem::find($id);
+        $divisi->fill([
             'nama_divisi' => $request->nama_divisi,
-            'deskripsi_divisi' => $request->deskripsi_divisi
+            'foto_divisi' => $request->foto_divisi
         ]);
-        $data->save();
-        return response()->json(['success' => true, 'message' => 'Berhasil update divisi', 'data' => $data], 200);
+        $divisi->save();
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data divisi']);
     }
+
     public function deleteDivisi($id)
     {
-        $data = Divisi::find($id);
-        if ($data) {
-            $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
-            $data->delete();
-            return view('mitra-pengaturan.manage-devisi')->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
+        $divisi = DivisiItem::find($id);
+
+        if ($divisi) {
+            $divisi->delete();
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
     }
 
