@@ -17,7 +17,7 @@
             <a class="nav-link  {{ Request::is('AdminPaket') ? 'active' : '' }}" href="/AdminPaket">Paket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  {{ Request::is('RiwayatJangkaWaktu') ? 'active' : '' }}" href="/RiwayatJangkaWaktu">Riwayat</a>
+            <a class="nav-link  {{ Request::is('RiwayatJangkaWaktu','RiwayatPembelian') ? 'active' : '' }}" href="/RiwayatJangkaWaktu">Riwayat</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('logout.admin') }}">
