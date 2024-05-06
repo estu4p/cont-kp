@@ -258,6 +258,7 @@ Route::get('/pemagang/MyQR', function () {
 Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.mahasiswa');
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
+Route::get('/univ-detail-profil', [ContributorUnivController::class, 'detailUnivProfile'])->name('detail.univProfil');
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
@@ -298,13 +299,13 @@ Route::get('/kategoripenilaian', function () {
 
 
 // Contributor For mitra - Penilaian Mahasiswa
-Route::get('/input-nilai', function () {
-    return view('penilaian-siswa.input-nilai');
-})->name('input-nilaimhs');
+// Route::get('/input-nilai', function () {
+//     return view('penilaian-siswa.input-nilai');
+// })->name('input-nilaimhs');
 
-Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
+// Route::get('/input-nilai/{nama_lengkap}',  [PenilaianMitraController::class, 'input_nilai'])->name('input-nilai');
 
-Route::post('/input-nilai/{user_id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
+// Route::post('/input-nilai/{user_id}',  [PenilaianMitraController::class, 'penilaianPost'])->name('input-nilai.store');
 
 
 Route::get('/MitraPresensiDetailHadir', function () {
