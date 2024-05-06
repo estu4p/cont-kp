@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\BEController;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Subscription;
+use App\Models\User;
 use App\Models\Paket;
+use App\Models\Riwayat;
 use App\Models\Sekolah;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Subscription;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class UserAdminSistemController extends Controller
@@ -32,8 +34,7 @@ class UserAdminSistemController extends Controller
         } else {
             return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'paket', 'allSekolah']));
         }
-    }
-    public function storeSubs(Request $request)
+    } public function storeSubs(Request $request)
     {
         // Validasi input jika diperlukan
         $request->validate([
