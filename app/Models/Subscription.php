@@ -15,7 +15,6 @@ class Subscription extends Model
     {
         return $this->belongsTo(User::class, 'nama_lengkap', 'id');
     }
-
     public function paket()
     {
         return $this->belongsTo(Paket::class, 'paket_id', 'id');
