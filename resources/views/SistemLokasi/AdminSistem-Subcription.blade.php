@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="hidden" name="nama" value="{{$subscription->user->id}}">
+                                    <input type="hidden" name="nama" value="{{$subscription->user->user_id}}">
                                     <input type="text" class="inputt" id="nama" value="{{$subscription->user->nama_lengkap}}">
                                 </div>
                                 <div class="form-group">
