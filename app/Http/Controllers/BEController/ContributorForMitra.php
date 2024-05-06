@@ -1,8 +1,3 @@
-
-
-
-
-
 <?php
 
 namespace App\Http\Controllers\BEController;
@@ -317,7 +312,7 @@ class ContributorForMitra extends Controller
 
             return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
-}
+    }
 
     public function laporanPresensi(Request $request)
     {
@@ -1142,19 +1137,18 @@ class ContributorForMitra extends Controller
         }
     }
 
-public function Divisi()
+    public function Divisi()
     {
         // Ambil semua data devisi
         $devisiList = Divisi::all();
-        
+
         // Loop melalui setiap devisi
         foreach ($devisiList as $devisi) {
             // Ambil semua user yang memiliki devisi_id yang sesuai dengan id devisi saat ini
             $users = User::where('divisi')->first();
-            
+
             // Kirim data devisi beserta anggotanya ke view
-            return view('contributorformitra.devisi', compact('devisiList', 'users','devisi'));
+            return view('contributorformitra.devisi', compact('devisiList', 'users', 'devisi'));
         }
     }
 }
-
