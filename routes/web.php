@@ -647,7 +647,7 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
-Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
+Route::get('/manage-devisi', [ContributorForMitra::class, 'divisiMitra'])->name('mitra.divisi');
 Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
 Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');

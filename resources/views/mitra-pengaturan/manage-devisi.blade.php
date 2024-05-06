@@ -19,7 +19,7 @@
     <div class="card-header">
         <h3 class="card-title">Pengaturan</h3>
     </div>
-    <a class="" href="{{ route('mitra.showdivisi') }}">
+    <a class="" href="{{ route('mitra.divisi') }}">
         <div class="nav-devisi" style="background-color:  #f9caca; font-weight: bold;">
             <li>Manage Divisi</li>
         </div>
@@ -67,18 +67,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($divisi as $division)
 
-                @foreach($divisi as $division)
-                @csrf
                     <tr>
                         <td class="ratatengah">{{ $loop->iteration }}</td>
-                        <td>{{ $division->nama_divisi}}</td>
+                        <td>{{ $division->divisi->nama_divisi }}</td>
 
                         <td class="ratatengah"><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>
 
                         <td class="ratatengah">
-                            <button class="btn btn-edit btn-sm" data-idUpdate="'.$division->id'" data-bs-target="#editModal{{$division->id}}" data-bs-toggle="modal" type="button">Edit</button>
-                            <button class="btn btn-danger btn-sm" data-id="{{ $division->id }}" type="button" onclick="deleteDivisi(this)">Hapus</button>
+                            <form action="{{ route('mitra.deletedivisi', ['id' => $division->id]) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-edit btn-sm" data-idUpdate="'.$shift->id'" data-bs-target="#editModal{{$division->id}}" data-bs-toggle="modal" type="button">Edit</button>
+                                <button class="btn btn-danger btn-sm" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="return showdeletemodal(event)" type="button">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -93,37 +96,37 @@
 @foreach($divisi as $item)
 <div class="modal fade modal-sm" id="editModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form action="{{route('mitra.updateDivisi', $item->id)}}" method="POST">
-        @csrf
-        <div class="modal-content space">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="textdivisi">Edit Divisi</div>
-                <div class="tambahgambar gap-3">
-                    <div class="gambar border d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-pen-nib" style="transform: rotate(90deg);"></i>
-                        <input type="file" id="fileInput" style="display: none;">
+    <form id="editDivisiForm" action="{{route('mitra.updatedivisi', $item->id)}}" method="POST" onsubmit="return false;">
+            @csrf
+            <div class="modal-content space">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="textdivisi">Edit Divisi</div>
+                    <div class="tambahgambar gap-3">
+                        <div class="gambar border d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-pen-nib" style="transform: rotate(90deg);"></i>
+                            <input type="file" id="fileInput" style="display: none;">
+                        </div>
+                        <div>
+                            <button class="addgambar">Edit Photo</button>
+                        </div>
+                        <div>
+                            <button class="remove">Remove</button>
+                        </div>
                     </div>
-                    <div>
-                        <button class="addgambar">Edit Photo</button>
-                    </div>
-                    <div>
-                        <button class="remove">Remove</button>
+                    <div class="grupinputt">
+                        <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
+                        <input type="text" class="inputmodalll" id="editNamaDivisi" placeholder="Masukkan nama divisi">
                     </div>
                 </div>
-                <div class="grupinputt">
-                    <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                    <input type="text" class="inputmodalll" id="editNamaDivisi" placeholder="Masukkan nama divisi">
+                <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
                 </div>
             </div>
-            <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="showedit()">Simpan</button>
-            </div>
-        </div>
         </form>
     </div>
 </div>
@@ -132,70 +135,43 @@
 <!-- Modal tambah divisi -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
     <div class="modal-dialog modal-dialog-centered ">
-    <form action="{{ route('mitra.adddivisi') }}" method="post">
-        @csrf
-        <div class="modal-content space">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="textdivisi">Profil Divisi</div>
-                <div class="tambahgambar gap-3">
-                    <div class="gambar border d-flex align-items-center justify-content-center">
-                        <i class="fa-regular fa-image"></i>
-                        <input type="file" name="foto_divisi" id="fileInput" style="display: none;">
+    <form id="addDivisiForm" action="{{ route('mitra.adddivisi') }}" method="post" enctype="multipart/form-data">
+    @csrf
+            <div class="modal-content space">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="textdivisi">Profil Divisi</div>
+                    <div class="tambahgambar gap-3">
+                        <div id="fileInputContainer" class="gambar border d-flex align-items-center justify-content-center">
+                            <i class="far fa-image"></i>
+                            <input type="file" name="foto_divisi[]" class="fileInput" style="display: none;">
+                        </div>
+                        <div>
+                            <button class="addgambar">Add Photo</button>
+                        </div>
+                        <div>
+                            <button class="remove">Remove</button>
+                        </div>
                     </div>
-                    <div>
-                        <button class="addgambar">Add Photo</button>
-                    </div>
-                    <div>
-                        <button class="remove">Remove</button>
+                    <div class="grupinputt">
+                        <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
+                        <input type="text" name="nama_divisi" class="inputmodall" placeholder="Masukkan nama divisi">
                     </div>
                 </div>
-                <div class="grupinputt">
-                    <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                    <input type="text" name="nama_divisi" class="inputmodall" placeholder="Masukkan nama divisi">
+                <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
+                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
                 </div>
             </div>
-            <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
-            </div>
-        </div>
-    </form>
+        </form>
     </div>
 </div>
 
 <script>
-
-// function addDivisi() {
-//         var form = document.getElementById('formDivisi');
-//         var formData = new FormData(form);
-
-//         fetch('/add-divisi', {
-//             method: 'POST',
-//             body: formData,
-//             headers: {
-//                 'X-CSRF-Token': '{{ csrf_token() }}'
-//             }
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 alert(data.message);
-
-//                 $('#exampleModal').modal('hide');
-
-//             } else {
-//                 alert('Gagal menambahkan divisi. Silakan coba lagi.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//         });
-//     }
-
+    
     // Variabel global untuk menyimpan indeks divisi yang akan diedit
     let editedIndex = null;
 
@@ -215,32 +191,74 @@
         $('#editModal').modal('show');
     }
 
+    // // Fungsi untuk menyimpan perubahan pada divisi yang diedit
+    // function updateDivisi() {
+    //     // Dapatkan nilai input dari modal
+    //     const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
+
+    //     // Perbarui data divisi pada tabel dengan nilai yang diedit
+    //     const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
+    //     row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
+
+    //     // Tampilkan pesan sukses
+    //     swal({
+    //         title: "Berhasil !",
+    //         icon: "success",
+    //         text: "Perubahan berhasil disimpan",
+    //         timer: 1500,
+    //         buttons: false
+    //     });
+
+    //     // Tutup modal edit
+    //     $('#editModal').modal('hide');
+
+    // }
+
     // Fungsi untuk menyimpan perubahan pada divisi yang diedit
-    function updateDivisi() {
-        // Dapatkan nilai input dari modal
-        const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
+function updateDivisi() {
+    // Dapatkan nilai input dari modal
+    const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
 
-        // Perbarui data divisi pada tabel dengan nilai yang diedit
-        const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
-        row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
+    // Kirim permintaan pembaruan ke server
+    fetch(`/manage-divisi/update/${editedIndex}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            nama_divisi: editedNamaDivisi
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Jika permintaan berhasil, perbarui data pada tabel dan tampilkan pesan sukses
+            const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
+            row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
+            swal({
+                title: "Berhasil !",
+                icon: "success",
+                text: "Perubahan berhasil disimpan",
+                timer: 1500,
+                buttons: false
+            });
+            // Tutup modal edit
+            $('#editModal').modal('hide');
+        } else {
+            // Jika permintaan gagal, tampilkan pesan gagal
+            swal("Gagal!", "Terjadi kesalahan saat menyimpan perubahan.", "error");
+        }
+    })
+    .catch(error => {
+        // Jika terjadi kesalahan, tampilkan pesan gagal
+        swal("Gagal!", "Terjadi kesalahan saat menghubungi server.", "error");
+    });
+}
 
-        // Tampilkan pesan sukses
-        swal({
-            title: "Berhasil !",
-            icon: "success",
-            text: "Perubahan berhasil disimpan",
-            timer: 1500,
-            buttons: false
-        });
-
-        // Tutup modal edit
-        $('#editModal').modal('hide');
-
-    }
 
     // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
     function sowsukses() {
-    
+
         // Dapatkan nilai input dari modal
         var namaDivisi = document.querySelector('.inputmodall').value;
 
@@ -258,114 +276,77 @@
         // Sisipkan baris baru ke dalam tabel
         document.querySelector('#examplee tbody').insertAdjacentHTML('beforeend', newRow);
 
-         // AJAX di sini untuk mengirim data form ke server
-         $.ajax({
-            url: $("#addDivisiForm").attr("action"),
-            method: "POST",
-            data: $("#addDivisiForm").serialize(), // Serialize form data
-            success: function(response) {
-                swal({
-                    title: "Berhasil !",
-                    icon: "success",
-                    text: "Perubahan berhasil disimpan",
-                    timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
-                    buttons: false // Sembunyikan tombol "OK"
-                });
-            },
-            error: function(xhr, status, error) {
-                swal({
-                    title: "Gagal !",
-                    icon: "error",
-                    text: "Gagal menambahkan divisi. Silakan coba lagi.",
-                    buttons: true // Tampilkan tombol "OK"
-                });
-            }
-        });
+        // Menambahkan baris baru ke tabel
+        $("#examplee tbody").append(newRow);
+
+        // Tampilkan notifikasi sukses
+            swal({
+                title: "Berhasil !",
+                icon: "success",
+                text: "Perubahan berhasil disimpan",
+                timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
+                buttons: false // Sembunyikan tombol "OK"
+            });
     }
 
-    // function deleteDivisi(index) {
-    //     // Tampilkan modal konfirmasi penghapusan
-    //     swal({
-    //         title: "Hapus",
-    //         text: "Apakah Anda ingin menghapus divisi ini?",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     }).then((willDelete) => {
-    //         if (willDelete) {
-    //             // Hapus baris divisi dari tabel
-    //             document.querySelector('#examplee tbody').deleteRow(index);
-
-    //             // Tampilkan pesan sukses
-    //             swal("Berhasil!", "Divisi berhasil dihapus.", {
-    //                 icon: "success",
-    //                 timer: 1500,
-    //                 buttons: false
-    //             });
-    //         } else {
-    //             // Tampilkan pesan bahwa data aman
-    //             swal("Data Anda aman.");
-    //         }
-    //     });
-    // }
-
-    function deleteDivisi(button) {
-        var id = button.getAttribute('data-id');
-    console.log("ID divisi yang akan dihapus:", id);
-
-        // Tampilkan modal konfirmasi penghapusan
+    // Fungsi untuk menampilkan modal konfirmasi penghapusan
+    function showdeletemodal(event) {
+        event.preventDefault();
         swal({
             title: "Hapus",
-            text: "Apakah Anda ingin menghapus divisi ini?",
+            text: "Apakah anda yakin ingin menghapus!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-        }).then((willDelete) => {
+        })
+        .then((willDelete) => {
             if (willDelete) {
-                // Kirim permintaan penghapusan ke server
-                fetch(`/manage-devisi/delete/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Hapus baris divisi dari tabel jika penghapusan berhasil
-                    if (data.success) {
-                        document.querySelector(`#examplee tbody tr[data-id="${id}"]`).remove();
-
-                        // Tampilkan pesan sukses
-                        swal("Berhasil!", "Divisi berhasil dihapus.", {
-                            icon: "success",
-                            timer: 1500,
-                            buttons: false
-                        });
-                    } else {
-                        // Tampilkan pesan gagal jika penghapusan tidak berhasil
-                        swal("Gagal!", "Terjadi kesalahan saat menghapus divisi.", "error");
-                    }
-                })
-                .catch(error => {
-                    // Tampilkan pesan gagal jika terjadi kesalahan saat menghubungi server
-                    swal("Gagal!", "Terjadi kesalahan saat menghubungi server.", "error");
+                // Jika pengguna mengonfirmasi penghapusan, submit form
+                event.target.closest('.delete-form').submit();
+                // Tampilkan notifikasi sukses
+                swal({
+                    title: "Berhasil !",
+                    icon: "success",
+                    text: "Data berhasil dihapus",
+                    timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
+                    buttons: false // Sembunyikan tombol "OK"
                 });
-            } else {
-                // Tampilkan pesan bahwa data aman
-                swal("Data Anda aman.");
-            }
+                
+                } else {
+                    swal("Penghapusan dibatalkan.");
+                }
         });
     }
+
 
     document.querySelector('.addgambar').addEventListener('click', function() {
         document.getElementById('fileInput').click();
     });
 
-    document.getElementById('fileInput').addEventListener('change', function() {
-        var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var imageSrc = e.target.result;
-            document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;" />';
-        };
-        reader.readAsDataURL(file);
+    function addgambar() {
+        var newFileInput = document.createElement('input');
+        newFileInput.type = 'file';
+        newFileInput.name = 'foto_divisi[]';
+        newFileInput.classList.add('fileInput');
+        newFileInput.style.display = 'none';
+
+        var fileInputContainer = document.getElementById('fileInputContainer');
+        fileInputContainer.appendChild(newFileInput);
+
+        newFileInput.click(); // Membuka dialog pemilihan file secara otomatis
+    }
+
+    document.querySelectorAll('.fileInput').forEach(function(input) {
+        input.addEventListener('change', function() {
+
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imageSrc = e.target.result;
+                document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;" />';
+            };
+            reader.readAsDataURL(file);
+        });
     });
 
     document.querySelector('.remove').addEventListener('click', function() {
@@ -373,6 +354,7 @@
         document.getElementById('fileInput').value = ''; // Clear input value
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Ketika tombol "Add Photo" diklik
