@@ -6,7 +6,7 @@
     <div class="wadah">
 
         <div class="propil">
-            <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkiri">
+            <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil" id="gambarKiri">
             <div class="nama">{{ $user->nama_lengkap }}</div>
             <div class="email">{{ $user->email }}</div>
             <div class="about">About</div>
@@ -15,72 +15,79 @@
 
         <div id="preview" class="preview"></div>
         <div class="wadahedit d-flex">
-            <form action="{{ route('adminUniv.updateProfile') }}" method="POST">
-                @csrf
                 <div class=" p-5">
                     <div class="atas d-flex flex-row  col-5">
                         <div id="previewZone">
-                            <img src="assets/images/atun.png" alt="Profile Logo" class="gambarkanan">
+                            <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80"  height="80" alt="Profile Logo" id="gambarKanan">
                         </div>
                         <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
-                            <label for="imageInput" class="custom-file-upload">
-                                <span class="change">Change Photo</span>
-                                <input type="file" id="imageInput" style="display: none;">
-                            </label>
-                            <span class="remove m-0">remove</span>
+                            <form id="uploadForm" action="{{ route('univ.updateFoto', $user->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                    <label for="imageInput" class="custom-file-upload">
+                                        <button type="button" onclick="document.getElementById('imageInput').click()" style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 5px 30px; text-transform: capitalize;">
+                                            Change photo
+                                        </button>
+                                        <input type="file" name="foto_profil" id="imageInput" style="display: none;" onchange="uploadFile(event)">
+                                    </label>
+                            </form>
+                            <button onclick="showAlertDeleteProfile('{{ $user->id }}')"
+                                style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
                         </div>
                     </div>
 
-                    <div class="tengah row ">
-                        <div class="judulkanan">Personal Details</div>
-                        <div class="isi col-12 row justify-content-evenly  ">
-                            <div class="form-group  col-6   p-3">
-                                <label for="username">Nama lengkap</label>
-                                <div class="input-group mb-3">
-                                    <input class="input form-control" type="text" id="name"
-                                        placeholder="Atun Khostriatun" value="{{ $user->nama_lengkap }}"
-                                        name="nama_lengkap">
+                    <form action="{{ route('univ.updateProfile') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="tengah row ">
+                            <div class="judulkanan">Personal Details</div>
+                            <div class="isi col-12 row justify-content-evenly  ">
+                                <div class="form-group  col-6   p-3">
+                                    <label for="username">Nama lengkap</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="name"
+                                            placeholder="{{ $user->nama_lengkap }}" value="{{ $user->nama_lengkap }}"
+                                            name="nama_lengkap">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group  col-6   p-3">
-                                <label for="NoHP">No HP</label>
-                                <div class="input-group mb-3">
-                                    <input class="input form-control" type="text" id="NoHP"
-                                        placeholder="081326273187" value="{{ $user->no_hp }}" name="no_hp">
+                                <div class="form-group  col-6   p-3">
+                                    <label for="NoHP">No HP</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="NoHP"
+                                            placeholder="{{ $user->no_hp }}" value="{{ $user->no_hp }}" name="no_hp">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group  col-6   p-3">
-                                <label for="email">Email</label>
-                                <div class="input-group mb-3">
-                                    <input class="input form-control" type="email" id="email"
-                                        placeholder="wahyudiatkinson@gmail.com" value="{{ $user->email }}" name="email">
+                                <div class="form-group  col-6   p-3">
+                                    <label for="email">Email</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="email" id="email"
+                                            placeholder="{{ $user->email }}" value="{{ $user->email }}" name="email">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group  col-6   p-3">
-                                <label for="alamat">Alamat</label>
-                                <div class="input-group mb-3">
-                                    <input class="input form-control" type="text" id="alamat" placeholder="Jateng"
-                                        value="{{ $user->kota }}" name="kota">
+                                <div class="form-group  col-6   p-3">
+                                    <label for="alamat">Alamat</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="alamat" placeholder="{{ $user->kota }}"
+                                            value="{{ $user->kota }}" name="kota">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="bawah p-0 col-6">
-                        <div class="judulkanan">Additional Info</div>
-                        <div class="form-group form-floating">
-                            <div class="col-12  ">
-                                <label for="alamat">About</label>
-                                <textarea id="About" class="form-control " style="width:97%;" placeholder="{{ $user->about }}" name="about"></textarea>
+                        <div class="bawah p-0 col-6">
+                            <div class="judulkanan">Additional Info</div>
+                            <div class="form-group form-floating">
+                                <div class="col-12  ">
+                                    <label for="alamat">About</label>
+                                    <textarea id="About" class="form-control " style="width:97%;" placeholder="{{ $user->about }}" value="{{ $user->about }}" name="about"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                        <button class="cancel">Cancel</button>
-                        <button class="Update" type="submit">Update</button>
-                    </div>
+                        <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                            <a href="{{ url('/dashboard') }}" class="cancel" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                            <button class="Update" type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-
         </div>
     </div>
 
@@ -102,29 +109,102 @@
             $('#successModal').modal('show');
             setTimeout(function() {
                 $('#successModal').modal('hide');
-                window.location.href = '/AdminUniv-Dashboard';
+                window.location.href = 'dashboard';
             }, 1000);
         }
 
-        const imgInput = document.getElementById('imageInput');
-        const previewZone = document.getElementById('previewZone');
+        function uploadFile(event) {
+            const file = event.target.files[0];
+            const userId = "{{ $user->id }}";
+            var formData = new FormData();
+            formData.append('foto_profil', file);
 
-        function setDefaultImage() {
-            const previewZone = document.getElementById('previewZone');
-            previewZone.innerHTML = '<img src="assets/images/atun.png"  class="img-fluid">';
+            fetch('/univ-updateFoto/' + userId, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response from server:', data);
+                // Update image source with the new uploaded image
+                const previewImage = document.getElementById('gambarKanan');
+                previewImage.src = data.newImageUrl;
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+            });
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const previewImage = document.getElementById('gambarKiri');
+                    previewImage.src = event.target.result;
+
+                    const previewImage2 = document.getElementById('gambarKanan');
+                    previewImage2.src = event.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
         }
 
-        // Call the setDefaultImage function when the page is loaded
-        // Menetapkan gambar default saat dokumen dimuat
-        window.addEventListener('DOMContentLoaded', setDefaultImage);
+        function showAlertDeleteProfile(userId) {
+            swal({
+                    title: "Anda yakin?",
+                    text: "Anda tidak akan dapat mengembalikan ini!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        fetch('/univ-deleteFoto/' + userId, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                }
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    swal("Foto berhasil dihapus!", {
+                                        icon: "success",
+                                    });
+                                    // Refresh halaman setelah foto dihapus
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 1000);
+                                } else {
+                                    throw new Error('Network response was not ok');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error deleting photo:', error);
+                                swal("Terjadi kesalahan saat menghapus foto!", {
+                                    icon: "error",
+                                });
+                            });
+                    } else {
+                        swal("Foto tidak dihapus!");
+                    }
+                });
+        }
 
         function setDefaultImage() {
             const defaultImageSrc = 'assets/images/atun.png';
 
-            const previewImage = document.querySelector('.gambarkiri');
+            const previewImage = document.getElementById('gambarkiri');
             previewImage.src = defaultImageSrc;
 
-            const previewImage2 = document.querySelector('.gambarkanan');
+            const previewImage2 = document.getElementById('gambarkanan');
             previewImage2.src = defaultImageSrc;
         }
 
@@ -135,16 +215,21 @@
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
-                    const previewImage = document.querySelector('.gambarkiri');
-                    previewImage.src = e.target.result;
+                    const previewImageKiri = document.getElementById('gambarKiri');
+                    if (previewImageKiri) {
+                        previewImageKiri.src = e.target.result;
+                    }
 
-                    const previewImage2 = document.querySelector('.gambarkanan');
-                    previewImage2.src = e.target.result;
+                    const previewImageKanan = document.getElementById('gambarKanan');
+                    if (previewImageKanan) {
+                        previewImageKanan.src = e.target.result;
+                    }
                 };
 
                 reader.readAsDataURL(file);
             }
         }
+
 
         const imageInput = document.getElementById('imageInput');
         imageInput.addEventListener('change', handleImageChange);
@@ -157,7 +242,7 @@
 
         function redirectToSubscriptionPage() {
             setTimeout(function() {
-                window.location.href = 'AdminSistem-Subcription';
+                alert("Perubahan berhasil");
             }, 5000);
         }
 
