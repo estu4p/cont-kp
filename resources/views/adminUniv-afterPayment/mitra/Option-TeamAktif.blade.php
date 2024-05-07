@@ -70,13 +70,13 @@
                             <i class="icon fa-solid fa-user"></i>
                         @endif
 
-                        @if ($item->divisi)
-                            <a href="{{ route('adminUniv.option.teamAktif', ['id' => $item->id]) }}"
+                        {{-- @if ($item->divisi) --}}
+                            <a href="{{ route('adminUniv.option.teamAktif', ['mitra_id' => $mitra_id, 'divisi_id' => $item->divisi_id]) }}"
                                 style="text-decoration: none">
                                 {{ $item->divisi->nama_divisi }}<br>
                                 Anggota
                             </a>
-                        @endif
+                        {{-- @endif --}}
                     </div>
                 @endif
             @endforeach
@@ -84,7 +84,7 @@
     </div>
 
     <div class="bawah">
-        <a href="/Option-TeamAktif-SeeAllTeams" style="color: #A4161A">lihat data seluruh siswa...</a>
+        <a href="{{ route('adminUniv.option.seeAllTeams', ['mitra_id' => $mitra_id]) }}" style="color: #A4161A">lihat data seluruh siswa...</a>
         <a href="{{ route('adminUniv.pengaturanDivisi', ['id' => $divisiMitraId->mitra_id]) }}"
             style="color: #A4161A">Pengaturan
             Divisi...<i class="fa-solid fa-gear"></i></a>
