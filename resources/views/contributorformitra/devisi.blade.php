@@ -66,10 +66,15 @@
                         <i class="icon fa-solid fa-user"></i>
                     @endif
 
-                    <a href="{{ route('mitra.divisiTeam', $item->divisi_id) }}" style="text-decoration: none">
+                    <a href="{{ route('mitra.divisiTeam', $item->id) }}" style="text-decoration: none">
                         {{ $item->divisi->nama_divisi }}<br>
                         Anggota
                     </a>
+                    {{--
+                    <a href="{{ route('mitra.divisiTeam', $item->divisi_id) }}" style="text-decoration: none">
+                        {{ $item->divisi->nama_divisi }}<br>
+                        Anggota
+                    </a> --}}
                 </div>
             @endforeach
         @endif

@@ -313,16 +313,8 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     $title = "Pengaturan";
-//     return view('manage_devisi', compact('title'));
-// });
 
 
-Route::get('/manage-shift', function () {
-    $title = "Pengaturan";
-    return view('mitra-pengaturan.manage-shift', compact('title'));
-});
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian', ['title' => 'penilaian']);
@@ -339,14 +331,8 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
-Route::get('manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('manage.showDivisi');
 
-// Route::get('/manage-shift', function () {
-//     return view('mitra-pengaturan.manage-shift');
-// });
+
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -387,13 +373,9 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+
+
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
@@ -412,13 +394,9 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+
+
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -647,8 +625,8 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
-Route::get('/manage-devisi', [ContributorForMitra::class, 'divisiMitra'])->name('mitra.divisi');
-Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::get('/manage-devisi', [ContributorForMitra::class, 'showPengaturanDivisi'])->name('mitra.pengaturan.divisi');
+Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addPengaturanDivisi'])->name('mitra.adddivisi');
 Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
@@ -672,9 +650,7 @@ Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class
 
 
 
-// Route::get('/manage-shift', function () {
-//     return view('mitra-pengaturan.manage-shift');
-// });
+
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
