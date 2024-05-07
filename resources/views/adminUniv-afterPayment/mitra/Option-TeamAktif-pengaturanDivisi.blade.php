@@ -54,27 +54,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($divisi as $no => $item)
+                                    @if ($divisiKosong)
                                         <tr>
-                                            <td class="ratakanan">{{ $no + 1 }}</td>
-                                            <td>{{ $item->divisi->nama_divisi }}</td>
-
-                                            <td class="ratakanan"><a href="/TeamAktif-kategoripenilaian-UiuX"><i
-                                                        class="fa-regular fa-file-lines ic"></i></a></td>
-
+                                            <td class="ratakanan"></td>
+                                            <td>Nama Divisi Kosong</td>
+                                            <td class="ratakanan">-</td>
                                             <td class="flex">
-                                                <button class="btn btn-edit btn-sm"
-                                                    data-bs-target="#editModal{{ $item->id }}" data-bs-toggle="modal"
-                                                    type="button">Edit</button>
-                                                <button class="btn btn-danger btn-sm"
-                                                    data-bs-target="#hapusModal{{ $item->id }}" data-bs-toggle="modal"
-                                                    type="button">Hapus</button>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @else
+                                        @foreach ($divisi as $no => $item)
+                                            <tr>
+                                                <td class="ratakanan">{{ $no + 1 }}</td>
+                                                <td>{{ $item->divisi->nama_divisi }}</td>
 
+                                                <td class="ratakanan"><a href="/TeamAktif-kategoripenilaian-UiuX"><i
+                                                            class="fa-regular fa-file-lines ic"></i></a></td>
+
+                                                <td class="flex">
+                                                    <button class="btn btn-edit btn-sm"
+                                                        data-bs-target="#editModal{{ $item->id }}"
+                                                        data-bs-toggle="modal" type="button">Edit</button>
+                                                    <button class="btn btn-danger btn-sm"
+                                                        data-bs-target="#hapusModal{{ $item->id }}"
+                                                        data-bs-toggle="modal" type="button">Hapus</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
@@ -113,17 +121,18 @@
                                 </div>
                                 <div class="grupinputt">
                                     <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                                        <select class="form-select shadow" id="editNamaDivisi" name="nama_divisi">
-                                            <option selected disabled> Edit Nama Divisi</option>
-                                            @php
-                                                $divisi = App\Models\Divisi::all();
-                                            @endphp
-                                            @foreach ($divisi as $item)
-                                            <option value="{{ $item->nama_divisi }}" {{ $item->nama_divisi == $value->nama_divisi ? 'selected' : '' }}>
+                                    <select class="form-select shadow" id="editNamaDivisi" name="nama_divisi">
+                                        <option selected disabled> Edit Nama Divisi</option>
+                                        @php
+                                            $divisi = App\Models\Divisi::all();
+                                        @endphp
+                                        @foreach ($divisi as $item)
+                                            <option value="{{ $item->nama_divisi }}"
+                                                {{ $item->nama_divisi == $value->nama_divisi ? 'selected' : '' }}>
                                                 {{ $item->nama_divisi }}
                                             </option>
-                                                @endforeach
-                                        </select>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -196,15 +205,15 @@
                                 <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
                                 {{-- <input type="text" name="nama_divisi" id="nama_divisi" class="inputmodall"
                                     placeholder="Masukkan nama divisi"> --}}
-                                    <select class="form-select shadow" id="nama_divisi" name="nama_divisi">
-                                        <option selected disabled> Pilih Nama Divisi</option>
-                                        @php
-                                            $divisi = App\Models\Divisi::all();
-                                        @endphp
-                                        @foreach ($divisi as $item)
+                                <select class="form-select shadow" id="nama_divisi" name="nama_divisi">
+                                    <option selected disabled> Pilih Nama Divisi</option>
+                                    @php
+                                        $divisi = App\Models\Divisi::all();
+                                    @endphp
+                                    @foreach ($divisi as $item)
                                         <option value="{{ $item->nama_divisi }}">{{ $item->nama_divisi }}</option>
-                                        @endforeach
-                                    </select>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">

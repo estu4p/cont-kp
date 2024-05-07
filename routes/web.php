@@ -280,12 +280,12 @@ Route::get('/lihat/{id}', [SchoolController::class, 'lihatPenilaian'])->name('pe
 // });
 
 //penilaian mahasiswa-contributor mitra
-Route::delete('/delete-division/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusDivisi']);
-Route::get('/kategoripenilaian/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
-Route::post('/kategoripenilaian/{divisi_id}/tambah', [BEControllerAdminUnivAfterPaymentController::class, 'addKategoriPenilaian'])->name('tambahKategori');
-Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [BEControllerAdminUnivAfterPaymentController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
-Route::delete('/delete-kategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteKategori'])->name('deleteKategori');
-Route::delete('/delete-Subkategori/{id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'deleteSubKategori'])->name('deleteSubKategori');
+Route::delete('/delete-division/{id}', [ContributorUnivController::class, 'hapusDivisi']);
+Route::get('/kategoripenilaian/{id}', [ContributorUnivController::class, 'showKategoriPenilaian'])->name('showKategoriPenilaian');
+Route::post('/kategoripenilaian/{divisi_id}/tambah', [ContributorUnivController::class, 'addKategoriPenilaian'])->name('tambahKategori');
+Route::post('/kategoripenilaian/{divisi_id}/{kategori_id}/tambah-sub', [ContributorUnivController::class, 'addSubKategoriPenilaian'])->name('tambahSubKategori');
+Route::delete('/delete-kategori/{id}/{divisi_id}', [ContributorUnivController::class, 'deleteKategori'])->name('deleteKategori');
+Route::delete('/delete-Subkategori/{id}/{divisi_id}', [ContributorUnivController::class, 'deleteSubKategori'])->name('deleteSubKategori');
 
 
 Route::get('/penilaian-mahasiswa', [PenilaianMitraController::class, 'showPenilaianSiswa'])->name('penilaian-mahasiswa');
@@ -316,16 +316,8 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     $title = "Pengaturan";
-//     return view('manage_devisi', compact('title'));
-// });
 
 
-Route::get('/manage-shift', function () {
-    $title = "Pengaturan";
-    return view('mitra-pengaturan.manage-shift', compact('title'));
-});
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian', ['title' => 'penilaian']);
@@ -342,14 +334,8 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
-Route::get('manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('manage.showDivisi');
 
-// Route::get('/manage-shift', function () {
-//     return view('mitra-pengaturan.manage-shift');
-// });
+
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -390,13 +376,9 @@ Route::get('/MitraPresensiDetailHadir', function () {
 });
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+
+
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
@@ -415,13 +397,9 @@ Route::get('/MitraPresensiDetailTidakHadir', function () {
 
 
 
-// Route::get('/manage-devisi', function () {
-//     return view('mitra-pengaturan.manage-devisi');
-// });
 
-Route::get('/manage-shift', function () {
-    return view('mitra-pengaturan.manage-shift');
-});
+
+
 
 Route::get('/pengaturan', function () {
     return view('pengaturan.margepenilaiandivisi');
@@ -650,8 +628,8 @@ Route::get('/laporanpresensi', function () {
     return view('user.ContributorForMitra.laporanpresensi');
 });
 
-Route::get('/manage-devisi', [ContributorForMitra::class, 'showDivisi'])->name('mitra.showdivisi');
-Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
+Route::get('/manage-devisi', [ContributorForMitra::class, 'showPengaturanDivisi'])->name('mitra.pengaturan.divisi');
+Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addPengaturanDivisi'])->name('mitra.adddivisi');
 Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
@@ -675,9 +653,7 @@ Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class
 
 
 
-// Route::get('/manage-shift', function () {
-//     return view('mitra-pengaturan.manage-shift');
-// });
+
 
 Route::get('/Kategori-penilaian', function () {
     return view('mitra-pengaturan.Kategori-penilaian');
@@ -840,6 +816,34 @@ Route::get('/admin/setting/user', function () {
         ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
     ];
     return view('admin.setting.user', [
+        'title' => "Admin - User & Organization",
+        'users' => $users,
+    ]);
+});
+
+Route::get('/AdminUniv/setting/quote', function () {
+    $user =  auth()->user();
+    return view('admin.quote', compact('user'));
+});
+Route::get('/AdminUniv/setting/panel', function () {
+    $users = [
+        ['id' => 1, 'nama' => "Guru1", 'username' => 'usernameguru1', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 2, 'nama' => "Mitra1", 'username' => 'usernamemitra1', "privilege" => ["Input Nilai", "Accept/Reject Log Activity", "Manage Devisi"], 'role' => "Mitra"],
+        ['id' => 3, 'nama' => "Guru2", 'username' => 'usernameguru2', "privilege" => ["Manage Kategori Penilaian", "Lihat Penilaian"], 'role' => "Guru"],
+        ['id' => 4, 'nama' => "Mitra2", 'username' => 'usernamemitra2', "privilege" => ["Input Nilai", "Accept/Reject Log Activity"], 'role' => "Mitra"],
+        ['id' => 5, 'nama' => "Guru3", 'username' => 'usernameguru3', "privilege" => ["Manage Kategori Penilaian"], 'role' => "Guru"],
+        ['id' => 6, 'nama' => "Mitra3", 'username' => 'usernamemitra3', "privilege" => ["Input Nilai", "Manage Devisi"], 'role' => "Mitra"],
+    ];
+
+    $mhs = [
+        ['nim' => '647825343329', 'nama' => 'Rudi', 'prodi' => 'TI'],
+        ['nim' => '647825343330', 'nama' => 'Almi', 'prodi' => 'TI'],
+        ['nim' => '647825343331', 'nama' => 'Jaka', 'prodi' => 'TI'],
+        ['nim' => '647825343332', 'nama' => 'Yessa Khoirunissa', 'prodi' => 'TI'],
+        ['nim' => '647825343333', 'nama' => 'Febrian Adipurnowo', 'prodi' => 'TI'],
+    ];
+    $user =  auth()->user();
+    return view('admin.panel', compact('user'), [
         'title' => "Admin - User & Organization",
         'users' => $users,
     ]);

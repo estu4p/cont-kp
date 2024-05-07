@@ -55,35 +55,35 @@
                         <td class="align-middle">{{ $subscription->user->nama_lengkap }}</td>
                         <td class="align-middle">{{ $subscription->user->email }}</td>
                         <td class="align-middle">{{ $sekolah[$subscription->user->sekolah] }}</td>
-                        @if ($subscription->paket->paket === 'Bronze')
+                        @if ($subscription->paket === 'Bronze')
                         <td class="text-center">
                             <p style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                {{ $subscription->paket->paket }}
+                                {{ $subscription->paket }}
                             </p>
                         </td>
-                        @elseif ($subscription->paket->paket === 'Silver')
+                        @elseif ($subscription->paket === 'Silver')
                         <td class="text-center">
                             <p style="background-color: #1A4CFF; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                {{ $subscription->paket->paket }}
+                                {{ $subscription->paket }}
                             </p>
                         </td>
-                        @elseif ($subscription->paket->paket === 'Gold')
+                        @elseif ($subscription->paket === 'Gold')
                         <td class="text-center">
                             <p style="background-color: #1AA158; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                {{ $subscription->paket->paket }}
+                                {{ $subscription->paket }}
                             </p>
                         </td>
                         @else
                         <td class="text-center">
                             <p style="background-color: #4A1A88; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
-                                {{ $subscription->paket->paket }}
+                                {{ $subscription->paket }}
                             </p>
                         </td>
                         @endif
-                        <td class="align-middle">{{ $subscription->user->kota }}</td>
+                        <td class="align-middle">{{ $subscription->lokasi }}</td>
                         <td>
                             <div class="aksi d-flex flex-row justify-content-around ">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ $subscription->user->nama_lengkap }}', '{{ $subscription->user->email }}', '{{ $subscription->user->telepon }}', '{{ $subscription->user->sekolah }}', '{{ $subscription->paket->paket }}', '{{ $subscription->start_date }}', '{{ $subscription->end_date }}', '{{ $subscription->harga }}', '{{ $subscription->status_berlangganan }}')">
+                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ $subscription->user->nama_lengkap }}', '{{ $subscription->user->email }}', '{{ $subscription->user->telepon }}', '{{ $subscription->user->sekolah }}', '{{ $subscription->paket }}', '{{ $subscription->tanggal }}', '{{ $subscription->tanggal_berakhir }}', '{{ $subscription->harga }}', '{{ $subscription->status }}')">
                                     <i class="fas fa-pen m-0 p-0 blue-icon"></i>
                                     <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
                                 </button>

@@ -20,8 +20,9 @@ class PresensiMitraController extends Controller
 {
     public function getAllPresensi()
     {
+        $user = auth()->user();
         $presensi = Presensi::all();
-        return view('user.ContributorForMitra.MitraPresensi', ['presensi' => $presensi]);
+        return view('user.ContributorForMitra.MitraPresensi', ['presensi' => $presensi, 'user' => $user]);
     }
 
 
@@ -114,35 +115,35 @@ class PresensiMitraController extends Controller
             }
         });
 
-         // Konversi total jam masuk dari detik ke format jam:menit:detik
-         $jam = floor($totalJamMasuk / 3600);
-         $menit = floor(($totalJamMasuk % 3600) / 60);
-         $detik = $totalJamMasuk % 60;
+        // Konversi total jam masuk dari detik ke format jam:menit:detik
+        $jam = floor($totalJamMasuk / 3600);
+        $menit = floor(($totalJamMasuk % 3600) / 60);
+        $detik = $totalJamMasuk % 60;
 
-         $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
+        $totalJamMasukFormatted = sprintf('%02d:%02d:%02d', $jam, $menit, $detik);
 
-         // Hitung total masuk (dalam jam)
-         $totalMasukJam = floor($totalJamMasuk / 3600);
+        // Hitung total masuk (dalam jam)
+        $totalMasukJam = floor($totalJamMasuk / 3600);
 
-         $tjammasuk = Presensi::where('nama_lengkap', $nama_lengkap)
-         ->whereNotNull('jam_masuk')
-         ->whereNotNull('jam_pulang')
-         ->where('status_kehadiran', 'Hadir')
-         ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
-         ->first();
+        $tjammasuk = Presensi::where('nama_lengkap', $nama_lengkap)
+            ->whereNotNull('jam_masuk')
+            ->whereNotNull('jam_pulang')
+            ->where('status_kehadiran', 'Hadir')
+            ->selectRaw('IFNULL(SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(jam_pulang, jam_masuk)))), "00:00:00") AS total_jam_masuk')
+            ->first();
 
-         // total jam masuk format integer
-         $totalJamMasuk = $tjammasuk->total_jam_masuk;
+        // total jam masuk format integer
+        $totalJamMasuk = $tjammasuk->total_jam_masuk;
 
-         // total masuk dalam detik
-         $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
+        // total masuk dalam detik
+        $jamMasukDetik = Carbon::parse($totalJamMasuk)->diffInSeconds(Carbon::today());
 
-         // Hitung total masuk dalam hari
-         $totalMasukHari = $presensi->count();
+        // Hitung total masuk dalam hari
+        $totalMasukHari = $presensi->count();
 
-         $target = 1440; //dalam jam
+        $target = 1440; //dalam jam
 
-         $sisa = $target - $totalMasukJam; //dalam jam
+        $sisa = $target - $totalMasukJam; //dalam jam
 
         // Jika ada data, kembalikan data sebagai JSON atau view
         if ($request->is('api/*') || $request->wantsJson()) {
@@ -163,7 +164,8 @@ class PresensiMitraController extends Controller
                 'total_terlambat_istirahat_keluar',
                 'total_terlambat_istirahat_kembali',
                 'total_terlambat_ijin_keluar',
-                'total_terlambat_ijin_kembali']));
+                'total_terlambat_ijin_kembali'
+            ]));
         }
     }
 
@@ -247,10 +249,6 @@ class PresensiMitraController extends Controller
         // Render PDF
         $dompdf->render();
         // Unduh PDF
-        return $dompdf->stream('presensi_'.$nama_lengkap.'.pdf');
+        return $dompdf->stream('presensi_' . $nama_lengkap . '.pdf');
     }
-
-
-
-
 }

@@ -20,7 +20,6 @@ class KategoriPenilaian extends Seeder
             $user = User::where('role_id', 3)->inRandomOrder()->first(); // Ambil satu pengguna secara acak dengan role ID 3
             ModelsKategoriPenilaian::create([
                 'divisi_id' => Divisi::inRandomOrder()->first()->id,
-                'nama_lengkap' => $user->id, 
                 'nama_kategori' => $kategori[$i],
             ]);
         }

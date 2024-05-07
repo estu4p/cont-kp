@@ -16,8 +16,9 @@ class PenilaianMitraController extends Controller
 {
     public function showPenilaianSiswa()
     {
+        $user = auth()->user();
         $mahasiswa = User::with('divisi')->where('role_id', 3)->get();
-        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa'));
+        return view('penilaian-siswa.penilaian-mahasiswa', compact('mahasiswa', 'user'));
     }
 
 
@@ -59,7 +60,7 @@ class PenilaianMitraController extends Controller
 
         $namaBulan['bulan_tahun_masuk'] = $nama_bulan_tahun_masuk;
 
-        return view('penilaian-siswa.input-nilai', compact('user','nama_lengkap','divisi', 'sekolah', 'namaBulan'));
+        return view('penilaian-siswa.input-nilai', compact('user', 'nama_lengkap', 'divisi', 'sekolah', 'namaBulan'));
     }
 
     // public function penilaianPost(Request $request, $id)
@@ -172,7 +173,7 @@ class PenilaianMitraController extends Controller
         }
 
         $nilai = Penilaian::with('user', 'subKategori', 'subKategori.kategori')
-                        ->where('nama_lengkap', $id)->first();
+            ->where('nama_lengkap', $id)->first();
 
         return view('penilaian-siswa.input-nilai', compact('nilai', 'kategori_penilaian', 'subkategori_per_kategori'))->with('success', 'Nilai berhasil disimpan!');
     }
@@ -213,6 +214,3 @@ class PenilaianMitraController extends Controller
     //         ->with('success', 'Nilai berhasil disimpan!');
     // }
 }
-
-
-

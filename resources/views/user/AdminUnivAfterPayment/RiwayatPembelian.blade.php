@@ -10,11 +10,12 @@
         <a href="/RiwayatJangkaWaktu" style="text-decoration: none;">
             <button class="button-with-icon jangkawaktu"><i class="fas fa-history"></i> Jangka Waktu</button>
         </a>
-        <a href="/RiwayatPembelian" style="text-decoration: none;">
-            <button class="button-with-icon riwayatpembelian"><i class="fas fa-history"></i> Riwayat Pembelian</button>
+        <a href="/RiwayatPembelian" style="text-decoration: none;" >
+            <button class="button-with-icon riwayatpembelian {{ Request::is('RiwayatPembelian') ? 'active' : '' }}"><i class="fas fa-history"></i> Riwayat Pembelian</button>
         </a>
     </div>
     <div class="isie">
+        <h3 style="padding-left: 21%">Riwayat Pembelian</h3>
         @foreach ($paket as $data)
             <div class="kartu">
                 <p class="stt">Status</p>
@@ -35,9 +36,9 @@
                 <p class="tgl">Tanggal</p>
                 <p class="ttgl"><b>{{ $data->tanggal }}</b></p>
                 <p class="mp">Metode Pembayaran</p>
-                <p class="mtp"><img src="{{ asset('assets/images/' . $data->metode_bayar . '.png') }}"
+                <p class="mtp"><img src="{{ asset('assets/images/' . $data->metode_bayar . '.png') }}" alt="{{$data->metode_bayar . '.png'}}"
                         class="lb"><b>{{ $data->metode_bayar }}</b></p>
-                <p class="acr"><img src="assets/images/arrow_circle_right.png">
+                <p class="acr"><img src="assets/images/arrow_circle_right.png" style="margin-top: -12px">
             </div>
         @endforeach
     </div>

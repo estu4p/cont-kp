@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/adminUniv-afterPayment/Riwayat.css') }}">
     <div class="kiri-putih p-5">
         <a href="/RiwayatJangkaWaktu" style="text-decoration: none;">
-            <button class="button-with-icon jangkawaktu"><i class="fas fa-history"></i> Jangka Waktu</button>
+            <button class="button-with-icon jangkawaktu {{ Request::is('RiwayatJangkaWaktu') ? 'active' : '' }}"><i class="fas fa-history"></i> Jangka Waktu</button>
         </a>
         <a href="/RiwayatPembelian" style="text-decoration: none;">
             <button class="button-with-icon riwayatpembelian"><i class="fas fa-history"></i> Riwayat Pembelian</button>
@@ -16,6 +16,7 @@
 
     </div>
     <div class="isie">
+        <h3 style="padding-left : 50%; padding-top : 5%"> Jangka Waktu </h3>
         @foreach ($paket as $item)
             <div class="kartu">
                 <p class="pkt"><b>Paket {{ $item->nama_paket }}</b></p>
