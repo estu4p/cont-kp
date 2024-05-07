@@ -90,49 +90,130 @@ class ContributorForMitra extends Controller
         return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
     }
     
+    // public function addDivisi(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'nama_divisi' => 'required',
+    //         'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect()->back()->withErrors($validator)->withInput();
+    //     }
+
+    //     if ($request->hasFile('foto_divisi')) {
+    //         $image = $request->file('foto_divisi');
+    //         $filename = time() . '.' . $image->getClientOriginalExtension();
+    //         $path = $image->store('images'); // Simpan gambar ke direktori 'images'
+    //     }
+        
+
+    //     $data = new DivisiItem([
+    //         'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
+    //         'foto_divisi' => $filename,
+    //     ]);
+
+    //     $data->save();
+    //     return redirect('/manage-divisi');
+    // }
+
     public function addDivisi(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_divisi' => '',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if ($request->hasFile('foto_divisi')) {
-            $image = $request->file('foto_divisi');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('images/' . $filename);
-            $image->move($path);
-        }
-
-        $data = new DivisiItem([
-            'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
-            'foto_divisi' => $filename,
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
+        $data = new Divisi([
+            'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan nama yang benar dari permintaan
         ]);
 
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $data->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+            $data->save();
+        }
         $data->save();
-        return redirect('/manage-divisi');
+
+        // Mengambil ID mitra dari sesi
+        $mitra_id = auth()->user()->id;
+        // dd($mitra_id);
+        // Simpan data divisi ke dalam tabel 'divisi_item'
+        $divisiItem = new DivisiItem([
+            'mitra_id' => $mitra_id,
+            'divisi_id' => $divisi_id,
+        ]);
+
+        $divisiItem->save();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to add divisi'], 200);
+        } else {
+            return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        }
     }
+
+
+    // public function updateDivisi(Request $request, $id)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'nama_divisi' => 'required',
+    //         'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['message' => 'Gagal update divisi',], 404);
+    //     }
+    //     $divisi = DivisiItem::find($id);
+    //     $divisi->fill([
+    //         'nama_divisi' => $request->nama_divisi,
+    //         'foto_divisi' => $request->foto_divisi
+    //     ]);
+    //     $divisi->save();
+    //     return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data divisi']);
+    // }
 
     public function updateDivisi(Request $request, $id)
     {
+        // Validasi data yang diterima dari request
         $validator = Validator::make($request->all(), [
             'nama_divisi' => 'required',
-            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_divisi' => '',
         ]);
+
         if ($validator->fails()) {
-            return response()->json(['message' => 'Gagal update divisi',], 404);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        $divisi = DivisiItem::find($id);
-        $divisi->fill([
-            'nama_divisi' => $request->nama_divisi,
-            'foto_divisi' => $request->foto_divisi
-        ]);
-        $divisi->save();
-        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data divisi']);
+
+        // Ambil ID divisi dari data yang dipilih dalam dropdown
+        $divisi_id = Divisi::where('nama_divisi', $request->input('nama_divisi'))->first()->id;
+
+        // Ambil data DivisiItem yang akan diupdate
+        $divisiItem = DivisiItem::find($id);
+
+        // Perbarui nama divisi
+        $divisiItem->divisi_id = $divisi_id;
+
+        // Perbarui foto divisi jika ada
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $divisiItem->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+        }
+
+        // Simpan perubahan
+        $divisiItem->save();
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Success to edit divisi'], 200);
+        } else {
+            return redirect()->back()->with('success', 'Data berhasil diubah');
+        }
     }
 
     public function deleteDivisi($id)

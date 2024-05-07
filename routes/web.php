@@ -649,7 +649,7 @@ Route::get('/laporanpresensi', function () {
 
 Route::get('/manage-devisi', [ContributorForMitra::class, 'divisiMitra'])->name('mitra.divisi');
 Route::post('/manage-devisi/addDivisi', [ContributorForMitra::class, 'addDivisi'])->name('mitra.adddivisi');
-Route::post('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
+Route::put('/updateDivisi/{id}', [ContributorForMitra::class, 'updateDivisi'])->name('mitra.updatedivisi');
 Route::delete('/manage-devisi/delete/{id}', [ContributorForMitra::class, 'deleteDivisi'])->name('mitra.deletedivisi');
 
 Route::get('/manage-shift', [ContributorForMitra::class, 'showShift'])->name('mitra.showshift');

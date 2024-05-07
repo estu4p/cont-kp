@@ -96,22 +96,23 @@
 @foreach($divisi as $item)
 <div class="modal fade modal-sm" id="editModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form id="editDivisiForm" action="{{route('mitra.updatedivisi', $item->id)}}" method="POST" onsubmit="return false;">
+        <form id="editDivisiForm" action="{{route('mitra.updatedivisi', $item->id)}}" method="POST" onsubmit="return false;">
             @csrf
+            @method('PUT')
             <div class="modal-content space">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Edit Divisi</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="textdivisi">Edit Divisi</div>
+                    <div class="textdivisi">{{ $item->nama_divisi }}</div>
                     <div class="tambahgambar gap-3">
                         <div class="gambar border d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-pen-nib" style="transform: rotate(90deg);"></i>
+                            <i class="fa-solid fa-pen-nib"></i>
                             <input type="file" id="fileInput" style="display: none;">
                         </div>
                         <div>
-                            <button class="addgambar">Edit Photo</button>
+                            <button class="addgambar">Add Photo</button>
                         </div>
                         <div>
                             <button class="remove">Remove</button>
@@ -119,12 +120,22 @@
                     </div>
                     <div class="grupinputt">
                         <div><label for="editNamaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                        <input type="text" class="inputmodalll" id="editNamaDivisi" placeholder="Masukkan nama divisi">
+                        <select class="form-select shadow" id="editNamaDivisi" name="nama_divisi">
+                            <option selected disabled> Edit Nama Divisi</option>
+                            @php
+                            $divisi = App\Models\Divisi::all();
+                            @endphp
+                            @foreach ($divisi as $item)
+                            <option value="{{ $item->nama_divisi }}" {{ $item->nama_divisi == $item->nama_divisi ? 'selected' : '' }}>
+                                {{ $item->nama_divisi }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="updateDivisi()">Simpan</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Simpan</button>
                 </div>
             </div>
         </form>
@@ -135,8 +146,8 @@
 <!-- Modal tambah divisi -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100% !important;">
     <div class="modal-dialog modal-dialog-centered ">
-    <form id="addDivisiForm" action="{{ route('mitra.adddivisi') }}" method="post" enctype="multipart/form-data">
-    @csrf
+        <form id="addDivisiForm" action="{{ route('mitra.adddivisi') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="modal-content space">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 judulmodal" id="exampleModalLabel">Tambah Divisi</h1>
@@ -147,7 +158,7 @@
                     <div class="tambahgambar gap-3">
                         <div id="fileInputContainer" class="gambar border d-flex align-items-center justify-content-center">
                             <i class="far fa-image"></i>
-                            <input type="file" name="foto_divisi[]" class="fileInput" style="display: none;">
+                            <input type="file" name="foto_divisi" class="fileInput" style="display: none;">
                         </div>
                         <div>
                             <button class="addgambar">Add Photo</button>
@@ -158,12 +169,22 @@
                     </div>
                     <div class="grupinputt">
                         <div><label for="namaDivisi" class="NamaDivisi">Nama Divisi</label></div>
-                        <input type="text" name="nama_divisi" class="inputmodall" placeholder="Masukkan nama divisi">
+                        {{-- <input type="text" name="nama_divisi" id="nama_divisi" class="inputmodall"
+                                    placeholder="Masukkan nama divisi"> --}}
+                        <select class="form-select shadow" id="nama_divisi" name="nama_divisi">
+                            <option selected disabled> Pilih Nama Divisi</option>
+                            @php
+                            $divisi = App\Models\Divisi::all();
+                            @endphp
+                            @foreach ($divisi as $division)
+                            <option value="{{ $division->nama_divisi }}">{{ $division->nama_divisi }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer modal-footer d-flex justify-content-center gap-4">
-                    <button type="button" class="btn btn-batal" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="sowsukses()">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="submit" class="btn btn-danger" aria-label="Close">Simpan</button>
                 </div>
             </div>
         </form>
@@ -171,7 +192,6 @@
 </div>
 
 <script>
-    
     // Variabel global untuk menyimpan indeks divisi yang akan diedit
     let editedIndex = null;
 
@@ -181,7 +201,7 @@
         editedIndex = index;
 
         // Dapatkan data divisi dari tabel
-        const row = document.querySelectorAll('#examplee tbody tr')[index];
+        const row = document.querySelectorAll('#example tbody tr')[index];
         const namaDivisi = row.querySelectorAll('td')[1].innerText;
 
         // Isi input modal dengan data divisi yang dipilih
@@ -191,162 +211,104 @@
         $('#editModal').modal('show');
     }
 
-    // // Fungsi untuk menyimpan perubahan pada divisi yang diedit
-    // function updateDivisi() {
-    //     // Dapatkan nilai input dari modal
-    //     const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
-
-    //     // Perbarui data divisi pada tabel dengan nilai yang diedit
-    //     const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
-    //     row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
-
-    //     // Tampilkan pesan sukses
-    //     swal({
-    //         title: "Berhasil !",
-    //         icon: "success",
-    //         text: "Perubahan berhasil disimpan",
-    //         timer: 1500,
-    //         buttons: false
-    //     });
-
-    //     // Tutup modal edit
-    //     $('#editModal').modal('hide');
-
-    // }
-
     // Fungsi untuk menyimpan perubahan pada divisi yang diedit
-function updateDivisi() {
-    // Dapatkan nilai input dari modal
-    const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
-
-    // Kirim permintaan pembaruan ke server
-    fetch(`/manage-divisi/update/${editedIndex}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({
-            nama_divisi: editedNamaDivisi
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            // Jika permintaan berhasil, perbarui data pada tabel dan tampilkan pesan sukses
-            const row = document.querySelectorAll('#examplee tbody tr')[editedIndex];
-            row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
-            swal({
-                title: "Berhasil !",
-                icon: "success",
-                text: "Perubahan berhasil disimpan",
-                timer: 1500,
-                buttons: false
-            });
-            // Tutup modal edit
-            $('#editModal').modal('hide');
-        } else {
-            // Jika permintaan gagal, tampilkan pesan gagal
-            swal("Gagal!", "Terjadi kesalahan saat menyimpan perubahan.", "error");
-        }
-    })
-    .catch(error => {
-        // Jika terjadi kesalahan, tampilkan pesan gagal
-        swal("Gagal!", "Terjadi kesalahan saat menghubungi server.", "error");
-    });
-}
-
-
-    // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
-    function sowsukses() {
+    function updateDivisi() {
 
         // Dapatkan nilai input dari modal
-        var namaDivisi = document.querySelector('.inputmodall').value;
+        const editedNamaDivisi = document.getElementById('editNamaDivisi').value;
 
-        // Buat elemen HTML untuk baris baru dalam tabel
-        var newRow = '<tr>' +
-            '<td class = "ratatengah">' + (document.querySelectorAll('#examplee tbody tr').length + 1) + '</td>' +
-            '<td>' + namaDivisi + '</td>' +
-            '<td class="ratatengah" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
-            '<td class="ratatengah">' +
-            '<button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(1)" type="button">Edit</button>' +
-            '<button class="btn btn-danger btn-sm tomboll" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(1)" type="button">Hapus</button>' +
-            '</td>' +
-            '</tr>';
+        // Misalkan Anda memiliki variabel editedIndex yang berisi indeks baris yang akan diubah
+        // Anda perlu menyesuaikan cara Anda mendapatkan indeks baris tergantung pada bagaimana Anda menyimpannya
+        const editedIndex = document.querySelector('.btn-edit[data-bs-target="#editModal"][data-bs-toggle="modal"]:focus').getAttribute('data-index');
 
-        // Sisipkan baris baru ke dalam tabel
-        document.querySelector('#examplee tbody').insertAdjacentHTML('beforeend', newRow);
+        // Perbarui data divisi pada tabel dengan nilai yang diedit
+        const row = document.querySelectorAll('#example tbody tr')[editedIndex];
+        row.querySelectorAll('td')[1].innerText = editedNamaDivisi;
 
-        // Menambahkan baris baru ke tabel
-        $("#examplee tbody").append(newRow);
+        // Tampilkan pesan sukses menggunakan library swal (SweetAlert)
+        swal({
+            title: "Berhasil!",
+            icon: "success",
+            text: "Perubahan berhasil disimpan",
+            timer: 1500, // Durasi pesan sukses ditampilkan (dalam milidetik)
+            buttons: false
+        });
 
-        // Tampilkan notifikasi sukses
-            swal({
-                title: "Berhasil !",
-                icon: "success",
-                text: "Perubahan berhasil disimpan",
-                timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
-                buttons: false // Sembunyikan tombol "OK"
-            });
+        // Tutup modal edit
+        $('#editModal').modal('hide');
     }
 
     // Fungsi untuk menampilkan modal konfirmasi penghapusan
     function showdeletemodal(event) {
         event.preventDefault();
         swal({
-            title: "Hapus",
-            text: "Apakah anda yakin ingin menghapus!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                // Jika pengguna mengonfirmasi penghapusan, submit form
-                event.target.closest('.delete-form').submit();
-                // Tampilkan notifikasi sukses
-                swal({
-                    title: "Berhasil !",
-                    icon: "success",
-                    text: "Data berhasil dihapus",
-                    timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
-                    buttons: false // Sembunyikan tombol "OK"
-                });
-                
+                title: "Hapus",
+                text: "Apakah anda yakin ingin menghapus!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    // Jika pengguna mengonfirmasi penghapusan, submit form
+                    event.target.closest('.delete-form').submit();
+                    // Tampilkan notifikasi sukses
+                    swal({
+                        title: "Berhasil !",
+                        icon: "success",
+                        text: "Data berhasil dihapus",
+                        timer: 5000, // Pesan akan ditutup otomatis setelah 5 detik
+                        buttons: false // Sembunyikan tombol "OK"
+                    });
+
                 } else {
                     swal("Penghapusan dibatalkan.");
                 }
-        });
+            });
     }
 
+    // Fungsi untuk menampilkan pesan sukses saat divisi ditambahkan
+    function sowsukses() {
+        // Dapatkan nilai input dari modal
+        var namaDivisi = document.querySelector('.inputmodall').value;
+
+        // Buat elemen HTML untuk baris baru dalam tabel
+        var newRow = '<tr>' +
+            '<td class = "ratakanan">' + (document.querySelectorAll('#example tbody tr').length + 1) + '</td>' +
+            '<td>' + namaDivisi + '</td>' +
+            '<td class="ratakanan" ><a href="/Kategori-penilaian"><i class="fa-regular fa-file-lines ic"></i></a></td>' +
+            '<td>' +
+            '<button class="btn btn-edit btn-sm" data-bs-target="#editModal" data-bs-toggle="modal" onclick="editModal(5)" type="button">Edit</button>' +
+            '<button class="btn btn-danger btn-sm tomboll" data-bs-target="#hapusModal" data-bs-toggle="modal" onclick="deleteDivisi(5)" type="button">Hapus</button>' +
+            '</td>' +
+            '</tr>';
+
+        // Sisipkan baris baru ke dalam tabel
+        document.querySelector('#example tbody').insertAdjacentHTML('beforeend', newRow);
+
+        // Tampilkan pesan sukses
+        swal({
+            title: "Berhasil !",
+            icon: "success",
+            text: "Perubahan berhasil disimpan",
+            timer: 1500, // Pesan akan ditutup otomatis setelah 3 detik
+            buttons: false // Sembunyikan tombol "OK"
+        });
+    }
 
     document.querySelector('.addgambar').addEventListener('click', function() {
         document.getElementById('fileInput').click();
     });
 
-    function addgambar() {
-        var newFileInput = document.createElement('input');
-        newFileInput.type = 'file';
-        newFileInput.name = 'foto_divisi[]';
-        newFileInput.classList.add('fileInput');
-        newFileInput.style.display = 'none';
-
-        var fileInputContainer = document.getElementById('fileInputContainer');
-        fileInputContainer.appendChild(newFileInput);
-
-        newFileInput.click(); // Membuka dialog pemilihan file secara otomatis
-    }
-
-    document.querySelectorAll('.fileInput').forEach(function(input) {
-        input.addEventListener('change', function() {
-
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var imageSrc = e.target.result;
-                document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;" />';
-            };
-            reader.readAsDataURL(file);
-        });
+    document.getElementById('fileInput').addEventListener('change', function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var imageSrc = e.target.result;
+            document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc +
+                '" style="max-width: 100%; max-height: 100%;" />';
+        };
+        reader.readAsDataURL(file);
     });
 
     document.querySelector('.remove').addEventListener('click', function() {
