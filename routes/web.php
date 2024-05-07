@@ -434,6 +434,7 @@ Route::post('/AdminUniv-InputNewPassword', [ResetPasswordAdminController::class,
 Route::get('/AdminUniv-Dashboard', [BEControllerAdminUnivAfterPaymentController::class, 'index'])->name('adminUniv.dashboard');
 
 Route::get('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'adminUnivMitra'])->name('adminUniv.mitra');
+// Route::get('//AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailProfilDivisiSiswa'])->name('detailProfilDivisiSiswa');
 Route::post('/mitra-adminunivmitra', [BEControllerAdminUnivAfterPaymentController::class, 'tambahMitra'])->name('tambahMitra');
 Route::delete('/hapusMitra/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'hapusMitra'])->name('hapusMitra');
 
@@ -463,8 +464,8 @@ Route::delete('AdminUniv/Option-TeamAktif-pengaturanDivisi/{id}', [BEControllerA
 Route::get('/TeamAktif-kategoripenilaian-UiuX', function () {
     return view('adminUniv-afterPayment.mitra.TeamAktif-kategoripenilaian-UiuX');
 });
-Route::get('/AdminUniv/OptionTeamAktif-detail/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
-Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEdit'])->name('adminUniv.editUser');
+Route::get('/AdminUniv/OptionTeamAktif-detail/{mitra_id}/{divisi_id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifKlik'])->name('adminUniv.option.teamAktif'); // jangan dihapus lah ini, ngapain kau hapus
+Route::get('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'detailProfilDivisiSiswa'])->name('detailProfilDivisiSiswa');
 Route::post('/AdminUniv/editProfil/{id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifEditPost'])->name('adminUniv.editUserPost');
 
 Route::get('/AdminUniv/setting/user', function () {
@@ -496,7 +497,7 @@ Route::get('/pengaturan', function () {
 });
 
 
-Route::get('/Option-TeamAktif-SeeAllTeams', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam'])->name('adminUniv.option.seeAllTeams');
+Route::get('/Option-TeamAktif-SeeAllTeams/{mitra_id}', [BEControllerAdminUnivAfterPaymentController::class, 'teamAktifSeeAllTeam'])->name('adminUniv.option.seeAllTeams');
 
 Route::get('/profilSiswa', function () {
     return view('adminUniv-afterPayment.mitra.profilSiswa');
