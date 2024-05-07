@@ -18,23 +18,12 @@ class UserAdminSistemController extends Controller
     public function IndexSubscription(Request $request)
     {
         $userAdmin = auth()->user();
-        $subscriptions = Subscription::with(['user.perguruanTinggi', 'paket', 'user.sekolah'])->get();
-        $paket = Paket::all();
+        $subscriptions = Riwayat::with('user')->latest()->get();
         $sekolah = Sekolah::pluck('nama_sekolah', 'id');
         $allSekolah = Sekolah::all();
-        //return ke tampilan
-        if ($request->is('api/*') || $request->wantsJson()) {
-            return response()->json([
-                'title' => "Subscription",
-                'user' => $userAdmin,
-                'subscriptions' => $subscriptions,
-                'sekolah' => $sekolah,
-                'paket' => $paket,
-            ], 200);
-        } else {
-            return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'paket', 'allSekolah']));
+            return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'allSekolah']));
         }
-    } public function storeSubs(Request $request)
+     public function storeSubs(Request $request)
     {
         // Validasi input jika diperlukan
         $request->validate([
@@ -43,9 +32,11 @@ class UserAdminSistemController extends Controller
             'sekolah' => 'required|exists:sekolah,id'
         ]);
 
-        // Simpan data ke tabel subscription
-        $subscription = new Subscription();
+        // Simpan data ke tabel riwayat
+        $subscription = new Riwayat();
         $subscription->nama_lengkap = $request->input('id');
+        $subscription->no_hp = $request->input('no_hp');
+        $subscription->email = $request->input('email');
         $subscription->paket_id = $request->input('paket_id');
         $subscription->sekolah = $request->input('sekolah');
         $subscription->save();
@@ -61,99 +52,31 @@ class UserAdminSistemController extends Controller
             return redirect()->back()->with('success', 'Subscription added successfully.');
         }
     }
-
     public function updateSubs(Request $request, $id)
     {
-        // Validasi input jika diperlukan
-        $request->validate([
-            'nama' => 'required|string',
-            'email' => 'required|email',
-            'no_hp' => 'required|string',
-            'sekolah' => 'required|string',
-            'paket_berlangganan' => 'required|exists:paket,id',
-        ]);
+// Validasi input jika diperlukan
+$request->validate([
+    'nama' => 'required|string',
+    'email' => 'required|email',
+    'no_hp' => 'required|string',
+    'sekolah' => 'required|string',
+    'paket_berlangganan' => 'required|exists:paket,id',
+]);
 
-        // Cari subscription yang ingin diperbarui
-        $subscription = Subscription::where('id', $id)->first();
-        // Update data subscription
-        $subscription->update([
-            'nama_lengkap' => $request->input('nama'),
-            'paket_id' => $request->input('paket_berlangganan'),
-            'sekolah' => $request->input('sekolah')
-        ]);
-        // Ambil user terkait dan update kolom-kolomnya
-        $user = $subscription->user()->first();
-
-        $user->update([
-            'email' => $request->input('email'),
-            'no_hp' => $request->input('no_hp'),
-            'tgl_masuk' => $request->input('tgl_masuk'),
-            'tgl_keluar' => $request->input('tgl_keluar'),
-            'harga' => $request->input('harga'),
-            'status_akun' => $request->input('status_berlangganan'),
-        ]);
-
-        // Berikan respons sesuai dengan jenis permintaan
-        if ($request->expectsJson()) {
-            return response()->json([
-                'message' => 'Subscription updated successfully.',
-                'subscription' => $subscription,
-            ], 200);
-        } else {
-            return redirect()->back()->with('success', 'Subscription updated successfully.');
-        }
+// Cari riwayat yang ingin diperbarui
+$subscription = Riwayat::findOrFail($id);
+// Update data riwayat
+$subscription->nama_lengkap = $request->input('nama');
+$subscription->no_hp = $request->input('no_hp');
+$subscription->email = $request->input('email');
+$subscription->paket_id = $request->input('paket_berlangganan');
+$subscription->sekolah = $request->input('sekolah');
+$subscription->save();
     }
-
-
-    // public function updateSubs(Request $request, $id)
-    // {
-    //     $data = $request->all();
-    //     $subscription = Subscription::with(['user.perguruanTinggi', 'paket'])->findOrFail($id);
-
-    //     try {
-    //         $validator = Validator::make($request->all(), [
-    //             'email' => [
-    //                 'required',
-    //                 'string',
-    //                 'email',
-    //                 Rule::unique('users', 'email')->ignore($subscription->user->id, 'id')
-    //             ],
-    //         ]);
-    //         $validator->validate();
-    //     } catch (ValidationException $e) {
-    //         $errorValidate = $e->validator->errors()->all();
-    //         $errorMessage = implode('<br>', $errorValidate);
-    //         return response()->json(['error' => $errorMessage]);
-    //     }
-
-    //     try {
-    //         $sekolah = Sekolah::where('sekolah', $data['sekolah'])->firstOrFail();
-    //         $subscription->user->update([
-    //             'nama_lengkap' => $data['nama_lengkap'],
-    //             'email' => $data['email'],
-    //             'no_hp' => $data['no_hp'],
-    //             'tgl_masuk' => $data['tgl_masuk'],
-    //             'tgl_keluar' => $data['tgl_keluar'],
-    //             'status_akun' => $data['status_akun'],
-    //             'sekolah' => $sekolah->id,
-    //         ]);
-    //         $subscription->update([
-    //             'harga' => $data['harga'],
-    //         ]);
-    //         $paket = Paket::where('nama_paket', $data['nama_paket'])->firstOrFail();
-    //         $subscription->paket()->associate($paket);
-    //         $subscription->save();
-    //         return response()->json(['success' => 'Data Berhasil diUpdate']);
-    //     } catch (\Exception $e) {
-    //         $errorMessage = strip_tags($e->getMessage());
-    //         return response()->json(['error' => $errorMessage]);
-    //     }
-    // }
-
     public function deleteSubs(Request $request, $id)
     {
         // Temukan subscription berdasarkan ID
-        $subscription = Subscription::find($id);
+        $subscription = RIwayat::find($id);
 
         // Pastikan subscription ditemukan
         if (!$subscription) {
