@@ -12,15 +12,15 @@
                       <span class="badge">3</span>
                   </i>
               </div>
-              <a href="{{ route('detail.univProfil') }}" style="text-decoration: none; color: #000;">
+              <a href="/univ-detail-profil" style="text-decoration: none; color: #000;">
                   <div class="d-flex justify-content-evenly flex-row ">
                       <div class="navbar-profile">
                           <span class="profile-name" style="font-weight: bold;">Lala Lisa</span>
                           <span class="profile-status">Guru</span>
                       </div>
                       <div class="navbar-logo">
-                          <img src="{{ asset('assets/images/Lalalisa.png') }}" alt="Profile Logo">
-                      </div>
+                        <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil" id="gambarKiri">
+                    </div>
                   </div>
               </a>
           </div>

@@ -259,6 +259,9 @@ Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboard.ma
 Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->name('jml_mahasiswa');
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 Route::get('/univ-detail-profil', [ContributorUnivController::class, 'detailUnivProfile'])->name('detail.univProfil');
+Route::put('/univ-update-profil', [ContributorUnivController::class, 'updateUnivProfile'])->name('univ.updateProfile');
+Route::post('/univ-updateFoto/{id}', [ContributorUnivController::class, 'updateFoto'])->name('univ.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::delete('/univ-deleteFoto/{id}', [ContributorUnivController::class, 'deleteFoto'])->name('univ.deleteFoto');
 
 Route::get('/laporandatapresensi', function () {
     return view('presensi.laporandatapresensi');
