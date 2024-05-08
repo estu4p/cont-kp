@@ -34,3 +34,6 @@
 }
 
 
+.aside .sidebar {
+    box-shadow: none !important;
+}
