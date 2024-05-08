@@ -164,7 +164,7 @@ Route::get('presensi/by-name', [PresensiMitraController::class, 'getPresensiByNa
 Route::post('/presensi/accept/{id}', [PresensiMitraController::class, 'presensiAccept']);
 Route::post('/presensi/reject', [PresensiMitraController::class, 'presensiReject']);
 Route::put('/presensi/accept-all', [PresensiMitraController::class, 'presensiAcceptAll']);
-
+Route::get('/cetak-presensi-pdf/{nama_lengkap}', [PresensiMitraController::class, 'getPresensiPDF'])->name('cetak.presensi');
 
 
 //Admin Pengaturan User & Organizations
