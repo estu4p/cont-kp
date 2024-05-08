@@ -23,7 +23,7 @@
             <div class="kanan-tabel p-4  w-100 justify-content-start">
                 <div class="atas">
                     <div class="ikon">
-                        <a href="Option-TeamAktif"><i class="icon fa-solid fa-angle-left" style=" color: #000000;"></i></a>
+                        <a href="{{ route('adminUniv.Divisi', ['id' => $id]) }}"><i class="icon fa-solid fa-angle-left" style=" color: #000000;"></i></a>
                     </div>
                     <div class="judull">
                         <h3 class="manage">Pengaturan Divisi</h3>
@@ -189,13 +189,13 @@
                         <div class="modal-body">
                             <div class="textdivisi">Profil Divisi</div>
                             <div class="tambahgambar gap-3">
-                                <div class="gambar border d-flex align-items-center justify-content-center">
+                                <div id="fileInputContainer" class="gambar border d-flex align-items-center justify-content-center">
                                     <i class="fa-regular fa-image"></i>
-                                    <input type="file" id="fileInput" style="display: none;">
+                                    {{-- <input class="addgambar form-control" type="file" id="fileInput" style="display: none;"> --}}
                                 </div>
                                 <div>
-                                    <input class="addgambar form-control" type="file" id="formFile"
-                                        name="foto_divisi" id="foto_divisi">
+                                    <input class="form-control addgambar" type="file" id="formFile"
+                                        name="foto_divisi">
                                 </div>
                                 <div>
                                     <button class="remove">Remove</button>
@@ -344,16 +344,28 @@
                 document.getElementById('fileInput').click();
             });
 
-            document.getElementById('fileInput').addEventListener('change', function() {
-                var file = this.files[0];
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var imageSrc = e.target.result;
-                    document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc +
-                        '" style="max-width: 100%; max-height: 100%;" />';
-                };
-                reader.readAsDataURL(file);
-            });
+            function addgambar() {
+                var newFileInput = document.createElement('input');
+                newFileInput.type = 'file';
+                newFileInput.name = 'foto_divisi';
+                newFileInput.classList.add('fileInput');
+                newFileInput.style.display = 'none';
+
+                var fileInputContainer = document.getElementById('fileInputContainer');
+                fileInputContainer.appendChild(newFileInput);
+                newFileInput.addEventListener('change', function() {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var imageSrc = e.target.result;
+                        document.querySelector('.gambar').innerHTML = '<img src="' + imageSrc +
+                            '" style="max-width: 100%; max-height: 100%;" />';
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                newFileInput.click(); // Membuka dialog pemilihan file secara otomatis
+            }
 
             document.querySelector('.remove').addEventListener('click', function() {
                 document.querySelector('.gambar').innerHTML = '<i class="far fa-image"></i>';
@@ -382,6 +394,7 @@
                         }
                         reader.readAsDataURL(file);
                     }
+
                 });
 
                 // Ketika tombol "Remove" diklik
