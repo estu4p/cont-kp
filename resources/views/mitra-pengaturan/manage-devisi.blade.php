@@ -72,13 +72,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($divisi as $division)
+                        @foreach ($divisi as $no => $division)
                             <tr>
-                                <td class="ratatengah">{{ $division->id }}</td>
+                                <td class="ratatengah">{{ $no + 1 }}</td>
                                 <td>{{ $division->divisi->nama_divisi }}</td>
 
-                                <td class="ratatengah"><a href="/Kategori-penilaian"><i
-                                            class="fa-regular fa-file-lines ic"></i></a></td>
+                                <td class="ratatengah">
+                                    <a href="/Kategori-penilaian">
+                                        <i class="fa-regular fa-file-lines ic"></i>
+                                    </a>
+                                </td>
 
                                 <td class="ratatengah">
                                     <form action="{{ route('mitra.deletedivisi', ['id' => $division->id]) }}" method="POST"
@@ -165,10 +168,12 @@
                             <div id="fileInputContainer"
                                 class="gambar border d-flex align-items-center justify-content-center">
                                 <i class="far fa-image"></i>
-                                <input type="file" name="foto_divisi[]" class="fileInput" style="display: none;">
+                                {{-- <input type="file" name="foto_divisi[]" class="form-control fileInput"
+                                    style="display: none;"> --}}
                             </div>
                             <div>
-                                <button class="addgambar">Add Photo</button>
+                                {{-- <button class="addgambar">Add Photo</button> --}}
+                                <input class="form-control addgambar" type="file" id="formFile" name="foto_divisi">
                             </div>
                             <div>
                                 <button class="remove">Remove</button>
