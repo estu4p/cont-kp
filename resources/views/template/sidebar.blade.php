@@ -9,8 +9,8 @@
             <a class="nav-link {{ Route::is('jml_mahasiswa') ? 'active' : '' }}" href="{{ route('jml_mahasiswa') }}">Mahasiswa</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('presensi', 'laporandatapresensi', 'datapresensisiswa', 'presensihadir', 'presensiizin', 'presensitidakhadir') ? 'active' : '' }}"
-                href="/presensi">Presensi</a>
+            <a class="nav-link {{ Request::is('presensi-contributor-univ', 'laporandatapresensi', 'datapresensisiswa', 'presensihadir', 'presensiizin', 'presensitidakhadir') ? 'active' : '' }}"
+                href="/presensi-contributor-univ">Presensi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('penilaianMahasiswa') ? 'active' : '' }}" href="/penilaianMahasiswa">Penilaian</a>

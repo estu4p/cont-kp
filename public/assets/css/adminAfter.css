@@ -32,3 +32,8 @@
     background-color: #a4161a;
     color: white;
 }
+
+
+.aside .sidebar {
+    box-shadow: none !important;
+}

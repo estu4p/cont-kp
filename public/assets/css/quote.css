@@ -1,0 +1,382 @@
+.swic/* assets/Css/margepenilaiandivisi.css */
+.swic/* assets/Css/margepenilaiandivisi.css */
+
+/* Gaya untuk judul card */
+.card .card-header h3 {
+    font-size: 24px;
+    color: #333; /* Warna teks judul */
+}
+
+/* Gaya untuk label form */
+.form-group label {
+    font-size: 18px;
+    color: #555; /* Warna teks label */
+}
+
+/* Gaya untuk tombol edit dan hapus */
+.btn-danger {
+    background-color: #dc3545; /* Warna latar belakang tombol hapus */
+    color: #fff; /* Warna teks tombol hapus */
+    border: none; /* Hapus border */
+}
+
+/* Mengubah warna tombol edit menjadi biru */
+.btn-edit {
+    background-color: #007bff; /* Warna latar belakang tombol edit */
+    color: #fff; /* Warna teks tombol edit */
+}
+
+/* Mengatur margin dan padding */
+.container {
+    margin-top: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+/* Responsif untuk tabel */
+.table-responsive {
+    overflow-x: auto;
+    width: 100%; /* Ubah width menjadi 100% */
+    border-radius: 10px;
+}
+.table-responsive table {
+    min-width: 700px; /* Atur lebar minimal sesuai kebutuhan */
+}
+.table-responsive th,
+.table-responsive td {
+    min-width: 150px; /* Atur lebar minimal untuk setiap sel */
+}
+
+.table-responsive .namadiv {
+    width: 30%; /* Atur lebar kolom "Nama Divisi" */
+}
+
+.table-responsive .ratatengah {
+    width: 20%; /* Atur lebar kolom "Penilaian" dan "Aksi" */
+}
+.wadah {
+    top: 0;
+    left: 250px;
+    height: 100%;
+    width: 100%;
+    padding-left: 250px !important;
+}
+.wadahh {
+    top: 0;
+    left: 0px;
+    height: 100%;
+    width: 70%;
+    padding-left: 0px !important;
+    padding-right: 100px;
+}
+.kiri-putih {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    background-color: white;
+    display: inline-block;
+}
+.kanan-tabel {
+    width: auto;
+    display: inline-block;
+    padding-top: 5% !important;
+    box-sizing: border-box;
+}
+.nav-item a {
+    color: black; /* Mengatur warna teks menjadi hitam */
+}
+
+.page,
+.item {
+    background: #c6c6c6;
+    border-radius: 5px;
+}
+
+.manageP {
+    text-decoration: none; /* Menghapus garis link */
+    background-color: pink; /* Warna latar belakang */
+    border-radius: 7px; /* Radius border */
+}
+.logout {
+    position: absolute;
+    bottom: 10px;
+}
+
+.col-md-auto .me-auto {
+    display: flex;
+    flex-direction: row;
+}
+.konfirmasiBackdrop {
+    background-color: transparent !important;
+    z-index: -10 !important;
+}
+.modal-frame-4 {
+    z-index: 1000 !important;
+}
+
+.ic {
+    color: #228300;
+}
+
+.btn-jam {
+    background: #ffffff;
+    height: 40px;
+    width: 170px;
+    border-radius: 10px;
+    text-align: center;
+}
+.labelmodal {
+    font-weight: bold;
+}
+.inputmodal {
+    width: 100%;
+    background-color: #f2f4f8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    padding-left: 10px;
+}
+.judulmodal {
+    font-weight: bold;
+}
+.grupinput {
+    margin-top: 20px;
+}
+.textdivisi {
+    font-weight: bold;
+    font-size: 20px;
+}
+.tambahgambar {
+    display: flex;
+    margin-top: 20px;
+}
+.gambar {
+    background-color: transparent;
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    font-size: 50px;
+    color: #555;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.addgambar {
+    background-color: transparent;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    margin-top: 50px;
+}
+.remove {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    height: 40px;
+    margin-top: 50px;
+    color: #dc3545;
+}
+.NamaDivisi {
+    color: #000000;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.inputmodall,
+.inputmodalll {
+    width: 100%;
+    background-color: #f2f4f8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ratatengah {
+    text-align: center;
+}
+.tomboll {
+    margin-left: 5px;
+}
+
+.grupselect {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nav-devisi {
+    font-size: 14px;
+    width: max-content;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: inherit; /* Mewarisi warna teks dari elemen induk */
+}
+
+/* .tangah{
+    text-align: center;
+} */
+.namadiv {
+    width: 50%;
+}
+.buttongrup {
+    margin-right: 35%;
+}
+.button-grup {
+    margin-right: 25%;
+}
+.btn-batal {
+    background: transparent;
+}
+.notabel {
+    width: 10%;
+}
+
+.space {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.inputmodall,
+.inputmodalll {
+    width: 100%;
+    background-color: #f2f4f8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.ratakanan {
+    text-align: right;
+}
+.judul-kiri{
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.quotes{
+    background-color: #e7e7e7;
+    width: 55%;
+    padding: 30px;
+    height: auto;
+}
+.ulangtahun{
+    background-color: #e7e7e7;
+    width: 40%;
+    padding: 30px;
+    height: 70%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 44px 5px rgba(0,0,0,0.2);
+}
+.wadahquote{
+    background-color: #ffffff;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    
+}
+.tambahquote{
+    width: 55%;
+    margin-top: 40px;
+}
+.inputquote{
+    width: 100%;
+    padding: 20px;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 10px;
+
+}
+.bt-batal{
+    border: none;
+}
+.bt-tambah{
+    border: none;
+    color: white;
+    background-color: #dc3545;
+    padding: 10px;
+    border-radius: 5px;
+}
+.h5{
+    margin-bottom: 20px;
+}
+.bt-add{
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.tab{
+    margin-top: 20px;
+}
+.grup{
+    background-color: #D9D9D9;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.navlink {
+    margin-right: 0 !important; /* Menghapus padding pada tombol navigasi */
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+}
+.indukpri{
+    margin-left: 5px;
+}
+.wadahpri{
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 4px;
+    
+}
+.wadahdata{
+    background-color: #fff;
+    color: #000000;
+    
+}
+.wadahdata:hover {
+    background-color: #7e7e7e;
+    color: #ffffff;
+}
+

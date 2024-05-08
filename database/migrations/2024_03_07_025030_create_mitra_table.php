@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('mitra', function (Blueprint $table) {
             $table->id();
             $table->string('nama_mitra');
-            $table->enum('status_absensi', ['Scan QR Code', 'Button']);
-            $table->string('deskripsi_mitra');
+            $table->enum('status_absensi', ['Scan QR Code', 'Button'])->nullable();
+            $table->string('deskripsi_mitra')->nullable();
             $table->timestamps();
         });
     }

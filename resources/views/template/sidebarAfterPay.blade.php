@@ -5,19 +5,19 @@
         <li class="nav-item">
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary {{ Request::is('AdminUniv-Dashboard') ? 'active' : '' }} " href="/AdminUniv-Dashboard">Dashboard</a>
+            <a class="nav-link  {{ Request::is('AdminUniv-Dashboard') ? 'active' : '' }} " href="/AdminUniv-Dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary {{ Request::is('mitra-adminunivmitra') ? 'active' : '' }} " href="/mitra-adminunivmitra">Mitra</a>
+            <a class="nav-link  {{ Request::is('mitra-adminunivmitra') ? 'active' : '' }} " href="/mitra-adminunivmitra">Mitra</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary {{ Request::is('AdminUniv/setting/quotes') ? 'active' : '' }} " href="/AdminUniv/setting/quotes">Pengaturan</a>
+            <a class="nav-link  {{ Request::is('AdminUniv/setting/quotes') ? 'active' : '' }} " href="/AdminUniv/setting/quotes">Pengaturan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary {{ Request::is('AdminPaket') ? 'active' : '' }}" href="/AdminPaket">Paket</a>
+            <a class="nav-link  {{ Request::is('AdminPaket') ? 'active' : '' }}" href="/AdminPaket">Paket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary {{ Request::is('RiwayatJangkaWaktu') ? 'active' : '' }}" href="/RiwayatJangkaWaktu">Riwayat</a>
+            <a class="nav-link  {{ Request::is('RiwayatJangkaWaktu','RiwayatPembelian') ? 'active' : '' }}" href="/RiwayatJangkaWaktu">Riwayat</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('logout.admin') }}">

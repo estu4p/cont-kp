@@ -10,12 +10,13 @@ use App\Models\Divisi;
 use App\Models\Sekolah;
 use App\Models\Presensi;
 use App\Models\Penilaian;
+use App\Models\DivisiItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\KategoriPenilaian;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\DivisiItem;
 use App\Models\SubKategoriPenilaian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,13 +36,30 @@ class ContributorForMitra extends Controller
         $divisi = DivisiItem::with('divisi')
             ->whereHas('divisi', function ($q) use ($query) {
                 $q->where('nama_divisi', 'like', "%$query%");
-            })
+            })->where('mitra_id', $user->mitra_id)
             ->get();
         if ($request->is('api/*') || $request->wantsJson()) {
 
             return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi, 'user' => $user]);
         } else {
             return view('contributorformitra.devisi', ['divisi' => $divisi, 'user' => $user]);
+        }
+    }
+
+    public function divisiMitra(Request $request)
+    {
+        $query = $request->input('query');
+        $divisi = DivisiItem::with('divisi')
+            ->whereHas('divisi', function ($q) use ($query) {
+                $q->where('nama_divisi', 'like', "%$query%");
+            })
+            ->get();
+        // dd($divisi);
+        if ($request->is('api/*') || $request->wantsJson()) {
+
+            return response()->json(['message' => 'Daftar Divisi', 'Divisi' => $divisi]);
+        } else {
+            return view('mitra-pengaturan.manage-devisi', ['divisi' => $divisi]);
         }
     }
 
@@ -71,60 +89,121 @@ class ContributorForMitra extends Controller
 
         return view('contributorformitra.teamaktifanggota', compact('users', 'user', 'divisi'));
     }
-    public function addDivisi(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nama_divisi' => 'required',
-            'foto_divisi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+    public function showPengaturanDivisi()
+    {
+        $user = auth()->user();
+        $divisi = DivisiItem::where('mitra_id', $user->mitra_id)->get();
+        return view('mitra-pengaturan.manage-devisi', compact('divisi', 'user'));
+    }
+    public function addPengaturanDivisi(Request $request)
+    {
+        $user = auth()->user();
+        $data = new Divisi([
+            'nama_divisi' => $request->input('nama_divisi'),
+            'foto_divisi' => $request->input('foto_divisi'),
+        ]);
 
         if ($request->hasFile('foto_divisi')) {
-            $image = $request->file('foto_divisi');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('public/images/' . $filename);
-            $image->move($path);
-        }
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $data->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+            $data->save();
+        };
 
-        $data = new Divisi([
-            'nama_divisi' => $request->input('nama_divisi'), // Sesuaikan dengan data yang sudah ada
-            'foto_divisi' => $filename,
+
+        $dataId = $data->id;
+
+        $dataItem = new DivisiItem([
+            'mitra_id' => $user->mitra_id,
+            'divisi_id' => $dataId
         ]);
-
-        $data->save();
-
-        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menambahkan divisi']);
+        $dataItem->save();
+        return redirect('/manage-devisi')->with('success', 'Berhasil menambahkan divisi');
     }
+
+
     public function updateDivisi(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_divisi' => 'required',
-            'deskripsi_divisi' => '',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Gagal update divisi',], 404);
+        $divisi = Divisi::find($id);
+
+        // dd($divisi);
+        if (!$divisi) {
+            return redirect()->back()->with(['error' => true, 'message' => 'Divisi tidak ditemukan']);
         }
-        $data = Divisi::find($id);
-        $data->fill([
-            'nama_divisi' => $request->nama_divisi,
-            'deskripsi_divisi' => $request->deskripsi_divisi
+
+        $divisi->update([
+            'nama_divisi' => $request->input('nama_divisi'),
         ]);
-        $data->save();
-        return response()->json(['success' => true, 'message' => 'Berhasil update divisi', 'data' => $data], 200);
+        // dd('Berhasil');
+        return redirect()->route('mitra.pengaturan.divisi');
+
+        // return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data divisi']);
     }
+
     public function deleteDivisi($id)
     {
-        $data = Divisi::find($id);
-        if ($data) {
-            $deletedId = $data->id; // Mendapatkan ID shift yang akan dihapus
-            $data->delete();
-            return view('mitra-pengaturan.manage-devisi')->with(['success' => true, 'message' => "Berhasil menghapus divisi"]);
+        $divisi = DivisiItem::find($id);
+
+        if ($divisi) {
+            $divisi->delete();
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
     }
 
+    public function detailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        // dd($users);
+        $shift = Shift::all();
+        if ($user) {
+            $divisiPerMitra = $user->mitra_id;
+        } else {
+            return response()->json([
+                'message' => 'Data User Mitra tidak ditemukan'
+            ]);
+        }
+
+        $divisi = DivisiItem::with('divisi')->where('mitra_id', $divisiPerMitra)->get();
+        // dd($divisi);
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                [
+                    'user detail' => $users,
+                    'divisi' => $divisi,
+                    'divisi mitra' => $divisiPerMitra
+                ]
+            );
+        }
+        return view("contributorformitra.Lihat-Profil-Mahasiswa", compact('user', 'users', 'divisi', 'shift'));
+    }
+
+    public function editDetailProfil(Request $request, $id)
+    {
+        $user = auth()->user();
+        $users = User::find($id);
+        $users->update([
+            'tgl_masuk' => $request->input('tgl_masuk'),
+            'tgl_keluar' => $request->input('tgl_keluar'),
+            'divisi_id' => $request->input('divisi_id'),
+            'project' => $request->input('project'),
+            'shift_id' => $request->input('shift_id'),
+            'os' => $request->input('os'),
+            'browser' => $request->input('browser'),
+            'status_absensi' => $request->input('status_absensi'),
+            'status_akun' => $request->input('status_akun'),
+            'konfirmasi_email' => $request->input('konfirmasi_email')
+        ]);
+
+        if ($request->is('api/*') || $request->wantsJson()) {
+            return response()->json(
+                ['user update' => $users]
+            );
+        };
+
+        return redirect()->route('mitra.detailprofil', $users->id)->with('success', 'Data pengguna berhasil diperbarui.');
+    }
     public function showKategoriPenilaian(Request $request)
     {
         $kategori = KategoriPenilaian::with('kategori')->get();
@@ -180,18 +259,19 @@ class ContributorForMitra extends Controller
 
     public function showShift(Request $request)
     {
+        $user = auth()->user();
         $shift = Shift::all();
 
         if ($request->is('api/*') || $request->wantsJson()) {
             return response()->json([
-                'message' => 'Daftar Shift', 
+                'message' => 'Daftar Shift',
                 'shift' => $shift,
             ], 200);
         } else {
-            return view('mitra-pengaturan.manage-shift', compact('shift'));
+            return view('mitra-pengaturan.manage-shift', compact('shift', 'user'));
         }
     }
-   
+
 
     public function addShift(Request $request)
     {
@@ -211,6 +291,7 @@ class ContributorForMitra extends Controller
             'jml_jam_kerja' => $request->input('jml_jam_kerja'),
             'jam_masuk' => $request->input('jam_masuk'),
             'jam_pulang' => $request->input('jam_pulang'),
+            'istirahat' => $request->input('istirahat')
         ]);
 
         $data->save();
@@ -245,7 +326,7 @@ class ContributorForMitra extends Controller
 
         $data->save();
 
-        return response()->json(['success' => true, 'message' => 'Berhasil update data shift'], 200);
+        return redirect()->back()->with(['success' => true, 'message' => 'Berhasil update data shift']);
     }
 
     public function deleteShift($id)
@@ -254,9 +335,8 @@ class ContributorForMitra extends Controller
 
         if ($shift) {
             $shift->delete();
-            return response()->json(['success' => true, 'message' => "Berhasil menghapus data shift dengan ID $id"], 200);
-        } else {
-            return response()->json(['success' => false, 'message' => "Data shift dengan id $id tidak ditemukan"], 404);
+
+            return redirect()->back()->with(['success' => true, 'message' => 'Berhasil menghapus data shift']);
         }
     }
 
@@ -936,11 +1016,12 @@ class ContributorForMitra extends Controller
 
     public function filterMahasiswa()
     {
+        $user = auth()->user();
         $totalMahasiswa = Presensi::count();
         $totalHadir = Presensi::where('status_kehadiran', 'Hadir')->count();
         $totalIzin = Presensi::where('status_kehadiran', 'Izin')->count();
 
-        return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin'));
+        return view('contributorformitra.dashboard', compact('totalMahasiswa', 'totalHadir', 'totalIzin', 'user'));
     }
 
     //InputNilai
@@ -995,12 +1076,13 @@ class ContributorForMitra extends Controller
 
     public function editProfile()
     {
-        //$userMitra = auth()->user();
+        $user = auth()->user();
         $userMitra = User::where('role_id', 5)->first();
         return view('contributorformitra.editprofile', [
             'title' => "userMitra- Ubah Profil",
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
+            'user' => $user
         ]);
     }
 
@@ -1083,19 +1165,18 @@ class ContributorForMitra extends Controller
         }
     }
 
-public function Divisi()
+    public function Divisi()
     {
         // Ambil semua data devisi
         $devisiList = Divisi::all();
-        
+
         // Loop melalui setiap devisi
         foreach ($devisiList as $devisi) {
             // Ambil semua user yang memiliki devisi_id yang sesuai dengan id devisi saat ini
             $users = User::where('divisi')->first();
-            
+
             // Kirim data devisi beserta anggotanya ke view
-            return view('contributorformitra.devisi', compact('devisiList', 'users','devisi'));
+            return view('contributorformitra.devisi', compact('devisiList', 'users', 'devisi'));
         }
     }
 }
-

@@ -21,6 +21,7 @@
             <div class="navbar-logo">
               <img src="{{ isset($userAdmin->foto_profil) ? asset('storage/assets/images/' . $userAdmin->foto_profil) : "assets/images/atun.png" }}" style="border-radius: 50%;" alt="Profile Logo">
             </div>
+
           </div>
         </a>
       </div>

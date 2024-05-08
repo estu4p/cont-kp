@@ -65,17 +65,14 @@
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Masukkan Password">
                 </div>
-                <small id="passwordLengthError" class="text-danger d-none mt-1">Password harus memiliki minimal 8
-                    karakter.</small>
-
                 <label for="password-confirm" class="mt-2 fw-5 mb-2">konfirmasi password</label>
                 <div class="d-flex">
-                    <input type="password" name="password_confirmation" id="password-confirm"
+                    <input type="password" name="password-confirm" id="password-confirm"
                         style="border: 0.5px solid #00000075; padding: 6px 10px; border-radius: 4px; width: 100%; font-size: 12px;"
                         placeholder="Konfirmasi password">
+                    <small id="passwordMatchError" class="text-danger d-none mt-1">Konfirmasi password harus cocok dengan
+                        password.</small>
                 </div>
-                <small id="passwordMatchError" class="text-danger d-none mt-1">Konfirmasi password harus cocok dengan
-                    password.</small>
 
                 <div class="button-container text-center mt-4">
                     <button type="submit" class="reg-button border-0 shadow fw-semibold text-decoration-none"
@@ -125,45 +122,6 @@
             inputs.forEach(input => {
                 input.addEventListener('input', checkInputs);
             });
-        });
-
-        function checkPasswordLength() {
-            const passwordInput = document.querySelector('input[name="password"]');
-            const passwordLengthWarning = document.getElementById('passwordLengthError');
-            const registerButton = document.getElementById('registerButton');
-
-            if (passwordInput.value.length < 8) {
-                passwordLengthWarning.classList.remove('d-none');
-                registerButton.disabled = true; // Menonaktifkan tombol daftar jika password kurang dari 8 karakter
-            } else {
-                passwordLengthWarning.classList.add('d-none');
-                checkInputs(); // Memeriksa kembali validitas semua input
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const passwordInput = document.querySelector('input[name="password"]');
-            passwordInput.addEventListener('input', checkPasswordLength);
-        });
-
-        function checkPasswordMatch() {
-            const passwordInput = document.querySelector('input[name="password"]');
-            const confirmPasswordInput = document.querySelector('input[name="password_confirmation"]');
-            const confirmPasswordWarning = document.getElementById('passwordMatchError');
-            const registerButton = document.getElementById('registerButton');
-
-            if (confirmPasswordInput.value !== passwordInput.value) {
-                confirmPasswordWarning.classList.remove('d-none');
-                registerButton.disabled = true; // Menonaktifkan tombol daftar jika password tidak cocok
-            } else {
-                confirmPasswordWarning.classList.add('d-none');
-                checkInputs(); // Memeriksa kembali validitas semua input
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const confirmPasswordInput = document.querySelector('input[name="password_confirmation"]');
-            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
         });
     </script>
 @endsection

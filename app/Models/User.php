@@ -45,7 +45,7 @@ class User extends Authenticatable
         'divisi_id',
         'shift_id',
         'paket_id',
-        'project_id'
+        'project'
 
     ];
 
@@ -133,4 +133,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penilaian::class, 'nama_lengkap', 'id');
     }
+    public function riwayats()
+{
+    return $this->hasMany(Riwayat::class);
+}
 }

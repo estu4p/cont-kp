@@ -1,10 +1,10 @@
-@extends('layouts.admin')
+@extends('layouts.masterAfterPay')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('assets/css/adminAfter.css') }}">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <aside>
+    <aside class="aside">
         <div class="sidebar" style="left: 250px; background-color: white;">
             <h5 class="text-capitalize mb-5" style="margin-left: -4rem;">pengaturan</h5>
             <div style="margin-left: -28px;">
@@ -382,7 +382,7 @@
         var modal = $('#userModal');
         var modalTitle = modal.find('.modal-title');
         var submitButton = modal.find('.modal-footer button');
-        
+
         // Dynamically set title and submit button text based on action
         if (action === 'add') {
             modalTitle.text('Add ' + role);

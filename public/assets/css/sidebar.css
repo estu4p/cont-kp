@@ -10,7 +10,7 @@ body {
     height: 100%; /* Mengisi tinggi layar penuh */
     width: 250px; /* Lebar sidebar */
     background-color: #dcdcdc; /* Ubah warna latar belakang sidebar */
-    color: grey; /* Ubah warna teks tautan */
+    color: black; /* Ubah warna teks tautan */
     padding-top: 50px; /* Ruang atas sidebar */
     z-index: 15;
     box-shadow: 0 0 20px rgb(146, 146, 146);
@@ -50,7 +50,6 @@ a.nav-link.active {
 .sidebar {
     padding-left: 2%;
     text-align: left;
-
 }
 
 .logo {
