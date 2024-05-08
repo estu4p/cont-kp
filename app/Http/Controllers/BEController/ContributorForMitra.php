@@ -101,8 +101,15 @@ class ContributorForMitra extends Controller
         $user = auth()->user();
         $data = new Divisi([
             'nama_divisi' => $request->input('nama_divisi'),
+            'foto_divisi' => $request->input('foto_divisi'),
         ]);
-        $data->save();
+
+        if ($request->hasFile('foto_divisi')) {
+            $request->file('foto_divisi')->move('foto_divisi/', $request->file('foto_divisi')->getClientOriginalName());
+            $data->foto_divisi = $request->file('foto_divisi')->getClientOriginalName();
+            $data->save();
+        };
+
 
         $dataId = $data->id;
 
@@ -1069,12 +1076,13 @@ class ContributorForMitra extends Controller
 
     public function editProfile()
     {
-        //$userMitra = auth()->user();
+        $user = auth()->user();
         $userMitra = User::where('role_id', 5)->first();
         return view('contributorformitra.editprofile', [
             'title' => "userMitra- Ubah Profil",
             'userMitra' => $userMitra,
             'csrfToken' => $csrfToken = csrf_token(),
+            'user' => $user
         ]);
     }
 
