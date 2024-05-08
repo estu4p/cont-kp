@@ -18,6 +18,12 @@
                 <i class="fa-solid fa-eye"></i>
                 Lihat Laporan Presensi
             </a>
+
+            <button id="btn-pdf" class="btn">
+                <i class="fas fa-download"></i>
+                PDF
+            </button>
+
             <div>
                 <div class="tgl-filter">
                     <i class="kaca-pembesar fa-solid fa-magnifying-glass"></i><input type="date" class="tgl">
@@ -79,7 +85,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($presensiharian as $index => $data)
+            @foreach($presensi as $index => $data)
             <tr>
                 <td><input type="checkbox" id="#" name=""> &nbsp; {{ $index + 1 }}</td>
                 <td class="bates" href><a href="/datapresensisiswa/{{ $data->user->id }}">{{ $data->user->nama_lengkap }}</a></td>
@@ -103,13 +109,20 @@
             @endforeach
         </tbody>
     </table>
-    <button class="btnpdf"><i class="fas fa-download"></i> PDF</button>
+    <!-- <button id="btn-pdf" class="btnpdf"><i class="fas fa-download"></i> PDF</button> -->
 </div>
 
 @endsection
 
 @section('scripts')
 <script>
+
+    // Fungsi untuk mengunduh PDF saat tombol PDF diklik
+    document.getElementById('btn-pdf').addEventListener('click', function() {
+        // Mengarahkan ke rute untuk mengunduh PDF
+        window.location.href = "{{ route('cetak.presensi', ['nama_lengkap' => $nama_lengkap]) }}";
+    });
+
     function toggleCollapse(icon) {
         var content = document.getElementById('collapseContent');
         content.classList.toggle('collapsed');
@@ -123,5 +136,6 @@
             icon.classList.add('fa-angle-up');
         }
     }
+
 </script>
 @endsection
