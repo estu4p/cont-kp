@@ -36,6 +36,36 @@
         </div>
 
         <body>
+
+            @foreach ($mitra as $data)
+                <div class="card wadah">
+                    <div class="card-header">
+                        MITRA
+                        <div class="dropdown">
+                            <button class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical klik" data-toggle="modal"
+                                    data-target="#exampleModal"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Data Presensi Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="{{ route('adminUniv.Divisi', $data->id) }}">Data Divisi
+                                        siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="/AdminUniv-mitra-laporanpresensi">Laporan Presensi
+                                        Siswa/Mahasiswa</a></li>
+                                <li><a class="dropdown-item" href="#">Hapus Mitra</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    {{-- dari BE, pake flex mas jangan pake margin left :) --}}
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <p style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $data->nama_mitra }}</p>
+
+                        </div>
+                        <div>
+                            <p style="font-size: 11px">{{ $data->mahasiswa_count }} Orang</p>
+
            @if ($mitra->isEmpty())
                 <div class="text-center">Tidak ada mitra</div>
             @else
@@ -73,6 +103,7 @@
                             <div>
                                 <p>{{ $data->mahasiswa_count }} Orang</p>
                             </div>
+
                         </div>
                     </div>
                 @endforeach

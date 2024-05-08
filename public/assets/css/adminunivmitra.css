@@ -127,6 +127,27 @@
     border-radius: 0.25rem;
 }
 .card {
+
+    width: 32%;
+    height: 130px;
+    margin: 0,9%;
+    display: inline-flex; /* Menggunakan flexbox */
+    flex-direction: column; /* Mengatur arah flex menjadi vertikal */
+    border: 1px solid #0c0b0b; /* Menambahkan border */
+  
+    
+  }
+
+.card-content {
+    flex-grow: 1; /* Memastikan konten card memanfaatkan seluruh ruang yang tersedia */
+    display: flex;
+    justify-content: center; /* Pusatkan konten horizontal */
+    align-items: center; /* Pusatkan konten vertikal */
+}
+
+
+
+
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 30%;
@@ -138,13 +159,14 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+
 .card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
     font-weight: bold;
-    background-color: #2b2a2a;
+    background-color: #080808;
     text-align: center;
     color: #f5f7fa;
     padding-left: 50%;
@@ -152,20 +174,28 @@
 
 .card-body {
     display: flex;
+    justify-content: space-between; /* Menempatkan elemen secara merata di sepanjang sumbu horizontal */
+    align-items: center; /* Pusatkan elemen secara vertikal */
+    padding: 1%;
+    text-align: center;
+    font-style: normal;
+    color: #0e0d0d;
+    text-overflow: ellipsis;
     padding: 10px;
     text-align: center;
     margin-left: 10px;
+
 }
 .wadah {
     position: relative;
 }
 .tampil {
-    position: absolute;
-    top: 5%;
+   
+    top: 10%;
     width: 100%;
-    left: 95%;
-    z-index: 10;
-    display: none;
+    left: 100%;
+  
+   
 }
 .abu2:hover {
     background-color: rgb(179, 179, 179);
