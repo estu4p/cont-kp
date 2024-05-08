@@ -347,29 +347,7 @@ class AdminUnivAfterPaymentController extends Controller
             return redirect()->back()->with('success', 'Data berhasil ditambahkan');
         }
     }
-    // public function updateDivisi(Request $request, $id)
-    // // // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Pengaturan Divisi
-    // {
-    //     // dd($request->all());
-    //     $divisi = Divisi::all();
-    //     $validator = Validator::make($request->all(), [
-    //         'nama_divisi' => 'required',
-    //         'deskripsi_divisi' => '',
-    //     ]);
-    //     if ($validator->fails()) {
-    //         return response()->json(['message' => 'gagal update divisi',], 404);
-    //     }
-    //     // Cari data divisi berdasarkan ID divisi
-    //     $data = DivisiItem::where('divisi_id', $id)->first();
-    //     // Jika data divisi tidak ditemukan, kembalikan pesan kesalahan
-    //     if (!$data) {
-    //         return redirect()->back()->with('error', 'Divisi tidak ditemukan');
-    //     }
-    //      // Isi data divisi dengan input yang diterima dari request
-    //     $data->divisi->nama_divisi = $request->input('nama_divisi');
-    //     $data->divisi->save();
-    //     return redirect()->back()->with('success','Data berhasil diubah');
-    // }
+
 
     public function updateDivisi(Request $request, $id)
     {
@@ -930,7 +908,8 @@ class AdminUnivAfterPaymentController extends Controller
         } else {
             return view('adminUniv-afterPayment.mitra.Option-TeamAktif-pengaturanDivisi', [
                 'divisi' => $divisi,
-                'divisiKosong' => $divisiKosong
+                'divisiKosong' => $divisiKosong,
+                'id' =>$id
             ]);
         }
     }
@@ -999,7 +978,7 @@ class AdminUnivAfterPaymentController extends Controller
 public function Pengaturpersensi(Request $request)
 {
    // Periksa jika permintaan adalah metode POST
- 
+
     // Tangani permintaan dari formulir
     $pilihan = $request->input('pilihan');
 
@@ -1046,7 +1025,7 @@ public function Pengaturpersensi(Request $request)
             'no_hp' => 'required|string',
             'password' => 'required|string|confirmed|min:8',
         ]);
-        
+
         $user = User::create([
             'nama_lengkap' => $request->nama,
             'foto_profil' => $request->foto_profil,
@@ -1069,7 +1048,7 @@ public function Pengaturpersensi(Request $request)
         $divisiItem->save();
 
         if ($user) {
-            $user->save();            
+            $user->save();
 
             return redirect()->route('adminUniv.mitra');
         } else {
