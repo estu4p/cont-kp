@@ -51,12 +51,13 @@
                         </div>
                     </div>
                     {{-- dari BE, pake flex mas jangan pake margin left :) --}}
-                    <div class="card-body flex justify-content-between">
+                    <div class="card-body d-flex justify-content-between">
                         <div>
-                            <h6>{{ $data->nama_mitra }}</h6>
+                            <p style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $data->nama_mitra }}</p>
+
                         </div>
                         <div>
-                            <p>{{ $data->mahasiswa_count }} Orang</p>
+                            <p style="font-size: 11px">{{ $data->mahasiswa_count }} Orang</p>
                         </div>
                     </div>
                 </div>
