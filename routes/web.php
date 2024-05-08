@@ -260,7 +260,7 @@ Route::get('/jumlah-mahasiswa', [SchoolController::class, 'jumlahMahasiswa'])->n
 Route::get('/profil-siswa/{id}', [SchoolController::class, 'Lihatprofil'])->name('detail-profil-siswa');
 Route::get('/univ-detail-profil', [ContributorUnivController::class, 'detailUnivProfile'])->name('detail.univProfil');
 Route::put('/univ-update-profil', [ContributorUnivController::class, 'updateUnivProfile'])->name('univ.updateProfile');
-Route::post('/univ-updateFoto/{id}', [ContributorUnivController::class, 'updateFoto'])->name('univ.updateFoto')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::post('/univ-updateFoto/{id}', [ContributorUnivController::class, 'updateFoto'])->name('univ.updateFoto');
 Route::delete('/univ-deleteFoto/{id}', [ContributorUnivController::class, 'deleteFoto'])->name('univ.deleteFoto');
 
 Route::get('/laporandatapresensi', function () {
@@ -441,6 +441,7 @@ Route::delete('/hapusMitra/{id}', [BEControllerAdminUnivAfterPaymentController::
 Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 
 Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
+Route::post('/AdminUniv-updateFoto/{id}', [ContributorUnivController::class, 'updateFoto'])->name('AdminUniv.updateFoto');
 
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
