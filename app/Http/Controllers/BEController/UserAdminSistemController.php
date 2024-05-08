@@ -18,11 +18,31 @@ class UserAdminSistemController extends Controller
     public function IndexSubscription(Request $request)
     {
         $userAdmin = auth()->user();
-        $subscriptions = Riwayat::with('user')->latest()->get();
+        
+        $subscriptions = Riwayat::all();
         $sekolah = Sekolah::pluck('nama_sekolah', 'id');
         $allSekolah = Sekolah::all();
-            return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'allSekolah']));
+
+        // Ambil semua data pengguna untuk setiap langganan
+    foreach ($subscriptions as $subscription) {
+        // Periksa apakah pengguna ditemukan
+        $user = $subscription->user;
+
+        // Jika pengguna ditemukan, tambahkan informasi pengguna ke langganan
+        if ($user) {
+            $subscription->nama_lengkap = $user->nama_lengkap;
+            $subscription->no_hp = $user->no_hp;
+            $subscription->email = $user->email;
+        } else {
+            // Jika pengguna tidak ditemukan, berikan nilai default
+            $subscription->nama_lengkap = "Pengguna tidak ditemukan";
+            $subscription->no_hp = "-";
+            $subscription->email = "-";
         }
+    }
+        return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'allSekolah']));
+
+    }
      public function storeSubs(Request $request)
     {
         // Validasi input jika diperlukan
@@ -76,7 +96,7 @@ $subscription->save();
     public function deleteSubs(Request $request, $id)
     {
         // Temukan subscription berdasarkan ID
-        $subscription = RIwayat::find($id);
+        $subscription = Riwayat::find($id);
 
         // Pastikan subscription ditemukan
         if (!$subscription) {
