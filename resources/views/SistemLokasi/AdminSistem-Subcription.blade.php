@@ -52,9 +52,9 @@
                     @foreach($subscriptions as $subscription)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td class="align-middle">{{ $subscription->nama_lengkap }}</td>
-                        <td class="align-middle">{{ $subscription->email }}</td>
-                        <td class="align-middle">{{ $subscription->sekolah }}</td>
+                        <td class="align-middle">{{ optional($subscription->user)->nama_lengkap }}</td>
+                        <td class="align-middle">{{ optional($subscription->user)->email }}</td>
+                        <td class="align-middle">{{ optional($subscription->user)->sekolah }}</td>
                         @if ($subscription->paket === 'Bronze')
                         <td class="text-center">
                             <p style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
@@ -83,7 +83,7 @@
                         <td class="align-middle">{{ $subscription->lokasi }}</td>
                         <td>
                             <div class="aksi d-flex flex-row justify-content-around ">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ $subscription->nama_lengkap }}', '{{ $subscription->email }}', '{{ $subscription->telepon }}', '{{ $subscription->sekolah }}', '{{ $subscription->paket }}', '{{ $subscription->tanggal }}', '{{ $subscription->tanggal_berakhir }}', '{{ $subscription->harga }}', '{{ $subscription->status }}')">
+                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ optional($subscription->user)->nama_lengkap }}', '{{ optional($subscription->user)->email }}', '{{ optional($subscription->user)->telepon }}', '{{ optional($subscription->user)->sekolah }}', '{{ $subscription->paket }}', '{{ $subscription->tanggal }}', '{{ $subscription->tanggal_berakhir }}', '{{ $subscription->harga }}', '{{ $subscription->status }}')">
                                     <i class="fas fa-pen m-0 p-0 blue-icon"></i>
                                     <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
                                 </button>
@@ -144,22 +144,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="hidden" name="nama" value="{{ optional($subscription->user)->user_id}}">
-                                    <input type="text" class="inputt" id="nama" value="{{ optional($subscription->user)->nama_lengkap}}">
+                                    <input type="hidden" name="nama" value="{{ $subscription->user_id}}">
+                                    <input type="text" class="inputt" id="nama" value="{{ $subscription->nama_lengkap}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="Email">Email</label>
-                                    <input type="text" class="inputt" id="Email" name="email" value="{{ optional($subscription->user)->email}}" placeholder="email">
+                                    <input type="text" class="inputt" id="Email" name="email" value="{{ $subscription->email}}" placeholder="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="Telepon">Telepon</label>
-                                    <input type="number" class="inputt" id="Telepon" name="no_hp" value="{{optional($subscription->user)->no_hp}}">
+                                    <input type="number" class="inputt" id="Telepon" name="no_hp" value="{{$subscription->no_hp}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="Sekolah">Sekolah/perguruantinggi</label>
                                     <!-- <input type="text" class="inputt" id="Sekolah" name="sekolah" placeholder="sekolah/perguruan tinggi" > -->
                                     <select class="form-select" aria-label="Default select example" name="sekolah">
-                                        <option selected>{{optional($subscription->user)->sekolah}}</option>
+                                        <option selected>{{$subscription->sekolah}}</option>
                                         @foreach($allSekolah as $item)
                                             <option value="{{$item->id}}">{{$item->nama_sekolah}}</option>
                                         @endforeach
