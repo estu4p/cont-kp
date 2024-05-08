@@ -18,5 +18,9 @@ class Riwayat extends Model
     public function paket()
     {
         return $this->belongsTo(Paket::class);
+    }
+    public function sekolah()
+    {
+        return $this->belongsTo(Sekolah::class);
     }    
 }

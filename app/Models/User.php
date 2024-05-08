@@ -133,8 +133,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penilaian::class, 'nama_lengkap', 'id');
     }
-    public function riwayats()
+    public function riwayat()
 {
     return $this->hasMany(Riwayat::class);
 }
+
 }
