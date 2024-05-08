@@ -25,7 +25,7 @@
     height: 100px;
     background-color: white;
     margin-left: 260px;
-    margin-top: 100px;
+    margin-top: 50px;
     border-radius: 8px;
     border-color: red;
 
@@ -47,7 +47,8 @@
     margin-top: 30px;
     border-radius: 8px;
     border-color: red;
-}.kartu4 {
+}
+.kartu4 {
     width: 830px;
     height: 100px;
     background-color: white;
@@ -55,7 +56,8 @@
     margin-top: 30px;
     border-radius: 8px;
     border-color: red;
-}.kartu5 {
+}
+.kartu5 {
     width: 830px;
     height: 100px;
     background-color: white;
@@ -235,8 +237,9 @@
     .lb {
         width: 50px;
         height: auto;
-        margin-left: 500px;
+        margin-left: 550px;
         font-size: 10px;
+        margin-top: -10px;
     }
 
     .mtp {

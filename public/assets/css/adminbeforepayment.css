@@ -7,7 +7,7 @@ body {
 
 .tittle-container {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .tittle-container h1 {
@@ -34,19 +34,27 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
-    width: 250px;
-    margin: 10px;
-    overflow: auto;
+    width: 500px;
+    margin-top: 100px;
+    /* overflow: auto; */
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 0;
+    border: #333;
+}
+
+.card:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3); 
 }
 
 .card div table tr td {
-    padding: 5px 10px;
-    font-size: 14px;
+    padding: 9px 13px;
+    font-size: 19px;
 }
 
 .plan-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
+    margin-top: -10px;
 }
 
 .price {
@@ -61,6 +69,30 @@ body {
 }
 
 .btn {
-    margin-top: 20px;
+    margin-top: 35px;
+    width: 200px;
+    height: 50px;
+    position: relative;
+    top: -30px;
 }
 
+.btn i {
+    margin-left: 30px;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    width: 100%;
+    background-color: none; /* Ubah warna latar belakang sesuai kebutuhan */
+    padding: 20px;
+    text-align: center;
+  }
+  .fixed-header h1 {
+    margin: 0;
+  }
+  .fixed-header h1 b {
+    font-weight: bold;
+  }
+  
