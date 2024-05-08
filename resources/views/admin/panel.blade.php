@@ -45,7 +45,28 @@
             </div>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
+                        <div class="d-flex align-items-center gap-4 rounded-1">
+                            <div class="container d-flex align-items-center gap-4 mb-4">
+                                <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
+                                <div class="flex-grow-1">
+                                    <p class="fw-semibold mb-1">usernameguru1</p>
+                                    <p class="mb-1">Name: Guru1</p>
+                                    <div class="d-flex flex-wrap">Privilege:
+                                        <div class="indukpri d-flex justify-content-start gap-1">
+                                            <div class="wadahpri">Manage Kategori Penilainan</div>
+                                            <div class="wadahpri">Lihat Penilaian</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ms-auto">
+                                    <button class="btn btn-primary edit-guru" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                                    <button class="btn btn-danger hapus-guru" onclick="hapus()">Hapus</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -66,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -87,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -108,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -129,28 +150,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
-                        <div class="d-flex align-items-center gap-4 rounded">
-                            <div class="container d-flex align-items-center gap-4 mb-4">
-                                <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
-                                <div class="flex-grow-1">
-                                    <p class="fw-semibold mb-1">usernameguru1</p>
-                                    <p class="mb-1">Name: Guru1</p>
-                                    <div class="d-flex flex-wrap">Privilege:
-                                        <div class="indukpri d-flex justify-content-start gap-1">
-                                            <div class="wadahpri">Manage Kategori Penilainan</div>
-                                            <div class="wadahpri">Lihat Penilaian</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ms-auto">
-                                    <button class="btn btn-primary edit-guru" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-                                    <button class="btn btn-danger hapus-guru" onclick="hapus()">Hapus</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -190,7 +190,7 @@
                     </nav>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -212,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -256,7 +256,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -278,7 +278,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -300,7 +300,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -322,7 +322,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wadahdata mb-3">
+                    <div class="wadahdata mb-3 rounded">
                         <div class="d-flex align-items-center gap-4 rounded">
                             <div class="container d-flex align-items-center gap-4 mb-4">
                                 <img src="{{ asset('assets/images/userAfter.png') }}" width="80" height="80" alt="">
@@ -389,7 +389,7 @@
     </div>
 
 
-    
+
     <!-- modal edit -->
     <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
