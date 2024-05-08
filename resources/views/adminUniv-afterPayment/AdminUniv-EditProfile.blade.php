@@ -6,8 +6,7 @@
     <div class="wadah">
 
         <div class="propil">
-            <img src="{{ isset($user->foto_profil) ? asset('Admin-foto_profil/' . $user->foto_profil) : 'assets/images/atun.png' }}"
-                alt="Profile Logo" class="gambarkiri">
+            <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil" id="gambarKiri">
             <div class="nama">{{ $user->nama_lengkap }}</div>
             <div class="email">{{ $user->email }}</div>
             <div class="about">About</div>
@@ -16,83 +15,80 @@
 
         <div id="preview" class="preview"></div>
         <div class="wadahedit d-flex">
-            <div class=" p-5">
-                <div class="atas d-flex flex-row  col-5">
-                    <div id="previewZone">
-                        <img src="{{ isset($user->foto_profil) ? asset('Admin-foto_profil/' . $user->foto_profil) : 'assets/images/atun.png' }}"
-                            alt="Profile Logo" class="gambarkanan">
-                    </div>
-                    <form id="uploadForm" action="{{ route('AdminUniv.updateFoto', $user->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
+                <div class=" p-5">
+                    <div class="atas d-flex flex-row  col-5">
+                        <div id="previewZone">
+                            <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80"  height="80" alt="Profile Logo" id="gambarKanan">
+                        </div>
                         <div class="upload col-5 d-flex flex-column mx-2 my-auto gap-1">
-                            <label for="imageInput" class="custom-file-upload">
-                                <button type="button" onclick="document.getElementById('imageInput').click()"
-                                    style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 5px 30px; text-transform: capitalize;">
-                                    Change photo
-                                </button>
-                                <input type="file" name="foto_profil" id="imageInput" style="display: none;"
-                                    onchange="uploadFile(event)">
-                            </label>
-                    </form>
-                    {{-- <span class="remove m-0">remove</span> --}}
-                    <button onclick="showAlertDeleteProfile('{{ $user->id }}')"
-                        style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
-                </div>
-            </div>
+                            <form id="uploadForm" action="{{ route('AdminUniv.updateFoto', $user->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                    <label for="imageInput" class="custom-file-upload">
+                                        <button type="button" onclick="document.getElementById('imageInput').click()" style="border: 2px solid #00000080; border-radius: 6px; background-color: white; color: #00000080; font-size: 12px; font-weight: 600; padding: 5px 30px; text-transform: capitalize;">
+                                            Change photo
+                                        </button>
+                                        <input type="file" name="foto_profil" id="imageInput" style="display: none;" onchange="uploadFile(event)">
+                                    </label>
+                            </form>
+                            <button onclick="showAlertDeleteProfile('{{ $user->id }}')"
+                                style="border: 0; color: red; background-color: transparent; text-transform: capitalize;">remove</button>
+                        </div>
+                    </div>
 
-            <form action="{{ route('adminUniv.updateProfile') }}" method="POST">
-                @csrf
-                <div class="tengah row ">
-                    <div class="judulkanan">Personal Details</div>
-                    <div class="isi col-12 row justify-content-evenly  ">
-                        <div class="form-group  col-6   p-3">
-                            <label for="username">Nama lengkap</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text" id="name"
-                                    placeholder="Atun Khostriatun" value="{{ $user->nama_lengkap }}" name="nama_lengkap">
+                    <form action="{{ route('adminUniv.updateProfile') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="tengah row ">
+                            <div class="judulkanan">Personal Details</div>
+                            <div class="isi col-12 row justify-content-evenly  ">
+                                <div class="form-group  col-6   p-3">
+                                    <label for="username">Nama lengkap</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="name"
+                                            placeholder="{{ $user->nama_lengkap }}" value="{{ $user->nama_lengkap }}"
+                                            name="nama_lengkap">
+                                    </div>
+                                </div>
+                                <div class="form-group  col-6   p-3">
+                                    <label for="NoHP">No HP</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="NoHP"
+                                            placeholder="{{ $user->no_hp }}" value="{{ $user->no_hp }}" name="no_hp">
+                                    </div>
+                                </div>
+                                <div class="form-group  col-6   p-3">
+                                    <label for="email">Email</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="email" id="email"
+                                            placeholder="{{ $user->email }}" value="{{ $user->email }}" name="email">
+                                    </div>
+                                </div>
+                                <div class="form-group  col-6   p-3">
+                                    <label for="alamat">Alamat</label>
+                                    <div class="input-group mb-3">
+                                        <input class="input form-control" type="text" id="alamat" placeholder="{{ $user->kota }}"
+                                            value="{{ $user->kota }}" name="kota">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group  col-6   p-3">
-                            <label for="NoHP">No HP</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text" id="NoHP" placeholder="081326273187"
-                                    value="{{ $user->no_hp }}" name="no_hp">
+                        <div class="bawah p-0 col-6">
+                            <div class="judulkanan">Additional Info</div>
+                            <div class="form-group form-floating">
+                                <div class="col-12  ">
+                                    <label for="alamat">About</label>
+                                    <textarea id="About" class="form-control " style="width:97%;" placeholder="{{ $user->about }}" value="{{ $user->about }}" name="about"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group  col-6   p-3">
-                            <label for="email">Email</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="email" id="email"
-                                    placeholder="wahyudiatkinson@gmail.com" value="{{ $user->email }}" name="email">
-                            </div>
+                        <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
+                            <a href="{{ url('/AdminUniv-Dashboard') }}" class="cancel" type="button" style="background-color: #02020259; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Cancel</a>
+                            <button class="Update" type="submit" style="background-color: #A4161A; color: white; padding: 8px 16px; border-radius: 8px; border: 0;">Update</button>
                         </div>
-                        <div class="form-group  col-6   p-3">
-                            <label for="alamat">Alamat</label>
-                            <div class="input-group mb-3">
-                                <input class="input form-control" type="text" id="alamat" placeholder="Jateng"
-                                    value="{{ $user->alamat }}" name="alamat">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bawah p-0 col-6">
-                    <div class="judulkanan">Additional Info</div>
-                    <div class="form-group form-floating">
-                        <div class="col-12  ">
-                            <label for="About">About</label>
-                            <textarea id="About" class="form-control " style="width:97%;" name="about">{{ $user->about }}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="tombol d-flex flex gap-2  align-items-end justify-content-end">
-                    <button class="cancel">Cancel</button>
-                    <button class="Update" type="submit">Update</button>
+                    </form>
                 </div>
         </div>
-        </form>
-
-    </div>
     </div>
 
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -123,28 +119,28 @@
             var formData = new FormData();
             formData.append('foto_profil', file);
 
-            fetch('/univ-updateFoto/' + userId, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Response from server:', data);
-                    // Update image source with the new uploaded image
-                    const previewImage = document.getElementById('gambarKanan');
-                    previewImage.src = data.newImageUrl;
-                })
-                .catch(error => {
-                    console.error('Error uploading image:', error);
-                });
+            fetch('/AdminUniv-updateFoto/' + userId, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response from server:', data);
+                // Update image source with the new uploaded image
+                const previewImage = document.getElementById('gambarKanan');
+                previewImage.src = data.newImageUrl;
+            })
+            .catch(error => {
+                console.error('Error uploading image:', error);
+            });
 
             if (file) {
                 const reader = new FileReader();
@@ -171,7 +167,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        fetch('/univ-deleteFoto/' + userId, {
+                        fetch('/AdminUniv-deleteFoto/' + userId, {
                                 method: 'DELETE',
                                 headers: {
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

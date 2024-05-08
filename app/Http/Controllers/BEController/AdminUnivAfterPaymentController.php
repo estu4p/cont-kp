@@ -163,7 +163,7 @@ class AdminUnivAfterPaymentController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
+            'alamat' => $request->kota,
             'about' => $request->about,
         ]);
 
@@ -177,20 +177,38 @@ class AdminUnivAfterPaymentController extends Controller
                 'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
             if ($profile->foto_profil) {
-                Storage::delete('public/Admin-foto_profil/' . $profile->foto_profil);
+                Storage::delete('public/assets/images/adminProfile/' . $profile->foto_profil);
             }
             $namaFoto = time() . '.' . $request->file('foto_profil')->getClientOriginalExtension();
-            $request->file('foto_profil')->storeAs('public/Admin-foto_profil', $namaFoto);
+            $request->file('foto_profil')->storeAs('public/assets/images/', $namaFoto);
             $profile->update([
                 'foto_profil' => $namaFoto,
             ]);
             return response()->json([
                 'success' => 'Foto Profil Berhasil Diperbarui',
                 'data' => $namaFoto,
-                'newImageUrl' => asset('Admin-foto_profil' . $namaFoto)
+                'newImageUrl' => asset('storage/assets/images/' . $namaFoto)
             ]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+        }
+    }
+
+    public function deleteFoto($id)
+    {
+        $profil = User::findOrFail($id);
+        try {
+            if ($profil->foto_profil) {
+                Storage::delete('public/' . $profil->foto_profil);
+                $profil->foto_profil = null;
+                $profil->save();
+                return response()->json(['success' => 'Foto Berhasil diHapus']);
+            } else {
+                return response()->json(['error' => 'Anda tidak memiliki Foto Profil']);
+            }
+        } catch (\Exception $e) {
+            $errorMessage = strip_tags($e->getMessage());
+            return response()->json(['error' => $errorMessage]);
         }
     }
 
@@ -918,7 +936,7 @@ class AdminUnivAfterPaymentController extends Controller
     // Univ - Mitra - Daftar Mitra -  Option - Team Aktif - Klik
     {
         $user = auth()->user();
-        
+
         $users = User::where('role_id', 3)
             ->where('mitra_id', $mitra_id)
             ->where('divisi_id', $divisi_id)

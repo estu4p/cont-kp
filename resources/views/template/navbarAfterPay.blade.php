@@ -22,7 +22,7 @@
 
                     </div>
                     <div class="navbar-logo">
-                        <img src="{{ asset('/assets/images/Rectangle 22 (3).png') }}" alt="Profile Logo">
+                        <img src="{{ isset($user->foto_profil) ? asset('storage/assets/images/' . $user->foto_profil) : "assets/images/atun.png"}}" style="border-radius: 50%;" width="80" alt="Foto Profil">
                     </div>
                 </div>
             </a>
