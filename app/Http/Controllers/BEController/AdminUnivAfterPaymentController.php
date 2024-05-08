@@ -146,6 +146,7 @@ class AdminUnivAfterPaymentController extends Controller
     {
         // $profil = User::find($id);
         $user = auth()->user();
+        $user = User::where('role_id', 2)->first();
         if ($request->is("api/*") || $request->wantsJson()) {
             return response()->json([
                 'profil' => $user
@@ -157,18 +158,40 @@ class AdminUnivAfterPaymentController extends Controller
     public function updateAdminProfile(Request $request)
     {
         $user = auth()->user();
-        // $updateUser = User::where('id', $user);
-        // Update the user's profile with the validated data
+        $user = User::find($user->id);
         $user->update([
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
-            'kota' => $request->kota,
+            'alamat' => $request->alamat,
             'about' => $request->about,
         ]);
 
-        // Redirect back to the edit profile page
         return redirect()->route('adminUniv.editProfile');
+    }
+    public function updateFoto(Request $request, $id)
+    {
+        try {
+            $profile = User::findOrFail($id);
+            $request->validate([
+                'foto_profil' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            if ($profile->foto_profil) {
+                Storage::delete('public/Admin-foto_profil/' . $profile->foto_profil);
+            }
+            $namaFoto = time() . '.' . $request->file('foto_profil')->getClientOriginalExtension();
+            $request->file('foto_profil')->storeAs('public/Admin-foto_profil', $namaFoto);
+            $profile->update([
+                'foto_profil' => $namaFoto,
+            ]);
+            return response()->json([
+                'success' => 'Foto Profil Berhasil Diperbarui',
+                'data' => $namaFoto,
+                'newImageUrl' => asset('Admin-foto_profil' . $namaFoto)
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
     }
 
 
