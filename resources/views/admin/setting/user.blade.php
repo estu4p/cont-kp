@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/adminAfter.css') }}">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <aside>
+    <aside class="aside">
         <div class="sidebar" style="left: 250px; background-color: white;">
             <h5 class="text-capitalize mb-5" style="margin-left: -4rem;">pengaturan</h5>
             <div style="margin-left: -28px;">
