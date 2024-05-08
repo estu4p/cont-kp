@@ -18,30 +18,35 @@ class UserAdminSistemController extends Controller
     public function IndexSubscription(Request $request)
     {
         $userAdmin = auth()->user();
-        
+    
+        // Ambil semua langganan
         $subscriptions = Riwayat::all();
+        
+        // Ambil semua sekolah
         $sekolah = Sekolah::pluck('nama_sekolah', 'id');
         $allSekolah = Sekolah::all();
-
-        // Ambil semua data pengguna untuk setiap langganan
-    foreach ($subscriptions as $subscription) {
-        // Periksa apakah pengguna ditemukan
-        $user = $subscription->user;
-
-        // Jika pengguna ditemukan, tambahkan informasi pengguna ke langganan
-        if ($user) {
-            $subscription->nama_lengkap = $user->nama_lengkap;
-            $subscription->no_hp = $user->no_hp;
-            $subscription->email = $user->email;
-        } else {
-            // Jika pengguna tidak ditemukan, berikan nilai default
-            $subscription->nama_lengkap = "Pengguna tidak ditemukan";
-            $subscription->no_hp = "-";
-            $subscription->email = "-";
+    
+        // Ambil pengguna dengan role_id 11
+        $userSistem = User::where('role_id', 11)->get();
+    
+        // Loop melalui langganan
+        foreach ($subscriptions as $subscription) {
+            // Cari pengguna berdasarkan langganan
+            $user = $userSistem->where('id', $subscription->user_id)->first();
+    
+            // Jika pengguna ditemukan, tambahkan informasi pengguna ke langganan
+            if ($user) {
+                $subscription->nama_lengkap = $user->nama_lengkap;
+                $subscription->no_hp = $user->no_hp;
+                $subscription->email = $user->email;
+            } else {
+                // Jika pengguna tidak ditemukan, berikan nilai default
+                $subscription->nama_lengkap = "Pengguna tidak ditemukan";
+                $subscription->no_hp = "-";
+                $subscription->email = "-";
+            }
         }
-    }
         return view('SistemLokasi.AdminSistem-Subcription', compact(['userAdmin', 'subscriptions', 'sekolah', 'allSekolah']));
-
     }
      public function storeSubs(Request $request)
     {

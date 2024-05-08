@@ -52,9 +52,9 @@
                     @foreach($subscriptions as $subscription)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td class="align-middle">{{ optional($subscription->user)->nama_lengkap }}</td>
-                        <td class="align-middle">{{ optional($subscription->user)->email }}</td>
-                        <td class="align-middle">{{ optional($subscription->user)->sekolah }}</td>
+                        <td class="align-middle">{{ $subscription->nama_lengkap }}</td>
+                        <td class="align-middle">{{ $subscription->email }}</td>
+                        <td class="align-middle">{{ $subscription->sekolah }}</td>
                         @if ($subscription->paket === 'Bronze')
                         <td class="text-center">
                             <p style="background-color: #AF3333; color: white; border-radius: 20px; padding: 8px; width: 80%; margin: auto;">
@@ -83,7 +83,7 @@
                         <td class="align-middle">{{ $subscription->lokasi }}</td>
                         <td>
                             <div class="aksi d-flex flex-row justify-content-around ">
-                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ optional($subscription->user)->nama_lengkap }}', '{{ optional($subscription->user)->email }}', '{{ optional($subscription->user)->telepon }}', '{{ optional($subscription->user)->sekolah }}', '{{ $subscription->paket }}', '{{ $subscription->tanggal }}', '{{ $subscription->tanggal_berakhir }}', '{{ $subscription->harga }}', '{{ $subscription->status }}')">
+                                <button class=" d-flex flex-column gap-0 p-0" style="border: none;" onclick="showEditModal('{{ $subscription->id }}', '{{ $subscription->nama_lengkap }}', '{{ $subscription->email }}', '{{ $subscription->telepon }}', '{{ $subscription->sekolah }}', '{{ $subscription->paket }}', '{{ $subscription->tanggal }}', '{{ $subscription->tanggal_berakhir }}', '{{ $subscription->harga }}', '{{ $subscription->status }}')">
                                     <i class="fas fa-pen m-0 p-0 blue-icon"></i>
                                     <i class="fas fa-minus m-0" style="margin-top: -5px !important; color: blue;"></i>
                                 </button>
