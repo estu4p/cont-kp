@@ -440,8 +440,9 @@ Route::delete('/hapusMitra/{id}', [BEControllerAdminUnivAfterPaymentController::
 
 Route::get('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'detailAdminProfile'])->name('adminUniv.editProfile');
 
-Route::post('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
+Route::put('/AdminUniv-EditProfile', [BEControllerAdminUnivAfterPaymentController::class, 'updateAdminProfile'])->name('adminUniv.updateProfile');
 Route::post('/AdminUniv-updateFoto/{id}', [ContributorUnivController::class, 'updateFoto'])->name('AdminUniv.updateFoto');
+Route::delete('/AdminUniv-deleteFoto/{id}', [ContributorUnivController::class, 'deleteFoto'])->name('AdminUniv.deleteFoto');
 
 Route::get('/mitra-laporanpresensi', function () {
     return view('adminUniv-afterPayment.mitra.laporanpresensi');
